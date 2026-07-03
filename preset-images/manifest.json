@@ -1,1 +1,126 @@
-
+{
+  "categories": [
+    {
+      "id": "food",
+      "name": "Food",
+      "folder": "food",
+      "items": [
+        {
+          "file": "un_croissant.png",
+          "translations": {
+            "fr": "un croissant",
+            "en": "a croissant",
+            "es": "un croissant",
+            "de": "ein Croissant",
+            "it": "un croissant",
+            "ja": "クロワッサン",
+            "zh-pinyin": "niújiǎo miànbāo",
+            "zh-hanzi": "牛角面包",
+            "cantonese": "牛角包",
+            "he": "קרואסון",
+            "ar": "كرواسون",
+            "sinhala": "ක්‍රොසෑන්ට් එකක්",
+            "vi": "bánh sừng bò",
+            "ur": "کروسینٹ",
+            "hi": "क्रोइसैंट",
+            "uk": "круасан",
+            "ru": "круассан",
+            "macedonian": "кроасан"
+          }
+        },
+        {
+          "file": "une_pomme.png",
+          "translations": {
+            "fr": "une pomme",
+            "en": "an apple",
+            "es": "una manzana",
+            "de": "ein Apfel",
+            "it": "una mela",
+            "ja": "りんご",
+            "zh-pinyin": "yī gè píngguǒ",
+            "zh-hanzi": "一个苹果",
+            "cantonese": "一個蘋果",
+            "he": "תפוח",
+            "ar": "تفاحة",
+            "sinhala": "ඇපල් ගෙඩියක්",
+            "vi": "một quả táo",
+            "ur": "ایک سیب",
+            "hi": "एक सेब",
+            "uk": "яблуко",
+            "ru": "яблоко",
+            "macedonian": "јаболко"
+          }
+        },
+        {
+          "file": "du_pain.png",
+          "translations": {
+            "fr": "du pain",
+            "en": "bread",
+            "es": "pan",
+            "de": "Brot",
+            "it": "pane",
+            "ja": "パン",
+            "zh-pinyin": "miànbāo",
+            "zh-hanzi": "面包",
+            "cantonese": "麵包",
+            "he": "לחם",
+            "ar": "خبز",
+            "sinhala": "පාන්",
+            "vi": "bánh mì",
+            "ur": "روٹی",
+            "hi": "रोटी",
+            "uk": "хліб",
+            "ru": "хлеб",
+            "macedonian": "леб"
+          }
+        },
+        {
+          "file": "un_fromage.png",
+          "translations": {
+            "fr": "un fromage",
+            "en": "cheese",
+            "es": "queso",
+            "de": "Käse",
+            "it": "formaggio",
+            "ja": "チーズ",
+            "zh-pinyin": "nǎilào",
+            "zh-hanzi": "奶酪",
+            "cantonese": "芝士",
+            "he": "גבינה",
+            "ar": "جبن",
+            "sinhala": "චීස්",
+            "vi": "phô mai",
+            "ur": "پنیر",
+            "hi": "पनीर",
+            "uk": "сир",
+            "ru": "сыр",
+            "macedonian": "сирење"
+          }
+        },
+        {
+          "file": "de_leau.png",
+          "translations": {
+            "fr": "de l'eau",
+            "en": "water",
+            "es": "agua",
+            "de": "Wasser",
+            "it": "acqua",
+            "ja": "水",
+            "zh-pinyin": "shuǐ",
+            "zh-hanzi": "水",
+            "cantonese": "水",
+            "he": "מים",
+            "ar": "ماء",
+            "sinhala": "වතුර",
+            "vi": "nước",
+            "ur": "پانی",
+            "hi": "पानी",
+            "uk": "вода",
+            "ru": "вода",
+            "macedonian": "вода"
+          }
+        }
+      ]
+    }
+  ]
+}
