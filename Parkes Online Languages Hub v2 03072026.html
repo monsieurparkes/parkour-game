@@ -605,12 +605,12 @@
                 <div class="flex items-end gap-4">
                     <div class="btn-circle" id="btn-left">←</div>
                     <div class="btn-circle" id="btn-right">→</div>
-                    <div class="btn-circle btn-run" id="btn-run" title="Hold to run">RUN</div>
                 </div>
                 <div class="flex flex-col items-end gap-2">
                     <div class="btn-circle" id="btn-jump">UP</div>
                     <div class="btn-circle" id="btn-down">DOWN</div>
                     <div class="btn-circle btn-drop" id="btn-drop" title="Drop through platform">DROP</div>
+                    <div class="btn-circle btn-run" id="btn-run" title="Hold to run">RUN</div>
                 </div>
             </div>
         </div>
@@ -2640,7 +2640,7 @@
                 presetWords.push(word);
 
                 const img = new Image();
-                img.src = PRESET_IMAGE_BASE_URL + preset.folder + '/' + preset.file;
+                img.src = PRESET_IMAGE_BASE_URL + encodeURIComponent(preset.folder) + '/' + encodeURIComponent(preset.file);
                 const isPng = /\.png$/i.test(preset.file);
                 pictureImageMap[word.toLowerCase()] = { img, isPng };
             });
@@ -4062,6 +4062,25 @@
                             if (word.imageEl.complete && word.imageEl.naturalWidth > 0) {
                                 ctx.save();
                                 ctx.drawImage(word.imageEl, word.x, finalY, word.w, word.h);
+                                ctx.restore();
+                            } else if (word.imageEl.complete) {
+                                // The image finished loading but failed (e.g. wrong filename/path
+                                // on GitHub) - show a visible placeholder instead of nothing at all.
+                                ctx.save();
+                                ctx.fillStyle = '#fef2f2';
+                                ctx.strokeStyle = '#dc2626';
+                                ctx.lineWidth = 3;
+                                ctx.setLineDash([6, 4]);
+                                ctx.beginPath();
+                                ctx.roundRect(word.x, finalY, word.w, word.h, 12);
+                                ctx.fill();
+                                ctx.stroke();
+                                ctx.setLineDash([]);
+                                ctx.fillStyle = '#dc2626';
+                                ctx.font = "bold 28px sans-serif";
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+                                ctx.fillText('?', word.x + word.w / 2, finalY + word.h / 2);
                                 ctx.restore();
                             }
                         } else {
