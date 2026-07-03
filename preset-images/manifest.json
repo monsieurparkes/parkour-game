@@ -6,7 +6,7 @@
       "folder": "dinosaurs",
       "items": [
         {
-          "file": "un_dinosaure_rouge.png",
+          "file": "un dinosaure rouge.png",
           "translations": {
             "fr": "un dinosaure rouge",
             "en": "a red dinosaur",
@@ -29,7 +29,7 @@
           }
         },
         {
-          "file": "un_dinosaure_bleu.png",
+          "file": "un dinosaure bleu.png",
           "translations": {
             "fr": "un dinosaure bleu",
             "en": "a blue dinosaur",
@@ -52,7 +52,7 @@
           }
         },
         {
-          "file": "un_dinosaure_vert.png",
+          "file": "un dinosaure vert.png",
           "translations": {
             "fr": "un dinosaure vert",
             "en": "a green dinosaur",
@@ -75,7 +75,7 @@
           }
         },
         {
-          "file": "un_dinosaure_jaune.png",
+          "file": "un dinosaure jaune.png",
           "translations": {
             "fr": "un dinosaure jaune",
             "en": "a yellow dinosaur",
@@ -98,7 +98,7 @@
           }
         },
         {
-          "file": "un_dinosaure_violet.png",
+          "file": "un dinosaure violet.png",
           "translations": {
             "fr": "un dinosaure violet",
             "en": "a purple dinosaur",
@@ -121,7 +121,7 @@
           }
         },
         {
-          "file": "un_dinosaure_orange.png",
+          "file": "un dinosaure orange.png",
           "translations": {
             "fr": "un dinosaure orange",
             "en": "an orange dinosaur",
@@ -144,7 +144,7 @@
           }
         },
         {
-          "file": "un_dinosaure_rose.png",
+          "file": "un dinosaure rose.png",
           "translations": {
             "fr": "un dinosaure rose",
             "en": "a pink dinosaur",
@@ -167,7 +167,7 @@
           }
         },
         {
-          "file": "un_dinosaure_noir.png",
+          "file": "un dinosaure noir.png",
           "translations": {
             "fr": "un dinosaure noir",
             "en": "a black dinosaur",
@@ -190,7 +190,7 @@
           }
         },
         {
-          "file": "un_dinosaure_blanc.png",
+          "file": "un dinosaure blanc.png",
           "translations": {
             "fr": "un dinosaure blanc",
             "en": "a white dinosaur",
@@ -213,7 +213,7 @@
           }
         },
         {
-          "file": "un_dinosaure_marron.png",
+          "file": "un dinosaure marron.png",
           "translations": {
             "fr": "un dinosaure marron",
             "en": "a brown dinosaur",
