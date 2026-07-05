@@ -3209,6 +3209,28 @@
             });
         }
 
+        // Shrinks an element's font size (never below a readable floor) until its text fits
+        // on one line within maxWidthPx, instead of wrapping and pushing surrounding layout
+        // around - used for the target word and location boxes, which can otherwise grow
+        // very wide for long vocabulary phrases (e.g. multi-word preset image names).
+        function fitTextToBox(el, maxWidthPx, minFontSizePx) {
+            minFontSizePx = minFontSizePx || 11;
+            el.style.whiteSpace = 'nowrap';
+            el.style.fontSize = '';
+            let fontSize = parseFloat(window.getComputedStyle(el).fontSize);
+            while (el.scrollWidth > maxWidthPx && fontSize > minFontSizePx) {
+                fontSize -= 1;
+                el.style.fontSize = fontSize + 'px';
+            }
+        }
+
+        function getMaxTargetBoxTextWidth() {
+            const vw = window.innerWidth || 800;
+            if (vw < 500) return 220;
+            if (vw < 900) return 320;
+            return 420;
+        }
+
         function nextQuest(options) {
             options = options || {};
             const available = activeWords.filter(w => !w.collected);
@@ -3253,6 +3275,7 @@
                 instructionEl.textContent = strippedTarget;
                 instructionEl.style.color = ''; 
             }
+            fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
 
             const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
             const locKey = currentWordObj ? currentWordObj.location : 'city';
@@ -3274,7 +3297,9 @@
             }
 
             document.getElementById('where-title').innerHTML = colorizeSentenceText(whereLabel);
-            document.getElementById('location-text').innerHTML = colorizeSentenceText(locationLabel);
+            const locationTextEl = document.getElementById('location-text');
+            locationTextEl.innerHTML = colorizeSentenceText(locationLabel);
+            fitTextToBox(locationTextEl, getMaxTargetBoxTextWidth());
 
             document.getElementById('score').innerText = score.toString().padStart(2, '0');
             const speakDelayMs = options.delaySpeechMs || 0;
