@@ -45,6 +45,17 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
+        /* Portrait screens (phones, and tablets held upright): fill the viewport instead of
+           forcing 16:9, which would otherwise squeeze the whole game into a thin horizontal
+           strip in the middle of a tall screen. */
+        @media (max-aspect-ratio: 1/1) {
+            #game-container {
+                max-width: 100vw;
+                max-height: 100vh;
+                aspect-ratio: auto;
+            }
+        }
+
         canvas { 
             display: none; /* Dynamically displayed depending on mode choice */
             width: 100%; 
@@ -148,6 +159,18 @@
         .board-btn:active {
             transform: translateY(6px);
             box-shadow: 0 0px 0 #78350f;
+        }
+
+        .coder-editable:empty::before {
+            content: attr(data-placeholder);
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        .character-card.selected {
+            border-color: #1e3a8a;
+            background: #eff6ff;
+            box-shadow: 3px 3px 0px #1e3a8a;
         }
 
         .mode-card {
@@ -332,6 +355,22 @@
                     </div>
 
                     <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Choose Your Character</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="character-card selected flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                                <input type="radio" name="character-select-lobby" data-char="parkour" class="hidden character-radio" checked>
+                                <span class="text-3xl">🏃</span>
+                                <span class="text-xs font-bold text-slate-700">P4RK-0UR UNIT</span>
+                            </label>
+                            <label class="character-card flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                                <input type="radio" name="character-select-lobby" data-char="bobot" class="hidden character-radio">
+                                <span class="text-3xl">🤖</span>
+                                <span class="text-xs font-bold text-slate-700">Bobot</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Vocabulary List (separated by commas)</label>
                         <textarea id="vocab-input" dir="auto" class="w-full h-24 p-4 board-input text-slate-800 resize-none leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
                         <p class="text-[10px] text-slate-500 mt-2 font-bold">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
@@ -355,6 +394,11 @@
                             <span class="text-[10px] font-bold text-slate-500 flex-1">All other graphemes</span>
                             <input type="color" id="default-grapheme-color-lobby" value="#b4b4b4" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer">
                         </div>
+                        <div id="sinhala-vowel-signs-row-lobby" style="display:none;" class="mb-3 interactive">
+                            <p class="text-[10px] font-bold text-slate-500 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                            <div id="sinhala-vowel-signs-list-lobby" class="grid grid-cols-2 gap-1.5"></div>
+                            <p class="text-[10px] text-slate-400 mt-2">Add consonants manually below.</p>
+                        </div>
                         <div id="lobby-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
                             <!-- Dynamically generated rows -->
                         </div>
@@ -366,6 +410,22 @@
                     <div>
                         <label for="picture-student-name-input" class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Student Name (optional)</label>
                         <input type="text" id="picture-student-name-input" dir="auto" class="w-full p-3 board-input text-slate-800" placeholder="Enter your name...">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Choose Your Character</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="character-card selected flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                                <input type="radio" name="character-select-picture" data-char="parkour" class="hidden character-radio" checked>
+                                <span class="text-3xl">🏃</span>
+                                <span class="text-xs font-bold text-slate-700">P4RK-0UR UNIT</span>
+                            </label>
+                            <label class="character-card flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                                <input type="radio" name="character-select-picture" data-char="bobot" class="hidden character-radio">
+                                <span class="text-3xl">🤖</span>
+                                <span class="text-xs font-bold text-slate-700">Bobot</span>
+                            </label>
+                        </div>
                     </div>
 
                     <div>
@@ -402,6 +462,11 @@
                         <div id="default-grapheme-row-picture" class="flex items-center gap-2 mb-2 mt-2 interactive" style="display:none;">
                             <span class="text-[10px] font-bold text-slate-500 flex-1">All other graphemes</span>
                             <input type="color" id="default-grapheme-color-picture" value="#b4b4b4" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer">
+                        </div>
+                        <div id="sinhala-vowel-signs-row-picture" style="display:none;" class="mb-3 interactive">
+                            <p class="text-[10px] font-bold text-slate-500 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                            <div id="sinhala-vowel-signs-list-picture" class="grid grid-cols-2 gap-1.5"></div>
+                            <p class="text-[10px] text-slate-400 mt-2">Add consonants manually below.</p>
                         </div>
                         <div id="picture-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
                             <!-- Dynamically generated rows -->
@@ -464,22 +529,18 @@
                         <span class="text-[10px] font-bold text-slate-500">All other graphemes</span>
                         <input type="color" id="default-grapheme-color-workspace" value="#b4b4b4" class="w-6 h-6 rounded cursor-pointer border border-slate-400">
                     </div>
+                    <div id="sinhala-vowel-signs-row-workspace" style="display:none;" class="mb-2 interactive">
+                        <p class="text-[10px] font-bold text-slate-500 mb-1">Sinhala Vowel Diacritics (tick to colour-code)</p>
+                        <div id="sinhala-vowel-signs-list-workspace" class="flex flex-wrap gap-2"></div>
+                    </div>
                     <div id="workspace-grapheme-container" class="flex flex-wrap gap-3 items-center">
                         <!-- Dynamic inline row inputs -->
                     </div>
                 </div>
 
-                <!-- 1/4 Left (Input Console) and 3/4 Right (Color Display Output) Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow overflow-hidden h-[calc(100vh-260px)]">
-                    <!-- Input Workspace (1/4 Width Split) -->
-                    <div class="flex flex-col h-full lg:col-span-1">
-                        <textarea id="coder-input" dir="auto" class="w-full h-full p-6 board-input text-slate-800 resize-none text-xl leading-relaxed" placeholder="Type words or text here... e.g. Le chien court sur la route."></textarea>
-                    </div>
-
-                    <!-- Beautiful Board Colorized Output Display (3/4 Width Split) -->
-                    <div class="flex flex-col h-full overflow-hidden lg:col-span-3">
-                        <div id="coder-board" dir="auto" class="w-full h-full bg-white p-8 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e3a8a] overflow-y-auto text-3xl leading-loose tracking-wide whitespace-pre-wrap select-all transition-all duration-200"></div>
-                    </div>
+                <!-- Single Live Colour-Coding Workspace -->
+                <div class="flex flex-col h-full overflow-hidden flex-grow">
+                    <div id="coder-input" contenteditable="true" dir="auto" spellcheck="false" data-placeholder="Type words or text here... e.g. Le chien court sur la route." class="coder-editable w-full h-full bg-white p-8 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e3a8a] overflow-y-auto text-3xl leading-loose tracking-wide whitespace-pre-wrap transition-all duration-200 outline-none"></div>
                 </div>
             </div>
         </div>
@@ -675,9 +736,30 @@
             crawl2: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/169487128c03e2ca8502fa7b923f8206353daae5/PARKOURCRAWL2.png'
         };
 
+        // Bobot: an alternate playable character. Assuming all 7 files were uploaded together
+        // in the same commit as the reference BOBOTIDLE1.png link provided.
+        const SPRITE_URLS_BOBOT = {
+            idle1: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTIDLE1.png',
+            idle2: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTIDLE2.png',
+            walk1: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTWALK1.png',
+            walk2: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTWALK2.png',
+            jump: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png',
+            crawl1: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTCRAWL1.png',
+            crawl2: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTCRAWL2.png'
+        };
+
         const keys = {};
 
+        // Bobot's jump/crawl source images appear to have more padding than its idle sprites
+        // (and more than the P4RK-0UR unit's equivalents), making Bobot look too small in
+        // those states at the same computed height. These boost just those two states for
+        // Bobot specifically, tuned independently.
+        const BOBOT_JUMP_SCALE_BOOST = 1.3;
+        const BOBOT_CRAWL_SCALE_BOOST = 1.5;
+
         let images = {}, imagesLoaded = false, gameStarted = false, score = 0, isModalOpen = false;
+        let imagesBobot = {}, imagesBobotLoaded = false;
+        let selectedCharacter = 'parkour'; // 'parkour' (P4RK-0UR UNIT) or 'bobot'
         let lastTime = 0, vocabularyList = [], activeWords = [], currentTargetWord = null;
         let customMoveSpeed = 3.0;
         let debugMode = false; 
@@ -1313,7 +1395,8 @@
             setVoiceWarning('date-voice-warning', LANG_MAP[selectedLanguage]);
         }
 
-        function getColoredGraphemes(word) {
+        function getColoredGraphemes(word, keepBrackets) {
+            word = word.normalize('NFC');
             let chars = [];
             let inBrackets = false;
 
@@ -1321,8 +1404,10 @@
                 let c = word[i];
                 if (c === '[') {
                     inBrackets = true;
+                    if (keepBrackets) chars.push({ char: c, isProtected: true, isBracketMarker: true, color: null });
                 } else if (c === ']') {
                     inBrackets = false;
+                    if (keepBrackets) chars.push({ char: c, isProtected: true, isBracketMarker: true, color: null });
                 } else {
                     chars.push({ 
                         char: c, 
@@ -1334,7 +1419,7 @@
 
             const activeCustomGraphemes = customGraphemes
                 .filter(cg => cg.text && cg.text.trim().length > 0)
-                .map(cg => ({ text: cg.text.trim().toLowerCase(), color: cg.color }))
+                .map(cg => ({ text: cg.text.trim().normalize('NFC').toLowerCase(), color: cg.color }))
                 .sort((a, b) => b.text.length - a.text.length);
 
             let i = 0;
@@ -1352,6 +1437,13 @@
                         if (match) {
                             for (let offset = 0; offset < cg.text.length; offset++) {
                                 chars[i + offset].color = cg.color;
+                            }
+                            // A Sinhala vowel sign must be shaped together with its preceding
+                            // base consonant for the mark to position correctly - splitting
+                            // them into differently-coloured spans can break that positioning.
+                            // Colouring the whole syllable keeps rendering correct.
+                            if (cg.text.length === 1 && SINHALA_VOWEL_SIGN_CHARS.has(cg.text) && i > 0 && !chars[i - 1].isProtected) {
+                                chars[i - 1].color = cg.color;
                             }
                             i += cg.text.length;
                             customMatched = true;
@@ -1434,10 +1526,33 @@
             const regex = /([\p{L}\p{M}\[\]]+)|([^\p{L}\p{M}\[\]]+)/gu;
             return text.replace(regex, (match, word, nonWord) => {
                 if (word) {
-                    const graphemes = getColoredGraphemes(word);
-                    return graphemes.map((g) => {
-                        return `<span style="color: ${g.color}; font-weight: bold;">${g.char}</span>`;
-                    }).join('');
+                    // keepBrackets=true: bracket markers stay present as hidden characters
+                    // (rather than being stripped entirely), since this box is both the input
+                    // and the display - the raw text needs to survive being re-rendered on
+                    // every keystroke, or a typed '[' would vanish forever the instant it's
+                    // typed, making it impossible to actually create a protected exception.
+                    const graphemes = getColoredGraphemes(word, true);
+                    // Group consecutive same-coloured characters into one span rather than
+                    // one span per character, so a base character and an attached combining
+                    // mark that share a colour stay in the same shaped text run.
+                    let html = '';
+                    let i = 0;
+                    while (i < graphemes.length) {
+                        if (graphemes[i].isBracketMarker) {
+                            html += `<span style="font-size:0; line-height:0;">${graphemes[i].char}</span>`;
+                            i++;
+                            continue;
+                        }
+                        let j = i;
+                        let runText = graphemes[i].char;
+                        while (j + 1 < graphemes.length && !graphemes[j + 1].isBracketMarker && graphemes[j + 1].color === graphemes[i].color) {
+                            j++;
+                            runText += graphemes[j].char;
+                        }
+                        html += `<span style="color: ${graphemes[i].color}; font-weight: bold;">${runText}</span>`;
+                        i = j + 1;
+                    }
+                    return html;
                 } else {
                     return nonWord.split('').map(char => {
                         if (char === '\n') return '\n';
@@ -1451,17 +1566,73 @@
             });
         }
 
+        // Finds the caret's plain-text character offset within a contenteditable element,
+        // so we can restore cursor position after replacing its coloured HTML content.
+        function getCaretCharacterOffset(el) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0) return null;
+            const range = selection.getRangeAt(0);
+            if (!el.contains(range.startContainer)) return null;
+            const preRange = range.cloneRange();
+            preRange.selectNodeContents(el);
+            preRange.setEnd(range.startContainer, range.startOffset);
+            return preRange.toString().length;
+        }
+
+        function setCaretCharacterOffset(el, offset) {
+            const range = document.createRange();
+            const selection = window.getSelection();
+            let currentNode = null;
+            let remaining = offset;
+            const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+            while (walker.nextNode()) {
+                const node = walker.currentNode;
+                if (remaining <= node.length) {
+                    currentNode = node;
+                    break;
+                }
+                remaining -= node.length;
+            }
+            if (currentNode) {
+                range.setStart(currentNode, remaining);
+                range.collapse(true);
+            } else {
+                range.selectNodeContents(el);
+                range.collapse(false);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+
+        // Re-colourises the Colour Coder box in place, preserving the caret position if the
+        // person is actively typing in it (so replacing the HTML doesn't jump their cursor).
+        function refreshCoderColorization() {
+            const coderInput = document.getElementById('coder-input');
+            if (!coderInput) return;
+            const isFocused = document.activeElement === coderInput;
+            const caretOffset = isFocused ? getCaretCharacterOffset(coderInput) : null;
+            const plainText = coderInput.textContent;
+            coderInput.innerHTML = colorizeSentenceText(plainText);
+            if (isFocused && caretOffset !== null) {
+                setCaretCharacterOffset(coderInput, caretOffset);
+            }
+        }
+
         function syncCustomGraphemeArrays() {
             const filtered = customGraphemes.filter(cg => cg.text.trim().length > 0);
             filtered.push({ text: '', color: '#ef4444' });
             customGraphemes = filtered;
 
             renderGraphemeEditors();
-            
-            const coderInput = document.getElementById('coder-input');
-            if (coderInput) {
-                document.getElementById('coder-board').innerHTML = colorizeSentenceText(coderInput.value);
-            }
+            updateSinhalaVowelSignsVisibility();
+            refreshCoderColorization();
+        }
+
+        // Shows the exact Unicode code point(s) of a string, e.g. "U+0DD9" or, if a stray
+        // character is present, "U+25CC U+0DD9" - makes invisible/hidden characters visible.
+        function getCodePointsLabel(str) {
+            if (!str) return '';
+            return Array.from(str).map(ch => 'U+' + ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')).join(' ');
         }
 
         function renderGraphemeEditors() {
@@ -1475,16 +1646,21 @@
 
             customGraphemes.forEach((cg, idx) => {
                 const lobbyRow = document.createElement('div');
-                lobbyRow.className = 'flex items-center gap-2';
+                lobbyRow.className = 'flex flex-col gap-0.5';
                 lobbyRow.innerHTML = `
-                    <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
-                    <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
+                    <div class="flex items-center gap-2">
+                        <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
+                        <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
+                    </div>
+                    <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
                 const textInput = lobbyRow.querySelector('input[type="text"]');
                 const colorInput = lobbyRow.querySelector('input[type="color"]');
+                const codeLabel = lobbyRow.querySelector('.codepoint-label');
 
                 textInput.addEventListener('input', (e) => {
                     customGraphemes[idx].text = e.target.value;
+                    codeLabel.textContent = getCodePointsLabel(e.target.value);
                     if (idx === customGraphemes.length - 1 && e.target.value.length > 0) {
                         syncCustomGraphemeArrays();
                     }
@@ -1496,16 +1672,21 @@
                 lobbyContainer.appendChild(lobbyRow);
 
                 const workItem = document.createElement('div');
-                workItem.className = 'flex items-center gap-1 bg-slate-100 p-1.5 rounded-xl border border-slate-300';
+                workItem.className = 'flex flex-col gap-0.5 bg-slate-100 p-1.5 rounded-xl border border-slate-300';
                 workItem.innerHTML = `
-                    <input type="text" value="${cg.text}" placeholder="..." class="w-16 p-1 text-xs border border-slate-400 rounded-md font-bold text-slate-800 focus:outline-none" data-index="${idx}">
-                    <input type="color" value="${cg.color}" class="w-6 h-6 rounded cursor-pointer border border-slate-400" data-index="${idx}">
+                    <div class="flex items-center gap-1">
+                        <input type="text" value="${cg.text}" placeholder="..." class="w-16 p-1 text-xs border border-slate-400 rounded-md font-bold text-slate-800 focus:outline-none" data-index="${idx}">
+                        <input type="color" value="${cg.color}" class="w-6 h-6 rounded cursor-pointer border border-slate-400" data-index="${idx}">
+                    </div>
+                    <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
                 const workText = workItem.querySelector('input[type="text"]');
                 const workColor = workItem.querySelector('input[type="color"]');
+                const workCodeLabel = workItem.querySelector('.codepoint-label');
 
                 workText.addEventListener('input', (e) => {
                     customGraphemes[idx].text = e.target.value;
+                    workCodeLabel.textContent = getCodePointsLabel(e.target.value);
                     if (idx === customGraphemes.length - 1 && e.target.value.length > 0) {
                         syncCustomGraphemeArrays();
                     }
@@ -1517,16 +1698,21 @@
                 workspaceContainer.appendChild(workItem);
 
                 const pictureRow = document.createElement('div');
-                pictureRow.className = 'flex items-center gap-2';
+                pictureRow.className = 'flex flex-col gap-0.5';
                 pictureRow.innerHTML = `
-                    <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
-                    <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
+                    <div class="flex items-center gap-2">
+                        <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
+                        <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
+                    </div>
+                    <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
                 const pictureText = pictureRow.querySelector('input[type="text"]');
                 const pictureColor = pictureRow.querySelector('input[type="color"]');
+                const pictureCodeLabel = pictureRow.querySelector('.codepoint-label');
 
                 pictureText.addEventListener('input', (e) => {
                     customGraphemes[idx].text = e.target.value;
+                    pictureCodeLabel.textContent = getCodePointsLabel(e.target.value);
                     if (idx === customGraphemes.length - 1 && e.target.value.length > 0) {
                         syncCustomGraphemeArrays();
                     }
@@ -1549,6 +1735,108 @@
             });
         }
 
+        // Sinhala dependent vowel signs ("pili"), hardcoded with their exact, verified Unicode
+        // code points. This exists because pasting an isolated diacritic from elsewhere often
+        // carries an invisible extra character along with it (e.g. a dotted-circle placeholder,
+        // or a leading space some systems insert) which silently breaks colour-matching and is
+        // very hard for a person to spot or edit out by hand. Ticking a box here guarantees the
+        // exact clean character every time, with no typing or pasting involved.
+        const SINHALA_VOWEL_SIGNS = [
+            { char: '\u0DCF', label: 'ා ā (aa)' },
+            { char: '\u0DD0', label: 'ැ æ (short ae)' },
+            { char: '\u0DD1', label: 'ෑ ǣ (long ae)' },
+            { char: '\u0DD2', label: 'ි i (short i)' },
+            { char: '\u0DD3', label: 'ී ī (long i)' },
+            { char: '\u0DD4', label: 'ු u (short u)' },
+            { char: '\u0DD6', label: 'ූ ū (long u)' },
+            { char: '\u0DD9', label: 'ෙ e (short e)' },
+            { char: '\u0DDA', label: 'ේ ē (long e)' },
+            { char: '\u0DDB', label: 'ෛ ai' },
+            { char: '\u0DDC', label: 'ො o (short o)' },
+            { char: '\u0DDD', label: 'ෝ ō (long o)' },
+            { char: '\u0DDE', label: 'ෞ au' }
+        ];
+        const SINHALA_VOWEL_SIGN_COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#f59e0b', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#84cc16', '#06b6d4', '#a855f7', '#e11d48', '#0ea5e9'];
+        const SINHALA_VOWEL_SIGN_CHARS = new Set(SINHALA_VOWEL_SIGNS.map(s => s.char));
+
+        function findCustomGraphemeIndex(char) {
+            return customGraphemes.findIndex(cg => cg.text === char);
+        }
+
+        function toggleSinhalaVowelSign(char, isChecked, color) {
+            const idx = findCustomGraphemeIndex(char);
+            if (isChecked) {
+                if (idx === -1) {
+                    const insertAt = Math.max(0, customGraphemes.length - 1);
+                    customGraphemes.splice(insertAt, 0, { text: char, color: color });
+                }
+            } else if (idx !== -1) {
+                customGraphemes.splice(idx, 1);
+            }
+            syncCustomGraphemeArrays();
+        }
+
+        function renderSinhalaVowelSignsRow(containerId, compact) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+
+            SINHALA_VOWEL_SIGNS.forEach((sign, i) => {
+                const idx = findCustomGraphemeIndex(sign.char);
+                const isChecked = idx !== -1;
+                const currentColor = isChecked ? customGraphemes[idx].color : SINHALA_VOWEL_SIGN_COLORS[i % SINHALA_VOWEL_SIGN_COLORS.length];
+
+                const row = document.createElement('label');
+                row.className = compact
+                    ? 'flex items-center gap-1 text-[10px] font-bold text-slate-700 cursor-pointer bg-slate-50 border border-slate-300 rounded-full px-2 py-1'
+                    : 'flex items-center gap-1.5 text-xs font-bold text-slate-700 cursor-pointer';
+                row.dir = 'auto';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = isChecked;
+                checkbox.className = compact ? 'w-3.5 h-3.5' : 'w-4 h-4';
+
+                const colorInput = document.createElement('input');
+                colorInput.type = 'color';
+                colorInput.value = currentColor;
+                colorInput.className = compact ? 'w-5 h-5 rounded cursor-pointer border border-slate-400' : 'w-6 h-6 rounded border-2 border-slate-800 cursor-pointer';
+                colorInput.disabled = !isChecked;
+
+                checkbox.addEventListener('change', () => {
+                    toggleSinhalaVowelSign(sign.char, checkbox.checked, colorInput.value);
+                });
+                colorInput.addEventListener('input', () => {
+                    const gi = findCustomGraphemeIndex(sign.char);
+                    if (gi !== -1) {
+                        customGraphemes[gi].color = colorInput.value;
+                        syncCustomGraphemeArrays();
+                    }
+                });
+
+                const labelSpan = document.createElement('span');
+                labelSpan.textContent = sign.label;
+
+                row.appendChild(checkbox);
+                row.appendChild(colorInput);
+                row.appendChild(labelSpan);
+                container.appendChild(row);
+            });
+        }
+
+        function updateSinhalaVowelSignsVisibility() {
+            const show = selectedLanguage === 'sinhala';
+            ['sinhala-vowel-signs-row-lobby', 'sinhala-vowel-signs-row-workspace', 'sinhala-vowel-signs-row-picture'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = show ? 'block' : 'none';
+            });
+            if (show) {
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-lobby', false);
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-workspace', true);
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-picture', false);
+            }
+        }
+
         function updateFullScreenButtonLabels() {
             const label = FULL_SCREEN_LABELS[selectedLanguage] || FULL_SCREEN_LABELS.en;
             document.querySelectorAll('.fullscreen-btn-label').forEach(el => {
@@ -1564,10 +1852,7 @@
             });
 
             updateDateHeader();
-            const coderInput = document.getElementById('coder-input');
-            if (coderInput) {
-                document.getElementById('coder-board').innerHTML = colorizeSentenceText(coderInput.value);
-            }
+            refreshCoderColorization();
         }
 
         function drawCustomBuilding(ctx, b) {
@@ -2102,16 +2387,38 @@
             ctx.textAlign = 'left';
             
             const graphemes = getColoredGraphemes(wordText);
-            const widths = graphemes.map(g => ctx.measureText(g.char).width);
+
+            // Group consecutive same-coloured characters into one run, measured and drawn
+            // together as a single string. This lets a base character and an attached
+            // combining mark (e.g. a Sinhala vowel sign) be shaped and positioned correctly
+            // as one unit, rather than each character being measured/drawn in isolation.
+            const runs = [];
+            let ri = 0;
+            while (ri < graphemes.length) {
+                let rj = ri;
+                let runText = graphemes[ri].char;
+                while (rj + 1 < graphemes.length && graphemes[rj + 1].color === graphemes[ri].color) {
+                    rj++;
+                    runText += graphemes[rj].char;
+                }
+                runs.push({ text: runText, color: graphemes[ri].color });
+                ri = rj + 1;
+            }
+
+            const widths = runs.map(r => ctx.measureText(r.text).width);
             const totalWidth = widths.reduce((sum, w) => sum + w, 0);
             
             let currentX = centerX - totalWidth / 2;
-            for (let idx = 0; idx < graphemes.length; idx++) {
-                ctx.fillStyle = graphemes[idx].color;
-                ctx.fillText(graphemes[idx].char, currentX, centerY);
+            for (let idx = 0; idx < runs.length; idx++) {
+                ctx.fillStyle = runs[idx].color;
+                ctx.fillText(runs[idx].text, currentX, centerY);
                 currentX += widths[idx];
             }
             ctx.restore();
+        }
+
+        function getActiveSprites() {
+            return selectedCharacter === 'bobot' ? imagesBobot : images;
         }
 
         function loadAssets() {
@@ -2135,15 +2442,15 @@
                 updateDateHeader();
                 updateDefaultGraphemeRowVisibility();
                 updateFullScreenButtonLabels();
-                
-                const coderInput = document.getElementById('coder-input');
-                document.getElementById('coder-board').innerHTML = colorizeSentenceText(coderInput.value);
+                updateSinhalaVowelSignsVisibility();
+                refreshCoderColorization();
             });
 
             selectedLanguage = langSelect.value;
             updateDateHeader();
             updateDefaultGraphemeRowVisibility();
             updateFullScreenButtonLabels();
+            updateSinhalaVowelSignsVisibility();
 
             let count = 0, total = Object.keys(SPRITE_URLS).length;
             Object.entries(SPRITE_URLS).forEach(([k, u]) => {
@@ -2158,6 +2465,21 @@
                     if (++count === total) imagesLoaded = true;
                 };
                 images[k].src = u;
+            });
+
+            let bobotCount = 0, bobotTotal = Object.keys(SPRITE_URLS_BOBOT).length;
+            Object.entries(SPRITE_URLS_BOBOT).forEach(([k, u]) => {
+                imagesBobot[k] = new Image();
+                imagesBobot[k].onload = () => {
+                    if (++bobotCount === bobotTotal) {
+                        imagesBobotLoaded = true;
+                    }
+                };
+                imagesBobot[k].onerror = () => {
+                    console.warn(`Could not load Bobot sprite: ${k}. Falling back to drawings.`);
+                    if (++bobotCount === bobotTotal) imagesBobotLoaded = true;
+                };
+                imagesBobot[k].src = u;
             });
 
             const GAME_PREVENT_KEYS = new Set(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space', 'ShiftLeft', 'ShiftRight']);
@@ -2247,6 +2569,17 @@
             loadPresetManifest();
             document.getElementById('preset-category-select').addEventListener('change', (e) => {
                 renderPresetCategoryItems(e.target.value);
+            });
+
+            document.querySelectorAll('.character-radio').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (!e.target.checked) return;
+                    selectedCharacter = e.target.dataset.char;
+                    document.querySelectorAll('.character-radio').forEach(r => {
+                        r.checked = (r.dataset.char === selectedCharacter);
+                        r.closest('.character-card').classList.toggle('selected', r.checked);
+                    });
+                });
             });
 
             ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture'].forEach(id => {
@@ -2370,20 +2703,24 @@
             }
 
             const coderInput = document.getElementById('coder-input');
-            const coderBoard = document.getElementById('coder-board');
             coderInput.addEventListener('input', () => {
-                coderBoard.innerHTML = colorizeSentenceText(coderInput.value);
+                refreshCoderColorization();
+            });
+            coderInput.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+                document.execCommand('insertText', false, text);
             });
 
             const fontScaleSelect = document.getElementById('font-size-select');
             fontScaleSelect.addEventListener('change', () => {
-                coderBoard.classList.remove('text-[10px]', 'text-[12px]', 'text-[24px]', 'text-[32px]', 'text-[40px]', 'text-[48px]', 'text-[56px]', 'text-[72px]');
-                coderBoard.classList.add(fontScaleSelect.value);
+                coderInput.classList.remove('text-[10px]', 'text-[12px]', 'text-[24px]', 'text-[32px]', 'text-[40px]', 'text-[48px]', 'text-[56px]', 'text-[72px]');
+                coderInput.classList.add(fontScaleSelect.value);
             });
 
             document.getElementById('copy-rich-btn').onclick = () => {
-                const rawText = coderInput.value;
-                const cleanHTML = coderBoard.innerHTML;
+                const rawText = coderInput.textContent;
+                const cleanHTML = coderInput.innerHTML;
                 const rawTextStripped = rawText.replace(/[\[\]]/g, '');
                 
                 const formattedHTML = `<span style="font-family: 'OpenDyslexic', 'Arial', sans-serif; font-size: 18pt; line-height: 1.4; color: #b4b4b4; display: inline;">${cleanHTML}</span>`;
@@ -2526,8 +2863,7 @@
                 pauseBackgroundMusic();
                 document.getElementById('title-screen').style.display = 'none';
                 document.getElementById('coder-screen').style.display = 'flex';
-                const coderInput = document.getElementById('coder-input');
-                document.getElementById('coder-board').innerHTML = colorizeSentenceText(coderInput.value);
+                refreshCoderColorization();
             }
         }
 
@@ -2573,7 +2909,8 @@
         // (e.g. the manifest.json hasn't been created on GitHub), this fails gracefully.
         function loadPresetManifest() {
             const select = document.getElementById('preset-category-select');
-            fetch(PRESET_MANIFEST_URL)
+            const cacheBustedUrl = PRESET_MANIFEST_URL + (PRESET_MANIFEST_URL.includes('?') ? '&' : '?') + 'cb=' + Date.now();
+            fetch(cacheBustedUrl, { cache: 'no-store' })
                 .then(res => {
                     if (!res.ok) throw new Error('Manifest not found');
                     return res.json();
@@ -2887,25 +3224,33 @@
             if (challengeModeEnabled) {
                 instructionEl.innerHTML = '';
                 instructionEl.style.color = '';
-                instructionEl.innerText = '?';
+                instructionEl.textContent = '?';
                 instructionEl.title = '';
             } else if (colourCodedEnabled) {
                 instructionEl.innerHTML = '';
                 const graphemes = getColoredGraphemes(currentTargetWord);
-                graphemes.forEach(g => {
+                let gi = 0;
+                while (gi < graphemes.length) {
+                    let gj = gi;
+                    let runText = graphemes[gi].char;
+                    while (gj + 1 < graphemes.length && graphemes[gj + 1].color === graphemes[gi].color) {
+                        gj++;
+                        runText += graphemes[gj].char;
+                    }
                     const span = document.createElement('span');
-                    if (g.char === ' ') {
+                    if (runText === ' ') {
                         span.innerHTML = '&nbsp;';
                     } else {
-                        span.innerText = g.char;
+                        span.textContent = runText;
                     }
-                    span.style.color = g.color;
+                    span.style.color = graphemes[gi].color;
                     instructionEl.appendChild(span);
-                });
+                    gi = gj + 1;
+                }
             } else {
                 instructionEl.innerHTML = '';
                 const strippedTarget = currentTargetWord.replace(/[\[\]]/g, '');
-                instructionEl.innerText = strippedTarget;
+                instructionEl.textContent = strippedTarget;
                 instructionEl.style.color = ''; 
             }
 
@@ -3747,9 +4092,14 @@
             });
 
             // Player sprite
-            let sprite = player.state === 'jump' ? images.jump : (player.state === 'walk' ? (player.animFrame === 0 ? images.walk1 : images.walk2) : (player.animFrame === 0 ? images.idle1 : images.idle2));
+            const activeSprites = getActiveSprites();
+            let sprite = player.state === 'jump' ? activeSprites.jump : (player.state === 'walk' ? (player.animFrame === 0 ? activeSprites.walk1 : activeSprites.walk2) : (player.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2));
             if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
-                let rH = player.state === 'jump' ? 70 * 0.8 : 70, rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
+                let rH = player.state === 'jump' ? 70 * 0.8 : 70;
+                if (selectedCharacter === 'bobot' && player.state === 'jump') {
+                    rH *= BOBOT_JUMP_SCALE_BOOST;
+                }
+                let rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
                 ctx.save();
                 if (!player.facingRight) {
                     ctx.scale(-1, 1);
@@ -4148,9 +4498,16 @@
             });
 
             // 10. PLAYER SPRITE CHARACTER
-            let sprite = player.state === 'crawl' ? (player.animFrame === 0 ? images.crawl1 : images.crawl2) : (player.state === 'jump' ? images.jump : (player.state === 'walk' ? (player.animFrame === 0 ? images.walk1 : images.walk2) : (player.animFrame === 0 ? images.idle1 : images.idle2)));
+            const activeSprites = getActiveSprites();
+            let sprite = player.state === 'crawl' ? (player.animFrame === 0 ? activeSprites.crawl1 : activeSprites.crawl2) : (player.state === 'jump' ? activeSprites.jump : (player.state === 'walk' ? (player.animFrame === 0 ? activeSprites.walk1 : activeSprites.walk2) : (player.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2)));
             if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
-                let rH = player.state === 'crawl' ? 70 * 4/9 : (player.state === 'jump' ? 70 * 0.8 : 70), rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
+                let rH = player.state === 'crawl' ? 70 * 4/9 : (player.state === 'jump' ? 70 * 0.8 : 70);
+                if (selectedCharacter === 'bobot' && player.state === 'crawl') {
+                    rH *= BOBOT_CRAWL_SCALE_BOOST;
+                } else if (selectedCharacter === 'bobot' && player.state === 'jump') {
+                    rH *= BOBOT_JUMP_SCALE_BOOST;
+                }
+                let rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
                 ctx.save();
                 if (!player.facingRight) {
                     ctx.scale(-1, 1);
