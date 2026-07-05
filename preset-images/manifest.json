@@ -236,6 +236,243 @@
           }
         }
       ]
+    },
+    {
+      "id": "australian-animals",
+      "name": "Australian Animals",
+      "folder": "australian-animals",
+      "items": [
+        {
+          "file": "un kangourou gris.png",
+          "translations": {
+            "fr": "un kangourou gris",
+            "en": "a grey kangaroo",
+            "es": "un canguro gris",
+            "de": "ein graues Känguru",
+            "it": "un canguro grigio",
+            "ja": "灰色のカンガルー",
+            "zh-pinyin": "huīsè de dàishǔ",
+            "zh-hanzi": "灰色的袋鼠",
+            "cantonese": "灰色袋鼠",
+            "he": "קנגורו אפור",
+            "ar": "كنغر رمادي",
+            "sinhala": "අළු කැංගරූවෙක්",
+            "vi": "một con kangaroo màu xám",
+            "ur": "ایک سرمئی کینگرو",
+            "hi": "एक स्लेटी कंगारू",
+            "uk": "сірий кенгуру",
+            "ru": "серый кенгуру",
+            "macedonian": "сив кенгур"
+          }
+        },
+        {
+          "file": "un kangourou marron.png",
+          "translations": {
+            "fr": "un kangourou marron",
+            "en": "a brown kangaroo",
+            "es": "un canguro marrón",
+            "de": "ein braunes Känguru",
+            "it": "un canguro marrone",
+            "ja": "茶色のカンガルー",
+            "zh-pinyin": "zōngsè de dàishǔ",
+            "zh-hanzi": "棕色的袋鼠",
+            "cantonese": "啡色袋鼠",
+            "he": "קנגורו חום",
+            "ar": "كنغر بني",
+            "sinhala": "දුඹුරු කැංගරූවෙක්",
+            "vi": "một con kangaroo màu nâu",
+            "ur": "ایک بھورا کینگرو",
+            "hi": "एक भूरा कंगारू",
+            "uk": "коричневий кенгуру",
+            "ru": "коричневый кенгуру",
+            "macedonian": "кафеав кенгур"
+          }
+        },
+        {
+          "file": "un oiseau arc-en-ciel.png",
+          "translations": {
+            "fr": "un oiseau arc-en-ciel",
+            "en": "a rainbow bird",
+            "es": "un pájaro arcoíris",
+            "de": "ein Regenbogenvogel",
+            "it": "un uccello arcobaleno",
+            "ja": "虹色の鳥",
+            "zh-pinyin": "cǎihóng niǎo",
+            "zh-hanzi": "彩虹鸟",
+            "cantonese": "彩虹雀仔",
+            "he": "ציפור קשת",
+            "ar": "طائر قوس قزح",
+            "sinhala": "දේදුන්නු කුරුල්ලෙක්",
+            "vi": "một con chim cầu vồng",
+            "ur": "ایک قوس قزح پرندہ",
+            "hi": "एक इंद्रधनुषी पक्षी",
+            "uk": "веселковий птах",
+            "ru": "радужная птица",
+            "macedonian": "виножито птица"
+          }
+        },
+        {
+          "file": "un oiseau blanc et jaune.png",
+          "translations": {
+            "fr": "un oiseau blanc et jaune",
+            "en": "a white and yellow bird",
+            "es": "un pájaro blanco y amarillo",
+            "de": "ein weißer und gelber Vogel",
+            "it": "un uccello bianco e giallo",
+            "ja": "白と黄色の鳥",
+            "zh-pinyin": "báisè hé huángsè de niǎo",
+            "zh-hanzi": "白色和黄色的鸟",
+            "cantonese": "白色同黃色雀仔",
+            "he": "ציפור לבנה וצהובה",
+            "ar": "طائر أبيض وأصفر",
+            "sinhala": "සුදු සහ කහ කුරුල්ලෙක්",
+            "vi": "một con chim trắng và vàng",
+            "ur": "ایک سفید اور پیلا پرندہ",
+            "hi": "एक सफ़ेद और पीला पक्षी",
+            "uk": "біло-жовтий птах",
+            "ru": "бело-жёлтая птица",
+            "macedonian": "бело-жолта птица"
+          }
+        },
+        {
+          "file": "un oiseau marron et blanc.png",
+          "translations": {
+            "fr": "un oiseau marron et blanc",
+            "en": "a brown and white bird",
+            "es": "un pájaro marrón y blanco",
+            "de": "ein brauner und weißer Vogel",
+            "it": "un uccello marrone e bianco",
+            "ja": "茶色と白の鳥",
+            "zh-pinyin": "zōngsè hé báisè de niǎo",
+            "zh-hanzi": "棕色和白色的鸟",
+            "cantonese": "啡色同白色雀仔",
+            "he": "ציפור חומה ולבנה",
+            "ar": "طائر بني وأبيض",
+            "sinhala": "දුඹුරු සහ සුදු කුරුල්ලෙක්",
+            "vi": "một con chim nâu và trắng",
+            "ur": "ایک بھورا اور سفید پرندہ",
+            "hi": "एक भूरा और सफ़ेद पक्षी",
+            "uk": "коричнево-білий птах",
+            "ru": "коричнево-белая птица",
+            "macedonian": "кафеаво-бела птица"
+          }
+        },
+        {
+          "file": "un oiseau noir et blanc.png",
+          "translations": {
+            "fr": "un oiseau noir et blanc",
+            "en": "a black and white bird",
+            "es": "un pájaro negro y blanco",
+            "de": "ein schwarzer und weißer Vogel",
+            "it": "un uccello nero e bianco",
+            "ja": "白黒の鳥",
+            "zh-pinyin": "hēisè hé báisè de niǎo",
+            "zh-hanzi": "黑色和白色的鸟",
+            "cantonese": "黑白色雀仔",
+            "he": "ציפור שחורה ולבנה",
+            "ar": "طائر أسود وأبيض",
+            "sinhala": "කළු සහ සුදු කුරුල්ලෙක්",
+            "vi": "một con chim đen và trắng",
+            "ur": "ایک کالا اور سفید پرندہ",
+            "hi": "एक काला और सफ़ेद पक्षी",
+            "uk": "чорно-білий птах",
+            "ru": "чёрно-белая птица",
+            "macedonian": "црно-бела птица"
+          }
+        },
+        {
+          "file": "un oiseau noir, marron, blanc et jaune.png",
+          "translations": {
+            "fr": "un oiseau noir, marron, blanc et jaune",
+            "en": "a black, brown, white and yellow bird",
+            "es": "un pájaro negro, marrón, blanco y amarillo",
+            "de": "ein schwarzer, brauner, weißer und gelber Vogel",
+            "it": "un uccello nero, marrone, bianco e giallo",
+            "ja": "黒、茶色、白、黄色の鳥",
+            "zh-pinyin": "hēisè, zōngsè, báisè hé huángsè de niǎo",
+            "zh-hanzi": "黑色、棕色、白色和黄色的鸟",
+            "cantonese": "黑色、啡色、白色同黃色雀仔",
+            "he": "ציפור שחורה, חומה, לבנה וצהובה",
+            "ar": "طائر أسود وبني وأبيض وأصفر",
+            "sinhala": "කළු, දුඹුරු, සුදු සහ කහ කුරුල්ලෙක්",
+            "vi": "một con chim đen, nâu, trắng và vàng",
+            "ur": "ایک کالا، بھورا، سفید اور پیلا پرندہ",
+            "hi": "एक काला, भूरा, सफ़ेद और पीला पक्षी",
+            "uk": "чорний, коричневий, білий і жовтий птах",
+            "ru": "чёрная, коричневая, белая и жёлтая птица",
+            "macedonian": "црна, кафеава, бела и жолта птица"
+          }
+        },
+        {
+          "file": "un oiseau rose et gris.png",
+          "translations": {
+            "fr": "un oiseau rose et gris",
+            "en": "a pink and grey bird",
+            "es": "un pájaro rosa y gris",
+            "de": "ein rosa und grauer Vogel",
+            "it": "un uccello rosa e grigio",
+            "ja": "ピンクと灰色の鳥",
+            "zh-pinyin": "fěnhóngsè hé huīsè de niǎo",
+            "zh-hanzi": "粉色和灰色的鸟",
+            "cantonese": "粉紅色同灰色雀仔",
+            "he": "ציפור ורודה ואפורה",
+            "ar": "طائر وردي ورمادي",
+            "sinhala": "රෝස සහ අළු කුරුල්ලෙක්",
+            "vi": "một con chim hồng và xám",
+            "ur": "ایک گلابی اور سرمئی پرندہ",
+            "hi": "एक गुलाबी और स्लेटी पक्षी",
+            "uk": "рожево-сірий птах",
+            "ru": "розово-серая птица",
+            "macedonian": "розово-сива птица"
+          }
+        },
+        {
+          "file": "un serpent arc-en-ciel.png",
+          "translations": {
+            "fr": "un serpent arc-en-ciel",
+            "en": "a rainbow snake",
+            "es": "una serpiente arcoíris",
+            "de": "eine Regenbogenschlange",
+            "it": "un serpente arcobaleno",
+            "ja": "虹色のヘビ",
+            "zh-pinyin": "cǎihóng shé",
+            "zh-hanzi": "彩虹蛇",
+            "cantonese": "彩虹蛇",
+            "he": "נחש קשת",
+            "ar": "ثعبان قوس قزح",
+            "sinhala": "දේදුන්නු සර්පයෙක්",
+            "vi": "một con rắn cầu vồng",
+            "ur": "ایک قوس قزح سانپ",
+            "hi": "एक इंद्रधनुषी साँप",
+            "uk": "веселкова змія",
+            "ru": "радужная змея",
+            "macedonian": "виножито змија"
+          }
+        },
+        {
+          "file": "un serpent noir et rouge.png",
+          "translations": {
+            "fr": "un serpent noir et rouge",
+            "en": "a black and red snake",
+            "es": "una serpiente negra y roja",
+            "de": "eine schwarze und rote Schlange",
+            "it": "un serpente nero e rosso",
+            "ja": "黒と赤のヘビ",
+            "zh-pinyin": "hēisè hé hóngsè de shé",
+            "zh-hanzi": "黑色和红色的蛇",
+            "cantonese": "黑色同紅色蛇",
+            "he": "נחש שחור ואדום",
+            "ar": "ثعبان أسود وأحمر",
+            "sinhala": "කළු සහ රතු සර්පයෙක්",
+            "vi": "một con rắn đen và đỏ",
+            "ur": "ایک کالا اور سرخ سانپ",
+            "hi": "एक काला और लाल साँप",
+            "uk": "чорно-червона змія",
+            "ru": "чёрно-красная змея",
+            "macedonian": "црно-црвена змија"
+          }
+        }
+      ]
     }
   ]
 }
