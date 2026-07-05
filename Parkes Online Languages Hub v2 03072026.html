@@ -21,6 +21,40 @@
             font-style: normal;
         }
 
+        /* ============================================================
+           DESIGN TOKENS - hub interface only (landing page + Colour
+           Coder chrome). The Parkour/Picture Parkour game rendering,
+           in-game HUD, and result screens are untouched by this pass.
+           ============================================================ */
+        :root {
+            --hub-paper: #FBF9F5;
+            --hub-surface: #FFFFFF;
+            --hub-ink: #292521;
+            --hub-ink-soft: #8B8579;
+            --hub-line: #ECE7DE;
+            --hub-violet: #5B4EFF;
+            --hub-violet-soft: #EEECFF;
+            --hub-violet-deep: #4238D6;
+            --hub-marigold: #FF9F43;
+            --hub-marigold-soft: #FFF1E0;
+            --hub-mint: #2FBF8F;
+            --hub-mint-soft: #E4F9F1;
+            --hub-radius-lg: 28px;
+            --hub-radius-md: 18px;
+            --hub-radius-sm: 12px;
+            --hub-shadow-sm: 0 1px 2px rgba(41,37,33,0.06), 0 1px 3px rgba(41,37,33,0.08);
+            --hub-shadow-md: 0 6px 16px rgba(41,37,33,0.08), 0 2px 6px rgba(41,37,33,0.05);
+            --hub-shadow-lg: 0 20px 44px rgba(41,37,33,0.12), 0 6px 14px rgba(41,37,33,0.06);
+        }
+
+        /* Interface chrome uses the system's native rounded font (SF Rounded on
+           Apple devices, sensible fallbacks elsewhere) - deliberately, so a future
+           iOS app built on this foundation feels coherent from day one. OpenDyslexic
+           stays reserved for actual reading/vocabulary content, where it matters. */
+        .hub-font {
+            font-family: ui-rounded, -apple-system, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+        }
+
         body { 
             margin: 0; 
             overflow: hidden; 
@@ -88,7 +122,7 @@
         #title-screen {
             position: absolute;
             inset: 0;
-            background-color: #ffffff;
+            background-color: var(--hub-paper);
             display: flex;
             flex-direction: row;
             align-items: stretch;
@@ -98,11 +132,11 @@
         }
 
         #title-sidebar {
-            width: 240px;
-            min-width: 200px;
+            width: 268px;
+            min-width: 220px;
             flex-shrink: 0;
-            background: #eff6ff;
-            border-right: 4px solid #1e3a8a;
+            background: var(--hub-surface);
+            border-right: 1px solid var(--hub-line);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -111,54 +145,108 @@
         #title-sidebar-list {
             flex: 1;
             overflow-y: auto;
-            padding: 12px;
+            padding: 14px;
         }
 
         #title-main {
             flex: 1;
             overflow-y: auto;
-            padding: 20px 28px;
+            padding: 28px 36px;
         }
 
         @media (max-width: 700px) {
             #title-screen { flex-direction: column; }
-            #title-sidebar { width: 100%; min-width: 0; max-height: 160px; border-right: none; border-bottom: 4px solid #1e3a8a; }
+            #title-sidebar { width: 100%; min-width: 0; max-height: 168px; border-right: none; border-bottom: 1px solid var(--hub-line); }
             #title-sidebar-list { display: flex; flex-direction: row; gap: 10px; overflow-x: auto; overflow-y: hidden; }
+            #title-main { padding: 20px; }
         }
 
-        /* Customize input fields to look like dry-erase drawings */
-        .board-input {
-            border: 4px solid #1e3a8a;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 4px 4px 0px #1e3a8a;
-            font-family: 'OpenDyslexic', sans-serif;
-            font-weight: bold;
-            transition: all 0.2s ease;
+        /* Grouped-list settings sections, iOS Settings-style: one soft card,
+           rows separated by hairlines rather than each field boxed separately. */
+        .hub-group {
+            background: var(--hub-surface);
+            border-radius: var(--hub-radius-md);
+            box-shadow: var(--hub-shadow-sm);
+            border: 1px solid var(--hub-line);
+            overflow: hidden;
         }
-        .board-input:focus {
+        .hub-row {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--hub-line);
+        }
+        .hub-row:last-child { border-bottom: none; }
+        .hub-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--hub-ink-soft);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .hub-hint {
+            font-size: 12px;
+            color: var(--hub-ink-soft);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .hub-input {
+            width: 100%;
+            border: 1.5px solid var(--hub-line);
+            background: var(--hub-paper);
+            border-radius: var(--hub-radius-sm);
+            padding: 12px 14px;
+            font-weight: 600;
+            color: var(--hub-ink);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .hub-input:focus {
             outline: none;
-            border-color: #ef4444;
-            box-shadow: 4px 4px 0px #ef4444;
+            border-color: var(--hub-violet);
+            box-shadow: 0 0 0 4px var(--hub-violet-soft);
+            background: var(--hub-surface);
         }
+        textarea.hub-input { resize: none; }
 
-        .board-btn {
-            background: #ffcc00;
-            border: 4px solid #78350f;
-            color: #78350f;
-            font-weight: bold;
-            padding: 14px 40px;
+        .hub-btn-primary {
+            background: var(--hub-violet);
+            color: #ffffff;
+            font-weight: 800;
+            padding: 16px 44px;
             border-radius: 9999px;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.2s;
-            box-shadow: 0 6px 0 #78350f;
-            font-family: 'OpenDyslexic', sans-serif;
+            letter-spacing: 0.02em;
+            transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 10px 24px rgba(91,78,255,0.35);
+            border: none;
         }
-        .board-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 0px 0 #78350f;
+        .hub-btn-primary:hover { background: var(--hub-violet-deep); }
+        .hub-btn-primary:active { transform: scale(0.97); }
+
+        .hub-btn-ghost {
+            background: var(--hub-surface);
+            color: var(--hub-ink);
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 9999px;
+            cursor: pointer;
+            border: 1px solid var(--hub-line);
+            box-shadow: var(--hub-shadow-sm);
+            transition: transform 0.12s ease, border-color 0.15s ease;
+            font-size: 13px;
+        }
+        .hub-btn-ghost:hover { border-color: var(--hub-violet); color: var(--hub-violet); }
+        .hub-btn-ghost:active { transform: scale(0.96); }
+
+        .hub-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--hub-paper);
+            border-radius: var(--hub-radius-sm);
+            padding: 14px 16px;
+            border: 1px solid var(--hub-line);
         }
 
         .coder-editable:empty::before {
@@ -167,24 +255,49 @@
             pointer-events: none;
         }
 
-        .character-card.selected {
-            border-color: #1e3a8a;
-            background: #eff6ff;
-            box-shadow: 3px 3px 0px #1e3a8a;
-        }
-
-        .mode-card {
-            border: 4px solid #475569;
-            border-radius: 20px;
-            background: white;
-            box-shadow: 4px 4px 0px #475569;
-            transition: all 0.2s ease;
+        .character-card {
+            border: 1.5px solid var(--hub-line);
+            border-radius: var(--hub-radius-sm);
+            background: var(--hub-surface);
+            transition: all 0.15s ease;
             cursor: pointer;
         }
+        .character-card.selected {
+            border-color: var(--hub-violet);
+            background: var(--hub-violet-soft);
+            box-shadow: 0 0 0 3px var(--hub-violet-soft);
+        }
+
+        /* Signature element: the tool picker. Each tool gets its own soft-tinted
+           icon badge and accent colour, carried through to its selected state. */
+        .mode-card {
+            border: 1.5px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            background: var(--hub-surface);
+            box-shadow: var(--hub-shadow-sm);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            cursor: pointer;
+        }
+        .mode-card:hover {
+            box-shadow: var(--hub-shadow-md);
+            transform: translateY(-2px);
+        }
+        .mode-card:active { transform: translateY(0) scale(0.98); }
         .mode-card.selected {
-            border-color: #2563eb;
-            box-shadow: 8px 8px 0px #2563eb;
-            transform: translate(-4px, -4px);
+            border-color: var(--mode-accent, var(--hub-violet));
+            background: var(--mode-accent-soft, var(--hub-violet-soft));
+            box-shadow: var(--hub-shadow-md);
+        }
+        .mode-icon-badge {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: var(--mode-accent-soft, var(--hub-violet-soft));
+            flex-shrink: 0;
         }
 
         .controls { position: absolute; bottom: 30px; width: 100%; display: flex; justify-content: space-between; padding: 0 40px; pointer-events: none; }
@@ -199,7 +312,7 @@
             display: none;
             position: absolute;
             inset: 0;
-            background: #fafaf9;
+            background: var(--hub-paper);
             z-index: 90;
             padding: 24px;
             overflow-y: auto;
@@ -250,10 +363,10 @@
     <div id="game-container">
 
         <!-- How To Use This Hub Modal -->
-        <div id="how-to-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
-            <div class="bg-white p-8 rounded-3xl max-w-lg w-full shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 max-h-[85vh] overflow-y-auto">
-                <h2 class="text-xl font-black text-slate-800 mb-4">How to Use This Hub</h2>
-                <div class="text-sm text-slate-700 space-y-3 leading-relaxed font-bold">
+        <div id="how-to-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
+            <div class="hub-font p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg);">
+                <h2 class="text-xl font-extrabold mb-4" style="color:var(--hub-ink);">How to Use This Hub</h2>
+                <div class="text-sm space-y-3 leading-relaxed font-medium" style="color:var(--hub-ink);">
                     <p>This hub works in most modern browsers, but text-to-speech is optimised for use in <strong>Microsoft Edge</strong>. If a word isn't being read aloud, try switching to Edge before assuming something's broken — voice availability varies a lot by browser and device.</p>
                     <p><strong>Parkour:</strong> type or paste a comma-separated vocabulary list, then explore the world to find each word's card. Great for reviewing a set of words the whole class has already met.</p>
                     <p><strong>Picture Parkour:</strong> upload images named after their target word (e.g. "un croissant.png") instead of typing text — ideal for younger learners or picture-based vocabulary, and works well as an independent task once a teacher has prepared a set of images.</p>
@@ -261,7 +374,7 @@
                     <p><strong>Custom graphemes:</strong> use square brackets around any letters you want excluded from colour-coding rules — useful for exceptions within an otherwise-matching word.</p>
                     <p><strong>Assessment:</strong> add a student's name before starting Parkour or Picture Parkour, and a results screen with accuracy, timing, and mistake data will appear once every word is found — good for a screenshot to submit as evidence of practice.</p>
                 </div>
-                <button id="how-to-close-btn" class="w-full mt-6 bg-blue-900 text-white font-black py-3 rounded-2xl hover:bg-black transition-all">Got it</button>
+                <button id="how-to-close-btn" class="hub-btn-primary w-full mt-6">Got it</button>
             </div>
         </div>
 
@@ -271,49 +384,55 @@
         <div id="title-screen" class="dyslexic-font">
             <!-- LEFT: Scrollable tool picker sidebar -->
             <div id="title-sidebar">
-                <div class="p-4 border-b-4 border-blue-900 flex justify-center">
-                    <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a8513ddabb16b08ff06719c10ae35275af9e85d/POLH%20small%20logo.png" alt="Parkes Online Languages Hub" class="max-w-full max-h-20 h-auto">
+                <div class="p-5 flex justify-center">
+                    <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a8513ddabb16b08ff06719c10ae35275af9e85d/POLH%20small%20logo.png" alt="Parkes Online Languages Hub" class="max-w-full max-h-16 h-auto">
                 </div>
                 <div id="title-sidebar-list" class="grid grid-cols-1 gap-3">
                     <!-- Mode 1: Parkour -->
-                    <div id="mode-quest" class="mode-card selected p-4 flex flex-col items-center text-center space-y-2" onclick="selectMode('quest')">
-                        <div class="text-4xl">🏃‍♂️</div>
-                        <h3 class="text-sm font-black text-slate-800">Parkour</h3>
-                        <p class="text-[10px] text-slate-500">Collect vocab words scattered across platform levels.</p>
+                    <div id="mode-quest" class="mode-card hub-font selected p-4 flex items-center gap-3 text-left" style="--mode-accent:var(--hub-violet); --mode-accent-soft:var(--hub-violet-soft);" onclick="selectMode('quest')">
+                        <div class="mode-icon-badge">🏃‍♂️</div>
+                        <div class="min-w-0">
+                            <h3 class="text-sm font-extrabold" style="color:var(--hub-ink);">Parkour</h3>
+                            <p class="text-[11px] leading-snug" style="color:var(--hub-ink-soft);">Collect vocab words scattered across platform levels.</p>
+                        </div>
                     </div>
 
                     <!-- Mode 2: Picture Parkour -->
-                    <div id="mode-picture" class="mode-card p-4 flex flex-col items-center text-center space-y-2" onclick="selectMode('picture')">
-                        <div class="text-4xl">🖼️</div>
-                        <h3 class="text-sm font-black text-slate-800">Picture Parkour</h3>
-                        <p class="text-[10px] text-slate-500">Find your own images instead of word cards.</p>
+                    <div id="mode-picture" class="mode-card hub-font p-4 flex items-center gap-3 text-left" style="--mode-accent:var(--hub-marigold); --mode-accent-soft:var(--hub-marigold-soft);" onclick="selectMode('picture')">
+                        <div class="mode-icon-badge">🖼️</div>
+                        <div class="min-w-0">
+                            <h3 class="text-sm font-extrabold" style="color:var(--hub-ink);">Picture Parkour</h3>
+                            <p class="text-[11px] leading-snug" style="color:var(--hub-ink-soft);">Find your own images instead of word cards.</p>
+                        </div>
                     </div>
 
                     <!-- Mode 3: Colour Coder -->
-                    <div id="mode-coder" class="mode-card p-4 flex flex-col items-center text-center space-y-2" onclick="selectMode('coder')">
-                        <div class="text-4xl">🖍️</div>
-                        <h3 class="text-sm font-black text-slate-800">Colour Coder</h3>
-                        <p class="text-[10px] text-slate-500">Colour-code target graphemes in any text instantly.</p>
+                    <div id="mode-coder" class="mode-card hub-font p-4 flex items-center gap-3 text-left" style="--mode-accent:var(--hub-mint); --mode-accent-soft:var(--hub-mint-soft);" onclick="selectMode('coder')">
+                        <div class="mode-icon-badge">🖍️</div>
+                        <div class="min-w-0">
+                            <h3 class="text-sm font-extrabold" style="color:var(--hub-ink);">Colour Coder</h3>
+                            <p class="text-[11px] leading-snug" style="color:var(--hub-ink-soft);">Colour-code target graphemes in any text instantly.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- RIGHT: Header, language/date, settings, launch -->
             <div id="title-main">
-                <div class="flex items-center justify-end gap-2 flex-wrap mb-4">
-                    <button id="how-to-btn" class="interactive inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-blue-900 font-black text-xs uppercase tracking-wide px-4 py-2 rounded-full border-2 border-blue-900 shadow-sm transition-all">
+                <div class="flex items-center justify-end gap-2 flex-wrap mb-5">
+                    <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
                         ❓ How to Use This Hub
                     </button>
-                    <button class="fullscreen-toggle-btn interactive inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-blue-900 font-black text-xs uppercase tracking-wide px-4 py-2 rounded-full border-2 border-blue-900 shadow-sm transition-all">
+                    <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
                         <span class="fullscreen-btn-label">Full Screen</span>
                     </button>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                <div class="flex flex-col sm:flex-row gap-4 mb-5">
                     <!-- Global Target Language Selector -->
-                    <div class="flex-1 flex flex-col items-center gap-2 bg-blue-50 p-4 rounded-2xl border-4 border-blue-950 shadow-[4px_4px_0px_#1e3a8a]">
-                        <label for="global-language-select" class="text-xs font-black text-blue-900 uppercase tracking-wide">Select Target Language</label>
-                        <select id="global-language-select" class="w-full p-3 board-input text-slate-800 bg-white">
+                    <div class="hub-group hub-font flex-1 p-5">
+                        <label for="global-language-select" class="hub-label">Select Target Language</label>
+                        <select id="global-language-select" class="hub-input">
                             <option value="fr" selected>French (Français)</option>
                             <option value="en">English</option>
                             <option value="zh-pinyin">Mandarin (Pinyin)</option>
@@ -336,68 +455,68 @@
                     </div>
 
                     <!-- Dynamic Date Bar -->
-                    <div class="flex-1 flex flex-col items-center justify-center gap-1 max-w-full">
-                        <div class="flex items-center justify-center gap-3 bg-white p-3 rounded-2xl border-4 border-slate-800 shadow-[4px_4px_0px_#1e293b] w-full">
-                            <span id="french-date-text" dir="auto" class="text-slate-800 font-bold text-sm leading-snug">Calcul de la date...</span>
-                            <button id="tts-date-btn" class="interactive bg-blue-100 hover:bg-blue-200 text-blue-900 p-2 rounded-xl transition-all flex-shrink-0" title="Listen to date">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    <div class="flex-1 flex flex-col gap-1.5 max-w-full">
+                        <div class="hub-group flex items-center justify-center gap-3 p-5 w-full h-full">
+                            <span id="french-date-text" dir="auto" class="text-sm leading-snug" style="color:var(--hub-ink);">Calcul de la date...</span>
+                            <button id="tts-date-btn" class="hub-btn-ghost interactive p-2.5 flex-shrink-0" title="Listen to date">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                             </button>
                         </div>
-                        <span id="date-voice-warning" class="hidden text-xs font-bold text-amber-700 bg-amber-50 border-2 border-amber-300 rounded-lg px-2 py-1"></span>
+                        <span id="date-voice-warning" class="hub-font hidden text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-2 py-1"></span>
                     </div>
                 </div>
 
                 <!-- Shared Parkour Settings Panel -->
-                <div id="quest-settings" class="text-left space-y-4 bg-white p-6 rounded-2xl border-4 border-slate-800 shadow-[8px_8px_0px_#1e293b]">
-                    <div>
-                        <label for="student-name-input" class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Student Name (optional)</label>
-                        <input type="text" id="student-name-input" dir="auto" class="w-full p-3 board-input text-slate-800" placeholder="Enter your name...">
+                <div id="quest-settings" class="hub-group hub-font text-left">
+                    <div class="hub-row">
+                        <label for="student-name-input" class="hub-label">Student Name (optional)</label>
+                        <input type="text" id="student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Choose Your Character</label>
+                    <div class="hub-row">
+                        <label class="hub-label">Choose Your Character</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <label class="character-card selected flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                            <label class="character-card selected flex flex-col items-center gap-1 p-3 cursor-pointer">
                                 <input type="radio" name="character-select-lobby" data-char="parkour" class="hidden character-radio" checked>
                                 <span class="text-3xl">🏃</span>
-                                <span class="text-xs font-bold text-slate-700">P4RK-0UR UNIT</span>
+                                <span class="text-xs font-bold" style="color:var(--hub-ink);">P4RK-0UR UNIT</span>
                             </label>
-                            <label class="character-card flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                            <label class="character-card flex flex-col items-center gap-1 p-3 cursor-pointer">
                                 <input type="radio" name="character-select-lobby" data-char="bobot" class="hidden character-radio">
                                 <span class="text-3xl">🤖</span>
-                                <span class="text-xs font-bold text-slate-700">Bobot</span>
+                                <span class="text-xs font-bold" style="color:var(--hub-ink);">Bobot</span>
                             </label>
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Vocabulary List (separated by commas)</label>
-                        <textarea id="vocab-input" dir="auto" class="w-full h-24 p-4 board-input text-slate-800 resize-none leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
-                        <p class="text-[10px] text-slate-500 mt-2 font-bold">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
+                    <div class="hub-row">
+                        <label class="hub-label">Vocabulary List (separated by commas)</label>
+                        <textarea id="vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
+                        <p class="hub-hint">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="flex items-center space-x-3 bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
-                            <input type="checkbox" id="colour-coded" class="w-6 h-6 rounded border-2 border-slate-800 text-blue-900 focus:ring-0 accent-blue-900 interactive" checked>
-                            <label for="colour-coded" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none mb-0 font-bold">colour-coded</label>
+                    <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="hub-checkbox-row">
+                            <input type="checkbox" id="colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
+                            <label for="colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
                         </div>
-                        <div class="flex items-center space-x-3 bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
-                            <input type="checkbox" id="challenge-mode" class="w-6 h-6 rounded border-2 border-slate-800 text-blue-900 focus:ring-0 accent-blue-900 interactive">
-                            <label for="challenge-mode" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none mb-0 font-bold">Challenge Mode (hide text, listen only)</label>
+                        <div class="hub-checkbox-row">
+                            <input type="checkbox" id="challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                            <label for="challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
                         </div>
                     </div>
 
                     <!-- Dynamic Custom Grapheme Panel inside Settings -->
-                    <div class="bg-blue-50/50 p-4 rounded-2xl border-2 border-blue-200">
-                        <h4 class="text-xs font-black uppercase text-blue-900 tracking-wider mb-1">Custom Colour Coding Rules</h4>
-                        <div id="default-grapheme-row-lobby" class="flex items-center gap-2 mb-2 mt-2 interactive" style="display:none;">
-                            <span class="text-[10px] font-bold text-slate-500 flex-1">All other graphemes</span>
-                            <input type="color" id="default-grapheme-color-lobby" value="#b4b4b4" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer">
+                    <div class="hub-row">
+                        <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                        <div id="default-grapheme-row-lobby" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                            <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                            <input type="color" id="default-grapheme-color-lobby" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
                         </div>
                         <div id="sinhala-vowel-signs-row-lobby" style="display:none;" class="mb-3 interactive">
-                            <p class="text-[10px] font-bold text-slate-500 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                            <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
                             <div id="sinhala-vowel-signs-list-lobby" class="grid grid-cols-2 gap-1.5"></div>
-                            <p class="text-[10px] text-slate-400 mt-2">Add consonants manually below.</p>
+                            <p class="hub-hint">Add consonants manually below.</p>
                         </div>
                         <div id="lobby-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
                             <!-- Dynamically generated rows -->
@@ -406,67 +525,67 @@
                 </div>
 
                 <!-- Picture Parkour Settings Panel -->
-                <div id="picture-settings" class="text-left space-y-4 bg-white p-6 rounded-2xl border-4 border-slate-800 shadow-[8px_8px_0px_#1e293b]" style="display:none;">
-                    <div>
-                        <label for="picture-student-name-input" class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Student Name (optional)</label>
-                        <input type="text" id="picture-student-name-input" dir="auto" class="w-full p-3 board-input text-slate-800" placeholder="Enter your name...">
+                <div id="picture-settings" class="hub-group hub-font text-left" style="display:none;">
+                    <div class="hub-row">
+                        <label for="picture-student-name-input" class="hub-label">Student Name (optional)</label>
+                        <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Choose Your Character</label>
+                    <div class="hub-row">
+                        <label class="hub-label">Choose Your Character</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <label class="character-card selected flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                            <label class="character-card selected flex flex-col items-center gap-1 p-3 cursor-pointer">
                                 <input type="radio" name="character-select-picture" data-char="parkour" class="hidden character-radio" checked>
                                 <span class="text-3xl">🏃</span>
-                                <span class="text-xs font-bold text-slate-700">P4RK-0UR UNIT</span>
+                                <span class="text-xs font-bold" style="color:var(--hub-ink);">P4RK-0UR UNIT</span>
                             </label>
-                            <label class="character-card flex flex-col items-center gap-1 p-3 rounded-2xl border-2 border-slate-300 cursor-pointer">
+                            <label class="character-card flex flex-col items-center gap-1 p-3 cursor-pointer">
                                 <input type="radio" name="character-select-picture" data-char="bobot" class="hidden character-radio">
                                 <span class="text-3xl">🤖</span>
-                                <span class="text-xs font-bold text-slate-700">Bobot</span>
+                                <span class="text-xs font-bold" style="color:var(--hub-ink);">Bobot</span>
                             </label>
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Preset Image Packs (optional)</label>
-                        <p class="text-[10px] text-slate-500 mb-3 font-bold">Pick a ready-made category so students don't need their own images. Words are shown translated into whichever language is selected above.</p>
-                        <select id="preset-category-select" class="w-full p-3 board-input text-slate-800 bg-white mb-2">
+                    <div class="hub-row">
+                        <label class="hub-label">Preset Image Packs (optional)</label>
+                        <p class="hub-hint mt-0 mb-3">Pick a ready-made category so students don't need their own images. Words are shown translated into whichever language is selected above.</p>
+                        <select id="preset-category-select" class="hub-input mb-2">
                             <option value="">Loading categories…</option>
                         </select>
                         <div id="preset-item-list" class="flex flex-wrap gap-2"></div>
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2">Target Vocabulary Images</label>
-                        <p class="text-[10px] text-slate-500 mb-3 font-bold">Name each image file after the word it shows, e.g. "un croissant.png". That name (without the file extension) becomes the target vocabulary in the game.</p>
-                        <label for="picture-file-input" class="board-btn interactive inline-block cursor-pointer text-sm">📁 Choose Images</label>
+                    <div class="hub-row">
+                        <label class="hub-label">Target Vocabulary Images</label>
+                        <p class="hub-hint mt-0 mb-3">Name each image file after the word it shows, e.g. "un croissant.png". That name (without the file extension) becomes the target vocabulary in the game.</p>
+                        <label for="picture-file-input" class="hub-btn-primary interactive inline-block cursor-pointer text-sm" style="padding:12px 28px;">📁 Choose Images</label>
                         <input type="file" id="picture-file-input" accept="image/*" multiple class="hidden">
                         <div id="picture-file-list" class="mt-3 flex flex-wrap gap-2"></div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="flex items-center space-x-3 bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
-                            <input type="checkbox" id="picture-colour-coded" class="w-6 h-6 rounded border-2 border-slate-800 text-blue-900 focus:ring-0 accent-blue-900 interactive" checked>
-                            <label for="picture-colour-coded" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none mb-0 font-bold">colour-coded</label>
+                    <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="hub-checkbox-row">
+                            <input type="checkbox" id="picture-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
+                            <label for="picture-colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
                         </div>
-                        <div class="flex items-center space-x-3 bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
-                            <input type="checkbox" id="picture-challenge-mode" class="w-6 h-6 rounded border-2 border-slate-800 text-blue-900 focus:ring-0 accent-blue-900 interactive">
-                            <label for="picture-challenge-mode" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none mb-0 font-bold">Challenge Mode (hide text, listen only)</label>
+                        <div class="hub-checkbox-row">
+                            <input type="checkbox" id="picture-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                            <label for="picture-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
                         </div>
                     </div>
 
                     <!-- Dynamic Custom Grapheme Panel inside Settings -->
-                    <div class="bg-blue-50/50 p-4 rounded-2xl border-2 border-blue-200">
-                        <h4 class="text-xs font-black uppercase text-blue-900 tracking-wider mb-1">Custom Colour Coding Rules</h4>
-                        <div id="default-grapheme-row-picture" class="flex items-center gap-2 mb-2 mt-2 interactive" style="display:none;">
-                            <span class="text-[10px] font-bold text-slate-500 flex-1">All other graphemes</span>
-                            <input type="color" id="default-grapheme-color-picture" value="#b4b4b4" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer">
+                    <div class="hub-row">
+                        <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                        <div id="default-grapheme-row-picture" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                            <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                            <input type="color" id="default-grapheme-color-picture" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
                         </div>
                         <div id="sinhala-vowel-signs-row-picture" style="display:none;" class="mb-3 interactive">
-                            <p class="text-[10px] font-bold text-slate-500 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                            <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
                             <div id="sinhala-vowel-signs-list-picture" class="grid grid-cols-2 gap-1.5"></div>
-                            <p class="text-[10px] text-slate-400 mt-2">Add consonants manually below.</p>
+                            <p class="hub-hint">Add consonants manually below.</p>
                         </div>
                         <div id="picture-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
                             <!-- Dynamically generated rows -->
@@ -474,8 +593,8 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-4 pt-4 pb-2">
-                    <button id="start-button" class="board-btn interactive text-lg">Launch Activity</button>
+                <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-4 pt-6 pb-2">
+                    <button id="start-button" class="hub-btn-primary hub-font interactive text-lg">Launch Activity</button>
                 </div>
             </div>
         </div>
@@ -485,16 +604,16 @@
         <!-- ========================================== -->
         <div id="coder-screen" class="dyslexic-font">
             <div class="max-w-7xl w-full mx-auto flex flex-col h-full space-y-4">
-                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-blue-100 p-4 rounded-2xl border-4 border-blue-900 shadow-[4px_4px_0px_#1e3a8a] gap-4">
+                <div class="hub-font flex flex-col lg:flex-row justify-between items-start lg:items-center hub-group p-5 gap-4">
                     <div>
-                        <h2 class="text-blue-900 text-2xl font-black leading-none">Colour Coder</h2>
+                        <h2 class="text-2xl font-extrabold leading-none" style="color:var(--hub-ink);">Colour Coder</h2>
                     </div>
                     <!-- Combined Header Toolbar -->
                     <div class="flex flex-wrap items-center gap-3 interactive">
                         <!-- Font Size Scale Select -->
                         <div class="flex items-center gap-2">
-                            <label for="font-size-select" class="text-xs font-black text-blue-900 uppercase">Font Size (px):</label>
-                            <select id="font-size-select" class="p-2 border-2 border-slate-800 rounded-xl font-bold text-xs bg-white text-slate-800 focus:outline-none">
+                            <label for="font-size-select" class="text-xs font-bold uppercase" style="color:var(--hub-ink-soft);">Font Size (px):</label>
+                            <select id="font-size-select" class="hub-input" style="padding:8px 12px; width:auto;">
                                 <option value="text-[10px]">10</option>
                                 <option value="text-[12px]">12</option>
                                 <option value="text-[24px]">24</option>
@@ -507,30 +626,30 @@
                         </div>
                         
                         <!-- Format Text Copy Trigger -->
-                        <button id="copy-rich-btn" class="bg-blue-900 hover:bg-black text-white font-black text-xs uppercase px-4 py-3 rounded-xl border-2 border-slate-800 shadow-[2px_2px_0px_#1e3a8a] transition-all flex items-center gap-2">
+                        <button id="copy-rich-btn" class="hub-btn-primary flex items-center gap-2" style="padding:12px 22px; font-size:13px;">
                             <span>📋</span> Copy Formatted Text
                         </button>
 
-                        <button class="fullscreen-toggle-btn bg-slate-700 hover:bg-slate-800 text-white font-black text-xs uppercase px-4 py-3 rounded-xl border-2 border-slate-800 shadow-[2px_2px_0px_#1e293b] transition-all">
+                        <button class="fullscreen-toggle-btn hub-btn-ghost">
                             <span class="fullscreen-btn-label">Full Screen</span>
                         </button>
                         
                         <!-- Exit Workspace Panel -->
-                        <button id="coder-back-btn" class="bg-rose-500 hover:bg-rose-600 text-white font-black text-xs uppercase px-4 py-3 rounded-xl border-2 border-slate-800 shadow-[3px_3px_0px_#1e293b] transition-all">
+                        <button id="coder-back-btn" class="hub-btn-ghost" style="color:#e11d48; border-color:#fecdd3;">
                             Exit Coder
                         </button>
                     </div>
                 </div>
 
                 <!-- Live Custom Grapheme config on top of workspace -->
-                <div class="bg-white p-4 rounded-2xl border-4 border-slate-800 shadow-[4px_4px_0px_#1e293b]">
-                    <h4 class="text-xs font-black uppercase text-slate-700 tracking-wider mb-2">Live Custom Grapheme Colors</h4>
+                <div class="hub-font hub-group p-5">
+                    <label class="hub-label mb-3">Live Custom Grapheme Colors</label>
                     <div id="default-grapheme-row-workspace" class="flex items-center gap-2 mb-2 interactive" style="display:none;">
-                        <span class="text-[10px] font-bold text-slate-500">All other graphemes</span>
-                        <input type="color" id="default-grapheme-color-workspace" value="#b4b4b4" class="w-6 h-6 rounded cursor-pointer border border-slate-400">
+                        <span class="text-[11px] font-bold" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                        <input type="color" id="default-grapheme-color-workspace" value="#b4b4b4" class="w-6 h-6 rounded-lg cursor-pointer border border-slate-200">
                     </div>
                     <div id="sinhala-vowel-signs-row-workspace" style="display:none;" class="mb-2 interactive">
-                        <p class="text-[10px] font-bold text-slate-500 mb-1">Sinhala Vowel Diacritics (tick to colour-code)</p>
+                        <p class="hub-hint mt-0 mb-1">Sinhala Vowel Diacritics (tick to colour-code)</p>
                         <div id="sinhala-vowel-signs-list-workspace" class="flex flex-wrap gap-2"></div>
                     </div>
                     <div id="workspace-grapheme-container" class="flex flex-wrap gap-3 items-center">
@@ -540,7 +659,7 @@
 
                 <!-- Single Live Colour-Coding Workspace -->
                 <div class="flex flex-col h-full overflow-hidden flex-grow">
-                    <div id="coder-input" contenteditable="true" dir="auto" spellcheck="false" data-placeholder="Type words or text here... e.g. Le chien court sur la route." class="coder-editable w-full h-full bg-white p-8 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e3a8a] overflow-y-auto text-3xl leading-loose tracking-wide whitespace-pre-wrap transition-all duration-200 outline-none"></div>
+                    <div id="coder-input" contenteditable="true" dir="auto" spellcheck="false" data-placeholder="Type words or text here... e.g. Le chien court sur la route." class="coder-editable w-full h-full p-8 overflow-y-auto text-3xl leading-loose tracking-wide whitespace-pre-wrap transition-all duration-200 outline-none" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); border:1px solid var(--hub-line);"></div>
                 </div>
             </div>
         </div>
