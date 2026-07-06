@@ -300,6 +300,180 @@
             flex-shrink: 0;
         }
 
+        /* ============================================================
+           WIZARD FLOW: language -> tool wheel -> (Parkour submode ->
+           player select ->) settings. Each step gets a soft entrance
+           so moving between them feels alive, not just a hard swap.
+           ============================================================ */
+        @keyframes hub-step-in {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .landing-step {
+            animation: hub-step-in 0.35s cubic-bezier(.2,.8,.2,1);
+        }
+        .hub-step-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--hub-ink);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* The tool wheel: a horizontal carousel, centre item enlarged and
+           lit up, neighbours dimmed and receding - a dial you spin through. */
+        .wheel-shell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 12px 0 8px;
+        }
+        .wheel-viewport {
+            width: 420px;
+            max-width: 80vw;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+        .wheel-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .wheel-bubble {
+            position: absolute;
+            top: 58%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            margin-top: -100px;
+            margin-left: -100px;
+            border-radius: 40px;
+            background: var(--tool-accent-soft, var(--hub-violet-soft));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: transform 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.35s ease;
+            box-shadow: var(--hub-shadow-md);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .wheel-bubble.wheel-bubble-active {
+            border-color: var(--tool-accent, var(--hub-violet));
+            box-shadow: var(--hub-shadow-lg);
+        }
+        .wheel-icon { font-size: 56px; }
+        .wheel-label {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--hub-ink);
+            text-align: center;
+            padding: 0 12px;
+            line-height: 1.25;
+        }
+        #wheel-tool-desc {
+            margin-top: 24px;
+        }
+        .wheel-nav-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-line);
+            box-shadow: var(--hub-shadow-sm);
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--hub-ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.12s ease, border-color 0.15s ease;
+        }
+        .wheel-nav-btn:hover { border-color: var(--hub-violet); color: var(--hub-violet); }
+        .wheel-nav-btn:active { transform: scale(0.9); }
+
+        .submode-card {
+            border: 1.5px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            background: var(--hub-surface);
+            box-shadow: var(--hub-shadow-sm);
+            padding: 22px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+        .submode-card:hover { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
+        .submode-card.selected {
+            border-color: var(--mode-accent, var(--hub-violet));
+            background: var(--mode-accent-soft, var(--hub-violet-soft));
+            box-shadow: var(--hub-shadow-md);
+        }
+
+        .player-card-big {
+            background: var(--hub-surface);
+            border: 1.5px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            padding: 20px;
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: var(--hub-shadow-sm);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+        .player-card-big:hover { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
+        .player-card-big.selected {
+            border-color: var(--hub-violet);
+            background: var(--hub-violet-soft);
+            box-shadow: var(--hub-shadow-md);
+        }
+        .player-card-big img {
+            width: 192px;
+            height: 264px;
+            object-fit: contain;
+        }
+
+        .preset-tile {
+            width: 260px;
+            border: 1.5px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            background: var(--hub-surface);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+        .preset-tile:hover { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
+        .preset-tile.selected {
+            border-color: var(--hub-violet);
+            background: var(--hub-violet-soft);
+            box-shadow: var(--hub-shadow-md);
+        }
+        .preset-tile-thumb {
+            width: 216px;
+            height: 216px;
+            border-radius: 16px;
+            object-fit: cover;
+            background: var(--hub-paper);
+        }
+        .preset-tile-label {
+            font-size: 15px;
+            font-weight: 800;
+            text-align: center;
+            color: var(--hub-ink);
+            line-height: 1.25;
+        }
+
         .controls { position: absolute; bottom: 30px; width: 100%; display: flex; justify-content: space-between; padding: 0 40px; pointer-events: none; }
         .btn-circle { width: 64px; height: 64px; background: rgba(30,41,59,0.1); border: 4px solid #1e293b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1e293b; font-weight: bold; pointer-events: auto; -webkit-user-select: none; font-family: 'OpenDyslexic', sans-serif; }
         .btn-circle:active { background: rgba(30,41,59,0.3); }
@@ -382,219 +556,270 @@
         <!-- Lobby / Mode Selection Screen              -->
         <!-- ========================================== -->
         <div id="title-screen" class="dyslexic-font">
-            <!-- LEFT: Scrollable tool picker sidebar -->
-            <div id="title-sidebar">
-                <div class="p-5 flex justify-center">
-                    <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a8513ddabb16b08ff06719c10ae35275af9e85d/POLH%20small%20logo.png" alt="Parkes Online Languages Hub" class="max-w-full max-h-16 h-auto">
-                </div>
-                <div id="title-sidebar-list" class="grid grid-cols-1 gap-3">
-                    <!-- Mode 1: Parkour -->
-                    <div id="mode-quest" class="mode-card hub-font selected p-4 flex items-center gap-3 text-left" style="--mode-accent:var(--hub-violet); --mode-accent-soft:var(--hub-violet-soft);" onclick="selectMode('quest')">
-                        <div class="mode-icon-badge">🏃‍♂️</div>
-                        <div class="min-w-0">
-                            <h3 class="text-sm font-extrabold" style="color:var(--hub-ink);">Parkour</h3>
-                            <p class="text-[11px] leading-snug" style="color:var(--hub-ink-soft);">Collect vocab words scattered across platform levels.</p>
-                        </div>
+            <div id="landing-flow" class="hub-font w-full h-full flex flex-col items-center justify-center overflow-y-auto py-8 px-6" style="background:var(--hub-paper);">
+                <div class="w-full max-w-2xl mx-auto">
+                    <div class="flex justify-center mb-4">
+                        <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a8513ddabb16b08ff06719c10ae35275af9e85d/POLH%20small%20logo.png" alt="Parkes Online Languages Hub" class="max-w-full max-h-14 h-auto">
                     </div>
 
-                    <!-- Mode 2: Picture Parkour -->
-                    <div id="mode-picture" class="mode-card hub-font p-4 flex items-center gap-3 text-left" style="--mode-accent:var(--hub-marigold); --mode-accent-soft:var(--hub-marigold-soft);" onclick="selectMode('picture')">
-                        <div class="mode-icon-badge">🖼️</div>
-                        <div class="min-w-0">
-                            <h3 class="text-sm font-extrabold" style="color:var(--hub-ink);">Picture Parkour</h3>
-                            <p class="text-[11px] leading-snug" style="color:var(--hub-ink-soft);">Find your own images instead of word cards.</p>
-                        </div>
+                    <!-- Legacy elements kept (hidden) purely so existing selectMode() JS logic
+                         doesn't break - the wheel below is now the real tool picker. -->
+                    <div style="display:none;">
+                        <div id="mode-quest"></div>
+                        <div id="mode-picture"></div>
+                        <div id="mode-coder"></div>
                     </div>
 
-                    <!-- Mode 3: Colour Coder -->
-                    <div id="mode-coder" class="mode-card hub-font p-4 flex items-center gap-3 text-left" style="--mode-accent:var(--hub-mint); --mode-accent-soft:var(--hub-mint-soft);" onclick="selectMode('coder')">
-                        <div class="mode-icon-badge">🖍️</div>
-                        <div class="min-w-0">
-                            <h3 class="text-sm font-extrabold" style="color:var(--hub-ink);">Colour Coder</h3>
-                            <p class="text-[11px] leading-snug" style="color:var(--hub-ink-soft);">Colour-code target graphemes in any text instantly.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RIGHT: Header, language/date, settings, launch -->
-            <div id="title-main">
-                <div class="flex items-center justify-end gap-2 flex-wrap mb-5">
-                    <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                        ❓ How to Use This Hub
-                    </button>
-                    <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                        <span class="fullscreen-btn-label">Full Screen</span>
-                    </button>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 mb-5">
-                    <!-- Global Target Language Selector -->
-                    <div class="hub-group hub-font flex-1 p-5">
-                        <label for="global-language-select" class="hub-label">Select Target Language</label>
-                        <select id="global-language-select" class="hub-input">
-                            <option value="fr" selected>French (Français)</option>
-                            <option value="en">English</option>
-                            <option value="zh-pinyin">Mandarin (Pinyin)</option>
-                            <option value="zh-hanzi">Mandarin (Hanzi)</option>
-                            <option value="cantonese">Cantonese</option>
-                            <option value="ja">Japanese (日本語)</option>
-                            <option value="de">German (Deutsch)</option>
-                            <option value="it">Italian (Italiano)</option>
-                            <option value="es">Spanish (Español)</option>
-                            <option value="he">Hebrew (עברית)</option>
-                            <option value="ar">Arabic (العربية)</option>
-                            <option value="sinhala">Sinhala (සිංහල)</option>
-                            <option value="vi">Vietnamese (Tiếng Việt)</option>
-                            <option value="ur">Urdu (اردو)</option>
-                            <option value="hi">Hindi (हिन्दी)</option>
-                            <option value="uk">Ukrainian (Українська)</option>
-                            <option value="ru">Russian (Русский)</option>
-                            <option value="macedonian">Macedonian (Македонски)</option>
-                        </select>
-                    </div>
-
-                    <!-- Dynamic Date Bar -->
-                    <div class="flex-1 flex flex-col gap-1.5 max-w-full">
-                        <div class="hub-group flex items-center justify-center gap-3 p-5 w-full h-full">
-                            <span id="french-date-text" dir="auto" class="text-sm leading-snug" style="color:var(--hub-ink);">Calcul de la date...</span>
-                            <button id="tts-date-btn" class="hub-btn-ghost interactive p-2.5 flex-shrink-0" title="Listen to date">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    <!-- STEP 1: Language & Date -->
+                    <div id="landing-step-language" class="landing-step">
+                        <div class="flex items-center justify-end gap-2 flex-wrap mb-5">
+                            <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                                ❓ How to Use This Hub
+                            </button>
+                            <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                                <span class="fullscreen-btn-label">Full Screen</span>
                             </button>
                         </div>
-                        <span id="date-voice-warning" class="hub-font hidden text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-2 py-1"></span>
-                    </div>
-                </div>
 
-                <!-- Shared Parkour Settings Panel -->
-                <div id="quest-settings" class="hub-group hub-font text-left">
-                    <div class="hub-row">
-                        <label for="student-name-input" class="hub-label">Student Name (optional)</label>
-                        <input type="text" id="student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
-                    </div>
+                        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                            <!-- Global Target Language Selector -->
+                            <div class="hub-group hub-font flex-1 p-5">
+                                <label for="global-language-select" class="hub-label">Select Target Language</label>
+                                <select id="global-language-select" class="hub-input">
+                                    <option value="fr" selected>French (Français)</option>
+                                    <option value="en">English</option>
+                                    <option value="zh-pinyin">Mandarin (Pinyin)</option>
+                                    <option value="zh-hanzi">Mandarin (Hanzi)</option>
+                                    <option value="cantonese">Cantonese</option>
+                                    <option value="ja">Japanese (日本語)</option>
+                                    <option value="de">German (Deutsch)</option>
+                                    <option value="it">Italian (Italiano)</option>
+                                    <option value="es">Spanish (Español)</option>
+                                    <option value="he">Hebrew (עברית)</option>
+                                    <option value="ar">Arabic (العربية)</option>
+                                    <option value="sinhala">Sinhala (සිංහල)</option>
+                                    <option value="vi">Vietnamese (Tiếng Việt)</option>
+                                    <option value="ur">Urdu (اردو)</option>
+                                    <option value="hi">Hindi (हिन्दी)</option>
+                                    <option value="uk">Ukrainian (Українська)</option>
+                                    <option value="ru">Russian (Русский)</option>
+                                    <option value="macedonian">Macedonian (Македонски)</option>
+                                </select>
+                            </div>
 
-                    <div class="hub-row">
-                        <label class="hub-label">Choose Your Character</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="character-card selected flex flex-col items-center gap-1 p-3 cursor-pointer">
-                                <input type="radio" name="character-select-lobby" data-char="parkour" class="hidden character-radio" checked>
-                                <span class="text-3xl">🏃</span>
-                                <span class="text-xs font-bold" style="color:var(--hub-ink);">P4RK-0UR UNIT</span>
-                            </label>
-                            <label class="character-card flex flex-col items-center gap-1 p-3 cursor-pointer">
-                                <input type="radio" name="character-select-lobby" data-char="bobot" class="hidden character-radio">
-                                <span class="text-3xl">🤖</span>
-                                <span class="text-xs font-bold" style="color:var(--hub-ink);">Bobot</span>
-                            </label>
+                            <!-- Dynamic Date Bar -->
+                            <div class="flex-1 flex flex-col gap-1.5 max-w-full">
+                                <div class="hub-group flex items-center justify-center gap-3 p-5 w-full h-full">
+                                    <span id="french-date-text" dir="auto" class="text-sm leading-snug" style="color:var(--hub-ink);">Calcul de la date...</span>
+                                    <button id="tts-date-btn" class="hub-btn-ghost interactive p-2.5 flex-shrink-0" title="Listen to date">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                    </button>
+                                </div>
+                                <span id="date-voice-warning" class="hub-font hidden text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-2 py-1"></span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button id="landing-lang-next-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
                     </div>
 
-                    <div class="hub-row">
-                        <label class="hub-label">Vocabulary List (separated by commas)</label>
-                        <textarea id="vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
-                        <p class="hub-hint">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
-                    </div>
-
-                    <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div class="hub-checkbox-row">
-                            <input type="checkbox" id="colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
-                            <label for="colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
+                    <!-- STEP 2: Tool Wheel -->
+                    <div id="landing-step-wheel" class="landing-step" style="display:none;">
+                        <h2 class="hub-step-title">What would you like to do?</h2>
+                        <div class="wheel-shell">
+                            <button id="wheel-prev-btn" class="wheel-nav-btn hub-font interactive" aria-label="Previous tool">‹</button>
+                            <div id="wheel-viewport" class="wheel-viewport interactive">
+                                <div id="wheel-track" class="wheel-track"></div>
+                            </div>
+                            <button id="wheel-next-btn" class="wheel-nav-btn hub-font interactive" aria-label="Next tool">›</button>
                         </div>
-                        <div class="hub-checkbox-row">
-                            <input type="checkbox" id="challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                            <label for="challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
-                        </div>
-                    </div>
-
-                    <!-- Dynamic Custom Grapheme Panel inside Settings -->
-                    <div class="hub-row">
-                        <label class="hub-label mb-3">Custom Colour Coding Rules</label>
-                        <div id="default-grapheme-row-lobby" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
-                            <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
-                            <input type="color" id="default-grapheme-color-lobby" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
-                        </div>
-                        <div id="sinhala-vowel-signs-row-lobby" style="display:none;" class="mb-3 interactive">
-                            <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
-                            <div id="sinhala-vowel-signs-list-lobby" class="grid grid-cols-2 gap-1.5"></div>
-                            <p class="hub-hint">Add consonants manually below.</p>
-                        </div>
-                        <div id="lobby-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
-                            <!-- Dynamically generated rows -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Picture Parkour Settings Panel -->
-                <div id="picture-settings" class="hub-group hub-font text-left" style="display:none;">
-                    <div class="hub-row">
-                        <label for="picture-student-name-input" class="hub-label">Student Name (optional)</label>
-                        <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
-                    </div>
-
-                    <div class="hub-row">
-                        <label class="hub-label">Choose Your Character</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="character-card selected flex flex-col items-center gap-1 p-3 cursor-pointer">
-                                <input type="radio" name="character-select-picture" data-char="parkour" class="hidden character-radio" checked>
-                                <span class="text-3xl">🏃</span>
-                                <span class="text-xs font-bold" style="color:var(--hub-ink);">P4RK-0UR UNIT</span>
-                            </label>
-                            <label class="character-card flex flex-col items-center gap-1 p-3 cursor-pointer">
-                                <input type="radio" name="character-select-picture" data-char="bobot" class="hidden character-radio">
-                                <span class="text-3xl">🤖</span>
-                                <span class="text-xs font-bold" style="color:var(--hub-ink);">Bobot</span>
-                            </label>
+                        <p id="wheel-tool-desc" class="hub-hint text-center" style="font-size:13px;"></p>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <button id="wheel-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
+                            <button id="wheel-select-btn" class="hub-btn-primary hub-font interactive text-lg">Select This Tool</button>
                         </div>
                     </div>
 
-                    <div class="hub-row">
-                        <label class="hub-label">Preset Image Packs (optional)</label>
-                        <p class="hub-hint mt-0 mb-3">Pick a ready-made category so students don't need their own images. Words are shown translated into whichever language is selected above.</p>
-                        <select id="preset-category-select" class="hub-input mb-2">
-                            <option value="">Loading categories…</option>
-                        </select>
-                        <div id="preset-item-list" class="flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <div class="hub-row">
-                        <label class="hub-label">Target Vocabulary Images</label>
-                        <p class="hub-hint mt-0 mb-3">Name each image file after the word it shows, e.g. "un croissant.png". That name (without the file extension) becomes the target vocabulary in the game.</p>
-                        <label for="picture-file-input" class="hub-btn-primary interactive inline-block cursor-pointer text-sm" style="padding:12px 28px;">📁 Choose Images</label>
-                        <input type="file" id="picture-file-input" accept="image/*" multiple class="hidden">
-                        <div id="picture-file-list" class="mt-3 flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div class="hub-checkbox-row">
-                            <input type="checkbox" id="picture-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
-                            <label for="picture-colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
+                    <!-- STEP 3: Parkour Submode -->
+                    <div id="landing-step-submode" class="landing-step" style="display:none;">
+                        <h2 class="hub-step-title">Parkour</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div id="submode-picture-card" class="submode-card hub-font selected" style="--mode-accent:var(--hub-marigold); --mode-accent-soft:var(--hub-marigold-soft);" onclick="chooseParkourSubmode('picture')">
+                                <div class="text-4xl mb-2">🖼️</div>
+                                <h3 class="font-extrabold" style="color:var(--hub-ink);">Picture Parkour</h3>
+                                <p class="text-xs mt-1" style="color:var(--hub-ink-soft);">Find pictures in the world — great for younger learners.</p>
+                            </div>
+                            <div id="submode-sentence-card" class="submode-card hub-font" style="--mode-accent:var(--hub-violet); --mode-accent-soft:var(--hub-violet-soft);" onclick="chooseParkourSubmode('quest')">
+                                <div class="text-4xl mb-2">📝</div>
+                                <h3 class="font-extrabold" style="color:var(--hub-ink);">Sentence Parkour</h3>
+                                <p class="text-xs mt-1" style="color:var(--hub-ink-soft);">Type your own vocabulary words to find.</p>
+                            </div>
                         </div>
-                        <div class="hub-checkbox-row">
-                            <input type="checkbox" id="picture-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                            <label for="picture-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
+                        <div class="flex justify-center gap-3 mt-6">
+                            <button id="submode-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
+                            <button id="submode-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
                     </div>
 
-                    <!-- Dynamic Custom Grapheme Panel inside Settings -->
-                    <div class="hub-row">
-                        <label class="hub-label mb-3">Custom Colour Coding Rules</label>
-                        <div id="default-grapheme-row-picture" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
-                            <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
-                            <input type="color" id="default-grapheme-color-picture" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
-                        </div>
-                        <div id="sinhala-vowel-signs-row-picture" style="display:none;" class="mb-3 interactive">
-                            <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
-                            <div id="sinhala-vowel-signs-list-picture" class="grid grid-cols-2 gap-1.5"></div>
-                            <p class="hub-hint">Add consonants manually below.</p>
-                        </div>
-                        <div id="picture-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
-                            <!-- Dynamically generated rows -->
+                    <!-- STEP 4: Player Select -->
+                    <div id="landing-step-player" class="landing-step" style="display:none;">
+                        <h2 class="hub-step-title">Choose Your Player</h2>
+                        <div id="player-select-grid" class="flex flex-wrap justify-center gap-5"></div>
+                        <div class="flex justify-center gap-3 mt-6">
+                            <button id="player-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
+                            <button id="player-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
                     </div>
-                </div>
 
-                <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-4 pt-6 pb-2">
-                    <button id="start-button" class="hub-btn-primary hub-font interactive text-lg">Launch Activity</button>
+                    <!-- STEP 5: Settings -->
+                    <div id="landing-step-settings" class="landing-step" style="display:none;">
+                        <!-- Vocab Kart Settings Panel (draft/prototype) -->
+                        <div id="kart-settings" class="hub-group hub-font text-left" style="display:none;">
+                            <div class="hub-row">
+                                <p class="hub-hint mt-0 mb-0">🏎️ <strong>Draft prototype</strong> — placeholder track and kart graphics for now, so you can test how the mechanic feels before any real art gets made.</p>
+                            </div>
+                            <div class="hub-row">
+                                <label for="kart-student-name-input" class="hub-label">Student Name (optional)</label>
+                                <input type="text" id="kart-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-label">Vocabulary List (separated by commas)</label>
+                                <textarea id="kart-vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
+                                <p class="hub-hint">Up to 8 words for now — each one gets a spot on the track.</p>
+                            </div>
+                        </div>
+
+                        <!-- Shared Parkour Settings Panel -->
+                        <div id="quest-settings" class="hub-group hub-font text-left">
+                            <div class="hub-row">
+                                <label for="student-name-input" class="hub-label">Student Name (optional)</label>
+                                <input type="text" id="student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                            </div>
+
+                            <div class="hub-row" style="display:none;">
+                                <label class="hub-label">Choose Your Character</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="character-card selected flex flex-col items-center gap-1 p-3 cursor-pointer">
+                                        <input type="radio" name="character-select-lobby" data-char="parkour" class="hidden character-radio" checked>
+                                        <span class="text-3xl">🏃</span>
+                                        <span class="text-xs font-bold" style="color:var(--hub-ink);">P4RK-0UR UNIT</span>
+                                    </label>
+                                    <label class="character-card flex flex-col items-center gap-1 p-3 cursor-pointer">
+                                        <input type="radio" name="character-select-lobby" data-char="bobot" class="hidden character-radio">
+                                        <span class="text-3xl">🤖</span>
+                                        <span class="text-xs font-bold" style="color:var(--hub-ink);">Bobot</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="hub-row">
+                                <label class="hub-label">Vocabulary List (separated by commas)</label>
+                                <textarea id="vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
+                                <p class="hub-hint">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
+                            </div>
+
+                            <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
+                                    <label for="colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
+                                </div>
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Custom Grapheme Panel inside Settings -->
+                            <div class="hub-row">
+                                <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                                <div id="default-grapheme-row-lobby" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                                    <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                                    <input type="color" id="default-grapheme-color-lobby" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
+                                </div>
+                                <div id="sinhala-vowel-signs-row-lobby" style="display:none;" class="mb-3 interactive">
+                                    <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                                    <div id="sinhala-vowel-signs-list-lobby" class="grid grid-cols-2 gap-1.5"></div>
+                                    <p class="hub-hint">Add consonants manually below.</p>
+                                </div>
+                                <div id="lobby-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
+                                    <!-- Dynamically generated rows -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Picture Parkour Settings Panel -->
+                        <div id="picture-settings" class="hub-group hub-font text-left" style="display:none;">
+                            <div class="hub-row" style="display:none;">
+                                <label class="hub-label">Choose Your Character</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="character-card selected flex flex-col items-center gap-1 p-3 cursor-pointer">
+                                        <input type="radio" name="character-select-picture" data-char="parkour" class="hidden character-radio" checked>
+                                        <span class="text-3xl">🏃</span>
+                                        <span class="text-xs font-bold" style="color:var(--hub-ink);">P4RK-0UR UNIT</span>
+                                    </label>
+                                    <label class="character-card flex flex-col items-center gap-1 p-3 cursor-pointer">
+                                        <input type="radio" name="character-select-picture" data-char="bobot" class="hidden character-radio">
+                                        <span class="text-3xl">🤖</span>
+                                        <span class="text-xs font-bold" style="color:var(--hub-ink);">Bobot</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="hub-row">
+                                <label class="hub-label">Preset Image Packs (optional)</label>
+                                <p class="hub-hint mt-0 mb-3">Pick a ready-made category so students don't need their own images. Words are shown translated into whichever language is selected above.</p>
+                                <div id="preset-category-tiles" class="flex flex-wrap gap-3 mb-2"></div>
+                                <div id="preset-item-list" class="flex flex-wrap gap-2"></div>
+                            </div>
+
+                            <div class="hub-row">
+                                <label for="picture-student-name-input" class="hub-label">Student Name (optional)</label>
+                                <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                            </div>
+
+                            <div class="hub-row">
+                                <label class="hub-label">Target Vocabulary Images</label>
+                                <p class="hub-hint mt-0 mb-3">Name each image file after the word it shows, e.g. "un croissant.png". That name (without the file extension) becomes the target vocabulary in the game.</p>
+                                <label for="picture-file-input" class="hub-btn-primary interactive inline-block cursor-pointer text-sm" style="padding:12px 28px;">📁 Choose Images</label>
+                                <input type="file" id="picture-file-input" accept="image/*" multiple class="hidden">
+                                <div id="picture-file-list" class="mt-3 flex flex-wrap gap-2"></div>
+                            </div>
+
+                            <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="picture-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
+                                    <label for="picture-colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
+                                </div>
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="picture-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="picture-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Custom Grapheme Panel inside Settings -->
+                            <div class="hub-row">
+                                <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                                <div id="default-grapheme-row-picture" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                                    <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                                    <input type="color" id="default-grapheme-color-picture" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
+                                </div>
+                                <div id="sinhala-vowel-signs-row-picture" style="display:none;" class="mb-3 interactive">
+                                    <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                                    <div id="sinhala-vowel-signs-list-picture" class="grid grid-cols-2 gap-1.5"></div>
+                                    <p class="hub-hint">Add consonants manually below.</p>
+                                </div>
+                                <div id="picture-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
+                                    <!-- Dynamically generated rows -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-3 pt-6 pb-2">
+                            <button id="settings-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
+                            <button id="start-button" class="hub-btn-primary hub-font interactive text-lg">Launch Activity</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -669,6 +894,47 @@
         <!-- ========================================== -->
         <!-- UI Dashboard Elements                      -->
         <!-- ========================================== -->
+        <div id="kart-ui-board" class="ui-overlay flex flex-col justify-between dyslexic-font">
+            <div class="flex justify-between items-start gap-4">
+                <div class="bg-white/95 border-4 border-slate-800 p-4 rounded-2xl shadow-[4px_4px_0px_#1e293b] flex flex-col items-center min-w-[100px] interactive flex-shrink-0">
+                    <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</div>
+                    <div id="kart-score-text" class="text-3xl font-black text-slate-800 leading-none">00</div>
+                </div>
+
+                <div class="bg-white/95 p-4 md:p-6 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] w-auto interactive flex flex-col justify-center items-center gap-1 flex-shrink-0">
+                    <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider">Find</h3>
+                    <div id="kart-target-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight text-center"></div>
+                </div>
+
+                <div class="bg-white/95 border-4 border-slate-800 p-4 rounded-2xl shadow-[4px_4px_0px_#1e293b] flex flex-col items-center min-w-[100px] interactive flex-shrink-0">
+                    <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Lap</div>
+                    <div id="kart-lap-text" class="text-2xl font-black text-slate-800 leading-none">1</div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button id="kart-back-to-config" class="interactive bg-rose-500 hover:bg-rose-600 text-white font-black text-xs uppercase px-4 py-3 rounded-xl border-2 border-slate-800 shadow-[3px_3px_0px_#1e293b] transition-all">
+                    Reset Race
+                </button>
+            </div>
+        </div>
+
+        <!-- Vocab Kart race-complete overlay -->
+        <div id="kart-complete-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
+            <div class="hub-font p-8 max-w-sm w-full text-center" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg);">
+                <div class="text-4xl mb-2">🏁</div>
+                <h2 class="text-xl font-extrabold mb-4" style="color:var(--hub-ink);">Race Complete!</h2>
+                <div class="text-sm space-y-2 text-left font-bold" style="color:var(--hub-ink);">
+                    <p>Laps taken: <span id="kart-result-laps"></span></p>
+                    <p>Mistakes: <span id="kart-result-mistakes"></span></p>
+                    <p>Time: <span id="kart-result-time"></span></p>
+                </div>
+                <div class="flex flex-col gap-3 mt-6">
+                    <button id="kart-try-again-btn" class="hub-btn-primary w-full">Race Again</button>
+                    <button id="kart-return-hub-btn" class="hub-btn-ghost w-full">Return to Hub</button>
+                </div>
+            </div>
+        </div>
+
         <div id="ui-board" class="ui-overlay flex flex-col justify-between dyslexic-font">
             <div class="flex justify-between items-start gap-4">
                 
@@ -946,6 +1212,40 @@
             bounceStage: 0 // 0 = at rest, otherwise index into BEACH_BALL_BOUNCE_IMPULSES
         };
         const BEACH_BALL_BOUNCE_IMPULSES = [-5.0, -3.0, -1.6]; // big, medium, tiny bounce
+
+        // ================================================================
+        // VOCAB KART - draft/prototype. Fully self-contained: its own state,
+        // physics, and rendering, sharing only the canvas, input, TTS, and
+        // colour-coding helpers the rest of the app already provides.
+        // ================================================================
+        // Placeholder track: a rectangular ring (outer bound minus a rectangular
+        // "infield" hole). This is deliberately simple so the on-track/off-track
+        // *mechanic* can be tested now; swapping this analytical check for a
+        // real pixel-mask image (sampled once per frame via an offscreen canvas'
+        // getImageData at the kart's position) is a self-contained change to
+        // just the isKartOnTrack() function once real track art exists.
+        const KART_WORLD_W = 2400, KART_WORLD_H = 1400;
+        const KART_INFIELD = { x: 500, y: 350, w: 1400, h: 700 };
+        const KART_ITEM_SLOTS = [
+            { x: 250, y: 700 }, { x: 250, y: 300 }, { x: 250, y: 1100 },
+            { x: 2150, y: 700 }, { x: 2150, y: 300 }, { x: 2150, y: 1100 },
+            { x: 1200, y: 150 }, { x: 1200, y: 1250 }
+        ];
+        const KART_MAX_SPEED = 7, KART_REVERSE_MAX_SPEED = 3, KART_OFFTRACK_MAX_SPEED = 2.2;
+        const KART_ACCEL = 0.18, KART_TURN_RATE = 3.4, KART_FRICTION = 0.985;
+
+        let kart = { x: 1200, y: 1250, angle: -90, speed: 0 };
+        let kartVocabularyList = [];
+        let kartItems = [];
+        let kartCurrentTargetWord = '';
+        let kartScore = 0, kartMistakeCount = 0, kartLap = 0, kartCheckpointPassed = false, kartStartTime = 0;
+
+        function isKartOnTrack(x, y) {
+            const inOuter = x >= 0 && x <= KART_WORLD_W && y >= 0 && y <= KART_WORLD_H;
+            const inInfield = x >= KART_INFIELD.x && x <= KART_INFIELD.x + KART_INFIELD.w &&
+                               y >= KART_INFIELD.y && y <= KART_INFIELD.y + KART_INFIELD.h;
+            return inOuter && !inInfield;
+        }
 
         const TARGET_FPS = 60, TARGET_MS = 1000 / TARGET_FPS;
         const gravity = 0.125, friction = 0.8, jumpForce = -5.5;
@@ -2563,6 +2863,7 @@
                 updateFullScreenButtonLabels();
                 updateSinhalaVowelSignsVisibility();
                 refreshCoderColorization();
+                if (selectedPresetCategoryId) renderPresetCategoryItems(selectedPresetCategoryId);
             });
 
             selectedLanguage = langSelect.value;
@@ -2686,9 +2987,6 @@
             });
 
             loadPresetManifest();
-            document.getElementById('preset-category-select').addEventListener('change', (e) => {
-                renderPresetCategoryItems(e.target.value);
-            });
 
             document.querySelectorAll('.character-radio').forEach(radio => {
                 radio.addEventListener('change', (e) => {
@@ -2700,6 +2998,58 @@
                     });
                 });
             });
+
+            // Landing wizard navigation
+            document.getElementById('landing-lang-next-btn').onclick = () => showLandingStep('wheel');
+            document.getElementById('wheel-select-btn').onclick = confirmWheelSelection;
+            document.getElementById('wheel-return-btn').onclick = () => showLandingStep('language');
+
+            document.getElementById('kart-back-to-config').onclick = resetToConfig;
+            document.getElementById('kart-try-again-btn').onclick = () => {
+                document.getElementById('kart-complete-overlay').classList.add('hidden');
+                document.getElementById('kart-complete-overlay').classList.remove('flex');
+                startKartGame();
+            };
+            document.getElementById('kart-return-hub-btn').onclick = resetToConfig;
+            document.getElementById('wheel-prev-btn').onclick = () => moveWheel(-1);
+            document.getElementById('wheel-next-btn').onclick = () => moveWheel(1);
+            document.getElementById('submode-confirm-btn').onclick = () => showLandingStep('player');
+            document.getElementById('submode-return-btn').onclick = () => showLandingStep('wheel');
+            document.getElementById('player-confirm-btn').onclick = () => {
+                selectMode(pendingParkourSubmode);
+                showLandingStep('settings');
+            };
+            document.getElementById('player-return-btn').onclick = () => showLandingStep('submode');
+            document.getElementById('settings-return-btn').onclick = () => {
+                if (selectedLobbyMode === 'coder' || selectedLobbyMode === 'kart') {
+                    showLandingStep('wheel');
+                } else {
+                    showLandingStep('player');
+                }
+            };
+
+            const wheelViewport = document.getElementById('wheel-viewport');
+            let wheelScrollCooldown = false;
+            wheelViewport.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                if (wheelScrollCooldown) return;
+                wheelScrollCooldown = true;
+                moveWheel((e.deltaY > 0 || e.deltaX > 0) ? 1 : -1);
+                setTimeout(() => { wheelScrollCooldown = false; }, 250);
+            }, { passive: false });
+
+            let wheelTouchStartX = null;
+            wheelViewport.addEventListener('touchstart', (e) => {
+                wheelTouchStartX = e.touches[0].clientX;
+            });
+            wheelViewport.addEventListener('touchend', (e) => {
+                if (wheelTouchStartX === null) return;
+                const dx = e.changedTouches[0].clientX - wheelTouchStartX;
+                if (Math.abs(dx) > 30) moveWheel(dx < 0 ? 1 : -1);
+                wheelTouchStartX = null;
+            });
+
+            showLandingStep('language');
 
             ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture'].forEach(id => {
                 const el = document.getElementById(id);
@@ -2943,9 +3293,11 @@
 
             const questSettings = document.getElementById('quest-settings');
             const pictureSettings = document.getElementById('picture-settings');
+            const kartSettings = document.getElementById('kart-settings');
 
             questSettings.style.display = 'none';
             pictureSettings.style.display = 'none';
+            if (kartSettings) kartSettings.style.display = 'none';
 
             if (mode === 'quest') {
                 document.getElementById('mode-quest').classList.add('selected');
@@ -2953,9 +3305,155 @@
             } else if (mode === 'picture') {
                 document.getElementById('mode-picture').classList.add('selected');
                 pictureSettings.style.display = 'block';
+            } else if (mode === 'kart') {
+                if (kartSettings) kartSettings.style.display = 'block';
             } else {
                 document.getElementById('mode-coder').classList.add('selected');
             }
+        }
+
+        // ================================================================
+        // LANDING WIZARD: language -> tool wheel -> (Parkour submode ->
+        // player select ->) settings. Drives the same underlying
+        // selectedLobbyMode/selectedCharacter/selectMode() the rest of the
+        // app already uses - this is purely a presentation layer on top.
+        // ================================================================
+        const HUB_TOOLS = [
+            { id: 'parkour', label: 'Parkour', icon: '🏃‍♂️', accent: '--hub-violet', accentSoft: '--hub-violet-soft', desc: 'Explore a world to find words or pictures.' },
+            { id: 'kart', label: 'Vocab Kart', icon: '🏎️', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word - draft/prototype.' },
+            { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
+        ];
+        let wheelIndex = 0;
+        let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
+
+        const HUB_CHARACTERS = [
+            { id: 'parkour', label: 'P4RK-0UR UNIT' },
+            { id: 'bobot', label: 'Bobot' }
+        ];
+        let playerIdleAnimTimer = null;
+
+        function showLandingStep(step) {
+            ['language', 'wheel', 'submode', 'player', 'settings'].forEach(s => {
+                const el = document.getElementById('landing-step-' + s);
+                if (el) el.style.display = (s === step) ? '' : 'none';
+            });
+            if (step === 'wheel') renderWheel();
+            if (step === 'player') renderPlayerSelect();
+            if (playerIdleAnimTimer && step !== 'player') {
+                clearInterval(playerIdleAnimTimer);
+                playerIdleAnimTimer = null;
+            }
+        }
+
+        function playWheelClickSound() {
+            if (!fxEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(1000, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.06);
+            } catch (e) {}
+        }
+
+        function renderWheel() {
+            const track = document.getElementById('wheel-track');
+            if (!track) return;
+            track.innerHTML = '';
+            const angleStep = 36; // degrees between adjacent tools around the dial
+            const radius = 260;
+            HUB_TOOLS.forEach((tool, i) => {
+                const distance = i - wheelIndex;
+                const angleDeg = distance * angleStep;
+                const angleRad = angleDeg * Math.PI / 180;
+                const x = radius * Math.sin(angleRad);
+                const y = -radius * (1 - Math.cos(angleRad));
+                const scale = distance === 0 ? 1 : 0.72;
+                const bubble = document.createElement('div');
+                bubble.className = 'wheel-bubble' + (distance === 0 ? ' wheel-bubble-active' : '');
+                bubble.style.setProperty('--tool-accent', `var(${tool.accent})`);
+                bubble.style.setProperty('--tool-accent-soft', `var(${tool.accentSoft})`);
+                bubble.style.transform = `translate(${x}px, ${y}px) scale(${scale}) rotate(${angleDeg * 0.35}deg)`;
+                bubble.style.opacity = Math.abs(distance) > 1 ? '0' : (distance === 0 ? '1' : '0.55');
+                bubble.style.pointerEvents = Math.abs(distance) > 1 ? 'none' : 'auto';
+                bubble.innerHTML = `<div class="wheel-icon">${tool.icon}</div><div class="wheel-label">${tool.label}</div>`;
+                bubble.onclick = () => {
+                    if (distance === 0) return;
+                    moveWheel(distance > 0 ? 1 : -1);
+                };
+                track.appendChild(bubble);
+            });
+            const descEl = document.getElementById('wheel-tool-desc');
+            if (descEl) descEl.textContent = HUB_TOOLS[wheelIndex].desc;
+        }
+
+        function moveWheel(delta) {
+            wheelIndex = (wheelIndex + delta + HUB_TOOLS.length) % HUB_TOOLS.length;
+            renderWheel();
+            playWheelClickSound();
+        }
+
+        function confirmWheelSelection() {
+            const tool = HUB_TOOLS[wheelIndex];
+            if (tool.id === 'coder') {
+                selectMode('coder');
+                launchSelectedActivity();
+            } else if (tool.id === 'parkour') {
+                showLandingStep('submode');
+            } else if (tool.id === 'kart') {
+                selectMode('kart');
+                showLandingStep('settings');
+            }
+        }
+
+        function chooseParkourSubmode(mode) {
+            pendingParkourSubmode = mode;
+            document.getElementById('submode-picture-card').classList.toggle('selected', mode === 'picture');
+            document.getElementById('submode-sentence-card').classList.toggle('selected', mode === 'quest');
+        }
+
+        function renderPlayerSelect() {
+            const grid = document.getElementById('player-select-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            HUB_CHARACTERS.forEach(ch => {
+                const card = document.createElement('div');
+                card.className = 'player-card-big hub-font' + (selectedCharacter === ch.id ? ' selected' : '');
+                card.innerHTML = `<img id="player-idle-img-${ch.id}" alt="${ch.label}"><span class="text-xs font-extrabold" style="color:var(--hub-ink);">${ch.label}</span>`;
+                card.onclick = () => {
+                    selectedCharacter = ch.id;
+                    document.querySelectorAll('.character-radio').forEach(r => {
+                        r.checked = (r.dataset.char === selectedCharacter);
+                    });
+                    renderPlayerSelect();
+                };
+                grid.appendChild(card);
+            });
+            startPlayerIdleAnimation();
+        }
+
+        function startPlayerIdleAnimation() {
+            if (playerIdleAnimTimer) clearInterval(playerIdleAnimTimer);
+            let frame = 0;
+            const tick = () => {
+                HUB_CHARACTERS.forEach(ch => {
+                    const img = document.getElementById('player-idle-img-' + ch.id);
+                    if (!img) return;
+                    const spriteSet = ch.id === 'bobot' ? imagesBobot : images;
+                    const spriteImg = (frame % 2 === 0) ? spriteSet.idle1 : spriteSet.idle2;
+                    if (spriteImg && spriteImg.src) img.src = spriteImg.src;
+                });
+                frame++;
+            };
+            tick();
+            playerIdleAnimTimer = setInterval(tick, 450);
         }
 
         function playBackgroundMusic() {
@@ -2978,6 +3476,8 @@
                 generateWhiteboard();
             } else if (selectedLobbyMode === 'picture') {
                 generatePictureBoard();
+            } else if (selectedLobbyMode === 'kart') {
+                generateKartRace();
             } else {
                 pauseBackgroundMusic();
                 document.getElementById('title-screen').style.display = 'none';
@@ -3003,6 +3503,80 @@
             }
         }
 
+        function generateKartRace() {
+            const rawInput = document.getElementById('kart-vocab-input').value;
+            kartVocabularyList = rawInput.split(',')
+                .map(w => w.trim())
+                .filter(w => w.length > 0)
+                .slice(0, KART_ITEM_SLOTS.length);
+
+            if (kartVocabularyList.length === 0) {
+                kartVocabularyList = ["sauter", "jouer", "savoir", "lire"];
+            }
+
+            const nameInput = document.getElementById('kart-student-name-input');
+            studentName = nameInput ? nameInput.value.trim() : '';
+
+            startKartGame();
+        }
+
+        function startKartGame() {
+            kartScore = 0;
+            kartMistakeCount = 0;
+            kartLap = 0;
+            kartCheckpointPassed = false;
+            kartStartTime = Date.now();
+            lastTime = 0;
+
+            kart.x = 1200; kart.y = 1250; kart.angle = -90; kart.speed = 0;
+
+            kartItems = KART_ITEM_SLOTS.slice(0, kartVocabularyList.length).map((slot, i) => ({
+                x: slot.x, y: slot.y, text: kartVocabularyList[i], collected: false
+            }));
+
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'none';
+            document.getElementById('kart-complete-overlay').classList.add('hidden');
+            document.getElementById('kart-complete-overlay').classList.remove('flex');
+            document.getElementById('kart-ui-board').style.display = 'flex';
+            canvas.style.display = 'block';
+
+            playBackgroundMusic();
+
+            gameStarted = true;
+            nextKartTarget();
+            resize();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function nextKartTarget() {
+            const remaining = kartItems.filter(i => !i.collected);
+            const targetEl = document.getElementById('kart-target-text');
+            if (remaining.length === 0) {
+                kartCurrentTargetWord = '';
+                targetEl.textContent = '🏁';
+                showKartRaceComplete();
+                return;
+            }
+            const chosen = remaining[Math.floor(Math.random() * remaining.length)];
+            kartCurrentTargetWord = chosen.text.toLowerCase();
+            targetEl.innerHTML = colorizeSentenceText(chosen.text);
+            speakWord(chosen.text);
+        }
+
+        function showKartRaceComplete() {
+            gameStarted = false;
+            pauseBackgroundMusic();
+            const elapsedMs = Date.now() - kartStartTime;
+            document.getElementById('kart-result-laps').textContent = kartLap;
+            document.getElementById('kart-result-mistakes').textContent = kartMistakeCount;
+            document.getElementById('kart-result-time').textContent = formatDuration(elapsedMs);
+            const overlay = document.getElementById('kart-complete-overlay');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+        }
+
         function generateWhiteboard() {
             const rawInput = document.getElementById('vocab-input').value;
             vocabularyList = rawInput.split(',')
@@ -3026,8 +3600,9 @@
         // the names of the images the teacher/student selected, rather than a typed list.
         // Fetches the teacher-hosted manifest of preset image packs. If none exists yet
         // (e.g. the manifest.json hasn't been created on GitHub), this fails gracefully.
+        let selectedPresetCategoryId = '';
+
         function loadPresetManifest() {
-            const select = document.getElementById('preset-category-select');
             const cacheBustedUrl = PRESET_MANIFEST_URL + (PRESET_MANIFEST_URL.includes('?') ? '&' : '?') + 'cb=' + Date.now();
             fetch(cacheBustedUrl, { cache: 'no-store' })
                 .then(res => {
@@ -3036,18 +3611,55 @@
                 })
                 .then(data => {
                     presetManifest = data;
-                    select.innerHTML = '<option value="">— None —</option>';
-                    (data.categories || []).forEach(cat => {
-                        const opt = document.createElement('option');
-                        opt.value = cat.id;
-                        opt.textContent = cat.name;
-                        select.appendChild(opt);
-                    });
+                    renderPresetCategoryTiles();
                 })
                 .catch(() => {
                     presetManifest = null;
-                    select.innerHTML = '<option value="">No preset packs available yet</option>';
+                    renderPresetCategoryTiles();
                 });
+        }
+
+        // Renders each preset category as a clickable image tile. Expects an image
+        // named exactly "tile.png" inside that category's own folder on GitHub
+        // (e.g. preset-images/dinosaurs/tile.png) - falls back to a generic icon
+        // if that file doesn't exist yet, so nothing breaks while packs are set up.
+        function renderPresetCategoryTiles() {
+            const container = document.getElementById('preset-category-tiles');
+            if (!container) return;
+            container.innerHTML = '';
+            if (!presetManifest || !(presetManifest.categories || []).length) {
+                container.innerHTML = '<p class="hub-hint mt-0 mb-0">No preset packs available yet</p>';
+                return;
+            }
+            presetManifest.categories.forEach(cat => {
+                const tile = document.createElement('div');
+                tile.className = 'preset-tile hub-font' + (cat.id === selectedPresetCategoryId ? ' selected' : '');
+
+                const img = document.createElement('img');
+                img.className = 'preset-tile-thumb';
+                img.alt = cat.name;
+                img.src = PRESET_IMAGE_BASE_URL + encodeURIComponent(cat.folder) + '/tile.png';
+                img.onerror = () => {
+                    img.remove();
+                    const fallback = document.createElement('div');
+                    fallback.className = 'preset-tile-thumb flex items-center justify-center text-7xl';
+                    fallback.textContent = '🖼️';
+                    tile.insertBefore(fallback, tile.firstChild);
+                };
+
+                const label = document.createElement('div');
+                label.className = 'preset-tile-label';
+                label.textContent = cat.name;
+
+                tile.appendChild(img);
+                tile.appendChild(label);
+                tile.onclick = () => {
+                    selectedPresetCategoryId = cat.id;
+                    renderPresetCategoryTiles();
+                    renderPresetCategoryItems(cat.id);
+                };
+                container.appendChild(tile);
+            });
         }
 
         function updatePresetSelection(category, item, isChecked) {
@@ -3080,7 +3692,7 @@
 
                 const span = document.createElement('span');
                 span.dir = 'auto';
-                span.textContent = (item.translations && item.translations.fr) || item.file;
+                span.textContent = (item.translations && (item.translations[selectedLanguage] || item.translations.en)) || item.file;
                 label.appendChild(span);
 
                 listEl.appendChild(label);
@@ -3156,9 +3768,13 @@
             pauseBackgroundMusic();
             canvas.style.display = 'none';
             document.getElementById('ui-board').style.display = 'none';
+            document.getElementById('kart-ui-board').style.display = 'none';
+            document.getElementById('kart-complete-overlay').classList.add('hidden');
+            document.getElementById('kart-complete-overlay').classList.remove('flex');
             document.getElementById('coder-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'none';
             document.getElementById('title-screen').style.display = 'flex';
+            showLandingStep('wheel');
         }
 
         function shuffle(array) {
@@ -3527,10 +4143,146 @@
             lastTime = now;
 
             if (!isModalOpen) {
-                updatePhysics(dt);
+                if (selectedLobbyMode === 'kart') {
+                    updateKartPhysics(dt);
+                } else {
+                    updatePhysics(dt);
+                }
             }
-            renderWhiteboard();
+            if (selectedLobbyMode === 'kart') {
+                renderKartGame();
+            } else {
+                renderWhiteboard();
+            }
             requestAnimationFrame(gameLoop);
+        }
+
+        function updateKartPhysics(dt) {
+            const turnInput = (keys['ArrowLeft'] || keys['KeyA'] ? -1 : 0) + (keys['ArrowRight'] || keys['KeyD'] ? 1 : 0);
+            const accelInput = (keys['ArrowUp'] || keys['KeyW'] || keys['btn-jump'] ? 1 : 0) - (keys['ArrowDown'] || keys['KeyS'] ? 1 : 0);
+            const onTrack = isKartOnTrack(kart.x, kart.y);
+
+            if (accelInput > 0) {
+                kart.speed = Math.min(kart.speed + KART_ACCEL * dt, onTrack ? KART_MAX_SPEED : KART_OFFTRACK_MAX_SPEED);
+            } else if (accelInput < 0) {
+                kart.speed = Math.max(kart.speed - KART_ACCEL * dt, -KART_REVERSE_MAX_SPEED);
+            } else {
+                kart.speed *= Math.pow(KART_FRICTION, dt);
+                if (Math.abs(kart.speed) < 0.05) kart.speed = 0;
+            }
+            if (!onTrack) {
+                kart.speed = Math.max(-KART_OFFTRACK_MAX_SPEED, Math.min(kart.speed, KART_OFFTRACK_MAX_SPEED));
+            }
+
+            if (Math.abs(kart.speed) > 0.2) {
+                kart.angle += turnInput * KART_TURN_RATE * dt * (kart.speed > 0 ? 1 : -1);
+            }
+
+            const rad = kart.angle * Math.PI / 180;
+            kart.x = Math.max(20, Math.min(KART_WORLD_W - 20, kart.x + Math.cos(rad) * kart.speed * dt));
+            kart.y = Math.max(20, Math.min(KART_WORLD_H - 20, kart.y + Math.sin(rad) * kart.speed * dt));
+
+            // Checkpoint (top straight) then finish line (bottom straight), in that order,
+            // so driving backward through the finish line doesn't award a free lap.
+            const inCheckpointZone = kart.x > 1100 && kart.x < 1300 && kart.y < 60;
+            const inFinishZone = kart.x > 1100 && kart.x < 1300 && kart.y > KART_WORLD_H - 60;
+            if (inCheckpointZone) kartCheckpointPassed = true;
+            if (inFinishZone && kartCheckpointPassed) {
+                kartLap++;
+                kartCheckpointPassed = false;
+            }
+
+            kartItems.forEach(item => {
+                if (item.collected) return;
+                const dx = kart.x - item.x, dy = kart.y - item.y;
+                if (Math.sqrt(dx * dx + dy * dy) < 55) {
+                    if (item.text.toLowerCase() === kartCurrentTargetWord) {
+                        item.collected = true;
+                        kartScore += 10;
+                        playChime(true);
+                        document.getElementById('kart-score-text').textContent = kartScore.toString().padStart(2, '0');
+                        nextKartTarget();
+                    } else {
+                        kartMistakeCount++;
+                        kart.speed *= 0.3; // spin-out penalty, like a banana peel
+                        playChime(false);
+                    }
+                }
+            });
+
+            document.getElementById('kart-lap-text').textContent = kartLap + 1;
+        }
+
+        function renderKartGame() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.scale(targetScale, targetScale);
+
+            const viewW = canvas.width / targetScale;
+            const viewH = canvas.height / targetScale;
+            const camX = kart.x - viewW / 2;
+            const camY = kart.y - viewH / 2;
+            ctx.translate(-camX, -camY);
+
+            // Grass surround
+            ctx.fillStyle = '#4ade80';
+            ctx.fillRect(camX - 300, camY - 300, viewW + 600, viewH + 600);
+
+            // Track (placeholder: flat colour ring). This whole block is exactly what
+            // would later be replaced with `ctx.drawImage(trackImage, 0, 0)` once real
+            // track art exists - isKartOnTrack() is the only place collision logic lives.
+            ctx.fillStyle = '#57534e';
+            ctx.fillRect(0, 0, KART_WORLD_W, KART_WORLD_H);
+            ctx.fillStyle = '#4ade80';
+            ctx.fillRect(KART_INFIELD.x, KART_INFIELD.y, KART_INFIELD.w, KART_INFIELD.h);
+            ctx.strokeStyle = '#fbbf24';
+            ctx.lineWidth = 8;
+            ctx.strokeRect(KART_INFIELD.x, KART_INFIELD.y, KART_INFIELD.w, KART_INFIELD.h);
+            ctx.strokeRect(4, 4, KART_WORLD_W - 8, KART_WORLD_H - 8);
+
+            // Finish line + checkpoint marker
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(1100, KART_WORLD_H - 60, 200, 60);
+            ctx.fillStyle = 'rgba(255,255,255,0.4)';
+            ctx.fillRect(1100, 0, 200, 60);
+
+            // Vocabulary item cards
+            kartItems.forEach(item => {
+                if (item.collected) return;
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.roundRect(item.x - 45, item.y - 30, 90, 60, 12);
+                ctx.fill();
+                ctx.stroke();
+                drawColoredText(ctx, item.text.replace(/[\[\]]/g, ''), item.x, item.y, "bold 14px 'OpenDyslexic', sans-serif");
+                ctx.restore();
+            });
+
+            // Kart (placeholder shape - swap for a real sprite via drawImage once ready)
+            ctx.save();
+            ctx.translate(kart.x, kart.y);
+            ctx.rotate(kart.angle * Math.PI / 180);
+            ctx.fillStyle = '#ef4444';
+            ctx.strokeStyle = '#7f1d1d';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.roundRect(-24, -16, 48, 32, 8);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = '#1e293b';
+            ctx.beginPath();
+            ctx.moveTo(24, 0);
+            ctx.lineTo(10, -10);
+            ctx.lineTo(10, 10);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+
+            ctx.restore();
         }
 
         // Returns the index of a city building whose door the player is currently standing
@@ -3561,7 +4313,7 @@
             outdoorPlayerX = player.x;
             outdoorPlayerY = player.y;
             inShopInterior = buildingIndex;
-            player.x = 220;
+            player.x = 55; // standing just past the interior door, having just walked through it
             player.y = 330;
             player.vx = 0;
             player.vy = 0;
@@ -3588,7 +4340,9 @@
             const isRunning = keys['ShiftLeft'] || keys['ShiftRight'];
             const cSpeed = customMoveSpeed * (isRunning ? 2.4 : 1.0);
 
-            if (keys['ArrowDown'] || keys['KeyS'] || keys['btn-down']) {
+            const nearInteriorDoor = player.x < 70;
+            const jumpKeyDown = keys['ArrowUp'] || keys['KeyW'] || keys['Space'];
+            if (nearInteriorDoor && jumpKeyDown && player.jumpKeyReleased) {
                 exitShop();
                 return;
             }
@@ -3606,7 +4360,6 @@
                 if (Math.abs(player.vx) < 0.1) player.vx = 0;
             }
 
-            const jumpKeyDown = keys['ArrowUp'] || keys['KeyW'] || keys['Space'];
             if (jumpKeyDown && player.jumpKeyReleased && player.grounded) {
                 player.vy = jumpForce;
                 player.grounded = false;
@@ -4208,10 +4961,6 @@
             ctx.fillStyle = '#78350f';
             ctx.fillRect(0, 300, 40, 100);
             ctx.strokeRect(0, 300, 40, 100);
-            ctx.fillStyle = '#1e293b';
-            ctx.font = "bold 14px 'OpenDyslexic', sans-serif";
-            ctx.textAlign = 'left';
-            ctx.fillText('⬇ Press Down to exit', 8, 285);
 
             // The word card(s), for any words this shop currently holds that haven't been found yet
             getShopWords(inShopInterior).forEach((shopWord, idx) => {
