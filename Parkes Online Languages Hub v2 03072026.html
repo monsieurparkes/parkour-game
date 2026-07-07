@@ -320,83 +320,46 @@
             margin-bottom: 20px;
         }
 
-        /* The tool wheel: a horizontal carousel, centre item enlarged and
-           lit up, neighbours dimmed and receding - a dial you spin through. */
-        .wheel-shell {
+        /* All tools visible at once as a grid of tiles, same size/style as the
+           tiles used elsewhere (player select, preset packs) for consistency. */
+        .tool-grid {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 18px;
-            padding: 12px 0 8px;
+            gap: 20px;
+            padding: 8px 0;
         }
-        .wheel-viewport {
-            width: 420px;
-            max-width: 80vw;
-            height: 300px;
-            overflow: hidden;
-            position: relative;
-        }
-        .wheel-track {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        .wheel-bubble {
-            position: absolute;
-            top: 58%;
-            left: 50%;
+        .tool-tile {
             width: 200px;
-            height: 200px;
-            margin-top: -100px;
-            margin-left: -100px;
             border-radius: 40px;
             background: var(--tool-accent-soft, var(--hub-violet-soft));
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            transition: transform 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.35s ease;
+            gap: 10px;
+            padding: 20px 16px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
             box-shadow: var(--hub-shadow-md);
             border: 2px solid transparent;
             cursor: pointer;
+            text-align: center;
         }
-        .wheel-bubble.wheel-bubble-active {
-            border-color: var(--tool-accent, var(--hub-violet));
-            box-shadow: var(--hub-shadow-lg);
-        }
-        .wheel-icon { font-size: 56px; }
-        .wheel-icon-img { width: 72px; height: 72px; object-fit: contain; }
-        .wheel-label {
+        .tool-tile:hover { transform: translateY(-3px); box-shadow: var(--hub-shadow-lg); }
+        .tool-tile:active { transform: translateY(0) scale(0.98); }
+        .tool-icon { font-size: 56px; }
+        .tool-icon-img { width: 72px; height: 72px; object-fit: contain; }
+        .tool-label {
             font-size: 15px;
             font-weight: 800;
             color: var(--hub-ink);
-            text-align: center;
-            padding: 0 12px;
             line-height: 1.25;
         }
-        #wheel-tool-desc {
-            margin-top: 24px;
+        .tool-desc {
+            font-size: 11px;
+            color: var(--hub-ink-soft);
+            line-height: 1.3;
         }
-        .wheel-nav-btn {
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: var(--hub-surface);
-            border: 1px solid var(--hub-line);
-            box-shadow: var(--hub-shadow-sm);
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--hub-ink);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: transform 0.12s ease, border-color 0.15s ease;
-        }
-        .wheel-nav-btn:hover { border-color: var(--hub-violet); color: var(--hub-violet); }
-        .wheel-nav-btn:active { transform: scale(0.9); }
 
         .submode-card {
             border: 1.5px solid var(--hub-line);
@@ -441,6 +404,17 @@
             object-fit: contain;
         }
 
+        .tile-row {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 12px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 4px 2px 10px;
+            scroll-snap-type: x proximity;
+            -webkit-overflow-scrolling: touch;
+        }
+        .tile-row .preset-tile { flex-shrink: 0; scroll-snap-align: start; }
         .preset-tile {
             width: 260px;
             border: 1.5px solid var(--hub-line);
@@ -522,6 +496,47 @@
             background: #94a3b8;
         }
 
+        .tts-button { position: relative; }
+        @keyframes tts-attention-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(91, 78, 255, 0.55); }
+            50% { box-shadow: 0 0 0 12px rgba(91, 78, 255, 0); }
+        }
+        .tts-attention {
+            animation: tts-attention-pulse 1s ease-out infinite;
+            border-radius: 9999px;
+        }
+        @keyframes tts-tooltip-fade {
+            0%, 85% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .tts-attention-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            background: #1e293b;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 8px;
+            white-space: nowrap;
+            z-index: 50;
+            animation: tts-tooltip-fade 5s ease forwards;
+            pointer-events: none;
+        }
+        .tts-attention-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #1e293b transparent transparent transparent;
+        }
+
         @keyframes spin-slow {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -560,7 +575,7 @@
             <div id="landing-flow" class="hub-font w-full h-full flex flex-col items-center justify-center overflow-y-auto py-8 px-6" style="background:var(--hub-paper);">
                 <div class="w-full max-w-2xl mx-auto">
                     <div class="flex justify-center mb-4">
-                        <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a8513ddabb16b08ff06719c10ae35275af9e85d/POLH%20small%20logo.png" alt="Parkes Online Languages Hub" class="max-w-full max-h-14 h-auto">
+                        <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a8513ddabb16b08ff06719c10ae35275af9e85d/POLH%20small%20logo.png" alt="Parkes Online Languages Hub" class="max-w-full max-h-28 h-auto">
                     </div>
 
                     <!-- Legacy elements kept (hidden) purely so existing selectMode() JS logic
@@ -628,17 +643,9 @@
                     <!-- STEP 2: Tool Wheel -->
                     <div id="landing-step-wheel" class="landing-step" style="display:none;">
                         <h2 class="hub-step-title">What would you like to do?</h2>
-                        <div class="wheel-shell">
-                            <button id="wheel-prev-btn" class="wheel-nav-btn hub-font interactive" aria-label="Previous tool">‹</button>
-                            <div id="wheel-viewport" class="wheel-viewport interactive">
-                                <div id="wheel-track" class="wheel-track"></div>
-                            </div>
-                            <button id="wheel-next-btn" class="wheel-nav-btn hub-font interactive" aria-label="Next tool">›</button>
-                        </div>
-                        <p id="wheel-tool-desc" class="hub-hint text-center" style="font-size:13px;"></p>
-                        <div class="flex justify-center gap-3 mt-4">
+                        <div id="tool-grid" class="tool-grid"></div>
+                        <div class="flex justify-center gap-3 mt-6">
                             <button id="wheel-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
-                            <button id="wheel-select-btn" class="hub-btn-primary hub-font interactive text-lg">Select This Tool</button>
                         </div>
                     </div>
 
@@ -685,17 +692,11 @@
                                 <input type="text" id="kart-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
                             </div>
                             <div class="hub-row">
-                                <label class="hub-label">Preset Image Packs (optional)</label>
-                                <p class="hub-hint mt-0 mb-3">Uses the same picture packs as Picture Parkour. Pick a category, and the cards on the track will show pictures instead of words.</p>
-                                <div id="kart-preset-category-tiles" class="flex flex-wrap gap-3 mb-2"></div>
-                                <div id="kart-preset-item-list" class="flex flex-wrap gap-2"></div>
-                            </div>
-                            <div class="hub-row">
-                                <label class="hub-label">Or Your Own Images</label>
-                                <p class="hub-hint mt-0 mb-3">Name each image file after the word it shows, e.g. "un croissant.png".</p>
-                                <label for="kart-picture-file-input" class="hub-btn-primary interactive inline-block cursor-pointer text-sm" style="padding:12px 28px;">📁 Choose Images</label>
+                                <label class="hub-label">Choose Your Pictures (optional)</label>
+                                <p class="hub-hint mt-0 mb-3">Uses the same picture packs as Picture Parkour, or upload your own - the cards on the track will show pictures instead of words.</p>
+                                <div id="kart-preset-category-tiles" class="tile-row"></div>
                                 <input type="file" id="kart-picture-file-input" accept="image/*" multiple class="hidden">
-                                <div id="kart-picture-file-list" class="mt-3 flex flex-wrap gap-2"></div>
+                                <p id="kart-picture-upload-status" class="hub-hint mt-2" style="display:none;"></p>
                             </div>
                             <div class="hub-row">
                                 <label class="hub-label">Or Type Vocabulary (separated by commas)</label>
@@ -781,23 +782,16 @@
                             </div>
 
                             <div class="hub-row">
-                                <label class="hub-label">Preset Image Packs (optional)</label>
-                                <p class="hub-hint mt-0 mb-3">Pick a ready-made category so students don't need their own images. Words are shown translated into whichever language is selected above.</p>
-                                <div id="preset-category-tiles" class="flex flex-wrap gap-3 mb-2"></div>
-                                <div id="preset-item-list" class="flex flex-wrap gap-2"></div>
+                                <label class="hub-label">Choose Your Pictures</label>
+                                <p class="hub-hint mt-0 mb-3">Pick a ready-made pack, or upload your own images (name each file after the word it shows, e.g. "un croissant.png").</p>
+                                <div id="preset-category-tiles" class="tile-row"></div>
+                                <input type="file" id="picture-file-input" accept="image/*" multiple class="hidden">
+                                <p id="picture-upload-status" class="hub-hint mt-2" style="display:none;"></p>
                             </div>
 
                             <div class="hub-row">
                                 <label for="picture-student-name-input" class="hub-label">Student Name (optional)</label>
                                 <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
-                            </div>
-
-                            <div class="hub-row">
-                                <label class="hub-label">Target Vocabulary Images</label>
-                                <p class="hub-hint mt-0 mb-3">Name each image file after the word it shows, e.g. "un croissant.png". That name (without the file extension) becomes the target vocabulary in the game.</p>
-                                <label for="picture-file-input" class="hub-btn-primary interactive inline-block cursor-pointer text-sm" style="padding:12px 28px;">📁 Choose Images</label>
-                                <input type="file" id="picture-file-input" accept="image/*" multiple class="hidden">
-                                <div id="picture-file-list" class="mt-3 flex flex-wrap gap-2"></div>
                             </div>
 
                             <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -909,8 +903,7 @@
         <!-- UI Dashboard Elements                      -->
         <!-- ========================================== -->
         <div id="kart-ui-board" class="ui-overlay flex flex-col justify-between dyslexic-font">
-            <div id="kart-wrong-banner" class="hidden absolute left-1/2 top-6 -translate-x-1/2 bg-rose-500 text-white font-black text-sm uppercase px-6 py-3 rounded-2xl border-2 border-rose-700 shadow-lg" style="pointer-events:none;">
-                ❌ Not quite - try again!
+            <div id="kart-wrong-banner" dir="auto" class="hidden absolute left-1/2 top-6 -translate-x-1/2 bg-rose-500 text-white font-bold text-sm rounded-2xl border-2 border-rose-700 shadow-lg px-6 py-3 text-center max-w-[80%]" style="pointer-events:none;">
             </div>
             <div class="flex justify-between items-start gap-4">
                 <div class="bg-white/95 border-4 border-slate-800 p-4 rounded-2xl shadow-[4px_4px_0px_#1e293b] flex flex-col items-center min-w-[100px] interactive flex-shrink-0">
@@ -920,7 +913,12 @@
 
                 <div class="bg-white/95 p-4 md:p-6 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] w-auto interactive flex flex-col justify-center items-center gap-1 flex-shrink-0">
                     <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider">Find</h3>
-                    <div id="kart-target-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight text-center"></div>
+                    <div class="flex items-center gap-4 mt-1">
+                        <div id="kart-target-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight text-center"></div>
+                        <button id="kart-tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="bg-white/95 border-4 border-slate-800 p-4 rounded-2xl shadow-[4px_4px_0px_#1e293b] flex flex-col items-center min-w-[100px] interactive flex-shrink-0">
@@ -2995,7 +2993,6 @@
                 updateFullScreenButtonLabels();
                 updateSinhalaVowelSignsVisibility();
                 refreshCoderColorization();
-                if (selectedPresetCategoryId) renderPresetCategoryItems(selectedPresetCategoryId);
             });
 
             selectedLanguage = langSelect.value;
@@ -3094,9 +3091,10 @@
                 const files = Array.from(e.target.files || []);
                 pictureImageMap = {};
                 pictureFileNames = [];
-
-                const listEl = document.getElementById('picture-file-list');
-                listEl.innerHTML = '';
+                selectedPresetCategoryId = '';
+                presetSelectedFiles = [];
+                renderPresetCategoryTiles();
+                appendUploadTile('preset-category-tiles', 'picture-file-input');
 
                 files.forEach(file => {
                     const dotIndex = file.name.lastIndexOf('.');
@@ -3109,22 +3107,25 @@
                     img.src = URL.createObjectURL(file);
                     const isPng = file.type === 'image/png' || /\.png$/i.test(file.name);
                     pictureImageMap[word.toLowerCase()] = { img, isPng };
-
-                    const chip = document.createElement('span');
-                    chip.dir = 'auto';
-                    chip.className = 'text-xs font-bold bg-blue-50 border-2 border-blue-200 rounded-full px-3 py-1 text-blue-900';
-                    chip.textContent = word;
-                    listEl.appendChild(chip);
                 });
+
+                const statusEl = document.getElementById('picture-upload-status');
+                if (pictureFileNames.length > 0) {
+                    statusEl.textContent = `✓ ${pictureFileNames.length} image${pictureFileNames.length === 1 ? '' : 's'} selected`;
+                    statusEl.style.display = 'block';
+                } else {
+                    statusEl.style.display = 'none';
+                }
             });
 
             document.getElementById('kart-picture-file-input').addEventListener('change', (e) => {
                 const files = Array.from(e.target.files || []);
                 pictureImageMap = {};
                 pictureFileNames = [];
-
-                const listEl = document.getElementById('kart-picture-file-list');
-                listEl.innerHTML = '';
+                selectedPresetCategoryId = '';
+                presetSelectedFiles = [];
+                renderPresetCategoryTiles('kart-preset-category-tiles');
+                appendUploadTile('kart-preset-category-tiles', 'kart-picture-file-input');
 
                 files.forEach(file => {
                     const dotIndex = file.name.lastIndexOf('.');
@@ -3137,13 +3138,15 @@
                     img.src = URL.createObjectURL(file);
                     const isPng = file.type === 'image/png' || /\.png$/i.test(file.name);
                     pictureImageMap[word.toLowerCase()] = { img, isPng };
-
-                    const chip = document.createElement('span');
-                    chip.dir = 'auto';
-                    chip.className = 'text-xs font-bold bg-blue-50 border-2 border-blue-200 rounded-full px-3 py-1 text-blue-900';
-                    chip.textContent = word;
-                    listEl.appendChild(chip);
                 });
+
+                const statusEl = document.getElementById('kart-picture-upload-status');
+                if (pictureFileNames.length > 0) {
+                    statusEl.textContent = `✓ ${pictureFileNames.length} image${pictureFileNames.length === 1 ? '' : 's'} selected`;
+                    statusEl.style.display = 'block';
+                } else {
+                    statusEl.style.display = 'none';
+                }
             });
 
             loadPresetManifest();
@@ -3161,23 +3164,7 @@
 
             // Landing wizard navigation
             document.getElementById('landing-lang-next-btn').onclick = () => showLandingStep('wheel');
-            document.getElementById('wheel-select-btn').onclick = confirmWheelSelection;
             document.getElementById('wheel-return-btn').onclick = () => showLandingStep('language');
-
-            window.addEventListener('keydown', (e) => {
-                const wheelStep = document.getElementById('landing-step-wheel');
-                if (!wheelStep || wheelStep.style.display === 'none' || gameStarted) return;
-                if (e.code === 'ArrowLeft') {
-                    e.preventDefault();
-                    moveWheel(-1);
-                } else if (e.code === 'ArrowRight') {
-                    e.preventDefault();
-                    moveWheel(1);
-                } else if (e.code === 'Enter' || e.code === 'NumpadEnter') {
-                    e.preventDefault();
-                    confirmWheelSelection();
-                }
-            });
 
             document.getElementById('kart-back-to-config').onclick = resetToConfig;
             document.getElementById('kart-try-again-btn').onclick = () => {
@@ -3186,8 +3173,6 @@
                 startKartGame();
             };
             document.getElementById('kart-return-hub-btn').onclick = resetToConfig;
-            document.getElementById('wheel-prev-btn').onclick = () => moveWheel(-1);
-            document.getElementById('wheel-next-btn').onclick = () => moveWheel(1);
             document.getElementById('submode-confirm-btn').onclick = () => showLandingStep('player');
             document.getElementById('submode-return-btn').onclick = () => showLandingStep('wheel');
             document.getElementById('player-confirm-btn').onclick = () => {
@@ -3203,27 +3188,6 @@
                 }
             };
 
-            const wheelViewport = document.getElementById('wheel-viewport');
-            let wheelScrollCooldown = false;
-            wheelViewport.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                if (wheelScrollCooldown) return;
-                wheelScrollCooldown = true;
-                moveWheel((e.deltaY > 0 || e.deltaX > 0) ? 1 : -1);
-                setTimeout(() => { wheelScrollCooldown = false; }, 250);
-            }, { passive: false });
-
-            let wheelTouchStartX = null;
-            wheelViewport.addEventListener('touchstart', (e) => {
-                wheelTouchStartX = e.touches[0].clientX;
-            });
-            wheelViewport.addEventListener('touchend', (e) => {
-                if (wheelTouchStartX === null) return;
-                const dx = e.changedTouches[0].clientX - wheelTouchStartX;
-                if (Math.abs(dx) > 30) moveWheel(dx < 0 ? 1 : -1);
-                wheelTouchStartX = null;
-            });
-
             showLandingStep('language');
 
             ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture'].forEach(id => {
@@ -3238,6 +3202,9 @@
             document.getElementById('close-feedback-btn').onclick = closeFeedbackOverlay;
             document.getElementById('tts-button').onclick = () => {
                 if (currentTargetWord) speakWord(currentTargetWord);
+            };
+            document.getElementById('kart-tts-button').onclick = () => {
+                if (kartCurrentTargetWord) speakWord(kartCurrentTargetWord);
             };
             document.getElementById('tts-location-button').onclick = () => {
                 const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
@@ -3527,7 +3494,6 @@
             { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word - draft/prototype.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
-        let wheelIndex = 0;
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
 
         const HUB_CHARACTERS = [
@@ -3541,7 +3507,7 @@
                 const el = document.getElementById('landing-step-' + s);
                 if (el) el.style.display = (s === step) ? '' : 'none';
             });
-            if (step === 'wheel') renderWheel();
+            if (step === 'wheel') renderToolGrid();
             if (step === 'player') renderPlayerSelect();
             if (playerIdleAnimTimer && step !== 'player') {
                 clearInterval(playerIdleAnimTimer);
@@ -3549,7 +3515,7 @@
             }
         }
 
-        function playWheelClickSound() {
+        function playTileClickSound() {
             if (!fxEnabled) return;
             try {
                 initAudio();
@@ -3567,54 +3533,34 @@
             } catch (e) {}
         }
 
-        function renderWheel() {
-            const track = document.getElementById('wheel-track');
-            if (!track) return;
-            track.innerHTML = '';
-            const angleStep = 36; // degrees between adjacent tools around the dial
-            const radius = 260;
-            HUB_TOOLS.forEach((tool, i) => {
-                const distance = i - wheelIndex;
-                const angleDeg = distance * angleStep;
-                const angleRad = angleDeg * Math.PI / 180;
-                const x = radius * Math.sin(angleRad);
-                const y = -radius * (1 - Math.cos(angleRad));
-                const scale = distance === 0 ? 1 : 0.72;
-                const bubble = document.createElement('div');
-                bubble.className = 'wheel-bubble' + (distance === 0 ? ' wheel-bubble-active' : '');
-                bubble.style.setProperty('--tool-accent', `var(${tool.accent})`);
-                bubble.style.setProperty('--tool-accent-soft', `var(${tool.accentSoft})`);
-                bubble.style.transform = `translate(${x}px, ${y}px) scale(${scale}) rotate(${angleDeg * 0.35}deg)`;
-                bubble.style.opacity = Math.abs(distance) > 1 ? '0' : (distance === 0 ? '1' : '0.55');
-                bubble.style.pointerEvents = Math.abs(distance) > 1 ? 'none' : 'auto';
+        function renderToolGrid() {
+            const grid = document.getElementById('tool-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            HUB_TOOLS.forEach((tool) => {
+                const tile = document.createElement('div');
+                tile.className = 'tool-tile hub-font';
+                tile.style.setProperty('--tool-accent', `var(${tool.accent})`);
+                tile.style.setProperty('--tool-accent-soft', `var(${tool.accentSoft})`);
                 const iconHtml = tool.image
-                    ? `<img src="${tool.image}" alt="${tool.label}" class="wheel-icon-img">`
-                    : `<div class="wheel-icon">${tool.icon}</div>`;
-                bubble.innerHTML = `${iconHtml}<div class="wheel-label">${tool.label}</div>`;
-                bubble.onclick = () => {
-                    if (distance === 0) return;
-                    moveWheel(distance > 0 ? 1 : -1);
+                    ? `<img src="${tool.image}" alt="${tool.label}" class="tool-icon-img">`
+                    : `<div class="tool-icon">${tool.icon}</div>`;
+                tile.innerHTML = `${iconHtml}<div class="tool-label">${tool.label}</div><div class="tool-desc">${tool.desc}</div>`;
+                tile.onclick = () => {
+                    playTileClickSound();
+                    selectTool(tool.id);
                 };
-                track.appendChild(bubble);
+                grid.appendChild(tile);
             });
-            const descEl = document.getElementById('wheel-tool-desc');
-            if (descEl) descEl.textContent = HUB_TOOLS[wheelIndex].desc;
         }
 
-        function moveWheel(delta) {
-            wheelIndex = (wheelIndex + delta + HUB_TOOLS.length) % HUB_TOOLS.length;
-            renderWheel();
-            playWheelClickSound();
-        }
-
-        function confirmWheelSelection() {
-            const tool = HUB_TOOLS[wheelIndex];
-            if (tool.id === 'coder') {
+        function selectTool(toolId) {
+            if (toolId === 'coder') {
                 selectMode('coder');
                 launchSelectedActivity();
-            } else if (tool.id === 'parkour') {
+            } else if (toolId === 'parkour') {
                 showLandingStep('submode');
-            } else if (tool.id === 'kart') {
+            } else if (toolId === 'kart') {
                 selectMode('kart');
                 showLandingStep('settings');
             }
@@ -3693,6 +3639,35 @@
             }
         }
 
+        // "Oops! No. That's ___" - names whatever the student actually picked, in
+        // their target language, so a wrong answer still teaches them something.
+        const WRONG_ANSWER_PHRASES = {
+            fr: (w) => `Oups ! Non. C'est ${w}.`,
+            en: (w) => `Oops! No. That's ${w}.`,
+            'zh-pinyin': (w) => `Āiyā! Bù duì. Nà shì ${w}.`,
+            'zh-hanzi': (w) => `哎呀！不对。那是${w}。`,
+            cantonese: (w) => `哎呀！唔啱。嗰個係${w}。`,
+            ja: (w) => `おっと！違うよ。それは${w}だよ。`,
+            de: (w) => `Ups! Nein. Das ist ${w}.`,
+            it: (w) => `Ops! No. Quello è ${w}.`,
+            es: (w) => `¡Ups! No. Eso es ${w}.`,
+            he: (w) => `אופס! לא. זה ${w}.`,
+            ar: (w) => `للأسف! لا. هذا ${w}.`,
+            sinhala: (w) => `අනේ! නෑ. ඒක ${w}.`,
+            vi: (w) => `Ôi! Không phải. Đó là ${w}.`,
+            ur: (w) => `افسوس! نہیں۔ یہ ${w} ہے۔`,
+            hi: (w) => `उफ़! नहीं। यह ${w} है।`,
+            uk: (w) => `Ой! Ні. Це ${w}.`,
+            ru: (w) => `Ой! Нет. Это ${w}.`,
+            macedonian: (w) => `Ах! Не. Тоа е ${w}.`
+        };
+
+        function getWrongAnswerFeedback(wrongWord) {
+            const stripped = wrongWord.replace(/[\[\]]/g, '');
+            const phraseFn = WRONG_ANSWER_PHRASES[selectedLanguage] || WRONG_ANSWER_PHRASES.en;
+            return phraseFn(stripped);
+        }
+
         function speakWord(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -3708,6 +3683,26 @@
                 if (bestVoice) utterance.voice = bestVoice;
                 window.speechSynthesis.speak(utterance);
             }
+        }
+
+        // Speaks multiple pieces of text back-to-back as one continuous sequence
+        // (rather than each new speakWord() call cutting the previous one off).
+        // Used for wrong-answer feedback so the student hears the full corrective
+        // sentence, then the target word reminder, maximising comprehensible input.
+        function speakSequence(texts) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const locale = LANG_MAP[selectedLanguage] || 'en-US';
+            const bestVoice = getBestVoice(locale);
+            texts.forEach((text) => {
+                const cleanText = text.replace(/[\[\]]/g, '');
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.rate = 0.85;
+                utterance.volume = ttsVolume;
+                utterance.lang = locale;
+                if (bestVoice) utterance.voice = bestVoice;
+                window.speechSynthesis.speak(utterance);
+            });
         }
 
         function generateKartRace() {
@@ -3736,6 +3731,23 @@
             studentName = nameInput ? nameInput.value.trim() : '';
 
             startKartGame();
+        }
+
+        // Draws attention to a TTS button with a brief pulsing glow and a "Tap to
+        // listen" tooltip, fading out after ~5 seconds - helps young or first-time
+        // users notice the button exists at all.
+        function showTtsAttentionHint(buttonId) {
+            const btn = document.getElementById(buttonId);
+            if (!btn) return;
+            btn.classList.add('tts-attention');
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tts-attention-tooltip';
+            tooltip.textContent = 'Tap to listen';
+            btn.appendChild(tooltip);
+            setTimeout(() => {
+                btn.classList.remove('tts-attention');
+                tooltip.remove();
+            }, 5000);
         }
 
         function startKartGame() {
@@ -3770,17 +3782,23 @@
 
             gameStarted = true;
             nextKartTarget();
+            setTimeout(() => showTtsAttentionHint('kart-tts-button'), 400);
             resize();
 
             requestAnimationFrame(gameLoop);
         }
 
         let kartWrongBannerTimeout = null;
-        function showKartWrongFeedback() {
+        function showKartWrongFeedback(wrongWord) {
             const banner = document.getElementById('kart-wrong-banner');
+            const feedbackText = getWrongAnswerFeedback(wrongWord);
+            banner.textContent = feedbackText;
             banner.classList.remove('hidden');
             clearTimeout(kartWrongBannerTimeout);
-            kartWrongBannerTimeout = setTimeout(() => banner.classList.add('hidden'), 1200);
+            kartWrongBannerTimeout = setTimeout(() => banner.classList.add('hidden'), 3000);
+
+            speakSequence([feedbackText, kartCurrentTargetWord]);
+            setTimeout(() => showTtsAttentionHint('kart-tts-button'), 400);
         }
 
         function nextKartTarget() {
@@ -3845,22 +3863,41 @@
                 .then(data => {
                     presetManifest = data;
                     renderPresetCategoryTiles();
-                    renderPresetCategoryTiles('kart-preset-category-tiles', 'kart-preset-item-list');
+                    renderPresetCategoryTiles('kart-preset-category-tiles');
+                    appendUploadTile('preset-category-tiles', 'picture-file-input');
+                    appendUploadTile('kart-preset-category-tiles', 'kart-picture-file-input');
                 })
                 .catch(() => {
                     presetManifest = null;
                     renderPresetCategoryTiles();
-                    renderPresetCategoryTiles('kart-preset-category-tiles', 'kart-preset-item-list');
+                    renderPresetCategoryTiles('kart-preset-category-tiles');
+                    appendUploadTile('preset-category-tiles', 'picture-file-input');
+                    appendUploadTile('kart-preset-category-tiles', 'kart-picture-file-input');
                 });
+        }
+
+        // A tile styled the same as a preset pack, but that just triggers the
+        // hidden file input - so "pick a pack" and "upload your own" live in one
+        // consolidated row instead of two separate sections.
+        function appendUploadTile(containerId, fileInputId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const tile = document.createElement('label');
+            tile.setAttribute('for', fileInputId);
+            tile.className = 'preset-tile hub-font';
+            tile.innerHTML = `
+                <div class="preset-tile-thumb flex items-center justify-center text-5xl" style="background:var(--hub-violet-soft);">📁</div>
+                <div class="preset-tile-label">Upload Your Own</div>
+            `;
+            container.appendChild(tile);
         }
 
         // Renders each preset category as a clickable image tile. Expects an image
         // named exactly "tile.png" inside that category's own folder on GitHub
         // (e.g. preset-images/dinosaurs/tile.png) - falls back to a generic icon
         // if that file doesn't exist yet, so nothing breaks while packs are set up.
-        function renderPresetCategoryTiles(containerId, listId) {
+        function renderPresetCategoryTiles(containerId) {
             containerId = containerId || 'preset-category-tiles';
-            listId = listId || 'preset-item-list';
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = '';
@@ -3892,49 +3929,26 @@
                 tile.appendChild(label);
                 tile.onclick = () => {
                     selectedPresetCategoryId = cat.id;
-                    renderPresetCategoryTiles(containerId, listId);
-                    renderPresetCategoryItems(cat.id, listId);
+                    selectAllItemsInCategory(cat.id);
+                    renderPresetCategoryTiles(containerId);
+                    if (containerId === 'preset-category-tiles') {
+                        appendUploadTile('preset-category-tiles', 'picture-file-input');
+                    } else if (containerId === 'kart-preset-category-tiles') {
+                        appendUploadTile('kart-preset-category-tiles', 'kart-picture-file-input');
+                    }
                 };
                 container.appendChild(tile);
             });
         }
 
-        function updatePresetSelection(category, item, isChecked) {
-            const key = category.folder + '/' + item.file;
-            presetSelectedFiles = presetSelectedFiles.filter(p => (p.folder + '/' + p.file) !== key);
-            if (isChecked) {
-                presetSelectedFiles.push({ file: item.file, folder: category.folder, translations: item.translations || {} });
-            }
-        }
-
-        function renderPresetCategoryItems(categoryId, listId) {
-            listId = listId || 'preset-item-list';
-            const listEl = document.getElementById(listId);
-            listEl.innerHTML = '';
+        // Selecting a pack includes every item in it automatically - no need to
+        // show or pick from an individual word list.
+        function selectAllItemsInCategory(categoryId) {
             presetSelectedFiles = [];
             if (!presetManifest || !categoryId) return;
-
             const category = (presetManifest.categories || []).find(c => c.id === categoryId);
             if (!category) return;
-
             (category.items || []).forEach(item => {
-                const label = document.createElement('label');
-                label.className = 'flex items-center gap-1 bg-blue-50 border-2 border-blue-200 rounded-full px-3 py-1 text-xs font-bold text-blue-900 cursor-pointer';
-
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.className = 'w-4 h-4';
-                checkbox.checked = true;
-                checkbox.addEventListener('change', () => updatePresetSelection(category, item, checkbox.checked));
-                label.appendChild(checkbox);
-
-                const span = document.createElement('span');
-                span.dir = 'auto';
-                span.textContent = (item.translations && (item.translations[selectedLanguage] || item.translations.en)) || item.file;
-                label.appendChild(span);
-
-                listEl.appendChild(label);
-
                 presetSelectedFiles.push({ file: item.file, folder: category.folder, translations: item.translations || {} });
             });
         }
@@ -3997,6 +4011,10 @@
 
             gameStarted = true;
             nextQuest();
+            setTimeout(() => {
+                showTtsAttentionHint('tts-button');
+                showTtsAttentionHint('tts-location-button');
+            }, 400);
             resize();
             
             requestAnimationFrame(gameLoop);
@@ -4339,13 +4357,8 @@
             
             playChime(false);
 
-            const strippedTarget = currentTargetWord.replace(/[\[\]]/g, '');
-            const strippedWrong = wrongWord.replace(/[\[\]]/g, '');
-
             const modalHeader = `Keep Searching!`;
-            const modalText = challengeModeEnabled
-                ? `You collected "${strippedWrong}". Listen again and find the right one!`
-                : `You collected "${strippedWrong}". Find the card representing "${strippedTarget}"!`;
+            const modalText = getWrongAnswerFeedback(wrongWord);
             const closeBtnText = `Close Whiteboard`;
 
             document.getElementById('feedback-header').innerText = modalHeader;
@@ -4353,7 +4366,11 @@
             document.getElementById('close-feedback-btn').innerText = closeBtnText;
             document.getElementById('feedback-overlay').classList.remove('hidden');
             
-            speakWord("No: " + currentTargetWord);
+            speakSequence([modalText, currentTargetWord]);
+            setTimeout(() => {
+                showTtsAttentionHint('tts-button');
+                showTtsAttentionHint('tts-location-button');
+            }, 400);
 
             if (inShopInterior === null) {
                 player.x = 400;
@@ -4457,7 +4474,7 @@
                         kartMistakeCount++;
                         kart.speed *= 0.3; // spin-out penalty, like a banana peel
                         playChime(false);
-                        showKartWrongFeedback();
+                        showKartWrongFeedback(item.text);
                     }
                 }
             });
