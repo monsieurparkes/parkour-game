@@ -39,6 +39,8 @@
             --hub-marigold-soft: #FFF1E0;
             --hub-mint: #2FBF8F;
             --hub-mint-soft: #E4F9F1;
+            --hub-earth: #8B5E34;
+            --hub-earth-soft: #F3E7D8;
             --hub-radius-lg: 28px;
             --hub-radius-md: 18px;
             --hub-radius-sm: 12px;
@@ -497,6 +499,28 @@
         }
 
         .tts-button { position: relative; }
+
+        /* Fluid HUD sizing: text and padding scale continuously with the actual
+           viewport rather than jumping between a couple of fixed breakpoints, so
+           small phones get proportionally smaller boxes instead of oversized ones
+           that make the game feel cropped/zoomed. Desktop sizes are unchanged since
+           the clamp() max matches the previous fixed values. */
+        #score, #kart-score-text {
+            font-size: clamp(15px, 4vw, 30px) !important;
+        }
+        #instruction-text, #location-text, #kart-target-text {
+            font-size: clamp(15px, 4.5vw, 30px) !important;
+        }
+        #kart-lap-text {
+            font-size: clamp(13px, 3.5vw, 24px) !important;
+        }
+        #score-card, #quest-box, #location-box {
+            padding: clamp(8px, 2vw, 24px) !important;
+        }
+        #quest-header-label {
+            font-size: clamp(9px, 2vw, 12px) !important;
+        }
+
         @keyframes tts-attention-pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(91, 78, 255, 0.55); }
             50% { box-shadow: 0 0 0 12px rgba(91, 78, 255, 0); }
@@ -676,13 +700,23 @@
                         <div id="player-select-grid" class="flex flex-wrap justify-center gap-5"></div>
                         <div class="flex justify-center gap-3 mt-6">
                             <button id="player-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
-                            <button id="player-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
+                            <button id="start-button" class="hub-btn-primary hub-font interactive text-lg">Launch Activity</button>
                         </div>
                     </div>
 
                     <!-- STEP 5: Settings -->
                     <div id="landing-step-settings" class="landing-step" style="display:none;">
                         <!-- Parkour Kart Settings Panel (draft/prototype) -->
+                        <div id="potato-settings" class="hub-group hub-font text-left" style="display:none;">
+                            <div class="hub-row">
+                                <p class="hub-hint mt-0 mb-0">🥔 A ready-made vocabulary hunt around the house - find the hidden potato before your classmates spot the wrong ones!</p>
+                            </div>
+                            <div class="hub-row">
+                                <label for="potato-student-name-input" class="hub-label">Student Name (optional)</label>
+                                <input type="text" id="potato-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                            </div>
+                        </div>
+
                         <div id="kart-settings" class="hub-group hub-font text-left" style="display:none;">
                             <div class="hub-row">
                                 <p class="hub-hint mt-0 mb-0">🏎️ <strong>Draft prototype</strong> — placeholder track and kart graphics for now, so you can test how the mechanic feels before any real art gets made.</p>
@@ -825,7 +859,7 @@
 
                         <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-3 pt-6 pb-2">
                             <button id="settings-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
-                            <button id="start-button" class="hub-btn-primary hub-font interactive text-lg">Launch Activity</button>
+                            <button id="settings-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
                     </div>
                 </div>
@@ -982,7 +1016,7 @@
                 <div class="flex flex-wrap items-stretch gap-3 max-w-[65vw]">
                     <!-- Active Quest / Matching Target -->
                     <div id="quest-box" class="bg-white/95 p-4 md:p-6 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] w-auto interactive flex flex-col justify-center items-center gap-1 transition-all flex-shrink-0">
-                        <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider">Target Objective</h3>
+                        <h3 id="quest-header-label" class="text-slate-400 text-xs font-bold uppercase tracking-wider">Target Objective</h3>
                         <div class="flex items-center gap-4 mt-1">
                             <div id="instruction-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight inline-block whitespace-pre-wrap text-center">...</div>
                             <button id="tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
@@ -1175,6 +1209,11 @@
         // Bobot specifically, tuned independently.
         const BOBOT_JUMP_SCALE_BOOST = 1.3;
         const BOBOT_CRAWL_SCALE_BOOST = 1.5;
+        // Potato Parkour specifically needs Bobot smaller overall (tighter world,
+        // small potato hitboxes) - this factor is applied uniformly across every
+        // animation state there, so the proportions between states stay identical
+        // to regular Parkour's, just scaled down as a whole.
+        const POTATO_BOBOT_SCALE = 1 / BOBOT_CRAWL_SCALE_BOOST;
 
         let images = {}, imagesLoaded = false, gameStarted = false, score = 0, isModalOpen = false;
         let imagesBobot = {}, imagesBobotLoaded = false;
@@ -1276,8 +1315,66 @@
         ];
         const KART_MAX_SPEED = 3.375, KART_REVERSE_MAX_SPEED = 1.5, KART_OFFTRACK_MAX_SPEED = 1.125;
         const KART_ACCEL = 0.09, KART_TURN_RATE = 3.4, KART_FRICTION = 0.985;
+        const KART_ANGULAR_EASE = 6; // how quickly the turn rate itself ramps up/down toward its target
 
-        let kart = { x: 1200, y: 1225, angle: 180, speed: 0 };
+        // ================================================================
+        // POTATO PARKOUR: a completely separate, fixed world - ported exactly
+        // from the original draft (same platforms, same house/forest landmarks,
+        // same hand-placed potato coordinates that were originally aligned to
+        // visual features like TVs and lamps using debug mode). This is
+        // deliberately NOT the same world as the main Parkour tool - only the
+        // truly shared systems (sprites, physics constants, TTS, debug mode,
+        // settings, the results screen) are reused; the world/physics/render
+        // are dedicated, the same way Parkour Kart has its own.
+        // ================================================================
+        const POTATO_PLATFORMS = [
+            { x: -5000, y: 815, w: 20000, h: 200 },
+            { x: 457, y: 700, w: 375, h: 10 },
+            { x: 1067, y: 682, w: 355, h: 18 },
+            { x: 1664, y: 695, w: 371, h: 10 }
+        ];
+        const POTATO_LANDMARKS = [
+            { id: 'house2', x: 450, y: 600, w: 200, h: 200 },
+            { id: 'house1', x: 1050, y: 600, w: 200, h: 200 },
+            { id: 'house3', x: 1650, y: 600, w: 200, h: 200 }
+        ];
+        // Raw hand-placed coordinates from the original draft (aligned to features
+        // like TVs/lamps/roofs in the house artwork via debug mode); each becomes
+        // an item positioned at (x - 7.5, y - 18) with a 15x18 box, exactly as before.
+        const POTATO_SPAWN_DATA = [
+            { x: 528, y: 754, id: 'shower' }, { x: 627, y: 769, id: 'toilet' }, { x: 677, y: 780, id: 'bed' }, { x: 761, y: 735, id: 'wardrobe' }, { x: 794, y: 747, id: 'lamp' }, { x: 722, y: 778, id: 'toybox' }, { x: 652, y: 662, id: 'red-roof' },
+            { x: 1256, y: 672, id: 'black-roof' }, { x: 1368, y: 752, id: 'television' }, { x: 1277, y: 778, id: 'lounge' }, { x: 1221, y: 737, id: 'fridge' }, { x: 1240, y: 777, id: 'bin' }, { x: 1326, y: 773, id: 'coffee-table' }, { x: 1177, y: 743, id: 'sink' },
+            { x: 1740, y: 754, id: 'computer' }, { x: 1827, y: 736, id: 'bookcase' }, { x: 1870, y: 765, id: 'washing-machine' }, { x: 1901, y: 770, id: 'washing-basket' }, { x: 1947, y: 772, id: 'ironing-board' }, { x: 1854, y: 665, id: 'blue-roof' }
+        ];
+        const POTATO_IMAGE_URLS = {
+            grass: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/5b41eedddcee96026248de437d92c7b45f4f2177/REPEATABLE_GRASS1.png',
+            house1: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/b2af3b7ccf136cc476fb84820ecfb57695f6374a/HOUSE1.png',
+            house2: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/61b4f99f4daf0c5030ceaf8b30c0beb754e81813/HOUSE2.png',
+            house3: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/21ba091a3b3840b508821a49fbe082a6c42a7646/HOUSE3.png',
+            forest1: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/21ba091a3b3840b508821a49fbe082a6c42a7646/FOREST1.png',
+            background: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/9ac0af46133b9302702816b569465e2295e2af23/BACKGROUNDAUS3.png'
+        };
+        let potatoImages = {};
+        Object.entries(POTATO_IMAGE_URLS).forEach(([k, u]) => {
+            potatoImages[k] = new Image();
+            potatoImages[k].onload = () => {
+                const lm = POTATO_LANDMARKS.find(l => l.id === k);
+                if (lm) lm.w = lm.h * (potatoImages[k].naturalWidth / potatoImages[k].naturalHeight);
+            };
+            potatoImages[k].src = u;
+        });
+
+        const potatoSpriteBack = new Image();
+        potatoSpriteBack.src = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherback.png';
+        const potatoSpriteFront = new Image();
+        potatoSpriteFront.src = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png';
+
+        let potatoPlayer = { x: 920, y: 730, vx: 0, vy: 0, grounded: false, facingRight: true, animFrame: 0, animTimer: 0, state: 'idle' };
+        let potatoCameraY = 0, potatoTargetScale = 1;
+        let potatoItems = [];
+        let potatoSuccessAnims = [];
+
+        let kart = { x: 1200, y: 1225, angle: 180, speed: 0, angularVelocity: 0 };
         const kartDriverSprite = new Image();
         kartDriverSprite.src = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/PARKOURDRIVEIDLE1.png';
         let kartPrevX = kart.x, kartPrevY = kart.y;
@@ -1285,6 +1382,14 @@
         let kartItems = [];
         let kartCurrentTargetWord = '';
         let kartScore = 0, kartMistakeCount = 0, kartLap = 0, kartCheckpointPassed = false, kartStartTime = 0;
+
+        // The visual card for a longer word/phrase is wider on screen, so its
+        // collision zone should be wider too - otherwise the kart visually drives
+        // onto a wide card well before the (previously fixed-size) zone registers it.
+        function getKartItemCollisionRadius(item) {
+            const textLength = (item.text || '').replace(/[\[\]]/g, '').length;
+            return 55 + textLength * 6;
+        }
 
         function isKartOnTrack(x, y) {
             const inOuter = x >= 0 && x <= KART_WORLD_W && y >= 0 && y <= KART_WORLD_H;
@@ -1433,6 +1538,46 @@
             'uk': { locale: 'uk-UA', prefix: "сьогодні ", suffix: "." },
             'ru': { locale: 'ru-RU', prefix: "сегодня ", suffix: "." },
             'macedonian': { locale: 'mk-MK', prefix: "денес е ", suffix: "." }
+        };
+
+        // Potato Parkour's fixed vocabulary set - ported from the original draft.
+        // 13 of the hub's 18 languages already had translations there and are reused
+        // directly (with a few real bugs fixed: a Pinyin copy-paste error where
+        // black-roof duplicated red-roof's text, two missing Hebrew entries, and
+        // corrupted stray characters in the Macedonian ironing-board line). The
+        // other 5 (Cantonese, Sinhala, Urdu, Ukrainian, Russian) are new translations
+        // since the original draft predates the hub supporting those languages.
+        const POTATO_LOCATIONS = {
+            en: { header: "Where is my potato?", locs: { shower: "in the shower", toilet: "on the toilet", bed: "on the bed", wardrobe: "on the wardrobe", lamp: "on the lamp", toybox: "in the toybox", 'red-roof': "on the red roof", 'black-roof': "on the black roof", television: "on the television", lounge: "on the lounge", fridge: "on the fridge", bin: "above the bin", 'coffee-table': "above the coffee table", sink: "above the kitchen sink", computer: "on the computer", bookcase: "on the bookcase", 'washing-machine': "on the washing machine", 'washing-basket': "above the washing basket", 'ironing-board': "on the ironing board", 'blue-roof': "on the blue roof" } },
+            fr: { header: "Où est ma pomme de terre ?", locs: { shower: "dans la douche", toilet: "sur la toilette", bed: "sur le lit", wardrobe: "sur l'armoire", lamp: "sur la lampe", toybox: "sur le coffre à jouets", 'red-roof': "sur le toit rouge", 'black-roof': "sur le toit noir", television: "sur la télévision", lounge: "sur le canapé", fridge: "sur le frigo", bin: "au-dessus de la poubelle", 'coffee-table': "au-dessus de la table basse", sink: "au-dessus de l'évier", computer: "sur l'ordinateur", bookcase: "sur la bibliothèque", 'washing-machine': "sur la machine à laver", 'washing-basket': "au-dessus du panier à linge", 'ironing-board': "sur la planche à repasser", 'blue-roof': "sur le toit bleu" } },
+            de: { header: "Wo ist meine Kartoffel?", locs: { shower: "in der Dusche", toilet: "auf der Toilette", bed: "auf dem Bett", wardrobe: "auf dem Kleiderschrank", lamp: "auf der Lampe", toybox: "in der Spielzeugkiste", 'red-roof': "auf dem roten Dach", 'black-roof': "auf dem schwarzen Dach", television: "auf dem Fernseher", lounge: "auf dem Sofa", fridge: "auf dem Kühlschrank", bin: "über dem Mülleimer", 'coffee-table': "über dem Couchtisch", sink: "über dem Spülbecken", computer: "auf dem Computer", bookcase: "auf dem Bücherregal", 'washing-machine': "auf der Waschmaschine", 'washing-basket': "über dem Wäschekorb", 'ironing-board': "auf dem Bügelbrett", 'blue-roof': "auf dem blauen Dach" } },
+            ja: { header: "じゃがいもはどこ？", locs: { shower: "シャワーの中", toilet: "トイレの上", bed: "ベッドの上", wardrobe: "たんすの上", lamp: "ランプの上", toybox: "おもちゃ箱の中", 'red-roof': "赤い屋根の上", 'black-roof': "黒い屋根の上", television: "テレビの上", lounge: "ソファーの上", fridge: "冷蔵庫の上", bin: "ゴミ箱の上", 'coffee-table': "コーヒーテーブルの上", sink: "流し台の上", computer: "コンピュータの上", bookcase: "本棚の上", 'washing-machine': "洗濯機の上", 'washing-basket': "洗濯かごの上", 'ironing-board': "アイロン台の上", 'blue-roof': "青い屋根の上" } },
+            'zh-hanzi': { header: "我的土豆在哪里？", locs: { shower: "在淋浴间里", toilet: "在马桶上", bed: "在床上", wardrobe: "在衣柜上", lamp: "在灯上", toybox: "在玩具箱里", 'red-roof': "在红屋顶上", 'black-roof': "在黑屋顶上", television: "在电视上", lounge: "在沙发上", fridge: "在冰箱上", bin: "在垃圾桶上方", 'coffee-table': "在咖啡桌上方", sink: "在厨房水槽上方", computer: "在电脑上", bookcase: "在书架上", 'washing-machine': "在洗衣机上", 'washing-basket': "在洗衣篮上方", 'ironing-board': "在熨衣板上", 'blue-roof': "在蓝屋顶上" } },
+            'zh-pinyin': { header: "Wǒ de tǔdòu zài nǎlǐ?", locs: { shower: "zài línyùjiān lǐ", toilet: "zài mǎtǒng shàng", bed: "zài chuáng shàng", wardrobe: "zài yīguì shàng", lamp: "zài dēng shàng", toybox: "zài wánjùxiāng lǐ", 'red-roof': "zài hóng wūdǐng shàng", 'black-roof': "zài hēi wūdǐng shàng", television: "zài diànshì shàng", lounge: "zài shāfā shàng", fridge: "zài bīngxiāng shàng", bin: "zài lājītǒng shàngfāng", 'coffee-table': "zài kāfēizhuō shàngfāng", sink: "zài chúfáng shuǐcáo shàngfāng", computer: "zài diànnǎo shàng", bookcase: "zài shūjià shàng", 'washing-machine': "zài xǐyījī shàng", 'washing-basket': "zài xǐyīlán shàngfāng", 'ironing-board': "zài yùnyībǎn shàng", 'blue-roof': "zài lán wūdǐng shàng" } },
+            it: { header: "Dov'è la mia patata?", locs: { shower: "nella doccia", toilet: "sulla toilette", bed: "sul letto", wardrobe: "sull'armadio", lamp: "sulla lampada", toybox: "nella scatola dei giocattoli", 'red-roof': "sul tetto rosso", 'black-roof': "sul tetto nero", television: "sulla televisione", lounge: "sul divano", fridge: "sul frigorifero", bin: "sopra il cestino", 'coffee-table': "sopra il tavolino", sink: "sopra il lavandino", computer: "sul computer", bookcase: "sulla libreria", 'washing-machine': "sulla lavatrice", 'washing-basket': "sopra il cesto della biancheria", 'ironing-board': "sull'asse da stiro", 'blue-roof': "sul tetto blu" } },
+            es: { header: "¿Dónde está mi patata?", locs: { shower: "en la ducha", toilet: "en el inodoro", bed: "en la cama", wardrobe: "en el armario", lamp: "en la lámpara", toybox: "en el baúl de juguetes", 'red-roof': "en el tejado rojo", 'black-roof': "en el tejado negro", television: "en la televisión", lounge: "en el sofá", fridge: "en la nevera", bin: "sobre el cubo de basura", 'coffee-table': "sobre la mesa de centro", sink: "sobre el fregadero", computer: "en el ordenador", bookcase: "en la estantería", 'washing-machine': "en la lavadora", 'washing-basket': "sobre el cesto de la ropa", 'ironing-board': "en la tabla de planchar", 'blue-roof': "en el tejado azul" } },
+            ar: { header: "أين بطاطسي؟", locs: { shower: "في الدش", toilet: "على المرحاض", bed: "على السرير", wardrobe: "على خزانة الملابس", lamp: "على المصباح", toybox: "في صندوق الألعاب", 'red-roof': "على السطح الأحمر", 'black-roof': "على السطح الأسود", television: "على التلفاز", lounge: "على الكنبة", fridge: "على الثلاجة", bin: "فوق سلة المهملات", 'coffee-table': "فوق طاولة القهوة", sink: "فوق مغسلة المطبخ", computer: "على الكمبيوتر", bookcase: "على خزانة الكتب", 'washing-machine': "على الغسالة", 'washing-basket': "فوق سلة الغسيل", 'ironing-board': "على طاولة الكي", 'blue-roof': "على السطح الأزرق" } },
+            vi: { header: "Khoai tây của tôi đâu?", locs: { shower: "trong vòi hoa sen", toilet: "trên bồn cầu", bed: "trên giường", wardrobe: "trên tủ quần áo", lamp: "trên đèn", toybox: "trong hộp đồ chơi", 'red-roof': "trên mái nhà màu đỏ", 'black-roof': "trên mái nhà màu đen", television: "trên tivi", lounge: "trên ghế sofa", fridge: "trên tủ lạnh", bin: "phía trên thùng rác", 'coffee-table': "phía trên bàn cà phê", sink: "phía trên bồn rửa bát", computer: "trên máy tính", bookcase: "trên kệ sách", 'washing-machine': "trên máy giặt", 'washing-basket': "phía trên giỏ đựng quần áo", 'ironing-board': "trên bàn là", 'blue-roof': "trên mái nhà màu xanh" } },
+            hi: { header: "मेरी आलू कहाँ है?", locs: { shower: "शावर में", toilet: "शौचालय पर", bed: "बिस्तर पर", wardrobe: "अलमारी पर", lamp: "दीपक पर", toybox: "खिलौनों के डिब्बे में", 'red-roof': "लाल छत पर", 'black-roof': "काली छत पर", television: "टीवी पर", lounge: "सोफे पर", fridge: "फ्रिज पर", bin: "कूड़ेदान के ऊपर", 'coffee-table': "कॉफ़ी टेबल के ऊपर", sink: "सिंक के ऊपर", computer: "कंप्यूटर पर", bookcase: "बुककेस पर", 'washing-machine': "वाशिंग मशीन पर", 'washing-basket': "कपड़े की टोकरी के ऊपर", 'ironing-board': "इस्त्री बोर्ड पर", 'blue-roof': "नीली छत पर" } },
+            he: { header: "איפה תפוח האדמה שלי?", locs: { shower: "במקלחת", toilet: "על השירותים", bed: "על המיטה", wardrobe: "על הארון", lamp: "על המנורה", toybox: "בארגז הצעצועים", 'red-roof': "על הגג האדום", 'black-roof': "על הגג השחור", television: "על הטלוויזיה", lounge: "על הספה", fridge: "על המקרר", bin: "מעל הפח", 'coffee-table': "מעל שולחן הקפה", sink: "מעל הכיור", computer: "על המחשב", bookcase: "על כוננית הספרים", 'washing-machine': "על מכונת הכביסה", 'washing-basket': "מעל סל הכביסה", 'ironing-board': "על קרש הגיהוץ", 'blue-roof': "על הגג הכחול" } },
+            macedonian: { header: "Каде е мојот компир?", locs: { shower: "во тушот", toilet: "на тоалетот", bed: "на креветот", wardrobe: "на плакарот", lamp: "на ламбата", toybox: "во кутијата за играчки", 'red-roof': "на црвениот покрив", 'black-roof': "на црниот покрив", television: "на телевизорот", lounge: "на троседот", fridge: "на фрижидерот", bin: "над кантата", 'coffee-table': "над клуб масичката", sink: "над мијалникот", computer: "на компјутерот", bookcase: "на полицата за книги", 'washing-machine': "на машината за перење", 'washing-basket': "над корпата за алишта", 'ironing-board': "на даската за пеглање", 'blue-roof': "на синиот покрив" } },
+            ru: { header: "Где моя картошка?", locs: { shower: "в душе", toilet: "на туалете", bed: "на кровати", wardrobe: "на шкафу", lamp: "на лампе", toybox: "в ящике с игрушками", 'red-roof': "на красной крыше", 'black-roof': "на чёрной крыше", television: "на телевизоре", lounge: "на диване", fridge: "на холодильнике", bin: "над мусорным ведром", 'coffee-table': "над журнальным столиком", sink: "над кухонной раковиной", computer: "на компьютере", bookcase: "на книжном шкафу", 'washing-machine': "на стиральной машине", 'washing-basket': "над корзиной для белья", 'ironing-board': "на гладильной доске", 'blue-roof': "на синей крыше" } },
+            uk: { header: "Де моя картопля?", locs: { shower: "у душі", toilet: "на туалеті", bed: "на ліжку", wardrobe: "на шафі", lamp: "на лампі", toybox: "у скрині з іграшками", 'red-roof': "на червоному даху", 'black-roof': "на чорному даху", television: "на телевізорі", lounge: "на дивані", fridge: "на холодильнику", bin: "над смітником", 'coffee-table': "над журнальним столиком", sink: "над кухонною мийкою", computer: "на комп'ютері", bookcase: "на книжковій шафі", 'washing-machine': "на пральній машині", 'washing-basket': "над кошиком для білизни", 'ironing-board': "на прасувальній дошці", 'blue-roof': "на синьому даху" } },
+            ur: { header: "میرا آلو کہاں ہے؟", locs: { shower: "شاور میں", toilet: "بیت الخلا پر", bed: "بستر پر", wardrobe: "الماری پر", lamp: "لیمپ پر", toybox: "کھلونوں کے ڈبے میں", 'red-roof': "سرخ چھت پر", 'black-roof': "کالی چھت پر", television: "ٹیلی ویژن پر", lounge: "صوفے پر", fridge: "فریج پر", bin: "کوڑے دان کے اوپر", 'coffee-table': "کافی ٹیبل کے اوپر", sink: "کچن سنک کے اوپر", computer: "کمپیوٹر پر", bookcase: "کتابوں کی الماری پر", 'washing-machine': "واشنگ مشین پر", 'washing-basket': "کپڑوں کی ٹوکری کے اوپر", 'ironing-board': "استری بورڈ پر", 'blue-roof': "نیلی چھت پر" } },
+            sinhala: { header: "මගේ අර්තාපල් කොහෙද?", locs: { shower: "ෂවර් එකේ", toilet: "වැසිකිළියේ", bed: "ඇඳ මත", wardrobe: "අල්මාරියේ", lamp: "ලාම්පුව මත", toybox: "සෙල්ලම් පෙට්ටියේ", 'red-roof': "රතු වහලය මත", 'black-roof': "කළු වහලය මත", television: "රූපවාහිනිය මත", lounge: "සෝෆා එක මත", fridge: "ෆ්‍රිජ් එක මත", bin: "කුණු බඳුනට උඩින්", 'coffee-table': "කෝපි මේසයට උඩින්", sink: "සින්ක් එකට උඩින්", computer: "පරිගණකය මත", bookcase: "පොත් රාක්කය මත", 'washing-machine': "සෝදන යන්ත්‍රය මත", 'washing-basket': "රෙදි කූඩයට උඩින්", 'ironing-board': "ඉස්ත්‍රි පුවරුව මත", 'blue-roof': "නිල් වහලය මත" } },
+            cantonese: { header: "我啲薯仔喺邊度？", locs: { shower: "喺花灑度", toilet: "喺廁所度", bed: "喺張床度", wardrobe: "喺衣櫃度", lamp: "喺盞燈度", toybox: "喺玩具箱度", 'red-roof': "喺紅色屋頂度", 'black-roof': "喺黑色屋頂度", television: "喺電視度", lounge: "喺梳化度", fridge: "喺雪櫃度", bin: "喺垃圾桶上面", 'coffee-table': "喺茶几上面", sink: "喺廚房洗手盆上面", computer: "喺電腦度", bookcase: "喺書櫃度", 'washing-machine': "喺洗衣機度", 'washing-basket': "喺洗衫籃上面", 'ironing-board': "喺熨衫板度", 'blue-roof': "喺藍色屋頂度" } }
+        };
+
+        // Generic "in the house" label, overriding the normal forest/city/sky/water
+        // zone name for Potato Parkour specifically - "in the shower" paired with
+        // "Where: Forest" wouldn't make sense, so this always reads coherently
+        // regardless of which zone the item actually landed in.
+        const POTATO_HOUSE_LABEL = {
+            en: "in the house", fr: "dans la maison", de: "im Haus", ja: "家の中",
+            'zh-hanzi': "在家里", 'zh-pinyin': "zài jiā lǐ", it: "in casa", es: "en la casa",
+            ar: "في المنزل", vi: "trong nhà", hi: "घर में", he: "בבית",
+            macedonian: "во куќата", ru: "в доме", uk: "у домі", ur: "گھر میں",
+            sinhala: "ගෙදර", cantonese: "喺屋企"
         };
 
         const LOCALIZED_LOCATIONS = {
@@ -3173,18 +3318,24 @@
                 startKartGame();
             };
             document.getElementById('kart-return-hub-btn').onclick = resetToConfig;
-            document.getElementById('submode-confirm-btn').onclick = () => showLandingStep('player');
-            document.getElementById('submode-return-btn').onclick = () => showLandingStep('wheel');
-            document.getElementById('player-confirm-btn').onclick = () => {
+            document.getElementById('submode-confirm-btn').onclick = () => {
                 selectMode(pendingParkourSubmode);
                 showLandingStep('settings');
             };
-            document.getElementById('player-return-btn').onclick = () => showLandingStep('submode');
-            document.getElementById('settings-return-btn').onclick = () => {
-                if (selectedLobbyMode === 'coder' || selectedLobbyMode === 'kart') {
-                    showLandingStep('wheel');
+            document.getElementById('submode-return-btn').onclick = () => showLandingStep('wheel');
+            document.getElementById('settings-confirm-btn').onclick = () => {
+                if (selectedLobbyMode === 'kart') {
+                    launchSelectedActivity();
                 } else {
                     showLandingStep('player');
+                }
+            };
+            document.getElementById('player-return-btn').onclick = () => showLandingStep('settings');
+            document.getElementById('settings-return-btn').onclick = () => {
+                if (selectedLobbyMode === 'coder' || selectedLobbyMode === 'kart' || selectedLobbyMode === 'potato') {
+                    showLandingStep('wheel');
+                } else {
+                    showLandingStep('submode');
                 }
             };
 
@@ -3465,10 +3616,12 @@
             const questSettings = document.getElementById('quest-settings');
             const pictureSettings = document.getElementById('picture-settings');
             const kartSettings = document.getElementById('kart-settings');
+            const potatoSettings = document.getElementById('potato-settings');
 
             questSettings.style.display = 'none';
             pictureSettings.style.display = 'none';
             if (kartSettings) kartSettings.style.display = 'none';
+            if (potatoSettings) potatoSettings.style.display = 'none';
 
             if (mode === 'quest') {
                 document.getElementById('mode-quest').classList.add('selected');
@@ -3478,6 +3631,8 @@
                 pictureSettings.style.display = 'block';
             } else if (mode === 'kart') {
                 if (kartSettings) kartSettings.style.display = 'block';
+            } else if (mode === 'potato') {
+                if (potatoSettings) potatoSettings.style.display = 'block';
             } else {
                 document.getElementById('mode-coder').classList.add('selected');
             }
@@ -3492,6 +3647,7 @@
         const HUB_TOOLS = [
             { id: 'parkour', label: 'Parkour', icon: '🏃‍♂️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3b9ce46b21964d9b6d3196dc96f4ca33ad63c9aa/PARKOURJUMP.png', accent: '--hub-violet', accentSoft: '--hub-violet-soft', desc: 'Explore a world to find words or pictures.' },
             { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word - draft/prototype.' },
+            { id: 'potato', label: 'Potato Parkour', icon: '🥔', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'A built-in vocabulary hunt - no setup needed, just play.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
@@ -3509,6 +3665,10 @@
             });
             if (step === 'wheel') renderToolGrid();
             if (step === 'player') renderPlayerSelect();
+            if (step === 'settings') {
+                const settingsConfirmBtn = document.getElementById('settings-confirm-btn');
+                if (settingsConfirmBtn) settingsConfirmBtn.textContent = (selectedLobbyMode === 'kart') ? 'Launch Activity' : 'Continue';
+            }
             if (playerIdleAnimTimer && step !== 'player') {
                 clearInterval(playerIdleAnimTimer);
                 playerIdleAnimTimer = null;
@@ -3560,6 +3720,10 @@
                 launchSelectedActivity();
             } else if (toolId === 'parkour') {
                 showLandingStep('submode');
+            } else if (toolId === 'potato') {
+                pendingParkourSubmode = 'potato';
+                selectMode('potato');
+                showLandingStep('settings');
             } else if (toolId === 'kart') {
                 selectMode('kart');
                 showLandingStep('settings');
@@ -3631,6 +3795,8 @@
                 generatePictureBoard();
             } else if (selectedLobbyMode === 'kart') {
                 generateKartRace();
+            } else if (selectedLobbyMode === 'potato') {
+                generatePotatoQuest();
             } else {
                 pauseBackgroundMusic();
                 document.getElementById('title-screen').style.display = 'none';
@@ -3668,7 +3834,58 @@
             return phraseFn(stripped);
         }
 
+        // ====================================================================
+        // OPTIONAL: Google Cloud TTS for specific languages (e.g. Sinhala), via
+        // your own deployed proxy function - see DEPLOYMENT-GUIDE.md. Leave a
+        // language's proxyUrl blank to keep using the free browser voice for
+        // it; nothing changes anywhere until you fill this in with your own
+        // deployed function's URL.
+        // ====================================================================
+        const CLOUD_TTS_CONFIG = {
+            // Example, once deployed:
+            // sinhala: { proxyUrl: 'https://synthesizespeech-xxxxx-uc.a.run.app', languageCode: 'si-LK' }
+        };
+        const cloudTtsAudioCache = {}; // avoids refetching the same word twice
+
+        async function speakWordViaCloudTTS(text, config) {
+            const cleanText = text.replace(/[\[\]]/g, '');
+            const cacheKey = config.languageCode + '::' + cleanText;
+            try {
+                let base64Audio = cloudTtsAudioCache[cacheKey];
+                if (!base64Audio) {
+                    const res = await fetch(config.proxyUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: cleanText, languageCode: config.languageCode, voiceName: config.voiceName })
+                    });
+                    if (!res.ok) return false;
+                    const data = await res.json();
+                    if (!data.audioContent) return false;
+                    base64Audio = data.audioContent;
+                    cloudTtsAudioCache[cacheKey] = base64Audio;
+                }
+                const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
+                audio.volume = ttsVolume;
+                await audio.play();
+                return true;
+            } catch (e) {
+                console.warn('Cloud TTS request failed, falling back to the browser voice:', e);
+                return false;
+            }
+        }
+
         function speakWord(text) {
+            const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
+            if (cloudConfig && cloudConfig.proxyUrl) {
+                speakWordViaCloudTTS(text, cloudConfig).then(succeeded => {
+                    if (!succeeded) speakWordBrowser(text);
+                });
+                return;
+            }
+            speakWordBrowser(text);
+        }
+
+        function speakWordBrowser(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const cleanTextForSpeech = text.replace(/[\[\]]/g, '');
@@ -3758,7 +3975,7 @@
             kartStartTime = Date.now();
             lastTime = 0;
 
-            kart.x = 1100; kart.y = 1225; kart.angle = 0; kart.speed = 0;
+            kart.x = 1100; kart.y = 1225; kart.angle = 0; kart.speed = 0; kart.angularVelocity = 0;
 
             kartItems = KART_ITEM_SLOTS.slice(0, kartVocabularyList.length).map((slot, i) => {
                 const word = kartVocabularyList[i];
@@ -3801,7 +4018,8 @@
             setTimeout(() => showTtsAttentionHint('kart-tts-button'), 400);
         }
 
-        function nextKartTarget() {
+        function nextKartTarget(options) {
+            options = options || {};
             const remaining = kartItems.filter(i => !i.collected);
             const targetEl = document.getElementById('kart-target-text');
             if (remaining.length === 0) {
@@ -3813,7 +4031,12 @@
             const chosen = remaining[Math.floor(Math.random() * remaining.length)];
             kartCurrentTargetWord = chosen.text.toLowerCase();
             targetEl.innerHTML = colorizeSentenceText(chosen.text);
-            speakWord(chosen.text);
+            const speakDelayMs = options.delaySpeechMs || 0;
+            if (speakDelayMs > 0) {
+                setTimeout(() => speakWord(chosen.text), speakDelayMs);
+            } else {
+                speakWord(chosen.text);
+            }
         }
 
         function showKartRaceComplete() {
@@ -3826,6 +4049,114 @@
             const overlay = document.getElementById('kart-complete-overlay');
             overlay.classList.remove('hidden');
             overlay.classList.add('flex');
+        }
+
+        // Potato Parkour's equivalent of generateWhiteboard: vocabulary is fixed and
+        // pre-translated, and items sit at the exact same hand-placed coordinates
+        // as the original draft (not randomly distributed like the main Parkour
+        // game's activeWords).
+        function generatePotatoQuest() {
+            const langData = POTATO_LOCATIONS[selectedLanguage] || POTATO_LOCATIONS.en;
+            potatoItems = POTATO_SPAWN_DATA.map(d => ({
+                x: d.x - 7.5, y: d.y - 18, w: 15, h: 18,
+                locId: d.id,
+                text: langData.locs[d.id],
+                collected: false,
+                wrongCooldown: false
+            }));
+            vocabularyList = potatoItems.map(p => p.text); // shared with the results screen's word list
+
+            const nameInput = document.getElementById('potato-student-name-input');
+            studentName = nameInput ? nameInput.value.trim() : '';
+
+            startPotatoGame();
+        }
+
+        function startPotatoGame() {
+            score = 0;
+            mistakeCount = 0;
+            gameStartTime = Date.now();
+            lastTime = 0;
+
+            potatoPlayer.x = 920; potatoPlayer.y = 730; potatoPlayer.vx = 0; potatoPlayer.vy = 0;
+            potatoPlayer.grounded = false; potatoPlayer.facingRight = true;
+            potatoPlayer.animFrame = 0; potatoPlayer.animTimer = 0; potatoPlayer.state = 'idle';
+            potatoSuccessAnims = [];
+
+            const langData = POTATO_LOCATIONS[selectedLanguage] || POTATO_LOCATIONS.en;
+            const questHeaderEl = document.getElementById('quest-header-label');
+            if (questHeaderEl) questHeaderEl.textContent = langData.header;
+            const locationBoxEl = document.getElementById('location-box');
+            if (locationBoxEl) locationBoxEl.style.display = 'none';
+
+            playBackgroundMusic();
+
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'none';
+            document.getElementById('kart-ui-board').style.display = 'none';
+            document.getElementById('ui-board').style.display = 'flex';
+            canvas.style.display = 'block';
+
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            potatoTargetScale = Math.max(0.1, Math.min((canvas.height / 5) / 70, canvas.width / 550));
+            potatoCameraY = (canvas.height * 0.85 / potatoTargetScale) - 815;
+
+            gameStarted = true;
+            nextPotatoQuest();
+            setTimeout(() => showTtsAttentionHint('tts-button'), 400);
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function nextPotatoQuest(options) {
+            options = options || {};
+            const available = potatoItems.filter(p => !p.collected);
+            if (available.length === 0) {
+                showCompletionScreen();
+                return;
+            }
+            const target = available[Math.floor(Math.random() * available.length)];
+            currentTargetWord = target.text.toLowerCase();
+
+            const instructionEl = document.getElementById('instruction-text');
+            instructionEl.innerHTML = colorizeSentenceText(currentTargetWord);
+            instructionEl.style.color = '';
+            fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
+
+            document.getElementById('score').innerText = score.toString().padStart(2, '0');
+            const speakDelayMs = options.delaySpeechMs || 0;
+            if (speakDelayMs > 0) {
+                setTimeout(() => speakWord(currentTargetWord), speakDelayMs);
+            } else {
+                speakWord(currentTargetWord);
+            }
+            setVoiceWarning('game-voice-warning', LANG_MAP[selectedLanguage]);
+        }
+
+        // Mirrors triggerCorrection, but resets potatoPlayer (this world's own
+        // player state) rather than the main Parkour game's player object.
+        function triggerPotatoCorrection(wrongWord) {
+            isModalOpen = true;
+            score = Math.max(0, score - 1);
+            mistakeCount++;
+            document.getElementById('score').innerText = score.toString().padStart(2, '0');
+
+            playChime(false);
+
+            const modalText = getWrongAnswerFeedback(wrongWord);
+            document.getElementById('feedback-header').innerText = 'Keep Searching!';
+            document.getElementById('feedback-text').innerText = modalText;
+            document.getElementById('close-feedback-btn').innerText = 'Close Whiteboard';
+            document.getElementById('feedback-overlay').classList.remove('hidden');
+
+            speakSequence([modalText, currentTargetWord]);
+            setTimeout(() => showTtsAttentionHint('tts-button'), 400);
+
+            potatoPlayer.x = 920;
+            potatoPlayer.y = 730;
+            potatoPlayer.vx = 0;
+            potatoPlayer.vy = 0;
         }
 
         function generateWhiteboard() {
@@ -3991,6 +4322,11 @@
             inShopInterior = null;
             distributeWords();
 
+            const questHeaderEl = document.getElementById('quest-header-label');
+            if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
+            const locationBoxEl = document.getElementById('location-box');
+            if (locationBoxEl) locationBoxEl.style.display = '';
+
             playBackgroundMusic();
 
             document.getElementById('title-screen').style.display = 'none';
@@ -4060,10 +4396,10 @@
                 ? shuffle(cityBuildings.map((b, i) => ({ buildingIndex: i })))
                 : [];
 
-            // Picture Parkour uses larger square image cards instead of the Parkour game's
-            // text cards. These reduce to exactly 120/24/45 (the original constants) when
-            // selectedLobbyMode isn't 'picture', so the original Parkour game's placement is
-            // completely unaffected.
+            // Picture Parkour and Potato Parkour both use larger square image cards
+            // instead of the Parkour game's text cards. These reduce to exactly
+            // 120/24/45 (the original constants) for regular Sentence Parkour, so
+            // that game's placement is completely unaffected.
             const CARD_W = (selectedLobbyMode === 'picture') ? 90 : 120;
             const CARD_H = (selectedLobbyMode === 'picture') ? 90 : 24;
             const CARD_LIFT = CARD_H + 21;
@@ -4273,6 +4609,9 @@
             const locKey = currentWordObj ? currentWordObj.location : 'city';
             const langData = LOCALIZED_LOCATIONS[selectedLanguage];
 
+            const questHeaderEl = document.getElementById('quest-header-label');
+            if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
+
             let whereLabel = langData.where;
             let locationLabel;
             if (currentWordObj && currentWordObj.inShop !== undefined) {
@@ -4388,7 +4727,15 @@
             if (!canvas) return;
             canvas.width = canvas.parentElement.clientWidth;
             canvas.height = canvas.parentElement.clientHeight;
-            targetScale = Math.max(0.1, (canvas.height / 7.5) / 105); 
+            const heightBasedScale = Math.max(0.1, (canvas.height / 7.5) / 105);
+            // On narrow/portrait screens, a purely height-based scale zooms in far too
+            // much (plenty of vertical room, but almost no width actually visible).
+            // Capping scale so at least this many world-units of width are always
+            // shown fixes that, while leaving normal landscape screens untouched
+            // (there, the height-based scale is already the more restrictive one).
+            const MIN_WORLD_WIDTH = 900;
+            const widthBasedScale = canvas.width / MIN_WORLD_WIDTH;
+            targetScale = Math.max(0.1, Math.min(heightBasedScale, widthBasedScale));
             cameraY = (canvas.height * 0.85 / targetScale) - 815;
         }
 
@@ -4401,16 +4748,251 @@
             if (!isModalOpen) {
                 if (selectedLobbyMode === 'kart') {
                     updateKartPhysics(dt);
+                } else if (selectedLobbyMode === 'potato') {
+                    updatePotatoPhysics(dt);
                 } else {
                     updatePhysics(dt);
                 }
             }
             if (selectedLobbyMode === 'kart') {
                 renderKartGame();
+            } else if (selectedLobbyMode === 'potato') {
+                renderPotatoWorld();
             } else {
                 renderWhiteboard();
             }
             requestAnimationFrame(gameLoop);
+        }
+
+        function updatePotatoPhysics(dt) {
+            if (dt === 0) return;
+            let moving = false;
+            const isRunning = keys['ShiftLeft'] || keys['ShiftRight'];
+            let cSpeed = 3.0 * (isRunning ? 2.4 : 1.0);
+            const isCrawl = (keys['ArrowDown'] || keys['KeyS'] || keys['btn-down']) && potatoPlayer.grounded;
+            if (isCrawl) cSpeed *= 0.6;
+
+            if (keys['ArrowLeft'] || keys['KeyA']) {
+                potatoPlayer.vx = -cSpeed;
+                potatoPlayer.facingRight = false;
+                moving = true;
+            } else if (keys['ArrowRight'] || keys['KeyD']) {
+                potatoPlayer.vx = cSpeed;
+                potatoPlayer.facingRight = true;
+                moving = true;
+            } else {
+                potatoPlayer.vx *= Math.pow(friction, dt);
+                if (Math.abs(potatoPlayer.vx) < 0.1) potatoPlayer.vx = 0;
+            }
+
+            if (!isCrawl && (keys['ArrowUp'] || keys['Space'] || keys['KeyW'] || keys['btn-jump']) && potatoPlayer.grounded) {
+                potatoPlayer.vy = jumpForce;
+                potatoPlayer.grounded = false;
+                playJumpSound();
+            }
+
+            potatoPlayer.vy += gravity * dt;
+            potatoPlayer.x += potatoPlayer.vx * dt;
+            potatoPlayer.y += potatoPlayer.vy * dt;
+
+            potatoPlayer.grounded = false;
+            const hbW = (potatoPlayer.state === 'crawl') ? 50 : 25;
+            const hbX = potatoPlayer.x + (50 - hbW) / 2;
+
+            POTATO_PLATFORMS.forEach(plat => {
+                const hOverlap = hbX < plat.x + plat.w && hbX + hbW > plat.x;
+                if (hOverlap && potatoPlayer.vy >= 0 && potatoPlayer.y + 70 >= plat.y && potatoPlayer.y + 70 <= plat.y + 15 + Math.abs(potatoPlayer.vy * dt)) {
+                    potatoPlayer.y = plat.y - 70;
+                    potatoPlayer.vy = 0;
+                    potatoPlayer.grounded = true;
+                }
+            });
+
+            potatoPlayer.state = isCrawl ? 'crawl' : (!potatoPlayer.grounded ? 'jump' : (Math.abs(potatoPlayer.vx) > 0.5 && moving ? 'walk' : 'idle'));
+            potatoPlayer.animTimer += dt;
+            const animThreshold = potatoPlayer.state === 'crawl' ? 8 : 12;
+            if (potatoPlayer.animTimer > animThreshold) {
+                potatoPlayer.animFrame = (potatoPlayer.animFrame + 1) % 2;
+                potatoPlayer.animTimer = 0;
+            }
+            if (potatoPlayer.state === 'crawl' && !moving) potatoPlayer.animFrame = 0;
+
+            for (let i = potatoSuccessAnims.length - 1; i >= 0; i--) {
+                const anim = potatoSuccessAnims[i];
+                if (anim.delay > 0) {
+                    anim.delay -= dt;
+                } else {
+                    if (anim.vy === 0) anim.vy = -12;
+                    anim.y += anim.vy * dt;
+                    anim.vy -= 0.8 * dt;
+                }
+                if (anim.y < potatoPlayer.y - 2000) potatoSuccessAnims.splice(i, 1);
+            }
+
+            const feetY = potatoPlayer.y + 70;
+            const hOffset = (potatoPlayer.state === 'crawl' ? 70 * 5 / 9 : 0);
+            const headY = potatoPlayer.y + hOffset;
+            for (const item of potatoItems) {
+                if (item.collected) continue;
+                if (item.wrongCooldown) {
+                    const dx2 = (hbX + hbW / 2) - (item.x + item.w / 2), dy2 = (potatoPlayer.y + 35) - (item.y + item.h / 2);
+                    if (Math.sqrt(dx2 * dx2 + dy2 * dy2) > 60) item.wrongCooldown = false;
+                    continue;
+                }
+                if (hbX < item.x + item.w && hbX + hbW > item.x && headY < item.y + item.h && feetY > item.y) {
+                    if (item.text.toLowerCase() === currentTargetWord) {
+                        playChime(true);
+                        score += 1;
+                        item.collected = true;
+                        potatoSuccessAnims.push({ x: item.x, y: item.y, vy: 0, delay: 20, w: item.w, h: item.h });
+                        nextPotatoQuest({ delaySpeechMs: getCelebrationSoundDelayMs() });
+                        document.getElementById('quest-box').classList.add('pop-effect');
+                        setTimeout(() => document.getElementById('quest-box').classList.remove('pop-effect'), 400);
+                    } else {
+                        item.wrongCooldown = true;
+                        triggerPotatoCorrection(item.text);
+                    }
+                    break;
+                }
+            }
+
+            if (potatoPlayer.y > 2000) {
+                potatoPlayer.x = 920;
+                potatoPlayer.y = 730;
+                potatoPlayer.vy = 0;
+            }
+
+            updatePotatoCameraY(dt);
+        }
+
+        // A true mirror of regular Parkour's updateCameraY - same formula, same
+        // dt-scaled and clamped smoothing - just using Potato Parkour's own
+        // player/camera/scale state instead of the shared globals.
+        function updatePotatoCameraY(dt) {
+            if (!canvas) return;
+            potatoTargetScale = Math.max(0.1, Math.min((canvas.height / 5) / 70, canvas.width / 550));
+            const viewHeight = canvas.height / potatoTargetScale;
+            const baseCameraY = (canvas.height * 0.85 / potatoTargetScale) - 815;
+
+            const topPadding = viewHeight * 0.30;
+            const bottomPadding = viewHeight * 0.15;
+
+            const playerScreenY = potatoPlayer.y + baseCameraY;
+
+            let targetCameraY = baseCameraY;
+            if (playerScreenY < topPadding) {
+                targetCameraY = topPadding - potatoPlayer.y;
+            } else if (playerScreenY > viewHeight - bottomPadding) {
+                targetCameraY = (viewHeight - bottomPadding) - potatoPlayer.y;
+            }
+
+            const smoothing = Math.min(1, 0.12 * dt);
+            potatoCameraY += (targetCameraY - potatoCameraY) * smoothing;
+        }
+
+        function renderPotatoWorld() {
+            if (!gameStarted || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+
+            ctx.scale(potatoTargetScale, potatoTargetScale);
+            const camX = -potatoPlayer.x + (canvas.width / 2) / potatoTargetScale;
+
+            // Distant parallax background
+            if (potatoImages.background && potatoImages.background.complete && potatoImages.background.naturalWidth > 0 &&
+                potatoImages.grass && potatoImages.grass.complete && potatoImages.grass.naturalWidth > 0) {
+                const grassAspect = potatoImages.grass.width / potatoImages.grass.height;
+                const dW = 140 * grassAspect;
+                const bW = (dW * 4) * 0.75;
+                const bHeight = bW / (potatoImages.background.width / potatoImages.background.height);
+                ctx.save();
+                ctx.translate(camX * 0.9, potatoCameraY);
+                for (let x = -bW * 8; x < 20000; x += bW) {
+                    ctx.drawImage(potatoImages.background, x, 825 - bHeight, bW, bHeight);
+                }
+                ctx.restore();
+            }
+
+            ctx.translate(camX, potatoCameraY);
+
+            // Grass strip along the ground and roof platforms
+            if (potatoImages.grass && potatoImages.grass.complete && potatoImages.grass.naturalWidth > 0) {
+                const dH = 140, dW = dH * (potatoImages.grass.width / potatoImages.grass.height);
+                POTATO_PLATFORMS.forEach((plat, i) => {
+                    if (i === 0) {
+                        for (let x = plat.x; x < plat.x + plat.w; x += dW) {
+                            ctx.drawImage(potatoImages.grass, x, 800, Math.min(dW, plat.x + plat.w - x), dH);
+                        }
+                    }
+                });
+            }
+
+            // House/forest landmarks
+            POTATO_LANDMARKS.forEach(lm => {
+                const img = potatoImages[lm.id];
+                if (img && img.complete && img.naturalWidth > 0) {
+                    const yOffset = lm.id.startsWith('house') ? (lm.h / 5) : 0;
+                    ctx.drawImage(img, lm.x, lm.y + yOffset, lm.w, lm.h);
+                }
+            });
+
+            // Bobbing potatoes
+            const time = performance.now() / 400;
+            potatoItems.forEach(item => {
+                if (item.collected || item.wrongCooldown) return;
+                if (potatoSpriteBack.complete && potatoSpriteBack.naturalWidth > 0) {
+                    ctx.drawImage(potatoSpriteBack, item.x, item.y + Math.sin(time + item.x * 0.05) * 5, item.w, item.h);
+                }
+            });
+            potatoSuccessAnims.forEach(anim => {
+                if (potatoSpriteFront.complete && potatoSpriteFront.naturalWidth > 0) {
+                    ctx.drawImage(potatoSpriteFront, anim.x, anim.y, anim.w, anim.h);
+                }
+            });
+
+            // Player sprite (shared sprite set - Parkour or Bobot)
+            const activeSprites = getActiveSprites();
+            let sprite = potatoPlayer.state === 'crawl' ? (potatoPlayer.animFrame === 0 ? activeSprites.crawl1 : activeSprites.crawl2)
+                : (potatoPlayer.state === 'jump' ? activeSprites.jump
+                : (potatoPlayer.state === 'walk' ? (potatoPlayer.animFrame === 0 ? activeSprites.walk1 : activeSprites.walk2)
+                : (potatoPlayer.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2)));
+            if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
+                let rH = potatoPlayer.state === 'crawl' ? 70 * 4 / 9 : (potatoPlayer.state === 'jump' ? 70 * 0.8 : 70);
+                if (selectedCharacter === 'bobot') {
+                    if (potatoPlayer.state === 'crawl') rH *= BOBOT_CRAWL_SCALE_BOOST;
+                    else if (potatoPlayer.state === 'jump') rH *= BOBOT_JUMP_SCALE_BOOST;
+                    rH *= POTATO_BOBOT_SCALE;
+                }
+                const rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
+                ctx.save();
+                if (!potatoPlayer.facingRight) {
+                    ctx.scale(-1, 1);
+                    ctx.translate(-(potatoPlayer.x + 25) * 2, 0);
+                }
+                ctx.drawImage(sprite, potatoPlayer.x + oX, potatoPlayer.y + oY, rW, rH);
+                ctx.restore();
+            }
+
+            if (debugMode) {
+                ctx.lineWidth = 1;
+                ctx.font = "10px monospace";
+                ctx.strokeStyle = "#22c55e";
+                POTATO_PLATFORMS.forEach(p => ctx.strokeRect(p.x, p.y, p.w, p.h));
+                ctx.strokeStyle = "#facc15";
+                potatoItems.forEach(p => {
+                    if (!p.collected && !p.wrongCooldown) {
+                        ctx.strokeRect(p.x, p.y, p.w, p.h);
+                        ctx.fillStyle = "white";
+                        ctx.fillText(Math.round(p.x) + "," + Math.round(p.y), p.x, p.y - 5);
+                    }
+                });
+                ctx.strokeStyle = "#ef4444";
+                ctx.strokeRect(potatoPlayer.x, potatoPlayer.y, 50, 70);
+                ctx.fillStyle = "red";
+                ctx.fillText(`P: ${Math.round(potatoPlayer.x)},${Math.round(potatoPlayer.y)}`, potatoPlayer.x, potatoPlayer.y - 10);
+            }
+
+            ctx.restore();
         }
 
         function updateKartPhysics(dt) {
@@ -4430,8 +5012,14 @@
                 kart.speed = Math.max(-KART_OFFTRACK_MAX_SPEED, Math.min(kart.speed, KART_OFFTRACK_MAX_SPEED));
             }
 
+            // Turning eases toward a target rate rather than snapping to it instantly,
+            // and that target rate itself scales with current speed - barely any turn
+            // authority at a crawl, full authority at top speed.
+            const speedFactor = Math.min(1, Math.abs(kart.speed) / KART_MAX_SPEED);
+            const targetAngularVelocity = turnInput * KART_TURN_RATE * speedFactor;
+            kart.angularVelocity += (targetAngularVelocity - kart.angularVelocity) * Math.min(1, KART_ANGULAR_EASE * dt);
             if (Math.abs(kart.speed) > 0.2) {
-                kart.angle += turnInput * KART_TURN_RATE * dt * (kart.speed > 0 ? 1 : -1);
+                kart.angle += kart.angularVelocity * dt * (kart.speed > 0 ? 1 : -1);
             }
 
             const rad = kart.angle * Math.PI / 180;
@@ -4453,22 +5041,23 @@
                 if (item.collected) return;
                 const dx = kart.x - item.x, dy = kart.y - item.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
+                const collisionRadius = getKartItemCollisionRadius(item);
 
                 if (item.wrongCooldown) {
                     // Stays hidden/un-collidable until the kart has actually left the
                     // zone - otherwise the same wrong answer re-triggers every single
                     // frame while still overlapping it.
-                    if (dist > 75) item.wrongCooldown = false;
+                    if (dist > collisionRadius + 20) item.wrongCooldown = false;
                     return;
                 }
 
-                if (dist < 55) {
+                if (dist < collisionRadius) {
                     if (item.text.toLowerCase() === kartCurrentTargetWord) {
                         item.collected = true;
                         kartScore += 10;
                         playChime(true);
                         document.getElementById('kart-score-text').textContent = kartScore.toString().padStart(2, '0');
-                        nextKartTarget();
+                        nextKartTarget({ delaySpeechMs: getCelebrationSoundDelayMs() });
                     } else {
                         item.wrongCooldown = true;
                         kartMistakeCount++;
@@ -4542,27 +5131,45 @@
             visibleItems.forEach(({ item, proj }) => {
                 const screenX = proj.x * scaleX;
                 const screenY = proj.y * scaleY;
-                const w = 90 * proj.scale * 3, h = 90 * proj.scale * 3;
-                if (w < 4) return;
+                const h = 90 * proj.scale * 3;
+                const minW = 90 * proj.scale * 3;
+                if (h < 4) return;
                 ctx.save();
 
                 const hasImage = item.imageEl && item.imageEl.complete && item.imageEl.naturalWidth > 0;
                 if (hasImage && item.imageIsPng) {
                     // Transparent PNG: no card background, just the image itself
-                    ctx.drawImage(item.imageEl, screenX - w / 2, screenY - h, w, h);
-                } else {
+                    ctx.drawImage(item.imageEl, screenX - minW / 2, screenY - h, minW, h);
+                } else if (hasImage) {
                     ctx.fillStyle = '#ffffff';
                     ctx.strokeStyle = '#1e293b';
                     ctx.lineWidth = Math.max(1, 3 * proj.scale);
                     ctx.beginPath();
-                    ctx.roundRect(screenX - w / 2, screenY - h, w, h, Math.max(2, 8 * proj.scale));
+                    ctx.roundRect(screenX - minW / 2, screenY - h, minW, h, Math.max(2, 8 * proj.scale));
                     ctx.fill();
                     ctx.stroke();
-                    if (hasImage) {
-                        ctx.drawImage(item.imageEl, screenX - w / 2 + 4, screenY - h + 4, w - 8, h - 8);
-                    } else if (proj.scale > 0.15) {
-                        drawColoredText(ctx, item.text.replace(/[\[\]]/g, ''), screenX, screenY - h / 2, `bold ${Math.max(8, 14 * proj.scale)}px 'OpenDyslexic', sans-serif`);
-                    }
+                    ctx.drawImage(item.imageEl, screenX - minW / 2 + 4, screenY - h + 4, minW - 8, h - 8);
+                } else {
+                    // Text card: the font size is derived directly from the card's
+                    // own height (rather than a separate scale formula), so the word
+                    // and its card are always one uniform unit - never drifting out
+                    // of sync with each other, and always appearing/disappearing at
+                    // the same distance. The card's width adapts to fit however long
+                    // the word actually is, instead of being a fixed square.
+                    const fontSize = Math.max(2, h * 0.32);
+                    const cleanText = item.text.replace(/[\[\]]/g, '');
+                    ctx.font = `bold ${fontSize}px 'OpenDyslexic', sans-serif`;
+                    const textWidth = ctx.measureText(cleanText).width;
+                    const cardW = Math.max(minW, textWidth + fontSize * 1.8);
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.strokeStyle = '#1e293b';
+                    ctx.lineWidth = Math.max(1, 3 * proj.scale);
+                    ctx.beginPath();
+                    ctx.roundRect(screenX - cardW / 2, screenY - h, cardW, h, Math.max(2, 8 * proj.scale));
+                    ctx.fill();
+                    ctx.stroke();
+                    drawColoredText(ctx, cleanText, screenX, screenY - h / 2, `bold ${fontSize}px 'OpenDyslexic', sans-serif`);
                 }
                 ctx.restore();
             });
@@ -4910,7 +5517,8 @@
                             playChime(true);
                             score += 10; 
                             word.collected = true; 
-                            successAnims.push({ x: word.x, y: bobbingY, vy: 0, delay: 20, w: word.w, h: word.h, text: word.text.toLowerCase() }); 
+                            const successImage = word.imageEl;
+                            successAnims.push({ x: word.x, y: bobbingY, vy: 0, delay: 20, w: word.w, h: word.h, text: word.text.toLowerCase(), imageEl: successImage, imageIsPng: word.imageIsPng });
                             nextQuest({ delaySpeechMs: getCelebrationSoundDelayMs() }); 
                             document.getElementById('quest-box').classList.add('pop-effect'); 
                             setTimeout(() => document.getElementById('quest-box').classList.remove('pop-effect'), 400); 
@@ -5693,10 +6301,14 @@
             // Particles
             successAnims.forEach(anim => {
                 ctx.save();
-                ctx.fillStyle = '#10b981';
-                ctx.beginPath();
-                ctx.arc(anim.x + anim.w / 2, anim.y + anim.h / 2, 8, 0, Math.PI * 2);
-                ctx.fill();
+                if (anim.imageEl && anim.imageEl.complete && anim.imageEl.naturalWidth > 0) {
+                    ctx.drawImage(anim.imageEl, anim.x, anim.y, anim.w, anim.h);
+                } else {
+                    ctx.fillStyle = '#10b981';
+                    ctx.beginPath();
+                    ctx.arc(anim.x + anim.w / 2, anim.y + anim.h / 2, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
                 ctx.restore();
             });
 
