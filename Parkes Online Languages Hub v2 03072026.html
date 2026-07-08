@@ -165,6 +165,15 @@
 
         /* Grouped-list settings sections, iOS Settings-style: one soft card,
            rows separated by hairlines rather than each field boxed separately. */
+        /* The settings step has meaningfully more content (checkboxes, custom
+           grapheme lists, per-language diacritic pickers) than the other wizard
+           steps, so it gets a wider column - keeps it from being forced tall/
+           portrait-feeling on a landscape screen just because the page's default
+           width was tuned for simpler steps like the tool grid. */
+        #landing-flow-inner.landing-wide {
+            max-width: 56rem;
+        }
+
         .hub-group {
             background: var(--hub-surface);
             border-radius: var(--hub-radius-md);
@@ -597,7 +606,7 @@
         <!-- ========================================== -->
         <div id="title-screen" class="dyslexic-font">
             <div id="landing-flow" class="hub-font w-full h-full flex flex-col items-center justify-center overflow-y-auto py-8 px-6" style="background:var(--hub-paper);">
-                <div class="w-full max-w-2xl mx-auto">
+                <div id="landing-flow-inner" class="w-full max-w-2xl mx-auto">
                     <div class="flex justify-center mb-4">
                         <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a8513ddabb16b08ff06719c10ae35275af9e85d/POLH%20small%20logo.png" alt="Parkes Online Languages Hub" class="max-w-full max-h-28 h-auto">
                     </div>
@@ -653,6 +662,9 @@
                                     <span id="french-date-text" dir="auto" class="text-sm leading-snug" style="color:var(--hub-ink);">Calcul de la date...</span>
                                     <button id="tts-date-btn" class="hub-btn-ghost interactive p-2.5 flex-shrink-0" title="Listen to date">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                    </button>
+                                    <button id="tts-date-btn-slow" class="hub-btn-ghost interactive p-2.5 flex-shrink-0" title="Listen Slowly">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-700"><path d="M11 11.5a2.5 2.5 0 1 1 2.5 2.5"></path><path d="M13.5 14a5 5 0 1 0-5-5"></path><path d="M2 18c0-2.2 2-4 5-4h7a3 3 0 0 1 0 6H8c-3.3 0-6-.9-6-2z"></path><path d="M4.5 14.3V12"></path><path d="M7.5 14V11.5"></path></svg>
                                     </button>
                                 </div>
                                 <span id="date-voice-warning" class="hub-font hidden text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-2 py-1"></span>
@@ -788,7 +800,7 @@
                                 </div>
                                 <div id="sinhala-vowel-signs-row-lobby" style="display:none;" class="mb-3 interactive">
                                     <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
-                                    <div id="sinhala-vowel-signs-list-lobby" class="grid grid-cols-2 gap-1.5"></div>
+                                    <div id="sinhala-vowel-signs-list-lobby" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5"></div>
                                     <p class="hub-hint">Add consonants manually below.</p>
                                 </div>
                                 <div id="lobby-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
@@ -848,7 +860,7 @@
                                 </div>
                                 <div id="sinhala-vowel-signs-row-picture" style="display:none;" class="mb-3 interactive">
                                     <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
-                                    <div id="sinhala-vowel-signs-list-picture" class="grid grid-cols-2 gap-1.5"></div>
+                                    <div id="sinhala-vowel-signs-list-picture" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5"></div>
                                     <p class="hub-hint">Add consonants manually below.</p>
                                 </div>
                                 <div id="picture-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
@@ -952,6 +964,9 @@
                         <button id="kart-tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                         </button>
+                        <button id="kart-tts-button-slow" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Slowly">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-700"><path d="M11 11.5a2.5 2.5 0 1 1 2.5 2.5"></path><path d="M13.5 14a5 5 0 1 0-5-5"></path><path d="M2 18c0-2.2 2-4 5-4h7a3 3 0 0 1 0 6H8c-3.3 0-6-.9-6-2z"></path><path d="M4.5 14.3V12"></path><path d="M7.5 14V11.5"></path></svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1022,6 +1037,9 @@
                             <button id="tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                             </button>
+                            <button id="tts-button-slow" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Slowly">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-700"><path d="M11 11.5a2.5 2.5 0 1 1 2.5 2.5"></path><path d="M13.5 14a5 5 0 1 0-5-5"></path><path d="M2 18c0-2.2 2-4 5-4h7a3 3 0 0 1 0 6H8c-3.3 0-6-.9-6-2z"></path><path d="M4.5 14.3V12"></path><path d="M7.5 14V11.5"></path></svg>
+                            </button>
                         </div>
                         <span id="game-voice-warning" class="hidden text-[10px] font-bold text-amber-700 bg-amber-50 border-2 border-amber-300 rounded-lg px-2 py-0.5 mt-1 interactive"></span>
                     </div>
@@ -1033,6 +1051,9 @@
                             <div id="location-text" dir="auto" class="text-2xl md:text-3xl font-black leading-tight inline-block text-center tracking-wide">...</div>
                             <button id="tts-location-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Location">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+                            <button id="tts-location-button-slow" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Slowly">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-700"><path d="M11 11.5a2.5 2.5 0 1 1 2.5 2.5"></path><path d="M13.5 14a5 5 0 1 0-5-5"></path><path d="M2 18c0-2.2 2-4 5-4h7a3 3 0 0 1 0 6H8c-3.3 0-6-.9-6-2z"></path><path d="M4.5 14.3V12"></path><path d="M7.5 14V11.5"></path></svg>
                             </button>
                         </div>
                     </div>
@@ -2008,8 +2029,10 @@
         function setVoiceWarning(elementId, langCode, langGroupKey) {
             const el = document.getElementById(elementId);
             if (!el) return;
+            const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
+            const hasCloudTts = cloudConfig && cloudConfig.proxyUrl;
             const voice = getBestVoice(langCode);
-            if (voice) {
+            if (voice || hasCloudTts) {
                 el.classList.add('hidden');
                 el.textContent = '';
             } else {
@@ -2038,6 +2061,8 @@
         // guarantees correct Macedonian regardless of the browser's locale support.
         const MACEDONIAN_WEEKDAYS = ['недела', 'понеделник', 'вторник', 'среда', 'четврток', 'петок', 'сабота']; // Date.getDay(): 0 = Sunday
         const MACEDONIAN_MONTHS = ['јануари', 'февруари', 'март', 'април', 'мај', 'јуни', 'јули', 'август', 'септември', 'октомври', 'ноември', 'декември'];
+        const SINHALA_WEEKDAYS = ['ඉරිදා', 'සඳුදා', 'අඟහරුවාදා', 'බදාදා', 'බ්‍රහස්පතින්දා', 'සිකුරාදා', 'සෙනසුරාදා'];
+        const SINHALA_MONTHS = ['ජනවාරි', 'පෙබරවාරි', 'මාර්තු', 'අප්‍රේල්', 'මැයි', 'ජූනි', 'ජූලි', 'අගෝස්තු', 'සැප්තැම්බර්', 'ඔක්තෝබර්', 'නොවැම්බර්', 'දෙසැම්බර්'];
 
         function getMacedonianDateText(d) {
             const year = d.getFullYear();
@@ -2047,10 +2072,19 @@
             return `Денес е ${weekday}, ${day} ${month} ${year} г.`;
         }
 
+        function getSinhalaDateText(d) {
+            const year = d.getFullYear();
+            const month = SINHALA_MONTHS[d.getMonth()];
+            const day = d.getDate();
+            const weekday = SINHALA_WEEKDAYS[d.getDay()];
+            return `අද ${weekday}, ${year} ${month} ${day} වැනිදා.`;
+        }
+
         function getLocalizedDate(lang) {
             const d = new Date();
             if (lang === 'zh-pinyin') return getPinyinDateText(d);
             if (lang === 'macedonian') return getMacedonianDateText(d);
+            if (lang === 'sinhala') return getSinhalaDateText(d);
             const data = LOCALE_DATA[lang];
             const opt = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
             let formattedDate = d.toLocaleDateString(data.locale, opt);
@@ -2070,6 +2104,7 @@
             const d = new Date();
             if (lang === 'zh-pinyin') return getPinyinDateText(d);
             if (lang === 'macedonian') return getMacedonianDateText(d);
+            if (lang === 'sinhala') return getSinhalaDateText(d);
             const data = LOCALE_DATA[lang];
             const cleanLocale = data.locale.split('-u-')[0]; // strip complex -u-nu tags
             const opt = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
@@ -3211,19 +3246,8 @@
             });
 
             document.getElementById('tts-date-btn').onclick = () => {
-                if ('speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                    const dateTextForSpeech = getLocalizedDateForSpeech(selectedLanguage);
-                    const cleanTextForSpeech = dateTextForSpeech.replace(/[\[\]]/g, '');
-                    const utterance = new SpeechSynthesisUtterance(cleanTextForSpeech);
-                    utterance.rate = 0.85;
-                    utterance.volume = ttsVolume;
-                    utterance.lang = LANG_MAP[selectedLanguage];
-                    
-                    const bestVoice = getBestVoice(utterance.lang);
-                    if (bestVoice) utterance.voice = bestVoice;
-                    window.speechSynthesis.speak(utterance);
-                }
+                const dateTextForSpeech = getLocalizedDateForSpeech(selectedLanguage);
+                speakWord(dateTextForSpeech);
             };
 
             document.getElementById('start-button').onclick = launchSelectedActivity;
@@ -3358,24 +3382,21 @@
                 if (kartCurrentTargetWord) speakWord(kartCurrentTargetWord);
             };
             document.getElementById('tts-location-button').onclick = () => {
-                const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
-                if (currentWordObj) {
-                    const locKey = currentWordObj.location;
-                    const langData = LOCALIZED_LOCATIONS[selectedLanguage];
-                    let locationPart;
-                    if (currentWordObj.inShop !== undefined) {
-                        const shopType = cityBuildings[currentWordObj.inShop] && cityBuildings[currentWordObj.inShop].shopType;
-                        const phrases = SHOP_LOCATION_PHRASES[shopType];
-                        locationPart = (phrases && phrases[selectedLanguage]) || langData[locKey];
-                    } else {
-                        locationPart = langData[locKey];
-                    }
-                    let phrase = langData.where + ", " + locationPart;
-                    if (selectedLanguage === 'de' && GERMAN_NOUN_CAPITALIZATIONS[phrase.toLowerCase()]) {
-                        phrase = GERMAN_NOUN_CAPITALIZATIONS[phrase.toLowerCase()];
-                    }
-                    speakWord(phrase);
-                }
+                const phrase = getCurrentLocationSpeechPhrase();
+                if (phrase) speakWord(phrase);
+            };
+            document.getElementById('tts-button-slow').onclick = () => {
+                if (currentTargetWord) speakWordSlow(currentTargetWord);
+            };
+            document.getElementById('tts-location-button-slow').onclick = () => {
+                const phrase = getCurrentLocationSpeechPhrase();
+                if (phrase) speakWordSlow(phrase);
+            };
+            document.getElementById('kart-tts-button-slow').onclick = () => {
+                if (kartCurrentTargetWord) speakWordSlow(kartCurrentTargetWord);
+            };
+            document.getElementById('tts-date-btn-slow').onclick = () => {
+                speakWordSlow(getLocalizedDateForSpeech(selectedLanguage));
             };
 
             const howToBtn = document.getElementById('how-to-btn');
@@ -3663,6 +3684,8 @@
                 const el = document.getElementById('landing-step-' + s);
                 if (el) el.style.display = (s === step) ? '' : 'none';
             });
+            const innerWrapper = document.getElementById('landing-flow-inner');
+            if (innerWrapper) innerWrapper.classList.toggle('landing-wide', step === 'settings');
             if (step === 'wheel') renderToolGrid();
             if (step === 'player') renderPlayerSelect();
             if (step === 'settings') {
@@ -3842,21 +3865,23 @@
         // deployed function's URL.
         // ====================================================================
         const CLOUD_TTS_CONFIG = {
-            // Example, once deployed:
-            // sinhala: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'si-LK' }
+            sinhala: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'si-LK' },
+            fr: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'fr-FR' }
         };
         const cloudTtsAudioCache = {}; // avoids refetching the same word twice
 
-        async function speakWordViaCloudTTS(text, config) {
+        async function speakWordViaCloudTTS(text, config, rate) {
             const cleanText = text.replace(/[\[\]]/g, '');
-            const cacheKey = config.languageCode + '::' + cleanText;
+            const cacheKey = config.languageCode + '::' + (rate || 'default') + '::' + cleanText;
             try {
                 let base64Audio = cloudTtsAudioCache[cacheKey];
                 if (!base64Audio) {
+                    const requestBody = { text: cleanText, languageCode: config.languageCode, voiceName: config.voiceName };
+                    if (rate) requestBody.speakingRate = rate;
                     const res = await fetch(config.proxyUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: cleanText, languageCode: config.languageCode, voiceName: config.voiceName })
+                        body: JSON.stringify(requestBody)
                     });
                     if (!res.ok) return false;
                     const data = await res.json();
@@ -3874,23 +3899,62 @@
             }
         }
 
-        function speakWord(text) {
+        // Microsoft Edge already has good built-in TTS, so there's no need to
+        // route it through Cloud TTS (saves API usage there too) - but Safari,
+        // iPad, and most other browsers have noticeably worse voices for some
+        // languages, so those prefer Cloud TTS whenever a language is configured.
+        function isMicrosoftEdge() {
+            return /Edg\//.test(navigator.userAgent);
+        }
+
+        function speakWord(text, rate) {
             const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
-            if (cloudConfig && cloudConfig.proxyUrl) {
-                speakWordViaCloudTTS(text, cloudConfig).then(succeeded => {
-                    if (!succeeded) speakWordBrowser(text);
+            const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+            if (preferCloud) {
+                speakWordViaCloudTTS(text, cloudConfig, rate).then(succeeded => {
+                    if (!succeeded) speakWordBrowser(text, rate);
                 });
                 return;
             }
-            speakWordBrowser(text);
+            speakWordBrowser(text, rate);
         }
 
-        function speakWordBrowser(text) {
+        // Always speaks at a slow, learner-friendly pace regardless of how fast
+        // the "normal" voice for this language happens to be - used by the snail
+        // buttons placed next to every TTS button in the hub.
+        // Builds the "where + location" phrase for the currently active target
+        // word - shared by the normal and slow location TTS buttons so the logic
+        // only lives in one place.
+        function getCurrentLocationSpeechPhrase() {
+            const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
+            if (!currentWordObj) return null;
+            const locKey = currentWordObj.location;
+            const langData = LOCALIZED_LOCATIONS[selectedLanguage];
+            let locationPart;
+            if (currentWordObj.inShop !== undefined) {
+                const shopType = cityBuildings[currentWordObj.inShop] && cityBuildings[currentWordObj.inShop].shopType;
+                const phrases = SHOP_LOCATION_PHRASES[shopType];
+                locationPart = (phrases && phrases[selectedLanguage]) || langData[locKey];
+            } else {
+                locationPart = langData[locKey];
+            }
+            let phrase = langData.where + ", " + locationPart;
+            if (selectedLanguage === 'de' && GERMAN_NOUN_CAPITALIZATIONS[phrase.toLowerCase()]) {
+                phrase = GERMAN_NOUN_CAPITALIZATIONS[phrase.toLowerCase()];
+            }
+            return phrase;
+        }
+
+        function speakWordSlow(text) {
+            speakWord(text, 0.6);
+        }
+
+        function speakWordBrowser(text, rate) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const cleanTextForSpeech = text.replace(/[\[\]]/g, '');
                 const utterance = new SpeechSynthesisUtterance(cleanTextForSpeech);
-                utterance.rate = 0.85;
+                utterance.rate = rate || 0.85;
                 utterance.volume = ttsVolume;
 
                 const locale = LANG_MAP[selectedLanguage] || 'en-US';
@@ -3906,7 +3970,49 @@
         // (rather than each new speakWord() call cutting the previous one off).
         // Used for wrong-answer feedback so the student hears the full corrective
         // sentence, then the target word reminder, maximising comprehensible input.
+        async function speakSequenceViaCloudTTS(texts, config) {
+            try {
+                for (const text of texts) {
+                    const cleanText = text.replace(/[\[\]]/g, '');
+                    const cacheKey = config.languageCode + '::' + cleanText;
+                    let base64Audio = cloudTtsAudioCache[cacheKey];
+                    if (!base64Audio) {
+                        const res = await fetch(config.proxyUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: cleanText, languageCode: config.languageCode, voiceName: config.voiceName })
+                        });
+                        if (!res.ok) return false;
+                        const data = await res.json();
+                        if (!data.audioContent) return false;
+                        base64Audio = data.audioContent;
+                        cloudTtsAudioCache[cacheKey] = base64Audio;
+                    }
+                    const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
+                    audio.volume = ttsVolume;
+                    await audio.play();
+                    await new Promise(resolve => { audio.onended = resolve; });
+                }
+                return true;
+            } catch (e) {
+                console.warn('Cloud TTS sequence failed, falling back to the browser voice:', e);
+                return false;
+            }
+        }
+
         function speakSequence(texts) {
+            const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
+            const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+            if (preferCloud) {
+                speakSequenceViaCloudTTS(texts, cloudConfig).then(succeeded => {
+                    if (!succeeded) speakSequenceBrowser(texts);
+                });
+                return;
+            }
+            speakSequenceBrowser(texts);
+        }
+
+        function speakSequenceBrowser(texts) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
             const locale = LANG_MAP[selectedLanguage] || 'en-US';
