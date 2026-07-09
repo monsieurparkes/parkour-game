@@ -480,7 +480,7 @@
       "folder": "familiar-food-and-ingredients",
       "items": [
         {
-          "file": "le_chocolat.png",
+          "file": "le chocolat.png",
           "translations": {
             "fr": "le chocolat",
             "en": "the chocolate",
@@ -503,7 +503,7 @@
           }
         },
         {
-          "file": "le_maïs.png",
+          "file": "le maïs.png",
           "translations": {
             "fr": "le maïs",
             "en": "the corn",
@@ -526,7 +526,7 @@
           }
         },
         {
-          "file": "le_pain.png",
+          "file": "le pain.png",
           "translations": {
             "fr": "le pain",
             "en": "the bread",
@@ -549,7 +549,7 @@
           }
         },
         {
-          "file": "un_cheeseburger.png",
+          "file": "un cheeseburger.png",
           "translations": {
             "fr": "un cheeseburger",
             "en": "a cheeseburger",
@@ -572,7 +572,7 @@
           }
         },
         {
-          "file": "un_concombre.png",
+          "file": "un concombre.png",
           "translations": {
             "fr": "un concombre",
             "en": "a cucumber",
@@ -595,7 +595,7 @@
           }
         },
         {
-          "file": "un_gâteau.png",
+          "file": "un gâteau.png",
           "translations": {
             "fr": "un gâteau",
             "en": "a cake",
@@ -618,7 +618,7 @@
           }
         },
         {
-          "file": "un_sandwich.png",
+          "file": "un sandwich.png",
           "translations": {
             "fr": "un sandwich",
             "en": "a sandwich",
@@ -641,7 +641,7 @@
           }
         },
         {
-          "file": "une_banane.png",
+          "file": "une banane.png",
           "translations": {
             "fr": "une banane",
             "en": "a banana",
@@ -664,7 +664,7 @@
           }
         },
         {
-          "file": "une_fraise.png",
+          "file": "une fraise.png",
           "translations": {
             "fr": "une fraise",
             "en": "a strawberry",
@@ -687,7 +687,7 @@
           }
         },
         {
-          "file": "une_orange.png",
+          "file": "une orange.png",
           "translations": {
             "fr": "une orange",
             "en": "an orange",
@@ -710,7 +710,7 @@
           }
         },
         {
-          "file": "une_pomme_de_terre.png",
+          "file": "une pomme_de_terre.png",
           "translations": {
             "fr": "une pomme de terre",
             "en": "a potato",
@@ -733,7 +733,7 @@
           }
         },
         {
-          "file": "une_pomme.png",
+          "file": "une pomme.png",
           "translations": {
             "fr": "une pomme",
             "en": "an apple",
@@ -756,7 +756,7 @@
           }
         },
         {
-          "file": "une_tomate.png",
+          "file": "une tomate.png",
           "translations": {
             "fr": "une tomate",
             "en": "a tomato",
