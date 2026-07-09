@@ -473,6 +473,312 @@
           }
         }
       ]
+    },
+    {
+      "id": "familiar-food-and-ingredients",
+      "name": "Familiar Food and Ingredients",
+      "folder": "familiar-food-and-ingredients",
+      "items": [
+        {
+          "file": "le_chocolat.png",
+          "translations": {
+            "fr": "le chocolat",
+            "en": "the chocolate",
+            "es": "el chocolate",
+            "de": "die Schokolade",
+            "it": "il cioccolato",
+            "ja": "チョコレート",
+            "zh-pinyin": "qiǎokèlì",
+            "zh-hanzi": "巧克力",
+            "cantonese": "朱古力",
+            "he": "השוקולד",
+            "ar": "الشوكولاتة",
+            "sinhala": "චොකලට්",
+            "vi": "sô cô la",
+            "ur": "چاکلیٹ",
+            "hi": "चॉकलेट",
+            "uk": "шоколад",
+            "ru": "шоколад",
+            "macedonian": "чоколадото"
+          }
+        },
+        {
+          "file": "le_maïs.png",
+          "translations": {
+            "fr": "le maïs",
+            "en": "the corn",
+            "es": "el maíz",
+            "de": "der Mais",
+            "it": "il mais",
+            "ja": "とうもろこし",
+            "zh-pinyin": "yùmǐ",
+            "zh-hanzi": "玉米",
+            "cantonese": "粟米",
+            "he": "התירס",
+            "ar": "الذرة",
+            "sinhala": "බඩ ඉරිඟු",
+            "vi": "ngô",
+            "ur": "مکئی",
+            "hi": "मक्का",
+            "uk": "кукурудза",
+            "ru": "кукуруза",
+            "macedonian": "пченката"
+          }
+        },
+        {
+          "file": "le_pain.png",
+          "translations": {
+            "fr": "le pain",
+            "en": "the bread",
+            "es": "el pan",
+            "de": "das Brot",
+            "it": "il pane",
+            "ja": "パン",
+            "zh-pinyin": "miànbāo",
+            "zh-hanzi": "面包",
+            "cantonese": "麵包",
+            "he": "הלחם",
+            "ar": "الخبز",
+            "sinhala": "පාන්",
+            "vi": "bánh mì",
+            "ur": "روٹی",
+            "hi": "रोटी",
+            "uk": "хліб",
+            "ru": "хлеб",
+            "macedonian": "лебот"
+          }
+        },
+        {
+          "file": "un_cheeseburger.png",
+          "translations": {
+            "fr": "un cheeseburger",
+            "en": "a cheeseburger",
+            "es": "una hamburguesa con queso",
+            "de": "ein Cheeseburger",
+            "it": "un cheeseburger",
+            "ja": "チーズバーガー",
+            "zh-pinyin": "yī gè zhīshì hànbǎo",
+            "zh-hanzi": "一个芝士汉堡",
+            "cantonese": "一個芝士漢堡包",
+            "he": "צ'יזבורגר",
+            "ar": "تشيزبرغر",
+            "sinhala": "චීස්බර්ගර් එකක්",
+            "vi": "một chiếc bánh mì kẹp phô mai",
+            "ur": "ایک چیز برگر",
+            "hi": "एक चीज़बर्गर",
+            "uk": "чізбургер",
+            "ru": "чизбургер",
+            "macedonian": "чизбургер"
+          }
+        },
+        {
+          "file": "un_concombre.png",
+          "translations": {
+            "fr": "un concombre",
+            "en": "a cucumber",
+            "es": "un pepino",
+            "de": "eine Gurke",
+            "it": "un cetriolo",
+            "ja": "きゅうり",
+            "zh-pinyin": "yī gēn huángguā",
+            "zh-hanzi": "一根黄瓜",
+            "cantonese": "一條青瓜",
+            "he": "מלפפון",
+            "ar": "خيارة",
+            "sinhala": "පිපිඤ්ඤා ගෙඩියක්",
+            "vi": "một quả dưa chuột",
+            "ur": "ایک ککڑی",
+            "hi": "एक खीरा",
+            "uk": "огірок",
+            "ru": "огурец",
+            "macedonian": "краставица"
+          }
+        },
+        {
+          "file": "un_gâteau.png",
+          "translations": {
+            "fr": "un gâteau",
+            "en": "a cake",
+            "es": "una tarta",
+            "de": "ein Kuchen",
+            "it": "una torta",
+            "ja": "ケーキ",
+            "zh-pinyin": "yī kuài dàngāo",
+            "zh-hanzi": "一块蛋糕",
+            "cantonese": "一件蛋糕",
+            "he": "עוגה",
+            "ar": "كعكة",
+            "sinhala": "කේක් එකක්",
+            "vi": "một cái bánh",
+            "ur": "ایک کیک",
+            "hi": "एक केक",
+            "uk": "торт",
+            "ru": "торт",
+            "macedonian": "торта"
+          }
+        },
+        {
+          "file": "un_sandwich.png",
+          "translations": {
+            "fr": "un sandwich",
+            "en": "a sandwich",
+            "es": "un sándwich",
+            "de": "ein Sandwich",
+            "it": "un panino",
+            "ja": "サンドイッチ",
+            "zh-pinyin": "yī gè sānmíngzhì",
+            "zh-hanzi": "一个三明治",
+            "cantonese": "一個三文治",
+            "he": "כריך",
+            "ar": "شطيرة",
+            "sinhala": "සැන්විචයක්",
+            "vi": "một chiếc bánh sandwich",
+            "ur": "ایک سینڈوچ",
+            "hi": "एक सैंडविच",
+            "uk": "сендвіч",
+            "ru": "сэндвич",
+            "macedonian": "сендвич"
+          }
+        },
+        {
+          "file": "une_banane.png",
+          "translations": {
+            "fr": "une banane",
+            "en": "a banana",
+            "es": "un plátano",
+            "de": "eine Banane",
+            "it": "una banana",
+            "ja": "バナナ",
+            "zh-pinyin": "yī gēn xiāngjiāo",
+            "zh-hanzi": "一根香蕉",
+            "cantonese": "一隻香蕉",
+            "he": "בננה",
+            "ar": "موزة",
+            "sinhala": "කෙසෙල් ගෙඩියක්",
+            "vi": "một quả chuối",
+            "ur": "ایک کیلا",
+            "hi": "एक केला",
+            "uk": "банан",
+            "ru": "банан",
+            "macedonian": "банана"
+          }
+        },
+        {
+          "file": "une_fraise.png",
+          "translations": {
+            "fr": "une fraise",
+            "en": "a strawberry",
+            "es": "una fresa",
+            "de": "eine Erdbeere",
+            "it": "una fragola",
+            "ja": "いちご",
+            "zh-pinyin": "yī kē cǎoméi",
+            "zh-hanzi": "一颗草莓",
+            "cantonese": "一粒士多啤梨",
+            "he": "תות",
+            "ar": "فراولة",
+            "sinhala": "ස්ට්‍රෝබෙරි ගෙඩියක්",
+            "vi": "một quả dâu tây",
+            "ur": "ایک اسٹرابیری",
+            "hi": "एक स्ट्रॉबेरी",
+            "uk": "полуниця",
+            "ru": "клубника",
+            "macedonian": "јагода"
+          }
+        },
+        {
+          "file": "une_orange.png",
+          "translations": {
+            "fr": "une orange",
+            "en": "an orange",
+            "es": "una naranja",
+            "de": "eine Orange",
+            "it": "un'arancia",
+            "ja": "オレンジ",
+            "zh-pinyin": "yī gè chéngzi",
+            "zh-hanzi": "一个橙子",
+            "cantonese": "一個橙",
+            "he": "תפוז",
+            "ar": "برتقالة",
+            "sinhala": "දොඩම් ගෙඩියක්",
+            "vi": "một quả cam",
+            "ur": "ایک سنگترہ",
+            "hi": "एक संतरा",
+            "uk": "апельсин",
+            "ru": "апельсин",
+            "macedonian": "портокал"
+          }
+        },
+        {
+          "file": "une_pomme_de_terre.png",
+          "translations": {
+            "fr": "une pomme de terre",
+            "en": "a potato",
+            "es": "una patata",
+            "de": "eine Kartoffel",
+            "it": "una patata",
+            "ja": "じゃがいも",
+            "zh-pinyin": "yī gè tǔdòu",
+            "zh-hanzi": "一个土豆",
+            "cantonese": "一個薯仔",
+            "he": "תפוח אדמה",
+            "ar": "بطاطس",
+            "sinhala": "අර්තාපල් ගෙඩියක්",
+            "vi": "một củ khoai tây",
+            "ur": "ایک آلو",
+            "hi": "एक आलू",
+            "uk": "картопля",
+            "ru": "картошка",
+            "macedonian": "компир"
+          }
+        },
+        {
+          "file": "une_pomme.png",
+          "translations": {
+            "fr": "une pomme",
+            "en": "an apple",
+            "es": "una manzana",
+            "de": "ein Apfel",
+            "it": "una mela",
+            "ja": "りんご",
+            "zh-pinyin": "yī gè píngguǒ",
+            "zh-hanzi": "一个苹果",
+            "cantonese": "一個蘋果",
+            "he": "תפוח",
+            "ar": "تفاحة",
+            "sinhala": "ඇපල් ගෙඩියක්",
+            "vi": "một quả táo",
+            "ur": "ایک سیب",
+            "hi": "एक सेब",
+            "uk": "яблуко",
+            "ru": "яблоко",
+            "macedonian": "јаболко"
+          }
+        },
+        {
+          "file": "une_tomate.png",
+          "translations": {
+            "fr": "une tomate",
+            "en": "a tomato",
+            "es": "un tomate",
+            "de": "eine Tomate",
+            "it": "un pomodoro",
+            "ja": "トマト",
+            "zh-pinyin": "yī gè xīhóngshì",
+            "zh-hanzi": "一个西红柿",
+            "cantonese": "一個蕃茄",
+            "he": "עגבנייה",
+            "ar": "طماطم",
+            "sinhala": "තක්කාලි ගෙඩියක්",
+            "vi": "một quả cà chua",
+            "ur": "ایک ٹماٹر",
+            "hi": "एक टमाटर",
+            "uk": "помідор",
+            "ru": "помидор",
+            "macedonian": "домат"
+          }
+        }
+      ]
     }
   ]
 }
