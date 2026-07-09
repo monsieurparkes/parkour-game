@@ -41,6 +41,8 @@
             --hub-mint-soft: #E4F9F1;
             --hub-earth: #8B5E34;
             --hub-earth-soft: #F3E7D8;
+            --hub-steel: #4A6FA5;
+            --hub-steel-soft: #E8EFF7;
             --hub-radius-lg: 28px;
             --hub-radius-md: 18px;
             --hub-radius-sm: 12px;
@@ -479,6 +481,62 @@
             flex-direction: column;
         }
 
+        #bobot-screen {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: var(--hub-paper);
+            z-index: 90;
+            padding: 24px;
+            overflow-y: auto;
+            flex-direction: column;
+        }
+        .bobot-video-frame {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--hub-radius-md);
+            background: #1e293b;
+            object-fit: cover;
+            border: 3px solid var(--hub-line);
+        }
+        .bobot-text-card, .bobot-video-card {
+            border: 2px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            background: var(--hub-surface);
+            box-shadow: var(--hub-shadow-sm);
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            overflow: hidden;
+        }
+        .bobot-text-card {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--hub-ink);
+            min-height: 70px;
+        }
+        .bobot-text-card:hover, .bobot-video-card:hover { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
+        .bobot-video-card.selected { border-color: var(--hub-steel); box-shadow: 0 0 0 3px var(--hub-steel-soft); }
+        .bobot-video-card video { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+        .bobot-yesno-btn {
+            flex: 1;
+            padding: 24px;
+            border-radius: var(--hub-radius-md);
+            border: 2px solid var(--hub-line);
+            background: var(--hub-surface);
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--hub-ink);
+            cursor: pointer;
+            box-shadow: var(--hub-shadow-sm);
+            transition: transform 0.12s ease, box-shadow 0.15s ease;
+        }
+        .bobot-yesno-btn:hover { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
+
         #results-screen {
             display: none;
             position: absolute;
@@ -737,6 +795,46 @@
                             </div>
                         </div>
 
+                        <div id="bobot-settings" class="hub-group hub-font text-left" style="display:none;">
+                            <div class="hub-row">
+                                <p class="hub-hint mt-0 mb-0">🐨 Watch Bobot, then match the verb - draft/prototype using placeholder verbs until real videos are uploaded.</p>
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-label">Choose a Mode</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                    <div id="bobot-mode-statement" class="submode-card selected" data-mode="statement">
+                                        <div class="text-2xl mb-1">🎬</div>
+                                        <div class="font-extrabold text-sm" style="color:var(--hub-ink);">Statements</div>
+                                        <p class="hub-hint mt-1 mb-0" style="font-size:11px;">Watch the video, pick the matching sentence.</p>
+                                    </div>
+                                    <div id="bobot-mode-command" class="submode-card" data-mode="command">
+                                        <div class="text-2xl mb-1">📣</div>
+                                        <div class="font-extrabold text-sm" style="color:var(--hub-ink);">Commands</div>
+                                        <p class="hub-hint mt-1 mb-0" style="font-size:11px;">Read the command, pick the matching video.</p>
+                                    </div>
+                                    <div id="bobot-mode-question" class="submode-card" data-mode="question">
+                                        <div class="text-2xl mb-1">❓</div>
+                                        <div class="font-extrabold text-sm" style="color:var(--hub-ink);">Questions</div>
+                                        <p class="hub-hint mt-1 mb-0" style="font-size:11px;">Watch the video, answer yes or no.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-label">Difficulty (1 = simplest, 5 = hardest)</label>
+                                <div class="flex flex-wrap gap-3 mt-1">
+                                    <label class="flex items-center gap-1.5 interactive"><input type="checkbox" id="bobot-difficulty-1" checked class="w-4 h-4"><span class="text-sm font-bold">1</span></label>
+                                    <label class="flex items-center gap-1.5 interactive"><input type="checkbox" id="bobot-difficulty-2" checked class="w-4 h-4"><span class="text-sm font-bold">2</span></label>
+                                    <label class="flex items-center gap-1.5 interactive"><input type="checkbox" id="bobot-difficulty-3" checked class="w-4 h-4"><span class="text-sm font-bold">3</span></label>
+                                    <label class="flex items-center gap-1.5 interactive"><input type="checkbox" id="bobot-difficulty-4" checked class="w-4 h-4"><span class="text-sm font-bold">4</span></label>
+                                    <label class="flex items-center gap-1.5 interactive"><input type="checkbox" id="bobot-difficulty-5" checked class="w-4 h-4"><span class="text-sm font-bold">5</span></label>
+                                </div>
+                            </div>
+                            <div class="hub-row">
+                                <label for="bobot-student-name-input" class="hub-label">Student Name (optional)</label>
+                                <input type="text" id="bobot-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                            </div>
+                        </div>
+
                         <div id="kart-settings" class="hub-group hub-font text-left" style="display:none;">
                             <div class="hub-row">
                                 <p class="hub-hint mt-0 mb-0">🏎️ <strong>Draft prototype</strong> — placeholder track and kart graphics for now, so you can test how the mechanic feels before any real art gets made.</p>
@@ -947,6 +1045,51 @@
                 <!-- Single Live Colour-Coding Workspace -->
                 <div class="flex flex-col h-full overflow-hidden flex-grow">
                     <div id="coder-input" contenteditable="true" dir="auto" spellcheck="false" data-placeholder="Type words or text here... e.g. Le chien court sur la route." class="coder-editable w-full h-full p-8 overflow-y-auto text-3xl leading-loose tracking-wide whitespace-pre-wrap transition-all duration-200 outline-none" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); border:1px solid var(--hub-line);"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bobot-screen" class="dyslexic-font">
+            <div class="max-w-5xl w-full mx-auto flex flex-col h-full">
+                <div class="hub-font flex justify-between items-center hub-group p-5 mb-4 gap-4">
+                    <h2 class="text-xl font-extrabold leading-none" style="color:var(--hub-ink);">Go Go Bobot!</h2>
+                    <div class="flex items-center gap-4">
+                        <div class="flex flex-col items-center">
+                            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</span>
+                            <span id="bobot-score-text" class="text-2xl font-black" style="color:var(--hub-ink);">00</span>
+                        </div>
+                        <button id="bobot-back-to-config" class="hub-btn-ghost interactive" style="color:#e11d48; border-color:#fecdd3;">Reset</button>
+                    </div>
+                </div>
+
+                <div id="bobot-wrong-banner" dir="auto" class="hidden hub-font text-center font-bold text-sm rounded-2xl border-2 px-6 py-3 mb-4" style="background:#fef2f2; border-color:#fecaca; color:#b91c1c;"></div>
+
+                <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <!-- LEFT: single video (statement/question modes) or a single command card (command mode) -->
+                    <div class="flex flex-col items-center gap-3">
+                        <video id="bobot-main-video" class="bobot-video-frame" muted loop autoplay playsinline controlsList="nodownload noremoteplayback" disablePictureInPicture oncontextmenu="return false" draggable="false"></video>
+                        <div id="bobot-command-prompt" class="hub-group hub-font p-6 text-center w-full" style="display:none;">
+                            <p class="hub-hint mt-0 mb-2">Tell Bobot what to do:</p>
+                            <div id="bobot-command-text" dir="auto" class="text-3xl font-black" style="color:var(--hub-ink);"></div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: adapts per mode -->
+                    <div class="flex flex-col gap-3">
+                        <div id="bobot-text-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        <div id="bobot-video-cards" class="grid grid-cols-2 gap-3" style="display:none;"></div>
+                        <div id="bobot-question-text-wrap" class="hub-group hub-font p-6 text-center" style="display:none;">
+                            <div id="bobot-question-text" dir="auto" class="text-2xl font-black" style="color:var(--hub-ink);"></div>
+                        </div>
+                        <div id="bobot-yesno-row" class="flex gap-4" style="display:none;">
+                            <button id="bobot-yes-btn" class="bobot-yesno-btn interactive"></button>
+                            <button id="bobot-no-btn" class="bobot-yesno-btn interactive"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="bobot-submit-row" class="flex justify-center mt-4" style="display:none;">
+                    <button id="bobot-submit-btn" class="hub-btn-primary hub-font interactive text-lg">Submit Answer</button>
                 </div>
             </div>
         </div>
@@ -3344,6 +3487,15 @@
             document.getElementById('wheel-return-btn').onclick = () => showLandingStep('language');
 
             document.getElementById('kart-back-to-config').onclick = resetToConfig;
+            document.getElementById('bobot-back-to-config').onclick = resetToConfig;
+            ['statement', 'command', 'question'].forEach(mode => {
+                document.getElementById('bobot-mode-' + mode).onclick = () => {
+                    bobotMode = mode;
+                    ['statement', 'command', 'question'].forEach(m => {
+                        document.getElementById('bobot-mode-' + m).classList.toggle('selected', m === mode);
+                    });
+                };
+            });
             document.getElementById('kart-try-again-btn').onclick = () => {
                 document.getElementById('kart-complete-overlay').classList.add('hidden');
                 document.getElementById('kart-complete-overlay').classList.remove('flex');
@@ -3356,7 +3508,7 @@
             };
             document.getElementById('submode-return-btn').onclick = () => showLandingStep('wheel');
             document.getElementById('settings-confirm-btn').onclick = () => {
-                if (selectedLobbyMode === 'kart') {
+                if (selectedLobbyMode === 'kart' || selectedLobbyMode === 'bobot') {
                     launchSelectedActivity();
                 } else {
                     showLandingStep('player');
@@ -3364,7 +3516,7 @@
             };
             document.getElementById('player-return-btn').onclick = () => showLandingStep('settings');
             document.getElementById('settings-return-btn').onclick = () => {
-                if (selectedLobbyMode === 'coder' || selectedLobbyMode === 'kart' || selectedLobbyMode === 'potato') {
+                if (selectedLobbyMode === 'coder' || selectedLobbyMode === 'kart' || selectedLobbyMode === 'potato' || selectedLobbyMode === 'bobot') {
                     showLandingStep('wheel');
                 } else {
                     showLandingStep('submode');
@@ -3646,11 +3798,13 @@
             const pictureSettings = document.getElementById('picture-settings');
             const kartSettings = document.getElementById('kart-settings');
             const potatoSettings = document.getElementById('potato-settings');
+            const bobotSettings = document.getElementById('bobot-settings');
 
             questSettings.style.display = 'none';
             pictureSettings.style.display = 'none';
             if (kartSettings) kartSettings.style.display = 'none';
             if (potatoSettings) potatoSettings.style.display = 'none';
+            if (bobotSettings) bobotSettings.style.display = 'none';
 
             if (mode === 'quest') {
                 document.getElementById('mode-quest').classList.add('selected');
@@ -3662,6 +3816,8 @@
                 if (kartSettings) kartSettings.style.display = 'block';
             } else if (mode === 'potato') {
                 if (potatoSettings) potatoSettings.style.display = 'block';
+            } else if (mode === 'bobot') {
+                if (bobotSettings) bobotSettings.style.display = 'block';
             } else {
                 document.getElementById('mode-coder').classList.add('selected');
             }
@@ -3677,6 +3833,7 @@
             { id: 'parkour', label: 'Parkour', icon: '🏃‍♂️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3b9ce46b21964d9b6d3196dc96f4ca33ad63c9aa/PARKOURJUMP.png', accent: '--hub-violet', accentSoft: '--hub-violet-soft', desc: 'Explore a world to find words or pictures.' },
             { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word - draft/prototype.' },
             { id: 'potato', label: 'Potato Parkour', icon: '🥔', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'A built-in vocabulary hunt - no setup needed, just play.' },
+            { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing - draft/prototype.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
@@ -3698,7 +3855,7 @@
             if (step === 'player') renderPlayerSelect();
             if (step === 'settings') {
                 const settingsConfirmBtn = document.getElementById('settings-confirm-btn');
-                if (settingsConfirmBtn) settingsConfirmBtn.textContent = (selectedLobbyMode === 'kart') ? 'Launch Activity' : 'Continue';
+                if (settingsConfirmBtn) settingsConfirmBtn.textContent = (selectedLobbyMode === 'kart' || selectedLobbyMode === 'bobot') ? 'Launch Activity' : 'Continue';
             }
             if (playerIdleAnimTimer && step !== 'player') {
                 clearInterval(playerIdleAnimTimer);
@@ -3757,6 +3914,9 @@
                 showLandingStep('settings');
             } else if (toolId === 'kart') {
                 selectMode('kart');
+                showLandingStep('settings');
+            } else if (toolId === 'bobot') {
+                selectMode('bobot');
                 showLandingStep('settings');
             }
         }
@@ -3828,6 +3988,8 @@
                 generateKartRace();
             } else if (selectedLobbyMode === 'potato') {
                 generatePotatoQuest();
+            } else if (selectedLobbyMode === 'bobot') {
+                generateBobotGame();
             } else {
                 pauseBackgroundMusic();
                 document.getElementById('title-screen').style.display = 'none';
@@ -3860,7 +4022,7 @@
         };
 
         function getWrongAnswerFeedback(wrongWord) {
-            const stripped = wrongWord.replace(/[\[\]]/g, '');
+            const stripped = wrongWord.replace(/[\[\]]/g, '').replace(/[.!?。！？]+$/, '');
             const phraseFn = WRONG_ANSWER_PHRASES[selectedLanguage] || WRONG_ANSWER_PHRASES.en;
             return phraseFn(stripped);
         }
@@ -4165,6 +4327,265 @@
             overlay.classList.add('flex');
         }
 
+        // ================================================================
+        // GO GO BOBOT! game logic
+        // ================================================================
+        function loadBobotVerbManifest() {
+            const fetchPromises = Object.entries(BOBOT_CATEGORY_FOLDERS).map(([difficulty, folder]) => {
+                const url = BOBOT_VERB_BASE_URL + folder + '/manifest.json?cb=' + Date.now();
+                return fetch(url, { cache: 'no-store' })
+                    .then(res => res.ok ? res.json() : null)
+                    .then(data => {
+                        if (!data || !Array.isArray(data.verbs)) return [];
+                        return data.verbs.map(v => Object.assign({}, v, {
+                            difficulty: v.difficulty || parseInt(difficulty, 10),
+                            _folder: folder
+                        }));
+                    })
+                    .catch(() => []);
+            });
+
+            return Promise.all(fetchPromises).then(results => {
+                const allVerbs = results.flat();
+                if (allVerbs.length === 0) {
+                    bobotVerbManifest = { verbs: BOBOT_PLACEHOLDER_VERBS.map(v => Object.assign({}, v, { _folder: null })) };
+                } else {
+                    bobotVerbManifest = { verbs: allVerbs };
+                }
+            });
+        }
+
+        function generateBobotGame() {
+            const nameInput = document.getElementById('bobot-student-name-input');
+            studentName = nameInput ? nameInput.value.trim() : '';
+            bobotScore = 0;
+            bobotMistakeCount = 0;
+            bobotStartTime = Date.now();
+
+            bobotSelectedDifficulties = [1, 2, 3, 4, 5].filter(d => {
+                const cb = document.getElementById('bobot-difficulty-' + d);
+                return !cb || cb.checked;
+            });
+            if (bobotSelectedDifficulties.length === 0) bobotSelectedDifficulties = [1, 2, 3, 4, 5]; // safety net if a teacher unchecks everything
+
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('bobot-screen').style.display = 'flex';
+            document.getElementById('bobot-score-text').textContent = '00';
+            document.getElementById('bobot-wrong-banner').classList.add('hidden');
+
+            // No background music for this tool - the video's own audio is the focus
+            pauseBackgroundMusic();
+
+            loadBobotVerbManifest().then(() => {
+                startBobotRound();
+            });
+        }
+
+        function getBobotVideoUrl(verb) {
+            const folder = verb._folder || 'cat1';
+            return BOBOT_VERB_BASE_URL + folder + '/' + verb.video;
+        }
+
+        function pickBobotRoundOptions() {
+            const allVerbs = bobotVerbManifest.verbs;
+
+            // Only consider selected difficulty levels that actually have enough
+            // verbs to form a round (need at least 2: one correct, one distractor).
+            const viableLevels = bobotSelectedDifficulties.filter(level => {
+                const count = allVerbs.filter(v => (v.difficulty || 1) === level).length;
+                return count >= 2;
+            });
+
+            let verbs;
+            if (viableLevels.length > 0) {
+                const chosenLevel = viableLevels[Math.floor(Math.random() * viableLevels.length)];
+                verbs = allVerbs.filter(v => (v.difficulty || 1) === chosenLevel);
+            } else {
+                verbs = allVerbs; // safety net if no selected level alone has enough verbs
+            }
+
+            const shuffledForCorrect = shuffle(verbs.slice());
+            const correct = shuffledForCorrect[0];
+            const optionCount = Math.min(4, verbs.length);
+            const others = verbs.filter(v => v.id !== correct.id);
+            const distractors = shuffle(others.slice()).slice(0, optionCount - 1);
+            const options = shuffle([correct].concat(distractors));
+            return { correct, options };
+        }
+
+        function stopAllBobotVideos() {
+            document.querySelectorAll('#bobot-screen video').forEach(v => {
+                try { v.pause(); } catch (e) {}
+            });
+        }
+
+        function startBobotRound() {
+            document.getElementById('bobot-wrong-banner').classList.add('hidden');
+            const { correct, options } = pickBobotRoundOptions();
+            bobotCurrentVerb = correct;
+            bobotRoundOptions = options;
+            bobotSelectedVideoIndex = null;
+
+            const mainVideoEl = document.getElementById('bobot-main-video');
+            const commandPromptEl = document.getElementById('bobot-command-prompt');
+            const textCardsEl = document.getElementById('bobot-text-cards');
+            const videoCardsEl = document.getElementById('bobot-video-cards');
+            const questionTextWrapEl = document.getElementById('bobot-question-text-wrap');
+            const yesNoRowEl = document.getElementById('bobot-yesno-row');
+            const submitRowEl = document.getElementById('bobot-submit-row');
+
+            stopAllBobotVideos();
+            mainVideoEl.style.display = 'none';
+            commandPromptEl.style.display = 'none';
+            textCardsEl.style.display = 'none';
+            videoCardsEl.style.display = 'none';
+            questionTextWrapEl.style.display = 'none';
+            yesNoRowEl.style.display = 'none';
+            submitRowEl.style.display = 'none';
+
+            if (bobotMode === 'statement') {
+                renderBobotStatementRound(correct, options, mainVideoEl, textCardsEl);
+            } else if (bobotMode === 'command') {
+                renderBobotCommandRound(correct, options, commandPromptEl, videoCardsEl, submitRowEl);
+            } else if (bobotMode === 'question') {
+                renderBobotQuestionRound(correct, mainVideoEl, questionTextWrapEl, yesNoRowEl);
+            }
+        }
+
+        function renderBobotStatementRound(correct, options, mainVideoEl, textCardsEl) {
+            mainVideoEl.style.display = 'block';
+            mainVideoEl.src = getBobotVideoUrl(correct);
+            mainVideoEl.muted = true;
+            mainVideoEl.play().catch(() => {});
+
+            textCardsEl.style.display = 'grid';
+            textCardsEl.innerHTML = '';
+            options.forEach(verbOption => {
+                const card = document.createElement('div');
+                card.className = 'bobot-text-card interactive';
+                card.dir = 'auto';
+                card.textContent = verbOption.statement[selectedLanguage] || verbOption.statement.en;
+                card.onclick = () => {
+                    if (verbOption.id === correct.id) {
+                        bobotCorrectAnswer();
+                    } else {
+                        bobotWrongAnswer(verbOption.statement[selectedLanguage] || verbOption.statement.en);
+                    }
+                };
+                textCardsEl.appendChild(card);
+            });
+        }
+
+        function renderBobotCommandRound(correct, options, commandPromptEl, videoCardsEl, submitRowEl) {
+            commandPromptEl.style.display = 'block';
+            document.getElementById('bobot-command-text').textContent = correct.command[selectedLanguage] || correct.command.en;
+
+            videoCardsEl.style.display = 'grid';
+            videoCardsEl.innerHTML = '';
+            submitRowEl.style.display = 'flex';
+
+            options.forEach((verbOption, idx) => {
+                const card = document.createElement('div');
+                card.className = 'bobot-video-card interactive';
+                const video = document.createElement('video');
+                video.src = getBobotVideoUrl(verbOption);
+                video.muted = true;
+                video.loop = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.setAttribute('controlsList', 'nodownload noremoteplayback');
+                video.disablePictureInPicture = true;
+                video.oncontextmenu = () => false;
+                video.draggable = false;
+                video.play().catch(() => {});
+                card.appendChild(video);
+                card.onclick = () => selectBobotVideoCard(idx);
+                videoCardsEl.appendChild(card);
+            });
+
+            document.getElementById('bobot-submit-btn').onclick = () => submitBobotCommandAnswer(correct);
+        }
+
+        // Clicking a video previews it (unmuted) and automatically mutes whichever
+        // was previewing before - only one plays audio at a time. Clicking the
+        // currently-previewing one again just mutes it. Submitting the answer is
+        // a deliberate separate action, so students can listen to all four before
+        // committing.
+        function selectBobotVideoCard(idx) {
+            const cards = document.querySelectorAll('#bobot-video-cards .bobot-video-card');
+            cards.forEach((card, i) => {
+                const video = card.querySelector('video');
+                if (i === idx) {
+                    const wasSelected = card.classList.contains('selected');
+                    if (wasSelected) {
+                        video.muted = true;
+                        card.classList.remove('selected');
+                        bobotSelectedVideoIndex = null;
+                    } else {
+                        video.muted = false;
+                        card.classList.add('selected');
+                        bobotSelectedVideoIndex = idx;
+                    }
+                } else {
+                    video.muted = true;
+                    card.classList.remove('selected');
+                }
+            });
+        }
+
+        function submitBobotCommandAnswer(correctVerb) {
+            if (bobotSelectedVideoIndex === null) return;
+            const chosen = bobotRoundOptions[bobotSelectedVideoIndex];
+            if (chosen.id === correctVerb.id) {
+                bobotCorrectAnswer();
+            } else {
+                bobotWrongAnswer(null);
+            }
+        }
+
+        function renderBobotQuestionRound(correct, mainVideoEl, questionTextWrapEl, yesNoRowEl) {
+            mainVideoEl.style.display = 'block';
+            mainVideoEl.src = getBobotVideoUrl(correct);
+            mainVideoEl.muted = true;
+            mainVideoEl.play().catch(() => {});
+
+            bobotQuestionIsTrue = Math.random() < 0.5;
+            let questionVerb = correct;
+            if (!bobotQuestionIsTrue) {
+                const others = bobotVerbManifest.verbs.filter(v => v.id !== correct.id);
+                questionVerb = others[Math.floor(Math.random() * others.length)];
+            }
+
+            questionTextWrapEl.style.display = 'block';
+            document.getElementById('bobot-question-text').textContent = questionVerb.question[selectedLanguage] || questionVerb.question.en;
+
+            const yn = BOBOT_YES_NO[selectedLanguage] || BOBOT_YES_NO.en;
+            yesNoRowEl.style.display = 'flex';
+            document.getElementById('bobot-yes-btn').textContent = yn[0];
+            document.getElementById('bobot-no-btn').textContent = yn[1];
+            document.getElementById('bobot-yes-btn').onclick = () => {
+                if (bobotQuestionIsTrue) bobotCorrectAnswer(); else bobotWrongAnswer(null);
+            };
+            document.getElementById('bobot-no-btn').onclick = () => {
+                if (!bobotQuestionIsTrue) bobotCorrectAnswer(); else bobotWrongAnswer(null);
+            };
+        }
+
+        function bobotCorrectAnswer() {
+            playChime(true);
+            bobotScore += 1;
+            document.getElementById('bobot-score-text').textContent = bobotScore.toString().padStart(2, '0');
+            setTimeout(() => startBobotRound(), getCelebrationSoundDelayMs());
+        }
+
+        function bobotWrongAnswer(wrongText) {
+            playChime(false);
+            bobotMistakeCount++;
+            const banner = document.getElementById('bobot-wrong-banner');
+            banner.textContent = wrongText ? getWrongAnswerFeedback(wrongText) : '❌ Not quite - try again!';
+            banner.classList.remove('hidden');
+        }
+
         // Potato Parkour's equivalent of generateWhiteboard: vocabulary is fixed and
         // pre-translated, and items sit at the exact same hand-placed coordinates
         // as the original draft (not randomly distributed like the main Parkour
@@ -4297,6 +4718,427 @@
         // Fetches the teacher-hosted manifest of preset image packs. If none exists yet
         // (e.g. the manifest.json hasn't been created on GitHub), this fails gracefully.
         let selectedPresetCategoryId = '';
+
+        // ================================================================
+        // GO GO BOBOT! - a verb-matching game, Bobot-only (no character
+        // choice needed). Three modes share the same underlying verb data:
+        // statements (video -> pick the matching text), commands (text ->
+        // pick the matching video), and questions (video -> true/false).
+        // Reuses the same manifest+fallback pattern as the image presets:
+        // tries to load real content from GitHub, falls back to this small
+        // placeholder set until real videos are uploaded.
+        // ================================================================
+        const BOBOT_VERB_BASE_URL = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/gogobobotvideos/';
+        const BOBOT_CATEGORY_FOLDERS = { 1: 'cat1', 2: 'cat2', 3: 'cat3', 4: 'cat4', 5: 'cat5' };
+        const BOBOT_PLACEHOLDER_VERBS = [
+{
+"id": "walk",
+"difficulty": 1,
+"video": "bobot-marche.mp4",
+"statement": {
+"fr": "Bobot marche.",
+"en": "Bobot walks.",
+"es": "Bobot camina.",
+"de": "Bobot geht.",
+"it": "Bobot cammina.",
+"ja": "ボボットは歩く。",
+"zh-pinyin": "Bōbótè zǒulù.",
+"zh-hanzi": "波波特走路。",
+"cantonese": "波波特行路。",
+"he": "בובוט הולך.",
+"ar": "بوبوت يمشي.",
+"sinhala": "බෝබට් ඇවිදිනවා.",
+"vi": "Bobot đi bộ.",
+"ur": "بوبوٹ چلتا ہے۔",
+"hi": "बोबोट चलता है।",
+"uk": "Бобот ходить.",
+"ru": "Бобот идёт.",
+"macedonian": "Бобот оди."
+},
+"question": {
+"fr": "Est-ce que Bobot marche ?",
+"en": "Is Bobot walking?",
+"es": "¿Está Bobot caminando?",
+"de": "Geht Bobot?",
+"it": "Bobot sta camminando?",
+"ja": "ボボットは歩いていますか？",
+"zh-pinyin": "Bōbótè zài zǒulù ma?",
+"zh-hanzi": "波波特在走路吗？",
+"cantonese": "波波特喺度行緊路呀？",
+"he": "האם בובוט הולך?",
+"ar": "هل بوبوت يمشي؟",
+"sinhala": "බෝබට් ඇවිදිනවාද?",
+"vi": "Bobot có đang đi bộ không?",
+"ur": "کیا بوبوٹ چل رہا ہے؟",
+"hi": "क्या बोबोट चल रहा है?",
+"uk": "Бобот ходить?",
+"ru": "Бобот идёт?",
+"macedonian": "Дали Бобот оди?"
+},
+"command": {
+"fr": "Marche !",
+"en": "Walk!",
+"es": "¡Camina!",
+"de": "Geh!",
+"it": "Cammina!",
+"ja": "歩いて！",
+"zh-pinyin": "Zǒulù!",
+"zh-hanzi": "走路！",
+"cantonese": "行路！",
+"he": "לך!",
+"ar": "امشِ!",
+"sinhala": "ඇවිදින්න!",
+"vi": "Đi bộ đi!",
+"ur": "چلو!",
+"hi": "चलो!",
+"uk": "Іди!",
+"ru": "Иди!",
+"macedonian": "Оди!"
+}
+},
+{
+"id": "jump",
+"difficulty": 1,
+"video": "bobot-saute.mp4",
+"statement": {
+"fr": "Bobot saute.",
+"en": "Bobot jumps.",
+"es": "Bobot salta.",
+"de": "Bobot springt.",
+"it": "Bobot salta.",
+"ja": "ボボットはジャンプする。",
+"zh-pinyin": "Bōbótè tiào.",
+"zh-hanzi": "波波特跳。",
+"cantonese": "波波特跳。",
+"he": "בובוט קופץ.",
+"ar": "بوبوت يقفز.",
+"sinhala": "බෝබට් පනිනවා.",
+"vi": "Bobot nhảy.",
+"ur": "بوبوٹ کودتا ہے۔",
+"hi": "बोबोट कूदता है।",
+"uk": "Бобот стрибає.",
+"ru": "Бобот прыгает.",
+"macedonian": "Бобот скока."
+},
+"question": {
+"fr": "Est-ce que Bobot saute ?",
+"en": "Is Bobot jumping?",
+"es": "¿Está Bobot saltando?",
+"de": "Springt Bobot?",
+"it": "Bobot sta saltando?",
+"ja": "ボボットはジャンプしていますか？",
+"zh-pinyin": "Bōbótè zài tiào ma?",
+"zh-hanzi": "波波特在跳吗？",
+"cantonese": "波波特喺度跳緊呀？",
+"he": "האם בובוט קופץ?",
+"ar": "هل بوبوت يقفز؟",
+"sinhala": "බෝබට් පනිනවාද?",
+"vi": "Bobot có đang nhảy không?",
+"ur": "کیا بوبوٹ کود رہا ہے؟",
+"hi": "क्या बोबोट कूद रहा है?",
+"uk": "Бобот стрибає?",
+"ru": "Бобот прыгает?",
+"macedonian": "Дали Бобот скока?"
+},
+"command": {
+"fr": "Saute !",
+"en": "Jump!",
+"es": "¡Salta!",
+"de": "Spring!",
+"it": "Salta!",
+"ja": "ジャンプして！",
+"zh-pinyin": "Tiào!",
+"zh-hanzi": "跳！",
+"cantonese": "跳！",
+"he": "קפוץ!",
+"ar": "اقفز!",
+"sinhala": "පනින්න!",
+"vi": "Nhảy đi!",
+"ur": "کودو!",
+"hi": "कूदो!",
+"uk": "Стрибай!",
+"ru": "Прыгай!",
+"macedonian": "Скокни!"
+}
+},
+{
+"id": "run",
+"difficulty": 1,
+"video": "bobot-court.mp4",
+"statement": {
+"fr": "Bobot court.",
+"en": "Bobot runs.",
+"es": "Bobot corre.",
+"de": "Bobot rennt.",
+"it": "Bobot corre.",
+"ja": "ボボットは走る。",
+"zh-pinyin": "Bōbótè pǎobù.",
+"zh-hanzi": "波波特跑步。",
+"cantonese": "波波特跑步。",
+"he": "בובוט רץ.",
+"ar": "بوبوت يجري.",
+"sinhala": "බෝබට් දුවනවා.",
+"vi": "Bobot chạy.",
+"ur": "بوبوٹ دوڑتا ہے۔",
+"hi": "बोबोट दौड़ता है।",
+"uk": "Бобот біжить.",
+"ru": "Бобот бежит.",
+"macedonian": "Бобот трча."
+},
+"question": {
+"fr": "Est-ce que Bobot court ?",
+"en": "Is Bobot running?",
+"es": "¿Está Bobot corriendo?",
+"de": "Rennt Bobot?",
+"it": "Bobot sta correndo?",
+"ja": "ボボットは走っていますか？",
+"zh-pinyin": "Bōbótè zài pǎobù ma?",
+"zh-hanzi": "波波特在跑步吗？",
+"cantonese": "波波特喺度跑緊步呀？",
+"he": "האם בובוט רץ?",
+"ar": "هل بوبوت يجري؟",
+"sinhala": "බෝබට් දුවනවාද?",
+"vi": "Bobot có đang chạy không?",
+"ur": "کیا بوبوٹ دوڑ رہا ہے؟",
+"hi": "क्या बोबोट दौड़ रहा है?",
+"uk": "Бобот біжить?",
+"ru": "Бобот бежит?",
+"macedonian": "Дали Бобот трча?"
+},
+"command": {
+"fr": "Cours !",
+"en": "Run!",
+"es": "¡Corre!",
+"de": "Renn!",
+"it": "Corri!",
+"ja": "走って！",
+"zh-pinyin": "Pǎobù!",
+"zh-hanzi": "跑步！",
+"cantonese": "跑步！",
+"he": "רוץ!",
+"ar": "اجرِ!",
+"sinhala": "දුවන්න!",
+"vi": "Chạy đi!",
+"ur": "دوڑو!",
+"hi": "दौड़ो!",
+"uk": "Біжи!",
+"ru": "Беги!",
+"macedonian": "Трчај!"
+}
+},
+{
+"id": "sleep",
+"difficulty": 1,
+"video": "bobot-dort.mp4",
+"statement": {
+"fr": "Bobot dort.",
+"en": "Bobot sleeps.",
+"es": "Bobot duerme.",
+"de": "Bobot schläft.",
+"it": "Bobot dorme.",
+"ja": "ボボットは眠る。",
+"zh-pinyin": "Bōbótè shuìjiào.",
+"zh-hanzi": "波波特睡觉。",
+"cantonese": "波波特瞓覺。",
+"he": "בובוט ישן.",
+"ar": "بوبوت ينام.",
+"sinhala": "බෝබට් නිදාගන්නවා.",
+"vi": "Bobot ngủ.",
+"ur": "بوبوٹ سوتا ہے۔",
+"hi": "बोबोट सोता है।",
+"uk": "Бобот спить.",
+"ru": "Бобот спит.",
+"macedonian": "Бобот спие."
+},
+"question": {
+"fr": "Est-ce que Bobot dort ?",
+"en": "Is Bobot sleeping?",
+"es": "¿Está Bobot durmiendo?",
+"de": "Schläft Bobot?",
+"it": "Bobot sta dormendo?",
+"ja": "ボボットは眠っていますか？",
+"zh-pinyin": "Bōbótè zài shuìjiào ma?",
+"zh-hanzi": "波波特在睡觉吗？",
+"cantonese": "波波特喺度瞓緊覺呀？",
+"he": "האם בובוט ישן?",
+"ar": "هل بوبوت ينام؟",
+"sinhala": "බෝබට් නිදාගන්නවාද?",
+"vi": "Bobot có đang ngủ không?",
+"ur": "کیا بوبوٹ سو رہا ہے؟",
+"hi": "क्या बोबोट सो रहा है?",
+"uk": "Бобот спить?",
+"ru": "Бобот спит?",
+"macedonian": "Дали Бобот спие?"
+},
+"command": {
+"fr": "Dors !",
+"en": "Sleep!",
+"es": "¡Duerme!",
+"de": "Schlaf!",
+"it": "Dormi!",
+"ja": "眠って！",
+"zh-pinyin": "Shuìjiào!",
+"zh-hanzi": "睡觉！",
+"cantonese": "瞓覺！",
+"he": "תישן!",
+"ar": "نَم!",
+"sinhala": "නිදාගන්න!",
+"vi": "Ngủ đi!",
+"ur": "سو جاؤ!",
+"hi": "सो जाओ!",
+"uk": "Спи!",
+"ru": "Спи!",
+"macedonian": "Спиј!"
+}
+},
+{
+"id": "eat",
+"difficulty": 1,
+"video": "bobot-mange.mp4",
+"statement": {
+"fr": "Bobot mange.",
+"en": "Bobot eats.",
+"es": "Bobot come.",
+"de": "Bobot isst.",
+"it": "Bobot mangia.",
+"ja": "ボボットは食べる。",
+"zh-pinyin": "Bōbótè chīfàn.",
+"zh-hanzi": "波波特吃饭。",
+"cantonese": "波波特食嘢。",
+"he": "בובוט אוכל.",
+"ar": "بوبوت يأكل.",
+"sinhala": "බෝබට් කනවා.",
+"vi": "Bobot ăn.",
+"ur": "بوبوٹ کھاتا ہے۔",
+"hi": "बोबोट खाता है।",
+"uk": "Бобот їсть.",
+"ru": "Бобот ест.",
+"macedonian": "Бобот јаде."
+},
+"question": {
+"fr": "Est-ce que Bobot mange ?",
+"en": "Is Bobot eating?",
+"es": "¿Está Bobot comiendo?",
+"de": "Isst Bobot?",
+"it": "Bobot sta mangiando?",
+"ja": "ボボットは食べていますか？",
+"zh-pinyin": "Bōbótè zài chīfàn ma?",
+"zh-hanzi": "波波特在吃饭吗？",
+"cantonese": "波波特喺度食緊嘢呀？",
+"he": "האם בובוט אוכל?",
+"ar": "هل بوبوت يأكل؟",
+"sinhala": "බෝබට් කනවාද?",
+"vi": "Bobot có đang ăn không?",
+"ur": "کیا بوبوٹ کھا رہا ہے؟",
+"hi": "क्या बोबोट खा रहा है?",
+"uk": "Бобот їсть?",
+"ru": "Бобот ест?",
+"macedonian": "Дали Бобот јаде?"
+},
+"command": {
+"fr": "Mange !",
+"en": "Eat!",
+"es": "¡Come!",
+"de": "Iss!",
+"it": "Mangia!",
+"ja": "食べて！",
+"zh-pinyin": "Chīfàn!",
+"zh-hanzi": "吃饭！",
+"cantonese": "食嘢！",
+"he": "תאכל!",
+"ar": "كُل!",
+"sinhala": "කන්න!",
+"vi": "Ăn đi!",
+"ur": "کھاؤ!",
+"hi": "खाओ!",
+"uk": "Їж!",
+"ru": "Ешь!",
+"macedonian": "Јади!"
+}
+},
+{
+"id": "dance",
+"difficulty": 1,
+"video": "bobot-danse.mp4",
+"statement": {
+"fr": "Bobot danse.",
+"en": "Bobot dances.",
+"es": "Bobot baila.",
+"de": "Bobot tanzt.",
+"it": "Bobot balla.",
+"ja": "ボボットは踊る。",
+"zh-pinyin": "Bōbótè tiàowǔ.",
+"zh-hanzi": "波波特跳舞。",
+"cantonese": "波波特跳舞。",
+"he": "בובוט רוקד.",
+"ar": "بوبوت يرقص.",
+"sinhala": "බෝබට් නටනවා.",
+"vi": "Bobot nhảy múa.",
+"ur": "بوبوٹ ناچتا ہے۔",
+"hi": "बोबोट नाचता है।",
+"uk": "Бобот танцює.",
+"ru": "Бобот танцует.",
+"macedonian": "Бобот танцува."
+},
+"question": {
+"fr": "Est-ce que Bobot danse ?",
+"en": "Is Bobot dancing?",
+"es": "¿Está Bobot bailando?",
+"de": "Tanzt Bobot?",
+"it": "Bobot sta ballando?",
+"ja": "ボボットは踊っていますか？",
+"zh-pinyin": "Bōbótè zài tiàowǔ ma?",
+"zh-hanzi": "波波特在跳舞吗？",
+"cantonese": "波波特喺度跳緊舞呀？",
+"he": "האם בובוט רוקד?",
+"ar": "هل بوبوت يرقص؟",
+"sinhala": "බෝබට් නටනවාද?",
+"vi": "Bobot có đang nhảy múa không?",
+"ur": "کیا بوبوٹ ناچ رہا ہے؟",
+"hi": "क्या बोबोट नाच रहा है?",
+"uk": "Бобот танцює?",
+"ru": "Бобот танцует?",
+"macedonian": "Дали Бобот танцува?"
+},
+"command": {
+"fr": "Danse !",
+"en": "Dance!",
+"es": "¡Baila!",
+"de": "Tanz!",
+"it": "Balla!",
+"ja": "踊って！",
+"zh-pinyin": "Tiàowǔ!",
+"zh-hanzi": "跳舞！",
+"cantonese": "跳舞！",
+"he": "תרקוד!",
+"ar": "ارقص!",
+"sinhala": "නටන්න!",
+"vi": "Nhảy múa đi!",
+"ur": "ناچو!",
+"hi": "नाचो!",
+"uk": "Танцюй!",
+"ru": "Танцуй!",
+"macedonian": "Танцувај!"
+}
+}
+];
+        let bobotVerbManifest = null; // { verbs: [...] } once loaded (real or placeholder)
+
+        const BOBOT_YES_NO = {
+            fr: ['Oui', 'Non'], en: ['Yes', 'No'], es: ['Sí', 'No'], de: ['Ja', 'Nein'], it: ['Sì', 'No'],
+            ja: ['はい', 'いいえ'], 'zh-pinyin': ['Shì', 'Bùshì'], 'zh-hanzi': ['是', '不是'], cantonese: ['係', '唔係'],
+            he: ['כן', 'לא'], ar: ['نعم', 'لا'], sinhala: ['ඔව්', 'නැහැ'], vi: ['Có', 'Không'], ur: ['ہاں', 'نہیں'],
+            hi: ['हाँ', 'नहीं'], uk: ['Так', 'Ні'], ru: ['Да', 'Нет'], macedonian: ['Да', 'Не']
+        };
+
+        let bobotMode = 'statement'; // 'statement' | 'command' | 'question'
+        let bobotSelectedDifficulties = [1, 2, 3, 4, 5];
+        let bobotScore = 0, bobotMistakeCount = 0, bobotStartTime = 0;
+        let bobotCurrentVerb = null;
+        let bobotRoundOptions = []; // the 4 candidate verbs for this round
+        let bobotSelectedVideoIndex = null; // commands mode: which video is currently previewing/selected
+        let bobotQuestionIsTrue = false; // question mode: whether the displayed question is actually true
+
 
         function loadPresetManifest() {
             const cacheBustedUrl = PRESET_MANIFEST_URL + (PRESET_MANIFEST_URL.includes('?') ? '&' : '?') + 'cb=' + Date.now();
@@ -4479,6 +5321,8 @@
             document.getElementById('kart-complete-overlay').classList.add('hidden');
             document.getElementById('kart-complete-overlay').classList.remove('flex');
             document.getElementById('coder-screen').style.display = 'none';
+            stopAllBobotVideos();
+            document.getElementById('bobot-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'none';
             document.getElementById('title-screen').style.display = 'flex';
             showLandingStep('wheel');
