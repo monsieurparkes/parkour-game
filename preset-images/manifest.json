@@ -551,7 +551,7 @@
         {
           "file": "un cheeseburger.png",
           "translations": {
-            "fr": "un cheeseburger",
+            "fr": "un [ch]eeseburger",
             "en": "a cheeseburger",
             "es": "una hamburguesa con queso",
             "de": "ein Cheeseburger",
@@ -620,7 +620,7 @@
         {
           "file": "un sandwich.png",
           "translations": {
-            "fr": "un sandwich",
+            "fr": "un sandwi[ch]",
             "en": "a sandwich",
             "es": "un sándwich",
             "de": "ein Sandwich",
@@ -643,7 +643,7 @@
         {
           "file": "une banane.png",
           "translations": {
-            "fr": "une banane",
+            "fr": "une b[anan]e",
             "en": "a banana",
             "es": "un plátano",
             "de": "eine Banane",
