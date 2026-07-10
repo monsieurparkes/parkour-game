@@ -491,6 +491,9 @@
             overflow-y: auto;
             flex-direction: column;
         }
+        @keyframes bobot-spin {
+            to { transform: rotate(360deg); }
+        }
         .bobot-video-frame {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -500,7 +503,7 @@
             border: 3px solid var(--hub-line);
         }
         .bobot-text-card, .bobot-video-card {
-            border: 2px solid var(--hub-line);
+            border: 4px solid var(--hub-line);
             border-radius: var(--hub-radius-md);
             background: var(--hub-surface);
             box-shadow: var(--hub-shadow-sm);
@@ -508,6 +511,33 @@
             transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
             overflow: hidden;
         }
+        /* A fixed colour per answer position (not per verb), so a student can
+           say "the blue one" regardless of which verb currently sits there. */
+        .bobot-answer-0 { border-color: #ef4444 !important; }
+        .bobot-answer-1 { border-color: #eab308 !important; }
+        .bobot-answer-2 { border-color: #3b82f6 !important; }
+        .bobot-answer-3 { border-color: #22c55e !important; }
+        /* Selected (pre-submit preview) and correct-reveal (post-submit) share the
+           same enlarge + colour-matched glow treatment, using each position's own
+           colour rather than a generic highlight, so the identity stays clear
+           throughout. Faded marks an option as not relevant to the outcome. */
+        .bobot-text-card, .bobot-video-card {
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+        }
+        .bobot-answer-0.selected, .bobot-answer-0.correct-reveal { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(239,68,68,0.35); }
+        .bobot-answer-1.selected, .bobot-answer-1.correct-reveal { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(234,179,8,0.35); }
+        .bobot-answer-2.selected, .bobot-answer-2.correct-reveal { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(59,130,246,0.35); }
+        .bobot-answer-3.selected, .bobot-answer-3.correct-reveal { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(34,197,94,0.35); }
+        .bobot-text-card.faded, .bobot-video-card.faded { opacity: 0.35; transform: scale(0.96); }
+        /* The student's own wrong pick: stays enlarged with its glow (so it's
+           still clearly "what I chose"), but fades like the other incorrect
+           options - distinct from the correct answer, which stays fully
+           visible. Needs higher specificity than the two rules above so the
+           enlarge doesn't get overridden by the plain .faded shrink. */
+        .bobot-answer-0.correct-reveal.faded { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(239,68,68,0.35); opacity: 0.35; }
+        .bobot-answer-1.correct-reveal.faded { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(234,179,8,0.35); opacity: 0.35; }
+        .bobot-answer-2.correct-reveal.faded { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(59,130,246,0.35); opacity: 0.35; }
+        .bobot-answer-3.correct-reveal.faded { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(34,197,94,0.35); opacity: 0.35; }
         .bobot-text-card {
             padding: 16px;
             display: flex;
@@ -518,9 +548,10 @@
             font-size: 16px;
             color: var(--hub-ink);
             min-height: 70px;
+            white-space: pre-wrap;
         }
-        .bobot-text-card:hover, .bobot-video-card:hover { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
-        .bobot-video-card.selected { border-color: var(--hub-steel); box-shadow: 0 0 0 3px var(--hub-steel-soft); }
+        .bobot-text-card:hover:not(.selected):not(.correct-reveal), .bobot-video-card:hover:not(.selected):not(.correct-reveal) { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
+        #bobot-main-video-sound-btn.selected { background: var(--hub-steel-soft); border-color: var(--hub-steel); }
         .bobot-video-card video { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
         .bobot-yesno-btn {
             flex: 1;
@@ -659,9 +690,12 @@
                     <p>This hub works in most modern browsers, but text-to-speech is optimised for use in <strong>Microsoft Edge</strong>. If a word isn't being read aloud, try switching to Edge before assuming something's broken — voice availability varies a lot by browser and device.</p>
                     <p><strong>Parkour:</strong> type or paste a comma-separated vocabulary list, then explore the world to find each word's card. Great for reviewing a set of words the whole class has already met.</p>
                     <p><strong>Picture Parkour:</strong> upload images named after their target word (e.g. "un croissant.png") instead of typing text — ideal for younger learners or picture-based vocabulary, and works well as an independent task once a teacher has prepared a set of images.</p>
+                    <p><strong>Parkour Kart:</strong> race around a track and drive over the card showing the correct word among several on offer — a faster-paced, more physical spin on the same vocabulary-matching idea.</p>
+                    <p><strong>Potato Parkour:</strong> a ready-made vocabulary hunt around a house, with no setup needed — just pick a player and go. Good for a quick warm-up or filler activity.</p>
+                    <p><strong>Go Go Bobot!:</strong> a video-based verb-matching game starring Bobot the robot koala. Choose between Statements (pick the sentence matching what Bobot is doing), Commands (pick the video matching a written command), or Questions (watch and answer yes or no) — great for practising verbs and comprehension together.</p>
                     <p><strong>Colour Coder:</strong> paste any text to colour-code target graphemes instantly, then copy the formatted result into another document.</p>
                     <p><strong>Custom graphemes:</strong> use square brackets around any letters you want excluded from colour-coding rules — useful for exceptions within an otherwise-matching word.</p>
-                    <p><strong>Assessment:</strong> add a student's name before starting Parkour or Picture Parkour, and a results screen with accuracy, timing, and mistake data will appear once every word is found — good for a screenshot to submit as evidence of practice.</p>
+                    <p><strong>Assessment:</strong> add a student's name before starting Parkour, Picture Parkour, or Go Go Bobot!, and a results screen with accuracy, timing, and mistake data will appear once the activity is complete — good for a screenshot to submit as evidence of practice.</p>
                 </div>
                 <button id="how-to-close-btn" class="hub-btn-primary w-full mt-6">Got it</button>
             </div>
@@ -687,15 +721,6 @@
 
                     <!-- STEP 1: Language & Date -->
                     <div id="landing-step-language" class="landing-step">
-                        <div class="flex items-center justify-end gap-2 flex-wrap mb-5">
-                            <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                                ❓ How to Use This Hub
-                            </button>
-                            <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                                <span class="fullscreen-btn-label">Full Screen</span>
-                            </button>
-                        </div>
-
                         <div class="flex flex-col sm:flex-row gap-4 mb-6">
                             <!-- Global Target Language Selector -->
                             <div class="hub-group hub-font flex-1 p-5">
@@ -727,7 +752,7 @@
                                 <div class="hub-group flex items-center justify-center gap-3 p-5 w-full h-full">
                                     <span id="french-date-text" dir="auto" class="text-sm leading-snug" style="color:var(--hub-ink);">Calcul de la date...</span>
                                     <button id="tts-date-btn" class="hub-btn-ghost interactive p-2.5 flex-shrink-0" title="Listen to date">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                                     </button>
                                     <button id="tts-date-btn-slow" class="hub-btn-ghost interactive p-1.5 flex-shrink-0" title="Listen Slowly">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
@@ -737,8 +762,14 @@
                             </div>
                         </div>
 
-                        <div class="flex justify-center">
+                        <div class="flex items-center justify-center gap-3 flex-wrap">
+                            <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                                ❓ How to Use This Hub
+                            </button>
                             <button id="landing-lang-next-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
+                            <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                                <span class="fullscreen-btn-label">Full Screen</span>
+                            </button>
                         </div>
                     </div>
 
@@ -797,7 +828,7 @@
 
                         <div id="bobot-settings" class="hub-group hub-font text-left" style="display:none;">
                             <div class="hub-row">
-                                <p class="hub-hint mt-0 mb-0">🐨 Watch Bobot, then match the verb - draft/prototype using placeholder verbs until real videos are uploaded.</p>
+                                <p class="hub-hint mt-0 mb-0">🐨 Watch Bobot, then match the verb.</p>
                             </div>
                             <div class="hub-row">
                                 <label class="hub-label">Choose a Mode</label>
@@ -819,7 +850,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="hub-row">
+                            <div class="hub-row" style="display:none;">
                                 <label class="hub-label">Difficulty (1 = simplest, 5 = hardest)</label>
                                 <div class="flex flex-wrap gap-3 mt-1">
                                     <label class="flex items-center gap-1.5 interactive"><input type="checkbox" id="bobot-difficulty-1" checked class="w-4 h-4"><span class="text-sm font-bold">1</span></label>
@@ -837,7 +868,7 @@
 
                         <div id="kart-settings" class="hub-group hub-font text-left" style="display:none;">
                             <div class="hub-row">
-                                <p class="hub-hint mt-0 mb-0">🏎️ <strong>Draft prototype</strong> — placeholder track and kart graphics for now, so you can test how the mechanic feels before any real art gets made.</p>
+                                <p class="hub-hint mt-0 mb-0">🏎️ Race the track and grab the correct word among the four on offer.</p>
                             </div>
                             <div class="hub-row">
                                 <label for="kart-student-name-input" class="hub-label">Student Name (optional)</label>
@@ -1050,6 +1081,10 @@
         </div>
 
         <div id="bobot-screen" class="dyslexic-font">
+            <div id="bobot-loading-overlay" class="hub-font" style="display:none; position:absolute; inset:0; z-index:20; background:rgba(251,249,245,0.97); flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+                <div style="width:44px; height:44px; border:4px solid var(--hub-line); border-top-color:var(--hub-steel); border-radius:50%; animation:bobot-spin 0.8s linear infinite;"></div>
+                <p class="font-bold" style="color:var(--hub-ink);">Getting everything ready...</p>
+            </div>
             <div class="max-w-5xl w-full mx-auto flex flex-col h-full">
                 <div class="hub-font flex justify-between items-center hub-group p-5 mb-4 gap-4">
                     <h2 class="text-xl font-extrabold leading-none" style="color:var(--hub-ink);">Go Go Bobot!</h2>
@@ -1062,24 +1097,43 @@
                     </div>
                 </div>
 
-                <div id="bobot-wrong-banner" dir="auto" class="hidden hub-font text-center font-bold text-sm rounded-2xl border-2 px-6 py-3 mb-4" style="background:#fef2f2; border-color:#fecaca; color:#b91c1c;"></div>
+                <div id="bobot-wrong-banner" dir="auto" class="hidden text-center font-bold text-sm rounded-2xl border-2 px-6 py-3 mb-4" style="background:#fef2f2; border-color:#fecaca; color:#b91c1c;"></div>
 
                 <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                     <!-- LEFT: single video (statement/question modes) or a single command card (command mode) -->
                     <div class="flex flex-col items-center gap-3">
                         <video id="bobot-main-video" class="bobot-video-frame" muted loop autoplay playsinline controlsList="nodownload noremoteplayback" disablePictureInPicture oncontextmenu="return false" draggable="false"></video>
-                        <div id="bobot-command-prompt" class="hub-group hub-font p-6 text-center w-full" style="display:none;">
+                        <button id="bobot-main-video-sound-btn" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Hear the video's sound" style="display:none;">
+                            <svg id="bobot-main-video-sound-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                        <div id="bobot-command-prompt" class="hub-group p-6 text-center w-full" style="display:none;">
                             <p class="hub-hint mt-0 mb-2">Tell Bobot what to do:</p>
-                            <div id="bobot-command-text" dir="auto" class="text-3xl font-black" style="color:var(--hub-ink);"></div>
+                            <div class="flex items-center justify-center gap-2">
+                                <div id="bobot-command-text" dir="auto" class="text-3xl font-black" style="color:var(--hub-ink);"></div>
+                                <button id="bobot-command-tts-btn" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                </button>
+                                <button id="bobot-command-tts-btn-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7fa"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799a"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20aa"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170a"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7fa)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170a)"><g clip-path="url(#86bb8ee799a)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20aa)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- RIGHT: adapts per mode -->
                     <div class="flex flex-col gap-3">
-                        <div id="bobot-text-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        <div id="bobot-text-cards" class="flex flex-col gap-3"></div>
                         <div id="bobot-video-cards" class="grid grid-cols-2 gap-3" style="display:none;"></div>
-                        <div id="bobot-question-text-wrap" class="hub-group hub-font p-6 text-center" style="display:none;">
-                            <div id="bobot-question-text" dir="auto" class="text-2xl font-black" style="color:var(--hub-ink);"></div>
+                        <div id="bobot-question-text-wrap" class="hub-group p-6 text-center" style="display:none;">
+                            <div class="flex items-center justify-center gap-2">
+                                <div id="bobot-question-text" dir="auto" class="text-2xl font-black" style="color:var(--hub-ink);"></div>
+                                <button id="bobot-question-tts-btn" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                </button>
+                                <button id="bobot-question-tts-btn-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7fb"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799b"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20ab"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170b"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7fb)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170b)"><g clip-path="url(#86bb8ee799b)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20ab)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                                </button>
+                            </div>
                         </div>
                         <div id="bobot-yesno-row" class="flex gap-4" style="display:none;">
                             <button id="bobot-yes-btn" class="bobot-yesno-btn interactive"></button>
@@ -1090,6 +1144,7 @@
 
                 <div id="bobot-submit-row" class="flex justify-center mt-4" style="display:none;">
                     <button id="bobot-submit-btn" class="hub-btn-primary hub-font interactive text-lg">Submit Answer</button>
+                    <button id="bobot-next-question-btn" class="hub-btn-primary hub-font interactive text-lg" style="display:none;">Next Question</button>
                 </div>
             </div>
         </div>
@@ -1959,12 +2014,17 @@
         function playChime(success) {
             if (!fxEnabled) return;
 
-            if (success && selectedLanguage === 'fr') {
+            if (success && selectedLanguage === 'fr' && selectedLobbyMode === 'potato') {
                 const correctSound = document.getElementById('correct-answer-fr-sound');
                 if (correctSound) {
                     correctSound.currentTime = 0;
                     correctSound.play().catch(() => {});
                 }
+                return;
+            }
+
+            if (success && selectedLanguage === 'fr') {
+                playHappyNoise();
                 return;
             }
 
@@ -3404,7 +3464,13 @@
             document.getElementById('start-button').onclick = launchSelectedActivity;
             document.getElementById('back-to-config').onclick = resetToConfig;
             document.getElementById('coder-back-btn').onclick = resetToConfig;
-            document.getElementById('results-try-again-btn').onclick = startQuestGame;
+            document.getElementById('results-try-again-btn').onclick = () => {
+                if (selectedLobbyMode === 'bobot') {
+                    generateBobotGame();
+                } else {
+                    startQuestGame();
+                }
+            };
             document.getElementById('results-return-btn').onclick = resetToConfig;
 
             document.getElementById('picture-file-input').addEventListener('change', (e) => {
@@ -3831,9 +3897,9 @@
         // ================================================================
         const HUB_TOOLS = [
             { id: 'parkour', label: 'Parkour', icon: '🏃‍♂️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3b9ce46b21964d9b6d3196dc96f4ca33ad63c9aa/PARKOURJUMP.png', accent: '--hub-violet', accentSoft: '--hub-violet-soft', desc: 'Explore a world to find words or pictures.' },
-            { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word - draft/prototype.' },
+            { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word.' },
             { id: 'potato', label: 'Potato Parkour', icon: '🥔', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'A built-in vocabulary hunt - no setup needed, just play.' },
-            { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing - draft/prototype.' },
+            { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
@@ -4040,8 +4106,20 @@
         };
         const cloudTtsAudioCache = {}; // avoids refetching the same word twice
 
+        // Prepares text right before it's sent to any TTS engine (never used for
+        // on-screen display). Strips bracket markers (existing behaviour), and
+        // fixes "Bobot" being mispronounced with a hard T by most non-French
+        // TTS voices - French words ending in "-ot" are conventionally silent
+        // on the T, but the name isn't a real dictionary word to other
+        // languages' engines, so they sound it out literally. Swapping in
+        // "Bobo" for speech only sidesteps that ambiguity everywhere at once,
+        // regardless of which language's voice is speaking.
+        function prepareTextForSpeech(text) {
+            return text.replace(/[\[\]]/g, '').replace(/Bobot\b/g, 'Bobo');
+        }
+
         async function speakWordViaCloudTTS(text, config, rate) {
-            const cleanText = text.replace(/[\[\]]/g, '');
+            const cleanText = prepareTextForSpeech(text);
             const cacheKey = config.languageCode + '::' + (rate || 'default') + '::' + cleanText;
             try {
                 let base64Audio = cloudTtsAudioCache[cacheKey];
@@ -4119,10 +4197,79 @@
             speakWord(text, 0.6);
         }
 
+        // Speaks text in a SPECIFIC language, regardless of what selectedLanguage
+        // currently is - needed for bilingual feedback (target language, then
+        // English). Properly awaits completion so multiple calls can be
+        // sequenced without overlapping.
+        function speakOneInLanguage(text, langKey) {
+            const cleanText = prepareTextForSpeech(text);
+            const cloudConfig = CLOUD_TTS_CONFIG[langKey];
+            const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+
+            if (preferCloud) {
+                const cacheKey = cloudConfig.languageCode + '::default::' + cleanText;
+                return (async () => {
+                    try {
+                        let base64Audio = cloudTtsAudioCache[cacheKey];
+                        if (!base64Audio) {
+                            const res = await fetch(cloudConfig.proxyUrl, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ text: cleanText, languageCode: cloudConfig.languageCode, voiceName: cloudConfig.voiceName })
+                            });
+                            if (res.ok) {
+                                const data = await res.json();
+                                if (data.audioContent) {
+                                    base64Audio = data.audioContent;
+                                    cloudTtsAudioCache[cacheKey] = base64Audio;
+                                }
+                            }
+                        }
+                        if (base64Audio) {
+                            const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
+                            audio.volume = ttsVolume;
+                            await audio.play();
+                            await new Promise(resolve => { audio.onended = resolve; });
+                            return;
+                        }
+                    } catch (e) {
+                        console.warn('Cloud TTS failed for bilingual feedback, falling back to browser voice:', e);
+                    }
+                    await speakOneInLanguageBrowser(cleanText, langKey);
+                })();
+            }
+            return speakOneInLanguageBrowser(cleanText, langKey);
+        }
+
+        function speakOneInLanguageBrowser(cleanText, langKey) {
+            return new Promise(resolve => {
+                if (!('speechSynthesis' in window)) { resolve(); return; }
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.rate = 0.85;
+                utterance.volume = ttsVolume;
+                const locale = LANG_MAP[langKey] || 'en-US';
+                utterance.lang = locale;
+                const bestVoice = getBestVoice(locale);
+                if (bestVoice) utterance.voice = bestVoice;
+                utterance.onend = resolve;
+                utterance.onerror = resolve;
+                window.speechSynthesis.speak(utterance);
+            });
+        }
+
+        // Speaks a sequence of {text, lang} pairs, each fully completing before
+        // the next starts, each in its own correct language/voice.
+        async function speakBilingualSequence(items) {
+            for (const item of items) {
+                if (!item || !item.text) continue;
+                await speakOneInLanguage(item.text, item.lang);
+            }
+        }
+
         function speakWordBrowser(text, rate) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const cleanTextForSpeech = text.replace(/[\[\]]/g, '');
+                const cleanTextForSpeech = prepareTextForSpeech(text);
                 const utterance = new SpeechSynthesisUtterance(cleanTextForSpeech);
                 utterance.rate = rate || 0.85;
                 utterance.volume = ttsVolume;
@@ -4143,7 +4290,7 @@
         async function speakSequenceViaCloudTTS(texts, config) {
             try {
                 for (const text of texts) {
-                    const cleanText = text.replace(/[\[\]]/g, '');
+                    const cleanText = prepareTextForSpeech(text);
                     const cacheKey = config.languageCode + '::' + cleanText;
                     let base64Audio = cloudTtsAudioCache[cacheKey];
                     if (!base64Audio) {
@@ -4188,7 +4335,7 @@
             const locale = LANG_MAP[selectedLanguage] || 'en-US';
             const bestVoice = getBestVoice(locale);
             texts.forEach((text) => {
-                const cleanText = text.replace(/[\[\]]/g, '');
+                const cleanText = prepareTextForSpeech(text);
                 const utterance = new SpeechSynthesisUtterance(cleanText);
                 utterance.rate = 0.85;
                 utterance.volume = ttsVolume;
@@ -4361,6 +4508,9 @@
             bobotScore = 0;
             bobotMistakeCount = 0;
             bobotStartTime = Date.now();
+            bobotRoundVerbSet = [];
+            bobotRemainingPool = [];
+            bobotRoundLocked = false;
 
             bobotSelectedDifficulties = [1, 2, 3, 4, 5].filter(d => {
                 const cb = document.getElementById('bobot-difficulty-' + d);
@@ -4369,6 +4519,7 @@
             if (bobotSelectedDifficulties.length === 0) bobotSelectedDifficulties = [1, 2, 3, 4, 5]; // safety net if a teacher unchecks everything
 
             document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'none';
             document.getElementById('bobot-screen').style.display = 'flex';
             document.getElementById('bobot-score-text').textContent = '00';
             document.getElementById('bobot-wrong-banner').classList.add('hidden');
@@ -4386,28 +4537,31 @@
             return BOBOT_VERB_BASE_URL + folder + '/' + verb.video;
         }
 
-        function pickBobotRoundOptions() {
+        // Establishes the fixed verb set for THIS round (capped at
+        // BOBOT_MAX_ROUND_SIZE), called once at the start of a round rather than
+        // recalculated per-question, so "the round" is a stable, well-defined
+        // thing that can end and show assessment data.
+        function establishBobotRoundVerbSet() {
             const allVerbs = bobotVerbManifest.verbs;
-
-            // Only consider selected difficulty levels that actually have enough
-            // verbs to form a round (need at least 2: one correct, one distractor).
             const viableLevels = bobotSelectedDifficulties.filter(level => {
                 const count = allVerbs.filter(v => (v.difficulty || 1) === level).length;
                 return count >= 2;
             });
-
-            let verbs;
+            let eligibleVerbs;
             if (viableLevels.length > 0) {
                 const chosenLevel = viableLevels[Math.floor(Math.random() * viableLevels.length)];
-                verbs = allVerbs.filter(v => (v.difficulty || 1) === chosenLevel);
+                eligibleVerbs = allVerbs.filter(v => (v.difficulty || 1) === chosenLevel);
             } else {
-                verbs = allVerbs; // safety net if no selected level alone has enough verbs
+                eligibleVerbs = allVerbs; // safety net if no selected level alone has enough verbs
             }
+            bobotRoundVerbSet = shuffle(eligibleVerbs.slice()).slice(0, BOBOT_MAX_ROUND_SIZE);
+            bobotRemainingPool = bobotRoundVerbSet.slice();
+        }
 
-            const shuffledForCorrect = shuffle(verbs.slice());
-            const correct = shuffledForCorrect[0];
-            const optionCount = Math.min(4, verbs.length);
-            const others = verbs.filter(v => v.id !== correct.id);
+        function pickBobotRoundOptions() {
+            const correct = bobotRemainingPool[Math.floor(Math.random() * bobotRemainingPool.length)];
+            const optionCount = Math.min(4, bobotRoundVerbSet.length);
+            const others = bobotRoundVerbSet.filter(v => v.id !== correct.id);
             const distractors = shuffle(others.slice()).slice(0, optionCount - 1);
             const options = shuffle([correct].concat(distractors));
             return { correct, options };
@@ -4419,14 +4573,102 @@
             });
         }
 
-        function startBobotRound() {
+        function showBobotLoadingOverlay() {
+            const el = document.getElementById('bobot-loading-overlay');
+            if (el) { el.style.display = 'flex'; }
+        }
+
+        function hideBobotLoadingOverlay() {
+            const el = document.getElementById('bobot-loading-overlay');
+            if (el) { el.style.display = 'none'; }
+        }
+
+        // Fetches and caches ONE (text, language) pair's Cloud TTS audio without
+        // playing it - a no-op if that language isn't Cloud-TTS-configured
+        // (browser voices synthesize on demand with no meaningful pre-cache
+        // benefit) or if it's already cached.
+        async function cacheCloudTTSIfConfigured(text, langKey) {
+            const cloudConfig = CLOUD_TTS_CONFIG[langKey];
+            if (!cloudConfig || !cloudConfig.proxyUrl || isMicrosoftEdge()) return;
+            const cleanText = prepareTextForSpeech(text);
+            const cacheKey = cloudConfig.languageCode + '::default::' + cleanText;
+            if (cloudTtsAudioCache[cacheKey]) return;
+            try {
+                const res = await fetch(cloudConfig.proxyUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: cleanText, languageCode: cloudConfig.languageCode, voiceName: cloudConfig.voiceName })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.audioContent) {
+                        cloudTtsAudioCache[cacheKey] = data.audioContent;
+                    }
+                }
+            } catch (e) {
+                console.warn('Pre-caching TTS failed for "' + text + '" (' + langKey + '):', e);
+            }
+        }
+
+        // Gathers every phrase this round's verb set could need to speak
+        // (target language + English for bilingual feedback, plus both yes/no
+        // outcomes for question mode since we don't know in advance which will
+        // be asked) and caches them all in parallel before the round begins.
+        async function precacheBobotRoundTTS(verbs) {
+            const targetLang = selectedLanguage;
+            const field = bobotMode === 'statement' ? 'statement' : (bobotMode === 'command' ? 'command' : 'question');
+            const pairs = [];
+
+            verbs.forEach(v => {
+                const targetText = v[field][targetLang] || v[field].en;
+                if (bobotMode === 'question') {
+                    const yn = BOBOT_YES_NO[targetLang] || BOBOT_YES_NO.en;
+                    pairs.push([targetText + ' ' + yn[0], targetLang]);
+                    pairs.push([targetText + ' ' + yn[1], targetLang]);
+                } else {
+                    pairs.push([targetText, targetLang]);
+                }
+
+                if (targetLang !== 'en') {
+                    const englishText = v[field].en;
+                    if (bobotMode === 'question') {
+                        const ynEn = BOBOT_YES_NO.en;
+                        pairs.push([englishText + ' ' + ynEn[0], 'en']);
+                        pairs.push([englishText + ' ' + ynEn[1], 'en']);
+                    } else {
+                        pairs.push([englishText, 'en']);
+                    }
+                }
+            });
+
+            await Promise.all(pairs.map(([text, lang]) => cacheCloudTTSIfConfigured(text, lang)));
+        }
+
+        async function startBobotRound() {
             document.getElementById('bobot-wrong-banner').classList.add('hidden');
+            document.getElementById('bobot-next-question-btn').style.display = 'none';
+            bobotRoundLocked = false;
+
+            if (bobotRoundVerbSet.length === 0) {
+                // Very first round of this session.
+                establishBobotRoundVerbSet();
+                showBobotLoadingOverlay();
+                await precacheBobotRoundTTS(bobotRoundVerbSet);
+                hideBobotLoadingOverlay();
+            } else if (bobotRemainingPool.length === 0) {
+                // Every verb in this round has now been answered correctly at
+                // least once - the round is over.
+                showBobotCompletionScreen();
+                return;
+            }
+
             const { correct, options } = pickBobotRoundOptions();
             bobotCurrentVerb = correct;
             bobotRoundOptions = options;
-            bobotSelectedVideoIndex = null;
+            bobotSelectedOptionIndex = null;
 
             const mainVideoEl = document.getElementById('bobot-main-video');
+            const mainVideoSoundBtn = document.getElementById('bobot-main-video-sound-btn');
             const commandPromptEl = document.getElementById('bobot-command-prompt');
             const textCardsEl = document.getElementById('bobot-text-cards');
             const videoCardsEl = document.getElementById('bobot-video-cards');
@@ -4436,15 +4678,19 @@
 
             stopAllBobotVideos();
             mainVideoEl.style.display = 'none';
+            mainVideoEl.muted = true;
+            mainVideoSoundBtn.style.display = 'none';
+            mainVideoSoundBtn.classList.remove('selected');
             commandPromptEl.style.display = 'none';
             textCardsEl.style.display = 'none';
             videoCardsEl.style.display = 'none';
             questionTextWrapEl.style.display = 'none';
             yesNoRowEl.style.display = 'none';
             submitRowEl.style.display = 'none';
+            document.getElementById('bobot-submit-btn').style.display = 'inline-block';
 
             if (bobotMode === 'statement') {
-                renderBobotStatementRound(correct, options, mainVideoEl, textCardsEl);
+                renderBobotStatementRound(correct, options, mainVideoEl, textCardsEl, submitRowEl);
             } else if (bobotMode === 'command') {
                 renderBobotCommandRound(correct, options, commandPromptEl, videoCardsEl, submitRowEl);
             } else if (bobotMode === 'question') {
@@ -4452,33 +4698,67 @@
             }
         }
 
-        function renderBobotStatementRound(correct, options, mainVideoEl, textCardsEl) {
+        // Once every verb in this round has been answered correctly, show the
+        // same assessment-style completion screen the other tools use -
+        // syncing Bobot's own tracked stats into the shared variables that
+        // screen reads from.
+        function showBobotCompletionScreen() {
+            score = bobotScore;
+            mistakeCount = bobotMistakeCount;
+            gameStartTime = bobotStartTime;
+            vocabularyList = bobotRoundVerbSet.map(v => v.statement[selectedLanguage] || v.statement.en);
+            showCompletionScreen();
+        }
+
+        // Statement mode: clicking a card previews it (speaks it aloud, marks it
+        // selected) rather than submitting immediately - a student can click
+        // through all four and listen before committing via the Submit button,
+        // same pattern as command mode's video preview.
+        function renderBobotStatementRound(correct, options, mainVideoEl, textCardsEl, submitRowEl) {
             mainVideoEl.style.display = 'block';
             mainVideoEl.src = getBobotVideoUrl(correct);
             mainVideoEl.muted = true;
             mainVideoEl.play().catch(() => {});
+            setupBobotMainVideoSoundButton(mainVideoEl);
 
-            textCardsEl.style.display = 'grid';
+            textCardsEl.style.display = 'flex';
             textCardsEl.innerHTML = '';
-            options.forEach(verbOption => {
+            submitRowEl.style.display = 'flex';
+
+            options.forEach((verbOption, idx) => {
                 const card = document.createElement('div');
-                card.className = 'bobot-text-card interactive';
+                card.className = 'bobot-text-card interactive bobot-answer-' + idx;
                 card.dir = 'auto';
-                card.textContent = verbOption.statement[selectedLanguage] || verbOption.statement.en;
-                card.onclick = () => {
-                    if (verbOption.id === correct.id) {
-                        bobotCorrectAnswer();
-                    } else {
-                        bobotWrongAnswer(verbOption.statement[selectedLanguage] || verbOption.statement.en);
-                    }
-                };
+                const text = verbOption.statement[selectedLanguage] || verbOption.statement.en;
+                card.innerHTML = colorizeSentenceText(text);
+                card.onclick = () => selectBobotOptionCard(idx, text);
                 textCardsEl.appendChild(card);
             });
+
+            document.getElementById('bobot-submit-btn').onclick = () => submitBobotAnswer(correct);
+        }
+
+        // Shows the small speaker button below the main video and wires it to
+        // toggle the video's own (otherwise permanently muted, since autoplay
+        // requires it) audio on and off - used by statement and question modes
+        // only; command mode's video cards already have their own click-to-
+        // preview sound handling and are untouched by this.
+        function setupBobotMainVideoSoundButton(mainVideoEl) {
+            const btn = document.getElementById('bobot-main-video-sound-btn');
+            btn.style.display = 'flex';
+            btn.classList.remove('selected');
+            btn.onclick = () => {
+                mainVideoEl.muted = !mainVideoEl.muted;
+                btn.classList.toggle('selected', !mainVideoEl.muted);
+            };
         }
 
         function renderBobotCommandRound(correct, options, commandPromptEl, videoCardsEl, submitRowEl) {
             commandPromptEl.style.display = 'block';
-            document.getElementById('bobot-command-text').textContent = correct.command[selectedLanguage] || correct.command.en;
+            const commandText = correct.command[selectedLanguage] || correct.command.en;
+            document.getElementById('bobot-command-text').innerHTML = colorizeSentenceText(commandText);
+            document.getElementById('bobot-command-tts-btn').onclick = () => speakWord(commandText);
+            document.getElementById('bobot-command-tts-btn-slow').onclick = () => speakWordSlow(commandText);
 
             videoCardsEl.style.display = 'grid';
             videoCardsEl.innerHTML = '';
@@ -4486,7 +4766,7 @@
 
             options.forEach((verbOption, idx) => {
                 const card = document.createElement('div');
-                card.className = 'bobot-video-card interactive';
+                card.className = 'bobot-video-card interactive bobot-answer-' + idx;
                 const video = document.createElement('video');
                 video.src = getBobotVideoUrl(verbOption);
                 video.muted = true;
@@ -4503,15 +4783,28 @@
                 videoCardsEl.appendChild(card);
             });
 
-            document.getElementById('bobot-submit-btn').onclick = () => submitBobotCommandAnswer(correct);
+            document.getElementById('bobot-submit-btn').onclick = () => submitBobotAnswer(correct);
+        }
+
+        // Statement mode's text-card preview: selecting a card speaks it and
+        // marks it as the current answer - no mute-toggle needed since it's
+        // text, not video, so every click simply (re)selects and speaks.
+        // Locked out entirely while wrong-answer feedback is showing.
+        function selectBobotOptionCard(idx, text) {
+            if (bobotRoundLocked) return;
+            const cards = document.querySelectorAll('#bobot-text-cards .bobot-text-card');
+            cards.forEach((card, i) => card.classList.toggle('selected', i === idx));
+            bobotSelectedOptionIndex = idx;
+            speakWord(text);
         }
 
         // Clicking a video previews it (unmuted) and automatically mutes whichever
         // was previewing before - only one plays audio at a time. Clicking the
         // currently-previewing one again just mutes it. Submitting the answer is
         // a deliberate separate action, so students can listen to all four before
-        // committing.
+        // committing. Locked out entirely while wrong-answer feedback is showing.
         function selectBobotVideoCard(idx) {
+            if (bobotRoundLocked) return;
             const cards = document.querySelectorAll('#bobot-video-cards .bobot-video-card');
             cards.forEach((card, i) => {
                 const video = card.querySelector('video');
@@ -4520,11 +4813,11 @@
                     if (wasSelected) {
                         video.muted = true;
                         card.classList.remove('selected');
-                        bobotSelectedVideoIndex = null;
+                        bobotSelectedOptionIndex = null;
                     } else {
                         video.muted = false;
                         card.classList.add('selected');
-                        bobotSelectedVideoIndex = idx;
+                        bobotSelectedOptionIndex = idx;
                     }
                 } else {
                     video.muted = true;
@@ -4533,14 +4826,54 @@
             });
         }
 
-        function submitBobotCommandAnswer(correctVerb) {
-            if (bobotSelectedVideoIndex === null) return;
-            const chosen = bobotRoundOptions[bobotSelectedVideoIndex];
+        // Shared submit handler for statement and command modes - both use the
+        // same preview-then-select-then-submit pattern, just differing in
+        // whether the options are text cards or video cards.
+        function submitBobotAnswer(correctVerb) {
+            if (bobotRoundLocked) return;
+            if (bobotSelectedOptionIndex === null) return;
+            const chosen = bobotRoundOptions[bobotSelectedOptionIndex];
+            const correctIndex = bobotRoundOptions.findIndex(v => v.id === correctVerb.id);
+            revealBobotAnswerCards(bobotSelectedOptionIndex, correctIndex);
+
             if (chosen.id === correctVerb.id) {
                 bobotCorrectAnswer();
             } else {
-                bobotWrongAnswer(null);
+                bobotWrongAnswer();
             }
+        }
+
+        // After submission: the correct answer stays enlarged at full opacity.
+        // If the student got it wrong, their own pick also stays enlarged (so
+        // it's still clearly visible as "what I chose") but fades, visually
+        // distinguishing it from the correct answer. Every other option just
+        // fades small. If they got it right, selectedIdx and correctIdx are
+        // the same card, which simply stays enlarged and full opacity.
+        function revealBobotAnswerCards(selectedIdx, correctIdx) {
+            const selector = bobotMode === 'command' ? '#bobot-video-cards .bobot-video-card' : '#bobot-text-cards .bobot-text-card';
+            const cards = document.querySelectorAll(selector);
+            cards.forEach((card, i) => {
+                card.classList.remove('selected');
+                if (i === correctIdx) {
+                    card.classList.add('correct-reveal');
+                    card.classList.remove('faded');
+                } else if (i === selectedIdx) {
+                    card.classList.add('correct-reveal');
+                    card.classList.add('faded');
+                } else {
+                    card.classList.add('faded');
+                    card.classList.remove('correct-reveal');
+                }
+
+                // Command mode specifically: once the answer is revealed, only
+                // the correct video's own sound should ever be heard - never
+                // leave a wrong pick's audio still playing, since that's
+                // exactly the mismatched association we don't want.
+                if (bobotMode === 'command') {
+                    const video = card.querySelector('video');
+                    if (video) video.muted = (i !== correctIdx);
+                }
+            });
         }
 
         function renderBobotQuestionRound(correct, mainVideoEl, questionTextWrapEl, yesNoRowEl) {
@@ -4548,43 +4881,103 @@
             mainVideoEl.src = getBobotVideoUrl(correct);
             mainVideoEl.muted = true;
             mainVideoEl.play().catch(() => {});
+            setupBobotMainVideoSoundButton(mainVideoEl);
 
             bobotQuestionIsTrue = Math.random() < 0.5;
             let questionVerb = correct;
             if (!bobotQuestionIsTrue) {
-                const others = bobotVerbManifest.verbs.filter(v => v.id !== correct.id);
+                const others = bobotRoundVerbSet.filter(v => v.id !== correct.id);
                 questionVerb = others[Math.floor(Math.random() * others.length)];
             }
+            bobotCurrentQuestionVerb = questionVerb;
 
             questionTextWrapEl.style.display = 'block';
-            document.getElementById('bobot-question-text').textContent = questionVerb.question[selectedLanguage] || questionVerb.question.en;
+            const questionText = questionVerb.question[selectedLanguage] || questionVerb.question.en;
+            document.getElementById('bobot-question-text').innerHTML = colorizeSentenceText(questionText);
+            document.getElementById('bobot-question-tts-btn').onclick = () => speakWord(questionText);
+            document.getElementById('bobot-question-tts-btn-slow').onclick = () => speakWordSlow(questionText);
 
             const yn = BOBOT_YES_NO[selectedLanguage] || BOBOT_YES_NO.en;
+            document.getElementById('bobot-yes-btn').innerHTML = colorizeSentenceText(yn[0]);
+            document.getElementById('bobot-no-btn').innerHTML = colorizeSentenceText(yn[1]);
             yesNoRowEl.style.display = 'flex';
-            document.getElementById('bobot-yes-btn').textContent = yn[0];
-            document.getElementById('bobot-no-btn').textContent = yn[1];
             document.getElementById('bobot-yes-btn').onclick = () => {
-                if (bobotQuestionIsTrue) bobotCorrectAnswer(); else bobotWrongAnswer(null);
+                if (bobotRoundLocked) return;
+                if (bobotQuestionIsTrue) { bobotCorrectAnswer(); } else { bobotWrongAnswer(); }
             };
             document.getElementById('bobot-no-btn').onclick = () => {
-                if (!bobotQuestionIsTrue) bobotCorrectAnswer(); else bobotWrongAnswer(null);
+                if (bobotRoundLocked) return;
+                if (!bobotQuestionIsTrue) { bobotCorrectAnswer(); } else { bobotWrongAnswer(); }
             };
         }
 
-        function bobotCorrectAnswer() {
+        // Builds the bilingual (target language, then English) reveal for
+        // whatever the actually-correct answer is this round - always reveals
+        // the truth regardless of whether the student got it right or wrong,
+        // since the point is reinforcing correct comprehensible input.
+        function getBobotBilingualItems() {
+            const targetLang = selectedLanguage;
+            const items = [];
+            if (bobotMode === 'statement') {
+                const targetText = bobotCurrentVerb.statement[targetLang] || bobotCurrentVerb.statement.en;
+                items.push({ text: targetText, lang: targetLang });
+                if (targetLang !== 'en') items.push({ text: bobotCurrentVerb.statement.en, lang: 'en' });
+            } else if (bobotMode === 'command') {
+                const targetText = bobotCurrentVerb.command[targetLang] || bobotCurrentVerb.command.en;
+                items.push({ text: targetText, lang: targetLang });
+                if (targetLang !== 'en') items.push({ text: bobotCurrentVerb.command.en, lang: 'en' });
+            } else if (bobotMode === 'question') {
+                const qVerb = bobotCurrentQuestionVerb || bobotCurrentVerb;
+                const yn = BOBOT_YES_NO[targetLang] || BOBOT_YES_NO.en;
+                const ynEn = BOBOT_YES_NO.en;
+                const qTarget = qVerb.question[targetLang] || qVerb.question.en;
+                const qEn = qVerb.question.en;
+                const answerTarget = bobotQuestionIsTrue ? yn[0] : yn[1];
+                const answerEn = bobotQuestionIsTrue ? ynEn[0] : ynEn[1];
+                items.push({ text: qTarget + ' ' + answerTarget, lang: targetLang });
+                if (targetLang !== 'en') items.push({ text: qEn + ' ' + answerEn, lang: 'en' });
+            }
+            return items;
+        }
+
+        async function bobotCorrectAnswer() {
+            bobotRoundLocked = true;
             playChime(true);
             bobotScore += 1;
             document.getElementById('bobot-score-text').textContent = bobotScore.toString().padStart(2, '0');
-            setTimeout(() => startBobotRound(), getCelebrationSoundDelayMs());
+            bobotRemainingPool = bobotRemainingPool.filter(v => v.id !== bobotCurrentVerb.id);
+
+            await new Promise(resolve => setTimeout(resolve, getCelebrationSoundDelayMs()));
+            await speakBilingualSequence(getBobotBilingualItems());
+            startBobotRound();
         }
 
-        function bobotWrongAnswer(wrongText) {
+        // Wrong answers no longer allow an immediate re-attempt: the round
+        // locks, the banner reveals what the correct answer actually was (in
+        // both languages, matching what gets spoken), and the student must
+        // press "Next Question" once they've understood it before moving on.
+        // The missed verb stays in the pool (never removed here), so it comes
+        // back around again later in the same round.
+        async function bobotWrongAnswer() {
+            bobotRoundLocked = true;
             playChime(false);
             bobotMistakeCount++;
+
+            const oops = BOBOT_OOPS_WORD[selectedLanguage] || BOBOT_OOPS_WORD.en;
+            const items = getBobotBilingualItems();
             const banner = document.getElementById('bobot-wrong-banner');
-            banner.textContent = wrongText ? getWrongAnswerFeedback(wrongText) : '❌ Not quite - try again!';
+            banner.textContent = oops + ' ' + items.map(item => item.text).join(' ');
             banner.classList.remove('hidden');
+
+            document.getElementById('bobot-submit-btn').style.display = 'none';
+            const nextBtn = document.getElementById('bobot-next-question-btn');
+            nextBtn.style.display = 'inline-block';
+            nextBtn.onclick = () => startBobotRound();
+
+            await speakBilingualSequence(items);
         }
+
+
 
         // Potato Parkour's equivalent of generateWhiteboard: vocabulary is fixed and
         // pre-translated, and items sit at the exact same hand-placed coordinates
@@ -5131,13 +5524,25 @@
             hi: ['हाँ', 'नहीं'], uk: ['Так', 'Ні'], ru: ['Да', 'Нет'], macedonian: ['Да', 'Не']
         };
 
+        const BOBOT_OOPS_WORD = {
+            fr: 'Oups !', en: 'Oops!', es: '¡Ups!', de: 'Ups!', it: 'Ops!',
+            ja: 'おっと！', 'zh-pinyin': 'Āiyā!', 'zh-hanzi': '哎呀！', cantonese: '哎呀！',
+            he: 'אופס!', ar: 'للأسف!', sinhala: 'අනේ!', vi: 'Ôi!', ur: 'افسوس!',
+            hi: 'उफ़!', uk: 'Ой!', ru: 'Ой!', macedonian: 'Ах!'
+        };
+
         let bobotMode = 'statement'; // 'statement' | 'command' | 'question'
         let bobotSelectedDifficulties = [1, 2, 3, 4, 5];
         let bobotScore = 0, bobotMistakeCount = 0, bobotStartTime = 0;
         let bobotCurrentVerb = null;
         let bobotRoundOptions = []; // the 4 candidate verbs for this round
-        let bobotSelectedVideoIndex = null; // commands mode: which video is currently previewing/selected
+        let bobotSelectedOptionIndex = null; // statement/command modes: which card is currently previewing/selected
         let bobotQuestionIsTrue = false; // question mode: whether the displayed question is actually true
+        let bobotCurrentQuestionVerb = null; // question mode: which verb the displayed question text is actually about (may differ from bobotCurrentVerb when the question is false)
+        let bobotRemainingPool = []; // verbs not yet answered correctly in this specific round - shrinks as each is answered correctly
+        let bobotRoundVerbSet = []; // the fixed set of verbs for the CURRENT round (capped at BOBOT_MAX_ROUND_SIZE), established once and reused until the round ends
+        let bobotRoundLocked = false; // true while wrong-answer feedback is showing, preventing further answer changes until "Next Question" is clicked
+        const BOBOT_MAX_ROUND_SIZE = 6;
 
 
         function loadPresetManifest() {
@@ -5611,12 +6016,15 @@
         // correct-answer celebration sound that just started playing.
         function getCelebrationSoundDelayMs() {
             if (!fxEnabled) return 0;
-            if (selectedLanguage === 'fr') {
+            if (selectedLanguage === 'fr' && selectedLobbyMode === 'potato') {
                 const sound = document.getElementById('correct-answer-fr-sound');
                 if (sound && !isNaN(sound.duration) && sound.duration > 0) {
                     return Math.ceil(sound.duration * 1000) + 100;
                 }
                 return 1200; // fallback if metadata hasn't loaded yet
+            }
+            if (selectedLanguage === 'fr') {
+                return 550; // matches the happy arpeggio's duration (4 notes, ~0.49s)
             }
             return 350; // matches the short synthesized success chime
         }
@@ -5643,6 +6051,8 @@
 
             document.getElementById('ui-board').style.display = 'none';
             canvas.style.display = 'none';
+            stopAllBobotVideos();
+            document.getElementById('bobot-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'flex';
         }
 
