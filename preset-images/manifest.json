@@ -779,6 +779,266 @@
           }
         }
       ]
+    },
+    {
+      "id": "school-objects",
+      "name": "School Objects",
+      "folder": "school-objects",
+      "items": [
+        {
+          "file": "un bâton de colle.png",
+          "translations": {
+            "fr": "un bâton de colle",
+            "en": "a glue stick",
+            "es": "una barra de pegamento",
+            "de": "ein Klebestift",
+            "it": "uno stick di colla",
+            "ja": "のり",
+            "zh-pinyin": "yī gēn jiāobàng",
+            "zh-hanzi": "一根胶棒",
+            "cantonese": "一支膠水筆",
+            "he": "מקל דבק",
+            "ar": "عصا صمغ",
+            "sinhala": "ගම් කූරක්",
+            "vi": "một cây keo dán",
+            "ur": "ایک گلو اسٹک",
+            "hi": "एक गोंद स्टिक",
+            "uk": "клейовий олівець",
+            "ru": "клеевой карандаш",
+            "macedonian": "лепило во стик"
+          }
+        },
+        {
+          "file": "un bureau.png",
+          "translations": {
+            "fr": "un bureau",
+            "en": "a desk",
+            "es": "un escritorio",
+            "de": "ein Schreibtisch",
+            "it": "una scrivania",
+            "ja": "机",
+            "zh-pinyin": "yī zhāng shūzhuō",
+            "zh-hanzi": "一张书桌",
+            "cantonese": "一張書枱",
+            "he": "שולחן כתיבה",
+            "ar": "مكتب",
+            "sinhala": "මේසයක්",
+            "vi": "một cái bàn học",
+            "ur": "ایک ڈیسک",
+            "hi": "एक डेस्क",
+            "uk": "письмовий стіл",
+            "ru": "письменный стол",
+            "macedonian": "биро"
+          }
+        },
+        {
+          "file": "un cahier.png",
+          "translations": {
+            "fr": "un cahier",
+            "en": "an exercise book",
+            "es": "un cuaderno",
+            "de": "ein Heft",
+            "it": "un quaderno",
+            "ja": "ノート",
+            "zh-pinyin": "yī běn liànxíběn",
+            "zh-hanzi": "一本练习本",
+            "cantonese": "一本練習簿",
+            "he": "מחברת",
+            "ar": "دفتر",
+            "sinhala": "වැඩපොතක්",
+            "vi": "một quyển vở",
+            "ur": "ایک کاپی",
+            "hi": "एक कॉपी",
+            "uk": "зошит",
+            "ru": "тетрадь",
+            "macedonian": "тетратка"
+          }
+        },
+        {
+          "file": "un crayon.png",
+          "translations": {
+            "fr": "un crayon",
+            "en": "a pencil",
+            "es": "un lápiz",
+            "de": "ein Bleistift",
+            "it": "una matita",
+            "ja": "鉛筆",
+            "zh-pinyin": "yī zhī qiānbǐ",
+            "zh-hanzi": "一支铅笔",
+            "cantonese": "一支鉛筆",
+            "he": "עיפרון",
+            "ar": "قلم رصاص",
+            "sinhala": "පැන්සලක්",
+            "vi": "một cây bút chì",
+            "ur": "ایک پنسل",
+            "hi": "एक पेंसिल",
+            "uk": "олівець",
+            "ru": "карандаш",
+            "macedonian": "молив"
+          }
+        },
+        {
+          "file": "un ordinateur.png",
+          "translations": {
+            "fr": "un ordinateur",
+            "en": "a computer",
+            "es": "un ordenador",
+            "de": "ein Computer",
+            "it": "un computer",
+            "ja": "コンピュータ",
+            "zh-pinyin": "yī tái diànnǎo",
+            "zh-hanzi": "一台电脑",
+            "cantonese": "一部電腦",
+            "he": "מחשב",
+            "ar": "حاسوب",
+            "sinhala": "පරිගණකයක්",
+            "vi": "một cái máy tính",
+            "ur": "ایک کمپیوٹر",
+            "hi": "एक कंप्यूटर",
+            "uk": "комп'ютер",
+            "ru": "компьютер",
+            "macedonian": "компјутер"
+          }
+        },
+        {
+          "file": "un sac à dos.png",
+          "translations": {
+            "fr": "un sac à dos",
+            "en": "a backpack",
+            "es": "una mochila",
+            "de": "ein Rucksack",
+            "it": "uno zaino",
+            "ja": "リュックサック",
+            "zh-pinyin": "yī gè shūbāo",
+            "zh-hanzi": "一个书包",
+            "cantonese": "一個書包",
+            "he": "תיק גב",
+            "ar": "حقيبة ظهر",
+            "sinhala": "පිට ගමන් බෑගයක්",
+            "vi": "một cái ba lô",
+            "ur": "ایک بیگ پیک",
+            "hi": "एक बैकपैक",
+            "uk": "рюкзак",
+            "ru": "рюкзак",
+            "macedonian": "ранец"
+          }
+        },
+        {
+          "file": "une boîte à lunch.png",
+          "translations": {
+            "fr": "une boîte à lunch",
+            "en": "a lunch box",
+            "es": "una lonchera",
+            "de": "eine Brotdose",
+            "it": "un porta pranzo",
+            "ja": "お弁当箱",
+            "zh-pinyin": "yī gè wǔcān hé",
+            "zh-hanzi": "一个午餐盒",
+            "cantonese": "一個飯盒",
+            "he": "קופסת אוכל",
+            "ar": "علبة غداء",
+            "sinhala": "දිවා ආහාර පෙට්ටියක්",
+            "vi": "một cái hộp cơm trưa",
+            "ur": "ایک لنچ باکس",
+            "hi": "एक लंच बॉक्स",
+            "uk": "контейнер для їжі",
+            "ru": "ланч-бокс",
+            "macedonian": "кутија за ручек"
+          }
+        },
+        {
+          "file": "une bouteille.png",
+          "translations": {
+            "fr": "une bouteille",
+            "en": "a bottle",
+            "es": "una botella",
+            "de": "eine Flasche",
+            "it": "una bottiglia",
+            "ja": "ボトル",
+            "zh-pinyin": "yī gè píngzi",
+            "zh-hanzi": "一个瓶子",
+            "cantonese": "一個樽",
+            "he": "בקבוק",
+            "ar": "زجاجة",
+            "sinhala": "බෝතලයක්",
+            "vi": "một cái chai",
+            "ur": "ایک بوتل",
+            "hi": "एक बोतल",
+            "uk": "пляшка",
+            "ru": "бутылка",
+            "macedonian": "шише"
+          }
+        },
+        {
+          "file": "une gomme.png",
+          "translations": {
+            "fr": "une gomme",
+            "en": "an eraser",
+            "es": "una goma de borrar",
+            "de": "ein Radiergummi",
+            "it": "una gomma",
+            "ja": "消しゴム",
+            "zh-pinyin": "yī kuài xiàngpí",
+            "zh-hanzi": "一块橡皮",
+            "cantonese": "一嚿擦膠",
+            "he": "מחק",
+            "ar": "ممحاة",
+            "sinhala": "මකනයක්",
+            "vi": "một cục tẩy",
+            "ur": "ایک ربڑ",
+            "hi": "एक रबड़",
+            "uk": "гумка",
+            "ru": "ластик",
+            "macedonian": "гума за бришење"
+          }
+        },
+        {
+          "file": "une tablette.png",
+          "translations": {
+            "fr": "une tablette",
+            "en": "a tablet",
+            "es": "una tableta",
+            "de": "ein Tablet",
+            "it": "un tablet",
+            "ja": "タブレット",
+            "zh-pinyin": "yī tái píngbǎn diànnǎo",
+            "zh-hanzi": "一台平板电脑",
+            "cantonese": "一部平板電腦",
+            "he": "טאבלט",
+            "ar": "جهاز لوحي",
+            "sinhala": "ටැබ්ලට් එකක්",
+            "vi": "một cái máy tính bảng",
+            "ur": "ایک ٹیبلٹ",
+            "hi": "एक टैबलेट",
+            "uk": "планшет",
+            "ru": "планшет",
+            "macedonian": "таблет"
+          }
+        },
+        {
+          "file": "une trousse.png",
+          "translations": {
+            "fr": "une trousse",
+            "en": "a pencil case",
+            "es": "un estuche",
+            "de": "ein Federmäppchen",
+            "it": "un astuccio",
+            "ja": "筆箱",
+            "zh-pinyin": "yī gè bǐhé",
+            "zh-hanzi": "一个笔盒",
+            "cantonese": "一個筆盒",
+            "he": "קלמר",
+            "ar": "مقلمة",
+            "sinhala": "පැන්සල් පෙට්ටියක්",
+            "vi": "một cái hộp bút",
+            "ur": "ایک پنسل باکس",
+            "hi": "एक पेंसिल केस",
+            "uk": "пенал",
+            "ru": "пенал",
+            "macedonian": "пенкало"
+          }
+        }
+      ]
     }
   ]
 }
