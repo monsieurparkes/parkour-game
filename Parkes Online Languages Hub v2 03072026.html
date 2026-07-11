@@ -344,26 +344,51 @@
             gap: 20px;
             padding: 8px 0;
         }
+        .landing-tools-row {
+            display: flex;
+            gap: 52px;
+            align-items: stretch;
+            justify-content: center;
+            flex-wrap: wrap;
+            transition: opacity 0.2s ease;
+        }
+        .tool-grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .tool-grid-1x2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .landing-tools-row.wb-tiles-disabled {
+            opacity: 0.35;
+            pointer-events: none;
+        }
         .tool-tile {
             width: 200px;
+            aspect-ratio: 1 / 1;
             border-radius: 40px;
             background: var(--tool-accent-soft, var(--hub-violet-soft));
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 20px 16px;
+            gap: 8px;
+            padding: 16px 16px;
             transition: transform 0.15s ease, box-shadow 0.15s ease;
             box-shadow: var(--hub-shadow-md);
             border: 2px solid transparent;
             cursor: pointer;
             text-align: center;
+            box-sizing: border-box;
+            overflow: hidden;
         }
         .tool-tile:hover { transform: translateY(-3px); box-shadow: var(--hub-shadow-lg); }
         .tool-tile:active { transform: translateY(0) scale(0.98); }
-        .tool-icon { font-size: 56px; }
-        .tool-icon-img { width: 72px; height: 72px; object-fit: contain; }
+        .tool-icon { font-size: 40px; line-height: 1; }
+        .tool-icon-img { width: 52px; height: 52px; object-fit: contain; }
         .tool-label {
             font-size: 15px;
             font-weight: 800;
@@ -371,7 +396,7 @@
             line-height: 1.25;
         }
         .tool-desc {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--hub-ink-soft);
             line-height: 1.3;
         }
@@ -534,6 +559,23 @@
             width: 100px;
             transform: rotate(-90deg);
         }
+        .wb-grapheme-add-btn, .wb-grapheme-remove-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid var(--hub-line);
+            background: var(--hub-surface);
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 13px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .wb-grapheme-add-btn:hover { background: var(--hub-mint-soft); border-color: var(--hub-mint); }
+        .wb-grapheme-remove-btn:hover { background: #fecaca; border-color: #ef4444; color: #ef4444; }
         .wb-circle-btn {
             width: 34px;
             height: 34px;
@@ -599,6 +641,7 @@
             touch-action: none;
         }
         #wb-canvas-wrap.wb-panning { cursor: grabbing; }
+        #wb-canvas-wrap.wb-space-pan-mode { cursor: grab; }
         #wb-background-layer { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
         .wb-custom-bg-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         #wb-bg-settings button.wb-mode-active { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
@@ -629,6 +672,15 @@
             user-select: none;
         }
         .wb-element.wb-selected { outline: 2px dashed var(--hub-plum); outline-offset: 2px; }
+        .wb-element.wb-multi-selected { outline: 2px dashed var(--hub-plum); outline-offset: 2px; opacity: 0.92; }
+        #wb-selection-box {
+            position: absolute;
+            border: 2px dashed var(--hub-plum);
+            background: rgba(139, 92, 246, 0.1);
+            pointer-events: none;
+            display: none;
+            z-index: 500;
+        }
         .wb-element-content { width: 100%; height: 100%; }
 
         .wb-handle {
@@ -723,6 +775,20 @@
             box-sizing: border-box;
         }
         .wb-clock-text { font-weight: 900; font-variant-numeric: tabular-nums; color: var(--hub-ink); }
+
+        .wb-date-element .wb-element-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--hub-surface);
+            border: 3px solid var(--hub-line);
+            border-radius: 14px;
+            box-sizing: border-box;
+            padding: 6px 10px;
+            overflow: hidden;
+        }
+        .wb-date-text { font-weight: 700; color: var(--hub-ink); flex: 1; min-width: 0; text-align: center; }
 
         .wb-timer-element .wb-element-content {
             position: relative;
@@ -882,7 +948,7 @@
             color: var(--hub-ink);
             z-index: 5;
         }
-        .wb-traffic-element:hover .wb-traffic-settings-btn { display: flex; }
+        .wb-traffic-element:hover .wb-traffic-settings-btn, .wb-date-element:hover .wb-traffic-settings-btn { display: flex; }
         .wb-traffic-settings-panel {
             position: absolute;
             top: -14px;
@@ -1104,11 +1170,20 @@
                     <p><strong>Parkour Kart:</strong> race around a track and drive over the card showing the correct word among several on offer — a faster-paced, more physical spin on the same vocabulary-matching idea.</p>
                     <p><strong>Potato Parkour:</strong> a ready-made vocabulary hunt around a house, with no setup needed — just pick a player and go. Good for a quick warm-up or filler activity.</p>
                     <p><strong>Go Go Bobot!:</strong> a video-based verb-matching game starring Bobot the robot koala. Choose between Statements (pick the sentence matching what Bobot is doing), Commands (pick the video matching a written command), or Questions (watch and answer yes or no) — great for practising verbs and comprehension together.</p>
+                    <p><strong>Whiteboard:</strong> a digital canvas for classroom display — add and freely drag/resize/rotate text boxes, images, and a set of built-in tools (a noise-level traffic light, countdown timer, clock, and translated date) via the tools menu. Text automatically colour-codes using the same grapheme rules as the rest of the hub, and everything you set up is saved automatically and restored next time you open it.</p>
                     <p><strong>Colour Coder:</strong> paste any text to colour-code target graphemes instantly, then copy the formatted result into another document.</p>
                     <p><strong>Custom graphemes:</strong> use square brackets around any letters you want excluded from colour-coding rules — useful for exceptions within an otherwise-matching word.</p>
                     <p><strong>Assessment:</strong> add a student's name before starting Parkour, Picture Parkour, or Go Go Bobot!, and a results screen with accuracy, timing, and mistake data will appear once the activity is complete — good for a screenshot to submit as evidence of practice.</p>
                 </div>
                 <button id="how-to-close-btn" class="hub-btn-primary w-full mt-6">Got it</button>
+            </div>
+        </div>
+
+        <div id="share-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
+            <div class="hub-font p-8 flex flex-col items-center gap-4" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M2 2.5h7m1 0h4m1 0h3m2 0h1m3 0h7M2 3.5h1m5 0h1m1 0h2m1 0h5m1 0h1m1 0h1m2 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m4 0h2m3 0h2m2 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h2m1 0h4m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m2 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m2 0h1m1 0h4m1 0h2m4 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m1 0h1m2 0h2m3 0h1M2 10.5h1m2 0h6m3 0h7m2 0h1m2 0h1m1 0h3M2 11.5h1m1 0h1m1 0h1m5 0h2m2 0h2m1 0h3m1 0h1m1 0h2m1 0h2M2 12.5h1m2 0h4m1 0h1m2 0h2m1 0h3m3 0h2m1 0h1m2 0h1M2 13.5h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1M2 14.5h1m1 0h3m1 0h2m2 0h2m1 0h3m4 0h1m1 0h2m4 0h1M3 15.5h1m1 0h3m1 0h6m2 0h2m1 0h1m3 0h1m1 0h5M2 16.5h2m4 0h7m1 0h10m2 0h1m1 0h1M2 17.5h1m1 0h1m5 0h1m1 0h5m1 0h1m2 0h1m1 0h4m1 0h1m1 0h1M4 18.5h5m3 0h1m1 0h1m6 0h2m4 0h1M2 19.5h5m2 0h1m4 0h1m2 0h1m2 0h4m2 0h1m1 0h2M2 20.5h2m1 0h2m1 0h1m1 0h2m3 0h3m3 0h1m1 0h2m2 0h1m2 0h1M2 21.5h3m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m3 0h1m1 0h5M2 22.5h3m1 0h1m1 0h1m6 0h1m2 0h2m1 0h9M10 23.5h1m1 0h2m1 0h1m1 0h6m3 0h2M2 24.5h7m1 0h4m1 0h1m1 0h3m1 0h2m1 0h1m1 0h2M2 25.5h1m5 0h1m1 0h2m3 0h1m3 0h1m1 0h2m3 0h1m2 0h1M2 26.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m2 0h8m1 0h2M2 27.5h1m1 0h3m1 0h1m1 0h1m3 0h7m1 0h2m1 0h1m4 0h1M2 28.5h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h1m1 0h1m3 0h1m1 0h2m1 0h3M2 29.5h1m5 0h1m4 0h2m3 0h1m1 0h1m4 0h1m1 0h2m1 0h1M2 30.5h7m1 0h4m3 0h1m3 0h2m1 0h1m1 0h2"/></svg>
+                <p class="font-bold" style="color:var(--hub-ink); font-size:35px;">www.parkesonline.com.au/hub</p>
+                <button id="share-close-btn" class="hub-circle-btn interactive" title="Close" style="width:34px; height:34px;">✕</button>
             </div>
         </div>
 
@@ -1130,66 +1205,49 @@
                         <div id="mode-coder"></div>
                     </div>
 
-                    <!-- STEP 1: Language & Date -->
-                    <div id="landing-step-language" class="landing-step">
-                        <div class="flex flex-col sm:flex-row gap-4 mb-6">
-                            <!-- Global Target Language Selector -->
-                            <div class="hub-group hub-font flex-1 p-5">
-                                <label for="global-language-select" class="hub-label">Select Target Language</label>
-                                <select id="global-language-select" class="hub-input">
-                                    <option value="fr" selected>French (Français)</option>
-                                    <option value="en">English</option>
-                                    <option value="zh-pinyin">Mandarin (Pinyin)</option>
-                                    <option value="zh-hanzi">Mandarin (Hanzi)</option>
-                                    <option value="cantonese">Cantonese</option>
-                                    <option value="ja">Japanese (日本語)</option>
-                                    <option value="de">German (Deutsch)</option>
-                                    <option value="it">Italian (Italiano)</option>
-                                    <option value="es">Spanish (Español)</option>
-                                    <option value="he">Hebrew (עברית)</option>
-                                    <option value="ar">Arabic (العربية)</option>
-                                    <option value="sinhala">Sinhala (සිංහල)</option>
-                                    <option value="vi">Vietnamese (Tiếng Việt)</option>
-                                    <option value="ur">Urdu (اردو)</option>
-                                    <option value="hi">Hindi (हिन्दी)</option>
-                                    <option value="uk">Ukrainian (Українська)</option>
-                                    <option value="ru">Russian (Русский)</option>
-                                    <option value="macedonian">Macedonian (Македонски)</option>
-                                </select>
-                            </div>
-
-                            <!-- Dynamic Date Bar -->
-                            <div class="flex-1 flex flex-col gap-1.5 max-w-full">
-                                <div class="hub-group flex items-center justify-center gap-3 p-5 w-full h-full">
-                                    <span id="french-date-text" dir="auto" class="text-sm leading-snug" style="color:var(--hub-ink);">Calcul de la date...</span>
-                                    <button id="tts-date-btn" class="hub-btn-ghost interactive p-2.5 flex-shrink-0" title="Listen to date">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                                    </button>
-                                    <button id="tts-date-btn-slow" class="hub-btn-ghost interactive p-1.5 flex-shrink-0" title="Listen Slowly">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
-                                    </button>
-                                </div>
-                                <span id="date-voice-warning" class="hub-font hidden text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-2 py-1"></span>
-                            </div>
+                    <!-- STEP 1 (merged): Language + Tool selection -->
+                    <div id="landing-step-wheel" class="landing-step">
+                        <div class="hub-group hub-font mb-6">
+                            <select id="global-language-select" class="hub-input">
+                                <option value="" selected disabled>Choose a target language to begin...</option>
+                                <option value="fr">French (Français)</option>
+                                <option value="en">English</option>
+                                <option value="zh-pinyin">Mandarin (Pinyin)</option>
+                                <option value="zh-hanzi">Mandarin (Hanzi)</option>
+                                <option value="cantonese">Cantonese</option>
+                                <option value="ja">Japanese (日本語)</option>
+                                <option value="de">German (Deutsch)</option>
+                                <option value="it">Italian (Italiano)</option>
+                                <option value="es">Spanish (Español)</option>
+                                <option value="he">Hebrew (עברית)</option>
+                                <option value="ar">Arabic (العربية)</option>
+                                <option value="sinhala">Sinhala (සිංහල)</option>
+                                <option value="vi">Vietnamese (Tiếng Việt)</option>
+                                <option value="ur">Urdu (اردو)</option>
+                                <option value="hi">Hindi (हिन्दी)</option>
+                                <option value="uk">Ukrainian (Українська)</option>
+                                <option value="ru">Russian (Русский)</option>
+                                <option value="macedonian">Macedonian (Македонски)</option>
+                            </select>
                         </div>
 
-                        <div class="flex items-center justify-center gap-3 flex-wrap">
-                            <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                                ❓ How to Use This Hub
-                            </button>
-                            <button id="landing-lang-next-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
-                            <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                                <span class="fullscreen-btn-label">Full Screen</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- STEP 2: Tool Wheel -->
-                    <div id="landing-step-wheel" class="landing-step" style="display:none;">
                         <h2 class="hub-step-title">What would you like to do?</h2>
-                        <div id="tool-grid" class="tool-grid"></div>
-                        <div class="flex justify-center gap-3 mt-6">
-                            <button id="wheel-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
+                        <div id="landing-tools-row" class="landing-tools-row">
+                            <div id="tool-grid-main" class="tool-grid-2x2"></div>
+                            <div id="tool-grid-side" class="tool-grid-1x2"></div>
+                        </div>
+
+                        <div class="flex items-center justify-center gap-3 flex-wrap mt-6">
+                            <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                                How to Use This Hub
+                            </button>
+                            <button id="share-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                                Share
+                            </button>
+                            <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive" title="Full Screen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
+                            </button>
                         </div>
                     </div>
 
@@ -1234,6 +1292,12 @@
                             <div class="hub-row">
                                 <label for="potato-student-name-input" class="hub-label">Student Name (optional)</label>
                                 <input type="text" id="potato-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                            </div>
+                            <div class="hub-row">
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="potato-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="potato-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
+                                </div>
                             </div>
                         </div>
 
@@ -1297,6 +1361,20 @@
                                 <textarea id="kart-vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
                                 <p class="hub-hint">Up to 8 words total on the track right now, combined from whichever of the above you use.</p>
                             </div>
+                            <div class="hub-row">
+                                <label class="hub-label">Have a code? (optional)</label>
+                                <div style="display:flex; gap:8px; align-items:center;">
+                                    <input type="text" id="kart-vocab-code-input" class="hub-input" placeholder="Enter code" style="flex:1; text-transform:uppercase;">
+                                    <button id="kart-vocab-code-go-btn" class="hub-btn-primary interactive">Go</button>
+                                </div>
+                                <p id="kart-vocab-code-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Oops! Try again!</p>
+                            </div>
+                            <div class="hub-row">
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="kart-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="kart-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Shared Parkour Settings Panel -->
@@ -1326,6 +1404,15 @@
                                 <label class="hub-label">Vocabulary List (separated by commas)</label>
                                 <textarea id="vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
                                 <p class="hub-hint">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
+                            </div>
+
+                            <div class="hub-row">
+                                <label class="hub-label">Have a code? (optional)</label>
+                                <div style="display:flex; gap:8px; align-items:center;">
+                                    <input type="text" id="vocab-code-input" class="hub-input" placeholder="Enter code" style="flex:1; text-transform:uppercase;">
+                                    <button id="vocab-code-go-btn" class="hub-btn-primary interactive">Go</button>
+                                </div>
+                                <p id="vocab-code-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Oops! Try again!</p>
                             </div>
 
                             <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1570,6 +1657,7 @@
                         <button id="wb-add-traffic-btn" class="hub-btn-ghost interactive w-full">🚦 Noise Light</button>
                         <button id="wb-add-timer-btn" class="hub-btn-ghost interactive w-full">⏱️ Timer</button>
                         <button id="wb-add-clock-btn" class="hub-btn-ghost interactive w-full">🕐 Clock</button>
+                        <button id="wb-add-date-btn" class="hub-btn-ghost interactive w-full">📅 Date</button>
                     </div>
                 </div>
 
@@ -1670,6 +1758,10 @@
                 <div id="wb-graphemes-wrap" class="wb-dropdown-wrap">
                     <button id="wb-graphemes-toggle-btn" class="hub-btn-ghost interactive">🎨 Colour-Coding</button>
                     <div id="wb-graphemes-panel" class="wb-dropdown-menu hub-font text-left" style="display:none; min-width:260px;">
+                        <div id="wb-default-grapheme-row" class="flex items-center gap-2 mb-2" style="display:none;">
+                            <span class="text-[11px] font-bold" style="color:var(--hub-ink-soft);">All other text</span>
+                            <input type="color" id="wb-default-grapheme-color" value="#b4b4b4" class="w-6 h-6 rounded-lg cursor-pointer border border-slate-200">
+                        </div>
                         <div id="wb-sinhala-preset-row" style="display:none;">
                             <label class="hub-label">Sinhala Vowel Signs</label>
                             <div id="wb-sinhala-preset-list" class="flex flex-wrap gap-1.5 mb-2"></div>
@@ -1716,6 +1808,7 @@
             <div id="wb-canvas-wrap">
                 <div id="wb-background-layer"></div>
                 <div id="wb-world"></div>
+                <div id="wb-selection-box"></div>
             </div>
 
             <div id="wb-context-menu" class="wb-dropdown-menu" style="display:none; position:fixed;">
@@ -1768,7 +1861,7 @@
                     <div id="kart-settings-panel" class="hidden absolute right-0 bottom-full mb-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
                         <div>
                             <label for="kart-music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
-                            <input type="range" id="kart-music-volume-slider" min="0" max="100" value="50" class="w-full">
+                            <input type="range" id="kart-music-volume-slider" min="0" max="100" value="25" class="w-full">
                         </div>
                         <div>
                             <label for="kart-tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
@@ -1860,7 +1953,7 @@
                             <div id="settings-panel" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
                                 <div>
                                     <label for="music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
-                                    <input type="range" id="music-volume-slider" min="0" max="100" value="50" class="w-full">
+                                    <input type="range" id="music-volume-slider" min="0" max="100" value="25" class="w-full">
                                 </div>
                                 <div>
                                     <label for="tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
@@ -2028,7 +2121,7 @@
         let customMoveSpeed = 3.0;
         let debugMode = false; 
         // Audio settings controlled from the top-right settings menu
-        let musicVolume = 0.5;
+        let musicVolume = 0.25;
         let ttsVolume = 1.0;
         let fxEnabled = true;
         const DEBUG_MODE_PASSWORD = 'BOBOTDITBOUMBOUM';
@@ -2910,7 +3003,8 @@
 
         function updateDateHeader() {
             const dateText = getLocalizedDate(selectedLanguage);
-            document.getElementById('french-date-text').innerHTML = colorizeSentenceText(dateText);
+            const dateEl = document.getElementById('french-date-text');
+            if (dateEl) dateEl.innerHTML = colorizeSentenceText(dateText);
             setVoiceWarning('date-voice-warning', LANG_MAP[selectedLanguage]);
         }
 
@@ -3079,7 +3173,7 @@
                         if (char === '<') escapedChar = '&lt;';
                         else if (char === '>') escapedChar = '&gt;';
                         else if (char === '&') escapedChar = '&amp;';
-                        return `<span style="color: #b4b4b4; font-weight: bold;">${escapedChar}</span>`;
+                        return `<span style="color: ${defaultGraphemeColor}; font-weight: bold;">${escapedChar}</span>`;
                     }).join('');
                 }
             });
@@ -3153,9 +3247,12 @@
         let wbElements = []; // { id, type: 'text'|'image'|'traffic', x, y, width, height, rotation, zIndex, text?, src?, trafficState? }
         let wbNextElementId = 1;
         let wbSelectedElementId = null;
+        let wbMultiSelectedIds = new Set();
+        let wbSpaceHeld = false;
         let wbEditingElementId = null; // which text element currently has its content editable
         let wbPanX = 0, wbPanY = 0, wbZoom = 1;
         let wbCurrentBackground = 'none';
+        let wbDefaultGraphemeColor = '#b4b4b4';
         let wbBackgroundMode = 'dynamic'; // 'static' | 'dynamic', only relevant for custom video backgrounds
         let wbBackgroundVolume = 0.7;
         let wbCustomGraphemes = [{ text: '', color: '#ef4444' }];
@@ -3231,7 +3328,8 @@
                 backgroundVolume: wbBackgroundVolume,
                 language: document.getElementById('wb-language-select').value,
                 font: document.getElementById('wb-font-select').value,
-                customGraphemes: wbCustomGraphemes
+                customGraphemes: wbCustomGraphemes,
+                defaultGraphemeColor: wbDefaultGraphemeColor
             };
         }
 
@@ -3268,6 +3366,8 @@
             wbApplyFont();
             wbApplyBackground();
             wbUpdateSinhalaPresetVisibility();
+            wbUpdateDefaultGraphemeRowVisibility();
+            wbRenderGraphemeEditors();
             wbPrecacheTrafficNumbers();
             try {
                 const db = await wbGetDB();
@@ -3292,6 +3392,9 @@
             document.getElementById('wb-language-select').value = state.language || 'fr';
             document.getElementById('wb-font-select').value = state.font || 'dyslexic';
             wbCustomGraphemes = (state.customGraphemes && state.customGraphemes.length) ? state.customGraphemes : [{ text: '', color: '#ef4444' }];
+            wbDefaultGraphemeColor = state.defaultGraphemeColor || '#b4b4b4';
+            const defaultColorInput = document.getElementById('wb-default-grapheme-color');
+            if (defaultColorInput) defaultColorInput.value = wbDefaultGraphemeColor;
             wbElements = (state.elements || []).map(el => {
                 const copy = Object.assign({}, el);
                 if (copy.type === 'timer') { copy.running = false; copy._intervalId = null; copy.finished = false; copy._ringIntervalId = null; }
@@ -3308,6 +3411,7 @@
             wbUpdateZoomDisplay();
             wbRenderGraphemeEditors();
             wbUpdateSinhalaPresetVisibility();
+                wbUpdateDefaultGraphemeRowVisibility();
             wbPrecacheTrafficNumbers();
             wbRenderAllElements();
         }
@@ -3333,12 +3437,14 @@
             if (wbWiredUp) return;
             wbWiredUp = true;
             setInterval(wbTickAllClocks, 1000);
+            setInterval(wbUpdateAllDateElements, 60000);
 
             document.getElementById('wb-back-btn').onclick = resetToConfig;
 
             document.getElementById('wb-language-select').addEventListener('change', () => {
                 wbRenderAllElements();
                 wbUpdateSinhalaPresetVisibility();
+                wbUpdateDefaultGraphemeRowVisibility();
                 wbPrecacheTrafficNumbers();
                 wbDebouncedSave();
             });
@@ -3392,6 +3498,11 @@
                 const panel = document.getElementById('wb-graphemes-panel');
                 panel.style.display = (panel.style.display === 'none' || !panel.style.display) ? 'flex' : 'none';
             };
+            document.getElementById('wb-default-grapheme-color').addEventListener('input', (e) => {
+                wbDefaultGraphemeColor = e.target.value;
+                wbRenderAllElements();
+                wbDebouncedSave();
+            });
             document.addEventListener('click', (e) => {
                 const wrap = document.getElementById('wb-graphemes-wrap');
                 if (wrap && !wrap.contains(e.target)) document.getElementById('wb-graphemes-panel').style.display = 'none';
@@ -3428,6 +3539,11 @@
             document.getElementById('wb-add-clock-btn').onclick = () => {
                 const center = wbScreenToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
                 wbCreateClockElement(center.x - 90, center.y - 35);
+                document.getElementById('wb-tools-menu').style.display = 'none';
+            };
+            document.getElementById('wb-add-date-btn').onclick = () => {
+                const center = wbScreenToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                wbCreateDateElement(center.x - 140, center.y - 35);
                 document.getElementById('wb-tools-menu').style.display = 'none';
             };
             document.getElementById('wb-add-image-btn').onclick = () => document.getElementById('wb-image-file-input').click();
@@ -3596,9 +3712,24 @@
             const canvasWrap = document.getElementById('wb-canvas-wrap');
             let isPanning = false, panStart = null, panOriginX = 0, panOriginY = 0;
             let pinchStartDistance = null, pinchStartZoom = 1;
+            let isSelecting = false, selectStart = null;
+
+            const startSelectionBox = (e) => {
+                isSelecting = true;
+                const rect = canvasWrap.getBoundingClientRect();
+                selectStart = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+                const box = document.getElementById('wb-selection-box');
+                box.style.display = 'block';
+                box.style.left = selectStart.x + 'px';
+                box.style.top = selectStart.y + 'px';
+                box.style.width = '0px';
+                box.style.height = '0px';
+                wbSelectElement(null);
+            };
 
             const startPan = (e) => {
                 if (!wbIsEmptyCanvasTarget(e.target)) return;
+                if (!wbSpaceHeld) { startSelectionBox(e); return; }
                 isPanning = true;
                 panStart = wbPointerXY(e);
                 panOriginX = wbPanX; panOriginY = wbPanY;
@@ -3614,14 +3745,39 @@
             });
 
             document.addEventListener('mousemove', (e) => {
-                if (!isPanning) return;
-                const p = wbPointerXY(e);
-                wbPanX = panOriginX + (p.x - panStart.x);
-                wbPanY = panOriginY + (p.y - panStart.y);
-                wbApplyWorldTransform();
+                if (isPanning) {
+                    const p = wbPointerXY(e);
+                    wbPanX = panOriginX + (p.x - panStart.x);
+                    wbPanY = panOriginY + (p.y - panStart.y);
+                    wbApplyWorldTransform();
+                } else if (isSelecting) {
+                    const rect = canvasWrap.getBoundingClientRect();
+                    const current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+                    const box = document.getElementById('wb-selection-box');
+                    box.style.left = Math.min(selectStart.x, current.x) + 'px';
+                    box.style.top = Math.min(selectStart.y, current.y) + 'px';
+                    box.style.width = Math.abs(current.x - selectStart.x) + 'px';
+                    box.style.height = Math.abs(current.y - selectStart.y) + 'px';
+                }
             });
             document.addEventListener('mouseup', () => {
                 if (isPanning) { isPanning = false; canvasWrap.classList.remove('wb-panning'); wbDebouncedSave(); }
+                if (isSelecting) {
+                    isSelecting = false;
+                    const box = document.getElementById('wb-selection-box');
+                    const boxRect = box.getBoundingClientRect();
+                    box.style.display = 'none';
+                    // A tiny box (essentially just a click) shouldn't count as a drag-select
+                    if (boxRect.width > 4 || boxRect.height > 4) {
+                        const selectedIds = [];
+                        document.querySelectorAll('.wb-element').forEach(el => {
+                            const elRect = el.getBoundingClientRect();
+                            const intersects = !(elRect.right < boxRect.left || elRect.left > boxRect.right || elRect.bottom < boxRect.top || elRect.top > boxRect.bottom);
+                            if (intersects) selectedIds.push(parseInt(el.dataset.id, 10));
+                        });
+                        if (selectedIds.length) wbSetMultiSelection(selectedIds);
+                    }
+                }
             });
 
             canvasWrap.addEventListener('wheel', (e) => {
@@ -3705,6 +3861,27 @@
                 // keypress.
             });
 
+            // Holding space switches empty-canvas drag from "draw a
+            // selection box" to "pan the canvas" - matches the common
+            // design-tool convention (Figma, etc).
+            document.addEventListener('keydown', (e) => {
+                if (document.getElementById('whiteboard-screen').style.display !== 'flex') return;
+                const active = document.activeElement;
+                const isFormField = active && (['INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName) || active.isContentEditable);
+                if (isFormField) return;
+                if (e.code === 'Space' && !wbSpaceHeld) {
+                    e.preventDefault();
+                    wbSpaceHeld = true;
+                    document.getElementById('wb-canvas-wrap').classList.add('wb-space-pan-mode');
+                }
+            });
+            document.addEventListener('keyup', (e) => {
+                if (e.code === 'Space') {
+                    wbSpaceHeld = false;
+                    document.getElementById('wb-canvas-wrap').classList.remove('wb-space-pan-mode');
+                }
+            });
+
             // Clipboard paste - an image (e.g. copied from a webpage) becomes
             // a new image element; otherwise falls back to pasting a
             // previously-copied whiteboard element via Ctrl+C.
@@ -3760,6 +3937,14 @@
 
         function wbCreateClockElement(x, y) {
             const el = { id: wbNextElementId++, type: 'clock', x, y, width: 180, height: 70, rotation: 0, zIndex: wbElements.length + 1 };
+            wbElements.push(el);
+            wbRenderAllElements();
+            wbSelectElement(el.id);
+            wbDebouncedSave();
+        }
+
+        function wbCreateDateElement(x, y) {
+            const el = { id: wbNextElementId++, type: 'date', x, y, width: 280, height: 70, rotation: 0, zIndex: wbElements.length + 1 };
             wbElements.push(el);
             wbRenderAllElements();
             wbSelectElement(el.id);
@@ -3832,8 +4017,27 @@
         function wbSelectElement(id) {
             if (wbEditingElementId !== null && wbEditingElementId !== id) wbExitTextEditMode(wbEditingElementId);
             wbSelectedElementId = id;
+            wbMultiSelectedIds = id === null ? new Set() : new Set([id]);
             document.querySelectorAll('.wb-element').forEach(el => {
-                el.classList.toggle('wb-selected', parseInt(el.dataset.id, 10) === id);
+                const elId = parseInt(el.dataset.id, 10);
+                el.classList.toggle('wb-selected', elId === id);
+                el.classList.remove('wb-multi-selected');
+            });
+            wbUpdateTextSettingsBar();
+        }
+
+        // Applies a multi-selection from the rubber-band box - the first id
+        // becomes the "primary" selection (gets resize/rotate handles and
+        // drives the text settings bar if applicable), the rest just get a
+        // selection border so a whole group is visibly selected together.
+        function wbSetMultiSelection(ids) {
+            if (wbEditingElementId !== null) wbExitTextEditMode(wbEditingElementId);
+            wbMultiSelectedIds = new Set(ids);
+            wbSelectedElementId = ids.length ? ids[0] : null;
+            document.querySelectorAll('.wb-element').forEach(el => {
+                const elId = parseInt(el.dataset.id, 10);
+                el.classList.toggle('wb-selected', elId === wbSelectedElementId);
+                el.classList.toggle('wb-multi-selected', wbMultiSelectedIds.has(elId) && elId !== wbSelectedElementId);
             });
             wbUpdateTextSettingsBar();
         }
@@ -3903,6 +4107,9 @@
             } else if (elData.type === 'clock') {
                 const clockText = domEl.querySelector('.wb-clock-text');
                 if (clockText) clockText.style.fontSize = Math.max(10, elData.height * 0.4) + 'px';
+            } else if (elData.type === 'date') {
+                const dateText = domEl.querySelector('.wb-date-text');
+                if (dateText) wbFitDateText(dateText, elData.width, elData.height);
             }
         }
 
@@ -3914,11 +4121,14 @@
         function wbColorizeForDisplay(text) {
             const savedGraphemes = customGraphemes;
             const savedLang = selectedLanguage;
+            const savedDefaultColor = defaultGraphemeColor;
             customGraphemes = wbCustomGraphemes;
             selectedLanguage = document.getElementById('wb-language-select').value;
+            defaultGraphemeColor = wbDefaultGraphemeColor;
             const html = colorizeSentenceText(text);
             customGraphemes = savedGraphemes;
             selectedLanguage = savedLang;
+            defaultGraphemeColor = savedDefaultColor;
             return html;
         }
 
@@ -4102,6 +4312,41 @@
             } else if (elData.type === 'clock') {
                 content.innerHTML = `<div class="wb-clock-text"></div>`;
                 wbUpdateClockVisual(el);
+            } else if (elData.type === 'date') {
+                if (elData.dateFormat === undefined) elData.dateFormat = 'sentence';
+                content.innerHTML = `<div class="wb-date-text"></div>`;
+                wbUpdateDateVisual(el);
+
+                const settingsBtn = document.createElement('button');
+                settingsBtn.className = 'wb-traffic-settings-btn';
+                settingsBtn.textContent = '⋯';
+                el.appendChild(settingsBtn);
+
+                const panel = document.createElement('div');
+                panel.className = 'wb-traffic-settings-panel';
+                panel.innerHTML = `
+                    <label>Date format</label>
+                    <button type="button" class="wb-date-format-btn" data-format="sentence">Sentence</button>
+                    <button type="button" class="wb-date-format-btn" data-format="ddmmyyyy">DD/MM/YYYY</button>
+                    <button type="button" class="wb-date-format-btn" data-format="mmddyyyy">MM/DD/YYYY</button>
+                `;
+                el.appendChild(panel);
+
+                settingsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    panel.classList.toggle('wb-open');
+                });
+                panel.addEventListener('click', (e) => e.stopPropagation());
+                panel.addEventListener('mousedown', (e) => e.stopPropagation());
+                panel.querySelectorAll('.wb-date-format-btn').forEach(btn => {
+                    btn.classList.toggle('wb-mode-active', btn.dataset.format === elData.dateFormat);
+                    btn.addEventListener('click', () => {
+                        elData.dateFormat = btn.dataset.format;
+                        panel.querySelectorAll('.wb-date-format-btn').forEach(b => b.classList.toggle('wb-mode-active', b === btn));
+                        wbUpdateDateVisual(el);
+                        wbDebouncedSave();
+                    });
+                });
             }
 
             wbPositionElementDOM(el, elData); // re-applied now that content exists, so font-scaling actually takes effect on first build
@@ -4129,7 +4374,13 @@
                 if (elData.type === 'text' && wbEditingElementId === elData.id) return; // let typing/clicking inside an editing text box work normally
                 if (e.target.closest && (e.target.closest('.wb-timer-controls') || e.target.closest('.wb-timer-finished-overlay'))) return; // let the timer's own inputs/buttons receive focus and clicks normally
                 e.preventDefault();
-                wbSelectElement(elData.id);
+                // Clicking an element that's already part of a multi-selected
+                // group shouldn't collapse that selection down to just this
+                // one item - the user is almost certainly trying to drag the
+                // whole group, not re-select a single element.
+                if (!(wbMultiSelectedIds.size > 1 && wbMultiSelectedIds.has(elData.id))) {
+                    wbSelectElement(elData.id);
+                }
                 wbStartElementDrag(elData, e);
             };
             el.addEventListener('mousedown', startInteraction);
@@ -4270,13 +4521,26 @@
                 elData = duplicate;
             }
 
+            // If multiple elements are selected and the dragged one is part
+            // of that group, move all of them together, preserving their
+            // relative positions - this is what makes "select many, drag
+            // one" reposition the whole group.
+            const isGroupDrag = wbMultiSelectedIds.size > 1 && wbMultiSelectedIds.has(elData.id);
+            const groupElements = isGroupDrag
+                ? wbElements.filter(e => wbMultiSelectedIds.has(e.id))
+                : [elData];
+            const origins = groupElements.map(e => ({ el: e, x: e.x, y: e.y }));
+
             const start = wbPointerXY(startEvent);
-            const originX = elData.x, originY = elData.y;
             function onMove(e) {
                 const p = wbPointerXY(e);
-                elData.x = originX + (p.x - start.x) / wbZoom;
-                elData.y = originY + (p.y - start.y) / wbZoom;
-                wbUpdateElementDOM(elData);
+                const dx = (p.x - start.x) / wbZoom;
+                const dy = (p.y - start.y) / wbZoom;
+                origins.forEach(o => {
+                    o.el.x = o.x + dx;
+                    o.el.y = o.y + dy;
+                    wbUpdateElementDOM(o.el);
+                });
             }
             function onUp() {
                 document.removeEventListener('mousemove', onMove);
@@ -4407,20 +4671,44 @@
                     <div class="flex items-center gap-2">
                         <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
                         <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
+                        <button type="button" class="wb-grapheme-add-btn" title="Add another target grapheme">+</button>
+                        <button type="button" class="wb-grapheme-remove-btn" title="Remove this row">✕</button>
                     </div>
                     <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
                 const textInput = row.querySelector('input[type="text"]');
                 const colorInput = row.querySelector('input[type="color"]');
                 const codeLabel = row.querySelector('.codepoint-label');
+                // Deliberately does NOT call wbRenderGraphemeEditors() here -
+                // rebuilding the whole list on every keystroke destroyed and
+                // recreated the input the person was actively typing in,
+                // kicking their focus out mid-word. Typing just updates the
+                // data and colourises the canvas live; the row list itself
+                // only rebuilds when rows are actually added or removed.
                 textInput.addEventListener('input', (e) => {
                     wbCustomGraphemes[idx].text = e.target.value;
                     codeLabel.textContent = getCodePointsLabel(e.target.value);
-                    wbSyncGraphemeArray();
+                    wbRenderAllElements();
+                    wbDebouncedSave();
                 });
                 colorInput.addEventListener('input', (e) => {
                     wbCustomGraphemes[idx].color = e.target.value;
-                    wbSyncGraphemeArray();
+                    wbRenderAllElements();
+                    wbDebouncedSave();
+                });
+                row.querySelector('.wb-grapheme-add-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    wbCustomGraphemes.splice(idx + 1, 0, { text: '', color: '#ef4444' });
+                    wbRenderGraphemeEditors();
+                    wbDebouncedSave();
+                });
+                row.querySelector('.wb-grapheme-remove-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    wbCustomGraphemes.splice(idx, 1);
+                    if (wbCustomGraphemes.length === 0) wbCustomGraphemes.push({ text: '', color: '#ef4444' });
+                    wbRenderGraphemeEditors();
+                    wbRenderAllElements();
+                    wbDebouncedSave();
                 });
                 container.appendChild(row);
             });
@@ -4509,6 +4797,18 @@
             if (show) wbRenderSinhalaPresetRow();
         }
 
+        function wbUpdateDefaultGraphemeRowVisibility() {
+            const isFrench = document.getElementById('wb-language-select').value === 'fr';
+            const row = document.getElementById('wb-default-grapheme-row');
+            if (row) row.style.display = isFrench ? 'none' : 'flex';
+            if (isFrench && wbDefaultGraphemeColor !== '#b4b4b4') {
+                wbDefaultGraphemeColor = '#b4b4b4';
+                const colorInput = document.getElementById('wb-default-grapheme-color');
+                if (colorInput) colorInput.value = '#b4b4b4';
+                wbRenderAllElements();
+            }
+        }
+
         // --- Traffic light: individual light clicks, red countdown with TTS ---
         function wbHandleTrafficLightClick(elData, color) {
             const el = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
@@ -4549,7 +4849,7 @@
         // overridden.
         function wbColorizeCountdownDisplay(text) {
             let html = wbColorizeForDisplay(text);
-            if (defaultGraphemeColor === '#b4b4b4') {
+            if (wbDefaultGraphemeColor === '#b4b4b4') {
                 html = html.replace(/color:\s*#b4b4b4/g, 'color: white');
             }
             return html;
@@ -4661,6 +4961,43 @@
 
         function wbTickAllClocks() {
             document.querySelectorAll('.wb-clock-element').forEach(domEl => wbUpdateClockVisual(domEl));
+        }
+
+        function wbUpdateDateVisual(domEl) {
+            const textEl = domEl.querySelector('.wb-date-text');
+            if (!textEl) return;
+            const elData = wbElements.find(e => e.id === parseInt(domEl.dataset.id, 10));
+            const format = (elData && elData.dateFormat) || 'sentence';
+
+            let dateText;
+            if (format === 'ddmmyyyy' || format === 'mmddyyyy') {
+                const now = new Date();
+                const dd = String(now.getDate()).padStart(2, '0');
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const yyyy = now.getFullYear();
+                dateText = format === 'ddmmyyyy' ? `${dd}/${mm}/${yyyy}` : `${mm}/${dd}/${yyyy}`;
+            } else {
+                const lang = document.getElementById('wb-language-select').value;
+                dateText = getLocalizedDate(lang);
+            }
+            textEl.innerHTML = wbColorizeForDisplay(dateText);
+            if (elData) wbFitDateText(textEl, elData.width, elData.height);
+        }
+
+        // Scales the date's font to fit both the box's width and height, and
+        // the actual text length - a resized box (in either dimension)
+        // therefore scales the font proportionally rather than only
+        // responding to height changes.
+        function wbFitDateText(textEl, width, height) {
+            const length = Math.max(1, (textEl.textContent || '').length);
+            const widthConstraint = (width * 0.85) / (length * 0.52);
+            const heightConstraint = height * 0.42;
+            const fontSize = Math.max(9, Math.min(widthConstraint, heightConstraint));
+            textEl.style.fontSize = fontSize + 'px';
+        }
+
+        function wbUpdateAllDateElements() {
+            document.querySelectorAll('.wb-date-element').forEach(domEl => wbUpdateDateVisual(domEl));
         }
 
         function wbFormatTime(totalSeconds) {
@@ -4778,6 +5115,18 @@
                         el._ringIntervalId = null;
                     }
                 }
+            });
+        }
+
+        // Stops any playing custom background video/audio when leaving the
+        // whiteboard entirely - otherwise a looping soundtrack keeps
+        // playing invisibly in the background over whichever tool is
+        // launched next.
+        function wbStopBackgroundMedia() {
+            const layer = document.getElementById('wb-background-layer');
+            if (!layer) return;
+            layer.querySelectorAll('video, audio').forEach(el => {
+                try { el.pause(); } catch (e) {}
             });
         }
 
@@ -5709,8 +6058,14 @@
             });
 
             const langSelect = document.getElementById('global-language-select');
+            const landingToolsRow = document.getElementById('landing-tools-row');
+            const savedLanguage = localStorage.getItem('polhSelectedLanguage');
+
             langSelect.addEventListener('change', () => {
+                if (!langSelect.value) return; // the disabled placeholder itself can't be re-selected, but guard anyway
                 selectedLanguage = langSelect.value;
+                localStorage.setItem('polhSelectedLanguage', langSelect.value);
+                landingToolsRow.classList.remove('wb-tiles-disabled');
                 updateDateHeader();
                 updateDefaultGraphemeRowVisibility();
                 updateFullScreenButtonLabels();
@@ -5718,7 +6073,14 @@
                 refreshCoderColorization();
             });
 
-            selectedLanguage = langSelect.value;
+            if (savedLanguage) {
+                langSelect.value = savedLanguage;
+                selectedLanguage = savedLanguage;
+                landingToolsRow.classList.remove('wb-tiles-disabled');
+            } else {
+                selectedLanguage = 'fr'; // sensible internal default while nothing is chosen yet - the tiles are disabled so nothing can act on this prematurely
+                landingToolsRow.classList.add('wb-tiles-disabled');
+            }
             updateDateHeader();
             updateDefaultGraphemeRowVisibility();
             updateFullScreenButtonLabels();
@@ -5788,7 +6150,8 @@
                 }
             });
 
-            document.getElementById('tts-date-btn').onclick = () => {
+            const ttsDateBtn = document.getElementById('tts-date-btn');
+            if (ttsDateBtn) ttsDateBtn.onclick = () => {
                 const dateTextForSpeech = getLocalizedDateForSpeech(selectedLanguage);
                 speakWord(dateTextForSpeech);
             };
@@ -5881,9 +6244,6 @@
             });
 
             // Landing wizard navigation
-            document.getElementById('landing-lang-next-btn').onclick = () => showLandingStep('wheel');
-            document.getElementById('wheel-return-btn').onclick = () => showLandingStep('language');
-
             document.getElementById('kart-back-to-config').onclick = resetToConfig;
             document.getElementById('bobot-back-to-config').onclick = resetToConfig;
             ['statement', 'command', 'question'].forEach(mode => {
@@ -5912,6 +6272,18 @@
                     showLandingStep('player');
                 }
             };
+            document.getElementById('kart-vocab-code-go-btn').onclick = () => {
+                handleVocabCodeSubmit('kart-vocab-code-input', 'kart-vocab-code-error', 'kart-vocab-input', launchSelectedActivity);
+            };
+            document.getElementById('kart-vocab-code-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('kart-vocab-code-go-btn').click();
+            });
+            document.getElementById('vocab-code-go-btn').onclick = () => {
+                handleVocabCodeSubmit('vocab-code-input', 'vocab-code-error', 'vocab-input', () => showLandingStep('player'));
+            };
+            document.getElementById('vocab-code-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('vocab-code-go-btn').click();
+            });
             document.getElementById('player-return-btn').onclick = () => showLandingStep('settings');
             document.getElementById('settings-return-btn').onclick = () => {
                 if (selectedLobbyMode === 'coder' || selectedLobbyMode === 'kart' || selectedLobbyMode === 'potato' || selectedLobbyMode === 'bobot') {
@@ -5921,7 +6293,7 @@
                 }
             };
 
-            showLandingStep('language');
+            showLandingStep('wheel');
 
             ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture'].forEach(id => {
                 const el = document.getElementById(id);
@@ -5953,7 +6325,8 @@
             document.getElementById('kart-tts-button-slow').onclick = () => {
                 if (kartCurrentTargetWord) speakWordSlow(kartCurrentTargetWord);
             };
-            document.getElementById('tts-date-btn-slow').onclick = () => {
+            const ttsDateBtnSlow = document.getElementById('tts-date-btn-slow');
+            if (ttsDateBtnSlow) ttsDateBtnSlow.onclick = () => {
                 speakWordSlow(getLocalizedDateForSpeech(selectedLanguage));
             };
 
@@ -5966,6 +6339,17 @@
             document.getElementById('how-to-close-btn').onclick = () => {
                 howToOverlay.classList.add('hidden');
                 howToOverlay.classList.remove('flex');
+            };
+
+            const shareBtn = document.getElementById('share-btn');
+            const shareOverlay = document.getElementById('share-overlay');
+            shareBtn.onclick = () => {
+                shareOverlay.classList.remove('hidden');
+                shareOverlay.classList.add('flex');
+            };
+            document.getElementById('share-close-btn').onclick = () => {
+                shareOverlay.classList.add('hidden');
+                shareOverlay.classList.remove('flex');
             };
 
             const toggleFullscreen = () => {
@@ -6234,7 +6618,7 @@
             { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word.' },
             { id: 'potato', label: 'Potato Parkour', icon: '🥔', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'A built-in vocabulary hunt - no setup needed, just play.' },
             { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing.' },
-            { id: 'whiteboard', label: 'Whiteboard', icon: '🖊️', accent: '--hub-plum', accentSoft: '--hub-plum-soft', desc: 'A colour-coded digital whiteboard with a timer, noise light, and images.' },
+            { id: 'whiteboard', label: 'Whiteboard', icon: '🖊️', accent: '--hub-plum', accentSoft: '--hub-plum-soft', desc: 'A digital whiteboard for teachers with grapheme colour-coding and classroom management tools.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
@@ -6246,7 +6630,7 @@
         let playerIdleAnimTimer = null;
 
         function showLandingStep(step) {
-            ['language', 'wheel', 'submode', 'player', 'settings'].forEach(s => {
+            ['wheel', 'submode', 'player', 'settings'].forEach(s => {
                 const el = document.getElementById('landing-step-' + s);
                 if (el) el.style.display = (s === step) ? '' : 'none';
             });
@@ -6282,25 +6666,30 @@
             } catch (e) {}
         }
 
+        function wbBuildToolTile(tool) {
+            const tile = document.createElement('div');
+            tile.className = 'tool-tile hub-font';
+            tile.style.setProperty('--tool-accent', `var(${tool.accent})`);
+            tile.style.setProperty('--tool-accent-soft', `var(${tool.accentSoft})`);
+            const iconHtml = tool.image
+                ? `<img src="${tool.image}" alt="${tool.label}" class="tool-icon-img">`
+                : `<div class="tool-icon">${tool.icon}</div>`;
+            tile.innerHTML = `${iconHtml}<div class="tool-label">${tool.label}</div><div class="tool-desc">${tool.desc}</div>`;
+            tile.onclick = () => {
+                playTileClickSound();
+                selectTool(tool.id);
+            };
+            return tile;
+        }
+
         function renderToolGrid() {
-            const grid = document.getElementById('tool-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            HUB_TOOLS.forEach((tool) => {
-                const tile = document.createElement('div');
-                tile.className = 'tool-tile hub-font';
-                tile.style.setProperty('--tool-accent', `var(${tool.accent})`);
-                tile.style.setProperty('--tool-accent-soft', `var(${tool.accentSoft})`);
-                const iconHtml = tool.image
-                    ? `<img src="${tool.image}" alt="${tool.label}" class="tool-icon-img">`
-                    : `<div class="tool-icon">${tool.icon}</div>`;
-                tile.innerHTML = `${iconHtml}<div class="tool-label">${tool.label}</div><div class="tool-desc">${tool.desc}</div>`;
-                tile.onclick = () => {
-                    playTileClickSound();
-                    selectTool(tool.id);
-                };
-                grid.appendChild(tile);
-            });
+            const mainGrid = document.getElementById('tool-grid-main');
+            const sideGrid = document.getElementById('tool-grid-side');
+            if (!mainGrid || !sideGrid) return;
+            mainGrid.innerHTML = '';
+            sideGrid.innerHTML = '';
+            HUB_TOOLS.slice(0, 4).forEach(tool => mainGrid.appendChild(wbBuildToolTile(tool)));
+            HUB_TOOLS.slice(4).forEach(tool => sideGrid.appendChild(wbBuildToolTile(tool)));
         }
 
         function selectTool(toolId) {
@@ -6376,6 +6765,34 @@
         function pauseBackgroundMusic() {
             const music = document.getElementById('bg-music');
             if (music) music.pause();
+        }
+
+        // Teachers upload uniquely-named .txt files (comma-separated vocab,
+        // same format as the vocabulary field itself) to this folder on
+        // GitHub. Students type the matching code to instantly load that
+        // vocabulary instead of typing it out themselves. Codes are
+        // case-insensitive (always upper-cased before lookup) since young
+        // students may type inconsistently - name the files in all-caps to
+        // match, e.g. "ANIMALS1.txt".
+        const WB_VOCAB_CODE_BASE_URL = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/vocabcodes/';
+
+        async function handleVocabCodeSubmit(codeInputId, errorId, vocabInputId, onSuccess) {
+            const codeInput = document.getElementById(codeInputId);
+            const errorEl = document.getElementById(errorId);
+            const code = codeInput.value.trim().toUpperCase();
+            if (!code) return;
+            errorEl.style.display = 'none';
+            try {
+                const response = await fetch(WB_VOCAB_CODE_BASE_URL + encodeURIComponent(code) + '.txt');
+                if (!response.ok) throw new Error('code not found');
+                const text = (await response.text()).trim();
+                if (!text) throw new Error('empty file');
+                document.getElementById(vocabInputId).value = text;
+                errorEl.style.display = 'none';
+                onSuccess();
+            } catch (e) {
+                errorEl.style.display = 'block';
+            }
         }
 
         function launchSelectedActivity() {
@@ -6709,6 +7126,7 @@
 
             const nameInput = document.getElementById('kart-student-name-input');
             studentName = nameInput ? nameInput.value.trim() : '';
+            challengeModeEnabled = document.getElementById('kart-challenge-mode').checked;
 
             startKartGame();
         }
@@ -6793,7 +7211,14 @@
             }
             const chosen = remaining[Math.floor(Math.random() * remaining.length)];
             kartCurrentTargetWord = chosen.text.toLowerCase();
-            targetEl.innerHTML = colorizeSentenceText(chosen.text);
+            if (challengeModeEnabled) {
+                targetEl.innerHTML = '';
+                targetEl.style.color = '';
+                targetEl.textContent = '?';
+                targetEl.title = '';
+            } else {
+                targetEl.innerHTML = colorizeSentenceText(chosen.text);
+            }
             const speakDelayMs = options.delaySpeechMs || 0;
             if (speakDelayMs > 0) {
                 setTimeout(() => speakWord(chosen.text), speakDelayMs);
@@ -7336,6 +7761,7 @@
 
             const nameInput = document.getElementById('potato-student-name-input');
             studentName = nameInput ? nameInput.value.trim() : '';
+            challengeModeEnabled = document.getElementById('potato-challenge-mode').checked;
 
             startPotatoGame();
         }
@@ -7388,8 +7814,15 @@
             currentTargetWord = target.text.toLowerCase();
 
             const instructionEl = document.getElementById('instruction-text');
-            instructionEl.innerHTML = colorizeSentenceText(currentTargetWord);
-            instructionEl.style.color = '';
+            if (challengeModeEnabled) {
+                instructionEl.innerHTML = '';
+                instructionEl.style.color = '';
+                instructionEl.textContent = '?';
+                instructionEl.title = '';
+            } else {
+                instructionEl.innerHTML = colorizeSentenceText(currentTargetWord);
+                instructionEl.style.color = '';
+            }
             fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
 
             document.getElementById('score').innerText = score.toString().padStart(2, '0');
@@ -8070,6 +8503,7 @@
             document.getElementById('bobot-screen').style.display = 'none';
             document.getElementById('whiteboard-screen').style.display = 'none';
             wbPauseAllTimers();
+            wbStopBackgroundMedia();
             document.getElementById('results-screen').style.display = 'none';
             document.getElementById('title-screen').style.display = 'flex';
             showLandingStep('wheel');
