@@ -490,12 +490,13 @@
         }
 
         .controls { position: absolute; bottom: 30px; width: 100%; display: flex; justify-content: space-between; padding: 0 40px; pointer-events: none; }
-        .btn-circle { width: 64px; height: 64px; background: rgba(30,41,59,0.1); border: 4px solid #1e293b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1e293b; font-weight: bold; pointer-events: auto; -webkit-user-select: none; font-family: 'OpenDyslexic', sans-serif; }
-        .btn-circle:active { background: rgba(30,41,59,0.3); }
-        .btn-circle.btn-run { background: rgba(37,99,235,0.15); border-color: #1e3a8a; color: #1e3a8a; font-size: 12px; }
-        .btn-circle.btn-run:active { background: rgba(37,99,235,0.35); }
-        .btn-circle.btn-drop { background: rgba(220,38,38,0.15); border-color: #7f1d1d; color: #7f1d1d; font-size: 12px; }
-        .btn-circle.btn-drop:active { background: rgba(220,38,38,0.35); }
+        .btn-circle { width: 64px; height: 64px; background: rgba(255,255,255,0.96); border: 4px solid #1e293b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1e293b; font-weight: bold; pointer-events: auto; -webkit-user-select: none; font-family: 'OpenDyslexic', sans-serif; box-shadow: 0 3px 8px rgba(0,0,0,0.3); }
+        .btn-circle svg { width: 55%; height: 55%; }
+        .btn-circle:active { background: rgba(226,232,240,1); }
+        .btn-circle.btn-run { border-color: #1e3a8a; color: #1e3a8a; }
+        .btn-circle.btn-run:active { background: rgba(219,234,254,1); }
+        .btn-circle.btn-drop { border-color: #7f1d1d; color: #7f1d1d; }
+        .btn-circle.btn-drop:active { background: rgba(254,226,226,1); }
 
         #coder-screen {
             display: none;
@@ -971,6 +972,7 @@
         .wb-traffic-settings-panel input[type="number"] { width: 100%; padding: 4px 6px; border: 2px solid var(--hub-line); border-radius: 6px; font-weight: 700; text-align: center; }
         .wb-traffic-settings-panel button { font-size: 11px; padding: 4px 8px; border-radius: 6px; border: 2px solid var(--hub-line); background: var(--hub-surface); cursor: pointer; font-weight: 700; }
         .wb-traffic-settings-panel button.wb-mode-active { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
+        #level-editor-panel button.wb-mode-active { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
         .bobot-video-frame {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -1823,6 +1825,41 @@
 
         <canvas id="gameCanvas"></canvas>
 
+        <!-- World Level Editor (debug mode only) -->
+        <button id="level-editor-toggle-btn" class="hub-btn-ghost interactive" style="display:none; position:fixed; top:12px; right:12px; z-index:150; background:white;">🖼️ Level Editor</button>
+
+        <div id="level-editor-panel" class="hub-font" style="display:none; position:fixed; top:12px; right:12px; z-index:150; background:var(--hub-surface); border:2px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:14px; width:280px;">
+            <div class="flex items-center justify-between mb-2">
+                <strong style="font-size:13px;">🖼️ Level Editor</strong>
+                <button id="level-editor-exit-btn" class="hub-btn-ghost interactive" style="padding:4px 10px; font-size:12px;">Exit</button>
+            </div>
+            <p class="hub-hint" style="margin:0 0 8px 0;">Arrow keys pan the frozen camera. Drag an image to move it, drag its corner to resize. Click empty space to deselect.</p>
+
+            <div class="hub-row" style="margin-bottom:8px;">
+                <label class="hub-label" style="font-size:11px;">Add image (live GitHub URL)</label>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="level-editor-url-input" class="hub-input" placeholder="https://raw.githubusercontent.com/..." style="flex:1; font-size:11px; padding:6px 8px;">
+                    <button id="level-editor-add-btn" class="hub-btn-primary interactive" style="padding:6px 12px; font-size:12px;">Add</button>
+                </div>
+                <p id="level-editor-add-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Couldn't load that image - check the URL.</p>
+            </div>
+
+            <div id="level-editor-selected-panel" style="display:none; border-top:2px solid var(--hub-line); padding-top:8px; margin-top:8px;">
+                <p id="level-editor-selected-name" class="hub-hint" style="margin:0 0 6px 0; word-break:break-all;"></p>
+                <div class="wb-tray-group" style="margin-bottom:6px;">
+                    <button id="level-editor-layer-bg-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">Background</button>
+                    <button id="level-editor-layer-fg-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">Foreground</button>
+                </div>
+                <div class="wb-tray-group" style="margin-bottom:6px;">
+                    <button id="level-editor-forward-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">↑ Forward</button>
+                    <button id="level-editor-backward-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">↓ Backward</button>
+                </div>
+                <button id="level-editor-delete-btn" class="hub-btn-ghost interactive w-full" style="font-size:11px; color:#dc2626; border-color:#fecdd3;">Delete Image</button>
+            </div>
+
+            <button id="level-editor-export-btn" class="hub-btn-primary interactive w-full" style="margin-top:10px; font-size:12px;">⬇ Export Report (JSON)</button>
+        </div>
+
         <!-- ========================================== -->
         <!-- UI Dashboard Elements                      -->
         <!-- ========================================== -->
@@ -2016,14 +2053,26 @@
             <!-- Virtual Mobile D-Pad -->
             <div class="controls">
                 <div class="flex items-end gap-4">
-                    <div class="btn-circle" id="btn-left">←</div>
-                    <div class="btn-circle" id="btn-right">→</div>
+                    <div class="btn-circle" id="btn-left" title="Left">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </div>
+                    <div class="btn-circle" id="btn-right" title="Right">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
                 </div>
                 <div class="flex flex-col items-end gap-2">
-                    <div class="btn-circle" id="btn-jump">UP</div>
-                    <div class="btn-circle" id="btn-down">DOWN</div>
-                    <div class="btn-circle btn-drop" id="btn-drop" title="Drop through platform">DROP</div>
-                    <div class="btn-circle btn-run" id="btn-run" title="Hold to run">RUN</div>
+                    <div class="btn-circle" id="btn-jump" title="Jump">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                    </div>
+                    <div class="btn-circle" id="btn-down" title="Down">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="btn-circle btn-drop" id="btn-drop" title="Drop through platform">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 14 18 9"></polyline><polyline points="6 15 12 20 18 15"></polyline></svg>
+                    </div>
+                    <div class="btn-circle btn-run" id="btn-run" title="Hold to run">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2119,7 +2168,19 @@
         let selectedCharacter = 'parkour'; // 'parkour' (P4RK-0UR UNIT) or 'bobot'
         let lastTime = 0, vocabularyList = [], activeWords = [], currentTargetWord = null;
         let customMoveSpeed = 3.0;
-        let debugMode = false; 
+        let debugMode = false;
+        // World Level Editor state - lets a teacher place real image assets
+        // directly into the live world coordinate system (the same one the
+        // game itself already uses), then export exactly what was placed so
+        // it can be hardcoded permanently later.
+        let levelEditorActive = false;
+        let levelEditorImages = [];
+        let levelEditorNextId = 1;
+        let levelEditorSelectedId = null;
+        let levelEditorCamX = 0, levelEditorCamY = 0;
+        let levelEditorLastCamX = 0, levelEditorLastCamY = 0; // most recent actual render-time camera, used to convert screen<->world outside the render loop
+        let levelEditorDrag = null; // { type: 'move'|'resize', id, startWorldX, startWorldY, originX, originY, originW, originH }
+
         // Audio settings controlled from the top-right settings menu
         let musicVolume = 0.25;
         let ttsVolume = 1.0;
@@ -6422,6 +6483,63 @@
                 if (e.key === 'Enter') submitDebugPassword();
             });
 
+            document.getElementById('level-editor-toggle-btn').onclick = enterLevelEditor;
+            document.getElementById('level-editor-exit-btn').onclick = exitLevelEditor;
+            document.getElementById('level-editor-add-btn').onclick = () => {
+                const url = document.getElementById('level-editor-url-input').value.trim();
+                if (url) levelEditorAddImage(url);
+            };
+            document.getElementById('level-editor-url-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('level-editor-add-btn').click();
+            });
+            document.getElementById('level-editor-layer-bg-btn').onclick = () => levelEditorSetLayer('background');
+            document.getElementById('level-editor-layer-fg-btn').onclick = () => levelEditorSetLayer('foreground');
+            document.getElementById('level-editor-forward-btn').onclick = () => levelEditorReorder('forward');
+            document.getElementById('level-editor-backward-btn').onclick = () => levelEditorReorder('backward');
+            document.getElementById('level-editor-delete-btn').onclick = levelEditorDeleteSelected;
+            document.getElementById('level-editor-export-btn').onclick = levelEditorExportReport;
+
+            // Canvas mouse interactions for the level editor - dragging to
+            // move, dragging the corner handle to resize (aspect-ratio
+            // preserved, since these are real photo/pixel-art assets, not
+            // freeform text boxes), and clicking empty space to deselect.
+            canvas.addEventListener('mousedown', (e) => {
+                if (!levelEditorActive) return;
+                const rect = canvas.getBoundingClientRect();
+                const screenX = e.clientX - rect.left, screenY = e.clientY - rect.top;
+                const world = levelEditorScreenToWorld(screenX, screenY);
+                const selected = levelEditorImages.find(i => i.id === levelEditorSelectedId);
+
+                if (selected && levelEditorIsOnResizeHandle(selected, world.x, world.y)) {
+                    levelEditorDrag = { type: 'resize', id: selected.id, startWorldX: world.x, startWorldY: world.y, originW: selected.width, originH: selected.height };
+                    return;
+                }
+                const hit = levelEditorFindImageAt(world.x, world.y);
+                if (hit) {
+                    levelEditorSelect(hit.id);
+                    levelEditorDrag = { type: 'move', id: hit.id, startWorldX: world.x, startWorldY: world.y, originX: hit.x, originY: hit.y };
+                } else {
+                    levelEditorSelect(null);
+                }
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (!levelEditorActive || !levelEditorDrag) return;
+                const rect = canvas.getBoundingClientRect();
+                const screenX = e.clientX - rect.left, screenY = e.clientY - rect.top;
+                const world = levelEditorScreenToWorld(screenX, screenY);
+                const img = levelEditorImages.find(i => i.id === levelEditorDrag.id);
+                if (!img) return;
+                if (levelEditorDrag.type === 'move') {
+                    img.x = levelEditorDrag.originX + (world.x - levelEditorDrag.startWorldX);
+                    img.y = levelEditorDrag.originY + (world.y - levelEditorDrag.startWorldY);
+                } else if (levelEditorDrag.type === 'resize') {
+                    const scaleFactor = Math.max(0.1, (levelEditorDrag.originW + (world.x - levelEditorDrag.startWorldX)) / levelEditorDrag.originW);
+                    img.width = Math.max(16, levelEditorDrag.originW * scaleFactor);
+                    img.height = Math.max(16, levelEditorDrag.originH * scaleFactor);
+                }
+            });
+            document.addEventListener('mouseup', () => { levelEditorDrag = null; });
+
             const kartSettingsCogBtn = document.getElementById('kart-settings-cog-btn');
             const kartSettingsPanel = document.getElementById('kart-settings-panel');
             kartSettingsCogBtn.onclick = (e) => {
@@ -6565,9 +6683,18 @@
             if (val === DEBUG_MODE_PASSWORD) {
                 debugMode = !debugMode;
                 closeDebugPasswordPrompt();
+                updateLevelEditorButtonVisibility();
             } else {
                 document.getElementById('debug-password-error').classList.remove('hidden');
             }
+        }
+
+        // The level editor only makes sense on the main quest-parkour world,
+        // where the game's real world coordinate system lives.
+        function updateLevelEditorButtonVisibility() {
+            const eligible = debugMode && gameStarted && selectedLobbyMode !== 'kart' && selectedLobbyMode !== 'potato' && selectedLobbyMode !== 'coder' && selectedLobbyMode !== 'bobot';
+            document.getElementById('level-editor-toggle-btn').style.display = (eligible && !levelEditorActive) ? 'inline-flex' : 'none';
+            if (!eligible && levelEditorActive) exitLevelEditor();
         }
 
         function selectMode(mode) {
@@ -7245,7 +7372,7 @@
         function loadBobotVerbManifest() {
             const fetchPromises = Object.entries(BOBOT_CATEGORY_FOLDERS).map(([difficulty, folder]) => {
                 const url = BOBOT_VERB_BASE_URL + folder + '/manifest.json?cb=' + Date.now();
-                return fetch(url, { cache: 'no-store' })
+                return fetchWithTimeout(url, { cache: 'no-store' }, 8000)
                     .then(res => res.ok ? res.json() : null)
                     .then(data => {
                         if (!data || !Array.isArray(data.verbs)) return [];
@@ -7257,8 +7384,8 @@
                     .catch(() => []);
             });
 
-            return Promise.all(fetchPromises).then(results => {
-                const allVerbs = results.flat();
+            return Promise.allSettled(fetchPromises).then(results => {
+                const allVerbs = results.flatMap(r => r.status === 'fulfilled' ? r.value : []);
                 if (allVerbs.length === 0) {
                     bobotVerbManifest = { verbs: BOBOT_PLACEHOLDER_VERBS.map(v => Object.assign({}, v, { _folder: null })) };
                 } else {
@@ -7293,6 +7420,10 @@
             pauseBackgroundMusic();
 
             loadBobotVerbManifest().then(() => {
+                startBobotRound();
+            }).catch((e) => {
+                console.warn('Bobot manifest loading hit an unexpected error - falling back to placeholder verbs:', e);
+                bobotVerbManifest = { verbs: BOBOT_PLACEHOLDER_VERBS.map(v => Object.assign({}, v, { _folder: null })) };
                 startBobotRound();
             });
         }
@@ -7352,6 +7483,20 @@
         // playing it - a no-op if that language isn't Cloud-TTS-configured
         // (browser voices synthesize on demand with no meaningful pre-cache
         // benefit) or if it's already cached.
+        // Plain fetch() has no timeout of its own - if a request hangs
+        // indefinitely (more common on mobile/cellular connections, captive
+        // portals, or a backgrounded tab losing its network briefly on iOS),
+        // it never resolves OR rejects, so nothing downstream ever fires and
+        // whatever was waiting on it freezes forever with no way to recover.
+        // This forcibly aborts a stuck request after a timeout so callers'
+        // existing .catch()/fallback logic can actually run instead.
+        function fetchWithTimeout(url, options, timeoutMs) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeoutMs || 8000);
+            return fetch(url, Object.assign({}, options, { signal: controller.signal }))
+                .finally(() => clearTimeout(timeoutId));
+        }
+
         async function cacheCloudTTSIfConfigured(text, langKey) {
             const cloudConfig = CLOUD_TTS_CONFIG[langKey];
             if (!cloudConfig || !cloudConfig.proxyUrl || isMicrosoftEdge()) return;
@@ -7359,11 +7504,11 @@
             const cacheKey = cloudConfig.languageCode + '::default::' + cleanText;
             if (cloudTtsAudioCache[cacheKey]) return;
             try {
-                const res = await fetch(cloudConfig.proxyUrl, {
+                const res = await fetchWithTimeout(cloudConfig.proxyUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: cleanText, languageCode: cloudConfig.languageCode, voiceName: cloudConfig.voiceName })
-                });
+                }, 8000);
                 if (res.ok) {
                     const data = await res.json();
                     if (data.audioContent) {
@@ -7406,7 +7551,7 @@
                 }
             });
 
-            await Promise.all(pairs.map(([text, lang]) => cacheCloudTTSIfConfigured(text, lang)));
+            await Promise.allSettled(pairs.map(([text, lang]) => cacheCloudTTSIfConfigured(text, lang)));
         }
 
         async function startBobotRound() {
@@ -7418,8 +7563,13 @@
                 // Very first round of this session.
                 establishBobotRoundVerbSet();
                 showBobotLoadingOverlay();
-                await precacheBobotRoundTTS(bobotRoundVerbSet);
-                hideBobotLoadingOverlay();
+                try {
+                    await precacheBobotRoundTTS(bobotRoundVerbSet);
+                } catch (e) {
+                    console.warn('Bobot TTS pre-caching hit an unexpected error - continuing anyway:', e);
+                } finally {
+                    hideBobotLoadingOverlay();
+                }
             } else if (bobotRemainingPool.length === 0) {
                 // Every verb in this round has now been answered correctly at
                 // least once - the round is over.
@@ -8481,6 +8631,7 @@
 
             gameStarted = true;
             nextQuest();
+            updateLevelEditorButtonVisibility();
             setTimeout(() => {
                 showTtsAttentionHint('tts-button');
                 showTtsAttentionHint('tts-location-button');
@@ -8492,6 +8643,8 @@
 
         function resetToConfig() {
             gameStarted = false;
+            if (levelEditorActive) exitLevelEditor();
+            document.getElementById('level-editor-toggle-btn').style.display = 'none';
             pauseBackgroundMusic();
             canvas.style.display = 'none';
             document.getElementById('ui-board').style.display = 'none';
@@ -8890,7 +9043,9 @@
             lastTime = now;
 
             if (!isModalOpen) {
-                if (selectedLobbyMode === 'kart') {
+                if (levelEditorActive) {
+                    updateLevelEditorCamera(dt);
+                } else if (selectedLobbyMode === 'kart') {
                     updateKartPhysics(dt);
                 } else if (selectedLobbyMode === 'potato') {
                     updatePotatoPhysics(dt);
@@ -8906,6 +9061,18 @@
                 renderWhiteboard();
             }
             requestAnimationFrame(gameLoop);
+        }
+
+        // Re-uses the same movement keys that normally drive the player -
+        // since the player is frozen while editing, these are free to pan
+        // the camera instead, at a speed independent of the game's own
+        // frame-rate-scaled physics.
+        function updateLevelEditorCamera(dt) {
+            const speed = 8 * dt;
+            if (keys['ArrowLeft'] || keys['KeyA']) levelEditorCamX += speed;
+            if (keys['ArrowRight'] || keys['KeyD']) levelEditorCamX -= speed;
+            if (keys['ArrowUp'] || keys['KeyW']) levelEditorCamY += speed;
+            if (keys['ArrowDown'] || keys['KeyS']) levelEditorCamY -= speed;
         }
 
         function updatePotatoPhysics(dt) {
@@ -10135,6 +10302,169 @@
             ctx.restore();
         }
 
+        // --- World Level Editor ---
+        function levelEditorScreenToWorld(screenX, screenY) {
+            return {
+                x: screenX / targetScale - levelEditorLastCamX,
+                y: screenY / targetScale - levelEditorLastCamY
+            };
+        }
+
+        function renderLevelEditorImages(layer) {
+            const items = levelEditorImages
+                .filter(img => img.layer === layer && img.loaded)
+                .sort((a, b) => a.order - b.order);
+            items.forEach(img => {
+                ctx.drawImage(img.el, img.x, img.y, img.width, img.height);
+            });
+        }
+
+        function renderLevelEditorSelectionUI() {
+            const img = levelEditorImages.find(i => i.id === levelEditorSelectedId);
+            if (!img) return;
+            ctx.save();
+            ctx.strokeStyle = '#8B5CF6';
+            ctx.lineWidth = 2 / targetScale;
+            ctx.setLineDash([6 / targetScale, 4 / targetScale]);
+            ctx.strokeRect(img.x, img.y, img.width, img.height);
+            ctx.setLineDash([]);
+            const handleSize = 14 / targetScale;
+            ctx.fillStyle = '#8B5CF6';
+            ctx.fillRect(img.x + img.width - handleSize / 2, img.y + img.height - handleSize / 2, handleSize, handleSize);
+            ctx.restore();
+        }
+
+        function levelEditorFindImageAt(worldX, worldY) {
+            // Topmost visually (foreground before background, highest order first within each) gets hit first.
+            const sorted = levelEditorImages
+                .filter(i => i.loaded)
+                .sort((a, b) => {
+                    if (a.layer !== b.layer) return a.layer === 'foreground' ? -1 : 1;
+                    return b.order - a.order;
+                });
+            return sorted.find(i => worldX >= i.x && worldX <= i.x + i.width && worldY >= i.y && worldY <= i.y + i.height) || null;
+        }
+
+        function levelEditorIsOnResizeHandle(img, worldX, worldY) {
+            const handleWorldSize = 14 / targetScale;
+            const hx = img.x + img.width - handleWorldSize / 2;
+            const hy = img.y + img.height - handleWorldSize / 2;
+            return worldX >= hx && worldX <= hx + handleWorldSize && worldY >= hy && worldY <= hy + handleWorldSize;
+        }
+
+        function levelEditorSelect(id) {
+            levelEditorSelectedId = id;
+            const panel = document.getElementById('level-editor-selected-panel');
+            const img = levelEditorImages.find(i => i.id === id);
+            if (!img) { panel.style.display = 'none'; return; }
+            panel.style.display = 'block';
+            document.getElementById('level-editor-selected-name').textContent = img.url;
+            document.getElementById('level-editor-layer-bg-btn').classList.toggle('wb-mode-active', img.layer === 'background');
+            document.getElementById('level-editor-layer-fg-btn').classList.toggle('wb-mode-active', img.layer === 'foreground');
+        }
+
+        function levelEditorAddImage(url) {
+            const errorEl = document.getElementById('level-editor-add-error');
+            errorEl.style.display = 'none';
+            const el = new Image();
+            el.crossOrigin = 'anonymous';
+            el.onload = () => {
+                const worldCenter = levelEditorScreenToWorld(canvas.width / 2, canvas.height / 2);
+                const maxDim = 400;
+                const scaleDown = Math.min(1, maxDim / Math.max(el.naturalWidth, el.naturalHeight));
+                const width = el.naturalWidth * scaleDown;
+                const height = el.naturalHeight * scaleDown;
+                const entry = {
+                    id: levelEditorNextId++,
+                    url,
+                    el,
+                    loaded: true,
+                    naturalWidth: el.naturalWidth,
+                    naturalHeight: el.naturalHeight,
+                    x: worldCenter.x - width / 2,
+                    y: worldCenter.y - height / 2,
+                    width, height,
+                    layer: 'background',
+                    order: levelEditorImages.length
+                };
+                levelEditorImages.push(entry);
+                levelEditorSelect(entry.id);
+            };
+            el.onerror = () => {
+                errorEl.style.display = 'block';
+            };
+            el.src = url;
+        }
+
+        function levelEditorSetLayer(layer) {
+            const img = levelEditorImages.find(i => i.id === levelEditorSelectedId);
+            if (!img) return;
+            img.layer = layer;
+            document.getElementById('level-editor-layer-bg-btn').classList.toggle('wb-mode-active', layer === 'background');
+            document.getElementById('level-editor-layer-fg-btn').classList.toggle('wb-mode-active', layer === 'foreground');
+        }
+
+        // Swaps stacking order with whichever image is directly adjacent
+        // within the SAME layer, matching the whiteboard's own forward/backward pattern.
+        function levelEditorReorder(direction) {
+            const img = levelEditorImages.find(i => i.id === levelEditorSelectedId);
+            if (!img) return;
+            const sameLayerSorted = levelEditorImages.filter(i => i.layer === img.layer).sort((a, b) => a.order - b.order);
+            const idx = sameLayerSorted.findIndex(i => i.id === img.id);
+            const swapIdx = direction === 'forward' ? idx + 1 : idx - 1;
+            if (swapIdx < 0 || swapIdx >= sameLayerSorted.length) return;
+            const other = sameLayerSorted[swapIdx];
+            const tmp = img.order;
+            img.order = other.order;
+            other.order = tmp;
+        }
+
+        function levelEditorDeleteSelected() {
+            levelEditorImages = levelEditorImages.filter(i => i.id !== levelEditorSelectedId);
+            levelEditorSelect(null);
+        }
+
+        function levelEditorExportReport() {
+            const report = {
+                exportedAt: new Date().toISOString(),
+                worldAssets: levelEditorImages.map(img => ({
+                    url: img.url,
+                    layer: img.layer,
+                    order: img.order,
+                    x: Math.round(img.x),
+                    y: Math.round(img.y),
+                    width: Math.round(img.width),
+                    height: Math.round(img.height),
+                    naturalWidth: img.naturalWidth,
+                    naturalHeight: img.naturalHeight
+                }))
+            };
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'parkour-level-layout.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function enterLevelEditor() {
+            levelEditorActive = true;
+            levelEditorCamX = -player.x + (canvas.width / 2) / targetScale;
+            levelEditorCamY = cameraY;
+            document.getElementById('level-editor-panel').style.display = 'block';
+            document.getElementById('level-editor-toggle-btn').style.display = 'none';
+        }
+
+        function exitLevelEditor() {
+            levelEditorActive = false;
+            levelEditorSelect(null);
+            document.getElementById('level-editor-panel').style.display = 'none';
+            document.getElementById('level-editor-toggle-btn').style.display = 'inline-flex';
+        }
+
         function renderWhiteboard() {
             if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -10147,9 +10477,14 @@
             ctx.save();
             ctx.scale(targetScale, targetScale);
 
-            const camX = -player.x + (canvas.width / 2) / targetScale;
+            const camX = levelEditorActive ? levelEditorCamX : (-player.x + (canvas.width / 2) / targetScale);
+            const camYToUse = levelEditorActive ? levelEditorCamY : cameraY;
 
-            ctx.translate(camX, cameraY);
+            ctx.translate(camX, camYToUse);
+            levelEditorLastCamX = camX;
+            levelEditorLastCamY = camYToUse;
+
+            renderLevelEditorImages('background');
 
             // 1. SCENERY CLOUDS (Background)
             backgroundClouds.forEach(cl => {
@@ -10609,6 +10944,9 @@
             // playable area regardless of what scenery would otherwise be visible there.
             drawCliffWall(ctx, -3800, -1, LEFT_CLIFF_PROFILE, LEFT_CLIFF_SHRUBS);
             drawCliffWall(ctx, 4500, 1, RIGHT_CLIFF_PROFILE, RIGHT_CLIFF_SHRUBS);
+
+            renderLevelEditorImages('foreground');
+            if (levelEditorActive) renderLevelEditorSelectionUI();
 
             ctx.restore();
         }
