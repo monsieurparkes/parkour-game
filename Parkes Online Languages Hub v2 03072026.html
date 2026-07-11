@@ -43,6 +43,8 @@
             --hub-earth-soft: #F3E7D8;
             --hub-steel: #4A6FA5;
             --hub-steel-soft: #E8EFF7;
+            --hub-plum: #8B5CF6;
+            --hub-plum-soft: #F1EBFE;
             --hub-radius-lg: 28px;
             --hub-radius-md: 18px;
             --hub-radius-sm: 12px;
@@ -494,6 +496,415 @@
         @keyframes bobot-spin {
             to { transform: rotate(360deg); }
         }
+
+        #whiteboard-screen {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: var(--hub-paper);
+            z-index: 90;
+            padding: 16px;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .wb-tray {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            box-shadow: var(--hub-shadow-sm);
+            padding: 10px 14px;
+            flex-shrink: 0;
+        }
+        .wb-tray-group { display: flex; align-items: center; gap: 6px; }
+        .wb-select { padding: 6px 10px; font-size: 13px; width: auto; }
+        #wb-zoom-btn { display: inline-flex; align-items: center; gap: 5px; }
+        .wb-zoom-slider-wrap {
+            height: 120px;
+            width: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .wb-zoom-slider-wrap input[type="range"] {
+            width: 100px;
+            transform: rotate(-90deg);
+        }
+        .wb-circle-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid var(--hub-line);
+            background: var(--hub-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--hub-ink);
+            padding: 0;
+        }
+        .wb-circle-btn:hover { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
+        .wb-fontsize-input { width: 76px; padding: 6px 4px 6px 10px; }
+
+        .wb-cog-wrap { position: relative; }
+        #wb-back-btn { margin-left: auto; }
+        .wb-dropdown-wrap { position: relative; }
+        .wb-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 6px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            box-shadow: var(--hub-shadow-md);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 200;
+            min-width: 160px;
+        }
+        .wb-cog-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 6px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            box-shadow: var(--hub-shadow-md);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 200;
+            min-width: 180px;
+        }
+
+        /* --- Canvas viewport (fixed size) and world (pannable/zoomable) --- */
+        #wb-canvas-wrap {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            border: 3px solid var(--hub-line);
+            border-radius: var(--hub-radius-lg);
+            overflow: hidden;
+            background: var(--hub-surface);
+            cursor: grab;
+            touch-action: none;
+        }
+        #wb-canvas-wrap.wb-panning { cursor: grabbing; }
+        #wb-background-layer { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .wb-custom-bg-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        #wb-bg-settings button.wb-mode-active { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
+        #wb-world {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            z-index: 1;
+        }
+
+        /* Background presets - pure CSS, no assets required. Stays fixed to
+           the viewport (not the pannable world) so a repeating pattern like
+           the dot grid or lined paper never visibly runs out at its edges. */
+        .wb-bg-chalkboard { background: radial-gradient(ellipse at center, #2d4a3e 0%, #1f3a2f 100%); }
+        .wb-bg-cream { background: #FBF3E7; }
+        .wb-bg-dotgrid { background-color: #FBF9F5; background-image: radial-gradient(#d8d3c7 1.5px, transparent 1.5px); background-size: 26px 26px; }
+        .wb-bg-lined { background-color: #ffffff; background-image: repeating-linear-gradient(#ffffff 0px, #ffffff 34px, #cfe0f0 35px); }
+        .wb-bg-sky { background: linear-gradient(180deg, #bfdbfe 0%, #eff6ff 100%); }
+        .wb-canvas-wrap-dark .wb-text-element .wb-element-content { color: #f1f5f9; }
+
+        /* --- Unified element chrome: every element type (text, image,
+           traffic light) shares the same selection outline, resize anchors,
+           rotate handle, and delete button. --- */
+        .wb-element {
+            position: absolute;
+            cursor: move;
+            user-select: none;
+        }
+        .wb-element.wb-selected { outline: 2px dashed var(--hub-plum); outline-offset: 2px; }
+        .wb-element-content { width: 100%; height: 100%; }
+
+        .wb-handle {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--hub-plum);
+            border: 2px solid white;
+            border-radius: 50%;
+            display: none;
+            z-index: 2;
+        }
+        .wb-element.wb-selected .wb-handle { display: block; }
+        .wb-handle-nw { top: -7px; left: -7px; cursor: nwse-resize; }
+        .wb-handle-n  { top: -7px; left: calc(50% - 7px); cursor: ns-resize; }
+        .wb-handle-ne { top: -7px; right: -7px; cursor: nesw-resize; }
+        .wb-handle-e  { top: calc(50% - 7px); right: -7px; cursor: ew-resize; }
+        .wb-handle-se { bottom: -7px; right: -7px; cursor: nwse-resize; }
+        .wb-handle-s  { bottom: -7px; left: calc(50% - 7px); cursor: ns-resize; }
+        .wb-handle-sw { bottom: -7px; left: -7px; cursor: nesw-resize; }
+        .wb-handle-w  { top: calc(50% - 7px); left: -7px; cursor: ew-resize; }
+
+        .wb-rotate-line {
+            position: absolute;
+            top: -18px;
+            left: calc(50% - 1px);
+            width: 2px;
+            height: 18px;
+            background: var(--hub-plum);
+            display: none;
+        }
+        .wb-element.wb-selected .wb-rotate-line { display: block; }
+        .wb-rotate-handle {
+            position: absolute;
+            top: -34px;
+            left: calc(50% - 8px);
+            width: 16px;
+            height: 16px;
+            background: var(--hub-plum);
+            border: 2px solid white;
+            border-radius: 50%;
+            cursor: grab;
+            display: none;
+            z-index: 2;
+        }
+        .wb-element.wb-selected .wb-rotate-handle { display: block; }
+
+        #wb-world.wb-font-dyslexic .wb-text-element .wb-element-content { font-family: 'OpenDyslexic', sans-serif; font-weight: bold; }
+        #wb-world.wb-font-sans .wb-text-element .wb-element-content { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; }
+        #wb-world.wb-font-serif .wb-text-element .wb-element-content { font-family: Georgia, 'Times New Roman', serif; }
+        #wb-world.wb-font-rounded .wb-text-element .wb-element-content { font-family: ui-rounded, -apple-system, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif; }
+        #wb-world.wb-font-mono .wb-text-element .wb-element-content { font-family: 'Courier New', monospace; }
+        .wb-text-element .wb-element-content {
+            padding: 8px 10px;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            outline: none;
+            overflow: hidden;
+            min-width: 40px;
+            min-height: 30px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 6px;
+        }
+        .wb-text-element.wb-editing .wb-element-content { cursor: text; background: rgba(255,255,255,0.92); }
+        .wb-image-element .wb-element-content { overflow: hidden; }
+        .wb-image-element img { width: 100%; height: 100%; display: block; pointer-events: none; }
+
+        #wb-text-settings-group button.wb-align-active, #wb-text-settings-group button.wb-mode-active { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
+        .wb-bullet-line { position: relative; padding-left: 1.5em; }
+        .wb-bullet-mode-bullet .wb-bullet-line::before {
+            content: '';
+            position: absolute;
+            left: 0.4em;
+            top: 0.5em;
+            width: 0.35em;
+            height: 0.35em;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .wb-bullet-mode-number { counter-reset: wb-line-counter; }
+        .wb-bullet-mode-number .wb-bullet-line::before { counter-increment: wb-line-counter; content: counter(wb-line-counter) '.'; position: absolute; left: 0; }
+
+        .wb-clock-element .wb-element-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--hub-surface);
+            border: 3px solid var(--hub-line);
+            border-radius: 14px;
+            box-sizing: border-box;
+        }
+        .wb-clock-text { font-weight: 900; font-variant-numeric: tabular-nums; color: var(--hub-ink); }
+
+        .wb-timer-element .wb-element-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wb-timer-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .wb-timer-track { fill: none; stroke: var(--hub-line); stroke-width: 8; }
+        .wb-timer-progress { fill: none; stroke: var(--hub-plum); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.2s linear, stroke 0.2s ease; }
+        .wb-timer-progress.wb-timer-warning { stroke: #dc2626; }
+        .wb-timer-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+            font-size: clamp(14px, 20%, 40px);
+            color: var(--hub-ink);
+            pointer-events: none;
+        }
+        .wb-timer-controls {
+            position: absolute;
+            bottom: -64px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: var(--hub-surface);
+            border: 2px solid var(--hub-line);
+            border-radius: 16px;
+            padding: 10px 14px;
+            box-shadow: var(--hub-shadow-md);
+            white-space: nowrap;
+        }
+        .wb-element.wb-selected .wb-timer-controls { display: flex; }
+        .wb-timer-controls button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 26px;
+            padding: 6px 14px;
+            border-radius: 10px;
+            color: var(--hub-ink);
+            line-height: 1;
+        }
+        .wb-timer-controls button:hover { background: var(--hub-plum-soft); }
+        .wb-timer-color { width: 40px; height: 40px; border: none; padding: 0; cursor: pointer; background: none; border-radius: 8px; }
+        .wb-timer-minutes-input, .wb-timer-seconds-input {
+            width: 58px;
+            padding: 8px 4px;
+            border: 2px solid var(--hub-line);
+            border-radius: 10px;
+            font-weight: 800;
+            text-align: center;
+            font-size: 20px;
+        }
+        .wb-timer-colon { font-weight: 900; font-size: 20px; color: var(--hub-ink); }
+        .wb-timer-finished-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(220, 38, 38, 0.93);
+            border-radius: 50%;
+            animation: wb-timer-pulse 1s ease-in-out infinite;
+        }
+        .wb-timer-stop-btn {
+            background: white;
+            color: #dc2626;
+            border: none;
+            border-radius: 50%;
+            width: 46%;
+            aspect-ratio: 1 / 1;
+            font-size: 40%;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+        @keyframes wb-timer-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .wb-traffic-element .wb-element-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            background: #1e293b;
+            padding: 8%;
+            border-radius: 8px;
+            border: 3px solid #0f172a;
+            box-sizing: border-box;
+        }
+        .wb-traffic-dot {
+            width: 72%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: #334155;
+            opacity: 0.35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.15s ease, box-shadow 0.15s ease;
+        }
+        .wb-traffic-dot svg { width: 60%; height: 60%; }
+        .wb-traffic-red { background: radial-gradient(circle at 35% 30%, #ffb3b3 0%, #ef4444 55%, #b91c1c 100%); }
+        .wb-traffic-orange { background: radial-gradient(circle at 35% 30%, #ffe0a3 0%, #f59e0b 55%, #b45309 100%); }
+        .wb-traffic-green { background: radial-gradient(circle at 35% 30%, #b9f6ca 0%, #22c55e 55%, #15803d 100%); }
+        .wb-traffic-element[data-state="red"] .wb-traffic-red { opacity: 1; box-shadow: 0 0 14px 3px rgba(239,68,68,0.8); }
+        .wb-traffic-element[data-state="orange"] .wb-traffic-orange { opacity: 1; box-shadow: 0 0 14px 3px rgba(245,158,11,0.8); }
+        .wb-traffic-element[data-state="green"] .wb-traffic-green { opacity: 1; box-shadow: 0 0 14px 3px rgba(34,197,94,0.8); }
+
+        .wb-traffic-red { position: relative; }
+        .wb-traffic-countdown-text {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .wb-traffic-red.wb-counting .wb-traffic-countdown-text { display: flex; }
+        .wb-traffic-red.wb-counting svg { display: none; }
+
+        .wb-traffic-settings-btn {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid var(--hub-line);
+            background: var(--hub-surface);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 14px;
+            color: var(--hub-ink);
+            z-index: 5;
+        }
+        .wb-traffic-element:hover .wb-traffic-settings-btn { display: flex; }
+        .wb-traffic-settings-panel {
+            position: absolute;
+            top: -14px;
+            left: 100%;
+            margin-left: 8px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            box-shadow: var(--hub-shadow-md);
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 200;
+            width: 170px;
+            white-space: normal;
+        }
+        .wb-traffic-settings-panel.wb-open { display: flex; }
+        .wb-traffic-settings-panel label { font-size: 11px; font-weight: 700; color: var(--hub-ink-soft); }
+        .wb-traffic-settings-panel input[type="number"] { width: 100%; padding: 4px 6px; border: 2px solid var(--hub-line); border-radius: 6px; font-weight: 700; text-align: center; }
+        .wb-traffic-settings-panel button { font-size: 11px; padding: 4px 8px; border-radius: 6px; border: 2px solid var(--hub-line); background: var(--hub-surface); cursor: pointer; font-weight: 700; }
+        .wb-traffic-settings-panel button.wb-mode-active { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
         .bobot-video-frame {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -1146,6 +1557,174 @@
                     <button id="bobot-submit-btn" class="hub-btn-primary hub-font interactive text-lg">Submit Answer</button>
                     <button id="bobot-next-question-btn" class="hub-btn-primary hub-font interactive text-lg" style="display:none;">Next Question</button>
                 </div>
+            </div>
+        </div>
+
+        <div id="whiteboard-screen" class="hub-font">
+            <div class="wb-tray">
+                <div id="wb-tools-wrap" class="wb-dropdown-wrap">
+                    <button id="wb-tools-btn" class="wb-circle-btn interactive" title="Tools">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div id="wb-tools-menu" class="wb-dropdown-menu" style="display:none;">
+                        <button id="wb-add-traffic-btn" class="hub-btn-ghost interactive w-full">🚦 Noise Light</button>
+                        <button id="wb-add-timer-btn" class="hub-btn-ghost interactive w-full">⏱️ Timer</button>
+                        <button id="wb-add-clock-btn" class="hub-btn-ghost interactive w-full">🕐 Clock</button>
+                    </div>
+                </div>
+
+                <div id="wb-background-wrap" class="wb-dropdown-wrap">
+                    <button id="wb-background-btn" class="hub-btn-ghost interactive">🖼️ Background ▾</button>
+                    <div id="wb-background-menu" class="wb-dropdown-menu" style="display:none; min-width:220px;">
+                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="none">🚫 No Background</button>
+                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="chalkboard">⬛ Chalkboard</button>
+                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="cream">◻️ Soft Cream</button>
+                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="dotgrid">⚬ Dot Grid</button>
+                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="lined">📃 Lined Paper</button>
+                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="sky">☁️ Soft Sky</button>
+                        <div id="wb-custom-bg-list"></div>
+                        <div id="wb-bg-settings" style="display:none;">
+                            <label class="hub-label">Background mode</label>
+                            <div class="wb-tray-group">
+                                <button type="button" id="wb-bg-mode-static-btn" class="hub-btn-ghost interactive">🖼️ Static</button>
+                                <button type="button" id="wb-bg-mode-dynamic-btn" class="hub-btn-ghost interactive">🎬 Dynamic</button>
+                            </div>
+                            <label class="hub-label">Volume</label>
+                            <input type="range" id="wb-bg-volume-input" min="0" max="100" value="70">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="wb-add-image-btn" class="hub-btn-ghost interactive">🖼️ Add Image</button>
+                <input type="file" id="wb-image-file-input" accept="image/*" multiple style="display:none;">
+
+                <select id="wb-language-select" class="hub-input wb-select">
+                    <option value="fr" selected>French (Français)</option>
+                    <option value="en">English</option>
+                    <option value="zh-pinyin">Mandarin (Pinyin)</option>
+                    <option value="zh-hanzi">Mandarin (Hanzi)</option>
+                    <option value="cantonese">Cantonese</option>
+                    <option value="ja">Japanese (日本語)</option>
+                    <option value="de">German (Deutsch)</option>
+                    <option value="it">Italian (Italiano)</option>
+                    <option value="es">Spanish (Español)</option>
+                    <option value="he">Hebrew (עברית)</option>
+                    <option value="ar">Arabic (العربية)</option>
+                    <option value="sinhala">Sinhala (සිංහල)</option>
+                    <option value="vi">Vietnamese (Tiếng Việt)</option>
+                    <option value="ur">Urdu (اردو)</option>
+                    <option value="hi">Hindi (हिन्दी)</option>
+                    <option value="uk">Ukrainian (Українська)</option>
+                    <option value="ru">Russian (Русский)</option>
+                    <option value="macedonian">Macedonian (Македонски)</option>
+                </select>
+
+                <div id="wb-text-settings-group" style="display:none;">
+                    <select id="wb-font-select" class="hub-input wb-select">
+                        <option value="dyslexic" selected>OpenDyslexic</option>
+                        <option value="sans">Sans-serif</option>
+                        <option value="serif">Serif</option>
+                        <option value="rounded">Rounded</option>
+                        <option value="mono">Monospace</option>
+                    </select>
+
+                    <div class="wb-tray-group">
+                        <button id="wb-align-left-btn" class="hub-btn-ghost interactive" title="Align left">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="14" y2="12"></line><line x1="4" y1="18" x2="18" y2="18"></line></svg>
+                        </button>
+                        <button id="wb-align-center-btn" class="hub-btn-ghost interactive" title="Align centre">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="5" y1="18" x2="19" y2="18"></line></svg>
+                        </button>
+                        <button id="wb-align-right-btn" class="hub-btn-ghost interactive" title="Align right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="10" y1="12" x2="20" y2="12"></line><line x1="6" y1="18" x2="20" y2="18"></line></svg>
+                        </button>
+                    </div>
+
+                    <div class="wb-tray-group">
+                        <span class="text-xs font-bold">Size</span>
+                        <input type="number" id="wb-text-fontsize-input" class="hub-input wb-fontsize-input" min="8" max="200" value="24">
+                    </div>
+
+                    <button id="wb-bullet-toggle-btn" class="hub-btn-ghost interactive" title="Cycle bullets/numbering">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                            <circle cx="4" cy="6" r="1.4" fill="currentColor" stroke="none"></circle>
+                            <line x1="9" y1="6" x2="20" y2="6"></line>
+                            <circle cx="4" cy="12" r="1.4" fill="currentColor" stroke="none"></circle>
+                            <line x1="9" y1="12" x2="20" y2="12"></line>
+                            <circle cx="4" cy="18" r="1.4" fill="currentColor" stroke="none"></circle>
+                            <line x1="9" y1="18" x2="20" y2="18"></line>
+                        </svg>
+                    </button>
+
+                    <div class="wb-tray-group">
+                        <span class="text-xs font-bold">Box colour</span>
+                        <input type="color" id="wb-text-bgcolor-input" value="#ffffff">
+                    </div>
+
+                    <div class="wb-tray-group">
+                        <span class="text-xs font-bold">Opacity</span>
+                        <input type="range" id="wb-text-opacity-input" min="0" max="100" value="70">
+                    </div>
+                </div>
+
+                <div id="wb-graphemes-wrap" class="wb-dropdown-wrap">
+                    <button id="wb-graphemes-toggle-btn" class="hub-btn-ghost interactive">🎨 Colour-Coding</button>
+                    <div id="wb-graphemes-panel" class="wb-dropdown-menu hub-font text-left" style="display:none; min-width:260px;">
+                        <div id="wb-sinhala-preset-row" style="display:none;">
+                            <label class="hub-label">Sinhala Vowel Signs</label>
+                            <div id="wb-sinhala-preset-list" class="flex flex-wrap gap-1.5 mb-2"></div>
+                        </div>
+                        <label class="hub-label">Custom Graphemes (Whiteboard only)</label>
+                        <div id="wb-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+
+                <div id="wb-zoom-wrap" class="wb-dropdown-wrap">
+                    <button id="wb-zoom-btn" class="hub-btn-ghost interactive" title="Zoom">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line><line x1="11" y1="8" x2="11" y2="14"></line></svg>
+                        <span id="wb-zoom-display-inline" class="text-xs font-bold">100%</span>
+                    </button>
+                    <div id="wb-zoom-menu" class="wb-dropdown-menu" style="display:none; align-items:center; gap:6px;">
+                        <span id="wb-zoom-display" class="text-xs font-bold">100%</span>
+                        <div class="wb-zoom-slider-wrap">
+                            <input type="range" id="wb-zoom-slider" min="30" max="300" value="100">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="wb-zoom-reset-btn" class="hub-btn-ghost interactive" title="Reset pan and zoom">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>
+                </button>
+
+                <button id="wb-fullscreen-btn" class="hub-btn-ghost interactive fullscreen-toggle-btn" title="Full Screen">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
+                </button>
+
+                <button id="wb-back-btn" class="hub-btn-ghost interactive" style="color:#e11d48; border-color:#fecdd3;">Reset</button>
+
+                <div id="wb-cog-wrap" class="wb-cog-wrap">
+                    <button id="wb-cog-btn" class="hub-btn-ghost interactive" title="Save/Load settings">⚙️</button>
+                    <div id="wb-cog-menu" class="wb-cog-menu" style="display:none;">
+                        <button id="wb-export-btn" class="hub-btn-ghost interactive w-full">⬇ Export Save File</button>
+                        <button id="wb-import-btn" class="hub-btn-ghost interactive w-full">⬆ Import Save File</button>
+                        <input type="file" id="wb-import-file-input" accept="application/json" style="display:none;">
+                        <span id="wb-save-indicator" class="text-xs font-bold text-center" style="color:var(--hub-ink-soft); opacity:0;">Saved</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wb-canvas-wrap">
+                <div id="wb-background-layer"></div>
+                <div id="wb-world"></div>
+            </div>
+
+            <div id="wb-context-menu" class="wb-dropdown-menu" style="display:none; position:fixed;">
+                <button id="wb-copy-btn" class="hub-btn-ghost interactive w-full">📋 Copy</button>
+                <button id="wb-paste-btn" class="hub-btn-ghost interactive w-full">📄 Paste</button>
+                <button id="wb-layer-front-btn" class="hub-btn-ghost interactive w-full">⬆️ Bring to Front</button>
+                <button id="wb-layer-forward-btn" class="hub-btn-ghost interactive w-full">↑ Bring Forward</button>
+                <button id="wb-layer-backward-btn" class="hub-btn-ghost interactive w-full">↓ Send Backward</button>
+                <button id="wb-layer-back-btn" class="hub-btn-ghost interactive w-full">⬇️ Send to Back</button>
             </div>
         </div>
 
@@ -2558,6 +3137,1759 @@
             }
         }
 
+
+
+        // ================================================================
+        // DIGITAL WHITEBOARD - a Figma/Miro-style infinite pannable/
+        // zoomable canvas. Every element (text, image, noise traffic
+        // light) shares one unified drag/resize/rotate/delete model.
+        // State persists locally via IndexedDB so a teacher's whiteboard
+        // reloads automatically next session on the same device, plus an
+        // export/import JSON file (tucked into the settings cog menu,
+        // since it's used far less often than the canvas itself) for
+        // moving a saved board to another device.
+        // ================================================================
+
+        let wbElements = []; // { id, type: 'text'|'image'|'traffic', x, y, width, height, rotation, zIndex, text?, src?, trafficState? }
+        let wbNextElementId = 1;
+        let wbSelectedElementId = null;
+        let wbEditingElementId = null; // which text element currently has its content editable
+        let wbPanX = 0, wbPanY = 0, wbZoom = 1;
+        let wbCurrentBackground = 'none';
+        let wbBackgroundMode = 'dynamic'; // 'static' | 'dynamic', only relevant for custom video backgrounds
+        let wbBackgroundVolume = 0.7;
+        let wbCustomGraphemes = [{ text: '', color: '#ef4444' }];
+
+        // Numbers 1-10 as words (for word-display mode and TTS) and "silence"
+        // in each of the hub's 18 languages, for the traffic light countdown.
+        const WB_NUMBER_WORDS = {
+            fr: ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'],
+            en: ['one','two','three','four','five','six','seven','eight','nine','ten'],
+            es: ['uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'],
+            de: ['eins','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn'],
+            it: ['uno','due','tre','quattro','cinque','sei','sette','otto','nove','dieci'],
+            ja: ['一','二','三','四','五','六','七','八','九','十'],
+            'zh-pinyin': ['yī','èr','sān','sì','wǔ','liù','qī','bā','jiǔ','shí'],
+            'zh-hanzi': ['一','二','三','四','五','六','七','八','九','十'],
+            cantonese: ['一','二','三','四','五','六','七','八','九','十'],
+            he: ['אחת','שתיים','שלוש','ארבע','חמש','שש','שבע','שמונה','תשע','עשר'],
+            ar: ['واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة'],
+            sinhala: ['එක','දෙක','තුන','හතර','පහ','හය','හත','අට','නවය','දහය'],
+            vi: ['một','hai','ba','bốn','năm','sáu','bảy','tám','chín','mười'],
+            ur: ['ایک','دو','تین','چار','پانچ','چھ','سات','آٹھ','نو','دس'],
+            hi: ['एक','दो','तीन','चार','पांच','छह','सात','आठ','नौ','दस'],
+            uk: ["один","два","три","чотири","п'ять","шість","сім","вісім","дев'ять","десять"],
+            ru: ['один','два','три','четыре','пять','шесть','семь','восемь','девять','десять'],
+            macedonian: ['еден','два','три','четири','пет','шест','седум','осум','девет','десет']
+        };
+
+        const WB_SILENCE_WORD = {
+            fr: 'Silence', en: 'Silence', es: 'Silencio', de: 'Stille', it: 'Silenzio',
+            ja: '静かに', 'zh-pinyin': 'Ānjìng', 'zh-hanzi': '安静', cantonese: '安靜',
+            he: 'שקט', ar: 'صمت', sinhala: 'නිශ්ශබ්දතාවය', vi: 'Im lặng', ur: 'خاموشی',
+            hi: 'मौन', uk: 'Тиша', ru: 'Тишина', macedonian: 'Тишина'
+        };
+
+        let wbDB = null;
+        let wbSaveDebounceTimer = null;
+        let wbSaveIndicatorTimeout = null;
+        let wbLoaded = false;
+
+        const WB_DB_NAME = 'ParkesWhiteboardDB';
+        const WB_STORE_NAME = 'whiteboardState';
+        const WB_STATE_KEY = 'currentState';
+        const WB_HANDLE_FRACTIONS = {
+            nw: [0, 0], n: [0.5, 0], ne: [1, 0],
+            e: [1, 0.5], se: [1, 1], s: [0.5, 1],
+            sw: [0, 1], w: [0, 0.5]
+        };
+
+        function wbOpenDB() {
+            return new Promise((resolve, reject) => {
+                if (!('indexedDB' in window)) { reject(new Error('IndexedDB not supported')); return; }
+                const request = indexedDB.open(WB_DB_NAME, 1);
+                request.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains(WB_STORE_NAME)) db.createObjectStore(WB_STORE_NAME);
+                };
+                request.onsuccess = (e) => resolve(e.target.result);
+                request.onerror = (e) => reject(e.target.error);
+            });
+        }
+
+        async function wbGetDB() {
+            if (!wbDB) wbDB = await wbOpenDB();
+            return wbDB;
+        }
+
+        function wbGatherState() {
+            return {
+                elements: wbElements.map(el => Object.assign({}, el)),
+                panX: wbPanX, panY: wbPanY, zoom: wbZoom,
+                background: wbCurrentBackground,
+                backgroundMode: wbBackgroundMode,
+                backgroundVolume: wbBackgroundVolume,
+                language: document.getElementById('wb-language-select').value,
+                font: document.getElementById('wb-font-select').value,
+                customGraphemes: wbCustomGraphemes
+            };
+        }
+
+        async function wbSaveState() {
+            if (!wbLoaded) return;
+            try {
+                const db = await wbGetDB();
+                await new Promise((resolve, reject) => {
+                    const tx = db.transaction(WB_STORE_NAME, 'readwrite');
+                    tx.objectStore(WB_STORE_NAME).put(wbGatherState(), WB_STATE_KEY);
+                    tx.oncomplete = resolve;
+                    tx.onerror = () => reject(tx.error);
+                });
+                wbShowSaveIndicator();
+            } catch (e) {
+                console.warn('Whiteboard auto-save failed (IndexedDB may be unavailable in this browser):', e);
+            }
+        }
+
+        function wbShowSaveIndicator() {
+            const el = document.getElementById('wb-save-indicator');
+            if (!el) return;
+            el.style.opacity = '1';
+            clearTimeout(wbSaveIndicatorTimeout);
+            wbSaveIndicatorTimeout = setTimeout(() => { el.style.opacity = '0'; }, 1400);
+        }
+
+        function wbDebouncedSave() {
+            clearTimeout(wbSaveDebounceTimer);
+            wbSaveDebounceTimer = setTimeout(wbSaveState, 700);
+        }
+
+        async function wbLoadState() {
+            wbApplyFont();
+            wbApplyBackground();
+            wbUpdateSinhalaPresetVisibility();
+            wbPrecacheTrafficNumbers();
+            try {
+                const db = await wbGetDB();
+                const state = await new Promise((resolve, reject) => {
+                    const tx = db.transaction(WB_STORE_NAME, 'readonly');
+                    const request = tx.objectStore(WB_STORE_NAME).get(WB_STATE_KEY);
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+                if (state) wbApplyState(state);
+            } catch (e) {
+                console.warn('Whiteboard load failed (starting with a blank board):', e);
+            } finally {
+                wbLoaded = true;
+            }
+        }
+
+        function wbApplyState(state) {
+            wbCurrentBackground = state.background || 'none';
+            wbBackgroundMode = state.backgroundMode || 'dynamic';
+            wbBackgroundVolume = (state.backgroundVolume !== undefined && state.backgroundVolume !== null) ? state.backgroundVolume : 0.7;
+            document.getElementById('wb-language-select').value = state.language || 'fr';
+            document.getElementById('wb-font-select').value = state.font || 'dyslexic';
+            wbCustomGraphemes = (state.customGraphemes && state.customGraphemes.length) ? state.customGraphemes : [{ text: '', color: '#ef4444' }];
+            wbElements = (state.elements || []).map(el => {
+                const copy = Object.assign({}, el);
+                if (copy.type === 'timer') { copy.running = false; copy._intervalId = null; copy.finished = false; copy._ringIntervalId = null; }
+                if (copy.type === 'traffic') { copy._countdownTimeoutId = null; }
+                return copy;
+            });
+            wbNextElementId = wbElements.reduce((max, el) => Math.max(max, el.id + 1), 1);
+            wbPanX = state.panX || 0; wbPanY = state.panY || 0; wbZoom = state.zoom || 1;
+            wbSelectedElementId = null;
+
+            wbApplyBackground();
+            wbApplyFont();
+            wbApplyWorldTransform();
+            wbUpdateZoomDisplay();
+            wbRenderGraphemeEditors();
+            wbUpdateSinhalaPresetVisibility();
+            wbPrecacheTrafficNumbers();
+            wbRenderAllElements();
+        }
+
+        const WB_FONT_CLASSES = ['wb-font-dyslexic', 'wb-font-sans', 'wb-font-serif', 'wb-font-rounded', 'wb-font-mono'];
+        function wbApplyFont() {
+            const value = document.getElementById('wb-font-select').value;
+            const world = document.getElementById('wb-world');
+            WB_FONT_CLASSES.forEach(cls => world.classList.remove(cls));
+            world.classList.add('wb-font-' + value);
+        }
+
+        function launchDigitalWhiteboard() {
+            pauseBackgroundMusic();
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('whiteboard-screen').style.display = 'flex';
+            wbWireUpOnce();
+            wbLoadState();
+        }
+
+        let wbWiredUp = false;
+        function wbWireUpOnce() {
+            if (wbWiredUp) return;
+            wbWiredUp = true;
+            setInterval(wbTickAllClocks, 1000);
+
+            document.getElementById('wb-back-btn').onclick = resetToConfig;
+
+            document.getElementById('wb-language-select').addEventListener('change', () => {
+                wbRenderAllElements();
+                wbUpdateSinhalaPresetVisibility();
+                wbPrecacheTrafficNumbers();
+                wbDebouncedSave();
+            });
+
+            document.getElementById('wb-font-select').addEventListener('change', () => {
+                wbApplyFont();
+                wbDebouncedSave();
+            });
+
+            document.getElementById('wb-background-btn').onclick = (e) => {
+                e.stopPropagation();
+                const menu = document.getElementById('wb-background-menu');
+                menu.style.display = (menu.style.display === 'none' || !menu.style.display) ? 'flex' : 'none';
+            };
+            document.addEventListener('click', (e) => {
+                const wrap = document.getElementById('wb-background-wrap');
+                if (wrap && !wrap.contains(e.target)) document.getElementById('wb-background-menu').style.display = 'none';
+            });
+
+            wbRenderCustomBackgroundMenu();
+
+            document.querySelectorAll('.wb-bg-option').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    wbCurrentBackground = btn.dataset.bg;
+                    wbApplyBackground();
+                    wbDebouncedSave();
+                    if (!WB_CUSTOM_BACKGROUNDS[wbCurrentBackground]) {
+                        document.getElementById('wb-background-menu').style.display = 'none';
+                    }
+                });
+            });
+            document.getElementById('wb-bg-mode-static-btn').onclick = () => {
+                wbBackgroundMode = 'static';
+                wbApplyBackground();
+                wbDebouncedSave();
+            };
+            document.getElementById('wb-bg-mode-dynamic-btn').onclick = () => {
+                wbBackgroundMode = 'dynamic';
+                wbApplyBackground();
+                wbDebouncedSave();
+            };
+            document.getElementById('wb-bg-volume-input').addEventListener('input', (e) => {
+                wbBackgroundVolume = parseInt(e.target.value, 10) / 100;
+                const audioEl = document.getElementById('wb-bg-audio-el');
+                if (audioEl) audioEl.volume = wbBackgroundVolume;
+                wbDebouncedSave();
+            });
+
+            document.getElementById('wb-graphemes-toggle-btn').onclick = (e) => {
+                e.stopPropagation();
+                const panel = document.getElementById('wb-graphemes-panel');
+                panel.style.display = (panel.style.display === 'none' || !panel.style.display) ? 'flex' : 'none';
+            };
+            document.addEventListener('click', (e) => {
+                const wrap = document.getElementById('wb-graphemes-wrap');
+                if (wrap && !wrap.contains(e.target)) document.getElementById('wb-graphemes-panel').style.display = 'none';
+            });
+            document.addEventListener('click', (e) => {
+                document.querySelectorAll('.wb-traffic-settings-panel.wb-open').forEach(panel => {
+                    if (!panel.contains(e.target) && e.target !== panel.previousElementSibling) {
+                        panel.classList.remove('wb-open');
+                    }
+                });
+            });
+
+            document.getElementById('wb-tools-btn').onclick = (e) => {
+                e.stopPropagation();
+                const menu = document.getElementById('wb-tools-menu');
+                menu.style.display = (menu.style.display === 'none' || !menu.style.display) ? 'flex' : 'none';
+            };
+            document.addEventListener('click', (e) => {
+                const toolsWrap = document.getElementById('wb-tools-wrap');
+                if (toolsWrap && !toolsWrap.contains(e.target)) {
+                    document.getElementById('wb-tools-menu').style.display = 'none';
+                }
+            });
+            document.getElementById('wb-add-traffic-btn').onclick = () => {
+                const center = wbScreenToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                wbCreateTrafficElement(center.x - 40, center.y - 90);
+                document.getElementById('wb-tools-menu').style.display = 'none';
+            };
+            document.getElementById('wb-add-timer-btn').onclick = () => {
+                const center = wbScreenToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                wbCreateTimerElement(center.x - 70, center.y - 70);
+                document.getElementById('wb-tools-menu').style.display = 'none';
+            };
+            document.getElementById('wb-add-clock-btn').onclick = () => {
+                const center = wbScreenToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                wbCreateClockElement(center.x - 90, center.y - 35);
+                document.getElementById('wb-tools-menu').style.display = 'none';
+            };
+            document.getElementById('wb-add-image-btn').onclick = () => document.getElementById('wb-image-file-input').click();
+            document.getElementById('wb-image-file-input').addEventListener('change', (e) => {
+                wbHandleImageFiles(e.target.files);
+                e.target.value = '';
+            });
+
+            document.getElementById('wb-cog-btn').onclick = (e) => {
+                e.stopPropagation();
+                const menu = document.getElementById('wb-cog-menu');
+                menu.style.display = (menu.style.display === 'none' || !menu.style.display) ? 'flex' : 'none';
+            };
+            document.addEventListener('click', (e) => {
+                const cogWrap = document.getElementById('wb-cog-wrap');
+                if (cogWrap && !cogWrap.contains(e.target)) {
+                    document.getElementById('wb-cog-menu').style.display = 'none';
+                }
+            });
+            document.getElementById('wb-export-btn').onclick = wbExportToFile;
+            document.getElementById('wb-import-btn').onclick = () => document.getElementById('wb-import-file-input').click();
+            document.getElementById('wb-import-file-input').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) wbImportFromFile(file);
+                e.target.value = '';
+            });
+
+            document.getElementById('wb-copy-btn').onclick = () => {
+                wbSelectElement(document.getElementById('wb-context-menu').dataset.targetId * 1);
+                wbCopySelectedElement();
+                wbHideLayerMenu();
+            };
+            document.getElementById('wb-paste-btn').onclick = () => {
+                wbPasteClipboardElement();
+                wbHideLayerMenu();
+            };
+            document.getElementById('wb-layer-front-btn').onclick = () => { wbBringToFront(document.getElementById('wb-context-menu').dataset.targetId * 1); wbHideLayerMenu(); };
+            document.getElementById('wb-layer-forward-btn').onclick = () => { wbBringForward(document.getElementById('wb-context-menu').dataset.targetId * 1); wbHideLayerMenu(); };
+            document.getElementById('wb-layer-backward-btn').onclick = () => { wbSendBackward(document.getElementById('wb-context-menu').dataset.targetId * 1); wbHideLayerMenu(); };
+            document.getElementById('wb-layer-back-btn').onclick = () => { wbSendToBack(document.getElementById('wb-context-menu').dataset.targetId * 1); wbHideLayerMenu(); };
+            document.addEventListener('click', (e) => {
+                const menu = document.getElementById('wb-context-menu');
+                if (menu.style.display !== 'none' && !menu.contains(e.target)) wbHideLayerMenu();
+            });
+            document.getElementById('wb-canvas-wrap').addEventListener('contextmenu', (e) => {
+                if (e.target.id === 'wb-canvas-wrap' || e.target.id === 'wb-background-layer' || e.target.id === 'wb-world') {
+                    e.preventDefault(); // suppress the default menu over empty canvas too, even though there's nothing to layer-order there
+                    wbHideLayerMenu();
+                }
+            });
+
+            ['left', 'center', 'right'].forEach(align => {
+                document.getElementById('wb-align-' + align + '-btn').onclick = () => wbSetTextProperty('textAlign', align);
+            });
+            document.getElementById('wb-text-fontsize-input').addEventListener('change', (e) => {
+                wbSetTextProperty('fontSize', Math.max(8, parseInt(e.target.value, 10) || 22));
+            });
+            document.getElementById('wb-bullet-toggle-btn').onclick = () => {
+                const elData = wbElements.find(e => e.id === wbSelectedElementId);
+                if (!elData) return;
+                const order = ['none', 'bullet', 'number'];
+                const next = order[(order.indexOf(elData.bulletMode || 'none') + 1) % order.length];
+                wbSetTextProperty('bulletMode', next);
+            };
+            document.getElementById('wb-text-bgcolor-input').addEventListener('input', (e) => wbSetTextProperty('bgColor', e.target.value));
+            document.getElementById('wb-text-opacity-input').addEventListener('input', (e) => wbSetTextProperty('bgOpacity', parseInt(e.target.value, 10) / 100));
+
+            document.getElementById('wb-zoom-btn').onclick = (e) => {
+                e.stopPropagation();
+                const menu = document.getElementById('wb-zoom-menu');
+                menu.style.display = (menu.style.display === 'none' || !menu.style.display) ? 'flex' : 'none';
+            };
+            document.addEventListener('click', (e) => {
+                const wrap = document.getElementById('wb-zoom-wrap');
+                if (wrap && !wrap.contains(e.target)) document.getElementById('wb-zoom-menu').style.display = 'none';
+            });
+            document.getElementById('wb-zoom-slider').addEventListener('input', (e) => {
+                const rect = document.getElementById('wb-canvas-wrap').getBoundingClientRect();
+                wbZoomTo(parseInt(e.target.value, 10) / 100, rect.width / 2, rect.height / 2);
+            });
+            document.getElementById('wb-zoom-reset-btn').onclick = () => {
+                wbPanX = 0; wbPanY = 0; wbZoom = 1;
+                wbApplyWorldTransform();
+                wbUpdateZoomDisplay();
+                wbDebouncedSave();
+            };
+
+            wbSetupCanvasPanZoom();
+        }
+
+        // --- Coordinate conversion between screen (viewport pixel) space and
+        // world (the pannable/zoomable canvas's own) space ---
+        function wbScreenToWorld(screenPoint) {
+            const rect = document.getElementById('wb-canvas-wrap').getBoundingClientRect();
+            return {
+                x: (screenPoint.x - rect.left - wbPanX) / wbZoom,
+                y: (screenPoint.y - rect.top - wbPanY) / wbZoom
+            };
+        }
+
+        function wbPointerXY(e) {
+            if (e.touches && e.touches.length) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            if (e.changedTouches && e.changedTouches.length) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+            return { x: e.clientX, y: e.clientY };
+        }
+
+        function wbTouchDistance(touches) {
+            const dx = touches[0].clientX - touches[1].clientX;
+            const dy = touches[0].clientY - touches[1].clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function wbApplyWorldTransform() {
+            document.getElementById('wb-world').style.transform = `translate(${wbPanX}px, ${wbPanY}px) scale(${wbZoom})`;
+            wbUpdateTrafficUIScale();
+        }
+
+        // The traffic light's settings button/panel are fixed-px sized in
+        // CSS (independent of the light's own resize), but they still live
+        // inside #wb-world, which the canvas zoom scales along with
+        // everything else. This counteracts that with an inverse scale, so
+        // they stay a consistent size relative to the screen rather than
+        // shrinking/growing with the zoom level.
+        function wbUpdateTrafficUIScale() {
+            const inverseScale = 1 / wbZoom;
+            document.querySelectorAll('.wb-traffic-settings-btn').forEach(btn => {
+                btn.style.transform = `translateX(-50%) scale(${inverseScale})`;
+            });
+            document.querySelectorAll('.wb-traffic-settings-panel').forEach(panel => {
+                panel.style.transform = `scale(${inverseScale})`;
+                panel.style.transformOrigin = 'top left';
+            });
+        }
+
+        function wbUpdateZoomDisplay() {
+            const pct = Math.round(wbZoom * 100);
+            document.getElementById('wb-zoom-display').textContent = pct + '%';
+            document.getElementById('wb-zoom-display-inline').textContent = pct + '%';
+            document.getElementById('wb-zoom-slider').value = pct;
+        }
+
+        function wbZoomBy(factor) {
+            const rect = document.getElementById('wb-canvas-wrap').getBoundingClientRect();
+            wbZoomTo(wbZoom * factor, rect.width / 2, rect.height / 2);
+        }
+
+        // Sets zoom to an absolute value (used by the slider), anchored at
+        // the given screen point the same way wbZoomBy anchors at the
+        // canvas center - keeps whatever world point is under that spot
+        // fixed on screen as the zoom level changes.
+        function wbZoomTo(newZoom, cx, cy) {
+            const worldX = (cx - wbPanX) / wbZoom, worldY = (cy - wbPanY) / wbZoom;
+            wbZoom = Math.min(3, Math.max(0.2, newZoom));
+            wbPanX = cx - worldX * wbZoom;
+            wbPanY = cy - worldY * wbZoom;
+            wbApplyWorldTransform();
+            wbUpdateZoomDisplay();
+            wbDebouncedSave();
+        }
+
+        function wbIsEmptyCanvasTarget(target) {
+            return target.id === 'wb-canvas-wrap' || target.id === 'wb-world' || target.id === 'wb-background-layer';
+        }
+
+        function wbSetupCanvasPanZoom() {
+            const canvasWrap = document.getElementById('wb-canvas-wrap');
+            let isPanning = false, panStart = null, panOriginX = 0, panOriginY = 0;
+            let pinchStartDistance = null, pinchStartZoom = 1;
+
+            const startPan = (e) => {
+                if (!wbIsEmptyCanvasTarget(e.target)) return;
+                isPanning = true;
+                panStart = wbPointerXY(e);
+                panOriginX = wbPanX; panOriginY = wbPanY;
+                canvasWrap.classList.add('wb-panning');
+                wbSelectElement(null);
+            };
+            canvasWrap.addEventListener('mousedown', startPan);
+
+            canvasWrap.addEventListener('dblclick', (e) => {
+                if (!wbIsEmptyCanvasTarget(e.target)) return;
+                const worldPos = wbScreenToWorld(wbPointerXY(e));
+                wbCreateTextElement(worldPos.x, worldPos.y);
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isPanning) return;
+                const p = wbPointerXY(e);
+                wbPanX = panOriginX + (p.x - panStart.x);
+                wbPanY = panOriginY + (p.y - panStart.y);
+                wbApplyWorldTransform();
+            });
+            document.addEventListener('mouseup', () => {
+                if (isPanning) { isPanning = false; canvasWrap.classList.remove('wb-panning'); wbDebouncedSave(); }
+            });
+
+            canvasWrap.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = canvasWrap.getBoundingClientRect();
+                const cursorX = e.clientX - rect.left, cursorY = e.clientY - rect.top;
+                const worldX = (cursorX - wbPanX) / wbZoom, worldY = (cursorY - wbPanY) / wbZoom;
+                const zoomDelta = e.deltaY < 0 ? 1.1 : 0.9;
+                wbZoom = Math.min(3, Math.max(0.2, wbZoom * zoomDelta));
+                wbPanX = cursorX - worldX * wbZoom;
+                wbPanY = cursorY - worldY * wbZoom;
+                wbApplyWorldTransform();
+                wbUpdateZoomDisplay();
+                wbDebouncedSave();
+            }, { passive: false });
+
+            canvasWrap.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 2) {
+                    pinchStartDistance = wbTouchDistance(e.touches);
+                    pinchStartZoom = wbZoom;
+                } else if (e.touches.length === 1) {
+                    startPan(e);
+                }
+            }, { passive: false });
+
+            canvasWrap.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 2 && pinchStartDistance) {
+                    e.preventDefault();
+                    const rect = canvasWrap.getBoundingClientRect();
+                    const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+                    const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+                    const worldX = (midX - wbPanX) / wbZoom, worldY = (midY - wbPanY) / wbZoom;
+                    const scaleFactor = wbTouchDistance(e.touches) / pinchStartDistance;
+                    wbZoom = Math.min(3, Math.max(0.2, pinchStartZoom * scaleFactor));
+                    wbPanX = midX - worldX * wbZoom;
+                    wbPanY = midY - worldY * wbZoom;
+                    wbApplyWorldTransform();
+                    wbUpdateZoomDisplay();
+                } else if (isPanning && e.touches.length === 1) {
+                    e.preventDefault();
+                    const p = wbPointerXY(e);
+                    wbPanX = panOriginX + (p.x - panStart.x);
+                    wbPanY = panOriginY + (p.y - panStart.y);
+                    wbApplyWorldTransform();
+                }
+            }, { passive: false });
+
+            canvasWrap.addEventListener('touchend', () => {
+                isPanning = false;
+                pinchStartDistance = null;
+                wbDebouncedSave();
+            });
+
+            // Keyboard shortcuts - only act when the whiteboard is the active
+            // tool and focus isn't inside a form field or an actively-editing
+            // text box, so normal typing (including Backspace) keeps working
+            // everywhere it should.
+            document.addEventListener('keydown', (e) => {
+                if (document.getElementById('whiteboard-screen').style.display !== 'flex') return;
+                const active = document.activeElement;
+                const isFormField = active && (['INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName) || active.isContentEditable);
+                if (isFormField) return;
+
+                if ((e.key === 'Backspace' || e.key === 'Delete') && wbSelectedElementId !== null) {
+                    e.preventDefault();
+                    wbDeleteElement(wbSelectedElementId);
+                } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c' && wbSelectedElementId !== null) {
+                    wbCopySelectedElement();
+                } else if ((e.ctrlKey || e.metaKey) && e.key === ']' && wbSelectedElementId !== null) {
+                    e.preventDefault();
+                    wbBringForward(wbSelectedElementId);
+                } else if ((e.ctrlKey || e.metaKey) && e.key === '[' && wbSelectedElementId !== null) {
+                    e.preventDefault();
+                    wbSendBackward(wbSelectedElementId);
+                }
+                // Ctrl+V is deliberately NOT handled here - it's handled once,
+                // below, via the native 'paste' event instead. Handling it in
+                // both places caused Ctrl+V to sometimes paste a copied
+                // element AND a leftover image from the system clipboard at
+                // the same time, since both listeners fired for the same
+                // keypress.
+            });
+
+            // Clipboard paste - an image (e.g. copied from a webpage) becomes
+            // a new image element; otherwise falls back to pasting a
+            // previously-copied whiteboard element via Ctrl+C.
+            document.addEventListener('paste', (e) => {
+                if (document.getElementById('whiteboard-screen').style.display !== 'flex') return;
+                const active = document.activeElement;
+                const isFormField = active && (['INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName) || active.isContentEditable);
+                if (isFormField) return;
+
+                const items = e.clipboardData ? e.clipboardData.items : [];
+                const imageFiles = [];
+                for (const item of items) {
+                    if (item.type.startsWith('image/')) {
+                        const file = item.getAsFile();
+                        if (file) imageFiles.push(file);
+                    }
+                }
+                if (imageFiles.length) {
+                    e.preventDefault();
+                    wbHandleImageFiles(imageFiles);
+                } else if (wbClipboardElement) {
+                    e.preventDefault();
+                    wbPasteClipboardElement();
+                }
+            });
+        }
+
+        // --- Element creation ---
+        function wbCreateTextElement(x, y) {
+            const el = { id: wbNextElementId++, type: 'text', x, y, width: 180, height: 60, rotation: 0, zIndex: wbElements.length + 1, text: '' };
+            wbElements.push(el);
+            wbRenderAllElements();
+            wbSelectElement(el.id);
+            wbEnterTextEditMode(el.id);
+            wbDebouncedSave();
+        }
+
+        function wbCreateTrafficElement(x, y) {
+            const el = { id: wbNextElementId++, type: 'traffic', x, y, width: 80, height: 180, rotation: 0, zIndex: wbElements.length + 1, trafficState: 'off' };
+            wbElements.push(el);
+            wbRenderAllElements();
+            wbSelectElement(el.id);
+            wbDebouncedSave();
+        }
+
+        function wbCreateTimerElement(x, y) {
+            const el = { id: wbNextElementId++, type: 'timer', x, y, width: 140, height: 140, rotation: 0, zIndex: wbElements.length + 1, totalSeconds: 300, remainingSeconds: 300, running: false };
+            wbElements.push(el);
+            wbRenderAllElements();
+            wbSelectElement(el.id);
+            wbDebouncedSave();
+        }
+
+        function wbCreateClockElement(x, y) {
+            const el = { id: wbNextElementId++, type: 'clock', x, y, width: 180, height: 70, rotation: 0, zIndex: wbElements.length + 1 };
+            wbElements.push(el);
+            wbRenderAllElements();
+            wbSelectElement(el.id);
+            wbDebouncedSave();
+        }
+
+        function wbHandleImageFiles(fileList) {
+            const files = Array.from(fileList || []).filter(f => f.type.startsWith('image/'));
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const maxDim = 260;
+                        let width = img.naturalWidth, height = img.naturalHeight;
+                        if (width > maxDim || height > maxDim) {
+                            const scale = maxDim / Math.max(width, height);
+                            width = Math.round(width * scale);
+                            height = Math.round(height * scale);
+                        }
+                        const center = wbScreenToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                        const el = {
+                            id: wbNextElementId++, type: 'image',
+                            x: center.x - width / 2 + (Math.random() * 40 - 20),
+                            y: center.y - height / 2 + (Math.random() * 40 - 20),
+                            width, height, rotation: 0, zIndex: wbElements.length + 1, src: e.target.result
+                        };
+                        wbElements.push(el);
+                        wbRenderAllElements();
+                        wbSelectElement(el.id);
+                        wbDebouncedSave();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function wbDeleteElement(id) {
+            wbElements = wbElements.filter(el => el.id !== id);
+            if (wbSelectedElementId === id) wbSelectedElementId = null;
+            if (wbEditingElementId === id) wbEditingElementId = null;
+            wbRenderAllElements();
+            wbUpdateTextSettingsBar();
+            wbDebouncedSave();
+        }
+
+        let wbClipboardElement = null;
+
+        function wbCopySelectedElement() {
+            const elData = wbElements.find(e => e.id === wbSelectedElementId);
+            if (!elData) return;
+            wbClipboardElement = Object.assign({}, elData);
+        }
+
+        function wbPasteClipboardElement() {
+            if (!wbClipboardElement) return;
+            const newEl = Object.assign({}, wbClipboardElement, {
+                id: wbNextElementId++,
+                x: wbClipboardElement.x + 24,
+                y: wbClipboardElement.y + 24,
+                zIndex: wbElements.length + 1
+            });
+            wbElements.push(newEl);
+            wbRenderAllElements();
+            wbSelectElement(newEl.id);
+            wbDebouncedSave();
+        }
+
+        function wbSelectElement(id) {
+            if (wbEditingElementId !== null && wbEditingElementId !== id) wbExitTextEditMode(wbEditingElementId);
+            wbSelectedElementId = id;
+            document.querySelectorAll('.wb-element').forEach(el => {
+                el.classList.toggle('wb-selected', parseInt(el.dataset.id, 10) === id);
+            });
+            wbUpdateTextSettingsBar();
+        }
+
+        function wbUpdateTextSettingsBar() {
+            const group = document.getElementById('wb-text-settings-group');
+            const elData = wbElements.find(e => e.id === wbSelectedElementId);
+            if (!elData || elData.type !== 'text') {
+                group.style.display = 'none';
+                return;
+            }
+            group.style.display = 'contents'; // merges children into the tray's own flex row instead of adding a second bar
+            const align = elData.textAlign || 'left';
+            ['left', 'center', 'right'].forEach(a => {
+                document.getElementById('wb-align-' + a + '-btn').classList.toggle('wb-align-active', a === align);
+            });
+            document.getElementById('wb-text-fontsize-input').value = elData.fontSize || 22;
+            const bulletLabels = { none: 'Off', bullet: 'Bullets', number: 'Numbers' };
+            const bulletBtn = document.getElementById('wb-bullet-toggle-btn');
+            bulletBtn.title = 'List: ' + bulletLabels[elData.bulletMode || 'none'] + ' (click to cycle)';
+            bulletBtn.classList.toggle('wb-mode-active', (elData.bulletMode || 'none') !== 'none');
+            document.getElementById('wb-text-bgcolor-input').value = elData.bgColor || '#ffffff';
+            document.getElementById('wb-text-opacity-input').value = Math.round(((elData.bgOpacity !== undefined && elData.bgOpacity !== null) ? elData.bgOpacity : 0.7) * 100);
+        }
+
+        // Shared setter for all the text settings bar controls - updates the
+        // currently selected text element's data, re-renders it (re-entering
+        // edit mode's content if it's actively being edited, since typing
+        // could be in progress), and saves.
+        function wbSetTextProperty(prop, value) {
+            const elData = wbElements.find(e => e.id === wbSelectedElementId);
+            if (!elData || elData.type !== 'text') return;
+            elData[prop] = value;
+            const domEl = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            const content = domEl ? domEl.querySelector('.wb-element-content') : null;
+            if (content) {
+                if (wbEditingElementId === elData.id) {
+                    wbApplyTextElementStyles(elData, content); // don't disturb in-progress typing with a full re-render
+                } else {
+                    wbRenderTextContent(elData, content);
+                }
+            }
+            wbUpdateTextSettingsBar();
+            wbDebouncedSave();
+        }
+
+        // --- Rendering ---
+        function wbRenderAllElements() {
+            const world = document.getElementById('wb-world');
+            world.innerHTML = '';
+            wbElements.forEach(el => world.appendChild(wbBuildElementDOM(el)));
+            wbUpdateTrafficUIScale();
+        }
+
+        function wbPositionElementDOM(domEl, elData) {
+            domEl.style.left = elData.x + 'px';
+            domEl.style.top = elData.y + 'px';
+            domEl.style.width = elData.width + 'px';
+            domEl.style.height = elData.height + 'px';
+            domEl.style.zIndex = elData.zIndex;
+            domEl.style.transform = `rotate(${elData.rotation || 0}rad)`;
+            if (elData.type === 'timer') {
+                const textEl = domEl.querySelector('.wb-timer-text');
+                if (textEl) textEl.style.fontSize = Math.max(10, Math.min(elData.width, elData.height) * 0.22) + 'px';
+                const stopBtn = domEl.querySelector('.wb-timer-stop-btn');
+                if (stopBtn) stopBtn.style.fontSize = Math.max(14, Math.min(elData.width, elData.height) * 0.22) + 'px';
+            } else if (elData.type === 'clock') {
+                const clockText = domEl.querySelector('.wb-clock-text');
+                if (clockText) clockText.style.fontSize = Math.max(10, elData.height * 0.4) + 'px';
+            }
+        }
+
+        // Colourises text using the whiteboard's OWN separate custom grapheme
+        // rules and target language, independent of the rest of the hub -
+        // temporarily swaps the shared globals colorizeSentenceText reads,
+        // safe because this is entirely synchronous with no gap where
+        // anything else could observe the swapped values.
+        function wbColorizeForDisplay(text) {
+            const savedGraphemes = customGraphemes;
+            const savedLang = selectedLanguage;
+            customGraphemes = wbCustomGraphemes;
+            selectedLanguage = document.getElementById('wb-language-select').value;
+            const html = colorizeSentenceText(text);
+            customGraphemes = savedGraphemes;
+            selectedLanguage = savedLang;
+            return html;
+        }
+
+        // Alignment/size/opacity/background apply regardless of whether the
+        // box is actively being edited, so a teacher sees them update live
+        // while typing, not just after clicking away.
+        function wbHexToRgba(hex, alpha) {
+            const clean = (hex || '#ffffff').replace('#', '');
+            const r = parseInt(clean.substring(0, 2), 16);
+            const g = parseInt(clean.substring(2, 4), 16);
+            const b = parseInt(clean.substring(4, 6), 16);
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+
+        function wbApplyTextElementStyles(elData, content) {
+            content.style.textAlign = elData.textAlign || 'left';
+            content.style.fontSize = (elData.fontSize || 22) + 'px';
+            content.style.opacity = 1; // the text itself never fades - only the box background does, via its own alpha below
+            const bgOpacity = (elData.bgOpacity !== undefined && elData.bgOpacity !== null) ? elData.bgOpacity : 0.7;
+            content.style.background = wbHexToRgba(elData.bgColor || '#ffffff', bgOpacity);
+        }
+
+        // Colourises the text and, if bullet/number mode is active, splits it
+        // into one <div> per line so each can get its own marker via CSS -
+        // only applied when NOT actively being edited (matching the existing
+        // pattern where editing shows plain text and formatting re-applies
+        // on exit), since a contenteditable full of nested per-line divs
+        // would be fragile to type into directly.
+        function wbRenderTextContent(elData, content) {
+            const bulletMode = elData.bulletMode || 'none';
+            content.classList.remove('wb-bullet-mode-bullet', 'wb-bullet-mode-number');
+
+            if (!elData.text) {
+                content.innerHTML = '';
+            } else if (bulletMode === 'none') {
+                content.innerHTML = wbColorizeForDisplay(elData.text);
+            } else {
+                content.classList.add('wb-bullet-mode-' + bulletMode);
+                content.innerHTML = elData.text.split('\n')
+                    .map(line => '<div class="wb-bullet-line">' + (line.trim() === '' ? '&nbsp;' : wbColorizeForDisplay(line)) + '</div>')
+                    .join('');
+            }
+            wbApplyTextElementStyles(elData, content);
+        }
+
+        function wbBuildElementDOM(elData) {
+            const el = document.createElement('div');
+            el.className = 'wb-element wb-' + elData.type + '-element';
+            el.dataset.id = elData.id;
+            wbPositionElementDOM(el, elData);
+            if (elData.type === 'traffic') el.dataset.state = elData.trafficState || 'off';
+
+            const content = document.createElement('div');
+            content.className = 'wb-element-content';
+            el.appendChild(content);
+
+            if (elData.type === 'text') {
+                content.dir = 'auto';
+                content.spellcheck = false;
+                content.contentEditable = 'false';
+                wbRenderTextContent(elData, content);
+            } else if (elData.type === 'image') {
+                const imgEl = document.createElement('img');
+                imgEl.src = elData.src;
+                imgEl.draggable = false;
+                content.appendChild(imgEl);
+            } else if (elData.type === 'traffic') {
+                if (elData.countdownStart === undefined) elData.countdownStart = 5;
+                if (elData.displayMode === undefined) elData.displayMode = 'digit';
+
+                const dotIcons = {
+                    green: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>',
+                    orange: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>',
+                    red: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>'
+                };
+                ['red', 'orange', 'green'].forEach(color => {
+                    const dot = document.createElement('div');
+                    dot.className = 'wb-traffic-dot wb-traffic-' + color;
+                    dot.innerHTML = dotIcons[color];
+                    if (color === 'red') {
+                        const countdownText = document.createElement('div');
+                        countdownText.className = 'wb-traffic-countdown-text';
+                        dot.appendChild(countdownText);
+                    }
+                    dot.addEventListener('click', (e) => {
+                        if (wbSelectedElementId !== elData.id) return; // must already be selected - a plain click just selects/drags
+                        e.stopPropagation();
+                        wbHandleTrafficLightClick(elData, color);
+                    });
+                    content.appendChild(dot);
+                });
+
+                // Three-dot settings button, only visible on hover, for the
+                // countdown starting number and digit/word display mode.
+                const settingsBtn = document.createElement('button');
+                settingsBtn.className = 'wb-traffic-settings-btn';
+                settingsBtn.textContent = '⋯';
+                el.appendChild(settingsBtn);
+
+                const panel = document.createElement('div');
+                panel.className = 'wb-traffic-settings-panel';
+                panel.innerHTML = `
+                    <label>Countdown from</label>
+                    <input type="number" class="wb-traffic-countdown-input" min="1" max="20" value="${elData.countdownStart}">
+                    <label>Display as</label>
+                    <div style="display:flex; gap:4px;">
+                        <button type="button" class="wb-traffic-mode-digit">123</button>
+                        <button type="button" class="wb-traffic-mode-word">abc</button>
+                    </div>
+                `;
+                el.appendChild(panel);
+
+                settingsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    panel.classList.toggle('wb-open');
+                });
+                panel.addEventListener('click', (e) => e.stopPropagation());
+                panel.addEventListener('mousedown', (e) => e.stopPropagation());
+                const digitBtn = panel.querySelector('.wb-traffic-mode-digit');
+                const wordBtn = panel.querySelector('.wb-traffic-mode-word');
+                digitBtn.classList.toggle('wb-mode-active', elData.displayMode === 'digit');
+                wordBtn.classList.toggle('wb-mode-active', elData.displayMode === 'word');
+                panel.querySelector('.wb-traffic-countdown-input').addEventListener('change', (e) => {
+                    elData.countdownStart = Math.max(1, Math.min(20, parseInt(e.target.value, 10) || 5));
+                    e.target.value = elData.countdownStart;
+                    wbDebouncedSave();
+                });
+                digitBtn.addEventListener('click', () => {
+                    elData.displayMode = 'digit';
+                    digitBtn.classList.add('wb-mode-active');
+                    wordBtn.classList.remove('wb-mode-active');
+                    wbDebouncedSave();
+                });
+                wordBtn.addEventListener('click', () => {
+                    elData.displayMode = 'word';
+                    wordBtn.classList.add('wb-mode-active');
+                    digitBtn.classList.remove('wb-mode-active');
+                    wbDebouncedSave();
+                });
+            } else if (elData.type === 'timer') {
+                content.innerHTML = `
+                    <svg class="wb-timer-svg" viewBox="0 0 100 100">
+                        <circle class="wb-timer-track" cx="50" cy="50" r="44"></circle>
+                        <circle class="wb-timer-progress" cx="50" cy="50" r="44" stroke-dasharray="276.46" stroke-dashoffset="0"></circle>
+                    </svg>
+                    <div class="wb-timer-text">05:00</div>
+                    <div class="wb-timer-finished-overlay" style="display:none;">
+                        <button class="wb-timer-stop-btn" title="Stop the sound and reset">↺</button>
+                    </div>
+                    <div class="wb-timer-controls">
+                        <input type="color" class="wb-timer-color" value="${elData.color || '#8B5CF6'}" title="Ring colour">
+                        <input type="number" class="wb-timer-minutes-input" min="0" max="180" value="${Math.floor(elData.totalSeconds / 60)}" title="Minutes">
+                        <span class="wb-timer-colon">:</span>
+                        <input type="number" class="wb-timer-seconds-input" min="0" max="59" value="${elData.totalSeconds % 60}" title="Seconds">
+                        <button class="wb-timer-toggle" title="Start/Pause">▶</button>
+                        <button class="wb-timer-reset-el" title="Reset">↺</button>
+                    </div>
+                `;
+                wbUpdateTimerVisual(elData);
+                content.querySelector('.wb-timer-toggle').addEventListener('click', (e) => { e.stopPropagation(); wbToggleTimerElement(elData.id); });
+                content.querySelector('.wb-timer-reset-el').addEventListener('click', (e) => { e.stopPropagation(); wbResetTimerElement(elData.id); });
+                content.querySelector('.wb-timer-stop-btn').addEventListener('click', (e) => { e.stopPropagation(); wbResetTimerElement(elData.id); });
+                content.querySelector('.wb-timer-color').addEventListener('input', (e) => {
+                    elData.color = e.target.value;
+                    wbUpdateTimerVisual(elData);
+                    wbDebouncedSave();
+                });
+                const minutesInput = content.querySelector('.wb-timer-minutes-input');
+                const secondsInput = content.querySelector('.wb-timer-seconds-input');
+                const applyDurationInputs = () => {
+                    const minutes = Math.max(0, parseInt(minutesInput.value, 10) || 0);
+                    const seconds = Math.max(0, Math.min(59, parseInt(secondsInput.value, 10) || 0));
+                    minutesInput.value = minutes;
+                    secondsInput.value = seconds;
+                    wbSetTimerDuration(elData.id, minutes, seconds);
+                };
+                minutesInput.addEventListener('click', (e) => e.stopPropagation());
+                secondsInput.addEventListener('click', (e) => e.stopPropagation());
+                minutesInput.addEventListener('change', applyDurationInputs);
+                secondsInput.addEventListener('change', applyDurationInputs);
+            } else if (elData.type === 'clock') {
+                content.innerHTML = `<div class="wb-clock-text"></div>`;
+                wbUpdateClockVisual(el);
+            }
+
+            wbPositionElementDOM(el, elData); // re-applied now that content exists, so font-scaling actually takes effect on first build
+            Object.keys(WB_HANDLE_FRACTIONS).forEach(dir => {
+                const h = document.createElement('div');
+                h.className = 'wb-handle wb-handle-' + dir;
+                h.dataset.dir = dir;
+                h.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); wbStartResize(elData, dir, e); });
+                h.addEventListener('touchstart', (e) => { e.stopPropagation(); e.preventDefault(); wbStartResize(elData, dir, e); }, { passive: false });
+                el.appendChild(h);
+            });
+
+            const rotateLine = document.createElement('div');
+            rotateLine.className = 'wb-rotate-line';
+            el.appendChild(rotateLine);
+
+            const rotateHandle = document.createElement('div');
+            rotateHandle.className = 'wb-rotate-handle';
+            rotateHandle.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); wbStartRotate(elData, e); });
+            rotateHandle.addEventListener('touchstart', (e) => { e.stopPropagation(); e.preventDefault(); wbStartRotate(elData, e); }, { passive: false });
+            el.appendChild(rotateHandle);
+
+            const startInteraction = (e) => {
+                if (e.target === rotateHandle || e.target.classList.contains('wb-handle')) return;
+                if (elData.type === 'text' && wbEditingElementId === elData.id) return; // let typing/clicking inside an editing text box work normally
+                if (e.target.closest && (e.target.closest('.wb-timer-controls') || e.target.closest('.wb-timer-finished-overlay'))) return; // let the timer's own inputs/buttons receive focus and clicks normally
+                e.preventDefault();
+                wbSelectElement(elData.id);
+                wbStartElementDrag(elData, e);
+            };
+            el.addEventListener('mousedown', startInteraction);
+            el.addEventListener('touchstart', startInteraction, { passive: false });
+
+            el.addEventListener('dblclick', (e) => {
+                if (elData.type === 'text') { e.stopPropagation(); wbEnterTextEditMode(elData.id); }
+            });
+
+            el.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                wbSelectElement(elData.id);
+                wbShowLayerMenu(elData.id, e.clientX, e.clientY);
+            });
+
+            if (wbSelectedElementId === elData.id) el.classList.add('wb-selected');
+            return el;
+        }
+
+        function wbUpdateElementDOM(elData) {
+            const el = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            if (el) wbPositionElementDOM(el, elData);
+        }
+
+        function wbShowLayerMenu(id, x, y) {
+            const menu = document.getElementById('wb-context-menu');
+            menu.dataset.targetId = id;
+            menu.style.display = 'flex';
+            menu.style.left = x + 'px';
+            menu.style.top = y + 'px';
+        }
+
+        function wbHideLayerMenu() {
+            document.getElementById('wb-context-menu').style.display = 'none';
+        }
+
+        function wbApplyZIndex(elData) {
+            const domEl = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            if (domEl) domEl.style.zIndex = elData.zIndex;
+        }
+
+        function wbBringToFront(id) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            const maxZ = Math.max(0, ...wbElements.map(e => e.zIndex));
+            elData.zIndex = maxZ + 1;
+            wbApplyZIndex(elData);
+            wbDebouncedSave();
+        }
+
+        function wbSendToBack(id) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            const minZ = Math.min(0, ...wbElements.map(e => e.zIndex));
+            elData.zIndex = minZ - 1;
+            wbApplyZIndex(elData);
+            wbDebouncedSave();
+        }
+
+        // Forward/backward swap z-index with whichever element sits directly
+        // adjacent in the current stacking order, rather than assuming
+        // z-index values are perfectly sequential integers.
+        function wbBringForward(id) {
+            const sorted = wbElements.slice().sort((a, b) => a.zIndex - b.zIndex);
+            const idx = sorted.findIndex(e => e.id === id);
+            if (idx === -1 || idx === sorted.length - 1) return;
+            const current = sorted[idx], above = sorted[idx + 1];
+            const tmp = current.zIndex;
+            current.zIndex = above.zIndex;
+            above.zIndex = tmp;
+            wbApplyZIndex(current);
+            wbApplyZIndex(above);
+            wbDebouncedSave();
+        }
+
+        function wbSendBackward(id) {
+            const sorted = wbElements.slice().sort((a, b) => a.zIndex - b.zIndex);
+            const idx = sorted.findIndex(e => e.id === id);
+            if (idx <= 0) return;
+            const current = sorted[idx], below = sorted[idx - 1];
+            const tmp = current.zIndex;
+            current.zIndex = below.zIndex;
+            below.zIndex = tmp;
+            wbApplyZIndex(current);
+            wbApplyZIndex(below);
+            wbDebouncedSave();
+        }
+
+        // --- Text edit mode ---
+        function wbEnterTextEditMode(id) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            wbEditingElementId = id;
+            const domEl = document.querySelector(`.wb-element[data-id="${id}"]`);
+            if (!domEl) return;
+            domEl.classList.add('wb-editing');
+            const content = domEl.querySelector('.wb-element-content');
+            content.contentEditable = 'true';
+            content.textContent = elData.text || '';
+            wbApplyTextElementStyles(elData, content);
+            content.focus();
+
+            const onInput = () => {
+                elData.text = content.textContent;
+                wbDebouncedSave();
+            };
+            content.addEventListener('input', onInput);
+            content._wbOnInput = onInput;
+        }
+
+        function wbExitTextEditMode(id) {
+            const elData = wbElements.find(e => e.id === id);
+            const domEl = document.querySelector(`.wb-element[data-id="${id}"]`);
+            if (!domEl) { wbEditingElementId = null; return; }
+            const content = domEl.querySelector('.wb-element-content');
+            if (elData) elData.text = content.textContent;
+            domEl.classList.remove('wb-editing');
+            content.contentEditable = 'false';
+            if (content._wbOnInput) content.removeEventListener('input', content._wbOnInput);
+            if (elData) wbRenderTextContent(elData, content);
+            wbEditingElementId = null;
+            wbDebouncedSave();
+        }
+
+        // --- Drag (move) ---
+        function wbStartElementDrag(elData, startEvent) {
+            if (startEvent.altKey) {
+                // Alt+drag duplicates the element, leaving the original in
+                // place, and drags the new copy instead.
+                const duplicate = Object.assign({}, elData, {
+                    id: wbNextElementId++,
+                    zIndex: wbElements.length + 1
+                });
+                wbElements.push(duplicate);
+                wbRenderAllElements();
+                wbSelectElement(duplicate.id);
+                elData = duplicate;
+            }
+
+            const start = wbPointerXY(startEvent);
+            const originX = elData.x, originY = elData.y;
+            function onMove(e) {
+                const p = wbPointerXY(e);
+                elData.x = originX + (p.x - start.x) / wbZoom;
+                elData.y = originY + (p.y - start.y) / wbZoom;
+                wbUpdateElementDOM(elData);
+            }
+            function onUp() {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onUp);
+                wbDebouncedSave();
+            }
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onUp);
+        }
+
+        // --- Proportional resize, correct even when the element is rotated:
+        // keeps the OPPOSITE anchor point fixed in world space regardless of
+        // which of the 8 handles is being dragged, by working in the
+        // element's own unrotated local frame. ---
+        function wbStartResize(elData, dir, startEvent) {
+            const [hfx, hfy] = WB_HANDLE_FRACTIONS[dir];
+            const anchorFx = 1 - hfx, anchorFy = 1 - hfy; // opposite corner/edge stays fixed
+            const rotation = elData.rotation || 0;
+            const cos = Math.cos(rotation), sin = Math.sin(rotation);
+
+            const originWidth = elData.width, originHeight = elData.height;
+            const originFontSize = elData.fontSize || 22;
+            const centerX = elData.x + originWidth / 2, centerY = elData.y + originHeight / 2;
+
+            const localAnchorX = (anchorFx - 0.5) * originWidth;
+            const localAnchorY = (anchorFy - 0.5) * originHeight;
+            const worldAnchorX = centerX + (localAnchorX * cos - localAnchorY * sin);
+            const worldAnchorY = centerY + (localAnchorX * sin + localAnchorY * cos);
+
+            const localHandleX = (hfx - 0.5) * originWidth;
+            const localHandleY = (hfy - 0.5) * originHeight;
+            const originDistance = Math.max(1, Math.sqrt(
+                Math.pow(localHandleX - localAnchorX, 2) + Math.pow(localHandleY - localAnchorY, 2)
+            ));
+
+            function onMove(e) {
+                const p = wbPointerXY(e);
+                const world = wbScreenToWorld(p);
+                const dxWorld = world.x - worldAnchorX, dyWorld = world.y - worldAnchorY;
+                // unrotate into the element's local frame
+                const localX = dxWorld * cos + dyWorld * sin;
+                const localY = -dxWorld * sin + dyWorld * cos;
+
+                let newWidth, newHeight;
+                // Text boxes normally resize freely (any shape), but holding
+                // shift switches to proportional scaling instead - matching
+                // every other element type - and also scales the font size
+                // by the same factor, non-integer sizes included.
+                if (elData.type === 'text' && !e.shiftKey) {
+                    const affectsX = hfx !== 0.5;
+                    const affectsY = hfy !== 0.5;
+                    newWidth = affectsX ? Math.max(24, Math.abs(localX)) : originWidth;
+                    newHeight = affectsY ? Math.max(24, Math.abs(localY)) : originHeight;
+                } else {
+                    const newDistance = Math.max(1, Math.sqrt(localX * localX + localY * localY));
+                    const scaleFactor = Math.max(0.1, newDistance / originDistance);
+                    newWidth = Math.max(24, originWidth * scaleFactor);
+                    newHeight = Math.max(24, originHeight * scaleFactor);
+                    if (elData.type === 'text') {
+                        elData.fontSize = Math.max(4, originFontSize * scaleFactor);
+                        const domEl = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+                        const content = domEl ? domEl.querySelector('.wb-element-content') : null;
+                        if (content) content.style.fontSize = elData.fontSize + 'px';
+                    }
+                }
+
+                const newLocalAnchorX = (anchorFx - 0.5) * newWidth;
+                const newLocalAnchorY = (anchorFy - 0.5) * newHeight;
+                const newCenterX = worldAnchorX - (newLocalAnchorX * cos - newLocalAnchorY * sin);
+                const newCenterY = worldAnchorY - (newLocalAnchorX * sin + newLocalAnchorY * cos);
+
+                elData.width = newWidth;
+                elData.height = newHeight;
+                elData.x = newCenterX - newWidth / 2;
+                elData.y = newCenterY - newHeight / 2;
+                wbUpdateElementDOM(elData);
+            }
+            function onUp() {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onUp);
+                if (elData.type === 'text') wbUpdateTextSettingsBar();
+                wbDebouncedSave();
+            }
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onUp);
+        }
+
+        // --- Rotate ---
+        function wbStartRotate(elData, startEvent) {
+            function onMove(e) {
+                const p = wbPointerXY(e);
+                const world = wbScreenToWorld(p);
+                const centerX = elData.x + elData.width / 2, centerY = elData.y + elData.height / 2;
+                // +90deg (PI/2) since the rotate handle sits ABOVE the element (pointing "up" = 0 rotation)
+                elData.rotation = Math.atan2(world.y - centerY, world.x - centerX) + Math.PI / 2;
+                wbUpdateElementDOM(elData);
+            }
+            function onUp() {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onUp);
+                wbDebouncedSave();
+            }
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onUp);
+        }
+
+        // --- Custom graphemes (whiteboard-only, separate from the rest of the hub) ---
+        function wbRenderGraphemeEditors() {
+            const container = document.getElementById('wb-grapheme-container');
+            if (!container) return;
+            container.innerHTML = '';
+            wbCustomGraphemes.forEach((cg, idx) => {
+                const row = document.createElement('div');
+                row.className = 'flex flex-col gap-0.5';
+                row.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
+                        <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
+                    </div>
+                    <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
+                `;
+                const textInput = row.querySelector('input[type="text"]');
+                const colorInput = row.querySelector('input[type="color"]');
+                const codeLabel = row.querySelector('.codepoint-label');
+                textInput.addEventListener('input', (e) => {
+                    wbCustomGraphemes[idx].text = e.target.value;
+                    codeLabel.textContent = getCodePointsLabel(e.target.value);
+                    wbSyncGraphemeArray();
+                });
+                colorInput.addEventListener('input', (e) => {
+                    wbCustomGraphemes[idx].color = e.target.value;
+                    wbSyncGraphemeArray();
+                });
+                container.appendChild(row);
+            });
+        }
+
+        function wbSyncGraphemeArray() {
+            const filtered = wbCustomGraphemes.filter(cg => cg.text.trim().length > 0);
+            filtered.push({ text: '', color: '#ef4444' });
+            wbCustomGraphemes = filtered;
+            wbRenderGraphemeEditors();
+            wbRenderAllElements();
+            wbDebouncedSave();
+        }
+
+        // Sinhala vowel-sign preset, adapted from the same checklist used
+        // elsewhere in the hub but operating on the whiteboard's own separate
+        // grapheme rules. No equivalent exists for French deliberately -
+        // French already has its own built-in scheme elsewhere in the hub,
+        // and isn't exposed as an editable preset here.
+        function wbFindCustomGraphemeIndex(char) {
+            return wbCustomGraphemes.findIndex(cg => cg.text === char);
+        }
+
+        function wbToggleSinhalaVowelSign(char, isChecked, color) {
+            const idx = wbFindCustomGraphemeIndex(char);
+            if (isChecked) {
+                if (idx === -1) {
+                    const insertAt = Math.max(0, wbCustomGraphemes.length - 1);
+                    wbCustomGraphemes.splice(insertAt, 0, { text: char, color: color });
+                }
+            } else if (idx !== -1) {
+                wbCustomGraphemes.splice(idx, 1);
+            }
+            wbSyncGraphemeArray();
+        }
+
+        function wbRenderSinhalaPresetRow() {
+            const container = document.getElementById('wb-sinhala-preset-list');
+            if (!container) return;
+            container.innerHTML = '';
+            SINHALA_VOWEL_SIGNS.forEach((sign, i) => {
+                const idx = wbFindCustomGraphemeIndex(sign.char);
+                const isChecked = idx !== -1;
+                const currentColor = isChecked ? wbCustomGraphemes[idx].color : SINHALA_VOWEL_SIGN_COLORS[i % SINHALA_VOWEL_SIGN_COLORS.length];
+
+                const row = document.createElement('label');
+                row.className = 'flex items-center gap-1 text-[10px] font-bold text-slate-700 cursor-pointer bg-slate-50 border border-slate-300 rounded-full px-2 py-1';
+                row.dir = 'auto';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = isChecked;
+                checkbox.className = 'w-3.5 h-3.5';
+
+                const colorInput = document.createElement('input');
+                colorInput.type = 'color';
+                colorInput.value = currentColor;
+                colorInput.className = 'w-5 h-5 rounded cursor-pointer border border-slate-400';
+                colorInput.disabled = !isChecked;
+
+                checkbox.addEventListener('change', () => {
+                    wbToggleSinhalaVowelSign(sign.char, checkbox.checked, colorInput.value);
+                });
+                colorInput.addEventListener('input', () => {
+                    const gi = wbFindCustomGraphemeIndex(sign.char);
+                    if (gi !== -1) {
+                        wbCustomGraphemes[gi].color = colorInput.value;
+                        wbSyncGraphemeArray();
+                    }
+                });
+
+                const labelSpan = document.createElement('span');
+                labelSpan.textContent = sign.label;
+
+                row.appendChild(checkbox);
+                row.appendChild(colorInput);
+                row.appendChild(labelSpan);
+                container.appendChild(row);
+            });
+        }
+
+        function wbUpdateSinhalaPresetVisibility() {
+            const show = document.getElementById('wb-language-select').value === 'sinhala';
+            const row = document.getElementById('wb-sinhala-preset-row');
+            row.style.display = show ? 'block' : 'none';
+            if (show) wbRenderSinhalaPresetRow();
+        }
+
+        // --- Traffic light: individual light clicks, red countdown with TTS ---
+        function wbHandleTrafficLightClick(elData, color) {
+            const el = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            if (!el) return;
+
+            if (color === 'red') {
+                if (elData.trafficState === 'red') {
+                    wbCancelTrafficCountdown(elData);
+                    elData.trafficState = 'off';
+                } else {
+                    elData.trafficState = 'red';
+                    wbStartTrafficCountdown(elData);
+                }
+            } else {
+                wbCancelTrafficCountdown(elData); // switching away from red mid-countdown stops it
+                elData.trafficState = (elData.trafficState === color) ? 'off' : color;
+            }
+            el.dataset.state = elData.trafficState;
+            wbDebouncedSave();
+        }
+
+        function wbCancelTrafficCountdown(elData) {
+            if (wbCountdownAudioEl) { try { wbCountdownAudioEl.pause(); } catch (e) {} wbCountdownAudioEl = null; }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const el = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            if (el) {
+                const redDot = el.querySelector('.wb-traffic-red');
+                if (redDot) redDot.classList.remove('wb-counting');
+            }
+        }
+
+        // Traffic light numbers need to stay legible against the dark red
+        // bulb - white by default for any character not explicitly matched
+        // by a custom grapheme rule, including for French, which otherwise
+        // defaults non-matched text to grey elsewhere in the hub. If a
+        // teacher HAS deliberately changed the default colour away from the
+        // standard grey, that choice is respected instead of being
+        // overridden.
+        function wbColorizeCountdownDisplay(text) {
+            let html = wbColorizeForDisplay(text);
+            if (defaultGraphemeColor === '#b4b4b4') {
+                html = html.replace(/color:\s*#b4b4b4/g, 'color: white');
+            }
+            return html;
+        }
+
+        // Shrinks the countdown text to fit the red light's circle, since a
+        // full number-word can be considerably longer than a single digit.
+        function wbFitTrafficCountdownText(textEl, dot) {
+            const size = dot.getBoundingClientRect().width || 60;
+            const length = (textEl.textContent || '').length;
+            const fontSize = length <= 1 ? size * 0.5 : Math.max(size * 0.15, size * 0.56 / (length * 0.53));
+            textEl.style.fontSize = fontSize + 'px';
+        }
+
+        // Rather than fighting a fixed 1-second beat against words that take
+        // varying amounts of time to say (which either cuts a word off or
+        // drifts out of sync depending on the approach), the countdown is
+        // now genuinely sequential: each number's audio must fully finish
+        // playing before the next one starts. The pace between numbers
+        // therefore follows however long each word actually takes to say
+        // rather than a rigid metronome - the right trade, since nothing
+        // ever gets cut off or queues up out of order.
+        let wbCountdownAudioEl = null;
+        function wbSpeakCountdownWordAwaited(text, langKey) {
+            return new Promise(resolve => {
+                const cleanText = prepareTextForSpeech(text);
+                const cloudConfig = CLOUD_TTS_CONFIG[langKey];
+                const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+
+                if (preferCloud) {
+                    const cacheKey = cloudConfig.languageCode + '::default::' + cleanText;
+                    const base64Audio = cloudTtsAudioCache[cacheKey];
+                    if (base64Audio) {
+                        wbCountdownAudioEl = new Audio('data:audio/mp3;base64,' + base64Audio);
+                        wbCountdownAudioEl.volume = ttsVolume;
+                        wbCountdownAudioEl.onended = resolve;
+                        wbCountdownAudioEl.onerror = resolve;
+                        wbCountdownAudioEl.play().catch(resolve);
+                        return;
+                    }
+                    // Not cached (shouldn't normally happen given pre-caching) - fall through to browser voice.
+                }
+
+                if (!('speechSynthesis' in window)) { resolve(); return; }
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.rate = 0.85;
+                utterance.volume = ttsVolume;
+                const locale = LANG_MAP[langKey] || 'en-US';
+                utterance.lang = locale;
+                const bestVoice = getBestVoice(locale);
+                if (bestVoice) utterance.voice = bestVoice;
+                utterance.onend = resolve;
+                utterance.onerror = resolve;
+                window.speechSynthesis.speak(utterance);
+            });
+        }
+
+        async function wbStartTrafficCountdown(elData) {
+            const el = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            if (!el) return;
+            const redDot = el.querySelector('.wb-traffic-red');
+            const textEl = redDot.querySelector('.wb-traffic-countdown-text');
+            redDot.classList.add('wb-counting');
+
+            const lang = document.getElementById('wb-language-select').value;
+            const numberWords = WB_NUMBER_WORDS[lang] || WB_NUMBER_WORDS.en;
+            let current = elData.countdownStart;
+
+            while (elData.trafficState === 'red' && current >= 1) {
+                const wordForSpeech = numberWords[current - 1] || String(current);
+                const displayText = elData.displayMode === 'word' ? wordForSpeech : String(current);
+                if (elData.displayMode === 'word') {
+                    textEl.innerHTML = wbColorizeCountdownDisplay(displayText);
+                } else {
+                    textEl.textContent = displayText;
+                }
+                wbFitTrafficCountdownText(textEl, redDot);
+                current -= 1;
+                await wbSpeakCountdownWordAwaited(wordForSpeech, lang);
+            }
+
+            if (elData.trafficState === 'red') {
+                redDot.classList.remove('wb-counting');
+                const silenceWord = WB_SILENCE_WORD[lang] || WB_SILENCE_WORD.en;
+                await wbSpeakCountdownWordAwaited(silenceWord, lang);
+            }
+        }
+
+        // Pre-caches numbers 1-10 and "silence" in whatever language is
+        // currently selected, so the countdown never has to wait on a
+        // network request mid-count - called whenever the language changes.
+        async function wbPrecacheTrafficNumbers() {
+            const lang = document.getElementById('wb-language-select').value;
+            const words = (WB_NUMBER_WORDS[lang] || []).concat([WB_SILENCE_WORD[lang] || '']);
+            await Promise.all(words.filter(Boolean).map(word => cacheCloudTTSIfConfigured(word, lang)));
+        }
+
+        // --- Timer ---
+        function wbUpdateClockVisual(domEl) {
+            const textEl = domEl.querySelector('.wb-clock-text');
+            if (!textEl) return;
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12; if (hours === 0) hours = 12;
+            textEl.textContent = `${hours}:${minutes} ${ampm}`;
+        }
+
+        function wbTickAllClocks() {
+            document.querySelectorAll('.wb-clock-element').forEach(domEl => wbUpdateClockVisual(domEl));
+        }
+
+        function wbFormatTime(totalSeconds) {
+            const m = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+            const s = Math.floor(totalSeconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        const WB_TIMER_CIRCUMFERENCE = 2 * Math.PI * 44;
+
+        function wbUpdateTimerVisual(elData) {
+            const domEl = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            if (!domEl) return;
+            const textEl = domEl.querySelector('.wb-timer-text');
+            const progressEl = domEl.querySelector('.wb-timer-progress');
+            const overlayEl = domEl.querySelector('.wb-timer-finished-overlay');
+            const controlsEl = domEl.querySelector('.wb-timer-controls');
+            if (textEl) textEl.textContent = wbFormatTime(Math.max(0, elData.remainingSeconds));
+            if (progressEl) {
+                const fraction = elData.totalSeconds > 0 ? Math.max(0, elData.remainingSeconds) / elData.totalSeconds : 0;
+                progressEl.style.strokeDashoffset = (WB_TIMER_CIRCUMFERENCE * (1 - fraction)).toFixed(2);
+                progressEl.classList.toggle('wb-timer-warning', elData.remainingSeconds <= 10 && elData.remainingSeconds > 0 && !elData.finished);
+                progressEl.style.stroke = elData.color || '#8B5CF6';
+            }
+            const toggleBtn = domEl.querySelector('.wb-timer-toggle');
+            if (toggleBtn) toggleBtn.textContent = elData.running ? '⏸' : '▶';
+            if (overlayEl) overlayEl.style.display = elData.finished ? 'flex' : 'none';
+            if (controlsEl) controlsEl.style.visibility = elData.finished ? 'hidden' : 'visible';
+        }
+
+        function wbToggleTimerElement(id) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            if (elData.running) { wbPauseTimerElement(id); } else { wbStartTimerElement(id); }
+        }
+
+        function wbStartTimerElement(id) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            if (elData.finished || elData.remainingSeconds <= 0) {
+                elData.finished = false;
+                clearInterval(elData._ringIntervalId);
+                elData._ringIntervalId = null;
+                elData.remainingSeconds = elData.totalSeconds;
+            }
+            if (elData.remainingSeconds <= 0) return;
+            elData.running = true;
+            wbUpdateTimerVisual(elData);
+            elData._intervalId = setInterval(() => {
+                elData.remainingSeconds -= 1;
+                wbUpdateTimerVisual(elData);
+                // Guarded so the initial chime can only ever fire once per
+                // countdown, even if this tick somehow runs again before
+                // clearInterval takes effect - the repeating ring afterwards
+                // is deliberate now, and only stops via Reset.
+                if (elData.remainingSeconds <= 0 && !elData.finished) {
+                    elData.finished = true;
+                    wbPauseTimerElement(id);
+                    playChime(true);
+                    elData._ringIntervalId = setInterval(() => playChime(true), 2000);
+                }
+            }, 1000);
+        }
+
+        function wbPauseTimerElement(id) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            elData.running = false;
+            clearInterval(elData._intervalId);
+            elData._intervalId = null;
+            wbUpdateTimerVisual(elData);
+            wbDebouncedSave();
+        }
+
+        // Used both by the regular Reset button and the icon that appears
+        // once the timer finishes - stops the repeating ring and restores
+        // the full chosen duration, ready to reuse immediately.
+        function wbResetTimerElement(id) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            wbPauseTimerElement(id);
+            clearInterval(elData._ringIntervalId);
+            elData._ringIntervalId = null;
+            elData.finished = false;
+            elData.remainingSeconds = elData.totalSeconds;
+            wbUpdateTimerVisual(elData);
+            wbDebouncedSave();
+        }
+
+        function wbSetTimerDuration(id, minutes, seconds) {
+            const elData = wbElements.find(e => e.id === id);
+            if (!elData) return;
+            elData.totalSeconds = Math.max(1, minutes * 60 + seconds);
+            if (!elData.running) {
+                elData.finished = false;
+                elData.remainingSeconds = elData.totalSeconds;
+            }
+            wbUpdateTimerVisual(elData);
+            wbDebouncedSave();
+        }
+
+        // Called when leaving the whiteboard entirely - stops any running
+        // timer elements' intervals so they don't keep ticking in the
+        // background after the tool is closed.
+        function wbPauseAllTimers() {
+            wbElements.forEach(el => {
+                if (el.type === 'timer') {
+                    if (el.running) {
+                        clearInterval(el._intervalId);
+                        el._intervalId = null;
+                        el.running = false;
+                    }
+                    if (el._ringIntervalId) {
+                        clearInterval(el._ringIntervalId);
+                        el._ringIntervalId = null;
+                    }
+                }
+            });
+        }
+
+        // --- Background ---
+        const WB_BACKGROUND_CLASSES = ['wb-bg-chalkboard', 'wb-bg-cream', 'wb-bg-dotgrid', 'wb-bg-lined', 'wb-bg-sky'];
+
+        // Custom backgrounds pair a looping video with a static fallback
+        // image and a separately-looping audio track (the audio's own
+        // length need not match the video's). Add more entries here as
+        // teachers upload additional dynamic backgrounds.
+        const WB_CUSTOM_BACKGROUNDS = {
+            'bobot-big-blue': {
+                label: 'Bobot in the Big Blue',
+                videoUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTINTHEBIGBLUE_DYNAMICBGLOOP.mp4',
+                staticUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTANDTHEBIGBLUE_STATIC.jpg',
+                audioUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTINTHEBIGBLUE_audio.mp3'
+            }
+        };
+
+        const WB_BUILTIN_BG_LABELS = { none: '🚫 No Background', chalkboard: '⬛ Chalkboard', cream: '◻️ Soft Cream', dotgrid: '⚬ Dot Grid', lined: '📃 Lined Paper', sky: '☁️ Soft Sky' };
+
+        function wbRenderCustomBackgroundMenu() {
+            const container = document.getElementById('wb-custom-bg-list');
+            container.innerHTML = '';
+            Object.keys(WB_CUSTOM_BACKGROUNDS).forEach(key => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'hub-btn-ghost interactive w-full wb-bg-option';
+                btn.dataset.bg = key;
+                btn.textContent = '🎬 ' + WB_CUSTOM_BACKGROUNDS[key].label;
+                container.appendChild(btn);
+            });
+        }
+
+        function wbApplyBackground() {
+            const value = wbCurrentBackground;
+            const layer = document.getElementById('wb-background-layer');
+            const customBg = WB_CUSTOM_BACKGROUNDS[value];
+
+            WB_BACKGROUND_CLASSES.forEach(cls => layer.classList.remove(cls));
+            document.getElementById('wb-canvas-wrap').classList.toggle('wb-canvas-wrap-dark', value === 'chalkboard');
+            layer.innerHTML = '';
+
+            if (customBg) {
+                if (wbBackgroundMode === 'static') {
+                    const img = document.createElement('img');
+                    img.src = customBg.staticUrl;
+                    img.className = 'wb-custom-bg-media';
+                    layer.appendChild(img);
+                } else {
+                    const video = document.createElement('video');
+                    video.src = customBg.videoUrl;
+                    video.className = 'wb-custom-bg-media';
+                    video.loop = true;
+                    video.muted = true;
+                    video.autoplay = true;
+                    video.playsInline = true;
+                    layer.appendChild(video);
+                    video.play().catch(() => {});
+                }
+                const audio = document.createElement('audio');
+                audio.id = 'wb-bg-audio-el';
+                audio.src = customBg.audioUrl;
+                audio.loop = true;
+                audio.volume = wbBackgroundVolume;
+                layer.appendChild(audio);
+                audio.play().catch(() => {});
+            } else if (value !== 'none') {
+                layer.classList.add('wb-bg-' + value);
+            }
+
+            const label = customBg ? ('🎬 ' + customBg.label) : (WB_BUILTIN_BG_LABELS[value] || 'Background');
+            document.getElementById('wb-background-btn').textContent = label + ' ▾';
+
+            const settingsPanel = document.getElementById('wb-bg-settings');
+            settingsPanel.style.display = customBg ? 'block' : 'none';
+            if (customBg) {
+                document.getElementById('wb-bg-mode-static-btn').classList.toggle('wb-mode-active', wbBackgroundMode === 'static');
+                document.getElementById('wb-bg-mode-dynamic-btn').classList.toggle('wb-mode-active', wbBackgroundMode === 'dynamic');
+                document.getElementById('wb-bg-volume-input').value = Math.round(wbBackgroundVolume * 100);
+            }
+        }
+
+        // --- Export / Import ---
+        function wbExportToFile() {
+            const state = wbGatherState();
+            const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'whiteboard-save.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function wbImportFromFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const state = JSON.parse(e.target.result);
+                    wbApplyState(state);
+                    wbSaveState();
+                } catch (err) {
+                    alert('That file could not be read as a whiteboard save - please check it is an unmodified export from this hub.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+
         function syncCustomGraphemeArrays() {
             const filtered = customGraphemes.filter(cg => cg.text.trim().length > 0);
             filtered.push({ text: '', color: '#ef4444' });
@@ -3884,6 +6216,8 @@
                 if (potatoSettings) potatoSettings.style.display = 'block';
             } else if (mode === 'bobot') {
                 if (bobotSettings) bobotSettings.style.display = 'block';
+            } else if (mode === 'whiteboard') {
+                // No settings panel needed - launches directly, same as Kart/Bobot's no-op here
             } else {
                 document.getElementById('mode-coder').classList.add('selected');
             }
@@ -3900,6 +6234,7 @@
             { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word.' },
             { id: 'potato', label: 'Potato Parkour', icon: '🥔', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'A built-in vocabulary hunt - no setup needed, just play.' },
             { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing.' },
+            { id: 'whiteboard', label: 'Whiteboard', icon: '🖊️', accent: '--hub-plum', accentSoft: '--hub-plum-soft', desc: 'A colour-coded digital whiteboard with a timer, noise light, and images.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
@@ -3971,6 +6306,9 @@
         function selectTool(toolId) {
             if (toolId === 'coder') {
                 selectMode('coder');
+                launchSelectedActivity();
+            } else if (toolId === 'whiteboard') {
+                selectMode('whiteboard');
                 launchSelectedActivity();
             } else if (toolId === 'parkour') {
                 showLandingStep('submode');
@@ -4056,6 +6394,8 @@
                 generatePotatoQuest();
             } else if (selectedLobbyMode === 'bobot') {
                 generateBobotGame();
+            } else if (selectedLobbyMode === 'whiteboard') {
+                launchDigitalWhiteboard();
             } else {
                 pauseBackgroundMusic();
                 document.getElementById('title-screen').style.display = 'none';
@@ -5728,6 +8068,8 @@
             document.getElementById('coder-screen').style.display = 'none';
             stopAllBobotVideos();
             document.getElementById('bobot-screen').style.display = 'none';
+            document.getElementById('whiteboard-screen').style.display = 'none';
+            wbPauseAllTimers();
             document.getElementById('results-screen').style.display = 'none';
             document.getElementById('title-screen').style.display = 'flex';
             showLandingStep('wheel');
