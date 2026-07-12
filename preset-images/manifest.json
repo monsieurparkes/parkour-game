@@ -25,8 +25,12 @@
             "hi": "एक लाल डायनासोर",
             "uk": "червоний динозавр",
             "ru": "красный динозавр",
-            "macedonian": "црвен диносаурус"
-          }
+            "macedonian": "црвен диносаурус",
+            "afrikaans": "'n rooi dinosourus",
+            "serbian": "црвени диносаурус",
+            "croatian": "crveni dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure bleu.png",
@@ -48,8 +52,12 @@
             "hi": "एक नीला डायनासोर",
             "uk": "синій динозавр",
             "ru": "синий динозавр",
-            "macedonian": "син диносаурус"
-          }
+            "macedonian": "син диносаурус",
+            "afrikaans": "'n blou dinosourus",
+            "serbian": "плави диносаурус",
+            "croatian": "plavi dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure vert.png",
@@ -71,8 +79,12 @@
             "hi": "एक हरा डायनासोर",
             "uk": "зелений динозавр",
             "ru": "зелёный динозавр",
-            "macedonian": "зелен диносаурус"
-          }
+            "macedonian": "зелен диносаурус",
+            "afrikaans": "'n groen dinosourus",
+            "serbian": "зелени диносаурус",
+            "croatian": "zeleni dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure jaune.png",
@@ -94,8 +106,12 @@
             "hi": "एक पीला डायनासोर",
             "uk": "жовтий динозавр",
             "ru": "жёлтый динозавр",
-            "macedonian": "жолт диносаурус"
-          }
+            "macedonian": "жолт диносаурус",
+            "afrikaans": "'n geel dinosourus",
+            "serbian": "жути диносаурус",
+            "croatian": "žuti dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure violet.png",
@@ -117,8 +133,12 @@
             "hi": "एक बैंगनी डायनासोर",
             "uk": "фіолетовий динозавр",
             "ru": "фиолетовый динозавр",
-            "macedonian": "виолетов диносаурус"
-          }
+            "macedonian": "виолетов диносаурус",
+            "afrikaans": "'n pers dinosourus",
+            "serbian": "љубичасти диносаурус",
+            "croatian": "ljubičasti dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure orange.png",
@@ -140,8 +160,12 @@
             "hi": "एक नारंगी डायनासोर",
             "uk": "помаранчевий динозавр",
             "ru": "оранжевый динозавр",
-            "macedonian": "портокалов диносаурус"
-          }
+            "macedonian": "портокалов диносаурус",
+            "afrikaans": "'n oranje dinosourus",
+            "serbian": "наранџасти диносаурус",
+            "croatian": "narančasti dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure rose.png",
@@ -163,8 +187,12 @@
             "hi": "एक गुलाबी डायनासोर",
             "uk": "рожевий динозавр",
             "ru": "розовый динозавр",
-            "macedonian": "розов диносаурус"
-          }
+            "macedonian": "розов диносаурус",
+            "afrikaans": "'n pienk dinosourus",
+            "serbian": "розе диносаурус",
+            "croatian": "rozi dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure noir.png",
@@ -186,8 +214,12 @@
             "hi": "एक काला डायनासोर",
             "uk": "чорний динозавр",
             "ru": "чёрный динозавр",
-            "macedonian": "црн диносаурус"
-          }
+            "macedonian": "црн диносаурус",
+            "afrikaans": "'n swart dinosourus",
+            "serbian": "црни диносаурус",
+            "croatian": "crni dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure blanc.png",
@@ -209,8 +241,12 @@
             "hi": "एक सफ़ेद डायनासोर",
             "uk": "білий динозавр",
             "ru": "белый динозавр",
-            "macedonian": "бел диносаурус"
-          }
+            "macedonian": "бел диносаурус",
+            "afrikaans": "'n wit dinosourus",
+            "serbian": "бели диносаурус",
+            "croatian": "bijeli dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
         {
           "file": "un dinosaure marron.png",
@@ -232,8 +268,12 @@
             "hi": "एक भूरा डायनासोर",
             "uk": "коричневий динозавр",
             "ru": "коричневый динозавр",
-            "macedonian": "кафеав диносаурус"
-          }
+            "macedonian": "кафеав диносаурус",
+            "afrikaans": "'n bruin dinosourus",
+            "serbian": "браон диносаурус",
+            "croatian": "smeđi dinosaur"
+          },
+          "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         }
       ]
     },
@@ -262,8 +302,12 @@
             "hi": "एक स्लेटी कंगारू",
             "uk": "сірий кенгуру",
             "ru": "серый кенгуру",
-            "macedonian": "сив кенгур"
-          }
+            "macedonian": "сив кенгур",
+            "afrikaans": "'n grys kangaroo",
+            "serbian": "сиви кенгур",
+            "croatian": "sivi klokan"
+          },
+          "definition": "A large Australian marsupial that hops on powerful hind legs and carries its young in a pouch."
         },
         {
           "file": "un kangourou marron.png",
@@ -285,8 +329,12 @@
             "hi": "एक भूरा कंगारू",
             "uk": "коричневий кенгуру",
             "ru": "коричневый кенгуру",
-            "macedonian": "кафеав кенгур"
-          }
+            "macedonian": "кафеав кенгур",
+            "afrikaans": "'n bruin kangaroo",
+            "serbian": "браон кенгур",
+            "croatian": "smeđi klokan"
+          },
+          "definition": "A large Australian marsupial that hops on powerful hind legs and carries its young in a pouch."
         },
         {
           "file": "un oiseau arc-en-ciel.png",
@@ -308,8 +356,12 @@
             "hi": "एक इंद्रधनुषी पक्षी",
             "uk": "веселковий птах",
             "ru": "радужная птица",
-            "macedonian": "виножито птица"
-          }
+            "macedonian": "виножито птица",
+            "afrikaans": "'n reënboog voël",
+            "serbian": "дугина птица",
+            "croatian": "duga ptica"
+          },
+          "definition": "A rainbow lorikeet. A small, strikingly multicoloured parrot native to Australia's coastal regions."
         },
         {
           "file": "un oiseau blanc et jaune.png",
@@ -331,8 +383,12 @@
             "hi": "एक सफ़ेद और पीला पक्षी",
             "uk": "біло-жовтий птах",
             "ru": "бело-жёлтая птица",
-            "macedonian": "бело-жолта птица"
-          }
+            "macedonian": "бело-жолта птица",
+            "afrikaans": "'n wit en geel voël",
+            "serbian": "бело-жута птица",
+            "croatian": "bijelo-žuta ptica"
+          },
+          "definition": "A sulphur-crested cockatoo. A large white Australian parrot with a bright yellow crest."
         },
         {
           "file": "un oiseau marron et blanc.png",
@@ -354,8 +410,12 @@
             "hi": "एक भूरा और सफ़ेद पक्षी",
             "uk": "коричнево-білий птах",
             "ru": "коричнево-белая птица",
-            "macedonian": "кафеаво-бела птица"
-          }
+            "macedonian": "кафеаво-бела птица",
+            "afrikaans": "'n bruin en wit voël",
+            "serbian": "браон-бела птица",
+            "croatian": "smeđe-bijela ptica"
+          },
+          "definition": "A kookaburra. An Australian bird famous for its call, which sounds like laughter."
         },
         {
           "file": "un oiseau noir et blanc.png",
@@ -377,8 +437,12 @@
             "hi": "एक काला और सफ़ेद पक्षी",
             "uk": "чорно-білий птах",
             "ru": "чёрно-белая птица",
-            "macedonian": "црно-бела птица"
-          }
+            "macedonian": "црно-бела птица",
+            "afrikaans": "'n swart en wit voël",
+            "serbian": "црно-бела птица",
+            "croatian": "crno-bijela ptica"
+          },
+          "definition": "An Australian magpie. A familiar black-and-white bird known for its warbling call and swooping cyclists."
         },
         {
           "file": "un oiseau noir, marron, blanc et jaune.png",
@@ -400,8 +464,12 @@
             "hi": "एक काला, भूरा, सफ़ेद और पीला पक्षी",
             "uk": "чорний, коричневий, білий і жовтий птах",
             "ru": "чёрная, коричневая, белая и жёлтая птица",
-            "macedonian": "црна, кафеава, бела и жолта птица"
-          }
+            "macedonian": "црна, кафеава, бела и жолта птица",
+            "afrikaans": "'n swart, bruin, wit en geel voël",
+            "serbian": "црно-браон-бело-жута птица",
+            "croatian": "crno-smeđe-bijelo-žuta ptica"
+          },
+          "definition": "A plover. Easily distinguished by its yellow mask and unique call."
         },
         {
           "file": "un oiseau rose et gris.png",
@@ -423,8 +491,12 @@
             "hi": "एक गुलाबी और स्लेटी पक्षी",
             "uk": "рожево-сірий птах",
             "ru": "розово-серая птица",
-            "macedonian": "розово-сива птица"
-          }
+            "macedonian": "розово-сива птица",
+            "afrikaans": "'n pienk en grys voël",
+            "serbian": "розе-сива птица",
+            "croatian": "roza-siva ptica"
+          },
+          "definition": "A galah. A distinctive pink and grey Australian bird found in large, noisy flocks."
         },
         {
           "file": "un serpent arc-en-ciel.png",
@@ -446,8 +518,12 @@
             "hi": "एक इंद्रधनुषी साँप",
             "uk": "веселкова змія",
             "ru": "радужная змея",
-            "macedonian": "виножито змија"
-          }
+            "macedonian": "виножито змија",
+            "afrikaans": "'n reënboog slang",
+            "serbian": "дугина змија",
+            "croatian": "duga zmija"
+          },
+          "definition": "The Rainbow Serpent. A major creation figure in the Dreaming in Aboriginal Australian cultures."
         },
         {
           "file": "un serpent noir et rouge.png",
@@ -469,8 +545,12 @@
             "hi": "एक काला और लाल साँप",
             "uk": "чорно-червона змія",
             "ru": "чёрно-красная змея",
-            "macedonian": "црно-црвена змија"
-          }
+            "macedonian": "црно-црвена змија",
+            "afrikaans": "'n swart en rooi slang",
+            "serbian": "црно-црвена змија",
+            "croatian": "crno-crvena zmija"
+          },
+          "definition": "A red-bellied black snake. A venomous Australian snake with glossy, black skin and a red underside."
         }
       ]
     },
@@ -499,8 +579,12 @@
             "hi": "चॉकलेट",
             "uk": "шоколад",
             "ru": "шоколад",
-            "macedonian": "чоколадото"
-          }
+            "macedonian": "чоколадото",
+            "afrikaans": "die sjokolade",
+            "serbian": "чоколада",
+            "croatian": "čokolada"
+          },
+          "definition": "A sweet food made from roasted cacao beans, originally cultivated by the Olmec, Maya, and Aztec civilizations of Mesoamerica."
         },
         {
           "file": "le maïs.png",
@@ -522,8 +606,12 @@
             "hi": "मक्का",
             "uk": "кукурудза",
             "ru": "кукуруза",
-            "macedonian": "пченката"
-          }
+            "macedonian": "пченката",
+            "afrikaans": "die mielies",
+            "serbian": "кукуруз",
+            "croatian": "kukuruz"
+          },
+          "definition": "A cereal grain with sweet yellow kernels, first domesticated in Mexico thousands of years ago and now grown worldwide."
         },
         {
           "file": "le pain.png",
@@ -545,8 +633,12 @@
             "hi": "रोटी",
             "uk": "хліб",
             "ru": "хлеб",
-            "macedonian": "лебот"
-          }
+            "macedonian": "лебот",
+            "afrikaans": "die brood",
+            "serbian": "хлеб",
+            "croatian": "kruh"
+          },
+          "definition": "A staple food made by baking a dough of flour and water, found in some form in nearly every culture worldwide."
         },
         {
           "file": "un cheeseburger.png",
@@ -568,8 +660,12 @@
             "hi": "एक चीज़बर्गर",
             "uk": "чізбургер",
             "ru": "чизбургер",
-            "macedonian": "чизбургер"
-          }
+            "macedonian": "чизбургер",
+            "afrikaans": "'n kaasburger",
+            "serbian": "чизбургер",
+            "croatian": "cheeseburger"
+          },
+          "definition": "A hamburger with a slice of melted cheese added, a popular fast-food dish that originated in the United States."
         },
         {
           "file": "un concombre.png",
@@ -591,8 +687,12 @@
             "hi": "एक खीरा",
             "uk": "огірок",
             "ru": "огурец",
-            "macedonian": "краставица"
-          }
+            "macedonian": "краставица",
+            "afrikaans": "'n komkommer",
+            "serbian": "краставац",
+            "croatian": "krastavac"
+          },
+          "definition": "A long, green vegetable with a mild, watery flavour, usually eaten raw in salads."
         },
         {
           "file": "un gâteau.png",
@@ -614,8 +714,12 @@
             "hi": "एक केक",
             "uk": "торт",
             "ru": "торт",
-            "macedonian": "торта"
-          }
+            "macedonian": "торта",
+            "afrikaans": "'n koek",
+            "serbian": "торта",
+            "croatian": "torta"
+          },
+          "definition": "A sweet baked dessert, often layered and decorated, traditionally served to celebrate birthdays and other special occasions."
         },
         {
           "file": "un sandwich.png",
@@ -637,8 +741,12 @@
             "hi": "एक सैंडविच",
             "uk": "сендвіч",
             "ru": "сэндвич",
-            "macedonian": "сендвич"
-          }
+            "macedonian": "сендвич",
+            "afrikaans": "'n toebroodjie",
+            "serbian": "сендвич",
+            "croatian": "sendvič"
+          },
+          "definition": "A food consisting of a filling placed between two slices of bread, said to be named after an 18th-century English Earl of Sandwich."
         },
         {
           "file": "une banane.png",
@@ -660,8 +768,12 @@
             "hi": "एक केला",
             "uk": "банан",
             "ru": "банан",
-            "macedonian": "банана"
-          }
+            "macedonian": "банана",
+            "afrikaans": "'n piesang",
+            "serbian": "банана",
+            "croatian": "banana"
+          },
+          "definition": "A long, curved yellow fruit that grows in large bunches on tropical plants."
         },
         {
           "file": "une fraise.png",
@@ -683,8 +795,12 @@
             "hi": "एक स्ट्रॉबेरी",
             "uk": "полуниця",
             "ru": "клубника",
-            "macedonian": "јагода"
-          }
+            "macedonian": "јагода",
+            "afrikaans": "'n aarbei",
+            "serbian": "јагода",
+            "croatian": "jagoda"
+          },
+          "definition": "A small, red, heart-shaped fruit covered in tiny seeds, notable for being the only fruit with its seeds on the outside."
         },
         {
           "file": "une orange.png",
@@ -706,8 +822,12 @@
             "hi": "एक संतरा",
             "uk": "апельсин",
             "ru": "апельсин",
-            "macedonian": "портокал"
-          }
+            "macedonian": "портокал",
+            "afrikaans": "'n lemoen",
+            "serbian": "поморанџа",
+            "croatian": "naranča"
+          },
+          "definition": "A round citrus fruit with orange skin and juicy, tangy-sweet segments inside."
         },
         {
           "file": "une pomme de terre.png",
@@ -729,8 +849,12 @@
             "hi": "एक आलू",
             "uk": "картопля",
             "ru": "картошка",
-            "macedonian": "компир"
-          }
+            "macedonian": "компир",
+            "afrikaans": "'n aartappel",
+            "serbian": "кромпир",
+            "croatian": "krumpir"
+          },
+          "definition": "A starchy root vegetable that grows underground, which can be prepared in countless different ways."
         },
         {
           "file": "une pomme.png",
@@ -752,8 +876,12 @@
             "hi": "एक सेब",
             "uk": "яблуко",
             "ru": "яблоко",
-            "macedonian": "јаболко"
-          }
+            "macedonian": "јаболко",
+            "afrikaans": "'n appel",
+            "serbian": "јабука",
+            "croatian": "jabuka"
+          },
+          "definition": "A round fruit with crisp flesh and shiny skin that can be red, green, or yellow."
         },
         {
           "file": "une tomate.png",
@@ -775,8 +903,12 @@
             "hi": "एक टमाटर",
             "uk": "помідор",
             "ru": "помидор",
-            "macedonian": "домат"
-          }
+            "macedonian": "домат",
+            "afrikaans": "'n tamatie",
+            "serbian": "парадајз",
+            "croatian": "rajčica"
+          },
+          "definition": "A round, red fruit. Commonly found in Italian cuisine."
         }
       ]
     },
@@ -805,8 +937,12 @@
             "hi": "एक गोंद स्टिक",
             "uk": "клейовий олівець",
             "ru": "клеевой карандаш",
-            "macedonian": "лепило во стик"
-          }
+            "macedonian": "лепило во стик",
+            "afrikaans": "'n gomstokkie",
+            "serbian": "лепак у штапићу",
+            "croatian": "ljepilo u štapiću"
+          },
+          "definition": "A solid, twist-up stick of glue used for sticking paper, common in classrooms."
         },
         {
           "file": "un bureau.png",
@@ -828,8 +964,12 @@
             "hi": "एक डेस्क",
             "uk": "письмовий стіл",
             "ru": "письменный стол",
-            "macedonian": "биро"
-          }
+            "macedonian": "биро",
+            "afrikaans": "'n lessenaar",
+            "serbian": "клупа",
+            "croatian": "klupa"
+          },
+          "definition": "A piece of furniture with a flat surface used for writing, reading, or working, typically paired with a chair."
         },
         {
           "file": "un cahier.png",
@@ -851,8 +991,12 @@
             "hi": "एक कॉपी",
             "uk": "зошит",
             "ru": "тетрадь",
-            "macedonian": "тетратка"
-          }
+            "macedonian": "тетратка",
+            "afrikaans": "'n oefeningboek",
+            "serbian": "свеска",
+            "croatian": "bilježnica"
+          },
+          "definition": "A bound book of blank or lined pages used by students for writing notes and completing exercises."
         },
         {
           "file": "un crayon.png",
@@ -874,8 +1018,12 @@
             "hi": "एक पेंसिल",
             "uk": "олівець",
             "ru": "карандаш",
-            "macedonian": "молив"
-          }
+            "macedonian": "молив",
+            "afrikaans": "'n potlood",
+            "serbian": "оловка",
+            "croatian": "olovka"
+          },
+          "definition": "A writing tool with a thin core of graphite encased in wood."
         },
         {
           "file": "un ordinateur.png",
@@ -897,8 +1045,12 @@
             "hi": "एक कंप्यूटर",
             "uk": "комп'ютер",
             "ru": "компьютер",
-            "macedonian": "компјутер"
-          }
+            "macedonian": "компјутер",
+            "afrikaans": "'n rekenaar",
+            "serbian": "рачунар",
+            "croatian": "računalo"
+          },
+          "definition": "An electronic device used for processing information, writing, and connecting to the internet."
         },
         {
           "file": "un sac à dos.png",
@@ -920,13 +1072,17 @@
             "hi": "एक बैकपैक",
             "uk": "рюкзак",
             "ru": "рюкзак",
-            "macedonian": "ранец"
-          }
+            "macedonian": "ранец",
+            "afrikaans": "'n rugsak",
+            "serbian": "ранац",
+            "croatian": "ruksak"
+          },
+          "definition": "A bag with two shoulder straps, worn on the back, used to carry things."
         },
         {
           "file": "une boîte à lunch.png",
           "translations": {
-            "fr": "une boîte à lun[ch]",
+            "fr": "une boîte à lunch",
             "en": "a lunch box",
             "es": "una lonchera",
             "de": "eine Brotdose",
@@ -943,8 +1099,12 @@
             "hi": "एक लंच बॉक्स",
             "uk": "контейнер для їжі",
             "ru": "ланч-бокс",
-            "macedonian": "кутија за ручек"
-          }
+            "macedonian": "кутија за ручек",
+            "afrikaans": "'n kosblik",
+            "serbian": "кутија за ручак",
+            "croatian": "kutija za ručak"
+          },
+          "definition": "A small container used for carrying a packed meal from home, typically to school or work."
         },
         {
           "file": "une bouteille.png",
@@ -966,8 +1126,12 @@
             "hi": "एक बोतल",
             "uk": "пляшка",
             "ru": "бутылка",
-            "macedonian": "шише"
-          }
+            "macedonian": "шише",
+            "afrikaans": "'n bottel",
+            "serbian": "флаша",
+            "croatian": "boca"
+          },
+          "definition": "A narrow-necked container used for holding and carrying liquids such as water."
         },
         {
           "file": "une gomme.png",
@@ -989,8 +1153,12 @@
             "hi": "एक रबड़",
             "uk": "гумка",
             "ru": "ластик",
-            "macedonian": "гума за бришење"
-          }
+            "macedonian": "гума за бришење",
+            "afrikaans": "'n uitveër",
+            "serbian": "гумица",
+            "croatian": "gumica za brisanje"
+          },
+          "definition": "A small block of rubber used to remove pencil marks from paper."
         },
         {
           "file": "une tablette.png",
@@ -1012,8 +1180,12 @@
             "hi": "एक टैबलेट",
             "uk": "планшет",
             "ru": "планшет",
-            "macedonian": "таблет"
-          }
+            "macedonian": "таблет",
+            "afrikaans": "'n tablet",
+            "serbian": "таблет",
+            "croatian": "tablet"
+          },
+          "definition": "A flat, portable touchscreen computer, larger than a phone but without a physical keyboard."
         },
         {
           "file": "une trousse.png",
@@ -1035,8 +1207,512 @@
             "hi": "एक पेंसिल केस",
             "uk": "пенал",
             "ru": "пенал",
-            "macedonian": "пенкало"
-          }
+            "macedonian": "пенкало",
+            "afrikaans": "'n pennesak",
+            "serbian": "пеналица",
+            "croatian": "pernica"
+          },
+          "definition": "A small case used to store and carry pens, pencils, and other stationery."
+        }
+      ]
+    },
+    {
+      "id": "2d-shapes",
+      "name": "2D Shapes",
+      "folder": "2D-shapes",
+      "items": [
+        {
+          "file": "un carré.png",
+          "translations": {
+            "fr": "un carré",
+            "en": "a square",
+            "es": "un cuadrado",
+            "de": "ein Quadrat",
+            "it": "un quadrato",
+            "ja": "四角形",
+            "zh-pinyin": "yī gè zhèngfāngxíng",
+            "zh-hanzi": "一个正方形",
+            "cantonese": "一個正方形",
+            "he": "ריבוע",
+            "ar": "مربع",
+            "sinhala": "සමචතුරස්‍රයක්",
+            "vi": "một hình vuông",
+            "ur": "ایک مربع",
+            "hi": "एक वर्ग",
+            "uk": "квадрат",
+            "ru": "квадрат",
+            "macedonian": "квадрат",
+            "afrikaans": "'n vierkant",
+            "serbian": "квадрат",
+            "croatian": "kvadrat"
+          },
+          "definition": "A flat shape with four edges of equal length and four vertices."
+        },
+        {
+          "file": "un cercle.png",
+          "translations": {
+            "fr": "un cercle",
+            "en": "a circle",
+            "es": "un círculo",
+            "de": "ein Kreis",
+            "it": "un cerchio",
+            "ja": "円",
+            "zh-pinyin": "yī gè yuánquān",
+            "zh-hanzi": "一个圆圈",
+            "cantonese": "一個圓形",
+            "he": "עיגול",
+            "ar": "دائرة",
+            "sinhala": "වෘත්තයක්",
+            "vi": "một hình tròn",
+            "ur": "ایک دائرہ",
+            "hi": "एक वृत्त",
+            "uk": "коло",
+            "ru": "круг",
+            "macedonian": "круг",
+            "afrikaans": "'n sirkel",
+            "serbian": "круг",
+            "croatian": "krug"
+          },
+          "definition": "A perfectly round form where every location on the outside is the same distance from the centre."
+        },
+        {
+          "file": "un cœur.png",
+          "translations": {
+            "fr": "un cœur",
+            "en": "a heart",
+            "es": "un corazón",
+            "de": "ein Herz",
+            "it": "un cuore",
+            "ja": "ハート",
+            "zh-pinyin": "yī gè xīnxíng",
+            "zh-hanzi": "一个心形",
+            "cantonese": "一個心形",
+            "he": "לב",
+            "ar": "قلب",
+            "sinhala": "හදවතක් හැඩය",
+            "vi": "hình trái tim",
+            "ur": "ایک دل کی شکل",
+            "hi": "एक दिल का आकार",
+            "uk": "серце",
+            "ru": "сердце",
+            "macedonian": "срце",
+            "afrikaans": "'n hart",
+            "serbian": "срце",
+            "croatian": "srce"
+          },
+          "definition": "A rounded shape with two curved lobes at the top meeting in a point at the bottom. Widely used as a symbol of love."
+        },
+        {
+          "file": "un hexagone.png",
+          "translations": {
+            "fr": "un hexagone",
+            "en": "a hexagon",
+            "es": "un hexágono",
+            "de": "ein Sechseck",
+            "it": "un esagono",
+            "ja": "六角形",
+            "zh-pinyin": "yī gè liùjiǎoxíng",
+            "zh-hanzi": "一个六边形",
+            "cantonese": "一個六邊形",
+            "he": "משושה",
+            "ar": "سداسي الأضلاع",
+            "sinhala": "෹ෂඩාස්‍රයක්",
+            "vi": "một hình lục giác",
+            "ur": "ایک شش ضلعی",
+            "hi": "एक षट्भुज",
+            "uk": "шестикутник",
+            "ru": "шестиугольник",
+            "macedonian": "шестаголник",
+            "afrikaans": "'n sesekant",
+            "serbian": "шестоугао",
+            "croatian": "šesterokut"
+          },
+          "definition": "A form with six edges and six vertices."
+        },
+        {
+          "file": "un octagone.png",
+          "translations": {
+            "fr": "un octagone",
+            "en": "an octagon",
+            "es": "un octágono",
+            "de": "ein Achteck",
+            "it": "un ottagono",
+            "ja": "八角形",
+            "zh-pinyin": "yī gè bājiǎoxíng",
+            "zh-hanzi": "一个八边形",
+            "cantonese": "一個八邊形",
+            "he": "מתומן",
+            "ar": "مثمن الأضلاع",
+            "sinhala": "අෂ්ටාස්‍රයක්",
+            "vi": "một hình bát giác",
+            "ur": "ایک ہشت پہلو",
+            "hi": "एक अष्टभुज",
+            "uk": "восьмикутник",
+            "ru": "восьмиугольник",
+            "macedonian": "осумаголник",
+            "afrikaans": "'n agthoek",
+            "serbian": "осмоугао",
+            "croatian": "osmerokut"
+          },
+          "definition": "A form with eight edges and eight vertices, commonly used for stop signs around the world."
+        },
+        {
+          "file": "un ovale.png",
+          "translations": {
+            "fr": "un ovale",
+            "en": "an oval",
+            "es": "un óvalo",
+            "de": "ein Oval",
+            "it": "un ovale",
+            "ja": "楕円形",
+            "zh-pinyin": "yī gè tuǒyuánxíng",
+            "zh-hanzi": "一个椭圆形",
+            "cantonese": "一個橢圓形",
+            "he": "אליפסה",
+            "ar": "بيضاوي الشكل",
+            "sinhala": "අණ්ඩාකාරයක්",
+            "vi": "một hình bầu dục",
+            "ur": "ایک بیضوی شکل",
+            "hi": "एक अंडाकार",
+            "uk": "овал",
+            "ru": "овал",
+            "macedonian": "овал",
+            "afrikaans": "'n ovaal",
+            "serbian": "овал",
+            "croatian": "ovalan oblik"
+          },
+          "definition": "A circle that has been stretched in one direction, like the outline of an egg."
+        },
+        {
+          "file": "un pentagone.png",
+          "translations": {
+            "fr": "un pentagone",
+            "en": "a pentagon",
+            "es": "un pentágono",
+            "de": "ein Fünfeck",
+            "it": "un pentagono",
+            "ja": "五角形",
+            "zh-pinyin": "yī gè wǔjiǎoxíng",
+            "zh-hanzi": "一个五边形",
+            "cantonese": "一個五邊形",
+            "he": "מחומש",
+            "ar": "خماسي الأضلاع",
+            "sinhala": "පංචාස්‍රයක්",
+            "vi": "một hình ngũ giác",
+            "ur": "ایک پانچ رخا",
+            "hi": "एक पंचभुज",
+            "uk": "п'ятикутник",
+            "ru": "пятиугольник",
+            "macedonian": "петаголник",
+            "afrikaans": "'n vyfhoek",
+            "serbian": "петоугао",
+            "croatian": "peterokut"
+          },
+          "definition": "A form with five edges and five vertices."
+        },
+        {
+          "file": "un rectangle.png",
+          "translations": {
+            "fr": "un rectangle",
+            "en": "a rectangle",
+            "es": "un rectángulo",
+            "de": "ein Rechteck",
+            "it": "un rettangolo",
+            "ja": "長方形",
+            "zh-pinyin": "yī gè chángfāngxíng",
+            "zh-hanzi": "一个长方形",
+            "cantonese": "一個長方形",
+            "he": "מלבן",
+            "ar": "مستطيل",
+            "sinhala": "සෘජුකෝණාස්‍රයක්",
+            "vi": "một hình chữ nhật",
+            "ur": "ایک مستطیل",
+            "hi": "एक आयत",
+            "uk": "прямокутник",
+            "ru": "прямоугольник",
+            "macedonian": "правоаголник",
+            "afrikaans": "'n reghoek",
+            "serbian": "правоугаоник",
+            "croatian": "pravokutnik"
+          },
+          "definition": "A form with four straight sides and four vertices. Like a square but with two sides longer than the other two."
+        },
+        {
+          "file": "un triangle.png",
+          "translations": {
+            "fr": "un triangle",
+            "en": "a triangle",
+            "es": "un triángulo",
+            "de": "ein Dreieck",
+            "it": "un triangolo",
+            "ja": "三角形",
+            "zh-pinyin": "yī gè sānjiǎoxíng",
+            "zh-hanzi": "一个三角形",
+            "cantonese": "一個三角形",
+            "he": "משולש",
+            "ar": "مثلث",
+            "sinhala": "ත්‍රිකෝණයක්",
+            "vi": "một hình tam giác",
+            "ur": "ایک تکون",
+            "hi": "एक त्रिभुज",
+            "uk": "трикутник",
+            "ru": "треугольник",
+            "macedonian": "триаголник",
+            "afrikaans": "'n driehoek",
+            "serbian": "троугао",
+            "croatian": "trokut"
+          },
+          "definition": "A form with three straight sides and three vertices."
+        },
+        {
+          "file": "une étoile.png",
+          "translations": {
+            "fr": "une étoile",
+            "en": "a star",
+            "es": "una estrella",
+            "de": "ein Stern",
+            "it": "una stella",
+            "ja": "星",
+            "zh-pinyin": "yī kē xīngxīng",
+            "zh-hanzi": "一个星星",
+            "cantonese": "一粒星",
+            "he": "כוכב",
+            "ar": "نجمة",
+            "sinhala": "තාරකාවක්",
+            "vi": "một ngôi sao",
+            "ur": "ایک ستارہ",
+            "hi": "एक तारा",
+            "uk": "зірка",
+            "ru": "звезда",
+            "macedonian": "ѕвезда",
+            "afrikaans": "'n ster",
+            "serbian": "звезда",
+            "croatian": "zvijezda"
+          },
+          "definition": "A shape with pointed rays extending outward, commonly drawn with five points."
+        }
+      ]
+    },
+    {
+      "id": "3d-objects",
+      "name": "3D Objects",
+      "folder": "3D-objects",
+      "items": [
+        {
+          "file": "un cône.png",
+          "translations": {
+            "fr": "un cône",
+            "en": "a cone",
+            "es": "un cono",
+            "de": "ein Kegel",
+            "it": "un cono",
+            "ja": "円錐",
+            "zh-pinyin": "yī gè yuánzhuī",
+            "zh-hanzi": "一个圆锥",
+            "cantonese": "一個圓錐",
+            "he": "חרוט",
+            "ar": "مخروط",
+            "sinhala": "සම්මුඛයක්",
+            "vi": "một hình nón",
+            "ur": "ایک مخروط",
+            "hi": "एक शंकु",
+            "uk": "конус",
+            "ru": "конус",
+            "macedonian": "конус",
+            "afrikaans": "'n keël",
+            "serbian": "конус",
+            "croatian": "stožac"
+          },
+          "definition": "An object with a circular base that narrows smoothly to a single vertex. Like an ice-cream cone."
+        },
+        {
+          "file": "un cube.png",
+          "translations": {
+            "fr": "un cube",
+            "en": "a cube",
+            "es": "un cubo",
+            "de": "ein Würfel",
+            "it": "un cubo",
+            "ja": "立方体",
+            "zh-pinyin": "yī gè lìfāngtǐ",
+            "zh-hanzi": "一个立方体",
+            "cantonese": "一個立方體",
+            "he": "קוביה",
+            "ar": "مكعب",
+            "sinhala": "ඝනකයක්",
+            "vi": "một hình lập phương",
+            "ur": "ایک مکعب",
+            "hi": "एक घन",
+            "uk": "куб",
+            "ru": "куб",
+            "macedonian": "коцка",
+            "afrikaans": "'n kubus",
+            "serbian": "коцка",
+            "croatian": "kocka"
+          },
+          "definition": "An object with six identical square faces. Like dice or a sugar cube."
+        },
+        {
+          "file": "un cylindre.png",
+          "translations": {
+            "fr": "un cylindre",
+            "en": "a cylinder",
+            "es": "un cilindro",
+            "de": "ein Zylinder",
+            "it": "un cilindro",
+            "ja": "円柱",
+            "zh-pinyin": "yī gè yuánzhùtǐ",
+            "zh-hanzi": "一个圆柱体",
+            "cantonese": "一個圓柱體",
+            "he": "גליל",
+            "ar": "أسطوانة",
+            "sinhala": "සිලින්ඩරයක්",
+            "vi": "một hình trụ",
+            "ur": "ایک بیلن",
+            "hi": "एक बेलन",
+            "uk": "циліндр",
+            "ru": "цилиндр",
+            "macedonian": "цилиндар",
+            "afrikaans": "'n silinder",
+            "serbian": "цилиндар",
+            "croatian": "valjak"
+          },
+          "definition": "An object with two identical, flat, circular ends connected by a curved surface. Like a can of soup."
+        },
+        {
+          "file": "un prisme rectangulaire.png",
+          "translations": {
+            "fr": "un prisme rectangulaire",
+            "en": "a rectangular prism",
+            "es": "un prisma rectangular",
+            "de": "ein rechteckiges Prisma",
+            "it": "un prisma rettangolare",
+            "ja": "直方体",
+            "zh-pinyin": "yī gè chángfāngtǐ",
+            "zh-hanzi": "一个长方体",
+            "cantonese": "一個長方體",
+            "he": "מנסרה מלבנית",
+            "ar": "منشور مستطيل",
+            "sinhala": "සෘජුකෝණාස්‍ර ප්‍රිස්මයක්",
+            "vi": "một hình hộp chữ nhật",
+            "ur": "ایک مستطیل منشور",
+            "hi": "एक आयताकार प्रिज्म",
+            "uk": "прямокутна призма",
+            "ru": "прямоугольная призма",
+            "macedonian": "правоаголна призма",
+            "afrikaans": "'n reghoekige prisma",
+            "serbian": "правоугаона призма",
+            "croatian": "pravokutna prizma"
+          },
+          "definition": "Similar to a cube that has been stretched or squeezed in one or more dimensions. An extruded rectangle."
+        },
+        {
+          "file": "un prisme triangulaire.png",
+          "translations": {
+            "fr": "un prisme triangulaire",
+            "en": "a triangular prism",
+            "es": "un prisma triangular",
+            "de": "ein dreieckiges Prisma",
+            "it": "un prisma triangolare",
+            "ja": "三角柱",
+            "zh-pinyin": "yī gè sānléngzhù",
+            "zh-hanzi": "一个三棱柱",
+            "cantonese": "一個三棱柱",
+            "he": "מנסרה משולשת",
+            "ar": "منشور مثلث",
+            "sinhala": "ත්‍රිකෝණාකාර ප්‍රිස්මයක්",
+            "vi": "một hình lăng trụ tam giác",
+            "ur": "ایک تکونی منشور",
+            "hi": "एक त्रिकोणीय प्रिज्म",
+            "uk": "трикутна призма",
+            "ru": "треугольная призма",
+            "macedonian": "триаголна призма",
+            "afrikaans": "'n driehoekige prisma",
+            "serbian": "троугаона призма",
+            "croatian": "trokutasta prizma"
+          },
+          "definition": "An object with two triangular ends connected by three rectangular faces. An extruded triangle."
+        },
+        {
+          "file": "une pyramide à base carrée.png",
+          "translations": {
+            "fr": "une pyramide à base carrée",
+            "en": "a square-based pyramid",
+            "es": "una pirámide de base cuadrada",
+            "de": "eine quadratische Pyramide",
+            "it": "una piramide a base quadrata",
+            "ja": "四角錐",
+            "zh-pinyin": "yī gè sìjiǎozhuī",
+            "zh-hanzi": "一个四角锥",
+            "cantonese": "一個四角錐",
+            "he": "פירמידה מרובעת",
+            "ar": "هرم ذو قاعدة مربعة",
+            "sinhala": "සමචතුරස්‍ර පාදක පිරමීඩයක්",
+            "vi": "một hình chóp đáy vuông",
+            "ur": "ایک مربع بنیاد کا اہرام",
+            "hi": "एक वर्गाकार आधार वाला पिरामिड",
+            "uk": "чотирикутна піраміда",
+            "ru": "четырёхугольная пирамида",
+            "macedonian": "пирамида со квадратна основа",
+            "afrikaans": "'n vierkantige piramide",
+            "serbian": "пирамида са квадратном основом",
+            "croatian": "piramida s kvadratnom bazom"
+          },
+          "definition": "An object with a square base and four triangular faces meeting at a single vertex, like the Great Pyramids of Giza in Egypt."
+        },
+        {
+          "file": "une pyramide à base triangulaire.png",
+          "translations": {
+            "fr": "une pyramide à base triangulaire",
+            "en": "a triangular-based pyramid",
+            "es": "una pirámide de base triangular",
+            "de": "eine dreieckige Pyramide",
+            "it": "una piramide a base triangolare",
+            "ja": "三角錐",
+            "zh-pinyin": "yī gè sānjiǎozhuī",
+            "zh-hanzi": "一个三角锥",
+            "cantonese": "一個三角錐",
+            "he": "פירמידה משולשת",
+            "ar": "هرم ذو قاعدة مثلثة",
+            "sinhala": "ත්‍රිකෝණාකාර පාදක පිරමීඩයක්",
+            "vi": "một hình chóp đáy tam giác",
+            "ur": "ایک تکونی بنیاد کا اہرام",
+            "hi": "एक त्रिकोणीय आधार वाला पिरामिड",
+            "uk": "трикутна піраміда",
+            "ru": "треугольная пирамида",
+            "macedonian": "пирамида со триаголна основа",
+            "afrikaans": "'n driehoekige piramide",
+            "serbian": "пирамида са троугаоном основом",
+            "croatian": "piramida s trokutastom bazom"
+          },
+          "definition": "An object with a triangular base and three more triangular faces meeting at a single vertex."
+        },
+        {
+          "file": "une sphère.png",
+          "translations": {
+            "fr": "une sphère",
+            "en": "a sphere",
+            "es": "una esfera",
+            "de": "eine Kugel",
+            "it": "una sfera",
+            "ja": "球",
+            "zh-pinyin": "yī gè qiútǐ",
+            "zh-hanzi": "一个球体",
+            "cantonese": "一個球體",
+            "he": "כדור",
+            "ar": "كرة",
+            "sinhala": "ගෝලයක්",
+            "vi": "một hình cầu",
+            "ur": "ایک کرہ",
+            "hi": "एक गोला",
+            "uk": "сфера",
+            "ru": "сфера",
+            "macedonian": "сфера",
+            "afrikaans": "'n sfeer",
+            "serbian": "сфера",
+            "croatian": "kugla"
+          },
+          "definition": "A perfectly round object where every point on its surface is the same distance from the centre. Like a ball."
         }
       ]
     }
