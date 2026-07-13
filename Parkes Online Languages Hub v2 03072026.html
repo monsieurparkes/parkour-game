@@ -456,15 +456,15 @@
         }
         .tile-row .preset-tile { flex-shrink: 0; scroll-snap-align: start; }
         .preset-tile {
-            width: 260px;
+            width: 146px;
             border: 1.5px solid var(--hub-line);
             border-radius: var(--hub-radius-md);
             background: var(--hub-surface);
-            padding: 16px;
+            padding: 9px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             cursor: pointer;
             transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
         }
@@ -475,14 +475,14 @@
             box-shadow: var(--hub-shadow-md);
         }
         .preset-tile-thumb {
-            width: 216px;
-            height: 216px;
-            border-radius: 16px;
+            width: 122px;
+            height: 122px;
+            border-radius: 9px;
             object-fit: cover;
             background: var(--hub-paper);
         }
         .preset-tile-label {
-            font-size: 15px;
+            font-size: 12px;
             font-weight: 800;
             text-align: center;
             color: var(--hub-ink);
@@ -1230,6 +1230,9 @@
                                 <option value="uk">Ukrainian (Українська)</option>
                                 <option value="ru">Russian (Русский)</option>
                                 <option value="macedonian">Macedonian (Македонски)</option>
+                                <option value="afrikaans">Afrikaans</option>
+                                <option value="serbian">Serbian (Српски)</option>
+                                <option value="croatian">Croatian (Hrvatski)</option>
                             </select>
                         </div>
 
@@ -1271,6 +1274,27 @@
                         <div class="flex justify-center gap-3 mt-6">
                             <button id="submode-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
                             <button id="submode-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3b: Kart Submode -->
+                    <div id="landing-step-kart-submode" class="landing-step" style="display:none;">
+                        <h2 class="hub-step-title">Parkour Kart</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div id="kart-submode-picture-card" class="submode-card hub-font selected" style="--mode-accent:var(--hub-marigold); --mode-accent-soft:var(--hub-marigold-soft);" onclick="chooseKartSubmode('picture')">
+                                <div class="text-4xl mb-2">🖼️</div>
+                                <h3 class="font-extrabold" style="color:var(--hub-ink);">Picture Parkour Kart</h3>
+                                <p class="text-xs mt-1" style="color:var(--hub-ink-soft);">Race the track and grab the right picture — great for younger learners.</p>
+                            </div>
+                            <div id="kart-submode-sentence-card" class="submode-card hub-font" style="--mode-accent:var(--hub-violet); --mode-accent-soft:var(--hub-violet-soft);" onclick="chooseKartSubmode('sentence')">
+                                <div class="text-4xl mb-2">📝</div>
+                                <h3 class="font-extrabold" style="color:var(--hub-ink);">Sentence Parkour Kart</h3>
+                                <p class="text-xs mt-1" style="color:var(--hub-ink-soft);">Type your own vocabulary words to grab.</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-3 mt-6">
+                            <button id="kart-submode-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
+                            <button id="kart-submode-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
                     </div>
 
@@ -1345,23 +1369,23 @@
 
                         <div id="kart-settings" class="hub-group hub-font text-left" style="display:none;">
                             <div class="hub-row">
-                                <p class="hub-hint mt-0 mb-0">🏎️ Race the track and grab the correct word among the four on offer.</p>
+                                <p id="kart-settings-hint" class="hub-hint mt-0 mb-0">🏎️ Race the track and grab the correct picture among the four on offer.</p>
                             </div>
                             <div class="hub-row">
                                 <label for="kart-student-name-input" class="hub-label">Student Name (optional)</label>
                                 <input type="text" id="kart-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
                             </div>
-                            <div class="hub-row">
-                                <label class="hub-label">Choose Your Pictures (optional)</label>
-                                <p class="hub-hint mt-0 mb-3">Uses the same picture packs as Picture Parkour, or upload your own - the cards on the track will show pictures instead of words.</p>
+                            <div id="kart-picture-only-section" class="hub-row">
+                                <label class="hub-label">Choose Your Pictures</label>
+                                <p class="hub-hint mt-0 mb-3">Uses the same picture packs as Picture Parkour, or upload your own - the cards on the track will show pictures.</p>
                                 <div id="kart-preset-category-tiles" class="tile-row"></div>
                                 <input type="file" id="kart-picture-file-input" accept="image/*" multiple class="hidden">
                                 <p id="kart-picture-upload-status" class="hub-hint mt-2" style="display:none;"></p>
                             </div>
-                            <div class="hub-row">
-                                <label class="hub-label">Or Type Vocabulary (separated by commas)</label>
+                            <div id="kart-quest-only-section" class="hub-row" style="display:none;">
+                                <label class="hub-label">Vocabulary List (separated by commas)</label>
                                 <textarea id="kart-vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
-                                <p class="hub-hint">Up to 8 words total on the track right now, combined from whichever of the above you use.</p>
+                                <p class="hub-hint">Up to 8 words total on the track right now.</p>
                             </div>
                             <div class="hub-row">
                                 <label class="hub-label">Have a code? (optional)</label>
@@ -1707,6 +1731,9 @@
                     <option value="uk">Ukrainian (Українська)</option>
                     <option value="ru">Russian (Русский)</option>
                     <option value="macedonian">Macedonian (Македонски)</option>
+                                <option value="afrikaans">Afrikaans</option>
+                                <option value="serbian">Serbian (Српски)</option>
+                                <option value="croatian">Croatian (Hrvatski)</option>
                 </select>
 
                 <div id="wb-text-settings-group" style="display:none;">
@@ -1823,58 +1850,21 @@
             </div>
         </div>
 
-        <canvas id="gameCanvas"></canvas>
-
-        <!-- World Level Editor (debug mode only) -->
-        <button id="level-editor-toggle-btn" class="hub-btn-ghost interactive" style="display:none; position:fixed; top:12px; right:12px; z-index:150; background:white;">🖼️ Level Editor</button>
-
-        <div id="level-editor-panel" class="hub-font" style="display:none; position:fixed; top:12px; right:12px; z-index:150; background:var(--hub-surface); border:2px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:14px; width:280px;">
-            <div class="flex items-center justify-between mb-2">
-                <strong style="font-size:13px;">🖼️ Level Editor</strong>
-                <button id="level-editor-exit-btn" class="hub-btn-ghost interactive" style="padding:4px 10px; font-size:12px;">Exit</button>
+        <div id="game-view-shell" style="display:none; flex-direction:column; width:100%; height:100%; padding:10px; box-sizing:border-box; gap:8px;">
+            <div id="kart-ui-board" class="wb-tray dyslexic-font" style="display:none;">
+            <div class="flex flex-col items-center interactive flex-shrink-0">
+                <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</div>
+                <div id="kart-score-text" class="text-2xl font-black text-slate-800 leading-none">00</div>
             </div>
-            <p class="hub-hint" style="margin:0 0 8px 0;">Arrow keys pan the frozen camera. Drag an image to move it, drag its corner to resize. Click empty space to deselect.</p>
-
-            <div class="hub-row" style="margin-bottom:8px;">
-                <label class="hub-label" style="font-size:11px;">Add image (live GitHub URL)</label>
-                <div style="display:flex; gap:6px;">
-                    <input type="text" id="level-editor-url-input" class="hub-input" placeholder="https://raw.githubusercontent.com/..." style="flex:1; font-size:11px; padding:6px 8px;">
-                    <button id="level-editor-add-btn" class="hub-btn-primary interactive" style="padding:6px 12px; font-size:12px;">Add</button>
-                </div>
-                <p id="level-editor-add-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Couldn't load that image - check the URL.</p>
+            <div class="flex flex-col items-center interactive flex-shrink-0">
+                <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Lap</div>
+                <div id="kart-lap-text" class="text-xl font-black text-slate-800 leading-none">1</div>
             </div>
 
-            <div id="level-editor-selected-panel" style="display:none; border-top:2px solid var(--hub-line); padding-top:8px; margin-top:8px;">
-                <p id="level-editor-selected-name" class="hub-hint" style="margin:0 0 6px 0; word-break:break-all;"></p>
-                <div class="wb-tray-group" style="margin-bottom:6px;">
-                    <button id="level-editor-layer-bg-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">Background</button>
-                    <button id="level-editor-layer-fg-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">Foreground</button>
-                </div>
-                <div class="wb-tray-group" style="margin-bottom:6px;">
-                    <button id="level-editor-forward-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">↑ Forward</button>
-                    <button id="level-editor-backward-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">↓ Backward</button>
-                </div>
-                <button id="level-editor-delete-btn" class="hub-btn-ghost interactive w-full" style="font-size:11px; color:#dc2626; border-color:#fecdd3;">Delete Image</button>
-            </div>
-
-            <button id="level-editor-export-btn" class="hub-btn-primary interactive w-full" style="margin-top:10px; font-size:12px;">⬇ Export Report (JSON)</button>
-        </div>
-
-        <!-- ========================================== -->
-        <!-- UI Dashboard Elements                      -->
-        <!-- ========================================== -->
-        <div id="kart-ui-board" class="ui-overlay flex flex-col justify-between dyslexic-font">
-            <div id="kart-wrong-banner" dir="auto" class="hidden absolute left-1/2 top-6 -translate-x-1/2 bg-rose-500 text-white font-bold text-sm rounded-2xl border-2 border-rose-700 shadow-lg px-6 py-3 text-center max-w-[80%]" style="pointer-events:none;">
-            </div>
-            <div class="flex justify-between items-start gap-4">
-                <div class="bg-white/95 border-4 border-slate-800 p-4 rounded-2xl shadow-[4px_4px_0px_#1e293b] flex flex-col items-center min-w-[100px] interactive flex-shrink-0">
-                    <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</div>
-                    <div id="kart-score-text" class="text-3xl font-black text-slate-800 leading-none">00</div>
-                </div>
-
-                <div class="bg-white/95 p-4 md:p-6 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] w-auto interactive flex flex-col justify-center items-center gap-1 flex-shrink-0">
+            <div id="kart-ui-board-center" style="flex:1; display:flex; align-items:center; justify-content:center; min-width:0;">
+                <div class="interactive flex flex-col justify-center items-center gap-0 flex-shrink-0" style="min-width:0;">
                     <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider">Find</h3>
-                    <div class="flex items-center gap-4 mt-1">
+                    <div class="flex items-center gap-3">
                         <div id="kart-target-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight text-center"></div>
                         <button id="kart-tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
@@ -1884,173 +1874,111 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="bg-white/95 border-4 border-slate-800 p-4 rounded-2xl shadow-[4px_4px_0px_#1e293b] flex flex-col items-center min-w-[100px] interactive flex-shrink-0">
-                    <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Lap</div>
-                    <div id="kart-lap-text" class="text-2xl font-black text-slate-800 leading-none">1</div>
-                </div>
             </div>
-            <div class="flex justify-end gap-2">
-                <div class="relative interactive">
-                    <button id="kart-settings-cog-btn" class="bg-slate-800 text-white p-2 rounded-full border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a] hover:bg-slate-700 transition-all" title="Game Settings">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    </button>
-                    <div id="kart-settings-panel" class="hidden absolute right-0 bottom-full mb-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
-                        <div>
-                            <label for="kart-music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
-                            <input type="range" id="kart-music-volume-slider" min="0" max="100" value="25" class="w-full">
-                        </div>
-                        <div>
-                            <label for="kart-tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
-                            <input type="range" id="kart-tts-volume-slider" min="0" max="100" value="100" class="w-full">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="kart-fx-enabled-checkbox" checked class="w-5 h-5 rounded border-2 border-slate-800 accent-blue-900 cursor-pointer">
-                            <label for="kart-fx-enabled-checkbox" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none">Sound FX</label>
-                        </div>
-                    </div>
-                </div>
-                <button id="kart-back-to-config" class="interactive bg-rose-500 hover:bg-rose-600 text-white font-black text-xs uppercase px-4 py-3 rounded-xl border-2 border-slate-800 shadow-[3px_3px_0px_#1e293b] transition-all">
-                    Reset Race
+
+            <button class="fullscreen-toggle-btn wb-circle-btn interactive" title="Toggle fullscreen">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
+            </button>
+            <button id="kart-controls-help-btn" class="wb-circle-btn interactive" title="Game Controls">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </button>
+            <div class="relative interactive">
+                <button id="kart-settings-cog-btn" class="wb-circle-btn" title="Game Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 </button>
+                <div id="kart-settings-panel" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
+                    <div>
+                        <label for="kart-music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
+                        <input type="range" id="kart-music-volume-slider" min="0" max="100" value="25" class="w-full">
+                    </div>
+                    <div>
+                        <label for="kart-tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
+                        <input type="range" id="kart-tts-volume-slider" min="0" max="100" value="100" class="w-full">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="kart-fx-enabled-checkbox" checked class="w-5 h-5 rounded border-2 border-slate-800 accent-blue-900 cursor-pointer">
+                        <label for="kart-fx-enabled-checkbox" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none">Sound FX</label>
+                    </div>
+                    <button id="kart-settings-debug-btn" class="w-full bg-slate-800 text-white font-black text-xs uppercase py-3 rounded-xl hover:bg-black transition-all">🔒 Debug Mode</button>
+                </div>
             </div>
+            <button id="kart-back-to-config" class="hub-btn-ghost interactive" style="color:#dc2626; border-color:#fecdd3;">
+                Reset Race
+            </button>
         </div>
 
-        <!-- Parkour Kart race-complete overlay -->
-        <div id="kart-complete-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
-            <div class="hub-font p-8 max-w-sm w-full text-center" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg);">
-                <div class="text-4xl mb-2">🏁</div>
-                <h2 class="text-xl font-extrabold mb-4" style="color:var(--hub-ink);">Race Complete!</h2>
-                <div class="text-sm space-y-2 text-left font-bold" style="color:var(--hub-ink);">
-                    <p>Laps taken: <span id="kart-result-laps"></span></p>
-                    <p>Mistakes: <span id="kart-result-mistakes"></span></p>
-                    <p>Time: <span id="kart-result-time"></span></p>
+        <div id="ui-board" class="wb-tray dyslexic-font" style="display:none;">
+            <div class="flex flex-col items-center interactive flex-shrink-0">
+                <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</div>
+                <div id="score" class="text-2xl font-black text-slate-800 leading-none">00</div>
+            </div>
+
+            <div id="ui-board-center" style="flex:1; display:flex; align-items:center; justify-content:center; gap:48px; min-width:0;">
+                <div id="quest-box" class="interactive flex flex-col justify-center items-center gap-0 flex-shrink-0" style="min-width:0;">
+                    <h3 id="quest-header-label" class="text-slate-400 text-xs font-bold uppercase tracking-wider">Target Objective</h3>
+                    <div class="flex items-center gap-3">
+                        <div id="instruction-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight inline-block whitespace-pre-wrap text-center">...</div>
+                        <button id="tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                        <button id="tts-button-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                        </button>
+                    </div>
+                    <span id="game-voice-warning" class="hidden text-[10px] font-bold text-amber-700 bg-amber-50 border-2 border-amber-300 rounded-lg px-2 py-0.5 mt-1 interactive"></span>
                 </div>
-                <div class="flex flex-col gap-3 mt-6">
-                    <button id="kart-try-again-btn" class="hub-btn-primary w-full">Race Again</button>
-                    <button id="kart-return-hub-btn" class="hub-btn-ghost w-full">Return to Hub</button>
+
+                <div id="location-box" class="interactive flex flex-col justify-center items-center gap-0 flex-shrink-0" style="min-width:0;">
+                    <h3 id="where-title" class="text-xs font-bold uppercase tracking-wider text-slate-400">Where?</h3>
+                    <div class="flex items-center gap-3">
+                        <div id="location-text" dir="auto" class="text-2xl md:text-3xl font-black leading-tight inline-block text-center tracking-wide">...</div>
+                        <button id="tts-location-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                        <button id="tts-location-button-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <button class="fullscreen-toggle-btn wb-circle-btn interactive" title="Toggle fullscreen">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
+            </button>
+            <button id="controls-help-btn" class="wb-circle-btn interactive" title="Game Controls">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </button>
+            <div class="relative interactive">
+                <button id="settings-cog-btn" class="wb-circle-btn" title="Game Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </button>
+                <div id="settings-panel" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
+                    <div>
+                        <label for="music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
+                        <input type="range" id="music-volume-slider" min="0" max="100" value="25" class="w-full">
+                    </div>
+                    <div>
+                        <label for="tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
+                        <input type="range" id="tts-volume-slider" min="0" max="100" value="100" class="w-full">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="fx-enabled-checkbox" checked class="w-5 h-5 rounded border-2 border-slate-800 accent-blue-900 cursor-pointer">
+                        <label for="fx-enabled-checkbox" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none">Sound FX</label>
+                    </div>
+                    <button id="settings-debug-btn" class="w-full bg-slate-800 text-white font-black text-xs uppercase py-3 rounded-xl hover:bg-black transition-all">🔒 Debug Mode</button>
+                </div>
+            </div>
+            <button id="back-to-config" class="hub-btn-ghost interactive" style="color:#dc2626; border-color:#fecdd3;">
+                Reset Board
+            </button>
         </div>
 
-        <div id="ui-board" class="ui-overlay flex flex-col justify-between dyslexic-font">
-            <div class="flex justify-between items-start gap-4">
-                
-                <!-- Score Counter / Word Progress -->
-                <div id="score-card" class="bg-white/95 border-4 border-slate-800 p-4 rounded-2xl shadow-[4px_4px_0px_#1e293b] flex flex-col items-center min-w-[100px] interactive flex-shrink-0">
-                    <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</div>
-                    <div id="score" class="text-3xl font-black text-slate-800 leading-none">00</div>
-                </div>
-
-                <!-- Target Objective & Localized Location Companion Boxes -->
-                <div class="flex flex-wrap items-stretch gap-3 max-w-[65vw]">
-                    <!-- Active Quest / Matching Target -->
-                    <div id="quest-box" class="bg-white/95 p-4 md:p-6 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] w-auto interactive flex flex-col justify-center items-center gap-1 transition-all flex-shrink-0">
-                        <h3 id="quest-header-label" class="text-slate-400 text-xs font-bold uppercase tracking-wider">Target Objective</h3>
-                        <div class="flex items-center gap-4 mt-1">
-                            <div id="instruction-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight inline-block whitespace-pre-wrap text-center">...</div>
-                            <button id="tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                            </button>
-                            <button id="tts-button-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
-                            </button>
-                        </div>
-                        <span id="game-voice-warning" class="hidden text-[10px] font-bold text-amber-700 bg-amber-50 border-2 border-amber-300 rounded-lg px-2 py-0.5 mt-1 interactive"></span>
+        <div id="game-middle-row" style="display:flex; flex:1; min-height:0; gap:10px;">
+                <div id="game-canvas-wrap" style="position:relative; flex:1; min-height:0; min-width:0; border:3px solid var(--hub-line); border-radius:var(--hub-radius-lg); overflow:hidden; background:#bae6fd;">
+                    <canvas id="gameCanvas"></canvas>
+                    <div id="kart-wrong-banner" dir="auto" class="hidden absolute left-1/2 top-6 -translate-x-1/2 bg-rose-500 text-white font-bold text-sm rounded-2xl border-2 border-rose-700 shadow-lg px-6 py-3 text-center max-w-[80%]" style="pointer-events:none;">
                     </div>
-
-                    <!-- Target Location Box (Where?) -->
-                    <div id="location-box" class="bg-white/95 p-4 md:p-6 rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] w-auto interactive flex flex-col justify-center items-center gap-1 transition-all flex-shrink-0">
-                        <h3 id="where-title" class="text-xs font-bold uppercase tracking-wider text-slate-400">Where?</h3>
-                        <div class="flex items-center gap-4 mt-1">
-                            <div id="location-text" dir="auto" class="text-2xl md:text-3xl font-black leading-tight inline-block text-center tracking-wide">...</div>
-                            <button id="tts-location-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Location">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                            </button>
-                            <button id="tts-location-button-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Back to Config Button -->
-                <div class="flex flex-col gap-2 items-end flex-shrink-0">
-                    <div class="flex gap-2 interactive">
-                        <button class="fullscreen-toggle-btn bg-slate-800 text-white px-3 py-2 rounded-full border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a] hover:bg-slate-700 transition-all font-black text-[10px] uppercase" title="Toggle fullscreen">
-                            <span class="fullscreen-btn-label">Full Screen</span>
-                        </button>
-                        <button id="controls-help-btn" class="bg-slate-800 text-white p-2 rounded-full border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a] hover:bg-slate-700 transition-all" title="Game Controls">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                        </button>
-                        <div class="relative">
-                            <button id="settings-cog-btn" class="bg-slate-800 text-white p-2 rounded-full border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a] hover:bg-slate-700 transition-all" title="Game Settings">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                            </button>
-                            <div id="settings-panel" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
-                                <div>
-                                    <label for="music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
-                                    <input type="range" id="music-volume-slider" min="0" max="100" value="25" class="w-full">
-                                </div>
-                                <div>
-                                    <label for="tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
-                                    <input type="range" id="tts-volume-slider" min="0" max="100" value="100" class="w-full">
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <input type="checkbox" id="fx-enabled-checkbox" checked class="w-5 h-5 rounded border-2 border-slate-800 accent-blue-900 cursor-pointer">
-                                    <label for="fx-enabled-checkbox" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none">Sound FX</label>
-                                </div>
-                                <button id="settings-debug-btn" class="w-full bg-slate-800 text-white font-black text-xs uppercase py-3 rounded-xl hover:bg-black transition-all">🔒 Debug Mode</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button id="back-to-config" class="interactive bg-rose-500 hover:bg-rose-600 text-white font-black text-xs uppercase px-4 py-3 rounded-xl border-2 border-slate-800 shadow-[3px_3px_0px_#1e293b] transition-all">
-                        Reset Board
-                    </button>
-                </div>
-            </div>
-
-            <!-- Controls Help Modal -->
-            <div id="controls-help-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
-                <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 max-h-[85vh] overflow-y-auto">
-                    <div class="text-4xl mb-2">🎮</div>
-                    <h2 class="text-lg font-black text-slate-800 mb-4">Game Controls</h2>
-                    <ul class="text-sm text-slate-700 space-y-2 leading-relaxed font-bold text-left">
-                        <li>⬅️➡️ Arrow keys / A-D — move</li>
-                        <li>⬆️ Arrow Up / W / Space — jump (press again mid-air to double jump)</li>
-                        <li>⬇️ Arrow Down / S — crawl under low gaps</li>
-                        <li>Shift — hold to run</li>
-                        <li>Ctrl + Down — drop through a floating platform</li>
-                        <li>⬆️ Up at a shop door — go inside</li>
-                        <li>⬇️ Down (inside a shop) — go back outside</li>
-                        <li>On tablets, use the on-screen buttons instead</li>
-                    </ul>
-                    <button id="controls-help-close-btn" class="w-full mt-6 bg-blue-900 text-white font-black py-3 rounded-2xl hover:bg-black transition-all">Got it</button>
-                </div>
-            </div>
-
-            <!-- Background Music -->
-            <audio id="bg-music" loop preload="auto" src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/fc319dff2fc92e7abbda0afe006d1273211fdbfa/AUDIOBACKINGMAIN.mp3"></audio>
-
-            <!-- French-only correct-answer sound -->
-            <audio id="correct-answer-fr-sound" preload="auto" src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/fc319dff2fc92e7abbda0afe006d1273211fdbfa/audio_ouiouiohyeah.wav"></audio>
-
-            <!-- Debug Mode Password Modal -->
-            <div id="debug-password-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
-                <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800">
-                    <div class="text-4xl mb-2">🔒</div>
-                    <h2 class="text-lg font-black text-slate-800 mb-2">Debug Mode</h2>
-                    <p class="text-slate-600 mb-4 text-sm font-bold">Enter the password to toggle debug mode.</p>
-                    <input type="password" id="debug-password-input" class="w-full p-3 board-input text-slate-800 mb-2" placeholder="Password">
-                    <p id="debug-password-error" class="hidden text-rose-600 text-xs font-bold mb-3">Incorrect password.</p>
-                    <div class="flex gap-3 mt-2">
-                        <button id="debug-password-cancel" class="flex-1 bg-slate-200 text-slate-800 font-black py-3 rounded-2xl hover:bg-slate-300 transition-all">Cancel</button>
-                        <button id="debug-password-submit" class="flex-1 bg-blue-900 text-white font-black py-3 rounded-2xl hover:bg-black transition-all">Confirm</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Virtual Mobile D-Pad -->
+                    <!-- Virtual Mobile D-Pad -->
             <div class="controls">
                 <div class="flex items-end gap-4">
                     <div class="btn-circle" id="btn-left" title="Left">
@@ -2075,7 +2003,180 @@
                     </div>
                 </div>
             </div>
+                </div>
+
+                <!-- Collected Words dock - Parkour + Kart only -->
+                <div id="collected-words-panel" class="hub-font" style="display:none; flex-shrink:0; width:190px; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-sm); padding:10px; flex-direction:column;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; flex-shrink:0;">
+                        <strong style="font-size:12px; color:var(--hub-ink);">📚 My Words</strong>
+                        <button id="collected-words-collapse-btn" class="interactive" style="border:none; background:transparent; font-size:16px; cursor:pointer; line-height:1;" title="Hide/show list">➖</button>
+                    </div>
+                    <div id="collected-words-list" style="overflow-y:auto; display:flex; flex-direction:column; gap:6px;"></div>
+                </div>
+            </div>
         </div>
+
+        <!-- World Level Editor (debug mode only) -->
+        <button id="level-editor-toggle-btn" class="hub-btn-ghost interactive" style="display:none; position:fixed; top:12px; left:12px; z-index:150; background:white;">🖼️ Level Editor</button>
+
+        <div id="level-editor-panel" class="hub-font" style="display:none; position:fixed; top:12px; left:12px; z-index:150; background:var(--hub-surface); border:2px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:14px; width:280px;">
+            <div class="flex items-center justify-between mb-2">
+                <strong style="font-size:13px;">🖼️ Level Editor</strong>
+                <button id="level-editor-exit-btn" class="hub-btn-ghost interactive" style="padding:4px 10px; font-size:12px;">Exit</button>
+            </div>
+            <p class="hub-hint" style="margin:0 0 8px 0;">Arrow keys pan the frozen camera. Drag an image to move it, drag its corner to resize. Click empty space to deselect.</p>
+
+            <div class="hub-row" style="margin-bottom:8px;">
+                <label class="hub-label" style="font-size:11px;">Add image (live GitHub URL)</label>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="level-editor-url-input" class="hub-input" placeholder="https://raw.githubusercontent.com/..." style="flex:1; font-size:11px; padding:6px 8px;">
+                    <button id="level-editor-add-btn" class="hub-btn-primary interactive" style="padding:6px 12px; font-size:12px;">Add</button>
+                </div>
+                <p id="level-editor-add-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Couldn't load that image - check the URL.</p>
+            </div>
+
+            <div class="hub-row" style="margin-bottom:8px;">
+                <button id="level-editor-add-collision-btn" class="hub-btn-ghost interactive w-full" style="font-size:12px;">📦 Add Collision Box</button>
+                <p class="hub-hint" style="margin:4px 0 0 0;">While active, click and drag on the world to draw a new invisible collision box. Existing collision boxes are shown as red dashed boxes while editing.</p>
+            </div>
+
+            <div id="level-editor-selected-panel" style="display:none; border-top:2px solid var(--hub-line); padding-top:8px; margin-top:8px;">
+                <p id="level-editor-selected-name" class="hub-hint" style="margin:0 0 6px 0; word-break:break-all;"></p>
+                <div class="wb-tray-group" style="margin-bottom:6px;">
+                    <button id="level-editor-layer-bg-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">Background</button>
+                    <button id="level-editor-layer-fg-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">Foreground</button>
+                </div>
+                <div class="wb-tray-group" style="margin-bottom:6px;">
+                    <button id="level-editor-forward-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">↑ Forward</button>
+                    <button id="level-editor-backward-btn" class="hub-btn-ghost interactive" style="font-size:11px; padding:4px 8px;">↓ Backward</button>
+                </div>
+                <button id="level-editor-delete-btn" class="hub-btn-ghost interactive w-full" style="font-size:11px; color:#dc2626; border-color:#fecdd3;">Delete Image</button>
+            </div>
+
+            <div id="level-editor-selected-platform-panel" style="display:none; border-top:2px solid var(--hub-line); padding-top:8px; margin-top:8px;">
+                <p class="hub-hint" style="margin:0 0 6px 0;">Collision box selected</p>
+                <div class="hub-checkbox-row" style="margin-bottom:6px;">
+                    <input type="checkbox" id="level-editor-platform-ground" class="w-4 h-4 rounded accent-[var(--hub-violet)] interactive">
+                    <label for="level-editor-platform-ground" style="font-size:11px; cursor:pointer;">Solid ground (can't drop through)</label>
+                </div>
+                <button id="level-editor-platform-delete-btn" class="hub-btn-ghost interactive w-full" style="font-size:11px; color:#dc2626; border-color:#fecdd3;">Delete Collision Box</button>
+            </div>
+
+            <button id="level-editor-export-btn" class="hub-btn-primary interactive w-full" style="margin-top:10px; font-size:12px;">⬇ Export Report (JSON)</button>
+        </div>
+
+        <!-- Kart World Level Editor (debug mode only) - a dedicated top-down
+             view, since Kart's Mode-7 style perspective distorts distant
+             positions too severely (pixels near the horizon cover huge
+             amounts of world space) for precise placement to be practical. -->
+        <button id="kart-level-editor-toggle-btn" class="hub-btn-ghost interactive" style="display:none; position:fixed; top:12px; left:12px; z-index:150; background:white;">🏁 Track Editor</button>
+
+        <div id="kart-level-editor-panel" class="hub-font" style="display:none; position:fixed; top:12px; left:12px; z-index:150; background:var(--hub-surface); border:2px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:14px; width:280px;">
+            <div class="flex items-center justify-between mb-2">
+                <strong style="font-size:13px;">🏁 Track Editor</strong>
+                <button id="kart-level-editor-exit-btn" class="hub-btn-ghost interactive" style="padding:4px 10px; font-size:12px;">Exit</button>
+            </div>
+            <p class="hub-hint" style="margin:0 0 8px 0;">Top-down view. Drag empty space to pan, scroll wheel to zoom. Drag an image to move it, drag its corner to resize.</p>
+
+            <div class="hub-row" style="margin-bottom:8px;">
+                <label class="hub-label" style="font-size:11px;">Add image (live GitHub URL)</label>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="kart-level-editor-url-input" class="hub-input" placeholder="https://raw.githubusercontent.com/..." style="flex:1; font-size:11px; padding:6px 8px;">
+                    <button id="kart-level-editor-add-btn" class="hub-btn-primary interactive" style="padding:6px 12px; font-size:12px;">Add</button>
+                </div>
+                <p id="kart-level-editor-add-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Couldn't load that image - check the URL.</p>
+            </div>
+
+            <div id="kart-level-editor-selected-panel" style="display:none; border-top:2px solid var(--hub-line); padding-top:8px; margin-top:8px;">
+                <p id="kart-level-editor-selected-name" class="hub-hint" style="margin:0 0 6px 0; word-break:break-all;"></p>
+                <div class="hub-checkbox-row" style="margin-bottom:6px;">
+                    <input type="checkbox" id="kart-level-editor-wall" class="w-4 h-4 rounded accent-[var(--hub-violet)] interactive">
+                    <label for="kart-level-editor-wall" style="font-size:11px; cursor:pointer;">Solid wall (blocks the kart)</label>
+                </div>
+                <button id="kart-level-editor-delete-btn" class="hub-btn-ghost interactive w-full" style="font-size:11px; color:#dc2626; border-color:#fecdd3;">Delete Image</button>
+            </div>
+
+            <button id="kart-level-editor-export-btn" class="hub-btn-primary interactive w-full" style="margin-top:10px; font-size:12px;">⬇ Export Report (JSON)</button>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- UI Dashboard Elements                      -->
+        <!-- ========================================== -->
+        <!-- Debug Mode Password Modal -->
+
+        <div id="debug-password-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
+            <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800">
+                <div class="text-4xl mb-2">🔒</div>
+                <h2 class="text-lg font-black text-slate-800 mb-2">Debug Mode</h2>
+                <p class="text-slate-600 mb-4 text-sm font-bold">Enter the password to toggle debug mode.</p>
+                <input type="password" id="debug-password-input" class="w-full p-3 board-input text-slate-800 mb-2" placeholder="Password">
+                <p id="debug-password-error" class="hidden text-rose-600 text-xs font-bold mb-3">Incorrect password.</p>
+                <div class="flex gap-3 mt-2">
+                    <button id="debug-password-cancel" class="flex-1 bg-slate-200 text-slate-800 font-black py-3 rounded-2xl hover:bg-slate-300 transition-all">Cancel</button>
+                    <button id="debug-password-submit" class="flex-1 bg-blue-900 text-white font-black py-3 rounded-2xl hover:bg-black transition-all">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kart Controls Help Modal -->
+        <div id="kart-controls-help-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
+            <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 max-h-[85vh] overflow-y-auto">
+                <div class="text-4xl mb-2">🏁</div>
+                <h2 class="text-lg font-black text-slate-800 mb-4">Game Controls</h2>
+                <ul class="text-sm text-slate-700 space-y-2 leading-relaxed font-bold text-left">
+                    <li>⬅️➡️ Arrow keys / A-D — steer</li>
+                    <li>⬆️ Arrow Up / W — accelerate</li>
+                    <li>⬇️ Arrow Down / S — brake / reverse</li>
+                    <li>On tablets, use the on-screen buttons instead</li>
+                </ul>
+                <button id="kart-controls-help-close-btn" class="w-full mt-6 bg-blue-900 text-white font-black py-3 rounded-2xl hover:bg-black transition-all">Got it</button>
+            </div>
+        </div>
+
+
+        <!-- Parkour Kart race-complete overlay -->
+        <div id="kart-complete-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
+            <div class="hub-font p-8 max-w-sm w-full text-center" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg);">
+                <div class="text-4xl mb-2">🏁</div>
+                <h2 class="text-xl font-extrabold mb-4" style="color:var(--hub-ink);">Race Complete!</h2>
+                <div class="text-sm space-y-2 text-left font-bold" style="color:var(--hub-ink);">
+                    <p>Laps taken: <span id="kart-result-laps"></span></p>
+                    <p>Mistakes: <span id="kart-result-mistakes"></span></p>
+                    <p>Time: <span id="kart-result-time"></span></p>
+                </div>
+                <div class="flex flex-col gap-3 mt-6">
+                    <button id="kart-try-again-btn" class="hub-btn-primary w-full">Race Again</button>
+                    <button id="kart-return-hub-btn" class="hub-btn-ghost w-full">Return to Hub</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Help Modal -->
+        <div id="controls-help-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
+            <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 max-h-[85vh] overflow-y-auto">
+                <div class="text-4xl mb-2">🎮</div>
+                <h2 class="text-lg font-black text-slate-800 mb-4">Game Controls</h2>
+                <ul class="text-sm text-slate-700 space-y-2 leading-relaxed font-bold text-left">
+                    <li>⬅️➡️ Arrow keys / A-D — move</li>
+                    <li>⬆️ Arrow Up / W / Space — jump (press again mid-air to double jump)</li>
+                    <li>⬇️ Arrow Down / S — crawl under low gaps</li>
+                    <li>Shift — hold to run</li>
+                    <li>Ctrl + Down — drop through a floating platform</li>
+                    <li>⬆️ Up at a shop door — go inside</li>
+                    <li>⬇️ Down (inside a shop) — go back outside</li>
+                    <li>On tablets, use the on-screen buttons instead</li>
+                </ul>
+                <button id="controls-help-close-btn" class="w-full mt-6 bg-blue-900 text-white font-black py-3 rounded-2xl hover:bg-black transition-all">Got it</button>
+            </div>
+        </div>
+
+        <!-- Background Music -->
+        <audio id="bg-music" loop preload="auto" src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/fc319dff2fc92e7abbda0afe006d1273211fdbfa/AUDIOBACKINGMAIN.mp3"></audio>
+
+        <!-- French-only correct-answer sound -->
+        <audio id="correct-answer-fr-sound" preload="auto" src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/fc319dff2fc92e7abbda0afe006d1273211fdbfa/audio_ouiouiohyeah.wav"></audio>
+
 
         <!-- Correction / Instruction Notification Modal -->
         <div id="feedback-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-50 interactive backdrop-blur-sm dyslexic-font">
@@ -2179,7 +2280,20 @@
         let levelEditorSelectedId = null;
         let levelEditorCamX = 0, levelEditorCamY = 0;
         let levelEditorLastCamX = 0, levelEditorLastCamY = 0; // most recent actual render-time camera, used to convert screen<->world outside the render loop
-        let levelEditorDrag = null; // { type: 'move'|'resize', id, startWorldX, startWorldY, originX, originY, originW, originH }
+        let levelEditorDrag = null; // { type: 'move'|'resize'|'draw-box', id, startWorldX, startWorldY, originX, originY, originW, originH }
+        let levelEditorSelectedType = null; // 'image' | 'platform'
+        let levelEditorAddCollisionMode = false;
+        let levelEditorNewBoxDraft = null; // { startX, startY, x, y, w, h } while actively dragging out a new box
+
+        // Kart Track Editor state - a top-down view over the same
+        // KART_WORLD_W x KART_WORLD_H world the real Mode-7 game uses.
+        let kartLevelEditorActive = false;
+        let kartLevelEditorImages = [];
+        let kartLevelEditorNextId = 1;
+        let kartLevelEditorSelectedId = null;
+        let kartLevelEditorCamX = 1200, kartLevelEditorCamY = 700; // world point at the center of the view - overwritten with the kart's actual position on entry
+        let kartLevelEditorZoom = 1; // world-units-to-pixels scale, adjusted by the scroll wheel
+        let kartLevelEditorDrag = null; // { type: 'move'|'resize'|'pan', id, startScreenX, startScreenY, ... }
 
         // Audio settings controlled from the top-right settings menu
         let musicVolume = 0.25;
@@ -2217,6 +2331,93 @@
         const PRESET_IMAGE_BASE_URL = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/preset-images/';
         let presetManifest = null;
         let presetSelectedFiles = []; // { file, folder, translations } for every checked preset item
+
+        // --- Collected Words panel (Parkour + Kart) ---
+        let collectedWordsLog = []; // { text: lowercased target-language word }
+
+        function findPresetEntryForWord(text) {
+            if (!presetManifest || !presetManifest.categories) return null;
+            const lower = text.toLowerCase();
+            for (const cat of presetManifest.categories) {
+                for (const item of (cat.items || [])) {
+                    const t = item.translations || {};
+                    const targetVal = t[selectedLanguage];
+                    if (targetVal && targetVal.toLowerCase() === lower) return item;
+                }
+            }
+            return null;
+        }
+
+        function recordWordCollected(text) {
+            const lower = text.toLowerCase().trim();
+            if (!lower || collectedWordsLog.some(w => w.text === lower)) return;
+            collectedWordsLog.push({ text: lower });
+            renderCollectedWordsPanel();
+        }
+
+        function resetCollectedWordsLog() {
+            collectedWordsLog = [];
+            renderCollectedWordsPanel();
+        }
+
+        function renderCollectedWordsPanel() {
+            const list = document.getElementById('collected-words-list');
+            if (!list) return;
+            list.innerHTML = '';
+            collectedWordsLog.forEach(entry => {
+                const presetItem = findPresetEntryForWord(entry.text);
+                const englishText = presetItem && presetItem.translations ? presetItem.translations.en : null;
+                const definitionText = presetItem ? presetItem.definition : null;
+
+                const row = document.createElement('div');
+                row.style.cssText = 'border:1px solid var(--hub-line); border-radius:12px; padding:6px 8px;';
+
+                const wordRow = document.createElement('div');
+                wordRow.style.cssText = 'display:flex; align-items:center; gap:4px; cursor:pointer;';
+                wordRow.innerHTML = `<span style="font-size:10px;">🔊</span><span class="cw-target-text" style="font-size:12px; font-weight:800; line-height:1.2;">${colorizeSentenceText(entry.text)}</span>`;
+                wordRow.onclick = () => speakOneInLanguage(entry.text, selectedLanguage);
+                row.appendChild(wordRow);
+
+                if (englishText) {
+                    const enRow = document.createElement('div');
+                    enRow.style.cssText = 'display:flex; align-items:center; gap:4px; cursor:pointer; margin-top:2px;';
+                    enRow.innerHTML = `<span style="font-size:10px;">🔊</span><span style="font-size:11px; color:var(--hub-ink-soft); font-style:italic;">${englishText}</span>`;
+                    enRow.onclick = () => speakOneInLanguage(englishText, 'en');
+                    row.appendChild(enRow);
+                }
+
+                if (definitionText) {
+                    const defBtnRow = document.createElement('div');
+                    defBtnRow.style.cssText = 'margin-top:4px;';
+                    const defBtn = document.createElement('button');
+                    defBtn.className = 'interactive';
+                    defBtn.style.cssText = 'width:26px; height:26px; border-radius:50%; border:1px solid var(--hub-line); background:var(--hub-paper); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:12px; padding:0; line-height:1; color:var(--hub-ink);';
+                    defBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" zoomAndPan="magnify" viewBox="0 0 150 149.999998" height="15" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="49c4c9ee27"><path d="M 8 25 L 139 25 L 139 120 L 8 120 Z M 8 25 " clip-rule="nonzero"/></clipPath><clipPath id="91b63c32fd"><path d="M 4.46875 61.765625 L 94.265625 14.992188 L 141.039062 104.789062 L 51.242188 151.5625 Z M 4.46875 61.765625 " clip-rule="nonzero"/></clipPath><clipPath id="a11b5bc92b"><path d="M 4.46875 61.765625 L 94.265625 14.992188 L 141.039062 104.789062 L 51.242188 151.5625 Z M 4.46875 61.765625 " clip-rule="nonzero"/></clipPath><clipPath id="f8be31d483"><path d="M 4.46875 61.765625 L 94.265625 14.992188 L 141.039062 104.789062 L 51.242188 151.5625 Z M 4.46875 61.765625 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#49c4c9ee27)"><g clip-path="url(#91b63c32fd)"><g clip-path="url(#a11b5bc92b)"><g clip-path="url(#f8be31d483)"><path fill="currentColor" d="M 79.238281 88.320312 C 77.246094 89.769531 75.285156 91.355469 73.390625 93.074219 L 49.769531 47.730469 C 52.3125 42.96875 58.019531 37.632812 65.199219 33.339844 C 71.527344 29.558594 77.8125 27.417969 80.84375 27.96875 L 96.75 58.511719 C 99.53125 57.960938 102.351562 57.925781 105.089844 58.386719 L 89.066406 27.628906 C 88.898438 27.304688 88.585938 27.074219 88.222656 27 L 82.03125 25.757812 C 77.746094 24.394531 69.875 27.703125 63.949219 31.246094 C 56.488281 35.707031 50.503906 41.316406 47.714844 46.414062 C 41.9375 45.777344 33.910156 47.46875 25.980469 51.023438 C 19.679688 53.847656 12.457031 58.402344 11.117188 62.695312 L 8.585938 68.480469 C 8.4375 68.820312 8.449219 69.207031 8.617188 69.535156 L 34.496094 119.214844 C 34.804688 119.8125 35.542969 120.042969 36.136719 119.734375 L 82.921875 95.363281 C 81.304688 93.257812 80.054688 90.878906 79.234375 88.320312 Z M 71.234375 94.199219 C 56.925781 97.445312 45.128906 105.003906 38.671875 111.105469 L 13.609375 62.988281 C 14.894531 60.1875 20.253906 56.265625 26.980469 53.246094 C 34.613281 49.828125 42.253906 48.207031 47.613281 48.851562 L 71.230469 94.199219 Z M 79.488281 36.859375 C 79.691406 37.5 79.335938 38.179688 78.699219 38.378906 C 72.050781 40.453125 65.375 44.5 58.851562 50.414062 C 58.777344 50.484375 58.683594 50.546875 58.59375 50.59375 C 58.117188 50.84375 57.515625 50.746094 57.132812 50.328125 C 56.679688 49.828125 56.714844 49.058594 57.214844 48.609375 C 63.996094 42.457031 70.984375 38.230469 77.96875 36.054688 C 78.609375 35.855469 79.289062 36.214844 79.488281 36.859375 Z M 83.039062 43.671875 C 83.230469 44.320312 82.863281 45 82.222656 45.191406 C 75.542969 47.203125 68.84375 51.179688 62.277344 57.015625 C 62.203125 57.085938 62.121094 57.140625 62.03125 57.1875 C 61.554688 57.4375 60.941406 57.339844 60.5625 56.914062 C 60.117188 56.410156 60.15625 55.640625 60.65625 55.195312 C 67.488281 49.121094 74.503906 44.96875 81.523438 42.855469 C 82.164062 42.660156 82.839844 43.03125 83.039062 43.671875 Z M 65.707031 63.621094 C 65.628906 63.6875 65.554688 63.738281 65.464844 63.785156 C 64.980469 64.035156 64.363281 63.933594 63.992188 63.5 C 63.546875 62.992188 63.597656 62.222656 64.105469 61.78125 C 70.972656 55.785156 78.027344 51.707031 85.078125 49.65625 C 85.722656 49.46875 86.398438 49.839844 86.589844 50.488281 C 86.777344 51.132812 86.402344 51.8125 85.757812 52 C 79.046875 53.949219 72.300781 57.859375 65.707031 63.621094 Z M 67.550781 68.367188 C 69.597656 66.617188 71.691406 65.007812 73.804688 63.574219 C 74.351562 63.203125 75.113281 63.34375 75.492188 63.902344 C 75.871094 64.457031 75.726562 65.214844 75.171875 65.59375 C 73.144531 66.972656 71.109375 68.53125 69.132812 70.222656 C 69.054688 70.285156 68.980469 70.335938 68.902344 70.378906 C 68.414062 70.632812 67.789062 70.53125 67.414062 70.089844 C 66.976562 69.578125 67.035156 68.808594 67.550781 68.367188 Z M 62.679688 89.289062 C 62.835938 89.851562 62.578125 90.429688 62.074219 90.695312 C 62.003906 90.730469 61.917969 90.765625 61.839844 90.785156 C 53.445312 93.128906 46.480469 96.625 41.148438 101.175781 C 40.632812 101.609375 39.859375 101.550781 39.425781 101.039062 C 38.988281 100.527344 39.046875 99.757812 39.5625 99.320312 C 45.167969 94.539062 52.441406 90.878906 61.179688 88.4375 C 61.828125 88.257812 62.5 88.636719 62.679688 89.289062 Z M 55.824219 76.125 C 55.96875 76.6875 55.703125 77.253906 55.207031 77.511719 C 55.128906 77.554688 55.042969 77.585938 54.953125 77.609375 C 46.484375 79.789062 39.449219 83.144531 34.035156 87.585938 C 33.515625 88.015625 32.753906 87.933594 32.328125 87.414062 C 31.898438 86.894531 31.972656 86.128906 32.492188 85.699219 C 38.179688 81.035156 45.527344 77.519531 54.34375 75.25 C 54.988281 75.082031 55.652344 75.476562 55.824219 76.125 Z M 59.253906 82.710938 C 59.410156 83.269531 59.136719 83.847656 58.640625 84.109375 C 58.570312 84.144531 58.488281 84.175781 58.398438 84.199219 C 50.085938 86.425781 42.890625 89.945312 37.585938 94.378906 C 37.078125 94.808594 36.3125 94.738281 35.875 94.222656 C 35.445312 93.703125 35.507812 92.941406 36.027344 92.507812 C 41.597656 87.847656 49.113281 84.164062 57.757812 81.851562 C 58.410156 81.675781 59.082031 82.058594 59.253906 82.710938 Z M 25.21875 73.789062 C 24.808594 73.257812 24.902344 72.488281 25.425781 72.074219 C 31.175781 67.539062 38.605469 64.164062 47.492188 62.054688 C 48.144531 61.898438 48.804688 62.300781 48.953125 62.960938 C 49.09375 63.511719 48.824219 64.066406 48.335938 64.320312 C 48.246094 64.367188 48.152344 64.402344 48.054688 64.425781 C 39.515625 66.453125 32.410156 69.671875 26.933594 73.992188 C 26.40625 74.40625 25.640625 74.316406 25.21875 73.789062 Z M 52.394531 69.539062 C 52.527344 70.101562 52.257812 70.664062 51.773438 70.917969 C 51.691406 70.957031 51.597656 70.992188 51.5 71.019531 C 43 73.121094 35.929688 76.410156 30.484375 80.789062 C 29.960938 81.207031 29.195312 81.125 28.777344 80.597656 C 28.355469 80.074219 28.441406 79.304688 28.964844 78.886719 C 34.679688 74.285156 42.0625 70.84375 50.917969 68.648438 C 51.566406 68.492188 52.222656 68.890625 52.394531 69.539062 Z M 44.066406 55.457031 C 44.722656 55.308594 45.375 55.71875 45.523438 56.375 C 45.652344 56.925781 45.378906 57.476562 44.902344 57.726562 C 44.8125 57.773438 44.71875 57.804688 44.609375 57.832031 C 36.03125 59.785156 28.886719 62.933594 23.378906 67.191406 C 22.851562 67.601562 22.082031 67.507812 21.667969 66.972656 C 21.257812 66.441406 21.363281 65.671875 21.890625 65.261719 C 27.679688 60.789062 35.140625 57.488281 44.066406 55.457031 Z M 137.171875 99.796875 L 125.003906 92.03125 C 124.328125 91.601562 123.472656 91.671875 122.882812 92.144531 L 122.558594 91.9375 C 121.113281 91.015625 120.492188 89.292969 121.019531 87.664062 C 122.117188 84.261719 122.347656 80.53125 121.515625 76.785156 C 119.023438 65.59375 107.945312 58.523438 96.773438 60.996094 C 85.601562 63.46875 78.5625 74.546875 81.054688 85.738281 C 83.546875 96.933594 94.625 104.003906 105.796875 101.53125 C 109.535156 100.703125 112.808594 98.914062 115.417969 96.476562 C 116.667969 95.3125 118.488281 95.144531 119.933594 96.066406 L 120.210938 96.242188 C 119.921875 97.03125 120.207031 97.949219 120.945312 98.417969 L 133.113281 106.183594 C 134.871094 107.304688 137.222656 106.785156 138.335938 105.027344 C 139.453125 103.273438 138.929688 100.917969 137.171875 99.796875 Z M 104.730469 96.746094 C 96.195312 98.636719 87.734375 93.234375 85.828125 84.683594 C 83.925781 76.132812 89.304688 67.667969 97.839844 65.777344 C 106.375 63.890625 114.835938 69.292969 116.742188 77.84375 C 118.644531 86.394531 113.269531 94.859375 104.730469 96.746094 Z M 104.730469 96.746094 " fill-opacity="1" fill-rule="evenodd"/></g></g></g></g></svg>`;
+                    defBtn.title = 'See definition';
+                    const defTextEl = document.createElement('div');
+                    defTextEl.style.cssText = 'display:none; font-size:10px; color:var(--hub-ink); margin-top:4px; cursor:pointer; line-height:1.3;';
+                    defTextEl.textContent = definitionText;
+                    defTextEl.onclick = () => speakOneInLanguage(definitionText, 'en');
+                    defBtn.onclick = () => {
+                        const showing = defTextEl.style.display === 'block';
+                        defTextEl.style.display = showing ? 'none' : 'block';
+                        if (!showing) speakOneInLanguage(definitionText, 'en');
+                    };
+                    defBtnRow.appendChild(defBtn);
+                    row.appendChild(defBtnRow);
+                    row.appendChild(defTextEl);
+                }
+
+                list.appendChild(row);
+            });
+        }
+
+        function updateCollectedWordsPanelVisibility() {
+            const panel = document.getElementById('collected-words-panel');
+            if (!panel) return;
+            const eligible = gameStarted && (selectedLobbyMode === 'kart' || (selectedLobbyMode !== 'potato' && selectedLobbyMode !== 'coder' && selectedLobbyMode !== 'bobot'));
+            panel.style.display = eligible ? 'flex' : 'none';
+        }
 
         let player = { 
             x: 400, 
@@ -2467,7 +2668,10 @@
             'hi': 'hi-IN',
             'uk': 'uk-UA',
             'ru': 'ru-RU',
-            'macedonian': 'mk-MK'
+            'macedonian': 'mk-MK',
+            'afrikaans': 'af-ZA',
+            'serbian': 'sr-RS',
+            'croatian': 'hr-HR'
         };
 
         // Geographical bounding boxes (strict word spawning regions)
@@ -2497,7 +2701,10 @@
             'hi': { locale: 'hi-IN-u-nu-deva', prefix: "आज ", suffix: "." },
             'uk': { locale: 'uk-UA', prefix: "сьогодні ", suffix: "." },
             'ru': { locale: 'ru-RU', prefix: "сегодня ", suffix: "." },
-            'macedonian': { locale: 'mk-MK', prefix: "денес е ", suffix: "." }
+            'macedonian': { locale: 'mk-MK', prefix: "денес е ", suffix: "." },
+            'afrikaans': { locale: 'af-ZA', prefix: "vandag is dit ", suffix: "." },
+            'serbian': { locale: 'sr-RS', prefix: "данас је ", suffix: "" },
+            'croatian': { locale: 'hr-HR', prefix: "danas je ", suffix: "" }
         };
 
         // Potato Parkour's fixed vocabulary set - ported from the original draft.
@@ -2521,6 +2728,9 @@
             hi: { header: "मेरी आलू कहाँ है?", locs: { shower: "शावर में", toilet: "शौचालय पर", bed: "बिस्तर पर", wardrobe: "अलमारी पर", lamp: "दीपक पर", toybox: "खिलौनों के डिब्बे में", 'red-roof': "लाल छत पर", 'black-roof': "काली छत पर", television: "टीवी पर", lounge: "सोफे पर", fridge: "फ्रिज पर", bin: "कूड़ेदान के ऊपर", 'coffee-table': "कॉफ़ी टेबल के ऊपर", sink: "सिंक के ऊपर", computer: "कंप्यूटर पर", bookcase: "बुककेस पर", 'washing-machine': "वाशिंग मशीन पर", 'washing-basket': "कपड़े की टोकरी के ऊपर", 'ironing-board': "इस्त्री बोर्ड पर", 'blue-roof': "नीली छत पर" } },
             he: { header: "איפה תפוח האדמה שלי?", locs: { shower: "במקלחת", toilet: "על השירותים", bed: "על המיטה", wardrobe: "על הארון", lamp: "על המנורה", toybox: "בארגז הצעצועים", 'red-roof': "על הגג האדום", 'black-roof': "על הגג השחור", television: "על הטלוויזיה", lounge: "על הספה", fridge: "על המקרר", bin: "מעל הפח", 'coffee-table': "מעל שולחן הקפה", sink: "מעל הכיור", computer: "על המחשב", bookcase: "על כוננית הספרים", 'washing-machine': "על מכונת הכביסה", 'washing-basket': "מעל סל הכביסה", 'ironing-board': "על קרש הגיהוץ", 'blue-roof': "על הגג הכחול" } },
             macedonian: { header: "Каде е мојот компир?", locs: { shower: "во тушот", toilet: "на тоалетот", bed: "на креветот", wardrobe: "на плакарот", lamp: "на ламбата", toybox: "во кутијата за играчки", 'red-roof': "на црвениот покрив", 'black-roof': "на црниот покрив", television: "на телевизорот", lounge: "на троседот", fridge: "на фрижидерот", bin: "над кантата", 'coffee-table': "над клуб масичката", sink: "над мијалникот", computer: "на компјутерот", bookcase: "на полицата за книги", 'washing-machine': "на машината за перење", 'washing-basket': "над корпата за алишта", 'ironing-board': "на даската за пеглање", 'blue-roof': "на синиот покрив" } },
+            afrikaans: { header: "Waar is my aartappel?", locs: { shower: "in die stort", toilet: "op die toilet", bed: "op die bed", wardrobe: "op die hangkas", lamp: "op die lamp", toybox: "in die speelgoedkis", 'red-roof': "op die rooi dak", 'black-roof': "op die swart dak", television: "op die televisie", lounge: "op die rusbank", fridge: "op die yskas", bin: "bo-oor die asblik", 'coffee-table': "bo-oor die koffietafel", sink: "bo-oor die wasbak", computer: "op die rekenaar", bookcase: "op die boekrak", 'washing-machine': "op die wasmasjien", 'washing-basket': "bo-oor die wasmandjie", 'ironing-board': "op die strykplank", 'blue-roof': "op die blou dak" } },
+            serbian: { header: "Где је мој кромпир?", locs: { shower: "у тушу", toilet: "на тоалету", bed: "на кревету", wardrobe: "на орману", lamp: "на лампи", toybox: "у кутији за играчке", 'red-roof': "на црвеном крову", 'black-roof': "на црном крову", television: "на телевизору", lounge: "на каучу", fridge: "на фрижидеру", bin: "изнад канте за смеће", 'coffee-table': "изнад сточића", sink: "изнад судопере", computer: "на рачунару", bookcase: "на полици за књиге", 'washing-machine': "на машини за прање веша", 'washing-basket': "изнад корпе за веш", 'ironing-board': "на дасци за пеглање", 'blue-roof': "на плавом крову" } },
+            croatian: { header: "Gdje je moj krumpir?", locs: { shower: "u tušu", toilet: "na WC školjci", bed: "na krevetu", wardrobe: "na ormaru", lamp: "na lampi", toybox: "u kutiji za igračke", 'red-roof': "na crvenom krovu", 'black-roof': "na crnom krovu", television: "na televizoru", lounge: "na kauču", fridge: "na hladnjaku", bin: "iznad kante za smeće", 'coffee-table': "iznad stolića za kavu", sink: "iznad sudopera", computer: "na računalu", bookcase: "na polici za knjige", 'washing-machine': "na perilici rublja", 'washing-basket': "iznad koša za rublje", 'ironing-board': "na dasci za glačanje", 'blue-roof': "na plavom krovu" } },
             ru: { header: "Где моя картошка?", locs: { shower: "в душе", toilet: "на туалете", bed: "на кровати", wardrobe: "на шкафу", lamp: "на лампе", toybox: "в ящике с игрушками", 'red-roof': "на красной крыше", 'black-roof': "на чёрной крыше", television: "на телевизоре", lounge: "на диване", fridge: "на холодильнике", bin: "над мусорным ведром", 'coffee-table': "над журнальным столиком", sink: "над кухонной раковиной", computer: "на компьютере", bookcase: "на книжном шкафу", 'washing-machine': "на стиральной машине", 'washing-basket': "над корзиной для белья", 'ironing-board': "на гладильной доске", 'blue-roof': "на синей крыше" } },
             uk: { header: "Де моя картопля?", locs: { shower: "у душі", toilet: "на туалеті", bed: "на ліжку", wardrobe: "на шафі", lamp: "на лампі", toybox: "у скрині з іграшками", 'red-roof': "на червоному даху", 'black-roof': "на чорному даху", television: "на телевізорі", lounge: "на дивані", fridge: "на холодильнику", bin: "над смітником", 'coffee-table': "над журнальним столиком", sink: "над кухонною мийкою", computer: "на комп'ютері", bookcase: "на книжковій шафі", 'washing-machine': "на пральній машині", 'washing-basket': "над кошиком для білизни", 'ironing-board': "на прасувальній дошці", 'blue-roof': "на синьому даху" } },
             ur: { header: "میرا آلو کہاں ہے؟", locs: { shower: "شاور میں", toilet: "بیت الخلا پر", bed: "بستر پر", wardrobe: "الماری پر", lamp: "لیمپ پر", toybox: "کھلونوں کے ڈبے میں", 'red-roof': "سرخ چھت پر", 'black-roof': "کالی چھت پر", television: "ٹیلی ویژن پر", lounge: "صوفے پر", fridge: "فریج پر", bin: "کوڑے دان کے اوپر", 'coffee-table': "کافی ٹیبل کے اوپر", sink: "کچن سنک کے اوپر", computer: "کمپیوٹر پر", bookcase: "کتابوں کی الماری پر", 'washing-machine': "واشنگ مشین پر", 'washing-basket': "کپڑوں کی ٹوکری کے اوپر", 'ironing-board': "استری بورڈ پر", 'blue-roof': "نیلی چھت پر" } },
@@ -2537,7 +2747,8 @@
             'zh-hanzi': "在家里", 'zh-pinyin': "zài jiā lǐ", it: "in casa", es: "en la casa",
             ar: "في المنزل", vi: "trong nhà", hi: "घर में", he: "בבית",
             macedonian: "во куќата", ru: "в доме", uk: "у домі", ur: "گھر میں",
-            sinhala: "ගෙදර", cantonese: "喺屋企"
+            sinhala: "ගෙදර", cantonese: "喺屋企",
+            afrikaans: "in die huis", serbian: "у кући", croatian: "u kući"
         };
 
         const LOCALIZED_LOCATIONS = {
@@ -2558,7 +2769,10 @@
             'hi': { where: "कहाँ?", city: "शहर में", forest: "जंगल में", sky: "आकाश में", water: "पानी में", shop: "एक दुकान में" },
             'uk': { where: "де?", city: "в місті", forest: "в лісі", sky: "в небі", water: "у воді", shop: "в магазині" },
             'ru': { where: "где?", city: "в городе", forest: "в лесу", sky: "в небе", water: "в воде", shop: "в магазине" },
-            'macedonian': { where: "каде?", city: "во градот", forest: "во шумата", sky: "на небото", water: "во водата", shop: "во продавница" }
+            'macedonian': { where: "каде?", city: "во градот", forest: "во шумата", sky: "на небото", water: "во водата", shop: "во продавница" },
+            'afrikaans': { where: "waar?", city: "in die stad", forest: "in die bos", sky: "in die lug", water: "in die water", shop: "in die winkel" },
+            'serbian': { where: "где?", city: "у граду", forest: "у шуми", sky: "на небу", water: "у води", shop: "у продавници" },
+            'croatian': { where: "gdje?", city: "u gradu", forest: "u šumi", sky: "na nebu", water: "u vodi", shop: "u trgovini" }
         };
 
         // German specific capitalization rules for Where? HUD elements
@@ -2593,6 +2807,12 @@
             { x: 130, y: 550, w: 60, h: 12, color: '#475569' },
             { x: 530, y: 520, w: 60, h: 12, color: '#475569' }
         ];
+        // Level editor identity tags for platforms are assigned inside
+        // loadAssets() instead of here, since building roof platforms are
+        // pushed into this array dynamically during setup - tagging here
+        // would miss them entirely.
+        let levelEditorNextPlatformId = 1;
+        let levelEditorDeletedOriginalPlatforms = []; // { originalIndex, x, y, w, h, isGround } snapshots, for the export report
 
         const backgroundClouds = [
             { x: -1500, y: 120, size: 70, speed: 0.15 },
@@ -2710,31 +2930,31 @@
         ];
 
         // "Full Screen" button label, translated into the target language.
-        const FULL_SCREEN_LABELS = { fr: "Plein Écran", en: "Full Screen", de: "Vollbild", it: "Schermo Intero", es: "Pantalla Completa", ja: "全画面", 'zh-pinyin': "quánpíng", 'zh-hanzi': "全屏", cantonese: "全螢幕", he: "מסך מלא", ar: "ملء الشاشة", sinhala: "පූර්ණ තිරය", vi: "Toàn Màn Hình", ur: "فل اسکرین", hi: "पूर्ण स्क्रीन", uk: "Повний Екран", ru: "Полный Экран", macedonian: "Цел Екран" };
+        const FULL_SCREEN_LABELS = { fr: "Plein Écran", en: "Full Screen", de: "Vollbild", it: "Schermo Intero", es: "Pantalla Completa", ja: "全画面", 'zh-pinyin': "quánpíng", 'zh-hanzi': "全屏", cantonese: "全螢幕", he: "מסך מלא", ar: "ملء الشاشة", sinhala: "පූර්ණ තිරය", vi: "Toàn Màn Hình", ur: "فل اسکرین", hi: "पूर्ण स्क्रीन", uk: "Повний Екран", ru: "Полный Экран", macedonian: "Цел Екран", afrikaans: "Volskerm", serbian: "Цео Екран", croatian: "Cijeli Zaslon" };
 
         // Shop name translations, shown as a sign above each building's door.
         const SHOP_NAMES = {
-            cafe: { fr: "Café", en: "Café", de: "Café", it: "Caffè", es: "Café", ja: "カフェ", 'zh-pinyin': "kāfēi guǎn", 'zh-hanzi': "咖啡馆", cantonese: "咖啡室", he: "בית קפה", ar: "مقهى", sinhala: "කෝපි කඩේ", vi: "quán cà phê", ur: "کیفے", hi: "कैफ़े", uk: "кафе", ru: "кафе", macedonian: "кафуле" },
-            bakery: { fr: "Boulangerie", en: "Bakery", de: "Bäckerei", it: "Panetteria", es: "Panadería", ja: "パン屋", 'zh-pinyin': "miànbāo diàn", 'zh-hanzi': "面包店", cantonese: "麵包舖", he: "מאפייה", ar: "مخبز", sinhala: "පාන් කඩේ", vi: "tiệm bánh mì", ur: "بیکری", hi: "बेकरी", uk: "пекарня", ru: "пекарня", macedonian: "пекара" },
-            pharmacy: { fr: "Pharmacie", en: "Pharmacy", de: "Apotheke", it: "Farmacia", es: "Farmacia", ja: "薬局", 'zh-pinyin': "yàofáng", 'zh-hanzi': "药房", cantonese: "藥房", he: "בית מרקחת", ar: "صيدلية", sinhala: "ෆාමසිය", vi: "nhà thuốc", ur: "فارمیسی", hi: "फार्मेसी", uk: "аптека", ru: "аптека", macedonian: "аптека" },
-            supermarket: { fr: "Supermarché", en: "Supermarket", de: "Supermarkt", it: "Supermercato", es: "Supermercado", ja: "スーパー", 'zh-pinyin': "chāoshì", 'zh-hanzi': "超市", cantonese: "超級市場", he: "סופרמרקט", ar: "سوبر ماركت", sinhala: "සුපිරි වෙළඳසැල", vi: "siêu thị", ur: "سپر مارکیٹ", hi: "सुपरमार्केट", uk: "супермаркет", ru: "супермаркет", macedonian: "супермаркет" },
-            restaurant: { fr: "Restaurant", en: "Restaurant", de: "Restaurant", it: "Ristorante", es: "Restaurante", ja: "レストラン", 'zh-pinyin': "cāntīng", 'zh-hanzi': "餐厅", cantonese: "餐廳", he: "מסעדה", ar: "مطعم", sinhala: "අවන්හල", vi: "nhà hàng", ur: "ریستوران", hi: "रेस्तराँ", uk: "ресторан", ru: "ресторан", macedonian: "ресторан" },
-            hospital: { fr: "Hôpital", en: "Hospital", de: "Krankenhaus", it: "Ospedale", es: "Hospital", ja: "病院", 'zh-pinyin': "yīyuàn", 'zh-hanzi': "医院", cantonese: "醫院", he: "בית חולים", ar: "مستشفى", sinhala: "රෝහල", vi: "bệnh viện", ur: "ہسپتال", hi: "अस्पताल", uk: "лікарня", ru: "больница", macedonian: "болница" },
-            vet: { fr: "Vétérinaire", en: "Vet", de: "Tierarzt", it: "Veterinario", es: "Veterinario", ja: "動物病院", 'zh-pinyin': "chǒngwù yīyuàn", 'zh-hanzi': "宠物医院", cantonese: "獸醫", he: "וטרינר", ar: "بيطري", sinhala: "සත්ව වෛද්‍යවරයා", vi: "bác sĩ thú y", ur: "جانوروں کا ڈاکٹر", hi: "पशु चिकित्सक", uk: "ветеринар", ru: "ветеринар", macedonian: "ветеринар" },
-            bookshop: { fr: "Librairie", en: "Bookshop", de: "Buchhandlung", it: "Libreria", es: "Librería", ja: "本屋", 'zh-pinyin': "shūdiàn", 'zh-hanzi': "书店", cantonese: "書店", he: "חנות ספרים", ar: "مكتبة", sinhala: "පොත් සාප්පුව", vi: "hiệu sách", ur: "کتابوں کی دکان", hi: "किताबों की दुकान", uk: "книгарня", ru: "книжный магазин", macedonian: "книжарница" }
+            cafe: { fr: "Café", en: "Café", de: "Café", it: "Caffè", es: "Café", ja: "カフェ", 'zh-pinyin': "kāfēi guǎn", 'zh-hanzi': "咖啡馆", cantonese: "咖啡室", he: "בית קפה", ar: "مقهى", sinhala: "කෝපි කඩේ", vi: "quán cà phê", ur: "کیفے", hi: "कैफ़े", uk: "кафе", ru: "кафе", macedonian: "кафуле", afrikaans: "Kafee", serbian: "кафић", croatian: "kafić" },
+            bakery: { fr: "Boulangerie", en: "Bakery", de: "Bäckerei", it: "Panetteria", es: "Panadería", ja: "パン屋", 'zh-pinyin': "miànbāo diàn", 'zh-hanzi': "面包店", cantonese: "麵包舖", he: "מאפייה", ar: "مخبز", sinhala: "පාන් කඩේ", vi: "tiệm bánh mì", ur: "بیکری", hi: "बेकरी", uk: "пекарня", ru: "пекарня", macedonian: "пекара", afrikaans: "Bakkery", serbian: "пекара", croatian: "pekarnica" },
+            pharmacy: { fr: "Pharmacie", en: "Pharmacy", de: "Apotheke", it: "Farmacia", es: "Farmacia", ja: "薬局", 'zh-pinyin': "yàofáng", 'zh-hanzi': "药房", cantonese: "藥房", he: "בית מרקחת", ar: "صيدلية", sinhala: "ෆාමසිය", vi: "nhà thuốc", ur: "فارمیسی", hi: "फार्मेसी", uk: "аптека", ru: "аптека", macedonian: "аптека", afrikaans: "Apteek", serbian: "апотека", croatian: "ljekarna" },
+            supermarket: { fr: "Supermarché", en: "Supermarket", de: "Supermarkt", it: "Supermercato", es: "Supermercado", ja: "スーパー", 'zh-pinyin': "chāoshì", 'zh-hanzi': "超市", cantonese: "超級市場", he: "סופרמרקט", ar: "سوبر ماركت", sinhala: "සුපිරි වෙළඳසැල", vi: "siêu thị", ur: "سپر مارکیٹ", hi: "सुपरमार्केट", uk: "супермаркет", ru: "супермаркет", macedonian: "супермаркет", afrikaans: "Supermark", serbian: "супермаркет", croatian: "supermarket" },
+            restaurant: { fr: "Restaurant", en: "Restaurant", de: "Restaurant", it: "Ristorante", es: "Restaurante", ja: "レストラン", 'zh-pinyin': "cāntīng", 'zh-hanzi': "餐厅", cantonese: "餐廳", he: "מסעדה", ar: "مطعم", sinhala: "අවන්හල", vi: "nhà hàng", ur: "ریستوران", hi: "रेस्तराँ", uk: "ресторан", ru: "ресторан", macedonian: "ресторан", afrikaans: "Restaurant", serbian: "ресторан", croatian: "restoran" },
+            hospital: { fr: "Hôpital", en: "Hospital", de: "Krankenhaus", it: "Ospedale", es: "Hospital", ja: "病院", 'zh-pinyin': "yīyuàn", 'zh-hanzi': "医院", cantonese: "醫院", he: "בית חולים", ar: "مستشفى", sinhala: "රෝහල", vi: "bệnh viện", ur: "ہسپتال", hi: "अस्पताल", uk: "лікарня", ru: "больница", macedonian: "болница", afrikaans: "Hospitaal", serbian: "болница", croatian: "bolnica" },
+            vet: { fr: "Vétérinaire", en: "Vet", de: "Tierarzt", it: "Veterinario", es: "Veterinario", ja: "動物病院", 'zh-pinyin': "chǒngwù yīyuàn", 'zh-hanzi': "宠物医院", cantonese: "獸醫", he: "וטרינר", ar: "بيطري", sinhala: "සත්ව වෛද්‍යවරයා", vi: "bác sĩ thú y", ur: "جانوروں کا ڈاکٹر", hi: "पशु चिकित्सक", uk: "ветеринар", ru: "ветеринар", macedonian: "ветеринар", afrikaans: "Veearts", serbian: "ветеринар", croatian: "veterinar" },
+            bookshop: { fr: "Librairie", en: "Bookshop", de: "Buchhandlung", it: "Libreria", es: "Librería", ja: "本屋", 'zh-pinyin': "shūdiàn", 'zh-hanzi': "书店", cantonese: "書店", he: "חנות ספרים", ar: "مكتبة", sinhala: "පොත් සාප්පුව", vi: "hiệu sách", ur: "کتابوں کی دکان", hi: "किताबों की दुकान", uk: "книгарня", ru: "книжный магазин", macedonian: "книжарница", afrikaans: "Boekwinkel", serbian: "књижара", croatian: "knjižara" }
         };
 
         // Specific "at the [shop]" phrasing for the Where? hint, so a word inside a building
         // names that exact shop rather than a vague "in a shop".
         const SHOP_LOCATION_PHRASES = {
-            cafe: { fr: "au café", en: "at the café", de: "im Café", it: "al caffè", es: "en el café", ja: "カフェで", 'zh-pinyin': "zài kāfēi guǎn", 'zh-hanzi': "在咖啡馆", cantonese: "喺咖啡室", he: "בבית קפה", ar: "في مقهى", sinhala: "කෝපි කඩේදී", vi: "ở quán cà phê", ur: "کیفے میں", hi: "कैफ़े में", uk: "у кафе", ru: "в кафе", macedonian: "во кафуле" },
-            bakery: { fr: "à la boulangerie", en: "at the bakery", de: "in der Bäckerei", it: "alla panetteria", es: "en la panadería", ja: "パン屋で", 'zh-pinyin': "zài miànbāo diàn", 'zh-hanzi': "在面包店", cantonese: "喺麵包舖", he: "במאפייה", ar: "في مخبز", sinhala: "පාන් කඩේදී", vi: "ở tiệm bánh mì", ur: "بیکری میں", hi: "बेकरी में", uk: "у пекарні", ru: "в пекарне", macedonian: "во пекара" },
-            pharmacy: { fr: "à la pharmacie", en: "at the pharmacy", de: "in der Apotheke", it: "alla farmacia", es: "en la farmacia", ja: "薬局で", 'zh-pinyin': "zài yàofáng", 'zh-hanzi': "在药房", cantonese: "喺藥房", he: "בבית מרקחת", ar: "في صيدلية", sinhala: "ෆාමසියේදී", vi: "ở nhà thuốc", ur: "فارمیسی میں", hi: "फार्मेसी में", uk: "в аптеці", ru: "в аптеке", macedonian: "во аптека" },
-            supermarket: { fr: "au supermarché", en: "at the supermarket", de: "im Supermarkt", it: "al supermercato", es: "en el supermercado", ja: "スーパーで", 'zh-pinyin': "zài chāoshì", 'zh-hanzi': "在超市", cantonese: "喺超級市場", he: "בסופרמרקט", ar: "في سوبر ماركت", sinhala: "සුපිරි වෙළඳසැලේදී", vi: "ở siêu thị", ur: "سپر مارکیٹ میں", hi: "सुपरमार्केट में", uk: "в супермаркеті", ru: "в супермаркете", macedonian: "во супермаркет" },
-            restaurant: { fr: "au restaurant", en: "at the restaurant", de: "im Restaurant", it: "al ristorante", es: "en el restaurante", ja: "レストランで", 'zh-pinyin': "zài cāntīng", 'zh-hanzi': "在餐厅", cantonese: "喺餐廳", he: "במסעדה", ar: "في مطعم", sinhala: "අවන්හලේදී", vi: "ở nhà hàng", ur: "ریستوران میں", hi: "रेस्तराँ में", uk: "в ресторані", ru: "в ресторане", macedonian: "во ресторан" },
-            hospital: { fr: "à l'hôpital", en: "at the hospital", de: "im Krankenhaus", it: "all'ospedale", es: "en el hospital", ja: "病院で", 'zh-pinyin': "zài yīyuàn", 'zh-hanzi': "在医院", cantonese: "喺醫院", he: "בבית חולים", ar: "في مستشفى", sinhala: "රෝහලේදී", vi: "ở bệnh viện", ur: "ہسپتال میں", hi: "अस्पताल में", uk: "в лікарні", ru: "в больнице", macedonian: "во болница" },
-            vet: { fr: "chez le vétérinaire", en: "at the vet", de: "beim Tierarzt", it: "dal veterinario", es: "en el veterinario", ja: "動物病院で", 'zh-pinyin': "zài chǒngwù yīyuàn", 'zh-hanzi': "在宠物医院", cantonese: "喺獸醫", he: "אצל הווטרינר", ar: "عند الطبيب البيطري", sinhala: "සත්ව වෛද්‍යවරයා ළඟ", vi: "ở chỗ bác sĩ thú y", ur: "جانوروں کے ڈاکٹر کے پاس", hi: "पशु चिकित्सक के पास", uk: "у ветеринара", ru: "у ветеринара", macedonian: "кај ветеринар" },
-            bookshop: { fr: "à la librairie", en: "at the bookshop", de: "in der Buchhandlung", it: "alla libreria", es: "en la librería", ja: "本屋で", 'zh-pinyin': "zài shūdiàn", 'zh-hanzi': "在书店", cantonese: "喺書店", he: "בחנות ספרים", ar: "في مكتبة", sinhala: "පොත් සාප්පුවේදී", vi: "ở hiệu sách", ur: "کتابوں کی دکان میں", hi: "किताबों की दुकान में", uk: "в книгарні", ru: "в книжном магазине", macedonian: "во книжарница" }
+            cafe: { fr: "au café", en: "at the café", de: "im Café", it: "al caffè", es: "en el café", ja: "カフェで", 'zh-pinyin': "zài kāfēi guǎn", 'zh-hanzi': "在咖啡馆", cantonese: "喺咖啡室", he: "בבית קפה", ar: "في مقهى", sinhala: "කෝපි කඩේදී", vi: "ở quán cà phê", ur: "کیفے میں", hi: "कैफ़े में", uk: "у кафе", ru: "в кафе", macedonian: "во кафуле", afrikaans: "by die kafee", serbian: "у кафићу", croatian: "u kafiću" },
+            bakery: { fr: "à la boulangerie", en: "at the bakery", de: "in der Bäckerei", it: "alla panetteria", es: "en la panadería", ja: "パン屋で", 'zh-pinyin': "zài miànbāo diàn", 'zh-hanzi': "在面包店", cantonese: "喺麵包舖", he: "במאפייה", ar: "في مخبز", sinhala: "පාන් කඩේදී", vi: "ở tiệm bánh mì", ur: "بیکری میں", hi: "बेकरी में", uk: "у пекарні", ru: "в пекарне", macedonian: "во пекара", afrikaans: "by die bakkery", serbian: "у пекари", croatian: "u pekarnici" },
+            pharmacy: { fr: "à la pharmacie", en: "at the pharmacy", de: "in der Apotheke", it: "alla farmacia", es: "en la farmacia", ja: "薬局で", 'zh-pinyin': "zài yàofáng", 'zh-hanzi': "在药房", cantonese: "喺藥房", he: "בבית מרקחת", ar: "في صيدلية", sinhala: "ෆාමසියේදී", vi: "ở nhà thuốc", ur: "فارمیسی میں", hi: "फार्मेसी में", uk: "в аптеці", ru: "в аптеке", macedonian: "во аптека", afrikaans: "by die apteek", serbian: "у апотеци", croatian: "u ljekarni" },
+            supermarket: { fr: "au supermarché", en: "at the supermarket", de: "im Supermarkt", it: "al supermercato", es: "en el supermercado", ja: "スーパーで", 'zh-pinyin': "zài chāoshì", 'zh-hanzi': "在超市", cantonese: "喺超級市場", he: "בסופרמרקט", ar: "في سوبر ماركت", sinhala: "සුපිරි වෙළඳසැලේදී", vi: "ở siêu thị", ur: "سپر مارکیٹ میں", hi: "सुपरमार्केट में", uk: "в супермаркеті", ru: "в супермаркете", macedonian: "во супермаркет", afrikaans: "by die supermark", serbian: "у супермаркету", croatian: "u supermarketu" },
+            restaurant: { fr: "au restaurant", en: "at the restaurant", de: "im Restaurant", it: "al ristorante", es: "en el restaurante", ja: "レストランで", 'zh-pinyin': "zài cāntīng", 'zh-hanzi': "在餐厅", cantonese: "喺餐廳", he: "במסעדה", ar: "في مطعم", sinhala: "අවන්හලේදී", vi: "ở nhà hàng", ur: "ریستوران میں", hi: "रेस्तराँ में", uk: "в ресторані", ru: "в ресторане", macedonian: "во ресторан", afrikaans: "by die restaurant", serbian: "у ресторану", croatian: "u restoranu" },
+            hospital: { fr: "à l'hôpital", en: "at the hospital", de: "im Krankenhaus", it: "all'ospedale", es: "en el hospital", ja: "病院で", 'zh-pinyin': "zài yīyuàn", 'zh-hanzi': "在医院", cantonese: "喺醫院", he: "בבית חולים", ar: "في مستشفى", sinhala: "රෝහලේදී", vi: "ở bệnh viện", ur: "ہسپتال میں", hi: "अस्पताल में", uk: "в лікарні", ru: "в больнице", macedonian: "во болница", afrikaans: "by die hospitaal", serbian: "у болници", croatian: "u bolnici" },
+            vet: { fr: "chez le vétérinaire", en: "at the vet", de: "beim Tierarzt", it: "dal veterinario", es: "en el veterinario", ja: "動物病院で", 'zh-pinyin': "zài chǒngwù yīyuàn", 'zh-hanzi': "在宠物医院", cantonese: "喺獸醫", he: "אצל הווטרינר", ar: "عند الطبيب البيطري", sinhala: "සත්ව වෛද්‍යවරයා ළඟ", vi: "ở chỗ bác sĩ thú y", ur: "جانوروں کے ڈاکٹر کے پاس", hi: "पशु चिकित्सक के पास", uk: "у ветеринара", ru: "у ветеринара", macedonian: "кај ветеринар", afrikaans: "by die veearts", serbian: "код ветеринара", croatian: "kod veterinara" },
+            bookshop: { fr: "à la librairie", en: "at the bookshop", de: "in der Buchhandlung", it: "alla libreria", es: "en la librería", ja: "本屋で", 'zh-pinyin': "zài shūdiàn", 'zh-hanzi': "在书店", cantonese: "喺書店", he: "בחנות ספרים", ar: "في مكتبة", sinhala: "පොත් සාප්පුවේදී", vi: "ở hiệu sách", ur: "کتابوں کی دکان میں", hi: "किताबों की दुकान में", uk: "в книгарні", ru: "в книжном магазине", macedonian: "во книжарница", afrikaans: "by die boekwinkel", serbian: "у књижари", croatian: "u knjižari" }
         };
 
 
@@ -3338,14 +3558,18 @@
             hi: ['एक','दो','तीन','चार','पांच','छह','सात','आठ','नौ','दस'],
             uk: ["один","два","три","чотири","п'ять","шість","сім","вісім","дев'ять","десять"],
             ru: ['один','два','три','четыре','пять','шесть','семь','восемь','девять','десять'],
-            macedonian: ['еден','два','три','четири','пет','шест','седум','осум','девет','десет']
+            macedonian: ['еден','два','три','четири','пет','шест','седум','осум','девет','десет'],
+            afrikaans: ['een','twee','drie','vier','vyf','ses','sewe','agt','nege','tien'],
+            serbian: ['један','два','три','четири','пет','шест','седам','осам','девет','десет'],
+            croatian: ['jedan','dva','tri','četiri','pet','šest','sedam','osam','devet','deset']
         };
 
         const WB_SILENCE_WORD = {
             fr: 'Silence', en: 'Silence', es: 'Silencio', de: 'Stille', it: 'Silenzio',
             ja: '静かに', 'zh-pinyin': 'Ānjìng', 'zh-hanzi': '安静', cantonese: '安靜',
             he: 'שקט', ar: 'صمت', sinhala: 'නිශ්ශබ්දතාවය', vi: 'Im lặng', ur: 'خاموشی',
-            hi: 'मौन', uk: 'Тиша', ru: 'Тишина', macedonian: 'Тишина'
+            hi: 'मौन', uk: 'Тиша', ru: 'Тишина', macedonian: 'Тишина',
+            afrikaans: 'Stilte', serbian: 'Тишина', croatian: 'Tišina'
         };
 
         let wbDB = null;
@@ -5204,6 +5428,12 @@
                 videoUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTINTHEBIGBLUE_DYNAMICBGLOOP.mp4',
                 staticUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTANDTHEBIGBLUE_STATIC.jpg',
                 audioUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTINTHEBIGBLUE_audio.mp3'
+            },
+            'bobot-tea-time': {
+                label: 'Bobot Tea Time',
+                videoUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTTEATIME_BGDYNAMIC.mp4',
+                staticUrl: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/88972e26c7e5e62664c177f0435bd95d4258f738/whiteboardbgs/BOBOTTEATIME_STATIC.jpg',
+                audioUrl: 'https://github.com/monsieurparkes/parkour-game/raw/refs/heads/main/whiteboardbgs/BOBOTTEATIME_audio.mp3'
             }
         };
 
@@ -6118,6 +6348,13 @@
                 });
             });
 
+            // Tag every platform (including the roofs just added above) with
+            // a stable identity before any editing can happen, so the level
+            // editor can later report exactly which original platform (by
+            // its position in this source array) was moved or deleted.
+            platforms.forEach((p, i) => { p._originalIndex = i; p._isNew = false; p._editorId = i + 1; });
+            levelEditorNextPlatformId = platforms.length + 1;
+
             const langSelect = document.getElementById('global-language-select');
             const landingToolsRow = document.getElementById('landing-tools-row');
             const savedLanguage = localStorage.getItem('polhSelectedLanguage');
@@ -6326,6 +6563,12 @@
                 showLandingStep('settings');
             };
             document.getElementById('submode-return-btn').onclick = () => showLandingStep('wheel');
+            document.getElementById('kart-submode-confirm-btn').onclick = () => {
+                selectMode('kart');
+                applyKartSubmodeToSettingsPanel();
+                showLandingStep('settings');
+            };
+            document.getElementById('kart-submode-return-btn').onclick = () => showLandingStep('wheel');
             document.getElementById('settings-confirm-btn').onclick = () => {
                 if (selectedLobbyMode === 'kart' || selectedLobbyMode === 'bobot') {
                     launchSelectedActivity();
@@ -6447,6 +6690,17 @@
                 controlsHelpOverlay.classList.remove('flex');
             };
 
+            const kartControlsHelpBtn = document.getElementById('kart-controls-help-btn');
+            const kartControlsHelpOverlay = document.getElementById('kart-controls-help-overlay');
+            kartControlsHelpBtn.onclick = () => {
+                kartControlsHelpOverlay.classList.remove('hidden');
+                kartControlsHelpOverlay.classList.add('flex');
+            };
+            document.getElementById('kart-controls-help-close-btn').onclick = () => {
+                kartControlsHelpOverlay.classList.add('hidden');
+                kartControlsHelpOverlay.classList.remove('flex');
+            };
+
             const settingsCogBtn = document.getElementById('settings-cog-btn');
             const settingsPanel = document.getElementById('settings-panel');
             settingsCogBtn.onclick = (e) => {
@@ -6477,6 +6731,10 @@
                 e.stopPropagation();
                 openDebugPasswordPrompt();
             };
+            document.getElementById('kart-settings-debug-btn').onclick = (e) => {
+                e.stopPropagation();
+                openDebugPasswordPrompt();
+            };
             document.getElementById('debug-password-cancel').onclick = closeDebugPasswordPrompt;
             document.getElementById('debug-password-submit').onclick = submitDebugPassword;
             document.getElementById('debug-password-input').addEventListener('keydown', (e) => {
@@ -6484,6 +6742,13 @@
             });
 
             document.getElementById('level-editor-toggle-btn').onclick = enterLevelEditor;
+            document.getElementById('collected-words-collapse-btn').onclick = () => {
+                const list = document.getElementById('collected-words-list');
+                const btn = document.getElementById('collected-words-collapse-btn');
+                const collapsed = list.style.display === 'none';
+                list.style.display = collapsed ? 'flex' : 'none';
+                btn.textContent = collapsed ? '➖' : '➕';
+            };
             document.getElementById('level-editor-exit-btn').onclick = exitLevelEditor;
             document.getElementById('level-editor-add-btn').onclick = () => {
                 const url = document.getElementById('level-editor-url-input').value.trim();
@@ -6497,7 +6762,84 @@
             document.getElementById('level-editor-forward-btn').onclick = () => levelEditorReorder('forward');
             document.getElementById('level-editor-backward-btn').onclick = () => levelEditorReorder('backward');
             document.getElementById('level-editor-delete-btn').onclick = levelEditorDeleteSelected;
+            document.getElementById('level-editor-add-collision-btn').onclick = () => {
+                levelEditorAddCollisionMode = !levelEditorAddCollisionMode;
+                document.getElementById('level-editor-add-collision-btn').classList.toggle('wb-mode-active', levelEditorAddCollisionMode);
+                if (levelEditorAddCollisionMode) { levelEditorSelect(null); levelEditorSelectPlatform(null); }
+            };
+            document.getElementById('level-editor-platform-ground').addEventListener('change', (e) => {
+                levelEditorSetPlatformGround(e.target.checked);
+            });
+            document.getElementById('level-editor-platform-delete-btn').onclick = levelEditorDeletePlatform;
             document.getElementById('level-editor-export-btn').onclick = levelEditorExportReport;
+
+            document.getElementById('kart-level-editor-toggle-btn').onclick = enterKartLevelEditor;
+            document.getElementById('kart-level-editor-exit-btn').onclick = exitKartLevelEditor;
+            document.getElementById('kart-level-editor-add-btn').onclick = () => {
+                const url = document.getElementById('kart-level-editor-url-input').value.trim();
+                if (url) kartLevelEditorAddImage(url);
+            };
+            document.getElementById('kart-level-editor-url-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('kart-level-editor-add-btn').click();
+            });
+            document.getElementById('kart-level-editor-wall').addEventListener('change', (e) => {
+                kartLevelEditorSetWall(e.target.checked);
+            });
+            document.getElementById('kart-level-editor-delete-btn').onclick = kartLevelEditorDeleteSelected;
+            document.getElementById('kart-level-editor-export-btn').onclick = kartLevelEditorExportReport;
+
+            // Canvas interactions for the Kart track editor - drag empty
+            // space to pan, scroll wheel to zoom, drag an image to move it,
+            // drag its corner handle to resize.
+            canvas.addEventListener('mousedown', (e) => {
+                if (!kartLevelEditorActive) return;
+                const rect = canvas.getBoundingClientRect();
+                const screenX = e.clientX - rect.left, screenY = e.clientY - rect.top;
+                const world = kartLevelEditorScreenToWorld(screenX, screenY);
+                const selected = kartLevelEditorImages.find(i => i.id === kartLevelEditorSelectedId);
+
+                if (selected && kartLevelEditorIsOnResizeHandle(selected, screenX, screenY)) {
+                    kartLevelEditorDrag = { type: 'resize', id: selected.id, startWorldX: world.x, startWorldY: world.y, originW: selected.width, originH: selected.height };
+                    return;
+                }
+                const hit = kartLevelEditorFindImageAt(world.x, world.y);
+                if (hit) {
+                    kartLevelEditorSelect(hit.id);
+                    kartLevelEditorDrag = { type: 'move', id: hit.id, startWorldX: world.x, startWorldY: world.y, originX: hit.x, originY: hit.y };
+                } else {
+                    kartLevelEditorSelect(null);
+                    kartLevelEditorDrag = { type: 'pan', startScreenX: screenX, startScreenY: screenY, originCamX: kartLevelEditorCamX, originCamY: kartLevelEditorCamY };
+                }
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (!kartLevelEditorActive || !kartLevelEditorDrag) return;
+                const rect = canvas.getBoundingClientRect();
+                const screenX = e.clientX - rect.left, screenY = e.clientY - rect.top;
+
+                if (kartLevelEditorDrag.type === 'pan') {
+                    kartLevelEditorCamX = kartLevelEditorDrag.originCamX - (screenX - kartLevelEditorDrag.startScreenX) / kartLevelEditorZoom;
+                    kartLevelEditorCamY = kartLevelEditorDrag.originCamY - (screenY - kartLevelEditorDrag.startScreenY) / kartLevelEditorZoom;
+                    return;
+                }
+                const world = kartLevelEditorScreenToWorld(screenX, screenY);
+                const img = kartLevelEditorImages.find(i => i.id === kartLevelEditorDrag.id);
+                if (!img) return;
+                if (kartLevelEditorDrag.type === 'move') {
+                    img.x = kartLevelEditorDrag.originX + (world.x - kartLevelEditorDrag.startWorldX);
+                    img.y = kartLevelEditorDrag.originY + (world.y - kartLevelEditorDrag.startWorldY);
+                } else if (kartLevelEditorDrag.type === 'resize') {
+                    const scaleFactor = Math.max(0.1, (kartLevelEditorDrag.originW + (world.x - kartLevelEditorDrag.startWorldX)) / kartLevelEditorDrag.originW);
+                    img.width = Math.max(16, kartLevelEditorDrag.originW * scaleFactor);
+                    img.height = Math.max(16, kartLevelEditorDrag.originH * scaleFactor);
+                }
+            });
+            document.addEventListener('mouseup', () => { kartLevelEditorDrag = null; });
+            canvas.addEventListener('wheel', (e) => {
+                if (!kartLevelEditorActive) return;
+                e.preventDefault();
+                const zoomFactor = e.deltaY < 0 ? 1.1 : 1 / 1.1;
+                kartLevelEditorZoom = Math.max(0.15, Math.min(4, kartLevelEditorZoom * zoomFactor));
+            }, { passive: false });
 
             // Canvas mouse interactions for the level editor - dragging to
             // move, dragging the corner handle to resize (aspect-ratio
@@ -6508,9 +6850,24 @@
                 const rect = canvas.getBoundingClientRect();
                 const screenX = e.clientX - rect.left, screenY = e.clientY - rect.top;
                 const world = levelEditorScreenToWorld(screenX, screenY);
-                const selected = levelEditorImages.find(i => i.id === levelEditorSelectedId);
 
-                if (selected && levelEditorIsOnResizeHandle(selected, world.x, world.y)) {
+                if (levelEditorAddCollisionMode) {
+                    levelEditorNewBoxDraft = { startX: world.x, startY: world.y, x: world.x, y: world.y, w: 0, h: 0 };
+                    return;
+                }
+
+                // Collision boxes are drawn on top of everything while editing,
+                // so they should be hit-tested first too, matching what's
+                // actually visible on top.
+                const platHit = levelEditorFindPlatformAt(world.x, world.y);
+                if (platHit) {
+                    levelEditorSelectPlatform(platHit._editorId);
+                    levelEditorDrag = { type: 'move-platform', id: platHit._editorId, startWorldX: world.x, startWorldY: world.y, originX: platHit.x, originY: platHit.y };
+                    return;
+                }
+
+                const selected = levelEditorImages.find(i => i.id === levelEditorSelectedId);
+                if (levelEditorSelectedType === 'image' && selected && levelEditorIsOnResizeHandle(selected, world.x, world.y)) {
                     levelEditorDrag = { type: 'resize', id: selected.id, startWorldX: world.x, startWorldY: world.y, originW: selected.width, originH: selected.height };
                     return;
                 }
@@ -6520,13 +6877,33 @@
                     levelEditorDrag = { type: 'move', id: hit.id, startWorldX: world.x, startWorldY: world.y, originX: hit.x, originY: hit.y };
                 } else {
                     levelEditorSelect(null);
+                    levelEditorSelectPlatform(null);
                 }
             });
             document.addEventListener('mousemove', (e) => {
-                if (!levelEditorActive || !levelEditorDrag) return;
+                if (!levelEditorActive) return;
                 const rect = canvas.getBoundingClientRect();
                 const screenX = e.clientX - rect.left, screenY = e.clientY - rect.top;
                 const world = levelEditorScreenToWorld(screenX, screenY);
+
+                if (levelEditorNewBoxDraft) {
+                    const d = levelEditorNewBoxDraft;
+                    d.x = Math.min(d.startX, world.x);
+                    d.y = Math.min(d.startY, world.y);
+                    d.w = Math.abs(world.x - d.startX);
+                    d.h = Math.abs(world.y - d.startY);
+                    return;
+                }
+                if (!levelEditorDrag) return;
+
+                if (levelEditorDrag.type === 'move-platform') {
+                    const plat = platforms.find(p => p._editorId === levelEditorDrag.id);
+                    if (plat) {
+                        plat.x = levelEditorDrag.originX + (world.x - levelEditorDrag.startWorldX);
+                        plat.y = levelEditorDrag.originY + (world.y - levelEditorDrag.startWorldY);
+                    }
+                    return;
+                }
                 const img = levelEditorImages.find(i => i.id === levelEditorDrag.id);
                 if (!img) return;
                 if (levelEditorDrag.type === 'move') {
@@ -6538,7 +6915,20 @@
                     img.height = Math.max(16, levelEditorDrag.originH * scaleFactor);
                 }
             });
-            document.addEventListener('mouseup', () => { levelEditorDrag = null; });
+            document.addEventListener('mouseup', () => {
+                if (levelEditorNewBoxDraft) {
+                    const d = levelEditorNewBoxDraft;
+                    if (d.w > 8 && d.h > 8) {
+                        const newPlat = { x: d.x, y: d.y, w: d.w, h: d.h, invisible: true, isGround: false, _isNew: true, _editorId: levelEditorNextPlatformId++ };
+                        platforms.push(newPlat);
+                        levelEditorSelectPlatform(newPlat._editorId);
+                    }
+                    levelEditorNewBoxDraft = null;
+                    levelEditorAddCollisionMode = false;
+                    document.getElementById('level-editor-add-collision-btn').classList.remove('wb-mode-active');
+                }
+                levelEditorDrag = null;
+            });
 
             const kartSettingsCogBtn = document.getElementById('kart-settings-cog-btn');
             const kartSettingsPanel = document.getElementById('kart-settings-panel');
@@ -6649,7 +7039,15 @@
             setupBirds();
             setupFish();
 
-            window.addEventListener('resize', resize);
+            window.addEventListener('resize', () => {
+                resize();
+                const instructionEl = document.getElementById('instruction-text');
+                const locationTextEl = document.getElementById('location-text');
+                const kartTargetEl = document.getElementById('kart-target-text');
+                if (instructionEl) fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
+                if (locationTextEl) fitTextToBox(locationTextEl, getMaxTargetBoxTextWidth());
+                if (kartTargetEl) fitTextToBox(kartTargetEl, getMaxKartTargetTextWidth());
+            });
             resize();
         }
 
@@ -6664,6 +7062,8 @@
         // inside a sandboxed iframe (e.g. when embedded on a Squarespace page).
         function openDebugPasswordPrompt() {
             document.getElementById('settings-panel').classList.add('hidden');
+            const kartPanel = document.getElementById('kart-settings-panel');
+            if (kartPanel) kartPanel.classList.add('hidden');
             document.getElementById('debug-password-input').value = '';
             document.getElementById('debug-password-error').classList.add('hidden');
             const overlay = document.getElementById('debug-password-overlay');
@@ -6695,6 +7095,10 @@
             const eligible = debugMode && gameStarted && selectedLobbyMode !== 'kart' && selectedLobbyMode !== 'potato' && selectedLobbyMode !== 'coder' && selectedLobbyMode !== 'bobot';
             document.getElementById('level-editor-toggle-btn').style.display = (eligible && !levelEditorActive) ? 'inline-flex' : 'none';
             if (!eligible && levelEditorActive) exitLevelEditor();
+
+            const kartEligible = debugMode && gameStarted && selectedLobbyMode === 'kart';
+            document.getElementById('kart-level-editor-toggle-btn').style.display = (kartEligible && !kartLevelEditorActive) ? 'inline-flex' : 'none';
+            if (!kartEligible && kartLevelEditorActive) exitKartLevelEditor();
         }
 
         function selectMode(mode) {
@@ -6749,6 +7153,7 @@
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
+        let pendingKartSubmode = 'picture'; // defaults to Picture Parkour Kart, per design
 
         const HUB_CHARACTERS = [
             { id: 'parkour', label: 'P4RK-0UR UNIT' },
@@ -6757,7 +7162,7 @@
         let playerIdleAnimTimer = null;
 
         function showLandingStep(step) {
-            ['wheel', 'submode', 'player', 'settings'].forEach(s => {
+            ['wheel', 'submode', 'kart-submode', 'player', 'settings'].forEach(s => {
                 const el = document.getElementById('landing-step-' + s);
                 if (el) el.style.display = (s === step) ? '' : 'none';
             });
@@ -6833,8 +7238,7 @@
                 selectMode('potato');
                 showLandingStep('settings');
             } else if (toolId === 'kart') {
-                selectMode('kart');
-                showLandingStep('settings');
+                showLandingStep('kart-submode');
             } else if (toolId === 'bobot') {
                 selectMode('bobot');
                 showLandingStep('settings');
@@ -6845,6 +7249,24 @@
             pendingParkourSubmode = mode;
             document.getElementById('submode-picture-card').classList.toggle('selected', mode === 'picture');
             document.getElementById('submode-sentence-card').classList.toggle('selected', mode === 'quest');
+        }
+
+        function chooseKartSubmode(mode) {
+            pendingKartSubmode = mode;
+            document.getElementById('kart-submode-picture-card').classList.toggle('selected', mode === 'picture');
+            document.getElementById('kart-submode-sentence-card').classList.toggle('selected', mode === 'sentence');
+        }
+
+        function applyKartSubmodeToSettingsPanel() {
+            const pictureSection = document.getElementById('kart-picture-only-section');
+            const questSection = document.getElementById('kart-quest-only-section');
+            const hint = document.getElementById('kart-settings-hint');
+            const isPicture = pendingKartSubmode === 'picture';
+            if (pictureSection) pictureSection.style.display = isPicture ? 'block' : 'none';
+            if (questSection) questSection.style.display = isPicture ? 'none' : 'block';
+            if (hint) hint.textContent = isPicture
+                ? '🏎️ Race the track and grab the correct picture among the four on offer.'
+                : '🏎️ Race the track and grab the correct word among the four on offer.';
         }
 
         function renderPlayerSelect() {
@@ -6968,7 +7390,10 @@
             hi: (w) => `उफ़! नहीं। यह ${w} है।`,
             uk: (w) => `Ой! Ні. Це ${w}.`,
             ru: (w) => `Ой! Нет. Это ${w}.`,
-            macedonian: (w) => `Ах! Не. Тоа е ${w}.`
+            macedonian: (w) => `Ах! Не. Тоа е ${w}.`,
+            afrikaans: (w) => `Oeps! Nee. Dit is ${w}.`,
+            serbian: (w) => `Уф! Не. То је ${w}.`,
+            croatian: (w) => `Ups! Ne. To je ${w}.`
         };
 
         function getWrongAnswerFeedback(wrongWord) {
@@ -7230,22 +7655,27 @@
         }
 
         function generateKartRace() {
-            const presetWords = [];
-            presetSelectedFiles.forEach(preset => {
-                const word = (preset.translations && (preset.translations[selectedLanguage] || preset.translations.en)) || preset.file.replace(/\.[^.]+$/, '');
-                presetWords.push(word);
-                if (!pictureImageMap[word.toLowerCase()]) {
-                    const img = new Image();
-                    img.src = PRESET_IMAGE_BASE_URL + encodeURIComponent(preset.folder) + '/' + encodeURIComponent(preset.file);
-                    const isPng = /\.png$/i.test(preset.file);
-                    pictureImageMap[word.toLowerCase()] = { img, isPng };
-                }
-            });
+            let kartWords = [];
 
-            const rawInput = document.getElementById('kart-vocab-input').value;
-            const typedWords = rawInput.split(',').map(w => w.trim()).filter(w => w.length > 0);
+            if (pendingKartSubmode === 'picture') {
+                const presetWords = [];
+                presetSelectedFiles.forEach(preset => {
+                    const word = (preset.translations && (preset.translations[selectedLanguage] || preset.translations.en)) || preset.file.replace(/\.[^.]+$/, '');
+                    presetWords.push(word);
+                    if (!pictureImageMap[word.toLowerCase()]) {
+                        const img = new Image();
+                        img.src = PRESET_IMAGE_BASE_URL + encodeURIComponent(preset.folder) + '/' + encodeURIComponent(preset.file);
+                        const isPng = /\.png$/i.test(preset.file);
+                        pictureImageMap[word.toLowerCase()] = { img, isPng };
+                    }
+                });
+                kartWords = pictureFileNames.concat(presetWords);
+            } else {
+                const rawInput = document.getElementById('kart-vocab-input').value;
+                kartWords = rawInput.split(',').map(w => w.trim()).filter(w => w.length > 0);
+            }
 
-            kartVocabularyList = pictureFileNames.concat(presetWords).concat(typedWords).slice(0, KART_ITEM_SLOTS.length);
+            kartVocabularyList = kartWords.slice(0, KART_ITEM_SLOTS.length);
 
             if (kartVocabularyList.length === 0) {
                 kartVocabularyList = ["sauter", "jouer", "savoir", "lire"];
@@ -7282,6 +7712,7 @@
             kartCheckpointPassed = false;
             kartStartTime = Date.now();
             lastTime = 0;
+            resetCollectedWordsLog();
 
             kart.x = 1100; kart.y = 1225; kart.angle = 0; kart.speed = 0; kart.angularVelocity = 0;
 
@@ -7302,11 +7733,14 @@
             document.getElementById('kart-complete-overlay').classList.remove('flex');
             document.getElementById('kart-ui-board').style.display = 'flex';
             canvas.style.display = 'block';
+            document.getElementById('game-view-shell').style.display = 'flex';
 
             playBackgroundMusic();
 
             gameStarted = true;
             nextKartTarget();
+            updateLevelEditorButtonVisibility();
+            updateCollectedWordsPanelVisibility();
             setTimeout(() => showTtsAttentionHint('kart-tts-button'), 400);
             resize();
 
@@ -7346,6 +7780,7 @@
             } else {
                 targetEl.innerHTML = colorizeSentenceText(chosen.text);
             }
+            fitTextToBox(targetEl, getMaxKartTargetTextWidth());
             const speakDelayMs = options.delaySpeechMs || 0;
             if (speakDelayMs > 0) {
                 setTimeout(() => speakWord(chosen.text), speakDelayMs);
@@ -7940,6 +8375,7 @@
             document.getElementById('kart-ui-board').style.display = 'none';
             document.getElementById('ui-board').style.display = 'flex';
             canvas.style.display = 'block';
+            document.getElementById('game-view-shell').style.display = 'flex';
 
             canvas.width = canvas.parentElement.clientWidth;
             canvas.height = canvas.parentElement.clientHeight;
@@ -8069,7 +8505,10 @@
 "hi": "बोबोट चलता है।",
 "uk": "Бобот ходить.",
 "ru": "Бобот идёт.",
-"macedonian": "Бобот оди."
+"macedonian": "Бобот оди.",
+"afrikaans": "Bobot loop.",
+"serbian": "Бобот хода.",
+"croatian": "Bobot hoda."
 },
 "question": {
 "fr": "Est-ce que Bobot marche ?",
@@ -8089,7 +8528,10 @@
 "hi": "क्या बोबोट चल रहा है?",
 "uk": "Бобот ходить?",
 "ru": "Бобот идёт?",
-"macedonian": "Дали Бобот оди?"
+"macedonian": "Дали Бобот оди?",
+"afrikaans": "Loop Bobot?",
+"serbian": "Да ли Бобот хода?",
+"croatian": "Hoda li Bobot?"
 },
 "command": {
 "fr": "Marche !",
@@ -8109,7 +8551,10 @@
 "hi": "चलो!",
 "uk": "Іди!",
 "ru": "Иди!",
-"macedonian": "Оди!"
+"macedonian": "Оди!",
+"afrikaans": "Loop!",
+"serbian": "Ходај!",
+"croatian": "Hodaj!"
 }
 },
 {
@@ -8134,7 +8579,10 @@
 "hi": "बोबोट कूदता है।",
 "uk": "Бобот стрибає.",
 "ru": "Бобот прыгает.",
-"macedonian": "Бобот скока."
+"macedonian": "Бобот скока.",
+"afrikaans": "Bobot spring.",
+"serbian": "Бобот скаче.",
+"croatian": "Bobot skače."
 },
 "question": {
 "fr": "Est-ce que Bobot saute ?",
@@ -8154,7 +8602,10 @@
 "hi": "क्या बोबोट कूद रहा है?",
 "uk": "Бобот стрибає?",
 "ru": "Бобот прыгает?",
-"macedonian": "Дали Бобот скока?"
+"macedonian": "Дали Бобот скока?",
+"afrikaans": "Spring Bobot?",
+"serbian": "Да ли Бобот скаче?",
+"croatian": "Skače li Bobot?"
 },
 "command": {
 "fr": "Saute !",
@@ -8174,7 +8625,10 @@
 "hi": "कूदो!",
 "uk": "Стрибай!",
 "ru": "Прыгай!",
-"macedonian": "Скокни!"
+"macedonian": "Скокни!",
+"afrikaans": "Spring!",
+"serbian": "Скочи!",
+"croatian": "Skoči!"
 }
 },
 {
@@ -8199,7 +8653,10 @@
 "hi": "बोबोट दौड़ता है।",
 "uk": "Бобот біжить.",
 "ru": "Бобот бежит.",
-"macedonian": "Бобот трча."
+"macedonian": "Бобот трча.",
+"afrikaans": "Bobot hardloop.",
+"serbian": "Бобот трчи.",
+"croatian": "Bobot trči."
 },
 "question": {
 "fr": "Est-ce que Bobot court ?",
@@ -8219,7 +8676,10 @@
 "hi": "क्या बोबोट दौड़ रहा है?",
 "uk": "Бобот біжить?",
 "ru": "Бобот бежит?",
-"macedonian": "Дали Бобот трча?"
+"macedonian": "Дали Бобот трча?",
+"afrikaans": "Hardloop Bobot?",
+"serbian": "Да ли Бобот трчи?",
+"croatian": "Trči li Bobot?"
 },
 "command": {
 "fr": "Cours !",
@@ -8239,7 +8699,10 @@
 "hi": "दौड़ो!",
 "uk": "Біжи!",
 "ru": "Беги!",
-"macedonian": "Трчај!"
+"macedonian": "Трчај!",
+"afrikaans": "Hardloop!",
+"serbian": "Трчи!",
+"croatian": "Trči!"
 }
 },
 {
@@ -8264,7 +8727,10 @@
 "hi": "बोबोट सोता है।",
 "uk": "Бобот спить.",
 "ru": "Бобот спит.",
-"macedonian": "Бобот спие."
+"macedonian": "Бобот спие.",
+"afrikaans": "Bobot slaap.",
+"serbian": "Бобот спава.",
+"croatian": "Bobot spava."
 },
 "question": {
 "fr": "Est-ce que Bobot dort ?",
@@ -8284,7 +8750,10 @@
 "hi": "क्या बोबोट सो रहा है?",
 "uk": "Бобот спить?",
 "ru": "Бобот спит?",
-"macedonian": "Дали Бобот спие?"
+"macedonian": "Дали Бобот спие?",
+"afrikaans": "Slaap Bobot?",
+"serbian": "Да ли Бобот спава?",
+"croatian": "Spava li Bobot?"
 },
 "command": {
 "fr": "Dors !",
@@ -8304,7 +8773,10 @@
 "hi": "सो जाओ!",
 "uk": "Спи!",
 "ru": "Спи!",
-"macedonian": "Спиј!"
+"macedonian": "Спиј!",
+"afrikaans": "Slaap!",
+"serbian": "Спавај!",
+"croatian": "Spavaj!"
 }
 },
 {
@@ -8329,7 +8801,10 @@
 "hi": "बोबोट खाता है।",
 "uk": "Бобот їсть.",
 "ru": "Бобот ест.",
-"macedonian": "Бобот јаде."
+"macedonian": "Бобот јаде.",
+"afrikaans": "Bobot eet.",
+"serbian": "Бобот једе.",
+"croatian": "Bobot jede."
 },
 "question": {
 "fr": "Est-ce que Bobot mange ?",
@@ -8349,7 +8824,10 @@
 "hi": "क्या बोबोट खा रहा है?",
 "uk": "Бобот їсть?",
 "ru": "Бобот ест?",
-"macedonian": "Дали Бобот јаде?"
+"macedonian": "Дали Бобот јаде?",
+"afrikaans": "Eet Bobot?",
+"serbian": "Да ли Бобот једе?",
+"croatian": "Jede li Bobot?"
 },
 "command": {
 "fr": "Mange !",
@@ -8369,7 +8847,10 @@
 "hi": "खाओ!",
 "uk": "Їж!",
 "ru": "Ешь!",
-"macedonian": "Јади!"
+"macedonian": "Јади!",
+"afrikaans": "Eet!",
+"serbian": "Једи!",
+"croatian": "Jedi!"
 }
 },
 {
@@ -8394,7 +8875,10 @@
 "hi": "बोबोट नाचता है।",
 "uk": "Бобот танцює.",
 "ru": "Бобот танцует.",
-"macedonian": "Бобот танцува."
+"macedonian": "Бобот танцува.",
+"afrikaans": "Bobot dans.",
+"serbian": "Бобот плеше.",
+"croatian": "Bobot pleše."
 },
 "question": {
 "fr": "Est-ce que Bobot danse ?",
@@ -8414,7 +8898,10 @@
 "hi": "क्या बोबोट नाच रहा है?",
 "uk": "Бобот танцює?",
 "ru": "Бобот танцует?",
-"macedonian": "Дали Бобот танцува?"
+"macedonian": "Дали Бобот танцува?",
+"afrikaans": "Dans Bobot?",
+"serbian": "Да ли Бобот плеше?",
+"croatian": "Pleše li Bobot?"
 },
 "command": {
 "fr": "Danse !",
@@ -8434,7 +8921,10 @@
 "hi": "नाचो!",
 "uk": "Танцюй!",
 "ru": "Танцуй!",
-"macedonian": "Танцувај!"
+"macedonian": "Танцувај!",
+"afrikaans": "Dans!",
+"serbian": "Плеши!",
+"croatian": "Pleši!"
 }
 }
 ];
@@ -8444,14 +8934,16 @@
             fr: ['Oui', 'Non'], en: ['Yes', 'No'], es: ['Sí', 'No'], de: ['Ja', 'Nein'], it: ['Sì', 'No'],
             ja: ['はい', 'いいえ'], 'zh-pinyin': ['Shì', 'Bùshì'], 'zh-hanzi': ['是', '不是'], cantonese: ['係', '唔係'],
             he: ['כן', 'לא'], ar: ['نعم', 'لا'], sinhala: ['ඔව්', 'නැහැ'], vi: ['Có', 'Không'], ur: ['ہاں', 'نہیں'],
-            hi: ['हाँ', 'नहीं'], uk: ['Так', 'Ні'], ru: ['Да', 'Нет'], macedonian: ['Да', 'Не']
+            hi: ['हाँ', 'नहीं'], uk: ['Так', 'Ні'], ru: ['Да', 'Нет'], macedonian: ['Да', 'Не'],
+            afrikaans: ['Ja', 'Nee'], serbian: ['Да', 'Не'], croatian: ['Da', 'Ne']
         };
 
         const BOBOT_OOPS_WORD = {
             fr: 'Oups !', en: 'Oops!', es: '¡Ups!', de: 'Ups!', it: 'Ops!',
             ja: 'おっと！', 'zh-pinyin': 'Āiyā!', 'zh-hanzi': '哎呀！', cantonese: '哎呀！',
             he: 'אופס!', ar: 'للأسف!', sinhala: 'අනේ!', vi: 'Ôi!', ur: 'افسوس!',
-            hi: 'उफ़!', uk: 'Ой!', ru: 'Ой!', macedonian: 'Ах!'
+            hi: 'उफ़!', uk: 'Ой!', ru: 'Ой!', macedonian: 'Ах!',
+            afrikaans: 'Eina!', serbian: 'Ух!', croatian: 'Ups!'
         };
 
         let bobotMode = 'statement'; // 'statement' | 'command' | 'question'
@@ -8465,7 +8957,7 @@
         let bobotRemainingPool = []; // verbs not yet answered correctly in this specific round - shrinks as each is answered correctly
         let bobotRoundVerbSet = []; // the fixed set of verbs for the CURRENT round (capped at BOBOT_MAX_ROUND_SIZE), established once and reused until the round ends
         let bobotRoundLocked = false; // true while wrong-answer feedback is showing, preventing further answer changes until "Next Question" is clicked
-        const BOBOT_MAX_ROUND_SIZE = 6;
+        const BOBOT_MAX_ROUND_SIZE = 10;
 
 
         function loadPresetManifest() {
@@ -8504,7 +8996,7 @@
                 <div class="preset-tile-thumb flex items-center justify-center text-5xl" style="background:var(--hub-violet-soft);">📁</div>
                 <div class="preset-tile-label">Upload Your Own</div>
             `;
-            container.appendChild(tile);
+            container.insertBefore(tile, container.firstChild);
         }
 
         // Renders each preset category as a clickable image tile. Expects an image
@@ -8604,6 +9096,7 @@
             gameStartTime = Date.now();
             lastTime = 0;
             inShopInterior = null;
+            resetCollectedWordsLog();
             distributeWords();
 
             const questHeaderEl = document.getElementById('quest-header-label');
@@ -8618,6 +9111,7 @@
             document.getElementById('kart-ui-board').style.display = 'none';
             document.getElementById('ui-board').style.display = 'flex';
             canvas.style.display = 'block';
+            document.getElementById('game-view-shell').style.display = 'flex';
 
             player.x = 400;
             player.y = 730;
@@ -8632,6 +9126,7 @@
             gameStarted = true;
             nextQuest();
             updateLevelEditorButtonVisibility();
+            updateCollectedWordsPanelVisibility();
             setTimeout(() => {
                 showTtsAttentionHint('tts-button');
                 showTtsAttentionHint('tts-location-button');
@@ -8643,10 +9138,14 @@
 
         function resetToConfig() {
             gameStarted = false;
+            updateCollectedWordsPanelVisibility();
             if (levelEditorActive) exitLevelEditor();
             document.getElementById('level-editor-toggle-btn').style.display = 'none';
+            if (kartLevelEditorActive) exitKartLevelEditor();
+            document.getElementById('kart-level-editor-toggle-btn').style.display = 'none';
             pauseBackgroundMusic();
             canvas.style.display = 'none';
+            document.getElementById('game-view-shell').style.display = 'none';
             document.getElementById('ui-board').style.display = 'none';
             document.getElementById('kart-ui-board').style.display = 'none';
             document.getElementById('kart-complete-overlay').classList.add('hidden');
@@ -8845,6 +9344,21 @@
         }
 
         function getMaxTargetBoxTextWidth() {
+            const center = document.getElementById('ui-board-center');
+            if (center && center.clientWidth > 0) {
+                return Math.max(120, (center.clientWidth - 48) / 2 - 40);
+            }
+            const vw = window.innerWidth || 800;
+            if (vw < 500) return 220;
+            if (vw < 900) return 320;
+            return 420;
+        }
+
+        function getMaxKartTargetTextWidth() {
+            const center = document.getElementById('kart-ui-board-center');
+            if (center && center.clientWidth > 0) {
+                return Math.max(120, center.clientWidth - 40);
+            }
             const vw = window.innerWidth || 800;
             if (vw < 500) return 220;
             if (vw < 900) return 320;
@@ -8980,6 +9494,7 @@
 
             document.getElementById('ui-board').style.display = 'none';
             canvas.style.display = 'none';
+            document.getElementById('game-view-shell').style.display = 'none';
             stopAllBobotVideos();
             document.getElementById('bobot-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'flex';
@@ -9045,6 +9560,8 @@
             if (!isModalOpen) {
                 if (levelEditorActive) {
                     updateLevelEditorCamera(dt);
+                } else if (kartLevelEditorActive) {
+                    // Kart itself is frozen while editing - only the camera pans/zooms, driven by mouse/wheel events.
                 } else if (selectedLobbyMode === 'kart') {
                     updateKartPhysics(dt);
                 } else if (selectedLobbyMode === 'potato') {
@@ -9053,7 +9570,9 @@
                     updatePhysics(dt);
                 }
             }
-            if (selectedLobbyMode === 'kart') {
+            if (kartLevelEditorActive) {
+                renderKartLevelEditor();
+            } else if (selectedLobbyMode === 'kart') {
                 renderKartGame();
             } else if (selectedLobbyMode === 'potato') {
                 renderPotatoWorld();
@@ -9334,8 +9853,19 @@
             }
 
             const rad = kart.angle * Math.PI / 180;
-            kart.x = Math.max(20, Math.min(KART_WORLD_W - 20, kart.x + Math.cos(rad) * kart.speed * dt));
-            kart.y = Math.max(20, Math.min(KART_WORLD_H - 20, kart.y + Math.sin(rad) * kart.speed * dt));
+            const moveX = Math.cos(rad) * kart.speed * dt;
+            const moveY = Math.sin(rad) * kart.speed * dt;
+            const newX = Math.max(20, Math.min(KART_WORLD_W - 20, kart.x + moveX));
+            const newY = Math.max(20, Math.min(KART_WORLD_H - 20, kart.y + moveY));
+
+            if (!kartLevelEditorBlocksPosition(newX, newY)) {
+                kart.x = newX;
+                kart.y = newY;
+            } else if (!kartLevelEditorBlocksPosition(newX, kart.y)) {
+                kart.x = newX; // slide along a wall hit at an angle, rather than hard-stopping
+            } else if (!kartLevelEditorBlocksPosition(kart.x, newY)) {
+                kart.y = newY;
+            }
 
             // Checkpoint (top straight) then finish line (bottom straight), in that order,
             // so driving backward through the finish line doesn't award a free lap.
@@ -9366,6 +9896,7 @@
                     if (item.text.toLowerCase() === kartCurrentTargetWord) {
                         item.collected = true;
                         kartScore += 10;
+                        recordWordCollected(item.text);
                         playChime(true);
                         document.getElementById('kart-score-text').textContent = kartScore.toString().padStart(2, '0');
                         nextKartTarget({ delaySpeechMs: getCelebrationSoundDelayMs() });
@@ -9418,6 +9949,191 @@
 
             kartBufferCtx.putImageData(kartBufferImageData, 0, 0);
             renderKartSky();
+        }
+
+        // --- Kart Track Editor (top-down view) ---
+        function kartLevelEditorScreenToWorld(screenX, screenY) {
+            return {
+                x: kartLevelEditorCamX + (screenX - canvas.width / 2) / kartLevelEditorZoom,
+                y: kartLevelEditorCamY + (screenY - canvas.height / 2) / kartLevelEditorZoom
+            };
+        }
+        function kartLevelEditorWorldToScreen(worldX, worldY) {
+            return {
+                x: canvas.width / 2 + (worldX - kartLevelEditorCamX) * kartLevelEditorZoom,
+                y: canvas.height / 2 + (worldY - kartLevelEditorCamY) * kartLevelEditorZoom
+            };
+        }
+
+        function renderKartLevelEditor() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#166534';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const topLeft = kartLevelEditorWorldToScreen(0, 0);
+            const bottomRight = kartLevelEditorWorldToScreen(KART_WORLD_W, KART_WORLD_H);
+            ctx.fillStyle = '#78716c';
+            ctx.fillRect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+
+            const infTopLeft = kartLevelEditorWorldToScreen(KART_INFIELD.x, KART_INFIELD.y);
+            const infBottomRight = kartLevelEditorWorldToScreen(KART_INFIELD.x + KART_INFIELD.w, KART_INFIELD.y + KART_INFIELD.h);
+            ctx.fillStyle = '#166534';
+            ctx.fillRect(infTopLeft.x, infTopLeft.y, infBottomRight.x - infTopLeft.x, infBottomRight.y - infTopLeft.y);
+
+            // The kart's current position and heading, for reference while placing things
+            const kartScreen = kartLevelEditorWorldToScreen(kart.x, kart.y);
+            ctx.save();
+            ctx.translate(kartScreen.x, kartScreen.y);
+            ctx.rotate(kart.angle * Math.PI / 180);
+            ctx.fillStyle = '#ef4444';
+            ctx.beginPath();
+            ctx.moveTo(10, 0);
+            ctx.lineTo(-8, -7);
+            ctx.lineTo(-8, 7);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+
+            const sortedImages = kartLevelEditorImages.filter(i => i.loaded).sort((a, b) => a.order - b.order);
+            sortedImages.forEach(img => {
+                const s = kartLevelEditorWorldToScreen(img.x, img.y);
+                const w = img.width * kartLevelEditorZoom, h = img.height * kartLevelEditorZoom;
+                ctx.drawImage(img.el, s.x, s.y, w, h);
+                if (img.isWall) {
+                    ctx.strokeStyle = '#dc2626';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([6, 4]);
+                    ctx.strokeRect(s.x, s.y, w, h);
+                    ctx.setLineDash([]);
+                }
+                if (img.id === kartLevelEditorSelectedId) {
+                    ctx.strokeStyle = '#8B5CF6';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([6, 4]);
+                    ctx.strokeRect(s.x, s.y, w, h);
+                    ctx.setLineDash([]);
+                    const handleSize = 14;
+                    ctx.fillStyle = '#8B5CF6';
+                    ctx.fillRect(s.x + w - handleSize / 2, s.y + h - handleSize / 2, handleSize, handleSize);
+                }
+            });
+        }
+
+        function kartLevelEditorFindImageAt(worldX, worldY) {
+            const sorted = kartLevelEditorImages.filter(i => i.loaded).sort((a, b) => b.order - a.order);
+            return sorted.find(i => worldX >= i.x && worldX <= i.x + i.width && worldY >= i.y && worldY <= i.y + i.height) || null;
+        }
+
+        function kartLevelEditorIsOnResizeHandle(img, screenX, screenY) {
+            const s = kartLevelEditorWorldToScreen(img.x, img.y);
+            const w = img.width * kartLevelEditorZoom, h = img.height * kartLevelEditorZoom;
+            const handleSize = 14;
+            return screenX >= s.x + w - handleSize / 2 && screenX <= s.x + w + handleSize / 2 &&
+                   screenY >= s.y + h - handleSize / 2 && screenY <= s.y + h + handleSize / 2;
+        }
+
+        function kartLevelEditorSelect(id) {
+            kartLevelEditorSelectedId = id;
+            const panel = document.getElementById('kart-level-editor-selected-panel');
+            const img = kartLevelEditorImages.find(i => i.id === id);
+            if (!img) { panel.style.display = 'none'; return; }
+            panel.style.display = 'block';
+            document.getElementById('kart-level-editor-selected-name').textContent = img.url;
+            document.getElementById('kart-level-editor-wall').checked = !!img.isWall;
+        }
+
+        function kartLevelEditorAddImage(url) {
+            const errorEl = document.getElementById('kart-level-editor-add-error');
+            errorEl.style.display = 'none';
+            const el = new Image();
+            el.crossOrigin = 'anonymous';
+            el.onload = () => {
+                const maxDim = 300;
+                const scaleDown = Math.min(1, maxDim / Math.max(el.naturalWidth, el.naturalHeight));
+                const width = el.naturalWidth * scaleDown;
+                const height = el.naturalHeight * scaleDown;
+                const entry = {
+                    id: kartLevelEditorNextId++,
+                    url, el, loaded: true,
+                    naturalWidth: el.naturalWidth, naturalHeight: el.naturalHeight,
+                    x: kartLevelEditorCamX - width / 2,
+                    y: kartLevelEditorCamY - height / 2,
+                    width, height,
+                    isWall: true,
+                    order: kartLevelEditorImages.length
+                };
+                kartLevelEditorImages.push(entry);
+                kartLevelEditorSelect(entry.id);
+            };
+            el.onerror = () => { errorEl.style.display = 'block'; };
+            el.src = url;
+        }
+
+        function kartLevelEditorSetWall(isWall) {
+            const img = kartLevelEditorImages.find(i => i.id === kartLevelEditorSelectedId);
+            if (img) img.isWall = isWall;
+        }
+
+        function kartLevelEditorDeleteSelected() {
+            kartLevelEditorImages = kartLevelEditorImages.filter(i => i.id !== kartLevelEditorSelectedId);
+            kartLevelEditorSelect(null);
+        }
+
+        function kartLevelEditorExportReport() {
+            const report = {
+                exportedAt: new Date().toISOString(),
+                trackAssets: kartLevelEditorImages.map(img => ({
+                    url: img.url,
+                    isWall: img.isWall,
+                    order: img.order,
+                    x: Math.round(img.x),
+                    y: Math.round(img.y),
+                    width: Math.round(img.width),
+                    height: Math.round(img.height),
+                    naturalWidth: img.naturalWidth,
+                    naturalHeight: img.naturalHeight
+                }))
+            };
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'kart-track-layout.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function enterKartLevelEditor() {
+            kartLevelEditorActive = true;
+            kartLevelEditorCamX = kart.x;
+            kartLevelEditorCamY = kart.y;
+            document.getElementById('kart-level-editor-panel').style.display = 'block';
+            document.getElementById('kart-level-editor-toggle-btn').style.display = 'none';
+        }
+
+        function exitKartLevelEditor() {
+            kartLevelEditorActive = false;
+            kartLevelEditorSelect(null);
+            kartLevelEditorDrag = null;
+            document.getElementById('kart-level-editor-panel').style.display = 'none';
+            document.getElementById('kart-level-editor-toggle-btn').style.display = 'inline-flex';
+        }
+
+        // Checks whether a proposed new kart position would collide with any
+        // wall image - used both by real gameplay physics and by the editor
+        // itself, so a teacher can test-drive a layout immediately after
+        // placing walls, even before anything is permanently hardcoded.
+        function kartLevelEditorBlocksPosition(x, y) {
+            const kartRadius = 15;
+            return kartLevelEditorImages.some(img => img.isWall &&
+                x + kartRadius > img.x && x - kartRadius < img.x + img.width &&
+                y + kartRadius > img.y && y - kartRadius < img.y + img.height);
         }
 
         function renderKartGame() {
@@ -9480,9 +10196,29 @@
                     ctx.roundRect(screenX - cardW / 2, screenY - h, cardW, h, Math.max(2, 8 * proj.scale));
                     ctx.fill();
                     ctx.stroke();
-                    drawColoredText(ctx, cleanText, screenX, screenY - h / 2, `bold ${fontSize}px 'OpenDyslexic', sans-serif`);
+                    drawColoredText(ctx, item.text, screenX, screenY - h / 2, `bold ${fontSize}px 'OpenDyslexic', sans-serif`);
                 }
                 ctx.restore();
+            });
+
+            // Track editor placed images (walls/decorations), rendered as
+            // billboards the same way vocabulary items are, anchored at the
+            // center of their top-down footprint - visible and collidable
+            // (if marked as a wall) in real gameplay immediately, not only
+            // once permanently hardcoded.
+            const visibleTrackAssets = kartLevelEditorImages
+                .filter(img => img.loaded)
+                .map(img => ({ img, proj: kartWorldToScreen(img.x + img.width / 2, img.y + img.height / 2) }))
+                .filter(o => o.proj && o.proj.forward < KART_MAX_DRAW_DISTANCE)
+                .sort((a, b) => b.proj.forward - a.proj.forward);
+
+            visibleTrackAssets.forEach(({ img, proj }) => {
+                const screenX = proj.x * scaleX;
+                const screenY = proj.y * scaleY;
+                const h = img.height * proj.scale * 3;
+                const w = img.width * proj.scale * 3;
+                if (h < 4) return;
+                ctx.drawImage(img.el, screenX - w / 2, screenY - h, w, h);
             });
 
             // The player's own kart/driver, fixed near the bottom-centre of the screen
@@ -9628,6 +10364,7 @@
                         playChime(true);
                         score += 10;
                         shopWord.collected = true;
+                        recordWordCollected(shopWord.text);
                         document.getElementById('score').innerText = score.toString().padStart(2, '0');
                         nextQuest({ delaySpeechMs: getCelebrationSoundDelayMs() });
                     } else {
@@ -9828,6 +10565,7 @@
                             playChime(true);
                             score += 10; 
                             word.collected = true; 
+                            recordWordCollected(word.text);
                             const successImage = word.imageEl;
                             successAnims.push({ x: word.x, y: bobbingY, vy: 0, delay: 20, w: word.w, h: word.h, text: word.text.toLowerCase(), imageEl: successImage, imageIsPng: word.imageIsPng });
                             nextQuest({ delaySpeechMs: getCelebrationSoundDelayMs() }); 
@@ -10204,7 +10942,7 @@
 
                 const textToShow = shopWord.text.toLowerCase().replace(/[\[\]]/g, '');
                 if (colourCodedEnabled) {
-                    drawColoredText(ctx, textToShow, cardX + shopWord.w / 2, cardY + shopWord.h / 2 + 1.5, "bold 11px 'OpenDyslexic', sans-serif");
+                    drawColoredText(ctx, shopWord.text.toLowerCase(), cardX + shopWord.w / 2, cardY + shopWord.h / 2 + 1.5, "bold 11px 'OpenDyslexic', sans-serif");
                 } else {
                     ctx.fillStyle = '#1e293b';
                     ctx.textAlign = 'center';
@@ -10320,17 +11058,47 @@
         }
 
         function renderLevelEditorSelectionUI() {
-            const img = levelEditorImages.find(i => i.id === levelEditorSelectedId);
-            if (!img) return;
+            if (levelEditorSelectedType === 'image') {
+                const img = levelEditorImages.find(i => i.id === levelEditorSelectedId);
+                if (img) {
+                    ctx.save();
+                    ctx.strokeStyle = '#8B5CF6';
+                    ctx.lineWidth = 2 / targetScale;
+                    ctx.setLineDash([6 / targetScale, 4 / targetScale]);
+                    ctx.strokeRect(img.x, img.y, img.width, img.height);
+                    ctx.setLineDash([]);
+                    const handleSize = 14 / targetScale;
+                    ctx.fillStyle = '#8B5CF6';
+                    ctx.fillRect(img.x + img.width - handleSize / 2, img.y + img.height - handleSize / 2, handleSize, handleSize);
+                    ctx.restore();
+                }
+            }
+        }
+
+        // While editing, every collision box (including ones that are
+        // normally invisible during real gameplay) is drawn as a highlighted
+        // dashed box so it can actually be seen, selected, and manipulated -
+        // otherwise an "invisible" box would be completely unworkable to edit.
+        function renderLevelEditorCollisionBoxes() {
             ctx.save();
-            ctx.strokeStyle = '#8B5CF6';
-            ctx.lineWidth = 2 / targetScale;
-            ctx.setLineDash([6 / targetScale, 4 / targetScale]);
-            ctx.strokeRect(img.x, img.y, img.width, img.height);
+            platforms.forEach(plat => {
+                const isSelected = levelEditorSelectedType === 'platform' && plat._editorId === levelEditorSelectedId;
+                ctx.fillStyle = isSelected ? 'rgba(239, 68, 68, 0.35)' : 'rgba(239, 68, 68, 0.18)';
+                ctx.fillRect(plat.x, plat.y, plat.w, plat.h);
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = (isSelected ? 3 : 1.5) / targetScale;
+                ctx.setLineDash([6 / targetScale, 4 / targetScale]);
+                ctx.strokeRect(plat.x, plat.y, plat.w, plat.h);
+            });
             ctx.setLineDash([]);
-            const handleSize = 14 / targetScale;
-            ctx.fillStyle = '#8B5CF6';
-            ctx.fillRect(img.x + img.width - handleSize / 2, img.y + img.height - handleSize / 2, handleSize, handleSize);
+            if (levelEditorNewBoxDraft) {
+                const d = levelEditorNewBoxDraft;
+                ctx.fillStyle = 'rgba(239, 68, 68, 0.3)';
+                ctx.fillRect(d.x, d.y, d.w, d.h);
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 2 / targetScale;
+                ctx.strokeRect(d.x, d.y, d.w, d.h);
+            }
             ctx.restore();
         }
 
@@ -10345,6 +11113,10 @@
             return sorted.find(i => worldX >= i.x && worldX <= i.x + i.width && worldY >= i.y && worldY <= i.y + i.height) || null;
         }
 
+        function levelEditorFindPlatformAt(worldX, worldY) {
+            return platforms.find(p => worldX >= p.x && worldX <= p.x + p.w && worldY >= p.y && worldY <= p.y + p.h) || null;
+        }
+
         function levelEditorIsOnResizeHandle(img, worldX, worldY) {
             const handleWorldSize = 14 / targetScale;
             const hx = img.x + img.width - handleWorldSize / 2;
@@ -10354,6 +11126,8 @@
 
         function levelEditorSelect(id) {
             levelEditorSelectedId = id;
+            levelEditorSelectedType = id === null ? null : 'image';
+            document.getElementById('level-editor-selected-platform-panel').style.display = 'none';
             const panel = document.getElementById('level-editor-selected-panel');
             const img = levelEditorImages.find(i => i.id === id);
             if (!img) { panel.style.display = 'none'; return; }
@@ -10361,6 +11135,17 @@
             document.getElementById('level-editor-selected-name').textContent = img.url;
             document.getElementById('level-editor-layer-bg-btn').classList.toggle('wb-mode-active', img.layer === 'background');
             document.getElementById('level-editor-layer-fg-btn').classList.toggle('wb-mode-active', img.layer === 'foreground');
+        }
+
+        function levelEditorSelectPlatform(editorId) {
+            levelEditorSelectedId = editorId;
+            levelEditorSelectedType = editorId === null ? null : 'platform';
+            document.getElementById('level-editor-selected-panel').style.display = 'none';
+            const panel = document.getElementById('level-editor-selected-platform-panel');
+            const plat = platforms.find(p => p._editorId === editorId);
+            if (!plat) { panel.style.display = 'none'; return; }
+            panel.style.display = 'block';
+            document.getElementById('level-editor-platform-ground').checked = !!plat.isGround;
         }
 
         function levelEditorAddImage(url) {
@@ -10424,6 +11209,28 @@
             levelEditorSelect(null);
         }
 
+        function levelEditorDeletePlatform() {
+            const plat = platforms.find(p => p._editorId === levelEditorSelectedId);
+            if (!plat) return;
+            if (!plat._isNew) {
+                // A pre-existing platform being removed wouldn't show up anywhere
+                // in the final exported state otherwise - record it explicitly.
+                levelEditorDeletedOriginalPlatforms.push({
+                    originalIndex: plat._originalIndex,
+                    x: Math.round(plat.x), y: Math.round(plat.y), w: Math.round(plat.w), h: Math.round(plat.h),
+                    isGround: !!plat.isGround
+                });
+            }
+            const idx = platforms.indexOf(plat);
+            if (idx !== -1) platforms.splice(idx, 1);
+            levelEditorSelectPlatform(null);
+        }
+
+        function levelEditorSetPlatformGround(isGround) {
+            const plat = platforms.find(p => p._editorId === levelEditorSelectedId);
+            if (plat) plat.isGround = isGround;
+        }
+
         function levelEditorExportReport() {
             const report = {
                 exportedAt: new Date().toISOString(),
@@ -10437,7 +11244,16 @@
                     height: Math.round(img.height),
                     naturalWidth: img.naturalWidth,
                     naturalHeight: img.naturalHeight
-                }))
+                })),
+                collisionBoxes: {
+                    current: platforms.map(p => ({
+                        isNew: !!p._isNew,
+                        originalIndex: p._isNew ? null : p._originalIndex,
+                        x: Math.round(p.x), y: Math.round(p.y), w: Math.round(p.w), h: Math.round(p.h),
+                        isGround: !!p.isGround
+                    })),
+                    deletedOriginalBoxes: levelEditorDeletedOriginalPlatforms
+                }
             };
             const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
@@ -10461,6 +11277,11 @@
         function exitLevelEditor() {
             levelEditorActive = false;
             levelEditorSelect(null);
+            levelEditorSelectPlatform(null);
+            levelEditorAddCollisionMode = false;
+            levelEditorNewBoxDraft = null;
+            levelEditorDrag = null;
+            document.getElementById('level-editor-add-collision-btn').classList.remove('wb-mode-active');
             document.getElementById('level-editor-panel').style.display = 'none';
             document.getElementById('level-editor-toggle-btn').style.display = 'inline-flex';
         }
@@ -10661,7 +11482,7 @@
 
             // 6. SCATTERED SOLID FLOATING CITY PLATFORMS 
             platforms.forEach(plat => {
-                if (plat.isRoof) return; 
+                if (plat.isRoof || plat.invisible) return;
                 ctx.fillStyle = plat.color || '#1e293b';
                 ctx.beginPath();
                 ctx.roundRect(plat.x, plat.y, plat.w, plat.h, 6);
@@ -10946,7 +11767,10 @@
             drawCliffWall(ctx, 4500, 1, RIGHT_CLIFF_PROFILE, RIGHT_CLIFF_SHRUBS);
 
             renderLevelEditorImages('foreground');
-            if (levelEditorActive) renderLevelEditorSelectionUI();
+            if (levelEditorActive) {
+                renderLevelEditorCollisionBoxes();
+                renderLevelEditorSelectionUI();
+            }
 
             ctx.restore();
         }
