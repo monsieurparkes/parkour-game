@@ -6476,7 +6476,7 @@
             return select;
         }
 
-        function stEnsureAudioElementForRow(row) {
+        async function stEnsureAudioElementForRow(row) {
             if (!row.audioEl) {
                 row.audioEl = document.createElement('audio');
                 row.audioEl.style.display = 'none';
@@ -6484,7 +6484,15 @@
             }
             row.audioEl.volume = (row.volume || 80) / 100;
             if (row.deviceId && row.audioEl.setSinkId) {
-                row.audioEl.setSinkId(row.deviceId).catch(e => console.warn('Could not set audio output device:', e));
+                // This MUST be awaited before playback starts - otherwise
+                // .play() can fire before the device switch has actually
+                // taken effect, and the audio plays on whatever the
+                // previous (often default) output happened to be.
+                try {
+                    await row.audioEl.setSinkId(row.deviceId);
+                } catch (e) {
+                    console.warn('Could not set audio output device:', e);
+                }
             }
         }
 
@@ -6545,7 +6553,7 @@
                 if (!res.ok) throw new Error('Translation service returned ' + res.status);
                 const data = await res.json();
                 if (!data.audioContent) throw new Error('No audio returned');
-                stEnsureAudioElementForRow(row);
+                await stEnsureAudioElementForRow(row);
                 row.audioEl.src = 'data:audio/mp3;base64,' + data.audioContent;
                 await row.audioEl.play();
             } catch (e) {
