@@ -2011,7 +2011,7 @@
                                 <span class="wb-tools-help-icon" data-help="A private, keyboard-scored way to record a mark for each student during a lesson, without ever showing scores on screen.">?</span>
                             </div>
                             <div class="wb-tools-menu-row">
-                                <button id="wb-open-silent-translator-btn" class="hub-btn-ghost interactive w-full">🔇 Silent Translator</button>
+                                <button id="wb-open-silent-translator-btn" class="hub-btn-ghost interactive w-full">🔇 Silent Interpreter</button>
                                 <span class="wb-tools-help-icon" data-help="Sends a private, translated audio reading of any text box straight to a specific student's connected headphones - no English included, so it supports understanding without replacing English exposure.">?</span>
                             </div>
 
@@ -2490,15 +2490,19 @@
                      browser tooltip delay) -->
                 <div id="wb-tools-help-tooltip" class="hub-font" style="display:none; position:fixed; z-index:500; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:10px 12px; width:220px; font-size:12px; line-height:1.45; color:var(--hub-ink); pointer-events:none;"></div>
 
-                <!-- Silent Translator settings - one row per connected student
+                <!-- Silent Interpreter settings - one row per connected student
                      device, each with its own language and volume -->
                 <div id="wb-st-settings-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[310] interactive backdrop-blur-sm hub-font">
                     <div style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); padding:24px; width:100%; max-width:480px; max-height:88vh; overflow-y:auto;">
                         <div class="flex items-center justify-between mb-4">
-                            <strong style="font-size:16px; color:var(--hub-ink);">⚙️ Silent Translator Settings</strong>
+                            <strong style="font-size:16px; color:var(--hub-ink);">⚙️ Silent Interpreter Settings</strong>
                             <button id="wb-st-settings-close-btn" class="wb-circle-btn interactive">✕</button>
                         </div>
                         <p class="hub-hint mt-0">Connect each student's own device, choose the language they'll hear, and set its own volume. These never play English - only the translation, so students still get English from the board and from you.</p>
+                        <div id="wb-st-permission-banner" style="display:flex; flex-direction:column; gap:8px; background:var(--hub-violet-soft); border-radius:10px; padding:10px; margin-bottom:12px;">
+                            <span style="font-size:12px;">🎤 Browsers hide device names until you allow this once - it only needs a moment's microphone access to reveal the list, nothing is recorded or kept.</span>
+                            <button id="wb-st-unlock-devices-btn" class="hub-btn-ghost interactive" style="font-size:12px;">Show my connected devices</button>
+                        </div>
                         <div id="wb-st-device-list" style="display:flex; flex-direction:column; gap:12px; margin:12px 0;"></div>
                         <button id="wb-st-add-device-btn" class="hub-btn-primary interactive w-full">+ Add a Device</button>
                         <p class="hub-hint" id="wb-st-support-warning" style="display:none; color:#b45309; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:8px; margin-top:10px;"></p>
@@ -2642,7 +2646,7 @@
                     <div id="wb-syntax-resize-handle" class="wb-panel-resize-handle interactive"></div>
                 </div>
 
-                <!-- Silent Translator - sends a private translated audio reading of
+                <!-- Silent Interpreter - sends a private translated audio reading of
                      any text box to specific students' own connected devices, with
                      no English included, supporting comprehension without
                      displacing English exposure. -->
@@ -2650,12 +2654,12 @@
                     <div id="wb-st-drag-handle" style="display:flex; align-items:center; justify-content:space-between; cursor:grab; padding:8px 10px; border-bottom:1px solid var(--hub-line);">
                         <div style="display:flex; align-items:center; gap:6px;">
                             <button id="wb-st-collapse-btn" class="wb-circle-btn interactive" style="width:20px; height:20px; font-size:10px;" title="Collapse">▾</button>
-                            <strong style="font-size:12px; color:var(--hub-ink);">🔇 Silent Translator</strong>
+                            <strong style="font-size:12px; color:var(--hub-ink);">🔇 Silent Interpreter</strong>
                         </div>
                         <button id="wb-st-close-btn" class="wb-circle-btn interactive" style="width:22px; height:22px;">✕</button>
                     </div>
                     <div id="wb-st-body" style="display:flex; align-items:center; justify-content:center; gap:16px; padding:16px;">
-                        <button id="wb-st-power-btn" class="wb-st-power-btn-base wb-st-power-off interactive" title="Turn on Silent Translator">OFF</button>
+                        <button id="wb-st-power-btn" class="wb-st-power-btn-base wb-st-power-off interactive" title="Turn on Silent Interpreter">OFF</button>
                         <button id="wb-st-settings-btn" class="wb-circle-btn interactive" style="width:34px; height:34px; font-size:16px;" title="Settings">⚙️</button>
                     </div>
                 </div>
@@ -6286,6 +6290,7 @@
         let silentTranslatorEnabled = false;
         let silentTranslatorDevices = []; // [{ id, deviceId, deviceLabel, language, volume, audioEl }]
         let silentTranslatorNextRowId = 1;
+        let silentTranslatorAvailableDevices = []; // populated once via stUnlockDevices()
 
         // PLACEHOLDER - this needs to point at your own deployed translate+
         // synthesize Cloud Function once it exists (see the accompanying
@@ -6341,7 +6346,7 @@
             btn.classList.toggle('wb-st-power-on', on);
             btn.classList.toggle('wb-st-power-off', !on);
             btn.textContent = on ? 'ON' : 'OFF';
-            btn.title = on ? 'Turn off Silent Translator' : 'Turn on Silent Translator';
+            btn.title = on ? 'Turn off Silent Interpreter' : 'Turn on Silent Interpreter';
             wbUpdateAllTextTTSButtons();
         }
 
@@ -6355,17 +6360,14 @@
 
                 const topRow = document.createElement('div');
                 topRow.style.cssText = 'display:flex; gap:8px; align-items:center;';
-                const chooseBtn = document.createElement('button');
-                chooseBtn.className = 'hub-btn-ghost interactive';
-                chooseBtn.style.cssText = 'flex:1; text-align:left; font-size:12px;';
-                chooseBtn.textContent = row.deviceLabel ? ('🎧 ' + row.deviceLabel) : '🎧 Choose Device...';
-                chooseBtn.onclick = () => stChooseDeviceForRow(row.id);
+                const deviceSelect = stBuildDeviceSelect(row);
+                deviceSelect.style.flex = '1';
                 const removeBtn = document.createElement('button');
                 removeBtn.className = 'wb-circle-btn interactive';
                 removeBtn.style.cssText = 'width:26px; height:26px; font-size:12px; color:#dc2626; flex-shrink:0;';
                 removeBtn.textContent = '🗑️';
                 removeBtn.onclick = () => stRemoveDeviceRow(row.id);
-                topRow.appendChild(chooseBtn);
+                topRow.appendChild(deviceSelect);
                 topRow.appendChild(removeBtn);
 
                 const langSelect = document.createElement('select');
@@ -6428,26 +6430,50 @@
             wbDebouncedSave();
         }
 
-        async function stChooseDeviceForRow(rowId) {
-            const row = silentTranslatorDevices.find(r => r.id === rowId);
-            if (!row) return;
+        // Device labels are hidden by the browser until mic permission has
+        // been granted at least once (a privacy protection that applies
+        // even though we only want to list OUTPUT devices, not use the
+        // mic itself) - this unlocks them, once, for the whole session.
+        async function stUnlockDevices() {
             const warning = document.getElementById('wb-st-support-warning');
             warning.style.display = 'none';
             try {
-                if (!navigator.mediaDevices || !navigator.mediaDevices.selectAudioOutput) {
-                    warning.textContent = "This browser doesn't support choosing a specific audio output device (needs a recent Chrome or Edge). Try updating your browser.";
-                    warning.style.display = 'block';
-                    return;
-                }
-                const deviceInfo = await navigator.mediaDevices.selectAudioOutput();
-                row.deviceId = deviceInfo.deviceId;
-                row.deviceLabel = deviceInfo.label || 'Connected device';
-                stEnsureAudioElementForRow(row);
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                stream.getTracks().forEach(track => track.stop()); // don't need to keep listening, just needed the one-time permission
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                silentTranslatorAvailableDevices = devices.filter(d => d.kind === 'audiooutput');
+                document.getElementById('wb-st-permission-banner').style.display = 'none';
                 stRenderDeviceList();
-                wbDebouncedSave();
             } catch (e) {
-                console.warn('Device selection cancelled or failed:', e);
+                warning.textContent = "Couldn't access the device list (permission was blocked or cancelled). Click the button again to retry.";
+                warning.style.display = 'block';
+                console.warn('Could not unlock audio output devices:', e);
             }
+        }
+
+        function stBuildDeviceSelect(row) {
+            const select = document.createElement('select');
+            select.className = 'hub-input wb-select';
+            select.style.width = '100%';
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = silentTranslatorAvailableDevices.length ? 'Choose a device...' : 'Click "Show my connected devices" above first';
+            select.appendChild(placeholder);
+            silentTranslatorAvailableDevices.forEach(d => {
+                const opt = document.createElement('option');
+                opt.value = d.deviceId;
+                opt.textContent = d.label || 'Unnamed device';
+                if (d.deviceId === row.deviceId) opt.selected = true;
+                select.appendChild(opt);
+            });
+            select.addEventListener('change', (e) => {
+                const chosen = silentTranslatorAvailableDevices.find(d => d.deviceId === e.target.value);
+                row.deviceId = e.target.value || null;
+                row.deviceLabel = chosen ? (chosen.label || 'Unnamed device') : '';
+                stEnsureAudioElementForRow(row);
+                wbDebouncedSave();
+            });
+            return select;
         }
 
         function stEnsureAudioElementForRow(row) {
@@ -6503,7 +6529,7 @@
 
         async function stTranslateAndSendToDevice(text, row) {
             if (!SILENT_TRANSLATOR_PROXY_URL) {
-                console.warn('Silent Translator: no translation service configured yet (SILENT_TRANSLATOR_PROXY_URL is blank).');
+                console.warn('Silent Interpreter: no translation service configured yet (SILENT_TRANSLATOR_PROXY_URL is blank).');
                 return;
             }
             try {
@@ -6523,7 +6549,7 @@
                 row.audioEl.src = 'data:audio/mp3;base64,' + data.audioContent;
                 await row.audioEl.play();
             } catch (e) {
-                console.warn('Silent Translator: could not translate/send audio for device', row.deviceLabel, e);
+                console.warn('Silent Interpreter: could not translate/send audio for device', row.deviceLabel, e);
             }
         }
 
@@ -7117,6 +7143,7 @@
                 overlay.classList.remove('flex');
             };
             document.getElementById('wb-st-add-device-btn').onclick = stAddDeviceRow;
+            document.getElementById('wb-st-unlock-devices-btn').onclick = stUnlockDevices;
             document.getElementById('wb-st-settings-overlay').addEventListener('wheel', (e) => e.stopPropagation());
             rosterMakeDraggable('wb-silent-translator-panel', 'wb-st-drag-handle', null);
 
