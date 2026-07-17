@@ -6292,12 +6292,21 @@
         let silentTranslatorNextRowId = 1;
         let silentTranslatorAvailableDevices = []; // populated once via stUnlockDevices()
 
+        // A short, near-silent looping tone kept playing continuously on
+        // each configured device while the tool is on. Bluetooth links go
+        // idle after a moment of silence, and waking one back up takes a
+        // beat - clipping the very start of whatever plays next. Keeping a
+        // continuous, near-inaudible signal flowing avoids that "cold
+        // start" clip happening at all, rather than trying to patch around
+        // it after the fact.
+        const SILENT_TRANSLATOR_KEEPALIVE_WAV = 'data:audio/wav;base64,UklGRpQXAABXQVZFZm10IBAAAAABAAEAcBcAAOAuAAACABAAZGF0YXAXAAAAAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8=';
+
         // PLACEHOLDER - this needs to point at your own deployed translate+
         // synthesize Cloud Function once it exists (see the accompanying
         // notes for the server-side code and setup steps). Left blank
         // deliberately rather than guessed, since a wrong URL fails
         // silently in a way that's hard to diagnose from here.
-        const SILENT_TRANSLATOR_PROXY_URL = 'https://translate-and-synthesize-250351337514.australia-southeast1.run.app';
+        const SILENT_TRANSLATOR_PROXY_URL = '';
 
         // Mirrors the main language dropdown, plus Punjabi - needed for
         // this feature's own stated use case, and now also added to the
@@ -6348,6 +6357,11 @@
             btn.textContent = on ? 'ON' : 'OFF';
             btn.title = on ? 'Turn off Silent Interpreter' : 'Turn on Silent Interpreter';
             wbUpdateAllTextTTSButtons();
+            if (on) {
+                stStartAllKeepAlives();
+            } else {
+                stStopAllKeepAlives();
+            }
         }
 
         // --- Device row management ---
@@ -6425,6 +6439,7 @@
         function stRemoveDeviceRow(rowId) {
             const row = silentTranslatorDevices.find(r => r.id === rowId);
             if (row && row.audioEl) { row.audioEl.pause(); row.audioEl.remove(); }
+            if (row && row.keepAliveEl) { row.keepAliveEl.pause(); row.keepAliveEl.remove(); }
             silentTranslatorDevices = silentTranslatorDevices.filter(r => r.id !== rowId);
             stRenderDeviceList();
             wbDebouncedSave();
@@ -6471,6 +6486,7 @@
                 row.deviceId = e.target.value || null;
                 row.deviceLabel = chosen ? (chosen.label || 'Unnamed device') : '';
                 stEnsureAudioElementForRow(row);
+                if (silentTranslatorEnabled && row.deviceId) stStartKeepAlive(row);
                 wbDebouncedSave();
             });
             return select;
@@ -6494,6 +6510,34 @@
                     console.warn('Could not set audio output device:', e);
                 }
             }
+        }
+
+        function stStartKeepAlive(row) {
+            if (!row.deviceId) return;
+            if (!row.keepAliveEl) {
+                row.keepAliveEl = document.createElement('audio');
+                row.keepAliveEl.style.display = 'none';
+                row.keepAliveEl.loop = true;
+                row.keepAliveEl.src = SILENT_TRANSLATOR_KEEPALIVE_WAV;
+                document.body.appendChild(row.keepAliveEl);
+            }
+            row.keepAliveEl.volume = 0.01; // as close to silent as possible while still being genuinely "on"
+            if (row.keepAliveEl.setSinkId) {
+                row.keepAliveEl.setSinkId(row.deviceId).catch(e => console.warn('Could not route keep-alive audio:', e));
+            }
+            row.keepAliveEl.play().catch(e => console.warn('Could not start keep-alive audio (may need a click on the page first):', e));
+        }
+
+        function stStopKeepAlive(row) {
+            if (row.keepAliveEl) row.keepAliveEl.pause();
+        }
+
+        function stStopAllKeepAlives() {
+            silentTranslatorDevices.forEach(stStopKeepAlive);
+        }
+
+        function stStartAllKeepAlives() {
+            silentTranslatorDevices.forEach(row => { if (row.deviceId) stStartKeepAlive(row); });
         }
 
         // --- Per-text-box TTS button - only present while the tool is on ---
@@ -6522,12 +6566,12 @@
 
         function stSpeakTextBox(elData) {
             if (!elData.text) return;
-            // Normal reading, to the board's own default audio output -
-            // exactly like anywhere else in the hub.
-            speakOneInLanguage(elData.text, selectedLanguage);
-            // Plus a private translated reading sent to each configured
-            // device - deliberately never English, so students keep
-            // getting English from the board and the teacher directly.
+            // This button is exclusively for the private, translated
+            // per-device broadcast - it deliberately does NOT read the
+            // original text aloud on the board's own speakers at all.
+            // Students get their English exposure from the board and the
+            // teacher directly, through the hub's normal, separate TTS
+            // controls - not from this button.
             if (silentTranslatorEnabled) {
                 silentTranslatorDevices.forEach(row => {
                     if (row.deviceId && row.language) stTranslateAndSendToDevice(elData.text, row);
@@ -6547,7 +6591,8 @@
                     body: JSON.stringify({
                         text: text,
                         sourceLanguageCode: LANG_MAP[selectedLanguage] || 'en-US',
-                        targetLanguageCode: LANG_MAP[row.language] || row.language
+                        targetLanguageCode: LANG_MAP[row.language] || row.language,
+                        speakingRate: 0.8
                     })
                 });
                 if (!res.ok) throw new Error('Translation service returned ' + res.status);
