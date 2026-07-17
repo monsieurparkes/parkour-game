@@ -553,6 +553,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: space-between;
             gap: 10px;
             background: var(--hub-surface);
             border: 1px solid var(--hub-line);
@@ -561,7 +562,87 @@
             padding: 10px 14px;
             flex-shrink: 0;
         }
+        .wb-tools-menu-row button { text-align: left; }
         .wb-tray-group { display: flex; align-items: center; gap: 6px; }
+        .wb-tray-left, .wb-tray-right { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+        #wb-tools-menu { min-width: 300px; }
+        .wb-tools-menu-group-label {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--hub-ink-soft);
+            margin: 8px 2px 2px;
+        }
+        .wb-tools-menu-group-label:first-child { margin-top: 2px; }
+        .wb-tools-menu-row { display: flex; align-items: center; gap: 6px; }
+        .wb-tools-help-icon {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--hub-line);
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: help;
+        }
+        .wb-clear-board-btn {
+            color: #dc2626;
+            border-color: #fecdd3;
+            font-weight: 800;
+        }
+        .wb-st-power-btn-base {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 13px;
+            color: white;
+            letter-spacing: 0.05em;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+        .wb-st-power-off {
+            background: radial-gradient(circle at 35% 30%, #ff8080, #dc2626);
+            box-shadow: 0 0 14px 4px rgba(220,38,38,0.55), inset 0 -3px 6px rgba(0,0,0,0.25);
+        }
+        .wb-st-power-on {
+            background: radial-gradient(circle at 35% 30%, #86efac, #16a34a);
+            box-shadow: 0 0 18px 6px rgba(22,163,74,0.65), inset 0 -3px 6px rgba(0,0,0,0.25);
+            animation: wb-st-pulse 1.6s ease-in-out infinite;
+        }
+        @keyframes wb-st-pulse {
+            0%, 100% { box-shadow: 0 0 18px 6px rgba(22,163,74,0.65), inset 0 -3px 6px rgba(0,0,0,0.25); }
+            50% { box-shadow: 0 0 26px 10px rgba(22,163,74,0.85), inset 0 -3px 6px rgba(0,0,0,0.25); }
+        }
+        .wb-st-device-row {
+            border: 1px solid var(--hub-line);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .wb-text-tts-btn {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--hub-violet);
+            color: white;
+            border: 2px solid white;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            z-index: 5;
+        }
         .wb-select { padding: 6px 10px; font-size: 13px; width: auto; }
         #wb-zoom-btn { display: inline-flex; align-items: center; gap: 5px; }
         .wb-zoom-slider-wrap {
@@ -714,6 +795,7 @@
             color: white;
             font-weight: 800;
             font-size: 13px;
+            font-family: 'OpenDyslexic', sans-serif;
             text-shadow: 0 1px 2px rgba(0,0,0,0.45);
             padding: 0 6px;
             white-space: nowrap;
@@ -721,23 +803,53 @@
         }
         .wb-syntax-house-features {
             display: flex;
-            align-items: flex-end;
+            align-items: flex-start;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             flex: 1;
             padding-bottom: 6px;
         }
         .wb-syntax-house-window {
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 250, 220, 0.8);
-            border: 1px solid rgba(0,0,0,0.25);
+            width: 16px;
+            height: 16px;
+            background: rgba(255, 250, 220, 0.85);
+            border: 1.5px solid rgba(0,0,0,0.3);
+            border-radius: 3px;
+            position: relative;
+        }
+        .wb-syntax-house-window::before, .wb-syntax-house-window::after {
+            content: '';
+            position: absolute;
+            background: rgba(0,0,0,0.25);
+        }
+        .wb-syntax-house-window::before {
+            left: 50%;
+            top: 1px;
+            bottom: 1px;
+            width: 1.5px;
+            transform: translateX(-50%);
+        }
+        .wb-syntax-house-window::after {
+            top: 50%;
+            left: 1px;
+            right: 1px;
+            height: 1.5px;
+            transform: translateY(-50%);
         }
         .wb-syntax-house-door {
             width: 18px;
-            height: 24px;
+            height: 26px;
             background: rgba(0,0,0,0.35);
-            border: 1px solid rgba(0,0,0,0.3);
+            border: 1.5px solid rgba(0,0,0,0.3);
+            border-radius: 3px 3px 0 0;
+        }
+        .wb-syntax-bubbles-on .wb-syntax-house-word span,
+        .wb-syntax-bubbles-on #wb-syntax-sentence-text span {
+            background: rgba(255,255,255,0.92);
+            border-radius: 3px;
+            padding: 1px 3px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
         }
         .wb-syntax-house.wb-syntax-dragging-clone { position: fixed; pointer-events: none; z-index: 9999; opacity: 0.9; }
         .wb-syntax-house-delete {
@@ -966,19 +1078,6 @@
         .wb-image-element img { width: 100%; height: 100%; display: block; pointer-events: none; }
 
         #wb-text-settings-group button.wb-align-active, #wb-text-settings-group button.wb-mode-active { background: var(--hub-plum-soft); border-color: var(--hub-plum); }
-        .wb-bullet-line { position: relative; padding-left: 1.5em; }
-        .wb-bullet-mode-bullet .wb-bullet-line::before {
-            content: '';
-            position: absolute;
-            left: 0.4em;
-            top: 0.5em;
-            width: 0.35em;
-            height: 0.35em;
-            border-radius: 50%;
-            background: currentColor;
-        }
-        .wb-bullet-mode-number { counter-reset: wb-line-counter; }
-        .wb-bullet-mode-number .wb-bullet-line::before { counter-increment: wb-line-counter; content: counter(wb-line-counter) '.'; position: absolute; left: 0; }
 
         .wb-clock-element .wb-element-content {
             display: flex;
@@ -1435,6 +1534,7 @@
                                 <option value="afrikaans">Afrikaans</option>
                                 <option value="serbian">Serbian (Српски)</option>
                                 <option value="croatian">Croatian (Hrvatski)</option>
+                                <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
                             </select>
                         </div>
                     </div>
@@ -1894,167 +1994,220 @@
 
         <div id="whiteboard-screen" class="hub-font">
             <div class="wb-tray">
-                <div id="wb-tools-wrap" class="wb-dropdown-wrap">
-                    <button id="wb-tools-btn" class="wb-circle-btn interactive" title="Tools">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div id="wb-tools-menu" class="wb-dropdown-menu" style="display:none;">
-                        <button id="wb-add-traffic-btn" class="hub-btn-ghost interactive w-full">🚦 Noise Light</button>
-                        <button id="wb-add-timer-btn" class="hub-btn-ghost interactive w-full">⏱️ Timer</button>
-                        <button id="wb-add-clock-btn" class="hub-btn-ghost interactive w-full">🕐 Clock</button>
-                        <button id="wb-add-date-btn" class="hub-btn-ghost interactive w-full">📅 Date</button>
-                        <button id="wb-manage-classes-btn" class="hub-btn-ghost interactive w-full">👥 Manage Classes</button>
-                        <button id="wb-open-namepicker-btn" class="hub-btn-ghost interactive w-full">🎲 Random Student</button>
-                        <button id="wb-open-assessment-btn" class="hub-btn-ghost interactive w-full">📊 Class Tracker</button>
-                        <button id="wb-open-dojo-btn" class="hub-btn-ghost interactive w-full">🌟 Behaviour Dojo</button>
-                        <button id="wb-open-syntax-btn" class="hub-btn-ghost interactive w-full">🏘️ Syntax Street</button>
-                    </div>
-                </div>
-
-                <div id="wb-background-wrap" class="wb-dropdown-wrap">
-                    <button id="wb-background-btn" class="hub-btn-ghost interactive">🖼️ Background ▾</button>
-                    <div id="wb-background-menu" class="wb-dropdown-menu" style="display:none; min-width:220px;">
-                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="none">🚫 No Background</button>
-                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="chalkboard">⬛ Chalkboard</button>
-                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="cream">◻️ Soft Cream</button>
-                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="dotgrid">⚬ Dot Grid</button>
-                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="lined">📃 Lined Paper</button>
-                        <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="sky">☁️ Soft Sky</button>
-                        <div id="wb-custom-bg-list"></div>
-                        <div id="wb-bg-settings" style="display:none;">
-                            <label class="hub-label">Background mode</label>
-                            <div class="wb-tray-group">
-                                <button type="button" id="wb-bg-mode-static-btn" class="hub-btn-ghost interactive">🖼️ Static</button>
-                                <button type="button" id="wb-bg-mode-dynamic-btn" class="hub-btn-ghost interactive">🎬 Dynamic</button>
+                <div class="wb-tray-left">
+                    <div id="wb-tools-wrap" class="wb-dropdown-wrap">
+                        <button id="wb-tools-btn" class="hub-btn-ghost interactive" title="Tools" style="display:inline-flex; align-items:center; gap:5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            Tools
+                        </button>
+                        <div id="wb-tools-menu" class="wb-dropdown-menu" style="display:none;">
+                            <div class="wb-tools-menu-group-label">Curriculum and Assessment</div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-open-syntax-btn" class="hub-btn-ghost interactive w-full">🏘️ Syntax Street</button>
+                                <span class="wb-tools-help-icon" data-help="A drag-and-drop sentence builder - houses represent words that snap into place along a street to build and read sentences aloud.">?</span>
                             </div>
-                            <label class="hub-label">Volume</label>
-                            <input type="range" id="wb-bg-volume-input" min="0" max="100" value="70">
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-open-assessment-btn" class="hub-btn-ghost interactive w-full">📊 Class Tracker</button>
+                                <span class="wb-tools-help-icon" data-help="A private, keyboard-scored way to record a mark for each student during a lesson, without ever showing scores on screen.">?</span>
+                            </div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-open-silent-translator-btn" class="hub-btn-ghost interactive w-full">🔇 Silent Translator</button>
+                                <span class="wb-tools-help-icon" data-help="Sends a private, translated audio reading of any text box straight to a specific student's connected headphones - no English included, so it supports understanding without replacing English exposure.">?</span>
+                            </div>
+
+                            <div class="wb-tools-menu-group-label">Routines and Organisation</div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-add-traffic-btn" class="hub-btn-ghost interactive w-full">🚦 Noise Light</button>
+                                <span class="wb-tools-help-icon" data-help="A traffic-light style noise monitor that changes colour with classroom volume, helping students self-regulate.">?</span>
+                            </div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-add-date-btn" class="hub-btn-ghost interactive w-full">📅 Date</button>
+                                <span class="wb-tools-help-icon" data-help="Displays today's date on the whiteboard, with text-to-speech in the target language.">?</span>
+                            </div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-add-clock-btn" class="hub-btn-ghost interactive w-full">🕐 Clock</button>
+                                <span class="wb-tools-help-icon" data-help="A simple on-screen clock you can place anywhere on the whiteboard.">?</span>
+                            </div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-add-timer-btn" class="hub-btn-ghost interactive w-full">⏱️ Timer</button>
+                                <span class="wb-tools-help-icon" data-help="A countdown or stopwatch timer you can drag onto the whiteboard for any activity.">?</span>
+                            </div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-open-namepicker-btn" class="hub-btn-ghost interactive w-full">🎲 Random Student</button>
+                                <span class="wb-tools-help-icon" data-help="Randomly picks a student from the class with no repeats until everyone has had a turn.">?</span>
+                            </div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-manage-classes-btn" class="hub-btn-ghost interactive w-full">👥 Manage Classes</button>
+                                <span class="wb-tools-help-icon" data-help="Set up your classes and student rosters - used by Random Student, Class Tracker, and Celebration Station.">?</span>
+                            </div>
+
+                            <div class="wb-tools-menu-group-label">Wellbeing</div>
+                            <div class="wb-tools-menu-row">
+                                <button id="wb-open-dojo-btn" class="hub-btn-ghost interactive w-full">🌟 Celebration Station</button>
+                                <span class="wb-tools-help-icon" data-help="A public, celebratory way to award positive-behaviour points to students, with a big on-screen celebration.">?</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <button id="wb-add-image-btn" class="hub-btn-ghost interactive">🖼️ Add Image</button>
-                <input type="file" id="wb-image-file-input" accept="image/*" multiple style="display:none;">
-
-                <select id="wb-language-select" class="hub-input wb-select">
-                    <option value="fr" selected>French (Français)</option>
-                    <option value="en">English</option>
-                    <option value="zh-pinyin">Mandarin (Pinyin)</option>
-                    <option value="zh-hanzi">Mandarin (Hanzi)</option>
-                    <option value="cantonese">Cantonese</option>
-                    <option value="ja">Japanese (日本語)</option>
-                    <option value="de">German (Deutsch)</option>
-                    <option value="it">Italian (Italiano)</option>
-                    <option value="es">Spanish (Español)</option>
-                    <option value="he">Hebrew (עברית)</option>
-                    <option value="ar">Arabic (العربية)</option>
-                    <option value="sinhala">Sinhala (සිංහල)</option>
-                    <option value="vi">Vietnamese (Tiếng Việt)</option>
-                    <option value="ur">Urdu (اردو)</option>
-                    <option value="hi">Hindi (हिन्दी)</option>
-                    <option value="uk">Ukrainian (Українська)</option>
-                    <option value="ru">Russian (Русский)</option>
-                    <option value="macedonian">Macedonian (Македонски)</option>
-                                <option value="afrikaans">Afrikaans</option>
-                                <option value="serbian">Serbian (Српски)</option>
-                                <option value="croatian">Croatian (Hrvatski)</option>
-                </select>
-
-                <div id="wb-text-settings-group" style="display:none;">
-                    <select id="wb-font-select" class="hub-input wb-select">
-                        <option value="dyslexic" selected>OpenDyslexic</option>
-                        <option value="sans">Sans-serif</option>
-                        <option value="serif">Serif</option>
-                        <option value="rounded">Rounded</option>
-                        <option value="mono">Monospace</option>
+                    <select id="wb-language-select" class="hub-input wb-select">
+                        <option value="fr" selected>French (Français)</option>
+                        <option value="en">English</option>
+                        <option value="zh-pinyin">Mandarin (Pinyin)</option>
+                        <option value="zh-hanzi">Mandarin (Hanzi)</option>
+                        <option value="cantonese">Cantonese</option>
+                        <option value="ja">Japanese (日本語)</option>
+                        <option value="de">German (Deutsch)</option>
+                        <option value="it">Italian (Italiano)</option>
+                        <option value="es">Spanish (Español)</option>
+                        <option value="he">Hebrew (עברית)</option>
+                        <option value="ar">Arabic (العربية)</option>
+                        <option value="sinhala">Sinhala (සිංහල)</option>
+                        <option value="vi">Vietnamese (Tiếng Việt)</option>
+                        <option value="ur">Urdu (اردو)</option>
+                        <option value="hi">Hindi (हिन्दी)</option>
+                        <option value="uk">Ukrainian (Українська)</option>
+                        <option value="ru">Russian (Русский)</option>
+                        <option value="macedonian">Macedonian (Македонски)</option>
+                        <option value="afrikaans">Afrikaans</option>
+                        <option value="serbian">Serbian (Српски)</option>
+                        <option value="croatian">Croatian (Hrvatski)</option>
+                                <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
                     </select>
 
-                    <div class="wb-tray-group">
-                        <button id="wb-align-left-btn" class="hub-btn-ghost interactive" title="Align left">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="14" y2="12"></line><line x1="4" y1="18" x2="18" y2="18"></line></svg>
-                        </button>
-                        <button id="wb-align-center-btn" class="hub-btn-ghost interactive" title="Align centre">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="5" y1="18" x2="19" y2="18"></line></svg>
-                        </button>
-                        <button id="wb-align-right-btn" class="hub-btn-ghost interactive" title="Align right">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="10" y1="12" x2="20" y2="12"></line><line x1="6" y1="18" x2="20" y2="18"></line></svg>
-                        </button>
+                    <div id="wb-graphemes-wrap" class="wb-dropdown-wrap">
+                        <button id="wb-graphemes-toggle-btn" class="hub-btn-ghost interactive">🎨 Colour-Coding</button>
+                        <div id="wb-graphemes-panel" class="wb-dropdown-menu hub-font text-left" style="display:none; min-width:260px;">
+                            <div id="wb-default-grapheme-row" class="flex items-center gap-2 mb-2" style="display:none;">
+                                <span class="text-[11px] font-bold" style="color:var(--hub-ink-soft);">All other text</span>
+                                <input type="color" id="wb-default-grapheme-color" value="#b4b4b4" class="w-6 h-6 rounded-lg cursor-pointer border border-slate-200">
+                            </div>
+                            <div id="wb-sinhala-preset-row" style="display:none;">
+                                <label class="hub-label">Sinhala Vowel Signs</label>
+                                <div id="wb-sinhala-preset-list" class="flex flex-wrap gap-1.5 mb-2"></div>
+                            </div>
+                            <label class="hub-label">Custom Graphemes (Whiteboard only)</label>
+                            <div id="wb-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+                        </div>
                     </div>
 
-                    <div class="wb-tray-group">
-                        <span class="text-xs font-bold">Size</span>
-                        <input type="number" id="wb-text-fontsize-input" class="hub-input wb-fontsize-input" min="8" max="200" value="24">
+                    <button id="wb-add-image-btn" class="hub-btn-ghost interactive">🖼️ Add Image</button>
+                    <button id="wb-add-textbox-btn" class="hub-btn-ghost interactive">📝 Add Text Box</button>
+                    <input type="file" id="wb-image-file-input" accept="image/*" multiple style="display:none;">
+                </div>
+
+                <div class="wb-tray-right">
+                    <div id="wb-zoom-wrap" class="wb-dropdown-wrap">
+                        <button id="wb-zoom-btn" class="hub-btn-ghost interactive" title="Zoom">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line><line x1="11" y1="8" x2="11" y2="14"></line></svg>
+                            <span id="wb-zoom-display-inline" class="text-xs font-bold">100%</span>
+                        </button>
+                        <div id="wb-zoom-menu" class="wb-dropdown-menu" style="display:none; align-items:center; gap:6px;">
+                            <span id="wb-zoom-display" class="text-xs font-bold">100%</span>
+                            <div class="wb-zoom-slider-wrap">
+                                <input type="range" id="wb-zoom-slider" min="30" max="300" value="100">
+                            </div>
+                        </div>
                     </div>
 
-                    <button id="wb-bullet-toggle-btn" class="hub-btn-ghost interactive" title="Cycle bullets/numbering">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                            <circle cx="4" cy="6" r="1.4" fill="currentColor" stroke="none"></circle>
-                            <line x1="9" y1="6" x2="20" y2="6"></line>
-                            <circle cx="4" cy="12" r="1.4" fill="currentColor" stroke="none"></circle>
-                            <line x1="9" y1="12" x2="20" y2="12"></line>
-                            <circle cx="4" cy="18" r="1.4" fill="currentColor" stroke="none"></circle>
-                            <line x1="9" y1="18" x2="20" y2="18"></line>
-                        </svg>
+                    <button id="wb-zoom-reset-btn" class="hub-btn-ghost interactive" title="Reset pan and zoom">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>
                     </button>
 
-                    <div class="wb-tray-group">
-                        <span class="text-xs font-bold">Box colour</span>
-                        <input type="color" id="wb-text-bgcolor-input" value="#ffffff">
-                    </div>
-
-                    <div class="wb-tray-group">
-                        <span class="text-xs font-bold">Opacity</span>
-                        <input type="range" id="wb-text-opacity-input" min="0" max="100" value="70">
-                    </div>
-                </div>
-
-                <div id="wb-graphemes-wrap" class="wb-dropdown-wrap">
-                    <button id="wb-graphemes-toggle-btn" class="hub-btn-ghost interactive">🎨 Colour-Coding</button>
-                    <div id="wb-graphemes-panel" class="wb-dropdown-menu hub-font text-left" style="display:none; min-width:260px;">
-                        <div id="wb-default-grapheme-row" class="flex items-center gap-2 mb-2" style="display:none;">
-                            <span class="text-[11px] font-bold" style="color:var(--hub-ink-soft);">All other text</span>
-                            <input type="color" id="wb-default-grapheme-color" value="#b4b4b4" class="w-6 h-6 rounded-lg cursor-pointer border border-slate-200">
-                        </div>
-                        <div id="wb-sinhala-preset-row" style="display:none;">
-                            <label class="hub-label">Sinhala Vowel Signs</label>
-                            <div id="wb-sinhala-preset-list" class="flex flex-wrap gap-1.5 mb-2"></div>
-                        </div>
-                        <label class="hub-label">Custom Graphemes (Whiteboard only)</label>
-                        <div id="wb-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
-                    </div>
-                </div>
-
-                <div id="wb-zoom-wrap" class="wb-dropdown-wrap">
-                    <button id="wb-zoom-btn" class="hub-btn-ghost interactive" title="Zoom">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line><line x1="11" y1="8" x2="11" y2="14"></line></svg>
-                        <span id="wb-zoom-display-inline" class="text-xs font-bold">100%</span>
+                    <button id="wb-fullscreen-btn" class="hub-btn-ghost interactive fullscreen-toggle-btn" title="Full Screen">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
                     </button>
-                    <div id="wb-zoom-menu" class="wb-dropdown-menu" style="display:none; align-items:center; gap:6px;">
-                        <span id="wb-zoom-display" class="text-xs font-bold">100%</span>
-                        <div class="wb-zoom-slider-wrap">
-                            <input type="range" id="wb-zoom-slider" min="30" max="300" value="100">
+
+                    <div id="wb-background-wrap" class="wb-dropdown-wrap">
+                        <button id="wb-background-btn" class="hub-btn-ghost interactive">🖼️ Background ▾</button>
+                        <div id="wb-background-menu" class="wb-dropdown-menu" style="display:none; min-width:220px;">
+                            <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="none">🚫 No Background</button>
+                            <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="chalkboard">⬛ Chalkboard</button>
+                            <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="cream">◻️ Soft Cream</button>
+                            <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="dotgrid">⚬ Dot Grid</button>
+                            <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="lined">📃 Lined Paper</button>
+                            <button type="button" class="hub-btn-ghost interactive w-full wb-bg-option" data-bg="sky">☁️ Soft Sky</button>
+                            <div id="wb-custom-bg-list"></div>
+                            <div id="wb-bg-settings" style="display:none;">
+                                <label class="hub-label">Background mode</label>
+                                <div class="wb-tray-group">
+                                    <button type="button" id="wb-bg-mode-static-btn" class="hub-btn-ghost interactive">🖼️ Static</button>
+                                    <button type="button" id="wb-bg-mode-dynamic-btn" class="hub-btn-ghost interactive">🎬 Dynamic</button>
+                                </div>
+                                <label class="hub-label">Volume</label>
+                                <input type="range" id="wb-bg-volume-input" min="0" max="100" value="70">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <button id="wb-zoom-reset-btn" class="hub-btn-ghost interactive" title="Reset pan and zoom">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>
-                </button>
+                    <button id="wb-back-btn" class="hub-btn-ghost interactive" style="color:var(--hub-violet); border-color:var(--hub-violet-soft); font-weight:800;">Exit</button>
 
-                <button id="wb-fullscreen-btn" class="hub-btn-ghost interactive fullscreen-toggle-btn" title="Full Screen">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
-                </button>
+                    <button id="wb-clear-board-btn" class="hub-btn-ghost interactive wb-clear-board-btn" title="Clear the whole board">✕</button>
 
-                <button id="wb-back-btn" class="hub-btn-ghost interactive" style="color:#e11d48; border-color:#fecdd3;">Reset</button>
+                    <div id="wb-cog-wrap" class="wb-cog-wrap">
+                        <button id="wb-cog-btn" class="hub-btn-ghost interactive" title="Save/Load settings">⚙️</button>
 
-                <div id="wb-cog-wrap" class="wb-cog-wrap">
-                    <button id="wb-cog-btn" class="hub-btn-ghost interactive" title="Save/Load settings">⚙️</button>
                     <div id="wb-cog-menu" class="wb-cog-menu" style="display:none;">
                         <button id="wb-export-btn" class="hub-btn-ghost interactive w-full">⬇ Export Save File</button>
                         <button id="wb-import-btn" class="hub-btn-ghost interactive w-full">⬆ Import Save File</button>
                         <input type="file" id="wb-import-file-input" accept="application/json" style="display:none;">
                         <span id="wb-save-indicator" class="text-xs font-bold text-center" style="color:var(--hub-ink-soft); opacity:0;">Saved</span>
                     </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Floating text settings bar - appears centred directly above
+                 whichever text box is currently selected, so the top bar's
+                 own layout never changes when editing text. -->
+            <div id="wb-text-settings-group" class="hub-font" style="display:none; position:fixed; z-index:250; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-md); padding:8px 10px; gap:10px; align-items:center;">
+                <select id="wb-font-select" class="hub-input wb-select">
+                    <option value="dyslexic" selected>OpenDyslexic</option>
+                    <option value="sans">Sans-serif</option>
+                    <option value="serif">Serif</option>
+                    <option value="rounded">Rounded</option>
+                    <option value="mono">Monospace</option>
+                </select>
+
+                <button id="wb-align-toggle-btn" class="hub-btn-ghost interactive" title="Align left (click to cycle)">
+                    <svg id="wb-align-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="14" y2="12"></line><line x1="4" y1="18" x2="18" y2="18"></line></svg>
+                </button>
+
+                <div class="wb-tray-group">
+                    <span class="text-xs font-bold">Size</span>
+                    <select id="wb-text-fontsize-input" class="hub-input wb-select">
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="24" selected>24</option>
+                        <option value="28">28</option>
+                        <option value="32">32</option>
+                        <option value="36">36</option>
+                        <option value="40">40</option>
+                        <option value="48">48</option>
+                        <option value="56">56</option>
+                        <option value="64">64</option>
+                        <option value="72">72</option>
+                        <option value="96">96</option>
+                        <option value="120">120</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                    </select>
+                </div>
+
+                <div class="wb-tray-group">
+                    <span class="text-xs font-bold">Box colour</span>
+                    <input type="color" id="wb-text-bgcolor-input" value="#ffffff">
+                </div>
+
+                <div class="wb-tray-group">
+                    <span class="text-xs font-bold">Opacity</span>
+                    <input type="range" id="wb-text-opacity-input" min="0" max="100" value="70">
                 </div>
             </div>
 
@@ -2182,7 +2335,7 @@
                 <div id="wb-dojo-categories-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[310] interactive backdrop-blur-sm hub-font">
                     <div style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); padding:24px; width:100%; max-width:440px; max-height:88vh; overflow-y:auto;">
                         <div class="flex items-center justify-between mb-4">
-                            <strong style="font-size:16px; color:var(--hub-ink);">⚙️ Dojo Settings</strong>
+                            <strong style="font-size:16px; color:var(--hub-ink);">⚙️ Celebration Station Settings</strong>
                             <button id="wb-dojo-categories-close-btn" class="wb-circle-btn interactive">✕</button>
                         </div>
 
@@ -2211,6 +2364,18 @@
                             <div class="hub-checkbox-row">
                                 <input type="checkbox" id="wb-dojo-mute-input" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
                                 <label for="wb-dojo-mute-input" style="font-size:13px; cursor:pointer;">Mute sound</label>
+                            </div>
+                        </div>
+
+                        <strong style="font-size:13px; color:var(--hub-ink);">🎯 Class Goal</strong>
+                        <div style="display:flex; flex-direction:column; gap:10px; margin:10px 0 20px;">
+                            <div class="hub-checkbox-row">
+                                <input type="checkbox" id="wb-dojo-class-goal-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                <label for="wb-dojo-class-goal-toggle" style="font-size:13px; cursor:pointer;">Show a class goal above the students</label>
+                            </div>
+                            <div id="wb-dojo-class-goal-input-wrap" style="display:none;">
+                                <label class="hub-label">Your class goal, in your own words</label>
+                                <input type="text" id="wb-dojo-class-goal-input" class="hub-input" placeholder="e.g. Everyone ready to learn by 9am!">
                             </div>
                         </div>
 
@@ -2311,6 +2476,35 @@
                     <button id="wb-dojo-reset-confirm-btn" class="hub-btn-ghost interactive w-full" style="color:#dc2626; border-color:#fecdd3; font-size:12px;">Reset Points to 0</button>
                 </div>
 
+                <!-- Clear board confirmation - a destructive action, so it gets a confirm step like everything else -->
+                <div id="wb-clear-board-popover" class="hub-font" style="display:none; position:fixed; z-index:400; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:12px; width:210px; text-align:center;">
+                    <p class="hub-hint mt-0" style="font-weight:700;">Clear the whole board? This can't be undone.</p>
+                    <div style="display:flex; gap:6px;">
+                        <button id="wb-clear-board-cancel-btn" class="hub-btn-ghost interactive" style="flex:1; font-size:12px;">Cancel</button>
+                        <button id="wb-clear-board-confirm-btn" class="hub-btn-ghost interactive" style="flex:1; font-size:12px; color:#dc2626; border-color:#fecdd3;">Clear</button>
+                    </div>
+                </div>
+
+                <!-- Tools menu help tooltip - one shared floating window, positioned next to
+                     whichever help icon is currently hovered, appears instantly (no native
+                     browser tooltip delay) -->
+                <div id="wb-tools-help-tooltip" class="hub-font" style="display:none; position:fixed; z-index:500; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:10px 12px; width:220px; font-size:12px; line-height:1.45; color:var(--hub-ink); pointer-events:none;"></div>
+
+                <!-- Silent Translator settings - one row per connected student
+                     device, each with its own language and volume -->
+                <div id="wb-st-settings-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[310] interactive backdrop-blur-sm hub-font">
+                    <div style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); padding:24px; width:100%; max-width:480px; max-height:88vh; overflow-y:auto;">
+                        <div class="flex items-center justify-between mb-4">
+                            <strong style="font-size:16px; color:var(--hub-ink);">⚙️ Silent Translator Settings</strong>
+                            <button id="wb-st-settings-close-btn" class="wb-circle-btn interactive">✕</button>
+                        </div>
+                        <p class="hub-hint mt-0">Connect each student's own device, choose the language they'll hear, and set its own volume. These never play English - only the translation, so students still get English from the board and from you.</p>
+                        <div id="wb-st-device-list" style="display:flex; flex-direction:column; gap:12px; margin:12px 0;"></div>
+                        <button id="wb-st-add-device-btn" class="hub-btn-primary interactive w-full">+ Add a Device</button>
+                        <p class="hub-hint" id="wb-st-support-warning" style="display:none; color:#b45309; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:8px; margin-top:10px;"></p>
+                    </div>
+                </div>
+
                 <!-- Class Tracker help popover - teacher-only guidance, opened via the "?" button -->
                 <div id="wb-assessment-help-popover" class="hub-font" style="display:none; position:absolute; z-index:400; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:14px; width:250px; font-size:12px; line-height:1.5; color:var(--hub-ink);">
                     <strong>How this works</strong>
@@ -2366,7 +2560,7 @@
                 <!-- Behaviour Dojo - public, celebratory positive-behaviour points -->
                 <div id="wb-dojo-panel" class="hub-font" style="display:none; position:absolute; top:20px; left:640px; z-index:150; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); width:420px; height:360px; overflow:hidden;">
                     <div id="wb-dojo-drag-handle" style="display:flex; align-items:center; justify-content:space-between; cursor:grab; padding:10px 12px; border-bottom:1px solid var(--hub-line);">
-                        <strong style="font-size:13px; color:var(--hub-ink);">🌟 Behaviour Dojo</strong>
+                        <strong style="font-size:13px; color:var(--hub-ink);">🌟 Celebration Station</strong>
                         <div style="display:flex; gap:4px; align-items:center;">
                             <button id="wb-dojo-manage-categories-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:12px;" title="Dojo Settings">⚙️</button>
                             <button id="wb-dojo-close-btn" class="wb-circle-btn interactive" style="width:24px; height:24px;">✕</button>
@@ -2379,6 +2573,7 @@
                             <button id="wb-dojo-view-photo-btn" class="interactive" style="padding:0 8px; font-size:14px; border:none; background:transparent; cursor:pointer;" title="Photo view">🖼️</button>
                         </div>
                     </div>
+                    <div id="wb-dojo-class-goal-banner" style="display:none; margin:0 12px 8px; padding:8px 12px; background:var(--hub-violet-soft); border-radius:10px; text-align:center; font-weight:800; font-size:13px; color:var(--hub-ink);"></div>
                     <div id="wb-dojo-student-grid" style="padding:6px 12px 12px; display:grid; grid-template-columns:repeat(auto-fill, minmax(78px, 1fr)); gap:10px; overflow-y:auto; height:calc(100% - 96px);"></div>
                     <div id="wb-dojo-resize-handle" class="wb-panel-resize-handle interactive"></div>
                 </div>
@@ -2386,13 +2581,32 @@
                 <!-- Syntax Street - modular drag-and-drop sentence building tool -->
                 <div id="wb-syntax-panel" class="hub-font" style="display:none; position:absolute; top:20px; left:20px; z-index:150; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); width:720px; height:460px; overflow:hidden;">
                     <div id="wb-syntax-drag-handle" style="display:flex; align-items:center; justify-content:space-between; cursor:grab; padding:10px 12px; border-bottom:1px solid var(--hub-line);">
-                        <strong style="font-size:13px; color:var(--hub-ink);">🏘️ Syntax Street</strong>
-                        <div style="display:flex; gap:4px; align-items:center;">
-                            <button id="wb-syntax-add-house-btn" class="wb-circle-btn interactive" style="width:26px; height:26px; font-size:16px; font-weight:800;" title="Add a house">+</button>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <strong style="font-size:13px; color:var(--hub-ink);">🏘️ Syntax Street</strong>
+                            <button id="wb-syntax-add-house-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:15px; font-weight:800;" title="Add a house">+</button>
+                        </div>
+                        <div id="wb-syntax-settings-wrap" class="wb-dropdown-wrap" style="display:flex; gap:4px; align-items:center;">
+                            <button id="wb-syntax-settings-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:12px;" title="Settings">⚙️</button>
+                            <div id="wb-syntax-settings-menu" class="wb-dropdown-menu hub-font" style="display:none; right:0; left:auto; min-width:230px;">
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="wb-syntax-bubble-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="wb-syntax-bubble-toggle" style="font-size:13px; cursor:pointer;">Background bubble behind text</label>
+                                </div>
+                                <label class="hub-label" style="margin-top:8px;">Street view zoom</label>
+                                <input type="range" id="wb-syntax-view-zoom-slider" min="60" max="180" value="100" class="w-full interactive">
+                                <label class="hub-label" style="margin-top:8px;">Text size</label>
+                                <select id="wb-syntax-fontsize-select" class="hub-input wb-select interactive" style="width:100%;">
+                                    <option value="11">Small</option>
+                                    <option value="13" selected>Medium</option>
+                                    <option value="16">Large</option>
+                                    <option value="19">Extra Large</option>
+                                </select>
+                            </div>
                             <button id="wb-syntax-close-btn" class="wb-circle-btn interactive" style="width:24px; height:24px;">✕</button>
                         </div>
                     </div>
-                    <div style="height:calc(100% - 45px); display:flex; flex-direction:column; position:relative;">
+                    <div id="wb-syntax-scene-wrap" style="height:calc(100% - 45px); display:flex; flex-direction:column; position:relative; overflow:hidden;">
+                        <div id="wb-syntax-scene-zoomable" style="display:flex; flex-direction:column; height:100%; transform-origin:center center;">
                         <div id="wb-syntax-grass" style="flex:1; position:relative; overflow:hidden;">
                             <svg id="wb-syntax-sky-svg" viewBox="0 0 700 320" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%;">
                                 <defs>
@@ -2416,14 +2630,34 @@
                             <div id="wb-syntax-shout-layer" style="position:absolute; inset:0; pointer-events:none;"></div>
                             <div id="wb-syntax-houses-row" style="position:absolute; bottom:14px; left:0; right:0; display:flex; justify-content:center; align-items:flex-end; gap:16px; flex-wrap:wrap; padding:0 24px;"></div>
                         </div>
-                        <div id="wb-syntax-road-wrap" style="height:80px; flex-shrink:0; position:relative; background:linear-gradient(180deg, #6ecb6a 0%, #6ecb6a 8px, transparent 8px);">
-                            <div id="wb-syntax-road" style="position:absolute; inset:0; top:8px; background:#4b4b52; display:flex; align-items:center; justify-content:center;">
-                                <div id="wb-syntax-sentence-text" style="color:white; font-size:17px; font-weight:800; text-align:center; padding:0 60px; line-height:1.3; position:relative;"></div>
+                        <div id="wb-syntax-road-wrap" style="height:88px; flex-shrink:0; position:relative;">
+                            <div id="wb-syntax-footpath" style="position:absolute; top:0; left:0; right:0; height:16px; background:repeating-linear-gradient(90deg, #d4d4d8 0px, #d4d4d8 38px, #b8b8bd 38px, #b8b8bd 40px); border-bottom:2px solid #9a9aa0;"></div>
+                            <div id="wb-syntax-road" style="position:absolute; inset:0; top:16px; background:#4b4b52; display:flex; align-items:center; justify-content:center;">
+                                <div id="wb-syntax-sentence-text" style="color:white; font-size:17px; font-weight:800; font-family:'OpenDyslexic', sans-serif; text-align:center; padding:0 60px; line-height:1.3; position:relative;"></div>
                                 <button id="wb-syntax-speak-btn" class="interactive" style="position:absolute; right:14px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; font-size:19px; background:white; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.35);" title="Read the sentence aloud">🔊</button>
                             </div>
                         </div>
+                        </div>
                     </div>
                     <div id="wb-syntax-resize-handle" class="wb-panel-resize-handle interactive"></div>
+                </div>
+
+                <!-- Silent Translator - sends a private translated audio reading of
+                     any text box to specific students' own connected devices, with
+                     no English included, supporting comprehension without
+                     displacing English exposure. -->
+                <div id="wb-silent-translator-panel" class="hub-font" style="display:none; position:absolute; top:20px; left:20px; z-index:150; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); width:220px; overflow:hidden;">
+                    <div id="wb-st-drag-handle" style="display:flex; align-items:center; justify-content:space-between; cursor:grab; padding:8px 10px; border-bottom:1px solid var(--hub-line);">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <button id="wb-st-collapse-btn" class="wb-circle-btn interactive" style="width:20px; height:20px; font-size:10px;" title="Collapse">▾</button>
+                            <strong style="font-size:12px; color:var(--hub-ink);">🔇 Silent Translator</strong>
+                        </div>
+                        <button id="wb-st-close-btn" class="wb-circle-btn interactive" style="width:22px; height:22px;">✕</button>
+                    </div>
+                    <div id="wb-st-body" style="display:flex; align-items:center; justify-content:center; gap:16px; padding:16px;">
+                        <button id="wb-st-power-btn" class="wb-st-power-btn-base wb-st-power-off interactive" title="Turn on Silent Translator">OFF</button>
+                        <button id="wb-st-settings-btn" class="wb-circle-btn interactive" style="width:34px; height:34px; font-size:16px;" title="Settings">⚙️</button>
+                    </div>
                 </div>
                 </div>
                 <div id="wb-selection-box"></div>
@@ -3261,7 +3495,8 @@
             'macedonian': 'mk-MK',
             'afrikaans': 'af-ZA',
             'serbian': 'sr-RS',
-            'croatian': 'hr-HR'
+            'croatian': 'hr-HR',
+            'punjabi': 'pa-IN'
         };
 
         // Geographical bounding boxes (strict word spawning regions)
@@ -4153,6 +4388,156 @@
             selection.addRange(range);
         }
 
+        // Like getCaretCharacterOffset, but captures both ends of a real
+        // (non-collapsed) selection - used for applying a font size to just
+        // the highlighted portion of a text box rather than the whole thing.
+        function getSelectionCharacterOffsets(el) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0) return null;
+            const range = selection.getRangeAt(0);
+            if (range.collapsed) return null;
+            if (!el.contains(range.startContainer) || !el.contains(range.endContainer)) return null;
+            const preStart = range.cloneRange();
+            preStart.selectNodeContents(el);
+            preStart.setEnd(range.startContainer, range.startOffset);
+            const start = preStart.toString().length;
+            const preEnd = range.cloneRange();
+            preEnd.selectNodeContents(el);
+            preEnd.setEnd(range.endContainer, range.endOffset);
+            const end = preEnd.toString().length;
+            return start === end ? null : { start, end };
+        }
+
+        // A contenteditable's own .textContent silently drops any line break
+        // that exists as a <div>/<p>/<br> boundary rather than a literal "\n"
+        // character - which is exactly what bullet mode's one-div-per-line
+        // rendering produces. These three functions treat block boundaries
+        // as real line breaks consistently, whether that structure came from
+        // our own bullet rendering or the browser's own native Enter
+        // handling, so extraction and caret restoration always agree with
+        // each other regardless of which produced it.
+        function wbDomToPlainText(root) {
+            let result = '';
+            function walk(node) {
+                if (node.nodeType === 3) { result += node.nodeValue; return; }
+                if (node.nodeType !== 1) return;
+                const tag = node.tagName;
+                if (tag === 'BR') { result += '\n'; return; }
+                const isBlock = (tag === 'DIV' || tag === 'P');
+                if (isBlock && result.length > 0 && !result.endsWith('\n')) result += '\n';
+                for (const child of node.childNodes) walk(child);
+            }
+            for (const child of root.childNodes) walk(child);
+            return result;
+        }
+
+        function wbGetCaretPlainOffset(root) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0) return null;
+            const range = selection.getRangeAt(0);
+            let offset = 0, hasContent = false, done = false;
+            function walk(node) {
+                if (done) return;
+                if (node === range.startContainer && node.nodeType === 3) {
+                    offset += range.startOffset;
+                    done = true;
+                    return;
+                }
+                if (node.nodeType === 3) {
+                    offset += node.nodeValue.length;
+                    if (node.nodeValue.length > 0) hasContent = true;
+                    return;
+                }
+                if (node.nodeType !== 1) return;
+                const tag = node.tagName;
+                if (tag === 'BR') {
+                    if (node === range.startContainer) { done = true; return; }
+                    offset += 1;
+                    hasContent = true;
+                    return;
+                }
+                const isBlock = (tag === 'DIV' || tag === 'P');
+                if (isBlock && hasContent) offset += 1;
+                const children = Array.from(node.childNodes);
+                if (node === range.startContainer) {
+                    for (let i = 0; i < range.startOffset && i < children.length; i++) {
+                        walk(children[i]);
+                        if (done) return;
+                    }
+                    done = true;
+                    return;
+                }
+                for (const child of children) {
+                    walk(child);
+                    if (done) return;
+                }
+                hasContent = true;
+            }
+            for (const child of Array.from(root.childNodes)) {
+                walk(child);
+                if (done) break;
+            }
+            return done ? offset : null;
+        }
+
+        function wbSetCaretPlainOffset(root, targetOffset) {
+            const selection = window.getSelection();
+            const range = document.createRange();
+            let remaining = targetOffset, hasContent = false, placed = false;
+            function walk(node) {
+                if (placed) return;
+                if (node.nodeType === 3) {
+                    if (remaining <= node.nodeValue.length) {
+                        range.setStart(node, Math.max(0, remaining));
+                        range.collapse(true);
+                        placed = true;
+                    } else {
+                        remaining -= node.nodeValue.length;
+                    }
+                    if (node.nodeValue.length > 0) hasContent = true;
+                    return;
+                }
+                if (node.nodeType !== 1) return;
+                const tag = node.tagName;
+                if (tag === 'BR') {
+                    if (remaining <= 0) {
+                        range.setStartBefore(node);
+                        range.collapse(true);
+                        placed = true;
+                    } else {
+                        remaining -= 1;
+                    }
+                    hasContent = true;
+                    return;
+                }
+                const isBlock = (tag === 'DIV' || tag === 'P');
+                if (isBlock && hasContent) {
+                    if (remaining <= 0) {
+                        range.setStart(node, 0);
+                        range.collapse(true);
+                        placed = true;
+                        return;
+                    }
+                    remaining -= 1;
+                }
+                for (const child of Array.from(node.childNodes)) {
+                    walk(child);
+                    if (placed) return;
+                }
+                hasContent = true;
+            }
+            for (const child of Array.from(root.childNodes)) {
+                walk(child);
+                if (placed) break;
+            }
+            if (!placed) {
+                range.selectNodeContents(root);
+                range.collapse(false);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+
         // Re-colourises the Colour Coder box in place, preserving the caret position if the
         // person is actively typing in it (so replacing the HTML doesn't jump their cursor).
         function refreshCoderColorization() {
@@ -4186,6 +4571,7 @@
         let wbMultiSelectedIds = new Set();
         let wbSpaceHeld = false;
         let wbEditingElementId = null; // which text element currently has its content editable
+        let wbSavedTextSelectionForSizing = null; // { elId, start, end } captured just before the size input takes focus
         let wbPanX = 0, wbPanY = 0, wbZoom = 1;
         let wbCurrentBackground = 'none';
         let wbDefaultGraphemeColor = '#b4b4b4';
@@ -5362,7 +5748,9 @@
             nameSize: 11,
             pointsSize: 10,
             photoSize: 44,
-            muted: false
+            muted: false,
+            classGoalEnabled: false,
+            classGoalText: ''
         };
 
         function rosterLoadDojoSettings() {
@@ -5376,11 +5764,29 @@
             document.getElementById('wb-dojo-points-size-input').value = rosterDojoSettings.pointsSize;
             document.getElementById('wb-dojo-photo-size-input').value = rosterDojoSettings.photoSize;
             document.getElementById('wb-dojo-mute-input').checked = rosterDojoSettings.muted;
+            document.getElementById('wb-dojo-class-goal-toggle').checked = rosterDojoSettings.classGoalEnabled;
+            document.getElementById('wb-dojo-class-goal-input').value = rosterDojoSettings.classGoalText;
+            document.getElementById('wb-dojo-class-goal-input-wrap').style.display = rosterDojoSettings.classGoalEnabled ? 'block' : 'none';
             rosterApplyDojoSettings();
+            rosterRenderClassGoalDisplay();
         }
 
         function rosterSaveDojoSettings() {
             try { localStorage.setItem('polhDojoSettings', JSON.stringify(rosterDojoSettings)); } catch (e) {}
+        }
+
+        function rosterRenderClassGoalDisplay() {
+            const banner = document.getElementById('wb-dojo-class-goal-banner');
+            const grid = document.getElementById('wb-dojo-student-grid');
+            const show = rosterDojoSettings.classGoalEnabled && rosterDojoSettings.classGoalText.trim().length > 0;
+            if (show) {
+                banner.textContent = '🎯 ' + rosterDojoSettings.classGoalText.trim();
+                banner.style.display = 'block';
+                grid.style.height = 'calc(100% - 136px)';
+            } else {
+                banner.style.display = 'none';
+                grid.style.height = 'calc(100% - 96px)';
+            }
         }
 
         function rosterApplyDojoSettings() {
@@ -5624,7 +6030,7 @@
                     <path d="M2,30 L50,2 L98,30 Z" fill="${roofColor}"/>
                 </svg>
                 <div class="wb-syntax-house-body" style="background:linear-gradient(160deg, ${bodyLight} 0%, ${color} 55%, ${bodyDark} 100%);">
-                    <span class="wb-syntax-house-word">${rosterEscapeHtml(word || '?')}</span>
+                    <span class="wb-syntax-house-word" style="font-size:${syntaxStreetFontSize}px;">${word ? colorizeSentenceText(word) : '?'}</span>
                     <div class="wb-syntax-house-features">
                         <div class="wb-syntax-house-window"></div>
                         <div class="wb-syntax-house-door"></div>
@@ -5868,6 +6274,260 @@
         }
 
         let syntaxStreetPunctuation = '.';
+        let syntaxStreetFontSize = 13;
+
+        // ================================================================
+        // SILENT TRANSLATOR - sends a private, translated audio reading of
+        // any text box directly to specific students' own connected
+        // devices, with no English included - supporting comprehension
+        // access without displacing the English exposure students already
+        // get from the board and the teacher directly.
+        // ================================================================
+        let silentTranslatorEnabled = false;
+        let silentTranslatorDevices = []; // [{ id, deviceId, deviceLabel, language, volume, audioEl }]
+        let silentTranslatorNextRowId = 1;
+
+        // PLACEHOLDER - this needs to point at your own deployed translate+
+        // synthesize Cloud Function once it exists (see the accompanying
+        // notes for the server-side code and setup steps). Left blank
+        // deliberately rather than guessed, since a wrong URL fails
+        // silently in a way that's hard to diagnose from here.
+        const SILENT_TRANSLATOR_PROXY_URL = '';
+
+        // Mirrors the main language dropdown, plus Punjabi - needed for
+        // this feature's own stated use case, and now also added to the
+        // hub's main language lists for consistency.
+        const SILENT_TRANSLATOR_LANGUAGES = [
+            { value: 'fr', label: 'French (Français)' },
+            { value: 'zh-pinyin', label: 'Mandarin (Pinyin)' },
+            { value: 'zh-hanzi', label: 'Mandarin (Hanzi)' },
+            { value: 'cantonese', label: 'Cantonese' },
+            { value: 'ja', label: 'Japanese (日本語)' },
+            { value: 'de', label: 'German (Deutsch)' },
+            { value: 'it', label: 'Italian (Italiano)' },
+            { value: 'es', label: 'Spanish (Español)' },
+            { value: 'he', label: 'Hebrew (עברית)' },
+            { value: 'ar', label: 'Arabic (العربية)' },
+            { value: 'sinhala', label: 'Sinhala (සිංහල)' },
+            { value: 'vi', label: 'Vietnamese (Tiếng Việt)' },
+            { value: 'ur', label: 'Urdu (اردو)' },
+            { value: 'hi', label: 'Hindi (हिन्दी)' },
+            { value: 'uk', label: 'Ukrainian (Українська)' },
+            { value: 'ru', label: 'Russian (Русский)' },
+            { value: 'macedonian', label: 'Macedonian (Македонски)' },
+            { value: 'afrikaans', label: 'Afrikaans' },
+            { value: 'serbian', label: 'Serbian (Српски)' },
+            { value: 'croatian', label: 'Croatian (Hrvatski)' },
+            { value: 'punjabi', label: 'Punjabi (ਪੰਜਾਬੀ)' }
+        ];
+
+        function stOpenPanel() {
+            document.getElementById('wb-silent-translator-panel').style.display = 'block';
+        }
+        function stClosePanel() {
+            document.getElementById('wb-silent-translator-panel').style.display = 'none';
+        }
+        function stToggleCollapse() {
+            const body = document.getElementById('wb-st-body');
+            const btn = document.getElementById('wb-st-collapse-btn');
+            const collapsed = body.style.display === 'none';
+            body.style.display = collapsed ? 'flex' : 'none';
+            btn.textContent = collapsed ? '▾' : '▸';
+        }
+
+        function stSetPower(on) {
+            silentTranslatorEnabled = on;
+            const btn = document.getElementById('wb-st-power-btn');
+            btn.classList.toggle('wb-st-power-on', on);
+            btn.classList.toggle('wb-st-power-off', !on);
+            btn.textContent = on ? 'ON' : 'OFF';
+            btn.title = on ? 'Turn off Silent Translator' : 'Turn on Silent Translator';
+            wbUpdateAllTextTTSButtons();
+        }
+
+        // --- Device row management ---
+        function stRenderDeviceList() {
+            const list = document.getElementById('wb-st-device-list');
+            list.innerHTML = '';
+            silentTranslatorDevices.forEach(row => {
+                const rowEl = document.createElement('div');
+                rowEl.className = 'wb-st-device-row';
+
+                const topRow = document.createElement('div');
+                topRow.style.cssText = 'display:flex; gap:8px; align-items:center;';
+                const chooseBtn = document.createElement('button');
+                chooseBtn.className = 'hub-btn-ghost interactive';
+                chooseBtn.style.cssText = 'flex:1; text-align:left; font-size:12px;';
+                chooseBtn.textContent = row.deviceLabel ? ('🎧 ' + row.deviceLabel) : '🎧 Choose Device...';
+                chooseBtn.onclick = () => stChooseDeviceForRow(row.id);
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'wb-circle-btn interactive';
+                removeBtn.style.cssText = 'width:26px; height:26px; font-size:12px; color:#dc2626; flex-shrink:0;';
+                removeBtn.textContent = '🗑️';
+                removeBtn.onclick = () => stRemoveDeviceRow(row.id);
+                topRow.appendChild(chooseBtn);
+                topRow.appendChild(removeBtn);
+
+                const langSelect = document.createElement('select');
+                langSelect.className = 'hub-input wb-select';
+                langSelect.style.width = '100%';
+                SILENT_TRANSLATOR_LANGUAGES.forEach(lang => {
+                    const opt = document.createElement('option');
+                    opt.value = lang.value;
+                    opt.textContent = lang.label;
+                    if (lang.value === row.language) opt.selected = true;
+                    langSelect.appendChild(opt);
+                });
+                langSelect.addEventListener('change', (e) => {
+                    row.language = e.target.value;
+                    wbDebouncedSave();
+                });
+
+                const volRow = document.createElement('div');
+                volRow.style.cssText = 'display:flex; align-items:center; gap:6px;';
+                const volLabel = document.createElement('span');
+                volLabel.className = 'text-xs font-bold';
+                volLabel.textContent = '🔊';
+                const volSlider = document.createElement('input');
+                volSlider.type = 'range';
+                volSlider.min = '0'; volSlider.max = '100'; volSlider.value = row.volume;
+                volSlider.className = 'w-full';
+                volSlider.addEventListener('input', (e) => {
+                    row.volume = parseInt(e.target.value, 10);
+                    if (row.audioEl) row.audioEl.volume = row.volume / 100;
+                    wbDebouncedSave();
+                });
+                volRow.appendChild(volLabel);
+                volRow.appendChild(volSlider);
+
+                rowEl.appendChild(topRow);
+                rowEl.appendChild(langSelect);
+                rowEl.appendChild(volRow);
+                list.appendChild(rowEl);
+            });
+        }
+
+        function stAddDeviceRow() {
+            silentTranslatorDevices.push({
+                id: silentTranslatorNextRowId++,
+                deviceId: null,
+                deviceLabel: '',
+                language: SILENT_TRANSLATOR_LANGUAGES[0].value,
+                volume: 80,
+                audioEl: null
+            });
+            stRenderDeviceList();
+            wbDebouncedSave();
+        }
+
+        function stRemoveDeviceRow(rowId) {
+            const row = silentTranslatorDevices.find(r => r.id === rowId);
+            if (row && row.audioEl) { row.audioEl.pause(); row.audioEl.remove(); }
+            silentTranslatorDevices = silentTranslatorDevices.filter(r => r.id !== rowId);
+            stRenderDeviceList();
+            wbDebouncedSave();
+        }
+
+        async function stChooseDeviceForRow(rowId) {
+            const row = silentTranslatorDevices.find(r => r.id === rowId);
+            if (!row) return;
+            const warning = document.getElementById('wb-st-support-warning');
+            warning.style.display = 'none';
+            try {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.selectAudioOutput) {
+                    warning.textContent = "This browser doesn't support choosing a specific audio output device (needs a recent Chrome or Edge). Try updating your browser.";
+                    warning.style.display = 'block';
+                    return;
+                }
+                const deviceInfo = await navigator.mediaDevices.selectAudioOutput();
+                row.deviceId = deviceInfo.deviceId;
+                row.deviceLabel = deviceInfo.label || 'Connected device';
+                stEnsureAudioElementForRow(row);
+                stRenderDeviceList();
+                wbDebouncedSave();
+            } catch (e) {
+                console.warn('Device selection cancelled or failed:', e);
+            }
+        }
+
+        function stEnsureAudioElementForRow(row) {
+            if (!row.audioEl) {
+                row.audioEl = document.createElement('audio');
+                row.audioEl.style.display = 'none';
+                document.body.appendChild(row.audioEl);
+            }
+            row.audioEl.volume = (row.volume || 80) / 100;
+            if (row.deviceId && row.audioEl.setSinkId) {
+                row.audioEl.setSinkId(row.deviceId).catch(e => console.warn('Could not set audio output device:', e));
+            }
+        }
+
+        // --- Per-text-box TTS button - only present while the tool is on ---
+        function wbUpdateAllTextTTSButtons() {
+            document.querySelectorAll('.wb-text-element').forEach(el => {
+                const existing = el.querySelector('.wb-text-tts-btn');
+                if (silentTranslatorEnabled) {
+                    if (!existing) {
+                        const btn = document.createElement('button');
+                        btn.className = 'wb-text-tts-btn interactive';
+                        btn.textContent = '🔊';
+                        btn.title = 'Read aloud, and send private translations to configured devices';
+                        btn.onclick = (e) => {
+                            e.stopPropagation();
+                            const id = parseInt(el.dataset.id, 10);
+                            const elData = wbElements.find(d => d.id === id);
+                            if (elData) stSpeakTextBox(elData);
+                        };
+                        el.appendChild(btn);
+                    }
+                } else if (existing) {
+                    existing.remove();
+                }
+            });
+        }
+
+        function stSpeakTextBox(elData) {
+            if (!elData.text) return;
+            // Normal reading, to the board's own default audio output -
+            // exactly like anywhere else in the hub.
+            speakOneInLanguage(elData.text, selectedLanguage);
+            // Plus a private translated reading sent to each configured
+            // device - deliberately never English, so students keep
+            // getting English from the board and the teacher directly.
+            if (silentTranslatorEnabled) {
+                silentTranslatorDevices.forEach(row => {
+                    if (row.deviceId && row.language) stTranslateAndSendToDevice(elData.text, row);
+                });
+            }
+        }
+
+        async function stTranslateAndSendToDevice(text, row) {
+            if (!SILENT_TRANSLATOR_PROXY_URL) {
+                console.warn('Silent Translator: no translation service configured yet (SILENT_TRANSLATOR_PROXY_URL is blank).');
+                return;
+            }
+            try {
+                const res = await fetch(SILENT_TRANSLATOR_PROXY_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        text: text,
+                        sourceLanguageCode: LANG_MAP[selectedLanguage] || 'en-US',
+                        targetLanguageCode: LANG_MAP[row.language] || row.language
+                    })
+                });
+                if (!res.ok) throw new Error('Translation service returned ' + res.status);
+                const data = await res.json();
+                if (!data.audioContent) throw new Error('No audio returned');
+                stEnsureAudioElementForRow(row);
+                row.audioEl.src = 'data:audio/mp3;base64,' + data.audioContent;
+                await row.audioEl.play();
+            } catch (e) {
+                console.warn('Silent Translator: could not translate/send audio for device', row.deviceLabel, e);
+            }
+        }
+
+
 
         function rosterOpenSyntaxPunctuationPicker(anchorEl) {
             const picker = document.getElementById('wb-syntax-punctuation-picker');
@@ -5922,7 +6582,9 @@
                 row.appendChild(punctWidget);
             }
 
-            document.getElementById('wb-syntax-sentence-text').textContent = rosterGetSyntaxSentenceText();
+            const sentenceTextEl = document.getElementById('wb-syntax-sentence-text');
+            sentenceTextEl.innerHTML = colorizeSentenceText(rosterGetSyntaxSentenceText());
+            sentenceTextEl.style.fontSize = (syntaxStreetFontSize + 4) + 'px';
         }
 
         // --- Text to speech: the full sentence normally, then each house
@@ -6361,6 +7023,15 @@
             document.getElementById('wb-dojo-points-size-input').addEventListener('input', (e) => rosterUpdateDojoSetting('pointsSize', parseInt(e.target.value)));
             document.getElementById('wb-dojo-photo-size-input').addEventListener('input', (e) => rosterUpdateDojoSetting('photoSize', parseInt(e.target.value)));
             document.getElementById('wb-dojo-mute-input').addEventListener('change', (e) => rosterUpdateDojoSetting('muted', e.target.checked));
+            document.getElementById('wb-dojo-class-goal-toggle').addEventListener('change', (e) => {
+                rosterUpdateDojoSetting('classGoalEnabled', e.target.checked);
+                document.getElementById('wb-dojo-class-goal-input-wrap').style.display = e.target.checked ? 'block' : 'none';
+                rosterRenderClassGoalDisplay();
+            });
+            document.getElementById('wb-dojo-class-goal-input').addEventListener('input', (e) => {
+                rosterUpdateDojoSetting('classGoalText', e.target.value);
+                rosterRenderClassGoalDisplay();
+            });
 
             document.getElementById('wb-dojo-celebration-close-btn').onclick = rosterCloseDojoCelebration;
             document.getElementById('wb-dojo-celebration-remove-btn').onclick = (e) => {
@@ -6427,6 +7098,28 @@
             });
             rosterMakeDraggable('wb-dojo-panel', 'wb-dojo-drag-handle', 'wb-dojo-resize-handle');
 
+            document.getElementById('wb-open-silent-translator-btn').onclick = () => {
+                document.getElementById('wb-tools-menu').style.display = 'none';
+                stOpenPanel();
+            };
+            document.getElementById('wb-st-close-btn').onclick = stClosePanel;
+            document.getElementById('wb-st-collapse-btn').onclick = stToggleCollapse;
+            document.getElementById('wb-st-power-btn').onclick = () => stSetPower(!silentTranslatorEnabled);
+            document.getElementById('wb-st-settings-btn').onclick = () => {
+                stRenderDeviceList();
+                const overlay = document.getElementById('wb-st-settings-overlay');
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+            };
+            document.getElementById('wb-st-settings-close-btn').onclick = () => {
+                const overlay = document.getElementById('wb-st-settings-overlay');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            };
+            document.getElementById('wb-st-add-device-btn').onclick = stAddDeviceRow;
+            document.getElementById('wb-st-settings-overlay').addEventListener('wheel', (e) => e.stopPropagation());
+            rosterMakeDraggable('wb-silent-translator-panel', 'wb-st-drag-handle', null);
+
             document.getElementById('wb-open-syntax-btn').onclick = () => {
                 document.getElementById('wb-tools-menu').style.display = 'none';
                 rosterMaybePromptFileSetup();
@@ -6434,6 +7127,28 @@
             };
             document.getElementById('wb-syntax-close-btn').onclick = rosterCloseSyntaxStreet;
             document.getElementById('wb-syntax-speak-btn').onclick = rosterSpeakSyntaxSentence;
+
+            document.getElementById('wb-syntax-settings-btn').onclick = (e) => {
+                e.stopPropagation();
+                const menu = document.getElementById('wb-syntax-settings-menu');
+                menu.style.display = (menu.style.display === 'none' || !menu.style.display) ? 'flex' : 'none';
+            };
+            document.addEventListener('click', (e) => {
+                const wrap = document.getElementById('wb-syntax-settings-wrap');
+                if (wrap && !wrap.contains(e.target)) {
+                    document.getElementById('wb-syntax-settings-menu').style.display = 'none';
+                }
+            });
+            document.getElementById('wb-syntax-bubble-toggle').addEventListener('change', (e) => {
+                document.getElementById('wb-syntax-panel').classList.toggle('wb-syntax-bubbles-on', e.target.checked);
+            });
+            document.getElementById('wb-syntax-view-zoom-slider').addEventListener('input', (e) => {
+                document.getElementById('wb-syntax-scene-zoomable').style.transform = `scale(${e.target.value / 100})`;
+            });
+            document.getElementById('wb-syntax-fontsize-select').addEventListener('change', (e) => {
+                syntaxStreetFontSize = parseInt(e.target.value, 10);
+                rosterRenderSyntaxStreetScene();
+            });
 
             document.getElementById('wb-syntax-add-house-btn').onclick = (e) => {
                 rosterOpenSyntaxCategoryMenu(e.currentTarget);
@@ -6536,7 +7251,7 @@
             wbCurrentBackground = state.background || 'none';
             wbBackgroundMode = state.backgroundMode || 'dynamic';
             wbBackgroundVolume = (state.backgroundVolume !== undefined && state.backgroundVolume !== null) ? state.backgroundVolume : 0.7;
-            document.getElementById('wb-language-select').value = state.language || 'fr';
+            document.getElementById('wb-language-select').value = selectedLanguage || state.language || 'fr';
             document.getElementById('wb-font-select').value = state.font || 'dyslexic';
             wbCustomGraphemes = (state.customGraphemes && state.customGraphemes.length) ? state.customGraphemes : [{ text: '', color: '#ef4444' }];
             wbDefaultGraphemeColor = state.defaultGraphemeColor || '#b4b4b4';
@@ -6590,7 +7305,55 @@
 
             document.getElementById('wb-back-btn').onclick = resetToConfig;
 
-            document.getElementById('wb-language-select').addEventListener('change', () => {
+            document.getElementById('wb-clear-board-btn').addEventListener('click', (e) => {
+                const popover = document.getElementById('wb-clear-board-popover');
+                const rect = e.currentTarget.getBoundingClientRect();
+                popover.style.left = Math.min(rect.left, window.innerWidth - 220) + 'px';
+                popover.style.top = (rect.bottom + 8) + 'px';
+                popover.style.display = 'block';
+            });
+            document.getElementById('wb-clear-board-cancel-btn').onclick = () => {
+                document.getElementById('wb-clear-board-popover').style.display = 'none';
+            };
+            document.getElementById('wb-clear-board-confirm-btn').onclick = () => {
+                wbElements = [];
+                wbRenderAllElements();
+                wbDebouncedSave();
+                document.getElementById('wb-clear-board-popover').style.display = 'none';
+            };
+            document.addEventListener('click', (e) => {
+                const popover = document.getElementById('wb-clear-board-popover');
+                if (popover.style.display === 'block' && !e.target.closest('#wb-clear-board-popover') && e.target.id !== 'wb-clear-board-btn') {
+                    popover.style.display = 'none';
+                }
+            });
+
+            // Tools menu help - a floating window matching the hub's other
+            // popovers, appearing the instant the icon is hovered (no native
+            // browser tooltip delay) and disappearing the moment the cursor
+            // leaves it.
+            const wbToolsHelpTooltip = document.getElementById('wb-tools-help-tooltip');
+            document.querySelectorAll('.wb-tools-help-icon').forEach(icon => {
+                icon.addEventListener('mouseenter', (e) => {
+                    wbToolsHelpTooltip.textContent = icon.dataset.help;
+                    const rect = icon.getBoundingClientRect();
+                    wbToolsHelpTooltip.style.display = 'block';
+                    const tooltipWidth = 220;
+                    let left = rect.right + 8;
+                    if (left + tooltipWidth > window.innerWidth) left = rect.left - tooltipWidth - 8;
+                    wbToolsHelpTooltip.style.left = Math.max(4, left) + 'px';
+                    wbToolsHelpTooltip.style.top = Math.max(4, rect.top - 4) + 'px';
+                });
+                icon.addEventListener('mouseleave', () => {
+                    wbToolsHelpTooltip.style.display = 'none';
+                });
+            });
+
+            document.getElementById('wb-language-select').addEventListener('change', (e) => {
+                // The two language dropdowns (main landing, whiteboard) are two
+                // switches for the same light - changing either one updates the
+                // single shared selectedLanguage everything else reads from.
+                selectedLanguage = e.target.value;
                 wbRenderAllElements();
                 wbUpdateSinhalaPresetVisibility();
                 wbUpdateDefaultGraphemeRowVisibility();
@@ -6696,6 +7459,15 @@
                 document.getElementById('wb-tools-menu').style.display = 'none';
             };
             document.getElementById('wb-add-image-btn').onclick = () => document.getElementById('wb-image-file-input').click();
+            document.getElementById('wb-add-textbox-btn').onclick = () => {
+                const rect = document.getElementById('wb-canvas-wrap').getBoundingClientRect();
+                const centerScreen = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+                const worldPos = wbScreenToWorld(centerScreen);
+                // wbCreateTextElement takes a top-left corner, not a centre -
+                // offset by half the default box size so the box actually
+                // appears centred on the view, not just anchored there.
+                wbCreateTextElement(worldPos.x - 90, worldPos.y - 30);
+            };
             document.getElementById('wb-image-file-input').addEventListener('change', (e) => {
                 wbHandleImageFiles(e.target.files);
                 e.target.value = '';
@@ -6744,19 +7516,50 @@
                 }
             });
 
-            ['left', 'center', 'right'].forEach(align => {
-                document.getElementById('wb-align-' + align + '-btn').onclick = () => wbSetTextProperty('textAlign', align);
-            });
-            document.getElementById('wb-text-fontsize-input').addEventListener('change', (e) => {
-                wbSetTextProperty('fontSize', Math.max(8, parseInt(e.target.value, 10) || 22));
-            });
-            document.getElementById('wb-bullet-toggle-btn').onclick = () => {
+            document.getElementById('wb-align-toggle-btn').onclick = () => {
                 const elData = wbElements.find(e => e.id === wbSelectedElementId);
                 if (!elData) return;
-                const order = ['none', 'bullet', 'number'];
-                const next = order[(order.indexOf(elData.bulletMode || 'none') + 1) % order.length];
-                wbSetTextProperty('bulletMode', next);
+                const order = ['left', 'center', 'right'];
+                const next = order[(order.indexOf(elData.textAlign || 'left') + 1) % order.length];
+                wbSetTextProperty('textAlign', next);
             };
+            // Clicking into the size input moves focus away from the text
+            // box, which would otherwise clear any highlighted selection
+            // before we get a chance to read it - so it's captured right
+            // here, on mousedown, a moment before that happens.
+            document.getElementById('wb-text-fontsize-input').addEventListener('mousedown', () => {
+                const elData = wbElements.find(el => el.id === wbSelectedElementId);
+                wbSavedTextSelectionForSizing = null;
+                if (!elData || wbEditingElementId !== elData.id) return;
+                const domEl = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+                const content = domEl ? domEl.querySelector('.wb-element-content') : null;
+                if (!content) return;
+                const offsets = getSelectionCharacterOffsets(content);
+                if (offsets) wbSavedTextSelectionForSizing = { elId: elData.id, start: offsets.start, end: offsets.end };
+            });
+            document.getElementById('wb-text-fontsize-input').addEventListener('change', (e) => {
+                const size = Math.max(8, parseInt(e.target.value, 10) || 22);
+                const saved = wbSavedTextSelectionForSizing;
+                if (saved && saved.elId === wbSelectedElementId) {
+                    const elData = wbElements.find(el => el.id === saved.elId);
+                    const domEl = elData ? document.querySelector(`.wb-element[data-id="${elData.id}"]`) : null;
+                    const content = domEl ? domEl.querySelector('.wb-element-content') : null;
+                    if (elData && content) {
+                        wbAddSizeRange(elData, saved.start, saved.end, size);
+                        if (wbEditingElementId === elData.id) {
+                            wbRenderTextContent(elData, content);
+                            content.contentEditable = 'true';
+                            wbSetCaretPlainOffset(content, saved.end);
+                        } else {
+                            wbRenderTextContent(elData, content);
+                        }
+                        wbDebouncedSave();
+                    }
+                } else {
+                    wbSetTextProperty('fontSize', size);
+                }
+                wbSavedTextSelectionForSizing = null;
+            });
             document.getElementById('wb-text-bgcolor-input').addEventListener('input', (e) => wbSetTextProperty('bgColor', e.target.value));
             document.getElementById('wb-text-opacity-input').addEventListener('input', (e) => wbSetTextProperty('bgOpacity', parseInt(e.target.value, 10) / 100));
 
@@ -6808,6 +7611,7 @@
         function wbApplyWorldTransform() {
             document.getElementById('wb-world').style.transform = `translate(${wbPanX}px, ${wbPanY}px) scale(${wbZoom})`;
             wbUpdateTrafficUIScale();
+            wbUpdateTextSettingsBar();
         }
 
         // The traffic light's settings button/panel are fixed-px sized in
@@ -7191,6 +7995,12 @@
             wbUpdateTextSettingsBar();
         }
 
+        const WB_ALIGN_ICONS = {
+            left: '<line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="14" y2="12"></line><line x1="4" y1="18" x2="18" y2="18"></line>',
+            center: '<line x1="4" y1="6" x2="20" y2="6"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="5" y1="18" x2="19" y2="18"></line>',
+            right: '<line x1="4" y1="6" x2="20" y2="6"></line><line x1="10" y1="12" x2="20" y2="12"></line><line x1="6" y1="18" x2="20" y2="18"></line>'
+        };
+
         function wbUpdateTextSettingsBar() {
             const group = document.getElementById('wb-text-settings-group');
             const elData = wbElements.find(e => e.id === wbSelectedElementId);
@@ -7198,16 +8008,25 @@
                 group.style.display = 'none';
                 return;
             }
-            group.style.display = 'contents'; // merges children into the tray's own flex row instead of adding a second bar
+            // Floats centred directly above the selected text box itself,
+            // rather than living in the top bar - so the top bar's own
+            // layout never shifts around while text is being edited.
+            const domEl = document.querySelector(`.wb-element[data-id="${elData.id}"]`);
+            if (domEl) {
+                const rect = domEl.getBoundingClientRect();
+                group.style.display = 'flex';
+                const barWidth = group.offsetWidth || 360;
+                let left = rect.left + rect.width / 2 - barWidth / 2;
+                left = Math.max(4, Math.min(left, window.innerWidth - barWidth - 4));
+                group.style.left = left + 'px';
+                group.style.top = Math.max(4, rect.top - group.offsetHeight - 10) + 'px';
+            } else {
+                group.style.display = 'none';
+            }
             const align = elData.textAlign || 'left';
-            ['left', 'center', 'right'].forEach(a => {
-                document.getElementById('wb-align-' + a + '-btn').classList.toggle('wb-align-active', a === align);
-            });
-            document.getElementById('wb-text-fontsize-input').value = elData.fontSize || 22;
-            const bulletLabels = { none: 'Off', bullet: 'Bullets', number: 'Numbers' };
-            const bulletBtn = document.getElementById('wb-bullet-toggle-btn');
-            bulletBtn.title = 'List: ' + bulletLabels[elData.bulletMode || 'none'] + ' (click to cycle)';
-            bulletBtn.classList.toggle('wb-mode-active', (elData.bulletMode || 'none') !== 'none');
+            document.getElementById('wb-align-toggle-icon').innerHTML = WB_ALIGN_ICONS[align] || WB_ALIGN_ICONS.left;
+            document.getElementById('wb-align-toggle-btn').title = 'Align: ' + align + ' (click to cycle)';
+            document.getElementById('wb-text-fontsize-input').value = elData.fontSize || 24;
             document.getElementById('wb-text-bgcolor-input').value = elData.bgColor || '#ffffff';
             document.getElementById('wb-text-opacity-input').value = Math.round(((elData.bgOpacity !== undefined && elData.bgOpacity !== null) ? elData.bgOpacity : 0.7) * 100);
         }
@@ -7225,6 +8044,11 @@
             if (content) {
                 if (wbEditingElementId === elData.id) {
                     wbApplyTextElementStyles(elData, content); // don't disturb in-progress typing with a full re-render
+                    // Clicking a control in the floating settings bar moves
+                    // the browser's focus away from the text box, which
+                    // would otherwise force a double-click to resume typing -
+                    // sending focus straight back keeps editing seamless.
+                    content.focus();
                 } else {
                     wbRenderTextContent(elData, content);
                 }
@@ -7236,7 +8060,7 @@
         // --- Rendering ---
         function wbRenderAllElements() {
             const world = document.getElementById('wb-world');
-            const toolPanels = ['wb-namepicker-panel', 'wb-assessment-panel', 'wb-dojo-panel', 'wb-syntax-panel']
+            const toolPanels = ['wb-namepicker-panel', 'wb-assessment-panel', 'wb-dojo-panel', 'wb-syntax-panel', 'wb-silent-translator-panel']
                 .map(id => document.getElementById(id))
                 .filter(Boolean);
             world.innerHTML = '';
@@ -7298,33 +8122,91 @@
 
         function wbApplyTextElementStyles(elData, content) {
             content.style.textAlign = elData.textAlign || 'left';
-            content.style.fontSize = (elData.fontSize || 22) + 'px';
+            content.style.fontSize = (elData.fontSize || 24) + 'px';
             content.style.opacity = 1; // the text itself never fades - only the box background does, via its own alpha below
             const bgOpacity = (elData.bgOpacity !== undefined && elData.bgOpacity !== null) ? elData.bgOpacity : 0.7;
             content.style.background = wbHexToRgba(elData.bgColor || '#ffffff', bgOpacity);
         }
 
-        // Colourises the text and, if bullet/number mode is active, splits it
-        // into one <div> per line so each can get its own marker via CSS -
-        // only applied when NOT actively being edited (matching the existing
-        // pattern where editing shows plain text and formatting re-applies
-        // on exit), since a contenteditable full of nested per-line divs
-        // would be fragile to type into directly.
         function wbRenderTextContent(elData, content) {
-            const bulletMode = elData.bulletMode || 'none';
-            content.classList.remove('wb-bullet-mode-bullet', 'wb-bullet-mode-number');
-
-            if (!elData.text) {
-                content.innerHTML = '';
-            } else if (bulletMode === 'none') {
-                content.innerHTML = wbColorizeForDisplay(elData.text);
-            } else {
-                content.classList.add('wb-bullet-mode-' + bulletMode);
-                content.innerHTML = elData.text.split('\n')
-                    .map(line => '<div class="wb-bullet-line">' + (line.trim() === '' ? '&nbsp;' : wbColorizeForDisplay(line)) + '</div>')
-                    .join('');
-            }
+            content.innerHTML = elData.text ? wbColorizeForDisplay(elData.text) : '';
             wbApplyTextElementStyles(elData, content);
+            wbApplySizeRangesToDom(elData, content);
+        }
+
+        // Lets part of a text box's text have its own font size (e.g. a
+        // larger heading within a longer note), independent of the box's
+        // overall size setting - a common expectation from Word/Canva-style
+        // editors. Ranges are offsets into the box's rendered text; applied
+        // as a DOM pass after the normal colour/bullet render, splitting and
+        // wrapping just the affected text nodes.
+        function wbApplySizeRangesToDom(elData, content) {
+            const ranges = (elData.sizeRanges || []).slice().sort((a, b) => a.start - b.start);
+            if (ranges.length === 0) return;
+
+            const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null);
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) textNodes.push(node);
+
+            let offset = 0;
+            for (const originalNode of textNodes) {
+                const nodeStart = offset;
+                const nodeLength = originalNode.length;
+                offset += nodeLength;
+                const nodeEnd = offset;
+
+                const overlaps = [];
+                for (const r of ranges) {
+                    const overlapStart = Math.max(r.start, nodeStart);
+                    const overlapEnd = Math.min(r.end, nodeEnd);
+                    if (overlapStart < overlapEnd) {
+                        overlaps.push({ localStart: overlapStart - nodeStart, localEnd: overlapEnd - nodeStart, size: r.size });
+                    }
+                }
+                if (overlaps.length === 0) continue;
+                overlaps.sort((a, b) => a.localStart - b.localStart);
+
+                let currentNode = originalNode;
+                let consumedUpTo = 0;
+                for (const ov of overlaps) {
+                    if (!currentNode) break;
+                    const splitPoint1 = ov.localStart - consumedUpTo;
+                    let target = currentNode;
+                    if (splitPoint1 > 0) target = currentNode.splitText(splitPoint1);
+                    const pieceLength = ov.localEnd - ov.localStart;
+                    if (pieceLength < target.length) {
+                        currentNode = target.splitText(pieceLength);
+                    } else {
+                        currentNode = null;
+                    }
+                    consumedUpTo = ov.localEnd;
+
+                    const span = document.createElement('span');
+                    span.style.fontSize = ov.size + 'px';
+                    target.parentNode.insertBefore(span, target);
+                    span.appendChild(target);
+                }
+            }
+        }
+
+        // Stores a new size override for a character range, trimming or
+        // splitting any existing ranges it overlaps so ranges never overlap
+        // each other (each character is only ever covered by one size).
+        function wbAddSizeRange(elData, start, end, size) {
+            if (!elData.sizeRanges) elData.sizeRanges = [];
+            const next = [];
+            for (const r of elData.sizeRanges) {
+                if (r.end <= start || r.start >= end) {
+                    next.push(r); // no overlap at all
+                    continue;
+                }
+                if (r.start < start) next.push({ start: r.start, end: start, size: r.size });
+                if (r.end > end) next.push({ start: end, end: r.end, size: r.size });
+                // the overlapping middle portion of the old range is simply dropped
+            }
+            next.push({ start, end, size });
+            elData.sizeRanges = next;
         }
 
         function wbBuildElementDOM(elData) {
@@ -7343,6 +8225,17 @@
                 content.spellcheck = false;
                 content.contentEditable = 'false';
                 wbRenderTextContent(elData, content);
+                if (silentTranslatorEnabled) {
+                    const ttsBtn = document.createElement('button');
+                    ttsBtn.className = 'wb-text-tts-btn interactive';
+                    ttsBtn.textContent = '🔊';
+                    ttsBtn.title = 'Read aloud, and send private translations to configured devices';
+                    ttsBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        stSpeakTextBox(elData);
+                    };
+                    el.appendChild(ttsBtn);
+                }
             } else if (elData.type === 'image') {
                 const imgEl = document.createElement('img');
                 imgEl.src = elData.src;
@@ -7633,12 +8526,33 @@
             domEl.classList.add('wb-editing');
             const content = domEl.querySelector('.wb-element-content');
             content.contentEditable = 'true';
-            content.textContent = elData.text || '';
-            wbApplyTextElementStyles(elData, content);
+            // Render the actual coloured/bulleted formatting immediately on
+            // entry, not plain text - otherwise re-opening an existing text
+            // box (as opposed to a brand new one) shows plain black text
+            // and no bullets until the next keystroke re-renders it.
+            wbRenderTextContent(elData, content);
             content.focus();
+            // Put the caret at the very end, matching where a click to enter
+            // editing would naturally land.
+            wbSetCaretPlainOffset(content, (elData.text || '').length);
 
+            // Enter is left to the browser's own native handling here
+            // (rather than intercepted) - fighting the browser's own
+            // paragraph/line-break insertion was causing conflicts
+            // (needing two presses to actually see a line break). Instead,
+            // whatever block structure the browser produces gets correctly
+            // converted back to real "\n" characters by wbDomToPlainText
+            // below, regardless of whether it's a <div>, <p>, or <br>.
             const onInput = () => {
-                elData.text = content.textContent;
+                elData.text = wbDomToPlainText(content);
+                // Same technique already proven in the Colour Coder tool -
+                // save the caret's plain-text offset, re-render the coloured
+                // (and bulleted, if active) HTML in place, then restore the
+                // caret so typing doesn't jump around.
+                const caretOffset = wbGetCaretPlainOffset(content);
+                wbRenderTextContent(elData, content);
+                content.contentEditable = 'true';
+                if (caretOffset !== null) wbSetCaretPlainOffset(content, caretOffset);
                 wbDebouncedSave();
             };
             content.addEventListener('input', onInput);
@@ -7650,7 +8564,7 @@
             const domEl = document.querySelector(`.wb-element[data-id="${id}"]`);
             if (!domEl) { wbEditingElementId = null; return; }
             const content = domEl.querySelector('.wb-element-content');
-            if (elData) elData.text = content.textContent;
+            if (elData) elData.text = wbDomToPlainText(content);
             domEl.classList.remove('wb-editing');
             content.contentEditable = 'false';
             if (content._wbOnInput) content.removeEventListener('input', content._wbOnInput);
@@ -7719,7 +8633,7 @@
             const cos = Math.cos(rotation), sin = Math.sin(rotation);
 
             const originWidth = elData.width, originHeight = elData.height;
-            const originFontSize = elData.fontSize || 22;
+            const originFontSize = elData.fontSize || 24;
             const centerX = elData.x + originWidth / 2, centerY = elData.y + originHeight / 2;
 
             const localAnchorX = (anchorFx - 0.5) * originWidth;
@@ -12115,6 +13029,12 @@
             wbStopBackgroundMedia();
             document.getElementById('results-screen').style.display = 'none';
             document.getElementById('title-screen').style.display = 'flex';
+            // The whiteboard's own language dropdown is a second switch for the
+            // same shared selectedLanguage - if it was changed while in there,
+            // this dropdown needs to reflect that on the way back out, not just
+            // whatever it happened to show before entering.
+            const landingLangSelect = document.getElementById('global-language-select');
+            if (landingLangSelect && selectedLanguage) landingLangSelect.value = selectedLanguage;
             showLandingStep('wheel');
         }
 
