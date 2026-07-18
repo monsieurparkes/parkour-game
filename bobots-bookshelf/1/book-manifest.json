@@ -9,80 +9,110 @@
       "name": "page1",
       "image": "1.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« Je vois un oiseau ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page2",
       "image": "2.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« J'entends un chien ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page3",
       "image": "3.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« Je vois une maison ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page4",
       "image": "4.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« J'entends une chanson ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page5",
       "image": "5.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« Je vois un avion ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page6",
       "image": "6.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« J'entends le vent ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page7",
       "image": "7.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« Je vois... un robot koala ? » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page8",
       "image": "8.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« J'entends... boum boum ? » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page9",
       "image": "9.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« Je vois beaucoup de choses ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     },
     {
       "name": "page10",
       "image": "10.jpg",
       "audio": null,
-      "text": {
+      "globalMeanings": {
         "fr": "« J'entends beaucoup de choses. C'est mon monde ! » dit Petit Parkour."
+      },
+      "literalMeanings": {
+        "fr": {}
       }
     }
   ]
