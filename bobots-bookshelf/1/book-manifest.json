@@ -10,62 +10,80 @@
       "image": "1.jpg",
       "audio": null,
       "text": {
-        "fr": "Je vois un oiseau."
+        "fr": "« Je vois un oiseau ! » dit Petit Parkour."
       }
     },
     {
       "name": "page2",
       "image": "2.jpg",
       "audio": null,
-      "text": {J'entends un chien.}
+      "text": {
+        "fr": "« J'entends un chien ! » dit Petit Parkour."
+      }
     },
     {
       "name": "page3",
       "image": "3.jpg",
       "audio": null,
-      "text": {Je vois une maison.}
+      "text": {
+        "fr": "« Je vois une maison ! » dit Petit Parkour."
+      }
     },
     {
       "name": "page4",
       "image": "4.jpg",
       "audio": null,
-      "text": {J'entends une chanson.}
+      "text": {
+        "fr": "« J'entends une chanson ! » dit Petit Parkour."
+      }
     },
     {
       "name": "page5",
       "image": "5.jpg",
       "audio": null,
-      "text": {Je vois un avion.}
+      "text": {
+        "fr": "« Je vois un avion ! » dit Petit Parkour."
+      }
     },
     {
       "name": "page6",
       "image": "6.jpg",
       "audio": null,
-      "text": {J'entends le vent.}
+      "text": {
+        "fr": "« J'entends le vent ! » dit Petit Parkour."
+      }
     },
     {
       "name": "page7",
       "image": "7.jpg",
       "audio": null,
-      "text": {Je vois... un robot koala ?}
+      "text": {
+        "fr": "« Je vois... un robot koala ? » dit Petit Parkour."
+      }
     },
     {
       "name": "page8",
       "image": "8.jpg",
       "audio": null,
-      "text": {J'entends... boum boum ?}
+      "text": {
+        "fr": "« J'entends... boum boum ? » dit Petit Parkour."
+      }
     },
     {
       "name": "page9",
       "image": "9.jpg",
       "audio": null,
-      "text": {Je vois beaucoup de choses.}
+      "text": {
+        "fr": "« Je vois beaucoup de choses ! » dit Petit Parkour."
+      }
     },
     {
       "name": "page10",
       "image": "10.jpg",
       "audio": null,
-      "text": {J'entends beaucoup de choses. C'est mon monde !}
+      "text": {
+        "fr": "« J'entends beaucoup de choses. C'est mon monde ! » dit Petit Parkour."
+      }
     }
   ]
 }
