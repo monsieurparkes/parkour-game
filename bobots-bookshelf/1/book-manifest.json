@@ -1,0 +1,69 @@
+{
+  "title": {
+    "fr": "Petit Parkour voit et entend",
+    "en": "Little Parkour sees and hears"
+  },
+  "cover": "cover.jpg",
+  "pages": [
+    {
+      "name": "page1",
+      "image": "1.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page2",
+      "image": "2.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page3",
+      "image": "3.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page4",
+      "image": "4.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page5",
+      "image": "5.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page6",
+      "image": "6.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page7",
+      "image": "7.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page8",
+      "image": "8.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page9",
+      "image": "9.jpg",
+      "audio": null,
+      "text": {}
+    },
+    {
+      "name": "page10",
+      "image": "10.jpg",
+      "audio": null,
+      "text": {}
+    }
+  ]
+}
