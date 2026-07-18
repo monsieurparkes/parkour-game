@@ -1,0 +1,9 @@
+{
+  "books": [
+    {
+      "title": { "fr": "Petit Parkour voit et entend", "en": "Little Parkour sees and hears" },
+      "folder": "1",
+      "cover": "cover.jpg"
+    }
+  ]
+}
