@@ -9,61 +9,61 @@
       "name": "page1",
       "image": "1.jpg",
       "audio": null,
-      "text": {}
+      "text": {Je vois un oiseau.}
     },
     {
       "name": "page2",
       "image": "2.jpg",
       "audio": null,
-      "text": {}
+      "text": {J'entends un chien.}
     },
     {
       "name": "page3",
       "image": "3.jpg",
       "audio": null,
-      "text": {}
+      "text": {Je vois une maison.}
     },
     {
       "name": "page4",
       "image": "4.jpg",
       "audio": null,
-      "text": {}
+      "text": {J'entends une chanson.}
     },
     {
       "name": "page5",
       "image": "5.jpg",
       "audio": null,
-      "text": {}
+      "text": {Je vois un avion.}
     },
     {
       "name": "page6",
       "image": "6.jpg",
       "audio": null,
-      "text": {}
+      "text": {J'entends le vent.}
     },
     {
       "name": "page7",
       "image": "7.jpg",
       "audio": null,
-      "text": {}
+      "text": {Je vois... un robot koala ?}
     },
     {
       "name": "page8",
       "image": "8.jpg",
       "audio": null,
-      "text": {}
+      "text": {J'entends... boum boum ?}
     },
     {
       "name": "page9",
       "image": "9.jpg",
       "audio": null,
-      "text": {}
+      "text": {Je vois beaucoup de choses.}
     },
     {
       "name": "page10",
       "image": "10.jpg",
       "audio": null,
-      "text": {}
+      "text": {J'entends beaucoup de choses. C'est mon monde !}
     }
   ]
 }
