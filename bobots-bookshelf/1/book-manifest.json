@@ -9,7 +9,9 @@
       "name": "page1",
       "image": "1.jpg",
       "audio": null,
-      "text": {Je vois un oiseau.}
+      "text": {
+        "fr": "Je vois un oiseau."
+      }
     },
     {
       "name": "page2",
