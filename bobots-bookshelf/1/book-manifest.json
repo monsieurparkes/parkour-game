@@ -4,16 +4,1472 @@
     "en": "Little Parkour sees and hears"
   },
   "cover": "cover.jpg",
+  "literalMeanings": {
+    "je": {
+      "en": [
+        "I"
+      ],
+      "es": [
+        "yo"
+      ],
+      "it": [
+        "io"
+      ],
+      "de": [
+        "ich"
+      ],
+      "zh-pinyin": [
+        "wǒ"
+      ],
+      "zh-hanzi": [
+        "我"
+      ],
+      "cantonese": [
+        "我"
+      ],
+      "ja": [
+        "私"
+      ],
+      "he": [
+        "אני"
+      ],
+      "ar": [
+        "أنا"
+      ],
+      "sinhala": [
+        "මම"
+      ],
+      "vi": [
+        "tôi"
+      ],
+      "ur": [
+        "میں"
+      ],
+      "hi": [
+        "मैं"
+      ],
+      "uk": [
+        "я"
+      ],
+      "ru": [
+        "я"
+      ],
+      "macedonian": [
+        "јас"
+      ],
+      "afrikaans": [
+        "ek"
+      ],
+      "serbian": [
+        "ја"
+      ],
+      "croatian": [
+        "ja"
+      ],
+      "punjabi": [
+        "ਮੈਂ"
+      ]
+    },
+    "vois": {
+      "en": [
+        "see"
+      ],
+      "es": [
+        "veo"
+      ],
+      "it": [
+        "vedo"
+      ],
+      "de": [
+        "sehe"
+      ],
+      "zh-pinyin": [
+        "kànjiàn"
+      ],
+      "zh-hanzi": [
+        "看见"
+      ],
+      "cantonese": [
+        "睇到"
+      ],
+      "ja": [
+        "見える"
+      ],
+      "he": [
+        "רואה"
+      ],
+      "ar": [
+        "أرى"
+      ],
+      "sinhala": [
+        "දකිනවා"
+      ],
+      "vi": [
+        "thấy"
+      ],
+      "ur": [
+        "دیکھتا ہوں"
+      ],
+      "hi": [
+        "देखता हूँ"
+      ],
+      "uk": [
+        "бачу"
+      ],
+      "ru": [
+        "вижу"
+      ],
+      "macedonian": [
+        "гледам"
+      ],
+      "afrikaans": [
+        "sien"
+      ],
+      "serbian": [
+        "видим"
+      ],
+      "croatian": [
+        "vidim"
+      ],
+      "punjabi": [
+        "ਦਿਖਦਾ ਹੈ"
+      ]
+    },
+    "un": {
+      "en": [
+        "a",
+        "an"
+      ],
+      "es": [
+        "un"
+      ],
+      "it": [
+        "un"
+      ],
+      "de": [
+        "ein"
+      ],
+      "zh-pinyin": [
+        "yī (no article in Mandarin)"
+      ],
+      "zh-hanzi": [
+        "一 (no article)"
+      ],
+      "cantonese": [
+        "一 (no article)"
+      ],
+      "ja": [
+        "(no article in Japanese)"
+      ],
+      "he": [
+        "(no article in Hebrew)"
+      ],
+      "ar": [
+        "(no article - \"un\" is unmarked in Arabic)"
+      ],
+      "sinhala": [
+        "(no article in Sinhala)"
+      ],
+      "vi": [
+        "một"
+      ],
+      "ur": [
+        "ایک"
+      ],
+      "hi": [
+        "एक"
+      ],
+      "uk": [
+        "(no article in Ukrainian)"
+      ],
+      "ru": [
+        "(no article in Russian)"
+      ],
+      "macedonian": [
+        "(no article)"
+      ],
+      "afrikaans": [
+        "'n"
+      ],
+      "serbian": [
+        "(no article)"
+      ],
+      "croatian": [
+        "(no article)"
+      ],
+      "punjabi": [
+        "ਇੱਕ"
+      ]
+    },
+    "oiseau": {
+      "en": [
+        "bird"
+      ],
+      "es": [
+        "pájaro"
+      ],
+      "it": [
+        "uccello"
+      ],
+      "de": [
+        "Vogel"
+      ],
+      "zh-pinyin": [
+        "niǎo"
+      ],
+      "zh-hanzi": [
+        "鸟"
+      ],
+      "cantonese": [
+        "雀仔"
+      ],
+      "ja": [
+        "鳥"
+      ],
+      "he": [
+        "ציפור"
+      ],
+      "ar": [
+        "طائر"
+      ],
+      "sinhala": [
+        "කුරුල්ලා"
+      ],
+      "vi": [
+        "chim"
+      ],
+      "ur": [
+        "پرندہ"
+      ],
+      "hi": [
+        "चिड़िया"
+      ],
+      "uk": [
+        "пташка"
+      ],
+      "ru": [
+        "птица"
+      ],
+      "macedonian": [
+        "птица"
+      ],
+      "afrikaans": [
+        "voël"
+      ],
+      "serbian": [
+        "птица"
+      ],
+      "croatian": [
+        "ptica"
+      ],
+      "punjabi": [
+        "ਪੰਛੀ"
+      ]
+    },
+    "dit": {
+      "en": [
+        "says",
+        "said"
+      ],
+      "es": [
+        "dijo"
+      ],
+      "it": [
+        "disse"
+      ],
+      "de": [
+        "sagte"
+      ],
+      "zh-pinyin": [
+        "shuō"
+      ],
+      "zh-hanzi": [
+        "说"
+      ],
+      "cantonese": [
+        "话"
+      ],
+      "ja": [
+        "言いました"
+      ],
+      "he": [
+        "אמר"
+      ],
+      "ar": [
+        "قال"
+      ],
+      "sinhala": [
+        "කිව්වා"
+      ],
+      "vi": [
+        "nói"
+      ],
+      "ur": [
+        "نے کہا"
+      ],
+      "hi": [
+        "ने कहा"
+      ],
+      "uk": [
+        "сказав"
+      ],
+      "ru": [
+        "сказал"
+      ],
+      "macedonian": [
+        "рече"
+      ],
+      "afrikaans": [
+        "sê"
+      ],
+      "serbian": [
+        "рекао је"
+      ],
+      "croatian": [
+        "rekao je"
+      ],
+      "punjabi": [
+        "ਨੇ ਕਿਹਾ"
+      ]
+    },
+    "jentends": {
+      "en": [
+        "I hear"
+      ],
+      "es": [
+        "oigo"
+      ],
+      "it": [
+        "sento"
+      ],
+      "de": [
+        "ich höre"
+      ],
+      "zh-pinyin": [
+        "wǒ tīngjiàn"
+      ],
+      "zh-hanzi": [
+        "我听见"
+      ],
+      "cantonese": [
+        "我听到"
+      ],
+      "ja": [
+        "聞こえる"
+      ],
+      "he": [
+        "אני שומע"
+      ],
+      "ar": [
+        "أسمع"
+      ],
+      "sinhala": [
+        "මම අහනවා"
+      ],
+      "vi": [
+        "mình nghe"
+      ],
+      "ur": [
+        "میں سنتا ہوں"
+      ],
+      "hi": [
+        "मुझे सुनाई देता है"
+      ],
+      "uk": [
+        "я чую"
+      ],
+      "ru": [
+        "я слышу"
+      ],
+      "macedonian": [
+        "слушам"
+      ],
+      "afrikaans": [
+        "ek hoor"
+      ],
+      "serbian": [
+        "чујем"
+      ],
+      "croatian": [
+        "čujem"
+      ],
+      "punjabi": [
+        "ਸੁਣਦਾ ਹੈ"
+      ]
+    },
+    "chien": {
+      "en": [
+        "dog"
+      ],
+      "es": [
+        "perro"
+      ],
+      "it": [
+        "cane"
+      ],
+      "de": [
+        "Hund"
+      ],
+      "zh-pinyin": [
+        "gǒu"
+      ],
+      "zh-hanzi": [
+        "狗"
+      ],
+      "cantonese": [
+        "狗"
+      ],
+      "ja": [
+        "犬"
+      ],
+      "he": [
+        "כלב"
+      ],
+      "ar": [
+        "كلب"
+      ],
+      "sinhala": [
+        "බල්ලා"
+      ],
+      "vi": [
+        "con chó"
+      ],
+      "ur": [
+        "کتا"
+      ],
+      "hi": [
+        "कुत्ता"
+      ],
+      "uk": [
+        "собака"
+      ],
+      "ru": [
+        "собака"
+      ],
+      "macedonian": [
+        "куче"
+      ],
+      "afrikaans": [
+        "hond"
+      ],
+      "serbian": [
+        "пас"
+      ],
+      "croatian": [
+        "pas"
+      ],
+      "punjabi": [
+        "ਕੁੱਤਾ"
+      ]
+    },
+    "une": {
+      "en": [
+        "a",
+        "an"
+      ],
+      "es": [
+        "una"
+      ],
+      "it": [
+        "una"
+      ],
+      "de": [
+        "eine"
+      ],
+      "zh-pinyin": [
+        "yī (no article)"
+      ],
+      "zh-hanzi": [
+        "一 (no article)"
+      ],
+      "cantonese": [
+        "一 (no article)"
+      ],
+      "ja": [
+        "(no article)"
+      ],
+      "he": [
+        "(no article)"
+      ],
+      "ar": [
+        "(no article)"
+      ],
+      "sinhala": [
+        "(no article)"
+      ],
+      "vi": [
+        "một"
+      ],
+      "ur": [
+        "ایک"
+      ],
+      "hi": [
+        "एक"
+      ],
+      "uk": [
+        "(no article)"
+      ],
+      "ru": [
+        "(no article)"
+      ],
+      "macedonian": [
+        "(no article)"
+      ],
+      "afrikaans": [
+        "'n"
+      ],
+      "serbian": [
+        "(no article)"
+      ],
+      "croatian": [
+        "(no article)"
+      ],
+      "punjabi": [
+        "ਇੱਕ"
+      ]
+    },
+    "maison": {
+      "en": [
+        "house"
+      ],
+      "es": [
+        "casa"
+      ],
+      "it": [
+        "casa"
+      ],
+      "de": [
+        "Haus"
+      ],
+      "zh-pinyin": [
+        "fángzi"
+      ],
+      "zh-hanzi": [
+        "房子"
+      ],
+      "cantonese": [
+        "屋"
+      ],
+      "ja": [
+        "家"
+      ],
+      "he": [
+        "בית"
+      ],
+      "ar": [
+        "بيت"
+      ],
+      "sinhala": [
+        "ගෙය"
+      ],
+      "vi": [
+        "ngôi nhà"
+      ],
+      "ur": [
+        "گھر"
+      ],
+      "hi": [
+        "घर"
+      ],
+      "uk": [
+        "будинок"
+      ],
+      "ru": [
+        "дом"
+      ],
+      "macedonian": [
+        "куќа"
+      ],
+      "afrikaans": [
+        "huis"
+      ],
+      "serbian": [
+        "кућа"
+      ],
+      "croatian": [
+        "kuća"
+      ],
+      "punjabi": [
+        "ਘਰ"
+      ]
+    },
+    "chanson": {
+      "en": [
+        "song"
+      ],
+      "es": [
+        "canción"
+      ],
+      "it": [
+        "canzone"
+      ],
+      "de": [
+        "Lied"
+      ],
+      "zh-pinyin": [
+        "gē"
+      ],
+      "zh-hanzi": [
+        "歌"
+      ],
+      "cantonese": [
+        "歌"
+      ],
+      "ja": [
+        "歌"
+      ],
+      "he": [
+        "שיר"
+      ],
+      "ar": [
+        "أغنية"
+      ],
+      "sinhala": [
+        "ගීතය"
+      ],
+      "vi": [
+        "bài hát"
+      ],
+      "ur": [
+        "گانا"
+      ],
+      "hi": [
+        "गाना"
+      ],
+      "uk": [
+        "пісня"
+      ],
+      "ru": [
+        "песня"
+      ],
+      "macedonian": [
+        "песна"
+      ],
+      "afrikaans": [
+        "liedjie"
+      ],
+      "serbian": [
+        "песма"
+      ],
+      "croatian": [
+        "pjesma"
+      ],
+      "punjabi": [
+        "ਗੀਤ"
+      ]
+    },
+    "avion": {
+      "en": [
+        "plane",
+        "airplane"
+      ],
+      "es": [
+        "avión"
+      ],
+      "it": [
+        "aereo"
+      ],
+      "de": [
+        "Flugzeug"
+      ],
+      "zh-pinyin": [
+        "fēijī"
+      ],
+      "zh-hanzi": [
+        "飞机"
+      ],
+      "cantonese": [
+        "飞机"
+      ],
+      "ja": [
+        "飛行機"
+      ],
+      "he": [
+        "מטוס"
+      ],
+      "ar": [
+        "طائرة"
+      ],
+      "sinhala": [
+        "ගුවන් යානය"
+      ],
+      "vi": [
+        "máy bay"
+      ],
+      "ur": [
+        "ہوائی جہاز"
+      ],
+      "hi": [
+        "हवाई जहाज़"
+      ],
+      "uk": [
+        "літак"
+      ],
+      "ru": [
+        "самолёт"
+      ],
+      "macedonian": [
+        "авион"
+      ],
+      "afrikaans": [
+        "vliegtuig"
+      ],
+      "serbian": [
+        "авион"
+      ],
+      "croatian": [
+        "avion"
+      ],
+      "punjabi": [
+        "ਹਵਾਈ ਜਹਾਜ਼"
+      ]
+    },
+    "le": {
+      "en": [
+        "the"
+      ],
+      "es": [
+        "el"
+      ],
+      "it": [
+        "il"
+      ],
+      "de": [
+        "der/das/die (the)"
+      ],
+      "zh-pinyin": [
+        "(no article)"
+      ],
+      "zh-hanzi": [
+        "(no article)"
+      ],
+      "cantonese": [
+        "(no article)"
+      ],
+      "ja": [
+        "(no article)"
+      ],
+      "he": [
+        "ה (the)"
+      ],
+      "ar": [
+        "ال (the)"
+      ],
+      "sinhala": [
+        "(no article)"
+      ],
+      "vi": [
+        "(no article)"
+      ],
+      "ur": [
+        "(no article)"
+      ],
+      "hi": [
+        "(no article)"
+      ],
+      "uk": [
+        "(no article)"
+      ],
+      "ru": [
+        "(no article)"
+      ],
+      "macedonian": [
+        "(no separate article - suffixed)"
+      ],
+      "afrikaans": [
+        "die"
+      ],
+      "serbian": [
+        "(no article)"
+      ],
+      "croatian": [
+        "(no article)"
+      ],
+      "punjabi": [
+        "(no article)"
+      ]
+    },
+    "vent": {
+      "en": [
+        "wind"
+      ],
+      "es": [
+        "viento"
+      ],
+      "it": [
+        "vento"
+      ],
+      "de": [
+        "Wind"
+      ],
+      "zh-pinyin": [
+        "fēng"
+      ],
+      "zh-hanzi": [
+        "风"
+      ],
+      "cantonese": [
+        "风"
+      ],
+      "ja": [
+        "風"
+      ],
+      "he": [
+        "רוח"
+      ],
+      "ar": [
+        "ريح"
+      ],
+      "sinhala": [
+        "සුළඟ"
+      ],
+      "vi": [
+        "gió"
+      ],
+      "ur": [
+        "ہوا"
+      ],
+      "hi": [
+        "हवा"
+      ],
+      "uk": [
+        "вітер"
+      ],
+      "ru": [
+        "ветер"
+      ],
+      "macedonian": [
+        "ветер"
+      ],
+      "afrikaans": [
+        "wind"
+      ],
+      "serbian": [
+        "ветар"
+      ],
+      "croatian": [
+        "vjetar"
+      ],
+      "punjabi": [
+        "ਹਵਾ"
+      ]
+    },
+    "robot": {
+      "en": [
+        "robot"
+      ],
+      "es": [
+        "robot"
+      ],
+      "it": [
+        "robot"
+      ],
+      "de": [
+        "Roboter"
+      ],
+      "zh-pinyin": [
+        "jīqìrén"
+      ],
+      "zh-hanzi": [
+        "机器人"
+      ],
+      "cantonese": [
+        "机器人"
+      ],
+      "ja": [
+        "ロボット"
+      ],
+      "he": [
+        "רובוט"
+      ],
+      "ar": [
+        "روبوت / آلي"
+      ],
+      "sinhala": [
+        "රොබෝ"
+      ],
+      "vi": [
+        "robot"
+      ],
+      "ur": [
+        "روبوٹ"
+      ],
+      "hi": [
+        "रोबोट"
+      ],
+      "uk": [
+        "робот"
+      ],
+      "ru": [
+        "робот"
+      ],
+      "macedonian": [
+        "робот"
+      ],
+      "afrikaans": [
+        "robot"
+      ],
+      "serbian": [
+        "робот"
+      ],
+      "croatian": [
+        "robot"
+      ],
+      "punjabi": [
+        "ਰੋਬੋਟ"
+      ]
+    },
+    "koala": {
+      "en": [
+        "koala"
+      ],
+      "es": [
+        "koala"
+      ],
+      "it": [
+        "koala"
+      ],
+      "de": [
+        "Koala"
+      ],
+      "zh-pinyin": [
+        "kǎolā"
+      ],
+      "zh-hanzi": [
+        "考拉"
+      ],
+      "cantonese": [
+        "树熊"
+      ],
+      "ja": [
+        "コアラ"
+      ],
+      "he": [
+        "קואלה"
+      ],
+      "ar": [
+        "كوالا"
+      ],
+      "sinhala": [
+        "කෝලා"
+      ],
+      "vi": [
+        "gấu túi (koala)"
+      ],
+      "ur": [
+        "کوآلا"
+      ],
+      "hi": [
+        "कोआला"
+      ],
+      "uk": [
+        "коала"
+      ],
+      "ru": [
+        "коала"
+      ],
+      "macedonian": [
+        "коала"
+      ],
+      "afrikaans": [
+        "koala"
+      ],
+      "serbian": [
+        "коала"
+      ],
+      "croatian": [
+        "koala"
+      ],
+      "punjabi": [
+        "ਕੋਆਲਾ"
+      ]
+    },
+    "boum": {
+      "en": [
+        "boom"
+      ],
+      "es": [
+        "bum"
+      ],
+      "it": [
+        "bum"
+      ],
+      "de": [
+        "bum"
+      ],
+      "zh-pinyin": [
+        "hōng"
+      ],
+      "zh-hanzi": [
+        "轰"
+      ],
+      "cantonese": [
+        "轰"
+      ],
+      "ja": [
+        "ドン"
+      ],
+      "he": [
+        "בום"
+      ],
+      "ar": [
+        "بوم"
+      ],
+      "sinhala": [
+        "බූම්"
+      ],
+      "vi": [
+        "bùm"
+      ],
+      "ur": [
+        "بوم"
+      ],
+      "hi": [
+        "धूम"
+      ],
+      "uk": [
+        "бум"
+      ],
+      "ru": [
+        "бум"
+      ],
+      "macedonian": [
+        "бум"
+      ],
+      "afrikaans": [
+        "boem"
+      ],
+      "serbian": [
+        "бум"
+      ],
+      "croatian": [
+        "bum"
+      ],
+      "punjabi": [
+        "ਬੂਮ"
+      ]
+    },
+    "beaucoup": {
+      "en": [
+        "a lot",
+        "many"
+      ],
+      "es": [
+        "mucho"
+      ],
+      "it": [
+        "tanto"
+      ],
+      "de": [
+        "viel"
+      ],
+      "zh-pinyin": [
+        "hěnduō"
+      ],
+      "zh-hanzi": [
+        "很多"
+      ],
+      "cantonese": [
+        "好多"
+      ],
+      "ja": [
+        "たくさん"
+      ],
+      "he": [
+        "הרבה"
+      ],
+      "ar": [
+        "كثير"
+      ],
+      "sinhala": [
+        "ගොඩක්"
+      ],
+      "vi": [
+        "rất nhiều"
+      ],
+      "ur": [
+        "بہت سارا"
+      ],
+      "hi": [
+        "बहुत सारा"
+      ],
+      "uk": [
+        "багато"
+      ],
+      "ru": [
+        "много"
+      ],
+      "macedonian": [
+        "многу"
+      ],
+      "afrikaans": [
+        "baie"
+      ],
+      "serbian": [
+        "много"
+      ],
+      "croatian": [
+        "puno"
+      ],
+      "punjabi": [
+        "ਬਹੁਤ ਸਾਰਾ"
+      ]
+    },
+    "de": {
+      "en": [
+        "of"
+      ],
+      "es": [
+        "de"
+      ],
+      "it": [
+        "di"
+      ],
+      "de": [
+        "von"
+      ],
+      "zh-pinyin": [
+        "de (的)"
+      ],
+      "zh-hanzi": [
+        "的"
+      ],
+      "cantonese": [
+        "嘅"
+      ],
+      "ja": [
+        "の"
+      ],
+      "he": [
+        "של"
+      ],
+      "ar": [
+        "من"
+      ],
+      "sinhala": [
+        "(implied, no separate word)"
+      ],
+      "vi": [
+        "của"
+      ],
+      "ur": [
+        "کا"
+      ],
+      "hi": [
+        "का"
+      ],
+      "uk": [
+        "(genitive case, no separate word)"
+      ],
+      "ru": [
+        "(genitive case, no separate word)"
+      ],
+      "macedonian": [
+        "од"
+      ],
+      "afrikaans": [
+        "van"
+      ],
+      "serbian": [
+        "(genitive case)"
+      ],
+      "croatian": [
+        "(genitive case)"
+      ],
+      "punjabi": [
+        "ਦਾ"
+      ]
+    },
+    "choses": {
+      "en": [
+        "things"
+      ],
+      "es": [
+        "cosas"
+      ],
+      "it": [
+        "cose"
+      ],
+      "de": [
+        "Dinge"
+      ],
+      "zh-pinyin": [
+        "dōngxi"
+      ],
+      "zh-hanzi": [
+        "东西"
+      ],
+      "cantonese": [
+        "嘢"
+      ],
+      "ja": [
+        "もの"
+      ],
+      "he": [
+        "דברים"
+      ],
+      "ar": [
+        "أشياء"
+      ],
+      "sinhala": [
+        "දේවල්"
+      ],
+      "vi": [
+        "thứ"
+      ],
+      "ur": [
+        "چیزیں"
+      ],
+      "hi": [
+        "चीज़ें"
+      ],
+      "uk": [
+        "речі"
+      ],
+      "ru": [
+        "вещи"
+      ],
+      "macedonian": [
+        "работи"
+      ],
+      "afrikaans": [
+        "dinge"
+      ],
+      "serbian": [
+        "ствари"
+      ],
+      "croatian": [
+        "stvari"
+      ],
+      "punjabi": [
+        "ਚੀਜ਼ਾਂ"
+      ]
+    },
+    "cest": {
+      "en": [
+        "it's",
+        "this is"
+      ],
+      "es": [
+        "es"
+      ],
+      "it": [
+        "è"
+      ],
+      "de": [
+        "das ist"
+      ],
+      "zh-pinyin": [
+        "zhè shì"
+      ],
+      "zh-hanzi": [
+        "这是"
+      ],
+      "cantonese": [
+        "呢个係"
+      ],
+      "ja": [
+        "これが〜だ"
+      ],
+      "he": [
+        "זה"
+      ],
+      "ar": [
+        "هذا"
+      ],
+      "sinhala": [
+        "මේක"
+      ],
+      "vi": [
+        "đây là"
+      ],
+      "ur": [
+        "یہ ہے"
+      ],
+      "hi": [
+        "यह है"
+      ],
+      "uk": [
+        "це"
+      ],
+      "ru": [
+        "это"
+      ],
+      "macedonian": [
+        "ова е"
+      ],
+      "afrikaans": [
+        "dit is"
+      ],
+      "serbian": [
+        "ово је"
+      ],
+      "croatian": [
+        "ovo je"
+      ],
+      "punjabi": [
+        "ਇਹ ਹੈ"
+      ]
+    },
+    "mon": {
+      "en": [
+        "my"
+      ],
+      "es": [
+        "mi"
+      ],
+      "it": [
+        "mio"
+      ],
+      "de": [
+        "mein"
+      ],
+      "zh-pinyin": [
+        "wǒ de"
+      ],
+      "zh-hanzi": [
+        "我的"
+      ],
+      "cantonese": [
+        "我嘅"
+      ],
+      "ja": [
+        "ぼくの"
+      ],
+      "he": [
+        "שלי"
+      ],
+      "ar": [
+        "ـي (my)"
+      ],
+      "sinhala": [
+        "මගේ"
+      ],
+      "vi": [
+        "của mình"
+      ],
+      "ur": [
+        "میری"
+      ],
+      "hi": [
+        "मेरी"
+      ],
+      "uk": [
+        "мій"
+      ],
+      "ru": [
+        "мой"
+      ],
+      "macedonian": [
+        "мојот"
+      ],
+      "afrikaans": [
+        "my"
+      ],
+      "serbian": [
+        "мој"
+      ],
+      "croatian": [
+        "moj"
+      ],
+      "punjabi": [
+        "ਮੇਰੀ"
+      ]
+    },
+    "monde": {
+      "en": [
+        "world"
+      ],
+      "es": [
+        "mundo"
+      ],
+      "it": [
+        "mondo"
+      ],
+      "de": [
+        "Welt"
+      ],
+      "zh-pinyin": [
+        "shìjiè"
+      ],
+      "zh-hanzi": [
+        "世界"
+      ],
+      "cantonese": [
+        "世界"
+      ],
+      "ja": [
+        "世界"
+      ],
+      "he": [
+        "עולם"
+      ],
+      "ar": [
+        "عالم"
+      ],
+      "sinhala": [
+        "ලෝකය"
+      ],
+      "vi": [
+        "thế giới"
+      ],
+      "ur": [
+        "دنیا"
+      ],
+      "hi": [
+        "दुनिया"
+      ],
+      "uk": [
+        "світ"
+      ],
+      "ru": [
+        "мир"
+      ],
+      "macedonian": [
+        "свет"
+      ],
+      "afrikaans": [
+        "wêreld"
+      ],
+      "serbian": [
+        "свет"
+      ],
+      "croatian": [
+        "svijet"
+      ],
+      "punjabi": [
+        "ਦੁਨੀਆਂ"
+      ]
+    }
+  },
   "pages": [
     {
       "name": "page1",
       "image": "1.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« Je vois un oiseau ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« Je vois un oiseau ! » dit Petit Parkour.",
+        "en": "\"I see a bird!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ kànjiàn yī zhī niǎo!\"",
+        "zh-hanzi": "小帕库尔说:\"我看见一只鸟!\"",
+        "cantonese": "小帕库尔话:\"我睇到一隻雀仔!\"",
+        "ja": "「鳥が見える!」とプチ・パルクールは言いました。",
+        "de": "„Ich sehe einen Vogel!“, sagte Kleiner Parkour.",
+        "it": "«Vedo un uccello!» disse Piccolo Parkour.",
+        "es": "«¡Veo un pájaro!» dijo Pequeño Parkour.",
+        "he": "\"אני רואה ציפור!\" אמר פרקור הקטן.",
+        "ar": "«أرى طائرًا!» قال باركور الصغير.",
+        "sinhala": "\"මම කුරුල්ලෙක් දකිනවා!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình thấy một con chim!\" Parkour Nhỏ nói.",
+        "ur": "\"میں ایک پرندہ دیکھتا ہوں!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे एक चिड़िया दिखती है!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я бачу пташку!» — сказав Малий Паркур.",
+        "ru": "«Я вижу птицу!» — сказал Маленький Паркур.",
+        "macedonian": "„Гледам птица!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek sien 'n voël!\" sê Klein Parkour.",
+        "serbian": "„Видим птицу!\" рекао је Мали Паркур.",
+        "croatian": "„Vidim pticu!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਇੱਕ ਪੰਛੀ ਦਿਖਦਾ ਹੈ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -21,10 +1477,28 @@
       "image": "2.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« J'entends un chien ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« J'entends un chien ! » dit Petit Parkour.",
+        "en": "\"I hear a dog!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ tīngjiàn yī zhī gǒu!\"",
+        "zh-hanzi": "小帕库尔说:\"我听见一只狗!\"",
+        "cantonese": "小帕库尔话:\"我听到一隻狗!\"",
+        "ja": "「犬の声が聞こえる!」とプチ・パルクールは言いました。",
+        "de": "„Ich höre einen Hund!“, sagte Kleiner Parkour.",
+        "it": "«Sento un cane!» disse Piccolo Parkour.",
+        "es": "«¡Oigo un perro!» dijo Pequeño Parkour.",
+        "he": "\"אני שומע כלב!\" אמר פרקור הקטן.",
+        "ar": "«أسمع كلبًا!» قال باركور الصغير.",
+        "sinhala": "\"මම බල්ලෙක්ගේ හඬ අහනවා!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình nghe một con chó!\" Parkour Nhỏ nói.",
+        "ur": "\"میں ایک کتا سنتا ہوں!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे एक कुत्ता सुनाई देता है!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я чую собаку!» — сказав Малий Паркур.",
+        "ru": "«Я слышу собаку!» — сказал Маленький Паркур.",
+        "macedonian": "„Слушам куче!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek hoor 'n hond!\" sê Klein Parkour.",
+        "serbian": "„Чујем пса!\" рекао је Мали Паркур.",
+        "croatian": "„Čujem psa!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਇੱਕ ਕੁੱਤਾ ਸੁਣਦਾ ਹੈ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -32,10 +1506,28 @@
       "image": "3.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« Je vois une maison ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« Je vois une maison ! » dit Petit Parkour.",
+        "en": "\"I see a house!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ kànjiàn yī zuò fángzi!\"",
+        "zh-hanzi": "小帕库尔说:\"我看见一座房子!\"",
+        "cantonese": "小帕库尔话:\"我睇到一间屋!\"",
+        "ja": "「家が見える!」とプチ・パルクールは言いました。",
+        "de": "„Ich sehe ein Haus!“, sagte Kleiner Parkour.",
+        "it": "«Vedo una casa!» disse Piccolo Parkour.",
+        "es": "«¡Veo una casa!» dijo Pequeño Parkour.",
+        "he": "\"אני רואה בית!\" אמר פרקור הקטן.",
+        "ar": "«أرى بيتًا!» قال باركور الصغير.",
+        "sinhala": "\"මම ගෙයක් දකිනවා!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình thấy một ngôi nhà!\" Parkour Nhỏ nói.",
+        "ur": "\"میں ایک گھر دیکھتا ہوں!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे एक घर दिखता है!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я бачу будинок!» — сказав Малий Паркур.",
+        "ru": "«Я вижу дом!» — сказал Маленький Паркур.",
+        "macedonian": "„Гледам куќа!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek sien 'n huis!\" sê Klein Parkour.",
+        "serbian": "„Видим кућу!\" рекао је Мали Паркур.",
+        "croatian": "„Vidim kuću!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਇੱਕ ਘਰ ਦਿਖਦਾ ਹੈ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -43,10 +1535,28 @@
       "image": "4.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« J'entends une chanson ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« J'entends une chanson ! » dit Petit Parkour.",
+        "en": "\"I hear a song!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ tīngjiàn yī shǒu gē!\"",
+        "zh-hanzi": "小帕库尔说:\"我听见一首歌!\"",
+        "cantonese": "小帕库尔话:\"我听到一首歌!\"",
+        "ja": "「歌が聞こえる!」とプチ・パルクールは言いました。",
+        "de": "„Ich höre ein Lied!“, sagte Kleiner Parkour.",
+        "it": "«Sento una canzone!» disse Piccolo Parkour.",
+        "es": "«¡Oigo una canción!» dijo Pequeño Parkour.",
+        "he": "\"אני שומע שיר!\" אמר פרקור הקטן.",
+        "ar": "«أسمع أغنية!» قال باركور الصغير.",
+        "sinhala": "\"මම ගීතයක් අහනවා!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình nghe một bài hát!\" Parkour Nhỏ nói.",
+        "ur": "\"میں ایک گانا سنتا ہوں!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे एक गाना सुनाई देता है!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я чую пісню!» — сказав Малий Паркур.",
+        "ru": "«Я слышу песню!» — сказал Маленький Паркур.",
+        "macedonian": "„Слушам песна!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek hoor 'n liedjie!\" sê Klein Parkour.",
+        "serbian": "„Чујем песму!\" рекао је Мали Паркур.",
+        "croatian": "„Čujem pjesmu!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਇੱਕ ਗੀਤ ਸੁਣਦਾ ਹੈ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -54,10 +1564,28 @@
       "image": "5.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« Je vois un avion ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« Je vois un avion ! » dit Petit Parkour.",
+        "en": "\"I see a plane!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ kànjiàn yī jià fēijī!\"",
+        "zh-hanzi": "小帕库尔说:\"我看见一架飞机!\"",
+        "cantonese": "小帕库尔话:\"我睇到一架飞机!\"",
+        "ja": "「飛行機が見える!」とプチ・パルクールは言いました。",
+        "de": "„Ich sehe ein Flugzeug!“, sagte Kleiner Parkour.",
+        "it": "«Vedo un aereo!» disse Piccolo Parkour.",
+        "es": "«¡Veo un avión!» dijo Pequeño Parkour.",
+        "he": "\"אני רואה מטוס!\" אמר פרקור הקטן.",
+        "ar": "«أرى طائرة!» قال باركور الصغير.",
+        "sinhala": "\"මම ගුවන් යානයක් දකිනවා!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình thấy một chiếc máy bay!\" Parkour Nhỏ nói.",
+        "ur": "\"میں ایک ہوائی جہاز دیکھتا ہوں!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे एक हवाई जहाज़ दिखता है!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я бачу літак!» — сказав Малий Паркур.",
+        "ru": "«Я вижу самолёт!» — сказал Маленький Паркур.",
+        "macedonian": "„Гледам авион!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek sien 'n vliegtuig!\" sê Klein Parkour.",
+        "serbian": "„Видим авион!\" рекао је Мали Паркур.",
+        "croatian": "„Vidim avion!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਇੱਕ ਹਵਾਈ ਜਹਾਜ਼ ਦਿਖਦਾ ਹੈ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -65,10 +1593,28 @@
       "image": "6.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« J'entends le vent ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« J'entends le vent ! » dit Petit Parkour.",
+        "en": "\"I hear the wind!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ tīngjiàn fēng!\"",
+        "zh-hanzi": "小帕库尔说:\"我听见风!\"",
+        "cantonese": "小帕库尔话:\"我听到风!\"",
+        "ja": "「風の音が聞こえる!」とプチ・パルクールは言いました。",
+        "de": "„Ich höre den Wind!“, sagte Kleiner Parkour.",
+        "it": "«Sento il vento!» disse Piccolo Parkour.",
+        "es": "«¡Oigo el viento!» dijo Pequeño Parkour.",
+        "he": "\"אני שומע את הרוח!\" אמר פרקור הקטן.",
+        "ar": "«أسمع الريح!» قال باركور الصغير.",
+        "sinhala": "\"මම සුළඟ අහනවා!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình nghe tiếng gió!\" Parkour Nhỏ nói.",
+        "ur": "\"میں ہوا سنتا ہوں!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे हवा सुनाई देती है!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я чую вітер!» — сказав Малий Паркур.",
+        "ru": "«Я слышу ветер!» — сказал Маленький Паркур.",
+        "macedonian": "„Слушам ветер!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek hoor die wind!\" sê Klein Parkour.",
+        "serbian": "„Чујем ветар!\" рекао је Мали Паркур.",
+        "croatian": "„Čujem vjetar!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਹਵਾ ਸੁਣਦੀ ਹੈ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -76,10 +1622,28 @@
       "image": "7.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« Je vois... un robot koala ? » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« Je vois... un robot koala ? » dit Petit Parkour.",
+        "en": "\"I see... a robot koala?\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ kànjiàn... yī gè jīqìrén kǎolā?\"",
+        "zh-hanzi": "小帕库尔说:\"我看见...一个机器人考拉?\"",
+        "cantonese": "小帕库尔话:\"我睇到...一个机器人树熊?\"",
+        "ja": "「見える…ロボットコアラ?」とプチ・パルクールは言いました。",
+        "de": "„Ich sehe… einen Roboter-Koala?“, sagte Kleiner Parkour.",
+        "it": "«Vedo… un koala robot?» disse Piccolo Parkour.",
+        "es": "«¿Veo… un koala robot?» dijo Pequeño Parkour.",
+        "he": "\"אני רואה... קואלה רובוט?\" אמר פרקור הקטן.",
+        "ar": "«أرى... كوالا آليًا؟» قال باركور الصغير.",
+        "sinhala": "\"මම දකිනවා... රොබෝ කෝලා කෙනෙක්ද?\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình thấy... một con gấu túi robot?\" Parkour Nhỏ nói.",
+        "ur": "\"میں دیکھتا ہوں... ایک روبوٹ کوآلا؟\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे दिखता है... एक रोबोट कोआला?\" छोटे पारकोर ने कहा।",
+        "uk": "«Я бачу... робота-коалу?» — сказав Малий Паркур.",
+        "ru": "«Я вижу... робота-коалу?» — сказал Маленький Паркур.",
+        "macedonian": "„Гледам... робот коала?“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek sien... 'n robot-koala?\" sê Klein Parkour.",
+        "serbian": "„Видим... робота коалу?\" рекао је Мали Паркур.",
+        "croatian": "„Vidim... robota koalu?\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਦਿਖਦਾ ਹੈ... ਇੱਕ ਰੋਬੋਟ ਕੋਆਲਾ?\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -87,10 +1651,28 @@
       "image": "8.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« J'entends... boum boum ? » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« J'entends... boum boum ? » dit Petit Parkour.",
+        "en": "\"I hear... boom boom?\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ tīngjiàn... hōng hōng?\"",
+        "zh-hanzi": "小帕库尔说:\"我听见...轰轰?\"",
+        "cantonese": "小帕库尔话:\"我听到...轰轰?\"",
+        "ja": "「聞こえる…ドンドン?」とプチ・パルクールは言いました。",
+        "de": "„Ich höre… bum bum?“, sagte Kleiner Parkour.",
+        "it": "«Sento… bum bum?» disse Piccolo Parkour.",
+        "es": "«¿Oigo… bum bum?» dijo Pequeño Parkour.",
+        "he": "\"אני שומע... בום בום?\" אמר פרקור הקטן.",
+        "ar": "«أسمع... بوم بوم؟» قال باركور الصغير.",
+        "sinhala": "\"මම අහනවා... බූම් බූම්ද?\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình nghe... bùm bùm?\" Parkour Nhỏ nói.",
+        "ur": "\"میں سنتا ہوں... بوم بوم؟\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे सुनाई देता है... धूम धूम?\" छोटे पारकोर ने कहा।",
+        "uk": "«Я чую... бум-бум?» — сказав Малий Паркур.",
+        "ru": "«Я слышу... бум-бум?» — сказал Маленький Паркур.",
+        "macedonian": "„Слушам... бум бум?“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek hoor... boem boem?\" sê Klein Parkour.",
+        "serbian": "„Чујем... бум бум?\" рекао је Мали Паркур.",
+        "croatian": "„Čujem... bum bum?\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਸੁਣਦਾ ਹੈ... ਬੂਮ ਬੂਮ?\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -98,10 +1680,28 @@
       "image": "9.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« Je vois beaucoup de choses ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« Je vois beaucoup de choses ! » dit Petit Parkour.",
+        "en": "\"I see lots of things!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ kànjiàn hěnduō dōngxi!\"",
+        "zh-hanzi": "小帕库尔说:\"我看见很多东西!\"",
+        "cantonese": "小帕库尔话:\"我睇到好多嘢!\"",
+        "ja": "「たくさんのものが見える!」とプチ・パルクールは言いました。",
+        "de": "„Ich sehe viele Dinge!“, sagte Kleiner Parkour.",
+        "it": "«Vedo tante cose!» disse Piccolo Parkour.",
+        "es": "«¡Veo muchas cosas!» dijo Pequeño Parkour.",
+        "he": "\"אני רואה הרבה דברים!\" אמר פרקור הקטן.",
+        "ar": "«أرى أشياء كثيرة!» قال باركور الصغير.",
+        "sinhala": "\"මම දේවල් ගොඩක් දකිනවා!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình thấy rất nhiều thứ!\" Parkour Nhỏ nói.",
+        "ur": "\"میں بہت ساری چیزیں دیکھتا ہوں!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे बहुत सी चीज़ें दिखती हैं!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я бачу багато речей!» — сказав Малий Паркур.",
+        "ru": "«Я вижу много вещей!» — сказал Маленький Паркур.",
+        "macedonian": "„Гледам многу работи!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek sien baie dinge!\" sê Klein Parkour.",
+        "serbian": "„Видим много ствари!\" рекао је Мали Паркур.",
+        "croatian": "„Vidim puno stvari!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਬਹੁਤ ਸਾਰੀਆਂ ਚੀਜ਼ਾਂ ਦਿਖਦੀਆਂ ਹਨ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     },
     {
@@ -109,10 +1709,28 @@
       "image": "10.jpg",
       "audio": null,
       "globalMeanings": {
-        "fr": "« J'entends beaucoup de choses. C'est mon monde ! » dit Petit Parkour."
-      },
-      "literalMeanings": {
-        "fr": {}
+        "fr": "« J'entends beaucoup de choses. C'est mon monde ! » dit Petit Parkour.",
+        "en": "\"I hear lots of things. It's my world!\" said Little Parkour.",
+        "zh-pinyin": "Xiǎo Parkour shuō: \"Wǒ tīngjiàn hěnduō dōngxi. Zhè shì wǒ de shìjiè!\"",
+        "zh-hanzi": "小帕库尔说:\"我听见很多东西。这是我的世界!\"",
+        "cantonese": "小帕库尔话:\"我听到好多嘢。呢个係我嘅世界!\"",
+        "ja": "「たくさんのものが聞こえる。これがぼくの世界だ!」とプチ・パルクールは言いました。",
+        "de": "„Ich höre viele Dinge. Das ist meine Welt!“, sagte Kleiner Parkour.",
+        "it": "«Sento tante cose. È il mio mondo!» disse Piccolo Parkour.",
+        "es": "«Oigo muchas cosas. ¡Es mi mundo!» dijo Pequeño Parkour.",
+        "he": "\"אני שומע הרבה דברים. זה העולם שלי!\" אמר פרקור הקטן.",
+        "ar": "«أسمع أشياء كثيرة. هذا عالمي!» قال باركور الصغير.",
+        "sinhala": "\"මම දේවල් ගොඩක් අහනවා. මේක මගේ ලෝකේ!\" පොඩි පාකෝර් කිව්වා.",
+        "vi": "\"Mình nghe rất nhiều thứ. Đây là thế giới của mình!\" Parkour Nhỏ nói.",
+        "ur": "\"میں بہت ساری چیزیں سنتا ہوں۔ یہ میری دنیا ہے!\" چھوٹے پارکور نے کہا۔",
+        "hi": "\"मुझे बहुत सी चीज़ें सुनाई देती हैं। यह मेरी दुनिया है!\" छोटे पारकोर ने कहा।",
+        "uk": "«Я чую багато речей. Це мій світ!» — сказав Малий Паркур.",
+        "ru": "«Я слышу много вещей. Это мой мир!» — сказал Маленький Паркур.",
+        "macedonian": "„Слушам многу работи. Ова е мојот свет!“ - рече Малиот Паркур.",
+        "afrikaans": "\"Ek hoor baie dinge. Dit is my wêreld!\" sê Klein Parkour.",
+        "serbian": "„Чујем много ствари. Ово је мој свет!\" рекао је Мали Паркур.",
+        "croatian": "„Čujem puno stvari. Ovo je moj svijet!\" rekao je Mali Parkour.",
+        "punjabi": "\"ਮੈਨੂੰ ਬਹੁਤ ਸਾਰੀਆਂ ਚੀਜ਼ਾਂ ਸੁਣਦੀਆਂ ਹਨ। ਇਹ ਮੇਰੀ ਦੁਨੀਆਂ ਹੈ!\" ਛੋਟੇ ਪਾਰਕੋਰ ਨੇ ਕਿਹਾ।"
       }
     }
   ]
