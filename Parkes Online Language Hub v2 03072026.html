@@ -52,6 +52,8 @@
             --hub-steel-soft: #E8EFF7;
             --hub-plum: #8B5CF6;
             --hub-plum-soft: #F1EBFE;
+            --hub-rose: #E8626B;
+            --hub-rose-soft: #FCEAEB;
             --hub-radius-lg: 28px;
             --hub-radius-md: 18px;
             --hub-radius-sm: 12px;
@@ -354,17 +356,28 @@
         .landing-tools-row {
             display: flex;
             gap: 52px;
-            align-items: stretch;
+            align-items: flex-start;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             transition: opacity 0.2s ease;
-            max-width: 668px;
+            max-width: 884px;
             margin: 0 auto;
         }
         .tool-grid-2x2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
+        }
+        .tool-grid-pyramid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+        .tool-grid-pyramid-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
         }
         .tool-grid-1x2 {
             display: grid;
@@ -619,6 +632,19 @@
         @keyframes wb-st-pulse {
             0%, 100% { box-shadow: 0 0 18px 6px rgba(22,163,74,0.65), inset 0 -3px 6px rgba(0,0,0,0.25); }
             50% { box-shadow: 0 0 26px 10px rgba(22,163,74,0.85), inset 0 -3px 6px rgba(0,0,0,0.25); }
+        }
+        .bbs-overlay-btn {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .bbs-overlay-btn.bbs-controls-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .bbs-overlay-btn.bbs-controls-visible.bbs-nav-disabled {
+            opacity: 0.35;
+            pointer-events: none;
         }
         .wb-st-device-row {
             border: 1px solid var(--hub-line);
@@ -1508,7 +1534,7 @@
         <div id="title-screen" class="dyslexic-font">
             <div id="landing-flow" class="hub-font w-full h-full flex flex-col items-center justify-center overflow-y-auto py-8 px-6" style="background:var(--hub-paper);">
                 <div id="landing-flow-inner" class="w-full max-w-2xl mx-auto">
-                    <div id="landing-logo-wrap" style="position:relative; width:100%; max-width:668px; margin:0 auto 24px;">
+                    <div id="landing-logo-wrap" style="position:relative; width:100%; max-width:884px; margin:0 auto 24px;">
                         <img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/b8daca400b9f13a8b3b88375bf4a04cdc9e3a789/Parkes%20Online%20Language%20Hub%20Train%20Logo.png" alt="Parkes Online Language Hub" style="width:100%; height:auto; display:block;">
                         <div class="hub-group hub-font" style="position:absolute; left:44.5%; top:71%; width:50%; transform:translateY(-74%); margin:0;">
                             <select id="global-language-select" class="hub-input" style="padding:3px 14px;">
@@ -1551,7 +1577,10 @@
                     <div id="landing-step-wheel" class="landing-step">
                         <h2 class="hub-step-title">What would you like to do?</h2>
                         <div id="landing-tools-row" class="landing-tools-row">
-                            <div id="tool-grid-main" class="tool-grid-2x2"></div>
+                            <div id="tool-grid-main" class="tool-grid-pyramid">
+                                <div id="tool-grid-main-row1" class="tool-grid-pyramid-row"></div>
+                                <div id="tool-grid-main-row2" class="tool-grid-pyramid-row"></div>
+                            </div>
                             <div id="tool-grid-side" class="tool-grid-1x2"></div>
                         </div>
 
@@ -1989,6 +2018,74 @@
                     <button id="bobot-submit-btn" class="hub-btn-primary hub-font interactive text-lg">Submit Answer</button>
                     <button id="bobot-next-question-btn" class="hub-btn-primary hub-font interactive text-lg" style="display:none;">Next Question</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Bobot's Bookshelf: library/repository screen - a grid of book
+             covers loaded from a GitHub-hosted manifest, with the
+             colour-coding setting a teacher can enable before entering
+             any book. -->
+        <div id="bobot-bookshelf-library-screen" class="hub-font" style="display:none; width:100%; height:100%; overflow-y:auto;">
+            <div class="w-full h-full flex flex-col items-center overflow-y-auto py-8 px-6">
+                <div class="w-full max-w-2xl mx-auto">
+                    <h2 class="hub-step-title">📚 Bobot's Bookshelf</h2>
+
+                    <div class="hub-group hub-font" style="margin-bottom:24px;">
+                        <div class="hub-row">
+                            <div class="hub-checkbox-row">
+                                <input type="checkbox" id="bbs-colorcoding-toggle" class="w-5 h-5 rounded accent-[var(--hub-rose)] interactive">
+                                <label for="bbs-colorcoding-toggle" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Grapheme Colour-Coding</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="bbs-library-status" class="hub-hint" style="text-align:center;">Loading books...</div>
+                    <div id="bbs-library-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:20px; width:100%;"></div>
+
+                    <div class="flex justify-center pt-6 pb-2">
+                        <button id="bbs-library-back-btn" class="hub-btn-ghost hub-font interactive">← Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bobot's Bookshelf: reader screen -->
+        <div id="bobot-bookshelf-reader-screen" class="hub-font" style="display:none; position:relative; width:100%; height:100%;">
+            <div id="bbs-loading-overlay" class="hub-font" style="display:none; position:absolute; inset:0; z-index:50; background:var(--hub-paper); align-items:center; justify-content:center; flex-direction:column; gap:12px;">
+                <div style="font-size:32px;">📖</div>
+                <div style="font-weight:800; color:var(--hub-ink);">Loading book...</div>
+            </div>
+            <button id="bbs-reader-back-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:16px; left:16px; z-index:20; width:36px; height:36px;" title="Back to library">←</button>
+            <button class="fullscreen-toggle-btn wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:16px; right:16px; z-index:20; width:36px; height:36px;" title="Toggle fullscreen">⛶</button>
+            <button id="bbs-prev-page-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:50%; left:16px; transform:translateY(-50%); z-index:20; width:44px; height:44px; font-size:20px;" title="Previous page">←</button>
+            <button id="bbs-next-page-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:50%; right:16px; transform:translateY(-50%); z-index:20; width:44px; height:44px; font-size:20px;" title="Next page">→</button>
+
+            <div id="bbs-reader-body" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; position:relative; overflow:hidden;">
+                <div id="bbs-pages-wrap" style="display:flex; transition:transform 0.25s ease, opacity 0.25s ease;">
+                    <div id="bbs-page-image-wrap" style="width:50%; height:100%; overflow:hidden; border-radius:var(--hub-radius-md) 0 0 var(--hub-radius-md); background:#f2f0ea;">
+                        <img id="bbs-page-image" style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                    <div id="bbs-page-text-wrap" style="width:50%; height:100%; background:var(--hub-surface); border:1px solid var(--hub-line); border-left:none; border-radius:0 var(--hub-radius-md) var(--hub-radius-md) 0; padding:28px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+                        <img id="bbs-cover-image" style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                        <div id="bbs-page-text" style="flex:1; display:flex; align-items:center; justify-content:center; min-width:0; min-height:0; width:100%;">
+                            <div id="bbs-page-text-inner" style="font-family:'OpenDyslexic', sans-serif; font-size:30px; letter-spacing:0.04em; font-weight:800; line-height:3.4; text-align:center; width:100%; overflow-wrap:break-word; white-space:normal;"></div>
+                        </div>
+                        <div id="bbs-page-translation" style="display:none; text-align:center; font-style:italic; margin:0 0 12px; font-family:'OpenDyslexic', sans-serif; font-size:22px; color:var(--hub-ink-soft);"></div>
+                        <div id="bbs-tts-controls" style="display:flex; align-items:center; gap:8px; flex-shrink:0; margin-bottom:12px;">
+                            <button id="bbs-speak-sentence-btn" class="tts-button interactive" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:12px;" title="Listen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+                            <button id="bbs-speak-slow-btn" class="tts-button interactive" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:12px;" title="Listen Slowly">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="bbsSnailClip1"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="bbsSnailClip2"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="bbsSnailClip3"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="bbsSnailClip4"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#bbsSnailClip1)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#bbsSnailClip4)"><g clip-path="url(#bbsSnailClip2)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#bbsSnailClip3)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                            </button>
+                            <button id="bbs-translate-sentence-btn" class="wb-circle-btn interactive" style="width:44px; height:44px; font-size:18px;" title="Translate">🌐</button>
+                        </div>
+                        <div id="bbs-grapheme-row" style="display:none; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;"></div>
+                    </div>
+                </div>
+
+                <!-- Floating translation bubble for tapped words -->
+                <div id="bbs-word-bubble" style="display:none; position:fixed; z-index:400; background:var(--hub-surface); color:var(--hub-ink); border:1px solid var(--hub-line); border-radius:9999px; padding:8px 16px; font-family:'OpenDyslexic', sans-serif; font-size:14px; font-weight:700; cursor:pointer; box-shadow:var(--hub-shadow-sm);"></div>
             </div>
         </div>
 
@@ -2741,30 +2838,38 @@
             </div>
 
             <div id="ui-board-center" style="flex:1; display:flex; align-items:center; justify-content:center; gap:48px; min-width:0;">
-                <div id="quest-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0;">
+                <div id="quest-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0; width:100%;">
                     <h3 id="quest-header-label" class="text-slate-400 text-xs font-bold uppercase tracking-wider">Target Objective</h3>
-                    <div class="flex items-center gap-3" style="min-width:0; max-width:100%;">
-                        <div id="instruction-text" dir="auto" class="text-2xl md:text-3xl font-black text-blue-900 leading-tight inline-block whitespace-pre-wrap text-center" style="min-width:0;">...</div>
-                        <button id="tts-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Word">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                        </button>
-                        <button id="tts-button-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
-                        </button>
+                    <div class="flex items-center gap-3" style="min-width:0; width:100%; justify-content:center;">
+                        <div id="quest-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:flex-end; overflow:hidden;">
+                            <div id="instruction-text" dir="auto" class="font-black text-blue-900 leading-tight whitespace-pre-wrap text-center" style="min-width:0; font-size:1.5rem;">...</div>
+                        </div>
+                        <div id="quest-tts-zone" style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
+                            <button id="tts-button" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Word">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+                            <button id="tts-button-slow" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Slowly">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                            </button>
+                        </div>
                     </div>
                     <span id="game-voice-warning" class="hidden text-[10px] font-bold text-amber-700 bg-amber-50 border-2 border-amber-300 rounded-lg px-2 py-0.5 mt-1 interactive"></span>
                 </div>
 
-                <div id="location-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0;">
+                <div id="location-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0; width:100%;">
                     <h3 id="where-title" class="text-xs font-bold uppercase tracking-wider text-slate-400">Where?</h3>
-                    <div class="flex items-center gap-3" style="min-width:0; max-width:100%;">
-                        <div id="location-text" dir="auto" class="text-2xl md:text-3xl font-black leading-tight inline-block text-center tracking-wide" style="min-width:0;">...</div>
-                        <button id="tts-location-button" class="tts-button interactive hover:bg-slate-100 p-2 rounded-xl transition-all" title="Listen Location">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                        </button>
-                        <button id="tts-location-button-slow" class="tts-button interactive hover:bg-slate-100 p-1 rounded-xl transition-all" title="Listen Slowly">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
-                        </button>
+                    <div class="flex items-center gap-3" style="min-width:0; width:100%; justify-content:center;">
+                        <div id="location-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:flex-end; overflow:hidden;">
+                            <div id="location-text" dir="auto" class="font-black leading-tight text-center tracking-wide" style="min-width:0; font-size:1.5rem;">...</div>
+                        </div>
+                        <div id="location-tts-zone" style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
+                            <button id="tts-location-button" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+                            <button id="tts-location-button-slow" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Slowly">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3126,6 +3231,35 @@
         let musicVolume = 0.25;
         let ttsVolume = 1.0;
         let fxEnabled = true;
+
+        // iOS Safari silently ignores JS changes to a native <audio>
+        // element's .volume property - it deliberately ties that to the
+        // hardware volume buttons instead, so setting music.volume there
+        // has no effect at all on iPad/iPhone. Web Audio API gain values
+        // aren't subject to that restriction, so routing the music through
+        // a GainNode is what actually makes the slider work on iOS. A
+        // media element can only ever be connected to one source node, so
+        // this is built once and reused everywhere the volume changes.
+        let bbMusicGainNode = null;
+        function bbSetMusicVolume(vol) {
+            const music = document.getElementById('bg-music');
+            if (!music) return;
+            music.volume = vol; // still set directly too, for browsers where this does work
+            try {
+                if (!bbMusicGainNode) {
+                    const AC = window.AudioContext || window.webkitAudioContext;
+                    const ctx = new AC();
+                    const source = ctx.createMediaElementSource(music);
+                    const gain = ctx.createGain();
+                    source.connect(gain);
+                    gain.connect(ctx.destination);
+                    bbMusicGainNode = gain;
+                }
+                bbMusicGainNode.gain.value = vol;
+            } catch (e) {
+                console.warn('Music gain node unavailable, falling back to audio.volume only', e);
+            }
+        }
         const DEBUG_MODE_PASSWORD = 'BOBOTDITBOUMBOUM';
         let selectedLanguage = "fr"; // Global target language selection (fr, en, de, etc.)
         let colourCodedEnabled = true; // State of color coding
@@ -6281,6 +6415,512 @@
         let syntaxStreetFontSize = 13;
 
         // ================================================================
+        // BOBOT'S BOOKSHELF - digital picture books with tap-to-translate
+        // words and read-aloud support, browsed from a GitHub-hosted
+        // manifest so new books can be added without touching this file.
+        // ================================================================
+        const BOBOTS_BOOKSHELF_BASE = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/bobots-bookshelf/';
+        let bbsLibraryManifest = null;
+        let bbsCurrentBook = null;
+        let bbsCurrentBookFolder = null;
+        let bbsCurrentLiteralMeanings = null;
+        let bbsCurrentPageIndex = 0;
+        let bbsColorCodingEnabled = false;
+
+        // Colour-coding defaults ON whenever French is the active target
+        // language, since that's specifically what it's built to support -
+        // doesn't force it off for other languages, just ensures it starts
+        // checked for French.
+        function bbsAutoCheckFrenchColorCoding() {
+            if (selectedLanguage !== 'fr') return;
+            const checkbox = document.getElementById('bbs-colorcoding-toggle');
+            if (checkbox && !checkbox.checked) {
+                checkbox.checked = true;
+                bbsColorCodingEnabled = true;
+            }
+        }
+        let bbsBgAudioEl = null;
+        let bbsWiredUp = false;
+
+        async function bobotsBookshelfOpenLibrary() {
+            pauseBackgroundMusic();
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('bobot-bookshelf-library-screen').style.display = 'flex';
+            bbsWireUpOnce();
+            bbsAutoCheckFrenchColorCoding();
+
+            const status = document.getElementById('bbs-library-status');
+            const grid = document.getElementById('bbs-library-grid');
+            grid.innerHTML = '';
+            status.style.display = 'block';
+            status.textContent = 'Loading books...';
+
+            try {
+                if (!bbsLibraryManifest) {
+                    const res = await fetch(BOBOTS_BOOKSHELF_BASE + 'library-manifest.json');
+                    if (!res.ok) throw new Error('Manifest returned ' + res.status);
+                    bbsLibraryManifest = await res.json();
+                }
+                bbsRenderLibraryGrid();
+                status.style.display = 'none';
+            } catch (e) {
+                console.error('Bobot\'s Bookshelf: could not load the library manifest', e);
+                status.textContent = "Couldn't load the bookshelf right now - check your connection and try again.";
+            }
+        }
+
+        function bbsResolveTitle(title) {
+            if (!title) return '';
+            if (typeof title === 'string') return title;
+            return title[selectedLanguage] || title.en || title.fr || Object.values(title)[0] || '';
+        }
+
+        function bbsRenderLibraryGrid() {
+            const grid = document.getElementById('bbs-library-grid');
+            grid.innerHTML = '';
+            const books = (bbsLibraryManifest && bbsLibraryManifest.books) || [];
+            books.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'interactive';
+                card.style.cssText = 'cursor:pointer; text-align:center; transition:transform 0.15s ease;';
+                card.innerHTML = `
+                    <div style="aspect-ratio:1/1; border-radius:var(--hub-radius-md); overflow:hidden; box-shadow:var(--hub-shadow-sm); border:1px solid var(--hub-line); background:#f2f0ea;">
+                        <img src="${BOBOTS_BOOKSHELF_BASE}${book.folder}/${book.cover}" style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                    <div style="margin-top:8px; font-weight:800; font-size:13px; color:var(--hub-ink);">${rosterEscapeHtml(bbsResolveTitle(book.title))}</div>
+                    <div class="hub-hint" style="margin:2px 0 0;">Book ${rosterEscapeHtml(String(book.folder))}</div>
+                `;
+                card.onclick = () => bbsOpenBook(book.folder);
+                grid.appendChild(card);
+            });
+        }
+
+        function bbsPreloadImage(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve();
+                img.onerror = () => {
+                    console.warn("Bobot's Bookshelf: image failed to preload:", url);
+                    resolve(); // don't let one bad image block the whole book from opening
+                };
+                img.src = url;
+            });
+        }
+
+        async function bbsOpenBook(bookFolder) {
+            try {
+                const res = await fetch(BOBOTS_BOOKSHELF_BASE + bookFolder + '/book-manifest.json');
+                if (!res.ok) throw new Error('Book manifest returned ' + res.status);
+                bbsCurrentBook = await res.json();
+                bbsCurrentBookFolder = bookFolder;
+                bbsCurrentPageIndex = -1;
+                bbsLiteralMeaningsCache = {}; // fresh cache for this book - a different book's dictionary doesn't apply here
+                bbsAutoCheckFrenchColorCoding();
+                document.getElementById('bobot-bookshelf-library-screen').style.display = 'none';
+                document.getElementById('bobot-bookshelf-reader-screen').style.display = 'flex';
+                const loadingOverlay = document.getElementById('bbs-loading-overlay');
+                loadingOverlay.style.display = 'flex';
+
+                // Every image (cover + every page) is fully loaded and
+                // cached by the browser before the book becomes viewable at
+                // all - otherwise turning to a page whose image hasn't
+                // finished loading yet shows a blank/broken frame for a
+                // moment. Since these are all being fetched into the
+                // browser's normal image cache, once loaded here they
+                // display instantly on their actual page without
+                // re-fetching.
+                const imageUrls = [BOBOTS_BOOKSHELF_BASE + bookFolder + '/' + (bbsCurrentBook.cover || 'cover.jpg')];
+                bbsCurrentBook.pages.forEach(page => {
+                    if (page.image) imageUrls.push(BOBOTS_BOOKSHELF_BASE + bookFolder + '/' + page.image);
+                });
+                await Promise.all([
+                    ...imageUrls.map(bbsPreloadImage),
+                    bbsLoadLiteralMeanings(selectedLanguage)
+                ]);
+
+                loadingOverlay.style.display = 'none';
+                // Two animation frames guarantees the browser has actually
+                // finished laying out the screen that was just switched to
+                // display:flex, before anything tries to measure it -
+                // measuring too early is exactly what was producing a
+                // tiny/collapsed result.
+                requestAnimationFrame(() => requestAnimationFrame(bbsResizePages));
+                bbsRenderPage(-1);
+                bbsShowControlsBriefly();
+            } catch (e) {
+                console.error('Bobot\'s Bookshelf: could not open book', bookFolder, e);
+            }
+        }
+
+        // Computes explicit pixel dimensions for the largest 2:1 pair (two
+        // true 1:1 squares side by side) that fits within the available
+        // space. Done in JS rather than via CSS aspect-ratio, since
+        // aspect-ratio combined with an explicit height and a max-width
+        // constraint doesn't reliably keep both dimensions locked together
+        // across browsers - the height can end up "stuck" at its explicit
+        // value while only width gets clamped, distorting the ratio and
+        // cropping the image. Plain arithmetic sidesteps that entirely.
+        //
+        // Measures the outermost reader screen directly (not the nested
+        // flex body inside it), with one deliberate, explicit gap value -
+        // this is the actual "keep this margin" amount, not a byproduct of
+        // padding/flex behaviour further down the chain that could end up
+        // smaller than intended.
+        const BBS_READER_GAP = 24;
+        function bbsResizePages() {
+            const screen = document.getElementById('bobot-bookshelf-reader-screen');
+            const wrap = document.getElementById('bbs-pages-wrap');
+            if (!screen || !wrap) return;
+            let availW = screen.clientWidth - BBS_READER_GAP * 2;
+            let availH = screen.clientHeight - BBS_READER_GAP * 2;
+            // If the container hasn't actually been laid out yet (reads as
+            // zero or near-zero), fall back to the viewport itself rather
+            // than producing a tiny or invisible book.
+            if (availW < 100 || availH < 100) {
+                availW = window.innerWidth - BBS_READER_GAP * 2;
+                availH = window.innerHeight - BBS_READER_GAP * 2;
+            }
+            let boxH = availH;
+            let boxW = boxH * 2;
+            if (boxW > availW) {
+                boxW = availW;
+                boxH = boxW / 2;
+            }
+            wrap.style.width = boxW + 'px';
+            wrap.style.height = boxH + 'px';
+        }
+
+        // index === -1 is the book's front cover: the left side is left
+        // blank (nothing to show yet - the book hasn't "opened") and the
+        // cover image takes over the right side, where the text normally
+        // sits. Turning the page from there moves to page 0 and restores
+        // the usual left=image, right=text layout.
+        function bbsRenderPage(index) {
+            if (!bbsCurrentBook || !bbsCurrentBook.pages) return;
+            bbsCurrentPageIndex = index;
+
+            const imageWrap = document.getElementById('bbs-page-image-wrap');
+            const coverImg = document.getElementById('bbs-cover-image');
+            const pageText = document.getElementById('bbs-page-text');
+            const ttsControls = document.getElementById('bbs-tts-controls');
+
+            if (index === -1) {
+                imageWrap.style.visibility = 'hidden';
+                pageText.style.display = 'none';
+                ttsControls.style.display = 'none';
+                document.getElementById('bbs-page-translation').style.display = 'none';
+                document.getElementById('bbs-grapheme-row').style.display = 'none';
+                coverImg.src = BOBOTS_BOOKSHELF_BASE + bbsCurrentBookFolder + '/' + (bbsCurrentBook.cover || 'cover.jpg');
+                coverImg.style.display = 'block';
+                document.getElementById('bbs-prev-page-btn').disabled = true;
+                document.getElementById('bbs-prev-page-btn').classList.add('bbs-nav-disabled');
+                document.getElementById('bbs-next-page-btn').disabled = false;
+                document.getElementById('bbs-next-page-btn').classList.remove('bbs-nav-disabled');
+                document.getElementById('bbs-word-bubble').style.display = 'none';
+                bbsSwitchBackgroundAudio(null);
+                return;
+            }
+
+            if (!bbsCurrentBook.pages[index]) return;
+            const page = bbsCurrentBook.pages[index];
+
+            imageWrap.style.visibility = 'visible';
+            pageText.style.display = 'flex';
+            ttsControls.style.display = 'flex';
+            coverImg.style.display = 'none';
+            bbsRenderGraphemeRow();
+
+            document.getElementById('bbs-page-image').src = BOBOTS_BOOKSHELF_BASE + bbsCurrentBookFolder + '/' + page.image;
+            document.getElementById('bbs-prev-page-btn').disabled = false;
+            document.getElementById('bbs-prev-page-btn').classList.remove('bbs-nav-disabled');
+            document.getElementById('bbs-next-page-btn').disabled = (index === bbsCurrentBook.pages.length - 1);
+            document.getElementById('bbs-next-page-btn').classList.toggle('bbs-nav-disabled', index === bbsCurrentBook.pages.length - 1);
+
+            document.getElementById('bbs-word-bubble').style.display = 'none';
+            document.getElementById('bbs-page-translation').style.display = 'none';
+            bbsRenderPageText();
+            bbsSwitchBackgroundAudio(page.audio);
+        }
+
+        // The 8 French phoneme-grapheme correspondence images, in the
+        // requested left-to-right order - each tap speaks that grapheme's
+        // sound in French. Shown only when French is the current target
+        // language, since that's what these specifically teach.
+        const BBS_FRENCH_GRAPHEMES = ['oi', 'ou', 'au', 'qu', 'ch', 'é', 'eu', 'en-an'];
+        const BBS_FRENCH_GRAPHEMES_BASE = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/french-graphemes/';
+        function bbsRenderGraphemeRow() {
+            const row = document.getElementById('bbs-grapheme-row');
+            if (selectedLanguage !== 'fr') {
+                row.style.display = 'none';
+                return;
+            }
+            row.style.display = 'flex';
+            if (row.children.length > 0) return; // built once, same 8 images every time
+            BBS_FRENCH_GRAPHEMES.forEach(g => {
+                const img = document.createElement('img');
+                img.src = BBS_FRENCH_GRAPHEMES_BASE + encodeURIComponent(g) + '.png';
+                img.alt = g;
+                img.className = 'interactive';
+                img.style.cssText = 'height:48px; width:48px; object-fit:contain; cursor:pointer; border-radius:8px;';
+                img.title = g;
+                // Muted for now - a few of these graphemes pronounce oddly
+                // in isolation, outside the context of a full word. Left as
+                // a deliberate no-op (rather than removing the handler) so
+                // sound can be switched back on easily later.
+                img.onclick = () => {};
+                row.appendChild(img);
+            });
+        }
+
+        // "Global meaning" = the sentence-level translation, shown/spoken
+        // via the Translate button at the bottom of the page.
+        function bbsGetPageText() {
+            const page = bbsCurrentBook.pages[bbsCurrentPageIndex];
+            if (!page || !page.globalMeanings) return '';
+            return page.globalMeanings[selectedLanguage] || page.globalMeanings.en || '';
+        }
+
+        // Character-based scripts where words aren't space-separated and
+        // where a single character can carry its own meaning AND combine
+        // with neighbours into a compound with a different meaning (e.g.
+        // Mandarin 水 "water" + 豚 "pig" = 水豚 "capybara") - these are
+        // tokenised character-by-character instead of by whitespace.
+        // Japanese is included too since it also has no spaces between
+        // words in normal writing (Mandarin Pinyin is excluded, since as a
+        // romanisation it IS space-separated like any Latin-script text).
+        function bbsIsCjkLanguage(lang) {
+            return lang === 'zh-hanzi' || lang === 'cantonese' || lang === 'ja';
+        }
+
+        // Literal meanings now live in one file PER LANGUAGE, keyed by that
+        // language's own words - not funnelled through French. A German
+        // reader's word taps look words up in German; a Mandarin reader's
+        // taps look characters up in Mandarin. Cached per language so
+        // switching back and forth doesn't re-fetch every time.
+        let bbsLiteralMeaningsCache = {};
+        async function bbsLoadLiteralMeanings(lang) {
+            if (bbsLiteralMeaningsCache[lang]) {
+                bbsCurrentLiteralMeanings = bbsLiteralMeaningsCache[lang];
+                return;
+            }
+            try {
+                const res = await fetch(BOBOTS_BOOKSHELF_BASE + bbsCurrentBookFolder + '/literal-meanings/' + lang + '.json');
+                bbsCurrentLiteralMeanings = res.ok ? await res.json() : {};
+            } catch (e) {
+                bbsCurrentLiteralMeanings = {};
+            }
+            bbsLiteralMeaningsCache[lang] = bbsCurrentLiteralMeanings;
+        }
+
+        function bbsRenderPageText() {
+            const text = bbsGetPageText();
+            let html;
+            if (bbsIsCjkLanguage(selectedLanguage)) {
+                // One span per character (skipping punctuation/whitespace),
+                // so each character is independently tappable.
+                html = [...text].map(ch => {
+                    if (/[\s.,!?;:'"()、。！？…「」・]/.test(ch)) return ch;
+                    const inner = bbsColorCodingEnabled ? colorizeSentenceText(ch) : rosterEscapeHtml(ch);
+                    return `<span class="bbs-word interactive" data-word="${rosterEscapeHtml(ch)}" style="cursor:pointer; border-radius:4px; padding:1px 2px;">${inner}</span>`;
+                }).join('');
+            } else {
+                const chunks = text.split(/(\s+)/);
+                html = chunks.map(chunk => {
+                    if (chunk === '' || /^\s+$/.test(chunk)) return chunk;
+                    const cleanWord = chunk.replace(/[.,!?;:'"()„“”«»…–—¡¿؟،؛۔।॥]/g, '').toLowerCase();
+                    const inner = bbsColorCodingEnabled ? colorizeSentenceText(chunk) : rosterEscapeHtml(chunk);
+                    return `<span class="bbs-word interactive" data-word="${rosterEscapeHtml(cleanWord)}" style="cursor:pointer; border-radius:4px; padding:1px 2px;">${inner}</span>`;
+                }).join('');
+            }
+            document.getElementById('bbs-page-text-inner').innerHTML = html;
+        }
+
+        function bbsSwitchBackgroundAudio(audioFilename) {
+            if (bbsBgAudioEl) {
+                bbsBgAudioEl.pause();
+                bbsBgAudioEl = null;
+            }
+            if (!audioFilename) return;
+            bbsBgAudioEl = new Audio(BOBOTS_BOOKSHELF_BASE + 'bobots-bookshelf-audio/' + audioFilename);
+            bbsBgAudioEl.loop = true;
+            bbsBgAudioEl.volume = 0.5;
+            bbsBgAudioEl.play().catch(e => console.warn("Bobot's Bookshelf: background audio couldn't autoplay yet (needs a click on the page first)", e));
+        }
+
+        let bbsAnimating = false;
+
+        // A slide/fade transition for turning pages - both the image and
+        // text panel move together as one unit. Guarded against overlapping
+        // animations so rapid clicking can't leave it in a broken
+        // half-transitioned state.
+        function bbsAnimatedGoToPage(newIndex, direction) {
+            if (bbsAnimating) return;
+            if (!bbsCurrentBook || newIndex < -1 || newIndex >= bbsCurrentBook.pages.length) return;
+            bbsAnimating = true;
+            const wrap = document.getElementById('bbs-pages-wrap');
+            const outX = direction === 'next' ? '-40px' : '40px';
+            wrap.style.transform = `translateX(${outX})`;
+            wrap.style.opacity = '0';
+            setTimeout(() => {
+                bbsRenderPage(newIndex);
+                wrap.style.transition = 'none';
+                wrap.style.transform = `translateX(${direction === 'next' ? '40px' : '-40px'})`;
+                void wrap.offsetWidth; // force a reflow so the browser registers this position before transitioning back
+                wrap.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+                wrap.style.transform = 'translateX(0)';
+                wrap.style.opacity = '1';
+                setTimeout(() => { bbsAnimating = false; }, 260);
+            }, 220);
+        }
+
+        function bbsNextPage() {
+            if (bbsCurrentBook && bbsCurrentPageIndex < bbsCurrentBook.pages.length - 1) bbsAnimatedGoToPage(bbsCurrentPageIndex + 1, 'next');
+        }
+        function bbsPrevPage() {
+            if (bbsCurrentPageIndex > -1) bbsAnimatedGoToPage(bbsCurrentPageIndex - 1, 'prev');
+        }
+
+        // "Literal meaning" = the word/lexeme-level translation, shown when
+        // a word (or, for CJK scripts, a character) is tapped - keyed by
+        // that language's OWN vocabulary, glossed into English, rather than
+        // being funnelled through French. Supports up to a few possible
+        // senses per word. For CJK characters, also checks whether this
+        // character is part of a known compound elsewhere in its entry
+        // (e.g. 水 tapped shows "water", plus "also in 水豚 = capybara").
+        // "Parkour" is a real, correctly-spelled word in French (and kept
+        // as-is in every other language's text too) - only English TTS
+        // engines tend to mispronounce it as two English words ("Park" +
+        // "hour"), so the substitution only applies when English is what's
+        // actually being spoken, never for French or any other language.
+        // This only affects what gets SPOKEN, not what's displayed - the
+        // visible text always reads "Parkour" normally regardless.
+        function bbsPhoneticizeForSpeech(text, lang) {
+            if (lang !== 'en') return text;
+            return text.replace(/\bparkour\b/gi, 'Parkaw');
+        }
+
+        function bbsHandleWordTap(wordEl) {
+            const word = wordEl.dataset.word;
+            if (!word) return;
+            speakWord(bbsPhoneticizeForSpeech(word, selectedLanguage));
+            const dict = bbsCurrentLiteralMeanings || {};
+            const entry = dict[word];
+            if (!entry) return;
+            let senses = Array.isArray(entry) ? entry : (entry.en || null);
+            if (!senses) return;
+            if (!Array.isArray(senses)) senses = [senses];
+            let bubbleText = senses.join(', ');
+            if (entry.compounds && entry.compounds.length) {
+                const compoundText = entry.compounds
+                    .map(c => `${c.chars} = ${Array.isArray(c.en) ? c.en.join(', ') : c.en}`)
+                    .join('; ');
+                bubbleText += ' — also in: ' + compoundText;
+            }
+            const bubble = document.getElementById('bbs-word-bubble');
+            bubble.textContent = bubbleText;
+            const rect = wordEl.getBoundingClientRect();
+            bubble.style.display = 'block';
+            bubble.style.left = (rect.left + rect.width / 2) + 'px';
+            bubble.style.top = (rect.bottom + 8) + 'px';
+            bubble.style.transform = 'translateX(-50%)';
+        }
+
+        function bbsSpeakSentence(slow) {
+            const text = bbsGetPageText();
+            if (!text) return;
+            const speechText = bbsPhoneticizeForSpeech(text, selectedLanguage);
+            if (slow) speakWordSlow(speechText); else speakWord(speechText);
+        }
+
+        function bbsToggleSentenceTranslation() {
+            const page = bbsCurrentBook.pages[bbsCurrentPageIndex];
+            const el = document.getElementById('bbs-page-translation');
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+                return;
+            }
+            const translation = page.globalMeanings && page.globalMeanings.en;
+            if (!translation) return;
+            el.textContent = translation;
+            el.style.display = 'block';
+            speakOneInLanguage(bbsPhoneticizeForSpeech(translation, 'en'), 'en');
+        }
+
+        // Exit/fullscreen/prev/next controls are overlaid on the page and
+        // stay hidden until the mouse moves, then fade out again after a
+        // pause - keeping the reading view as clean as possible.
+        let bbsControlsHideTimeout = null;
+        function bbsShowControlsBriefly() {
+            document.querySelectorAll('.bbs-overlay-btn').forEach(el => el.classList.add('bbs-controls-visible'));
+            clearTimeout(bbsControlsHideTimeout);
+            bbsControlsHideTimeout = setTimeout(() => {
+                document.querySelectorAll('.bbs-overlay-btn').forEach(el => el.classList.remove('bbs-controls-visible'));
+            }, 2200);
+        }
+
+        function bbsWireUpOnce() {
+            if (bbsWiredUp) return;
+            bbsWiredUp = true;
+
+            document.getElementById('bbs-library-back-btn').onclick = resetToConfig;
+            document.getElementById('bbs-reader-back-btn').onclick = () => {
+                if (bbsBgAudioEl) { bbsBgAudioEl.pause(); bbsBgAudioEl = null; }
+                document.getElementById('bobot-bookshelf-reader-screen').style.display = 'none';
+                document.getElementById('bobot-bookshelf-library-screen').style.display = 'flex';
+            };
+            document.getElementById('bbs-colorcoding-toggle').addEventListener('change', (e) => {
+                bbsColorCodingEnabled = e.target.checked;
+            });
+            document.getElementById('bbs-prev-page-btn').onclick = bbsPrevPage;
+            document.getElementById('bbs-next-page-btn').onclick = bbsNextPage;
+            document.getElementById('bbs-page-text').addEventListener('click', (e) => {
+                const wordEl = e.target.closest('.bbs-word');
+                if (wordEl) bbsHandleWordTap(wordEl);
+            });
+            document.getElementById('bbs-speak-sentence-btn').onclick = () => bbsSpeakSentence(false);
+            document.getElementById('bbs-speak-slow-btn').onclick = () => bbsSpeakSentence(true);
+            document.getElementById('bbs-translate-sentence-btn').onclick = bbsToggleSentenceTranslation;
+            document.getElementById('bbs-word-bubble').onclick = () => {
+                document.getElementById('bbs-word-bubble').style.display = 'none';
+            };
+
+            // Swipe support on touch devices, alongside the arrow buttons
+            const body = document.getElementById('bbs-reader-body');
+            let touchStartX = null;
+            body.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+            body.addEventListener('touchend', (e) => {
+                if (touchStartX === null) return;
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                if (Math.abs(dx) > 50) { dx < 0 ? bbsNextPage() : bbsPrevPage(); }
+                touchStartX = null;
+            }, { passive: true });
+
+            // Controls fade in on mouse movement, fade back out after a pause
+            const screen = document.getElementById('bobot-bookshelf-reader-screen');
+            screen.addEventListener('mousemove', bbsShowControlsBriefly);
+
+            // Keep the pages correctly sized whenever the window changes -
+            // only while the reader is actually the visible screen, so this
+            // doesn't do pointless work (or fight some other tool's own
+            // layout) the rest of the time.
+            window.addEventListener('resize', () => {
+                if (screen.style.display !== 'none') bbsResizePages();
+            });
+
+            // Left/right arrow keys turn pages too, alongside the on-screen
+            // buttons and swipe - only while the reader is the visible
+            // screen, so this doesn't hijack arrow keys used elsewhere in
+            // the hub (e.g. typing in a text field).
+            document.addEventListener('keydown', (e) => {
+                if (screen.style.display === 'none') return;
+                if (e.key === 'ArrowLeft') bbsPrevPage();
+                else if (e.key === 'ArrowRight') bbsNextPage();
+            });
+        }
+
+
+
+        // ================================================================
         // SILENT TRANSLATOR - sends a private, translated audio reading of
         // any text box directly to specific students' own connected
         // devices, with no English included - supporting comprehension
@@ -6301,11 +6941,6 @@
         // it after the fact.
         const SILENT_TRANSLATOR_KEEPALIVE_WAV = 'data:audio/wav;base64,UklGRpQXAABXQVZFZm10IBAAAAABAAEAcBcAAOAuAAACABAAZGF0YXAXAAAAAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8AAAIABQAHAAkADAAOABEAEwAVABcAGQAbAB0AHgAgACEAIwAkACUAJgAmACcAJwAnACgAJwAnACcAJgAmACUAJAAjACEAIAAeAB0AGwAZABcAFQATABEADgAMAAkABwAFAAIAAAD+//v/+f/3//T/8v/v/+3/6//p/+f/5f/j/+L/4P/f/93/3P/b/9r/2v/Z/9n/2f/Y/9n/2f/Z/9r/2v/b/9z/3f/f/+D/4v/j/+X/5//p/+v/7f/v//L/9P/3//n/+//+/wAAAgAFAAcACQAMAA4AEQATABUAFwAZABsAHQAeACAAIQAjACQAJQAmACYAJwAnACcAKAAnACcAJwAmACYAJQAkACMAIQAgAB4AHQAbABkAFwAVABMAEQAOAAwACQAHAAUAAgAAAP7/+//5//f/9P/y/+//7f/r/+n/5//l/+P/4v/g/9//3f/c/9v/2v/a/9n/2f/Z/9j/2f/Z/9n/2v/a/9v/3P/d/9//4P/i/+P/5f/n/+n/6//t/+//8v/0//f/+f/7//7/AAACAAUABwAJAAwADgARABMAFQAXABkAGwAdAB4AIAAhACMAJAAlACYAJgAnACcAJwAoACcAJwAnACYAJgAlACQAIwAhACAAHgAdABsAGQAXABUAEwARAA4ADAAJAAcABQACAAAA/v/7//n/9//0//L/7//t/+v/6f/n/+X/4//i/+D/3//d/9z/2//a/9r/2f/Z/9n/2P/Z/9n/2f/a/9r/2//c/93/3//g/+L/4//l/+f/6f/r/+3/7//y//T/9//5//v//v8=';
 
-        // PLACEHOLDER - this needs to point at your own deployed translate+
-        // synthesize Cloud Function once it exists (see the accompanying
-        // notes for the server-side code and setup steps). Left blank
-        // deliberately rather than guessed, since a wrong URL fails
-        // silently in a way that's hard to diagnose from here.
         const SILENT_TRANSLATOR_PROXY_URL = 'https://translate-and-synthesize-250351337514.australia-southeast1.run.app';
 
         // Mirrors the main language dropdown, plus Punjabi - needed for
@@ -10231,6 +10866,18 @@
                 updateFullScreenButtonLabels();
                 updateSinhalaVowelSignsVisibility();
                 refreshCoderColorization();
+                const bbsScreen = document.getElementById('bobot-bookshelf-reader-screen');
+                if (bbsScreen && bbsScreen.style.display !== 'none' && bbsCurrentBook) {
+                    bbsAutoCheckFrenchColorCoding();
+                    bbsRenderGraphemeRow();
+                    bbsLoadLiteralMeanings(selectedLanguage).then(() => {
+                        if (bbsCurrentPageIndex >= 0) bbsRenderPageText();
+                    });
+                }
+                const bbsLibraryScreen = document.getElementById('bobot-bookshelf-library-screen');
+                if (bbsLibraryScreen && bbsLibraryScreen.style.display !== 'none') {
+                    bbsAutoCheckFrenchColorCoding();
+                }
             });
 
             if (savedLanguage) {
@@ -10579,8 +11226,7 @@
 
             document.getElementById('music-volume-slider').addEventListener('input', (e) => {
                 musicVolume = parseInt(e.target.value, 10) / 100;
-                const music = document.getElementById('bg-music');
-                if (music) music.volume = musicVolume;
+                bbSetMusicVolume(musicVolume);
             });
             document.getElementById('tts-volume-slider').addEventListener('input', (e) => {
                 ttsVolume = parseInt(e.target.value, 10) / 100;
@@ -10810,8 +11456,7 @@
             });
             document.getElementById('kart-music-volume-slider').addEventListener('input', (e) => {
                 musicVolume = parseInt(e.target.value, 10) / 100;
-                const music = document.getElementById('bg-music');
-                if (music) music.volume = musicVolume;
+                bbSetMusicVolume(musicVolume);
             });
             document.getElementById('kart-tts-volume-slider').addEventListener('input', (e) => {
                 ttsVolume = parseInt(e.target.value, 10) / 100;
@@ -10821,10 +11466,7 @@
             });
 
 
-            const bgMusic = document.getElementById('bg-music');
-            if (bgMusic) {
-                bgMusic.volume = musicVolume;
-            }
+            bbSetMusicVolume(musicVolume);
 
             const coderInput = document.getElementById('coder-input');
             coderInput.addEventListener('input', () => {
@@ -11036,6 +11678,7 @@
             { id: 'kart', label: 'Parkour Kart', icon: '🏎️', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/0fba893699f8510af924956b77b3370da126fa96/Parkourkarttile.png', accent: '--hub-marigold', accentSoft: '--hub-marigold-soft', desc: 'Race a track and grab the right word.' },
             { id: 'potato', label: 'Potato Parkour', icon: '🥔', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'A built-in vocabulary hunt - no setup needed, just play.' },
             { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing.' },
+            { id: 'bookshelf', label: "Bobot's Bookshelf", icon: '📚', accent: '--hub-rose', accentSoft: '--hub-rose-soft', desc: 'Digital picture books with tap-to-translate words and read-aloud support.' },
             { id: 'whiteboard', label: 'Whiteboard', icon: '🖊️', accent: '--hub-plum', accentSoft: '--hub-plum-soft', desc: 'A digital whiteboard for teachers with grapheme colour-coding and classroom management tools.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
         ];
@@ -11102,13 +11745,16 @@
         }
 
         function renderToolGrid() {
-            const mainGrid = document.getElementById('tool-grid-main');
+            const row1 = document.getElementById('tool-grid-main-row1');
+            const row2 = document.getElementById('tool-grid-main-row2');
             const sideGrid = document.getElementById('tool-grid-side');
-            if (!mainGrid || !sideGrid) return;
-            mainGrid.innerHTML = '';
+            if (!row1 || !row2 || !sideGrid) return;
+            row1.innerHTML = '';
+            row2.innerHTML = '';
             sideGrid.innerHTML = '';
-            HUB_TOOLS.slice(0, 4).forEach(tool => mainGrid.appendChild(wbBuildToolTile(tool)));
-            HUB_TOOLS.slice(4).forEach(tool => sideGrid.appendChild(wbBuildToolTile(tool)));
+            HUB_TOOLS.slice(0, 2).forEach(tool => row1.appendChild(wbBuildToolTile(tool)));
+            HUB_TOOLS.slice(2, 5).forEach(tool => row2.appendChild(wbBuildToolTile(tool)));
+            HUB_TOOLS.slice(5).forEach(tool => sideGrid.appendChild(wbBuildToolTile(tool)));
         }
 
         function selectTool(toolId) {
@@ -11129,6 +11775,8 @@
             } else if (toolId === 'bobot') {
                 selectMode('bobot');
                 showLandingStep('settings');
+            } else if (toolId === 'bookshelf') {
+                bobotsBookshelfOpenLibrary();
             }
         }
 
@@ -13306,18 +13954,22 @@
 
         function getMaxTargetBoxTextWidth() {
             const center = document.getElementById('ui-board-center');
-            // The two TTS buttons plus their gaps sit alongside the text
-            // within the same row - leaving those out of this calculation
-            // was letting the text think it had more room than it actually
-            // did once its neighbours were accounted for.
-            const buttonsAndGaps = 100;
-            if (center && center.clientWidth > 0) {
-                return Math.max(80, (center.clientWidth - 48) / 2 - 24 - buttonsAndGaps);
+            if (!center || center.clientWidth === 0) {
+                const vw = window.innerWidth || 800;
+                if (vw < 500) return 160;
+                if (vw < 900) return 240;
+                return 340;
             }
-            const vw = window.innerWidth || 800;
-            if (vw < 500) return 160;
-            if (vw < 900) return 240;
-            return 340;
+            // Now that the TTS buttons live in their own explicit zone
+            // (quest-tts-zone / location-tts-zone) rather than being
+            // inferred, this measures that zone's actual current width
+            // directly instead of guessing a fixed pixel amount - so it
+            // stays correct even if the buttons themselves are resized
+            // later, rather than needing this number hand-tuned again.
+            const ttsZone = document.getElementById('quest-tts-zone') || document.getElementById('location-tts-zone');
+            const ttsZoneWidth = (ttsZone && ttsZone.clientWidth > 0) ? ttsZone.clientWidth : 76;
+            const rowGap = 12; // the gap between the text-zone and tts-zone
+            return Math.max(80, (center.clientWidth - 48) / 2 - 24 - ttsZoneWidth - rowGap);
         }
 
         function getMaxKartTargetTextWidth() {
