@@ -1,0 +1,532 @@
+{
+  "鳥": {
+    "en": [
+      "bird"
+    ]
+  },
+  "が": {
+    "en": [
+      "(subject marker)"
+    ]
+  },
+  "見": {
+    "en": [
+      "see"
+    ],
+    "compounds": [
+      {
+        "chars": "見える",
+        "en": [
+          "can be seen, visible"
+        ]
+      }
+    ]
+  },
+  "え": {
+    "en": [
+      "(part of a verb ending)"
+    ],
+    "compounds": [
+      {
+        "chars": "見える",
+        "en": [
+          "can be seen, visible"
+        ]
+      }
+    ]
+  },
+  "る": {
+    "en": [
+      "(verb ending)"
+    ]
+  },
+  "と": {
+    "en": [
+      "(quotation marker, \"that\")"
+    ]
+  },
+  "プ": {
+    "en": [
+      "(sound part of プチ, 'Petit')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "Petit Parkour (the character's full name)"
+        ]
+      }
+    ]
+  },
+  "チ": {
+    "en": [
+      "(sound part of プチ, 'Petit')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "Petit Parkour (the character's full name)"
+        ]
+      }
+    ]
+  },
+  "パ": {
+    "en": [
+      "(sound part of パルクール, 'Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "Petit Parkour (the character's full name)"
+        ]
+      }
+    ]
+  },
+  "ル": {
+    "en": [
+      "(sound part of パルクール, 'Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "Petit Parkour (the character's full name)"
+        ]
+      }
+    ]
+  },
+  "ク": {
+    "en": [
+      "(sound part of パルクール, 'Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "Petit Parkour (the character's full name)"
+        ]
+      }
+    ]
+  },
+  "ー": {
+    "en": [
+      "(long vowel mark)"
+    ]
+  },
+  "は": {
+    "en": [
+      "(topic marker)"
+    ]
+  },
+  "言": {
+    "en": [
+      "say"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "い": {
+    "en": [
+      "(part of a verb form)"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "ま": {
+    "en": [
+      "(polite verb ending)"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "し": {
+    "en": [
+      "(part of a verb ending)"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "た": {
+    "en": [
+      "(past tense marker)"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "犬": {
+    "en": [
+      "dog"
+    ]
+  },
+  "の": {
+    "en": [
+      "(possessive marker, like 's or 'of')"
+    ]
+  },
+  "声": {
+    "en": [
+      "voice, sound"
+    ]
+  },
+  "聞": {
+    "en": [
+      "hear"
+    ],
+    "compounds": [
+      {
+        "chars": "聞こえる",
+        "en": [
+          "can be heard, audible"
+        ]
+      }
+    ]
+  },
+  "こ": {
+    "en": [
+      "(part of a verb ending)"
+    ],
+    "compounds": [
+      {
+        "chars": "聞こえる",
+        "en": [
+          "can be heard, audible"
+        ]
+      },
+      {
+        "chars": "たくさん",
+        "en": [
+          "a lot, many"
+        ]
+      },
+      {
+        "chars": "これ",
+        "en": [
+          "this"
+        ]
+      }
+    ]
+  },
+  "家": {
+    "en": [
+      "house"
+    ]
+  },
+  "歌": {
+    "en": [
+      "song"
+    ]
+  },
+  "飛": {
+    "en": [
+      "fly"
+    ],
+    "compounds": [
+      {
+        "chars": "飛行機",
+        "en": [
+          "airplane"
+        ]
+      }
+    ]
+  },
+  "行": {
+    "en": [
+      "go"
+    ],
+    "compounds": [
+      {
+        "chars": "飛行機",
+        "en": [
+          "airplane"
+        ]
+      }
+    ]
+  },
+  "機": {
+    "en": [
+      "machine"
+    ],
+    "compounds": [
+      {
+        "chars": "飛行機",
+        "en": [
+          "airplane"
+        ]
+      }
+    ]
+  },
+  "風": {
+    "en": [
+      "wind"
+    ]
+  },
+  "音": {
+    "en": [
+      "sound"
+    ]
+  },
+  "ロ": {
+    "en": [
+      "(sound part of ロボット, 'robot')"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "ボ": {
+    "en": [
+      "(sound part of ロボット, 'robot')"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "ト": {
+    "en": [
+      "(sound part of ロボット, 'robot')"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "コ": {
+    "en": [
+      "(sound part of コアラ, 'koala')"
+    ],
+    "compounds": [
+      {
+        "chars": "コアラ",
+        "en": [
+          "koala"
+        ]
+      }
+    ]
+  },
+  "ア": {
+    "en": [
+      "(sound part of コアラ, 'koala')"
+    ],
+    "compounds": [
+      {
+        "chars": "コアラ",
+        "en": [
+          "koala"
+        ]
+      }
+    ]
+  },
+  "ラ": {
+    "en": [
+      "(sound part of コアラ, 'koala')"
+    ],
+    "compounds": [
+      {
+        "chars": "コアラ",
+        "en": [
+          "koala"
+        ]
+      }
+    ]
+  },
+  "ド": {
+    "en": [
+      "(sound part of ドンドン, 'boom boom')"
+    ],
+    "compounds": [
+      {
+        "chars": "ドンドン",
+        "en": [
+          "boom boom"
+        ]
+      }
+    ]
+  },
+  "ン": {
+    "en": [
+      "(sound part, appears in ドンドン and たくさん/ぼくん-style words)"
+    ],
+    "compounds": [
+      {
+        "chars": "ドンドン",
+        "en": [
+          "boom boom"
+        ]
+      }
+    ]
+  },
+  "く": {
+    "en": [
+      "(part of several words)"
+    ],
+    "compounds": [
+      {
+        "chars": "たくさん",
+        "en": [
+          "a lot, many"
+        ]
+      },
+      {
+        "chars": "ぼく",
+        "en": [
+          "I, me (informal, masculine)"
+        ]
+      }
+    ]
+  },
+  "さ": {
+    "en": [
+      "(part of a word)"
+    ],
+    "compounds": [
+      {
+        "chars": "たくさん",
+        "en": [
+          "a lot, many"
+        ]
+      }
+    ]
+  },
+  "ん": {
+    "en": [
+      "(part of a word/grammatical ending)"
+    ],
+    "compounds": [
+      {
+        "chars": "たくさん",
+        "en": [
+          "a lot, many"
+        ]
+      }
+    ]
+  },
+  "も": {
+    "en": [
+      "also, too"
+    ],
+    "compounds": [
+      {
+        "chars": "もの",
+        "en": [
+          "things"
+        ]
+      }
+    ]
+  },
+  "ぼ": {
+    "en": [
+      "(part of ぼく, 'I/me')"
+    ],
+    "compounds": [
+      {
+        "chars": "ぼく",
+        "en": [
+          "I, me (informal, masculine)"
+        ]
+      }
+    ]
+  },
+  "世": {
+    "en": [
+      "generation, era"
+    ],
+    "compounds": [
+      {
+        "chars": "世界",
+        "en": [
+          "world"
+        ]
+      }
+    ]
+  },
+  "界": {
+    "en": [
+      "boundary, realm"
+    ],
+    "compounds": [
+      {
+        "chars": "世界",
+        "en": [
+          "world"
+        ]
+      }
+    ]
+  },
+  "だ": {
+    "en": [
+      "is, am, are (casual)"
+    ]
+  },
+  "ッ": {
+    "en": [
+      "(doubling mark, part of ロボット)"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "れ": {
+    "en": [
+      "(part of これ, 'this')"
+    ],
+    "compounds": [
+      {
+        "chars": "これ",
+        "en": [
+          "this"
+        ]
+      }
+    ]
+  }
+}
