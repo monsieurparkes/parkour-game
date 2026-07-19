@@ -6721,7 +6721,7 @@
                 html = [...text].map(ch => {
                     if (/[\s.,!?;:'"()、。！？…「」・]/.test(ch)) return ch;
                     const inner = bbsColorCodingEnabled ? colorizeSentenceText(ch) : rosterEscapeHtml(ch);
-                    return `<span class="bbs-word interactive" data-word="${rosterEscapeHtml(ch)}" style="cursor:pointer; border-radius:4px; padding:1px 2px;">${inner}</span>`;
+                    return `<span class="bbs-word interactive" data-word="${rosterEscapeHtml(ch)}" data-original="${rosterEscapeHtml(ch)}" style="cursor:pointer; border-radius:4px; padding:1px 2px;">${inner}</span>`;
                 }).join('');
             } else {
                 const chunks = text.split(/(\s+)/);
@@ -6729,7 +6729,14 @@
                     if (chunk === '' || /^\s+$/.test(chunk)) return chunk;
                     const cleanWord = chunk.replace(/[.,!?;:'"()„“”«»…–—¡¿؟،؛۔।॥]/g, '').toLowerCase();
                     const inner = bbsColorCodingEnabled ? colorizeSentenceText(chunk) : rosterEscapeHtml(chunk);
-                    return `<span class="bbs-word interactive" data-word="${rosterEscapeHtml(cleanWord)}" style="cursor:pointer; border-radius:4px; padding:1px 2px;">${inner}</span>`;
+                    // data-word is a stripped, lowercased lookup key only
+                    // (so "C'est"/"c'est" hit the same dictionary entry) -
+                    // data-original keeps the real spelling, apostrophe and
+                    // all, since that's what actually needs to be spoken.
+                    // Stripping the apostrophe for speech turns a common,
+                    // correctly-pronounced word into meaningless letters a
+                    // TTS voice has no reason to read the way it should.
+                    return `<span class="bbs-word interactive" data-word="${rosterEscapeHtml(cleanWord)}" data-original="${rosterEscapeHtml(chunk)}" style="cursor:pointer; border-radius:4px; padding:1px 2px;">${inner}</span>`;
                 }).join('');
             }
             document.getElementById('bbs-page-text-inner').innerHTML = html;
@@ -6802,7 +6809,8 @@
         function bbsHandleWordTap(wordEl) {
             const word = wordEl.dataset.word;
             if (!word) return;
-            speakWord(bbsPhoneticizeForSpeech(word, selectedLanguage));
+            const originalText = wordEl.dataset.original || word;
+            speakWord(bbsPhoneticizeForSpeech(originalText, selectedLanguage));
             const dict = bbsCurrentLiteralMeanings || {};
             const entry = dict[word];
             if (!entry) return;
