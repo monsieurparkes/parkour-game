@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <script>
-    // On a phone specifically (not iPad, not computer), the whole app is
+    // On a phone specifically (not iPad, not computer), the whole app gets
     // wrapped in an iframe held at a fixed "desktop-like" reference size
     // and then scaled down as one unit to fit the actual small screen -
     // so every fixed-px font/button/spacing value throughout the app
     // shrinks together in exact proportion, rather than staying full-size
-    // inside a much smaller viewport. This runs as early as possible, before
-    // the rest of this (large) page has been parsed, so on a phone the
-    // heavy page content only ever loads once - inside the iframe - not
-    // twice. Computer and iPad are completely unaffected: this check is
-    // false for both, so the page underneath loads completely unchanged.
+    // inside a much smaller viewport. Detection runs immediately (hiding
+    // the page right away so there's no flash of unscaled content before
+    // the wrap happens), but the actual wrapping itself happens later,
+    // once the page has fully loaded, using plain DOM APIs rather than
+    // document.write() - which technically works by having the browser
+    // restart parsing on a freshly-written document, but is an old, quirky
+    // mechanism to depend on. Computer and iPad are completely unaffected:
+    // this check is false for both, so the page loads and displays
+    // completely normally with nothing hidden and nothing extra run.
     (function() {
         function isMobilePhone() {
             var ua = navigator.userAgent;
@@ -20,32 +24,13 @@
             if (/Android/.test(ua) && /Mobile/.test(ua)) return true; // Android tablets omit "Mobile"
             return false;
         }
-        // window.self !== window.top means this IS the iframe created below,
-        // loading the real page a second time - skip re-wrapping to avoid
-        // an infinite loop of iframes wrapping iframes.
-        if (window.self !== window.top || !isMobilePhone()) return;
-
-        var REF_W = 1280, REF_H = 720;
-        document.write(
-            '<!DOCTYPE html><html><head>' +
-            '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
-            '<style>' +
-            'html,body{margin:0;padding:0;overflow:hidden;background:#000;height:100%;width:100%;}' +
-            '#bbMobileFrame{position:absolute;top:50%;left:50%;width:' + REF_W + 'px;height:' + REF_H + 'px;border:none;transform-origin:center center;}' +
-            '</style></head><body>' +
-            '<iframe id="bbMobileFrame" src="' + window.location.href + '"></iframe>' +
-            '<script>' +
-            'function bbScaleMobileFrame(){' +
-            'var f=document.getElementById("bbMobileFrame");' +
-            'var s=Math.min(window.innerWidth/' + REF_W + ', window.innerHeight/' + REF_H + ');' +
-            'f.style.transform="translate(-50%,-50%) scale("+s+")";' +
-            '}' +
-            'bbScaleMobileFrame();' +
-            'window.addEventListener("resize", bbScaleMobileFrame);' +
-            'window.addEventListener("orientationchange", function(){ setTimeout(bbScaleMobileFrame, 100); });' +
-            '<\/script></body></html>'
-        );
-        document.close();
+        // bbEmbedded=1 marks this as the iframe's own copy of the page,
+        // loading a second time - skip re-wrapping to avoid an infinite
+        // loop of iframes wrapping iframes.
+        var alreadyEmbedded = /[?&]bbEmbedded=1(&|$)/.test(window.location.search);
+        if (alreadyEmbedded || !isMobilePhone()) return;
+        document.documentElement.style.visibility = 'hidden';
+        window.bbNeedsMobileWrap = true;
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16464,6 +16449,41 @@
         // time to appear, varying with network conditions for resources
         // that have nothing to do with the tiles themselves.
         loadAssets();
+
+        // If the phone-detection script at the top of <head> flagged this
+        // as needing the mobile wrap, do it now, using plain DOM APIs -
+        // this whole page's real content gets cleared out and replaced
+        // with a single iframe that reloads the same page a second time
+        // (marked so it won't try to wrap itself again), held at a fixed
+        // "desktop-like" size and scaled down as one unit to fit the
+        // actual phone screen.
+        if (window.bbNeedsMobileWrap) {
+            (function() {
+                const REF_W = 1280, REF_H = 720;
+                const url = new URL(window.location.href);
+                url.searchParams.set('bbEmbedded', '1');
+
+                document.body.innerHTML = '';
+                document.body.style.cssText = 'margin:0; padding:0; overflow:hidden; background:#000; height:100%; width:100%;';
+                document.documentElement.style.cssText = 'height:100%; visibility:visible;';
+
+                const iframe = document.createElement('iframe');
+                iframe.id = 'bbMobileFrame';
+                iframe.src = url.toString();
+                iframe.setAttribute('allowfullscreen', 'true');
+                iframe.setAttribute('allow', 'fullscreen');
+                iframe.style.cssText = 'position:absolute; top:50%; left:50%; width:' + REF_W + 'px; height:' + REF_H + 'px; border:none; transform-origin:center center;';
+                document.body.appendChild(iframe);
+
+                function bbScaleMobileFrame() {
+                    const s = Math.min(window.innerWidth / REF_W, window.innerHeight / REF_H);
+                    iframe.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+                }
+                bbScaleMobileFrame();
+                window.addEventListener('resize', bbScaleMobileFrame);
+                window.addEventListener('orientationchange', () => setTimeout(bbScaleMobileFrame, 100));
+            })();
+        }
 
         // Safety net alongside the <link rel="preload"> above: if any text
         // still managed to render before OpenDyslexic finished downloading
