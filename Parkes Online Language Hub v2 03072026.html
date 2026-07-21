@@ -1592,6 +1592,8 @@
                                 <option value="serbian">Serbian (Српски)</option>
                                 <option value="croatian">Croatian (Hrvatski)</option>
                                 <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+                                <option value="tamil">Tamil (தமிழ்)</option>
+                                <option value="korean">Korean (한국어)</option>
                             </select>
                         </div>
                     </div>
@@ -2200,6 +2202,8 @@
                         <option value="serbian">Serbian (Српски)</option>
                         <option value="croatian">Croatian (Hrvatski)</option>
                                 <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+                                <option value="tamil">Tamil (தமிழ்)</option>
+                                <option value="korean">Korean (한국어)</option>
                     </select>
 
                     <div id="wb-graphemes-wrap" class="wb-dropdown-wrap">
@@ -3665,7 +3669,9 @@
             'afrikaans': 'af-ZA',
             'serbian': 'sr-RS',
             'croatian': 'hr-HR',
-            'punjabi': 'pa-IN'
+            'punjabi': 'pa-IN',
+            'tamil': 'ta-IN',
+            'korean': 'ko-KR'
         };
 
         // Geographical bounding boxes (strict word spawning regions)
@@ -3698,7 +3704,9 @@
             'macedonian': { locale: 'mk-MK', prefix: "денес е ", suffix: "." },
             'afrikaans': { locale: 'af-ZA', prefix: "vandag is dit ", suffix: "." },
             'serbian': { locale: 'sr-RS', prefix: "данас је ", suffix: "" },
-            'croatian': { locale: 'hr-HR', prefix: "danas je ", suffix: "" }
+            'croatian': { locale: 'hr-HR', prefix: "danas je ", suffix: "" },
+            'tamil': { locale: 'ta-IN', prefix: "இன்று தேதி ", suffix: "." },
+            'korean': { locale: 'ko-KR', prefix: "오늘은 ", suffix: "입니다." }
         };
 
         // Potato Parkour's fixed vocabulary set - ported from the original draft.
@@ -3729,7 +3737,9 @@
             uk: { header: "Де моя картопля?", locs: { shower: "у душі", toilet: "на туалеті", bed: "на ліжку", wardrobe: "на шафі", lamp: "на лампі", toybox: "у скрині з іграшками", 'red-roof': "на червоному даху", 'black-roof': "на чорному даху", television: "на телевізорі", lounge: "на дивані", fridge: "на холодильнику", bin: "над смітником", 'coffee-table': "над журнальним столиком", sink: "над кухонною мийкою", computer: "на комп'ютері", bookcase: "на книжковій шафі", 'washing-machine': "на пральній машині", 'washing-basket': "над кошиком для білизни", 'ironing-board': "на прасувальній дошці", 'blue-roof': "на синьому даху" } },
             ur: { header: "میرا آلو کہاں ہے؟", locs: { shower: "شاور میں", toilet: "بیت الخلا پر", bed: "بستر پر", wardrobe: "الماری پر", lamp: "لیمپ پر", toybox: "کھلونوں کے ڈبے میں", 'red-roof': "سرخ چھت پر", 'black-roof': "کالی چھت پر", television: "ٹیلی ویژن پر", lounge: "صوفے پر", fridge: "فریج پر", bin: "کوڑے دان کے اوپر", 'coffee-table': "کافی ٹیبل کے اوپر", sink: "کچن سنک کے اوپر", computer: "کمپیوٹر پر", bookcase: "کتابوں کی الماری پر", 'washing-machine': "واشنگ مشین پر", 'washing-basket': "کپڑوں کی ٹوکری کے اوپر", 'ironing-board': "استری بورڈ پر", 'blue-roof': "نیلی چھت پر" } },
             sinhala: { header: "මගේ අර්තාපල් කොහෙද?", locs: { shower: "ෂවර් එකේ", toilet: "වැසිකිළියේ", bed: "ඇඳ මත", wardrobe: "අල්මාරියේ", lamp: "ලාම්පුව මත", toybox: "සෙල්ලම් පෙට්ටියේ", 'red-roof': "රතු වහලය මත", 'black-roof': "කළු වහලය මත", television: "රූපවාහිනිය මත", lounge: "සෝෆා එක මත", fridge: "ෆ්‍රිජ් එක මත", bin: "කුණු බඳුනට උඩින්", 'coffee-table': "කෝපි මේසයට උඩින්", sink: "සින්ක් එකට උඩින්", computer: "පරිගණකය මත", bookcase: "පොත් රාක්කය මත", 'washing-machine': "සෝදන යන්ත්‍රය මත", 'washing-basket': "රෙදි කූඩයට උඩින්", 'ironing-board': "ඉස්ත්‍රි පුවරුව මත", 'blue-roof': "නිල් වහලය මත" } },
-            cantonese: { header: "我啲薯仔喺邊度？", locs: { shower: "喺花灑度", toilet: "喺廁所度", bed: "喺張床度", wardrobe: "喺衣櫃度", lamp: "喺盞燈度", toybox: "喺玩具箱度", 'red-roof': "喺紅色屋頂度", 'black-roof': "喺黑色屋頂度", television: "喺電視度", lounge: "喺梳化度", fridge: "喺雪櫃度", bin: "喺垃圾桶上面", 'coffee-table': "喺茶几上面", sink: "喺廚房洗手盆上面", computer: "喺電腦度", bookcase: "喺書櫃度", 'washing-machine': "喺洗衣機度", 'washing-basket': "喺洗衫籃上面", 'ironing-board': "喺熨衫板度", 'blue-roof': "喺藍色屋頂度" } }
+            cantonese: { header: "我啲薯仔喺邊度？", locs: { shower: "喺花灑度", toilet: "喺廁所度", bed: "喺張床度", wardrobe: "喺衣櫃度", lamp: "喺盞燈度", toybox: "喺玩具箱度", 'red-roof': "喺紅色屋頂度", 'black-roof': "喺黑色屋頂度", television: "喺電視度", lounge: "喺梳化度", fridge: "喺雪櫃度", bin: "喺垃圾桶上面", 'coffee-table': "喺茶几上面", sink: "喺廚房洗手盆上面", computer: "喺電腦度", bookcase: "喺書櫃度", 'washing-machine': "喺洗衣機度", 'washing-basket': "喺洗衫籃上面", 'ironing-board': "喺熨衫板度", 'blue-roof': "喺藍色屋頂度" } },
+            tamil: { header: "என் உருளைக்கிழங்கு எங்கே?", locs: { shower: "ஷவரில்", toilet: "கழிப்பிடத்தின் மேல்", bed: "படுக்கையின் மேல்", wardrobe: "அலமாரியின் மேல்", lamp: "விளக்கின் மேல்", toybox: "பொம்மைப் பெட்டியின் மேல்", 'red-roof': "சிவப்பு கூரையின் மேல்", 'black-roof': "கருப்பு கூரையின் மேல்", television: "தொலைக்காட்சியின் மேல்", lounge: "சோபாவின் மேல்", fridge: "குளிர்சாதனப் பெட்டியின் மேல்", bin: "குப்பைத் தொட்டிக்கு மேலே", 'coffee-table': "காபி மேசைக்கு மேலே", sink: "சமையலறை சிங்குக்கு மேலே", computer: "கணினியின் மேல்", bookcase: "புத்தக அலமாரியின் மேல்", 'washing-machine': "துணி துவைக்கும் இயந்திரத்தின் மேல்", 'washing-basket': "துணிக் கூடைக்கு மேலே", 'ironing-board': "இஸ்திரி பலகையின் மேல்", 'blue-roof': "நீல கூரையின் மேல்" } },
+            korean: { header: "내 감자는 어디에 있어요?", locs: { shower: "샤워실 안에", toilet: "변기 위에", bed: "침대 위에", wardrobe: "옷장 위에", lamp: "램프 위에", toybox: "장난감 상자 위에", 'red-roof': "빨간 지붕 위에", 'black-roof': "검은 지붕 위에", television: "텔레비전 위에", lounge: "소파 위에", fridge: "냉장고 위에", bin: "쓰레기통 위에", 'coffee-table': "커피 테이블 위에", sink: "주방 싱크대 위에", computer: "컴퓨터 위에", bookcase: "책장 위에", 'washing-machine': "세탁기 위에", 'washing-basket': "빨래 바구니 위에", 'ironing-board': "다림질판 위에", 'blue-roof': "파란 지붕 위에" } }
         };
 
         // Generic "in the house" label, overriding the normal forest/city/sky/water
@@ -4187,6 +4197,38 @@
                     setVoiceWarning('game-voice-warning', LANG_MAP[selectedLanguage]);
                 }
             };
+        }
+
+        // getVoices() is frequently empty the very first time it's called -
+        // voice lists load in asynchronously on most browsers, arriving via
+        // the voiceschanged event above. Speaking before that event has
+        // fired means getBestVoice() finds nothing to match against, so no
+        // voice ever gets explicitly assigned to the utterance - the engine
+        // then falls back to whatever its own default voice happens to be
+        // (commonly English), which reads other languages' text using
+        // English pronunciation rules rather than actually failing loudly.
+        // This waits for that one-time population to genuinely finish
+        // before any browser-voice speech attempt proceeds.
+        let voicesReadyPromise = null;
+        function ensureVoicesLoaded() {
+            if (!('speechSynthesis' in window)) return Promise.resolve();
+            if (voicesList.length > 0) return Promise.resolve();
+            if (voicesReadyPromise) return voicesReadyPromise;
+            voicesReadyPromise = new Promise(resolve => {
+                let settled = false;
+                const finish = () => { if (!settled) { settled = true; resolve(); } };
+                const existingHandler = window.speechSynthesis.onvoiceschanged;
+                window.speechSynthesis.onvoiceschanged = (e) => {
+                    populateVoices();
+                    if (existingHandler) existingHandler(e);
+                    finish();
+                };
+                // Some browsers never fire voiceschanged at all if there are
+                // simply no voices installed on the device - this can't wait
+                // forever in that case.
+                setTimeout(finish, 1000);
+            });
+            return voicesReadyPromise;
         }
 
         // Some browsers/OSes still register languages under older or alternate BCP-47
@@ -7006,7 +7048,9 @@
             { value: 'afrikaans', label: 'Afrikaans' },
             { value: 'serbian', label: 'Serbian (Српски)' },
             { value: 'croatian', label: 'Croatian (Hrvatski)' },
-            { value: 'punjabi', label: 'Punjabi (ਪੰਜਾਬੀ)' }
+            { value: 'punjabi', label: 'Punjabi (ਪੰਜਾਬੀ)' },
+            { value: 'tamil', label: 'Tamil (தமிழ்)' },
+            { value: 'korean', label: 'Korean (한국어)' }
         ];
 
         function stOpenPanel() {
@@ -9698,7 +9742,7 @@
             return new Promise(resolve => {
                 const cleanText = prepareTextForSpeech(text);
                 const cloudConfig = CLOUD_TTS_CONFIG[langKey];
-                const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+                const preferCloud = cloudConfig && cloudConfig.proxyUrl;
 
                 if (preferCloud) {
                     const cacheKey = cloudConfig.languageCode + '::default::' + cleanText;
@@ -11985,9 +12029,26 @@
         // ====================================================================
         const CLOUD_TTS_CONFIG = {
             sinhala: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'si-LK', voiceName: 'si-LK-SameeraNeural' },
-            fr: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'fr-FR' }
+            fr: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'fr-FR', voiceName: 'fr-FR-Wavenet-A' }
         };
         const cloudTtsAudioCache = {}; // avoids refetching the same word twice
+        // Browser TTS explicitly cancels any in-progress utterance before
+        // speaking a new one (speechSynthesis.cancel(), used in several
+        // places below) - Cloud TTS playback had no equivalent, so tapping
+        // words in quick succession let a new audio clip start playing
+        // right on top of whatever the previous one hadn't finished yet.
+        // Two overlapping clips of correct French audio sound exactly like
+        // one garbled, unintelligible clip, even though neither is actually
+        // mispronounced on its own. This tracks whichever clip is currently
+        // playing so it can be stopped first.
+        let currentCloudTtsAudio = null;
+        function stopCurrentCloudTtsAudio() {
+            if (currentCloudTtsAudio) {
+                currentCloudTtsAudio.pause();
+                currentCloudTtsAudio.currentTime = 0;
+                currentCloudTtsAudio = null;
+            }
+        }
 
         // Prepares text right before it's sent to any TTS engine (never used for
         // on-screen display). Strips bracket markers (existing behaviour), and
@@ -12040,8 +12101,10 @@
                     if (!base64Audio) return false;
                     cloudTtsAudioCache[cacheKey] = base64Audio;
                 }
+                stopCurrentCloudTtsAudio();
                 const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
                 audio.volume = ttsVolume;
+                currentCloudTtsAudio = audio;
                 await audio.play();
                 return true;
             } catch (e) {
@@ -12050,17 +12113,21 @@
             }
         }
 
-        // Microsoft Edge already has good built-in TTS, so there's no need to
-        // route it through Cloud TTS (saves API usage there too) - but Safari,
-        // iPad, and most other browsers have noticeably worse voices for some
-        // languages, so those prefer Cloud TTS whenever a language is configured.
+        // Previously, Microsoft Edge was assumed to already have good
+        // built-in TTS and skipped Cloud TTS entirely to save on API usage.
+        // Direct testing showed that assumption was wrong for French: Edge's
+        // own built-in French voice mispronounces common short words ("je",
+        // "dit"), while Cloud TTS (already used correctly on Chrome) sounds
+        // right. Since English has no Cloud TTS configuration at all, this
+        // can't affect Edge's English voice either way - only languages that
+        // are actually cloud-configured (French, Sinhala) are affected.
         function isMicrosoftEdge() {
             return /Edg\//.test(navigator.userAgent);
         }
 
         function speakWord(text, rate) {
             const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
-            const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+            const preferCloud = cloudConfig && cloudConfig.proxyUrl;
             if (preferCloud) {
                 speakWordViaCloudTTS(text, cloudConfig, rate).then(succeeded => {
                     if (!succeeded) speakWordBrowser(text, rate);
@@ -12107,7 +12174,7 @@
         function speakOneInLanguage(text, langKey) {
             const cleanText = prepareTextForSpeech(text);
             const cloudConfig = CLOUD_TTS_CONFIG[langKey];
-            const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+            const preferCloud = cloudConfig && cloudConfig.proxyUrl;
 
             if (preferCloud) {
                 const cacheKey = cloudConfig.languageCode + '::default::' + cleanText;
@@ -12122,8 +12189,10 @@
                             if (base64Audio) cloudTtsAudioCache[cacheKey] = base64Audio;
                         }
                         if (base64Audio) {
+                            stopCurrentCloudTtsAudio();
                             const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
                             audio.volume = ttsVolume;
+                            currentCloudTtsAudio = audio;
                             await audio.play();
                             await new Promise(resolve => { audio.onended = resolve; });
                             return;
@@ -12140,16 +12209,18 @@
         function speakOneInLanguageBrowser(cleanText, langKey) {
             return new Promise(resolve => {
                 if (!('speechSynthesis' in window)) { resolve(); return; }
-                const utterance = new SpeechSynthesisUtterance(cleanText);
-                utterance.rate = 0.85;
-                utterance.volume = ttsVolume;
-                const locale = LANG_MAP[langKey] || 'en-US';
-                utterance.lang = locale;
-                const bestVoice = getBestVoice(locale);
-                if (bestVoice) utterance.voice = bestVoice;
-                utterance.onend = resolve;
-                utterance.onerror = resolve;
-                window.speechSynthesis.speak(utterance);
+                ensureVoicesLoaded().then(() => {
+                    const utterance = new SpeechSynthesisUtterance(cleanText);
+                    utterance.rate = 0.85;
+                    utterance.volume = ttsVolume;
+                    const locale = LANG_MAP[langKey] || 'en-US';
+                    utterance.lang = locale;
+                    const bestVoice = getBestVoice(locale);
+                    if (bestVoice) utterance.voice = bestVoice;
+                    utterance.onend = resolve;
+                    utterance.onerror = resolve;
+                    window.speechSynthesis.speak(utterance);
+                });
             });
         }
 
@@ -12162,8 +12233,9 @@
             }
         }
 
-        function speakWordBrowser(text, rate) {
+        async function speakWordBrowser(text, rate) {
             if ('speechSynthesis' in window) {
+                await ensureVoicesLoaded();
                 window.speechSynthesis.cancel();
                 const cleanTextForSpeech = prepareTextForSpeech(text);
                 const utterance = new SpeechSynthesisUtterance(cleanTextForSpeech);
@@ -12201,8 +12273,10 @@
                         base64Audio = data.audioContent;
                         cloudTtsAudioCache[cacheKey] = base64Audio;
                     }
+                    stopCurrentCloudTtsAudio();
                     const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
                     audio.volume = ttsVolume;
+                    currentCloudTtsAudio = audio;
                     await audio.play();
                     await new Promise(resolve => { audio.onended = resolve; });
                 }
@@ -12215,7 +12289,7 @@
 
         function speakSequence(texts) {
             const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
-            const preferCloud = cloudConfig && cloudConfig.proxyUrl && !isMicrosoftEdge();
+            const preferCloud = cloudConfig && cloudConfig.proxyUrl;
             if (preferCloud) {
                 speakSequenceViaCloudTTS(texts, cloudConfig).then(succeeded => {
                     if (!succeeded) speakSequenceBrowser(texts);
@@ -12225,8 +12299,9 @@
             speakSequenceBrowser(texts);
         }
 
-        function speakSequenceBrowser(texts) {
+        async function speakSequenceBrowser(texts) {
             if (!('speechSynthesis' in window)) return;
+            await ensureVoicesLoaded();
             window.speechSynthesis.cancel();
             const locale = LANG_MAP[selectedLanguage] || 'en-US';
             const bestVoice = getBestVoice(locale);
@@ -12521,7 +12596,7 @@
 
         async function cacheCloudTTSIfConfigured(text, langKey) {
             const cloudConfig = CLOUD_TTS_CONFIG[langKey];
-            if (!cloudConfig || !cloudConfig.proxyUrl || isMicrosoftEdge()) return;
+            if (!cloudConfig || !cloudConfig.proxyUrl) return;
             const cleanText = prepareTextForSpeech(text);
             const cacheKey = cloudConfig.languageCode + '::default::' + cleanText;
             if (cloudTtsAudioCache[cacheKey]) return;
