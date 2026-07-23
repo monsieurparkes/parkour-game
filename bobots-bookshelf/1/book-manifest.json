@@ -33,7 +33,7 @@
     {
       "name": "page1",
       "image": "1.jpg",
-      "audio": null,
+      "audio": "magpie_wind_forest.mp3",
       "globalMeanings": {
         "fr": "« Je vois un oiseau ! » dit Petit Parkour.",
         "en": "\"I see a bird!\" said Little Parkour.",
@@ -67,7 +67,7 @@
     {
       "name": "page2",
       "image": "2.jpg",
-      "audio": null,
+      "audio": "dog_barking_wind_forest.mp3",
       "globalMeanings": {
         "fr": "« J'entends un chien ! » dit Petit Parkour.",
         "en": "\"I hear a dog!\" said Little Parkour.",
@@ -101,7 +101,7 @@
     {
       "name": "page3",
       "image": "3.jpg",
-      "audio": null,
+      "audio": "wind_forest.mp3",
       "globalMeanings": {
         "fr": "« Je vois une maison ! » dit Petit Parkour.",
         "en": "\"I see a house!\" said Little Parkour.",
@@ -135,7 +135,7 @@
     {
       "name": "page4",
       "image": "4.jpg",
-      "audio": null,
+      "audio": "wind_forest_music.mp3",
       "globalMeanings": {
         "fr": "« J'entends une chanson ! » dit Petit Parkour.",
         "en": "\"I hear a song!\" said Little Parkour.",
@@ -169,7 +169,7 @@
     {
       "name": "page5",
       "image": "5.jpg",
-      "audio": null,
+      "audio": "aeroplane_wind_forest.mp3",
       "globalMeanings": {
         "fr": "« Je vois un avion ! » dit Petit Parkour.",
         "en": "\"I see a plane!\" said Little Parkour.",
@@ -203,7 +203,7 @@
     {
       "name": "page6",
       "image": "6.jpg",
-      "audio": null,
+      "audio": "wind_forest.mp3",
       "globalMeanings": {
         "fr": "« J'entends le vent ! » dit Petit Parkour.",
         "en": "\"I hear the wind!\" said Little Parkour.",
@@ -237,7 +237,7 @@
     {
       "name": "page7",
       "image": "7.jpg",
-      "audio": null,
+      "audio": "wind_forest.mp3",
       "globalMeanings": {
         "fr": "« Je vois... un robot koala ? » dit Petit Parkour.",
         "en": "\"I see... a robot koala?\" said Little Parkour.",
@@ -271,7 +271,7 @@
     {
       "name": "page8",
       "image": "8.jpg",
-      "audio": null,
+      "audio": "boum_wind_forest.mp3",
       "globalMeanings": {
         "fr": "« J'entends... boum boum ? » dit Petit Parkour.",
         "en": "\"I hear... boom boom?\" said Little Parkour.",
@@ -305,7 +305,7 @@
     {
       "name": "page9",
       "image": "9.jpg",
-      "audio": null,
+      "audio": "magpie_barking_aeroplane_music_wind_forest.mp3",
       "globalMeanings": {
         "fr": "« Je vois beaucoup de choses ! » dit Petit Parkour.",
         "en": "\"I see lots of things!\" said Little Parkour.",
@@ -339,7 +339,7 @@
     {
       "name": "page10",
       "image": "10.jpg",
-      "audio": null,
+      "audio": "magpie_barking_aeroplane_music_wind_forest.mp3",
       "globalMeanings": {
         "fr": "« J'entends beaucoup de choses. C'est mon monde ! » dit Petit Parkour.",
         "en": "\"I hear lots of things. It's my world!\" said Little Parkour.",
