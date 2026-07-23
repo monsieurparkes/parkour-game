@@ -1570,30 +1570,33 @@
                         <div class="hub-group hub-font" style="position:absolute; left:44.5%; top:71%; width:50%; transform:translateY(-74%); margin:0;">
                             <select id="global-language-select" class="hub-input" style="padding:3px 14px;">
                                 <option value="" selected disabled>Choose a target language...</option>
-                                <option value="fr">French (Français)</option>
-                                <option value="en">English</option>
-                                <option value="zh-pinyin">Mandarin (Pinyin)</option>
-                                <option value="zh-hanzi">Mandarin (Hanzi)</option>
-                                <option value="cantonese">Cantonese</option>
-                                <option value="ja">Japanese (日本語)</option>
-                                <option value="de">German (Deutsch)</option>
-                                <option value="it">Italian (Italiano)</option>
-                                <option value="es">Spanish (Español)</option>
-                                <option value="he">Hebrew (עברית)</option>
-                                <option value="ar">Arabic (العربية)</option>
-                                <option value="sinhala">Sinhala (සිංහල)</option>
-                                <option value="vi">Vietnamese (Tiếng Việt)</option>
-                                <option value="ur">Urdu (اردو)</option>
-                                <option value="hi">Hindi (हिन्दी)</option>
-                                <option value="uk">Ukrainian (Українська)</option>
-                                <option value="ru">Russian (Русский)</option>
-                                <option value="macedonian">Macedonian (Македонски)</option>
                                 <option value="afrikaans">Afrikaans</option>
-                                <option value="serbian">Serbian (Српски)</option>
+                                <option value="ar">Arabic (العربية)</option>
+                                <option value="burmese">Burmese (မြန်မာဘာသာ)</option>
+                                <option value="cantonese">Cantonese</option>
                                 <option value="croatian">Croatian (Hrvatski)</option>
-                                <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
-                                <option value="tamil">Tamil (தமிழ்)</option>
+                                <option value="dutch">Dutch (Nederlands)</option>
+                                <option value="en">English</option>
+                                <option value="fr">French (Français)</option>
+                                <option value="de">German (Deutsch)</option>
+                                <option value="he">Hebrew (עברית)</option>
+                                <option value="hi">Hindi (हिन्दी)</option>
+                                <option value="it">Italian (Italiano)</option>
+                                <option value="ja">Japanese (日本語)</option>
                                 <option value="korean">Korean (한국어)</option>
+                                <option value="macedonian">Macedonian (Македонски)</option>
+                                <option value="zh-hanzi">Mandarin (Hanzi)</option>
+                                <option value="zh-pinyin">Mandarin (Pinyin)</option>
+                                <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+                                <option value="ru">Russian (Русский)</option>
+                                <option value="serbian">Serbian (Српски)</option>
+                                <option value="sinhala">Sinhala (සිංහල)</option>
+                                <option value="es">Spanish (Español)</option>
+                                <option value="tamil">Tamil (தமிழ்)</option>
+                                <option value="thai">Thai (ภาษาไทย)</option>
+                                <option value="uk">Ukrainian (Українська)</option>
+                                <option value="ur">Urdu (اردو)</option>
+                                <option value="vi">Vietnamese (Tiếng Việt)</option>
                             </select>
                         </div>
                     </div>
@@ -2094,9 +2097,12 @@
             <button id="bbs-next-page-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:50%; right:16px; transform:translateY(-50%); z-index:20; width:44px; height:44px; font-size:20px;" title="Next page">→</button>
 
             <div id="bbs-reader-body" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; position:relative; overflow:hidden;">
-                <div id="bbs-pages-wrap" style="display:flex; transition:transform 0.25s ease, opacity 0.25s ease;">
+                <div id="bbs-pages-wrap" style="display:flex; position:relative; transition:transform 0.25s ease, opacity 0.25s ease;">
                     <div id="bbs-page-image-wrap" style="width:50%; height:100%; overflow:hidden; border-radius:var(--hub-radius-md) 0 0 var(--hub-radius-md); background:#f2f0ea;">
                         <img id="bbs-page-image" style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                    <div id="bbs-cover-title-overlay" style="display:none; position:absolute; left:0; top:0; width:50%; height:100%; align-items:center; justify-content:center; padding:36px; box-sizing:border-box; text-align:center;">
+                        <div id="bbs-cover-title-text" style="font-family:'OpenDyslexic', sans-serif; font-weight:800; line-height:1.3; letter-spacing:0.02em; color:var(--hub-ink); overflow-wrap:break-word;"></div>
                     </div>
                     <div id="bbs-page-text-wrap" style="width:50%; height:100%; background:var(--hub-surface); border:1px solid var(--hub-line); border-left:none; border-radius:0 var(--hub-radius-md) var(--hub-radius-md) 0; padding:28px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
                         <img id="bbs-cover-image" style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
@@ -2180,30 +2186,33 @@
                     </div>
 
                     <select id="wb-language-select" class="hub-input wb-select">
-                        <option value="fr" selected>French (Français)</option>
-                        <option value="en">English</option>
-                        <option value="zh-pinyin">Mandarin (Pinyin)</option>
-                        <option value="zh-hanzi">Mandarin (Hanzi)</option>
-                        <option value="cantonese">Cantonese</option>
-                        <option value="ja">Japanese (日本語)</option>
-                        <option value="de">German (Deutsch)</option>
-                        <option value="it">Italian (Italiano)</option>
-                        <option value="es">Spanish (Español)</option>
-                        <option value="he">Hebrew (עברית)</option>
-                        <option value="ar">Arabic (العربية)</option>
-                        <option value="sinhala">Sinhala (සිංහල)</option>
-                        <option value="vi">Vietnamese (Tiếng Việt)</option>
-                        <option value="ur">Urdu (اردو)</option>
-                        <option value="hi">Hindi (हिन्दी)</option>
-                        <option value="uk">Ukrainian (Українська)</option>
-                        <option value="ru">Russian (Русский)</option>
-                        <option value="macedonian">Macedonian (Македонски)</option>
                         <option value="afrikaans">Afrikaans</option>
-                        <option value="serbian">Serbian (Српски)</option>
+                        <option value="ar">Arabic (العربية)</option>
+                        <option value="burmese">Burmese (မြန်မာဘာသာ)</option>
+                        <option value="cantonese">Cantonese</option>
                         <option value="croatian">Croatian (Hrvatski)</option>
-                                <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
-                                <option value="tamil">Tamil (தமிழ்)</option>
-                                <option value="korean">Korean (한국어)</option>
+                        <option value="dutch">Dutch (Nederlands)</option>
+                        <option value="en">English</option>
+                        <option value="fr" selected>French (Français)</option>
+                        <option value="de">German (Deutsch)</option>
+                        <option value="he">Hebrew (עברית)</option>
+                        <option value="hi">Hindi (हिन्दी)</option>
+                        <option value="it">Italian (Italiano)</option>
+                        <option value="ja">Japanese (日本語)</option>
+                        <option value="korean">Korean (한국어)</option>
+                        <option value="macedonian">Macedonian (Македонски)</option>
+                        <option value="zh-hanzi">Mandarin (Hanzi)</option>
+                        <option value="zh-pinyin">Mandarin (Pinyin)</option>
+                        <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+                        <option value="ru">Russian (Русский)</option>
+                        <option value="serbian">Serbian (Српски)</option>
+                        <option value="sinhala">Sinhala (සිංහල)</option>
+                        <option value="es">Spanish (Español)</option>
+                        <option value="tamil">Tamil (தமிழ்)</option>
+                        <option value="thai">Thai (ภาษาไทย)</option>
+                        <option value="uk">Ukrainian (Українська)</option>
+                        <option value="ur">Urdu (اردو)</option>
+                        <option value="vi">Vietnamese (Tiếng Việt)</option>
                     </select>
 
                     <div id="wb-graphemes-wrap" class="wb-dropdown-wrap">
@@ -2380,6 +2389,20 @@
                     <div class="flex justify-center mt-4">
                         <button id="wb-dataviewer-report-btn" class="hub-btn-primary interactive">🖨️ Generate Report</button>
                     </div>
+                </div>
+            </div>
+
+            <!-- Set Line Order - drag-and-drop reordering of a class's students,
+                 used as the default order for Class Tracker sessions -->
+            <div id="wb-lineorder-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[310] interactive backdrop-blur-sm hub-font">
+                <div style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); padding:24px; width:100%; max-width:420px; max-height:85vh; overflow-y:auto;">
+                    <div class="flex items-center justify-between mb-2">
+                        <strong style="font-size:16px; color:var(--hub-ink);">📋 Set Line Order</strong>
+                        <button id="wb-lineorder-close-btn" class="wb-circle-btn interactive">✕</button>
+                    </div>
+                    <p class="hub-hint mt-0" style="margin-bottom:12px;">Drag students into the order you'll go through them in - this is remembered for next time.</p>
+                    <div id="wb-lineorder-list" style="display:flex; flex-direction:column; gap:4px;"></div>
+                    <button id="wb-lineorder-save-btn" class="hub-btn-primary interactive w-full" style="margin-top:16px;">Save Order</button>
                 </div>
             </div>
 
@@ -2623,14 +2646,15 @@
                 <div id="wb-tools-help-tooltip" class="hub-font" style="display:none; position:fixed; z-index:500; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:10px 12px; width:220px; font-size:12px; line-height:1.45; color:var(--hub-ink); pointer-events:none;"></div>
 
                 <!-- Silent Interpreter settings - one row per connected student
-                     device, each with its own language and volume -->
+                     device (or per student using their own device's speakers
+                     directly), each with its own language and volume -->
                 <div id="wb-st-settings-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[310] interactive backdrop-blur-sm hub-font">
                     <div style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); padding:24px; width:100%; max-width:480px; max-height:88vh; overflow-y:auto;">
                         <div class="flex items-center justify-between mb-4">
                             <strong style="font-size:16px; color:var(--hub-ink);">⚙️ Silent Interpreter Settings</strong>
                             <button id="wb-st-settings-close-btn" class="wb-circle-btn interactive">✕</button>
                         </div>
-                        <p class="hub-hint mt-0">Connect each student's own device, choose the language they'll hear, and set its own volume. These never play English - only the translation, so students still get English from the board and from you.</p>
+                        <p class="hub-hint mt-0">Connect each student's own device, choose the language they'll hear, and set its own volume - or, if a student only has an iPad with nothing to pair, tick "play on this device's own speakers" instead. English is available as a target language too, for whenever broadcasting an English reading is specifically what's needed.</p>
                         <div id="wb-st-permission-banner" style="display:flex; flex-direction:column; gap:8px; background:var(--hub-violet-soft); border-radius:10px; padding:10px; margin-bottom:12px;">
                             <span style="font-size:12px;">🎤 Browsers hide device names until you allow this once - it only needs a moment's microphone access to reveal the list, nothing is recorded or kept.</span>
                             <button id="wb-st-unlock-devices-btn" class="hub-btn-ghost interactive" style="font-size:12px;">Show my connected devices</button>
@@ -2681,6 +2705,11 @@
                             <input type="text" id="wb-assessment-criteria-input" class="hub-input" placeholder="Criteria (e.g. past tense verbs)...">
                             <input type="text" id="wb-assessment-outcome-input" class="hub-input" placeholder="Syllabus outcome (optional)..." list="wb-assessment-outcome-list">
                             <datalist id="wb-assessment-outcome-list"></datalist>
+                            <div class="hub-checkbox-row" style="margin-top:0;">
+                                <input type="checkbox" id="wb-assessment-random-order-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                <label for="wb-assessment-random-order-toggle" style="font-size:12px; cursor:pointer;">🔀 Random order (instead of line order)</label>
+                            </div>
+                            <button id="wb-assessment-lineorder-btn" class="hub-btn-ghost interactive w-full" style="font-size:12px;">📋 Set Line Order</button>
                             <button id="wb-assessment-start-btn" class="hub-btn-primary interactive w-full">Start Session</button>
                             <button id="wb-assessment-viewdata-btn" class="hub-btn-ghost interactive w-full">📈 View Data</button>
                         </div>
@@ -2779,9 +2808,12 @@
                 </div>
 
                 <!-- Silent Interpreter - sends a private translated audio reading of
-                     any text box to specific students' own connected devices, with
-                     no English included, supporting comprehension without
-                     displacing English exposure. -->
+                     any text box to specific students' own connected devices (or
+                     straight out of that device's own speakers, for students
+                     without a Bluetooth device to pair), supporting comprehension
+                     without displacing English exposure. English is available as
+                     a target language too, for when broadcasting an English
+                     reading is specifically needed. -->
                 <div id="wb-silent-translator-panel" class="hub-font" style="display:none; position:absolute; top:20px; left:20px; z-index:150; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); width:220px; overflow:hidden;">
                     <div id="wb-st-drag-handle" style="display:flex; align-items:center; justify-content:space-between; cursor:grab; padding:8px 10px; border-bottom:1px solid var(--hub-line);">
                         <div style="display:flex; align-items:center; gap:6px;">
@@ -2876,7 +2908,7 @@
                 <div id="quest-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0; width:100%;">
                     <h3 id="quest-header-label" class="text-slate-400 text-xs font-bold uppercase tracking-wider">Target Objective</h3>
                     <div class="flex items-center gap-3" style="min-width:0; width:100%; justify-content:center;">
-                        <div id="quest-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:flex-end; overflow:hidden;">
+                        <div id="quest-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:center; overflow:hidden;">
                             <div id="instruction-text" dir="auto" class="font-black text-blue-900 leading-tight whitespace-pre-wrap text-center" style="min-width:0; font-size:1.5rem;">...</div>
                         </div>
                         <div id="quest-tts-zone" style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
@@ -2894,7 +2926,7 @@
                 <div id="location-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0; width:100%;">
                     <h3 id="where-title" class="text-xs font-bold uppercase tracking-wider text-slate-400">Where?</h3>
                     <div class="flex items-center gap-3" style="min-width:0; width:100%; justify-content:center;">
-                        <div id="location-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:flex-end; overflow:hidden;">
+                        <div id="location-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:center; overflow:hidden;">
                             <div id="location-text" dir="auto" class="font-black leading-tight text-center tracking-wide" style="min-width:0; font-size:1.5rem;">...</div>
                         </div>
                         <div id="location-tts-zone" style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
@@ -3648,30 +3680,33 @@
 
         // Language TTS locale mapping
         const LANG_MAP = {
-            'fr': 'fr-FR',
-            'en': 'en-AU', 
-            'zh-pinyin': 'zh-CN',
-            'zh-hanzi': 'zh-CN',
-            'cantonese': 'zh-HK',
-            'ja': 'ja-JP',
-            'de': 'de-DE',
-            'it': 'it-IT',
-            'es': 'es-ES',
-            'he': 'he-IL',
-            'ar': 'ar-AE',
-            'sinhala': 'si-LK',
-            'vi': 'vi-VN',
-            'ur': 'ur-PK',
-            'hi': 'hi-IN',
-            'uk': 'uk-UA',
-            'ru': 'ru-RU',
-            'macedonian': 'mk-MK',
             'afrikaans': 'af-ZA',
-            'serbian': 'sr-RS',
+            'ar': 'ar-AE',
+            'burmese': 'my-MM',
+            'cantonese': 'zh-HK',
             'croatian': 'hr-HR',
+            'dutch': 'nl-NL',
+            'en': 'en-AU',
+            'fr': 'fr-FR',
+            'de': 'de-DE',
+            'he': 'he-IL',
+            'hi': 'hi-IN',
+            'it': 'it-IT',
+            'ja': 'ja-JP',
+            'korean': 'ko-KR',
+            'macedonian': 'mk-MK',
+            'zh-hanzi': 'zh-CN',
+            'zh-pinyin': 'zh-CN',
             'punjabi': 'pa-IN',
+            'ru': 'ru-RU',
+            'serbian': 'sr-RS',
+            'sinhala': 'si-LK',
+            'es': 'es-ES',
             'tamil': 'ta-IN',
-            'korean': 'ko-KR'
+            'thai': 'th-TH',
+            'uk': 'uk-UA',
+            'ur': 'ur-PK',
+            'vi': 'vi-VN'
         };
 
         // Geographical bounding boxes (strict word spawning regions)
@@ -3684,29 +3719,33 @@
 
         // Precision localized date formats featuring fully integrated non-Latin numeral tags (e.g. hanidec, jpan, deva, hebr, arab)
         const LOCALE_DATA = {
-            'fr': { locale: 'fr-FR', prefix: "on est le ", suffix: "." },
-            'en': { locale: 'en-AU', prefix: "today is ", suffix: "." },
-            'zh-pinyin': { locale: 'zh-CN', prefix: "jīntiān shì ", suffix: "." },
-            'zh-hanzi': { locale: 'zh-CN-u-nu-hanidec', prefix: "今天是 ", suffix: "。" },
-            'cantonese': { locale: 'zh-HK-u-nu-hanidec', prefix: "今日係 ", suffix: "。" },
-            'ja': { locale: 'ja-JP-u-nu-jpan', prefix: "今日は ", suffix: "。" },
-            'de': { locale: 'de-DE', prefix: "Heute ist ", suffix: "." }, 
-            'it': { locale: 'it-IT', prefix: "oggi è ", suffix: "." },
-            'es': { locale: 'es-ES', prefix: "hoy es ", suffix: "." },
-            'he': { locale: 'he-IL-u-nu-hebr', prefix: "היום ", suffix: "." },
-            'ar': { locale: 'ar-AE-u-nu-arab', prefix: "اليوم هو ", suffix: "." },
-            'sinhala': { locale: 'si-LK', prefix: "අද ", suffix: "." },
-            'vi': { locale: 'vi-VN', prefix: "hôm nay là ", suffix: "." },
-            'ur': { locale: 'ur-PK-u-nu-arabext', prefix: "آج ", suffix: "." },
-            'hi': { locale: 'hi-IN-u-nu-deva', prefix: "आज ", suffix: "." },
-            'uk': { locale: 'uk-UA', prefix: "сьогодні ", suffix: "." },
-            'ru': { locale: 'ru-RU', prefix: "сегодня ", suffix: "." },
-            'macedonian': { locale: 'mk-MK', prefix: "денес е ", suffix: "." },
             'afrikaans': { locale: 'af-ZA', prefix: "vandag is dit ", suffix: "." },
-            'serbian': { locale: 'sr-RS', prefix: "данас је ", suffix: "" },
+            'ar': { locale: 'ar-AE-u-nu-arab', prefix: "اليوم هو ", suffix: "." },
+            'burmese': { locale: 'my-MM', prefix: "ဒီနေ့ ", suffix: "" },
+            'cantonese': { locale: 'zh-HK-u-nu-hanidec', prefix: "今日係 ", suffix: "。" },
             'croatian': { locale: 'hr-HR', prefix: "danas je ", suffix: "" },
+            'dutch': { locale: 'nl-NL', prefix: "vandaag is het ", suffix: "." },
+            'en': { locale: 'en-AU', prefix: "today is ", suffix: "." },
+            'fr': { locale: 'fr-FR', prefix: "on est le ", suffix: "." },
+            'de': { locale: 'de-DE', prefix: "Heute ist ", suffix: "." },
+            'he': { locale: 'he-IL-u-nu-hebr', prefix: "היום ", suffix: "." },
+            'hi': { locale: 'hi-IN-u-nu-deva', prefix: "आज ", suffix: "." },
+            'it': { locale: 'it-IT', prefix: "oggi è ", suffix: "." },
+            'ja': { locale: 'ja-JP-u-nu-jpan', prefix: "今日は ", suffix: "。" },
+            'korean': { locale: 'ko-KR', prefix: "오늘은 ", suffix: "입니다." },
+            'macedonian': { locale: 'mk-MK', prefix: "денес е ", suffix: "." },
+            'zh-hanzi': { locale: 'zh-CN-u-nu-hanidec', prefix: "今天是 ", suffix: "。" },
+            'zh-pinyin': { locale: 'zh-CN', prefix: "jīntiān shì ", suffix: "." },
+            'punjabi': { locale: 'pa-IN', prefix: "ਅੱਜ ", suffix: "." },
+            'ru': { locale: 'ru-RU', prefix: "сегодня ", suffix: "." },
+            'serbian': { locale: 'sr-RS', prefix: "данас је ", suffix: "" },
+            'sinhala': { locale: 'si-LK', prefix: "අද ", suffix: "." },
+            'es': { locale: 'es-ES', prefix: "hoy es ", suffix: "." },
             'tamil': { locale: 'ta-IN', prefix: "இன்று தேதி ", suffix: "." },
-            'korean': { locale: 'ko-KR', prefix: "오늘은 ", suffix: "입니다." }
+            'thai': { locale: 'th-TH', prefix: "วันนี้คือ ", suffix: "" },
+            'uk': { locale: 'uk-UA', prefix: "сьогодні ", suffix: "." },
+            'ur': { locale: 'ur-PK-u-nu-arabext', prefix: "آج ", suffix: "." },
+            'vi': { locale: 'vi-VN', prefix: "hôm nay là ", suffix: "." }
         };
 
         // Potato Parkour's fixed vocabulary set - ported from the original draft.
@@ -3717,29 +3756,33 @@
         // other 5 (Cantonese, Sinhala, Urdu, Ukrainian, Russian) are new translations
         // since the original draft predates the hub supporting those languages.
         const POTATO_LOCATIONS = {
+            afrikaans: { header: "Waar is my aartappel?", locs: { shower: "in die stort", toilet: "op die toilet", bed: "op die bed", wardrobe: "op die hangkas", lamp: "op die lamp", toybox: "in die speelgoedkis", 'red-roof': "op die rooi dak", 'black-roof': "op die swart dak", television: "op die televisie", lounge: "op die rusbank", fridge: "op die yskas", bin: "bo-oor die asblik", 'coffee-table': "bo-oor die koffietafel", sink: "bo-oor die wasbak", computer: "op die rekenaar", bookcase: "op die boekrak", 'washing-machine': "op die wasmasjien", 'washing-basket': "bo-oor die wasmandjie", 'ironing-board': "op die strykplank", 'blue-roof': "op die blou dak" } },
+            ar: { header: "أين بطاطسي؟", locs: { shower: "في الدش", toilet: "على المرحاض", bed: "على السرير", wardrobe: "على خزانة الملابس", lamp: "على المصباح", toybox: "في صندوق الألعاب", 'red-roof': "على السطح الأحمر", 'black-roof': "على السطح الأسود", television: "على التلفاز", lounge: "على الكنبة", fridge: "على الثلاجة", bin: "فوق سلة المهملات", 'coffee-table': "فوق طاولة القهوة", sink: "فوق مغسلة المطبخ", computer: "على الكمبيوتر", bookcase: "على خزانة الكتب", 'washing-machine': "على الغسالة", 'washing-basket': "فوق سلة الغسيل", 'ironing-board': "على طاولة الكي", 'blue-roof': "على السطح الأزرق" } },
+            burmese: { header: "ငါ့အာလူးဘယ်မှာလဲ", locs: { shower: "ရေချိုးခန်းထဲမှာ", toilet: "အိမ်သာပေါ်မှာ", bed: "အိပ်ရာပေါ်မှာ", wardrobe: "အဝတ်ဗီရိုပေါ်မှာ", lamp: "မီးအိမ်ပေါ်မှာ", toybox: "ကစားစရာသေတ္တာပေါ်မှာ", 'red-roof': "အခေါင်းနီပေါ်မှာ", 'black-roof': "အခေါင်းမည်းပေါ်မှာ", television: "ရုပ်မြင်သံကြားပေါ်မှာ", lounge: "ဆိုဖာပေါ်မှာ", fridge: "ရေခဲသေတ္တာပေါ်မှာ", bin: "အမှိုက်ပုံးအပေါ်မှာ", 'coffee-table': "ကော်ဖီစားပွဲအပေါ်မှာ", sink: "မီးဖိုချောင်ရေချိုးကန်အပေါ်မှာ", computer: "ကွန်ပျူတာပေါ်မှာ", bookcase: "စာအုပ်စင်ပေါ်မှာ", 'washing-machine': "အဝတ်လျှော်စက်ပေါ်မှာ", 'washing-basket': "အဝတ်ခြင်းတောင်းအပေါ်မှာ", 'ironing-board': "မီးပူတိုက်ခုံပေါ်မှာ", 'blue-roof': "အခေါင်းပြာပေါ်မှာ" } },
+            cantonese: { header: "我啲薯仔喺邊度？", locs: { shower: "喺花灑度", toilet: "喺廁所度", bed: "喺張床度", wardrobe: "喺衣櫃度", lamp: "喺盞燈度", toybox: "喺玩具箱度", 'red-roof': "喺紅色屋頂度", 'black-roof': "喺黑色屋頂度", television: "喺電視度", lounge: "喺梳化度", fridge: "喺雪櫃度", bin: "喺垃圾桶上面", 'coffee-table': "喺茶几上面", sink: "喺廚房洗手盆上面", computer: "喺電腦度", bookcase: "喺書櫃度", 'washing-machine': "喺洗衣機度", 'washing-basket': "喺洗衫籃上面", 'ironing-board': "喺熨衫板度", 'blue-roof': "喺藍色屋頂度" } },
+            croatian: { header: "Gdje je moj krumpir?", locs: { shower: "u tušu", toilet: "na WC školjci", bed: "na krevetu", wardrobe: "na ormaru", lamp: "na lampi", toybox: "u kutiji za igračke", 'red-roof': "na crvenom krovu", 'black-roof': "na crnom krovu", television: "na televizoru", lounge: "na kauču", fridge: "na hladnjaku", bin: "iznad kante za smeće", 'coffee-table': "iznad stolića za kavu", sink: "iznad sudopera", computer: "na računalu", bookcase: "na polici za knjige", 'washing-machine': "na perilici rublja", 'washing-basket': "iznad koša za rublje", 'ironing-board': "na dasci za glačanje", 'blue-roof': "na plavom krovu" } },
+            dutch: { header: "Waar is mijn aardappel?", locs: { shower: "in de douche", toilet: "op het toilet", bed: "op het bed", wardrobe: "op de kledingkast", lamp: "op de lamp", toybox: "in de speelgoedkist", 'red-roof': "op het rode dak", 'black-roof': "op het zwarte dak", television: "op de televisie", lounge: "op de bank", fridge: "op de koelkast", bin: "boven de vuilnisbak", 'coffee-table': "boven de salontafel", sink: "boven de gootsteen", computer: "op de computer", bookcase: "op de boekenkast", 'washing-machine': "op de wasmachine", 'washing-basket': "boven de wasmand", 'ironing-board': "op de strijkplank", 'blue-roof': "op het blauwe dak" } },
             en: { header: "Where is my potato?", locs: { shower: "in the shower", toilet: "on the toilet", bed: "on the bed", wardrobe: "on the wardrobe", lamp: "on the lamp", toybox: "on the toybox", 'red-roof': "on the red roof", 'black-roof': "on the black roof", television: "on the television", lounge: "on the lounge", fridge: "on the fridge", bin: "above the bin", 'coffee-table': "above the coffee table", sink: "above the kitchen sink", computer: "on the computer", bookcase: "on the bookcase", 'washing-machine': "on the washing machine", 'washing-basket': "above the washing basket", 'ironing-board': "on the ironing board", 'blue-roof': "on the blue roof" } },
             fr: { header: "Où est ma pomme de terre ?", locs: { shower: "dans la douche", toilet: "sur la toilette", bed: "sur le lit", wardrobe: "sur l'armoire", lamp: "sur la lampe", toybox: "sur le coffre à jouets", 'red-roof': "sur le toit rouge", 'black-roof': "sur le toit noir", television: "sur la télévision", lounge: "sur le canapé", fridge: "sur le frigo", bin: "au-dessus de la poubelle", 'coffee-table': "au-dessus de la table basse", sink: "au-dessus de l'évier", computer: "sur l'ordinateur", bookcase: "sur la bibliothèque", 'washing-machine': "sur la machine à laver", 'washing-basket': "au-dessus du panier à linge", 'ironing-board': "sur la planche à repasser", 'blue-roof': "sur le toit bleu" } },
             de: { header: "Wo ist meine Kartoffel?", locs: { shower: "in der Dusche", toilet: "auf der Toilette", bed: "auf dem Bett", wardrobe: "auf dem Kleiderschrank", lamp: "auf der Lampe", toybox: "in der Spielzeugkiste", 'red-roof': "auf dem roten Dach", 'black-roof': "auf dem schwarzen Dach", television: "auf dem Fernseher", lounge: "auf dem Sofa", fridge: "auf dem Kühlschrank", bin: "über dem Mülleimer", 'coffee-table': "über dem Couchtisch", sink: "über dem Spülbecken", computer: "auf dem Computer", bookcase: "auf dem Bücherregal", 'washing-machine': "auf der Waschmaschine", 'washing-basket': "über dem Wäschekorb", 'ironing-board': "auf dem Bügelbrett", 'blue-roof': "auf dem blauen Dach" } },
+            he: { header: "איפה תפוח האדמה שלי?", locs: { shower: "במקלחת", toilet: "על השירותים", bed: "על המיטה", wardrobe: "על הארון", lamp: "על המנורה", toybox: "בארגז הצעצועים", 'red-roof': "על הגג האדום", 'black-roof': "על הגג השחור", television: "על הטלוויזיה", lounge: "על הספה", fridge: "על המקרר", bin: "מעל הפח", 'coffee-table': "מעל שולחן הקפה", sink: "מעל הכיור", computer: "על המחשב", bookcase: "על כוננית הספרים", 'washing-machine': "על מכונת הכביסה", 'washing-basket': "מעל סל הכביסה", 'ironing-board': "על קרש הגיהוץ", 'blue-roof': "על הגג הכחול" } },
+            hi: { header: "मेरी आलू कहाँ है?", locs: { shower: "शावर में", toilet: "शौचालय पर", bed: "बिस्तर पर", wardrobe: "अलमारी पर", lamp: "दीपक पर", toybox: "खिलौनों के डिब्बे में", 'red-roof': "लाल छत पर", 'black-roof': "काली छत पर", television: "टीवी पर", lounge: "सोफे पर", fridge: "फ्रिज पर", bin: "कूड़ेदान के ऊपर", 'coffee-table': "कॉफ़ी टेबल के ऊपर", sink: "सिंक के ऊपर", computer: "कंप्यूटर पर", bookcase: "बुककेस पर", 'washing-machine': "वाशिंग मशीन पर", 'washing-basket': "कपड़े की टोकरी के ऊपर", 'ironing-board': "इस्त्री बोर्ड पर", 'blue-roof': "नीली छत पर" } },
+            it: { header: "Dov'è la mia patata?", locs: { shower: "nella doccia", toilet: "sulla toilette", bed: "sul letto", wardrobe: "sull'armadio", lamp: "sulla lampada", toybox: "nella scatola dei giocattoli", 'red-roof': "sul tetto rosso", 'black-roof': "sul tetto nero", television: "sulla televisione", lounge: "sul divano", fridge: "sul frigorifero", bin: "sopra il cestino", 'coffee-table': "sopra il tavolino", sink: "sopra il lavandino", computer: "sul computer", bookcase: "sulla libreria", 'washing-machine': "sulla lavatrice", 'washing-basket': "sopra il cesto della biancheria", 'ironing-board': "sull'asse da stiro", 'blue-roof': "sul tetto blu" } },
             ja: { header: "じゃがいもはどこ？", locs: { shower: "シャワーの中", toilet: "トイレの上", bed: "ベッドの上", wardrobe: "たんすの上", lamp: "ランプの上", toybox: "おもちゃ箱の中", 'red-roof': "赤い屋根の上", 'black-roof': "黒い屋根の上", television: "テレビの上", lounge: "ソファーの上", fridge: "冷蔵庫の上", bin: "ゴミ箱の上", 'coffee-table': "コーヒーテーブルの上", sink: "流し台の上", computer: "コンピュータの上", bookcase: "本棚の上", 'washing-machine': "洗濯機の上", 'washing-basket': "洗濯かごの上", 'ironing-board': "アイロン台の上", 'blue-roof': "青い屋根の上" } },
+            korean: { header: "내 감자는 어디에 있어요?", locs: { shower: "샤워실 안에", toilet: "변기 위에", bed: "침대 위에", wardrobe: "옷장 위에", lamp: "램프 위에", toybox: "장난감 상자 위에", 'red-roof': "빨간 지붕 위에", 'black-roof': "검은 지붕 위에", television: "텔레비전 위에", lounge: "소파 위에", fridge: "냉장고 위에", bin: "쓰레기통 위에", 'coffee-table': "커피 테이블 위에", sink: "주방 싱크대 위에", computer: "컴퓨터 위에", bookcase: "책장 위에", 'washing-machine': "세탁기 위에", 'washing-basket': "빨래 바구니 위에", 'ironing-board': "다림질판 위에", 'blue-roof': "파란 지붕 위에" } },
+            macedonian: { header: "Каде е мојот компир?", locs: { shower: "во тушот", toilet: "на тоалетот", bed: "на креветот", wardrobe: "на плакарот", lamp: "на ламбата", toybox: "во кутијата за играчки", 'red-roof': "на црвениот покрив", 'black-roof': "на црниот покрив", television: "на телевизорот", lounge: "на троседот", fridge: "на фрижидерот", bin: "над кантата", 'coffee-table': "над клуб масичката", sink: "над мијалникот", computer: "на компјутерот", bookcase: "на полицата за книги", 'washing-machine': "на машината за перење", 'washing-basket': "над корпата за алишта", 'ironing-board': "на даската за пеглање", 'blue-roof': "на синиот покрив" } },
             'zh-hanzi': { header: "我的土豆在哪里？", locs: { shower: "在淋浴间里", toilet: "在马桶上", bed: "在床上", wardrobe: "在衣柜上", lamp: "在灯上", toybox: "在玩具箱里", 'red-roof': "在红屋顶上", 'black-roof': "在黑屋顶上", television: "在电视上", lounge: "在沙发上", fridge: "在冰箱上", bin: "在垃圾桶上方", 'coffee-table': "在咖啡桌上方", sink: "在厨房水槽上方", computer: "在电脑上", bookcase: "在书架上", 'washing-machine': "在洗衣机上", 'washing-basket': "在洗衣篮上方", 'ironing-board': "在熨衣板上", 'blue-roof': "在蓝屋顶上" } },
             'zh-pinyin': { header: "Wǒ de tǔdòu zài nǎlǐ?", locs: { shower: "zài línyùjiān lǐ", toilet: "zài mǎtǒng shàng", bed: "zài chuáng shàng", wardrobe: "zài yīguì shàng", lamp: "zài dēng shàng", toybox: "zài wánjùxiāng lǐ", 'red-roof': "zài hóng wūdǐng shàng", 'black-roof': "zài hēi wūdǐng shàng", television: "zài diànshì shàng", lounge: "zài shāfā shàng", fridge: "zài bīngxiāng shàng", bin: "zài lājītǒng shàngfāng", 'coffee-table': "zài kāfēizhuō shàngfāng", sink: "zài chúfáng shuǐcáo shàngfāng", computer: "zài diànnǎo shàng", bookcase: "zài shūjià shàng", 'washing-machine': "zài xǐyījī shàng", 'washing-basket': "zài xǐyīlán shàngfāng", 'ironing-board': "zài yùnyībǎn shàng", 'blue-roof': "zài lán wūdǐng shàng" } },
-            it: { header: "Dov'è la mia patata?", locs: { shower: "nella doccia", toilet: "sulla toilette", bed: "sul letto", wardrobe: "sull'armadio", lamp: "sulla lampada", toybox: "nella scatola dei giocattoli", 'red-roof': "sul tetto rosso", 'black-roof': "sul tetto nero", television: "sulla televisione", lounge: "sul divano", fridge: "sul frigorifero", bin: "sopra il cestino", 'coffee-table': "sopra il tavolino", sink: "sopra il lavandino", computer: "sul computer", bookcase: "sulla libreria", 'washing-machine': "sulla lavatrice", 'washing-basket': "sopra il cesto della biancheria", 'ironing-board': "sull'asse da stiro", 'blue-roof': "sul tetto blu" } },
-            es: { header: "¿Dónde está mi patata?", locs: { shower: "en la ducha", toilet: "en el inodoro", bed: "en la cama", wardrobe: "en el armario", lamp: "en la lámpara", toybox: "en el baúl de juguetes", 'red-roof': "en el tejado rojo", 'black-roof': "en el tejado negro", television: "en la televisión", lounge: "en el sofá", fridge: "en la nevera", bin: "sobre el cubo de basura", 'coffee-table': "sobre la mesa de centro", sink: "sobre el fregadero", computer: "en el ordenador", bookcase: "en la estantería", 'washing-machine': "en la lavadora", 'washing-basket': "sobre el cesto de la ropa", 'ironing-board': "en la tabla de planchar", 'blue-roof': "en el tejado azul" } },
-            ar: { header: "أين بطاطسي؟", locs: { shower: "في الدش", toilet: "على المرحاض", bed: "على السرير", wardrobe: "على خزانة الملابس", lamp: "على المصباح", toybox: "في صندوق الألعاب", 'red-roof': "على السطح الأحمر", 'black-roof': "على السطح الأسود", television: "على التلفاز", lounge: "على الكنبة", fridge: "على الثلاجة", bin: "فوق سلة المهملات", 'coffee-table': "فوق طاولة القهوة", sink: "فوق مغسلة المطبخ", computer: "على الكمبيوتر", bookcase: "على خزانة الكتب", 'washing-machine': "على الغسالة", 'washing-basket': "فوق سلة الغسيل", 'ironing-board': "على طاولة الكي", 'blue-roof': "على السطح الأزرق" } },
-            vi: { header: "Khoai tây của tôi đâu?", locs: { shower: "trong vòi hoa sen", toilet: "trên bồn cầu", bed: "trên giường", wardrobe: "trên tủ quần áo", lamp: "trên đèn", toybox: "trong hộp đồ chơi", 'red-roof': "trên mái nhà màu đỏ", 'black-roof': "trên mái nhà màu đen", television: "trên tivi", lounge: "trên ghế sofa", fridge: "trên tủ lạnh", bin: "phía trên thùng rác", 'coffee-table': "phía trên bàn cà phê", sink: "phía trên bồn rửa bát", computer: "trên máy tính", bookcase: "trên kệ sách", 'washing-machine': "trên máy giặt", 'washing-basket': "phía trên giỏ đựng quần áo", 'ironing-board': "trên bàn là", 'blue-roof': "trên mái nhà màu xanh" } },
-            hi: { header: "मेरी आलू कहाँ है?", locs: { shower: "शावर में", toilet: "शौचालय पर", bed: "बिस्तर पर", wardrobe: "अलमारी पर", lamp: "दीपक पर", toybox: "खिलौनों के डिब्बे में", 'red-roof': "लाल छत पर", 'black-roof': "काली छत पर", television: "टीवी पर", lounge: "सोफे पर", fridge: "फ्रिज पर", bin: "कूड़ेदान के ऊपर", 'coffee-table': "कॉफ़ी टेबल के ऊपर", sink: "सिंक के ऊपर", computer: "कंप्यूटर पर", bookcase: "बुककेस पर", 'washing-machine': "वाशिंग मशीन पर", 'washing-basket': "कपड़े की टोकरी के ऊपर", 'ironing-board': "इस्त्री बोर्ड पर", 'blue-roof': "नीली छत पर" } },
-            he: { header: "איפה תפוח האדמה שלי?", locs: { shower: "במקלחת", toilet: "על השירותים", bed: "על המיטה", wardrobe: "על הארון", lamp: "על המנורה", toybox: "בארגז הצעצועים", 'red-roof': "על הגג האדום", 'black-roof': "על הגג השחור", television: "על הטלוויזיה", lounge: "על הספה", fridge: "על המקרר", bin: "מעל הפח", 'coffee-table': "מעל שולחן הקפה", sink: "מעל הכיור", computer: "על המחשב", bookcase: "על כוננית הספרים", 'washing-machine': "על מכונת הכביסה", 'washing-basket': "מעל סל הכביסה", 'ironing-board': "על קרש הגיהוץ", 'blue-roof': "על הגג הכחול" } },
-            macedonian: { header: "Каде е мојот компир?", locs: { shower: "во тушот", toilet: "на тоалетот", bed: "на креветот", wardrobe: "на плакарот", lamp: "на ламбата", toybox: "во кутијата за играчки", 'red-roof': "на црвениот покрив", 'black-roof': "на црниот покрив", television: "на телевизорот", lounge: "на троседот", fridge: "на фрижидерот", bin: "над кантата", 'coffee-table': "над клуб масичката", sink: "над мијалникот", computer: "на компјутерот", bookcase: "на полицата за книги", 'washing-machine': "на машината за перење", 'washing-basket': "над корпата за алишта", 'ironing-board': "на даската за пеглање", 'blue-roof': "на синиот покрив" } },
-            afrikaans: { header: "Waar is my aartappel?", locs: { shower: "in die stort", toilet: "op die toilet", bed: "op die bed", wardrobe: "op die hangkas", lamp: "op die lamp", toybox: "in die speelgoedkis", 'red-roof': "op die rooi dak", 'black-roof': "op die swart dak", television: "op die televisie", lounge: "op die rusbank", fridge: "op die yskas", bin: "bo-oor die asblik", 'coffee-table': "bo-oor die koffietafel", sink: "bo-oor die wasbak", computer: "op die rekenaar", bookcase: "op die boekrak", 'washing-machine': "op die wasmasjien", 'washing-basket': "bo-oor die wasmandjie", 'ironing-board': "op die strykplank", 'blue-roof': "op die blou dak" } },
-            serbian: { header: "Где је мој кромпир?", locs: { shower: "у тушу", toilet: "на тоалету", bed: "на кревету", wardrobe: "на орману", lamp: "на лампи", toybox: "у кутији за играчке", 'red-roof': "на црвеном крову", 'black-roof': "на црном крову", television: "на телевизору", lounge: "на каучу", fridge: "на фрижидеру", bin: "изнад канте за смеће", 'coffee-table': "изнад сточића", sink: "изнад судопере", computer: "на рачунару", bookcase: "на полици за књиге", 'washing-machine': "на машини за прање веша", 'washing-basket': "изнад корпе за веш", 'ironing-board': "на дасци за пеглање", 'blue-roof': "на плавом крову" } },
-            croatian: { header: "Gdje je moj krumpir?", locs: { shower: "u tušu", toilet: "na WC školjci", bed: "na krevetu", wardrobe: "na ormaru", lamp: "na lampi", toybox: "u kutiji za igračke", 'red-roof': "na crvenom krovu", 'black-roof': "na crnom krovu", television: "na televizoru", lounge: "na kauču", fridge: "na hladnjaku", bin: "iznad kante za smeće", 'coffee-table': "iznad stolića za kavu", sink: "iznad sudopera", computer: "na računalu", bookcase: "na polici za knjige", 'washing-machine': "na perilici rublja", 'washing-basket': "iznad koša za rublje", 'ironing-board': "na dasci za glačanje", 'blue-roof': "na plavom krovu" } },
+            punjabi: { header: "ਮੇਰਾ ਆਲੂ ਕਿੱਥੇ ਹੈ", locs: { shower: "ਸ਼ਾਵਰ ਵਿੱਚ", toilet: "ਟਾਇਲਟ ਉੱਤੇ", bed: "ਬਿਸਤਰੇ ਉੱਤੇ", wardrobe: "ਅਲਮਾਰੀ ਉੱਤੇ", lamp: "ਲੈਂਪ ਉੱਤੇ", toybox: "ਖਿਡੌਣਿਆਂ ਦੇ ਡੱਬੇ ਉੱਤੇ", 'red-roof': "ਲਾਲ ਛੱਤ ਉੱਤੇ", 'black-roof': "ਕਾਲੀ ਛੱਤ ਉੱਤੇ", television: "ਟੈਲੀਵਿਜ਼ਨ ਉੱਤੇ", lounge: "ਸੋਫੇ ਉੱਤੇ", fridge: "ਫਰਿੱਜ ਉੱਤੇ", bin: "ਕੂੜੇਦਾਨ ਦੇ ਉੱਤੇ", 'coffee-table': "ਕੌਫੀ ਟੇਬਲ ਦੇ ਉੱਤੇ", sink: "ਰਸੋਈ ਦੇ ਸਿੰਕ ਦੇ ਉੱਤੇ", computer: "ਕੰਪਿਊਟਰ ਉੱਤੇ", bookcase: "ਕਿਤਾਬਾਂ ਦੀ ਅਲਮਾਰੀ ਉੱਤੇ", 'washing-machine': "ਵਾਸ਼ਿੰਗ ਮਸ਼ੀਨ ਉੱਤੇ", 'washing-basket': "ਕੱਪੜੇ ਦੀ ਟੋਕਰੀ ਦੇ ਉੱਤੇ", 'ironing-board': "ਪ੍ਰੈਸ ਬੋਰਡ ਉੱਤੇ", 'blue-roof': "ਨੀਲੀ ਛੱਤ ਉੱਤੇ" } },
             ru: { header: "Где моя картошка?", locs: { shower: "в душе", toilet: "на туалете", bed: "на кровати", wardrobe: "на шкафу", lamp: "на лампе", toybox: "в ящике с игрушками", 'red-roof': "на красной крыше", 'black-roof': "на чёрной крыше", television: "на телевизоре", lounge: "на диване", fridge: "на холодильнике", bin: "над мусорным ведром", 'coffee-table': "над журнальным столиком", sink: "над кухонной раковиной", computer: "на компьютере", bookcase: "на книжном шкафу", 'washing-machine': "на стиральной машине", 'washing-basket': "над корзиной для белья", 'ironing-board': "на гладильной доске", 'blue-roof': "на синей крыше" } },
+            serbian: { header: "Где је мој кромпир?", locs: { shower: "у тушу", toilet: "на тоалету", bed: "на кревету", wardrobe: "на орману", lamp: "на лампи", toybox: "у кутији за играчке", 'red-roof': "на црвеном крову", 'black-roof': "на црном крову", television: "на телевизору", lounge: "на каучу", fridge: "на фрижидеру", bin: "изнад канте за смеће", 'coffee-table': "изнад сточића", sink: "изнад судопере", computer: "на рачунару", bookcase: "на полици за књиге", 'washing-machine': "на машини за прање веша", 'washing-basket': "изнад корпе за веш", 'ironing-board': "на дасци за пеглање", 'blue-roof': "на плавом крову" } },
+            sinhala: { header: "මගේ අර්තාපල් කොහෙද?", locs: { shower: "ෂවර් එකේ", toilet: "වැසිකිළියේ", bed: "ඇඳ මත", wardrobe: "අල්මාරියේ", lamp: "ලාම්පුව මත", toybox: "සෙල්ලම් පෙට්ටියේ", 'red-roof': "රතු වහලය මත", 'black-roof': "කළු වහලය මත", television: "රූපවාහිනිය මත", lounge: "සෝෆා එක මත", fridge: "ෆ්‍රිජ් එක මත", bin: "කුණු බඳුනට උඩින්", 'coffee-table': "කෝපි මේසයට උඩින්", sink: "සින්ක් එකට උඩින්", computer: "පරිගණකය මත", bookcase: "පොත් රාක්කය මත", 'washing-machine': "සෝදන යන්ත්‍රය මත", 'washing-basket': "රෙදි කූඩයට උඩින්", 'ironing-board': "ඉස්ත්‍රි පුවරුව මත", 'blue-roof': "නිල් වහලය මත" } },
+            es: { header: "¿Dónde está mi patata?", locs: { shower: "en la ducha", toilet: "en el inodoro", bed: "en la cama", wardrobe: "en el armario", lamp: "en la lámpara", toybox: "en el baúl de juguetes", 'red-roof': "en el tejado rojo", 'black-roof': "en el tejado negro", television: "en la televisión", lounge: "en el sofá", fridge: "en la nevera", bin: "sobre el cubo de basura", 'coffee-table': "sobre la mesa de centro", sink: "sobre el fregadero", computer: "en el ordenador", bookcase: "en la estantería", 'washing-machine': "en la lavadora", 'washing-basket': "sobre el cesto de la ropa", 'ironing-board': "en la tabla de planchar", 'blue-roof': "en el tejado azul" } },
+            tamil: { header: "என் உருளைக்கிழங்கு எங்கே?", locs: { shower: "ஷவரில்", toilet: "கழிப்பிடத்தின் மேல்", bed: "படுக்கையின் மேல்", wardrobe: "அலமாரியின் மேல்", lamp: "விளக்கின் மேல்", toybox: "பொம்மைப் பெட்டியின் மேல்", 'red-roof': "சிவப்பு கூரையின் மேல்", 'black-roof': "கருப்பு கூரையின் மேல்", television: "தொலைக்காட்சியின் மேல்", lounge: "சோபாவின் மேல்", fridge: "குளிர்சாதனப் பெட்டியின் மேல்", bin: "குப்பைத் தொட்டிக்கு மேலே", 'coffee-table': "காபி மேசைக்கு மேலே", sink: "சமையலறை சிங்குக்கு மேலே", computer: "கணினியின் மேல்", bookcase: "புத்தக அலமாரியின் மேல்", 'washing-machine': "துணி துவைக்கும் இயந்திரத்தின் மேல்", 'washing-basket': "துணிக் கூடைக்கு மேலே", 'ironing-board': "இஸ்திரி பலகையின் மேல்", 'blue-roof': "நீல கூரையின் மேல்" } },
+            thai: { header: "มันฝรั่งของฉันอยู่ที่ไหน", locs: { shower: "ในฝักบัว", toilet: "บนโถส้วม", bed: "บนเตียง", wardrobe: "บนตู้เสื้อผ้า", lamp: "บนโคมไฟ", toybox: "บนกล่องของเล่น", 'red-roof': "บนหลังคาสีแดง", 'black-roof': "บนหลังคาสีดำ", television: "บนโทรทัศน์", lounge: "บนโซฟา", fridge: "บนตู้เย็น", bin: "เหนือถังขยะ", 'coffee-table': "เหนือโต๊ะกาแฟ", sink: "เหนืออ่างล้างจานในครัว", computer: "บนคอมพิวเตอร์", bookcase: "บนชั้นหนังสือ", 'washing-machine': "บนเครื่องซักผ้า", 'washing-basket': "เหนือตะกร้าผ้า", 'ironing-board': "บนโต๊ะรีดผ้า", 'blue-roof': "บนหลังคาสีน้ำเงิน" } },
             uk: { header: "Де моя картопля?", locs: { shower: "у душі", toilet: "на туалеті", bed: "на ліжку", wardrobe: "на шафі", lamp: "на лампі", toybox: "у скрині з іграшками", 'red-roof': "на червоному даху", 'black-roof': "на чорному даху", television: "на телевізорі", lounge: "на дивані", fridge: "на холодильнику", bin: "над смітником", 'coffee-table': "над журнальним столиком", sink: "над кухонною мийкою", computer: "на комп'ютері", bookcase: "на книжковій шафі", 'washing-machine': "на пральній машині", 'washing-basket': "над кошиком для білизни", 'ironing-board': "на прасувальній дошці", 'blue-roof': "на синьому даху" } },
             ur: { header: "میرا آلو کہاں ہے؟", locs: { shower: "شاور میں", toilet: "بیت الخلا پر", bed: "بستر پر", wardrobe: "الماری پر", lamp: "لیمپ پر", toybox: "کھلونوں کے ڈبے میں", 'red-roof': "سرخ چھت پر", 'black-roof': "کالی چھت پر", television: "ٹیلی ویژن پر", lounge: "صوفے پر", fridge: "فریج پر", bin: "کوڑے دان کے اوپر", 'coffee-table': "کافی ٹیبل کے اوپر", sink: "کچن سنک کے اوپر", computer: "کمپیوٹر پر", bookcase: "کتابوں کی الماری پر", 'washing-machine': "واشنگ مشین پر", 'washing-basket': "کپڑوں کی ٹوکری کے اوپر", 'ironing-board': "استری بورڈ پر", 'blue-roof': "نیلی چھت پر" } },
-            sinhala: { header: "මගේ අර්තාපල් කොහෙද?", locs: { shower: "ෂවර් එකේ", toilet: "වැසිකිළියේ", bed: "ඇඳ මත", wardrobe: "අල්මාරියේ", lamp: "ලාම්පුව මත", toybox: "සෙල්ලම් පෙට්ටියේ", 'red-roof': "රතු වහලය මත", 'black-roof': "කළු වහලය මත", television: "රූපවාහිනිය මත", lounge: "සෝෆා එක මත", fridge: "ෆ්‍රිජ් එක මත", bin: "කුණු බඳුනට උඩින්", 'coffee-table': "කෝපි මේසයට උඩින්", sink: "සින්ක් එකට උඩින්", computer: "පරිගණකය මත", bookcase: "පොත් රාක්කය මත", 'washing-machine': "සෝදන යන්ත්‍රය මත", 'washing-basket': "රෙදි කූඩයට උඩින්", 'ironing-board': "ඉස්ත්‍රි පුවරුව මත", 'blue-roof': "නිල් වහලය මත" } },
-            cantonese: { header: "我啲薯仔喺邊度？", locs: { shower: "喺花灑度", toilet: "喺廁所度", bed: "喺張床度", wardrobe: "喺衣櫃度", lamp: "喺盞燈度", toybox: "喺玩具箱度", 'red-roof': "喺紅色屋頂度", 'black-roof': "喺黑色屋頂度", television: "喺電視度", lounge: "喺梳化度", fridge: "喺雪櫃度", bin: "喺垃圾桶上面", 'coffee-table': "喺茶几上面", sink: "喺廚房洗手盆上面", computer: "喺電腦度", bookcase: "喺書櫃度", 'washing-machine': "喺洗衣機度", 'washing-basket': "喺洗衫籃上面", 'ironing-board': "喺熨衫板度", 'blue-roof': "喺藍色屋頂度" } },
-            tamil: { header: "என் உருளைக்கிழங்கு எங்கே?", locs: { shower: "ஷவரில்", toilet: "கழிப்பிடத்தின் மேல்", bed: "படுக்கையின் மேல்", wardrobe: "அலமாரியின் மேல்", lamp: "விளக்கின் மேல்", toybox: "பொம்மைப் பெட்டியின் மேல்", 'red-roof': "சிவப்பு கூரையின் மேல்", 'black-roof': "கருப்பு கூரையின் மேல்", television: "தொலைக்காட்சியின் மேல்", lounge: "சோபாவின் மேல்", fridge: "குளிர்சாதனப் பெட்டியின் மேல்", bin: "குப்பைத் தொட்டிக்கு மேலே", 'coffee-table': "காபி மேசைக்கு மேலே", sink: "சமையலறை சிங்குக்கு மேலே", computer: "கணினியின் மேல்", bookcase: "புத்தக அலமாரியின் மேல்", 'washing-machine': "துணி துவைக்கும் இயந்திரத்தின் மேல்", 'washing-basket': "துணிக் கூடைக்கு மேலே", 'ironing-board': "இஸ்திரி பலகையின் மேல்", 'blue-roof': "நீல கூரையின் மேல்" } },
-            korean: { header: "내 감자는 어디에 있어요?", locs: { shower: "샤워실 안에", toilet: "변기 위에", bed: "침대 위에", wardrobe: "옷장 위에", lamp: "램프 위에", toybox: "장난감 상자 위에", 'red-roof': "빨간 지붕 위에", 'black-roof': "검은 지붕 위에", television: "텔레비전 위에", lounge: "소파 위에", fridge: "냉장고 위에", bin: "쓰레기통 위에", 'coffee-table': "커피 테이블 위에", sink: "주방 싱크대 위에", computer: "컴퓨터 위에", bookcase: "책장 위에", 'washing-machine': "세탁기 위에", 'washing-basket': "빨래 바구니 위에", 'ironing-board': "다림질판 위에", 'blue-roof': "파란 지붕 위에" } }
+            vi: { header: "Khoai tây của tôi đâu?", locs: { shower: "trong vòi hoa sen", toilet: "trên bồn cầu", bed: "trên giường", wardrobe: "trên tủ quần áo", lamp: "trên đèn", toybox: "trong hộp đồ chơi", 'red-roof': "trên mái nhà màu đỏ", 'black-roof': "trên mái nhà màu đen", television: "trên tivi", lounge: "trên ghế sofa", fridge: "trên tủ lạnh", bin: "phía trên thùng rác", 'coffee-table': "phía trên bàn cà phê", sink: "phía trên bồn rửa bát", computer: "trên máy tính", bookcase: "trên kệ sách", 'washing-machine': "trên máy giặt", 'washing-basket': "phía trên giỏ đựng quần áo", 'ironing-board': "trên bàn là", 'blue-roof': "trên mái nhà màu xanh" } }
         };
 
         // Generic "in the house" label, overriding the normal forest/city/sky/water
@@ -4793,35 +4836,37 @@
         // Numbers 1-10 as words (for word-display mode and TTS) and "silence"
         // in each of the hub's 18 languages, for the traffic light countdown.
         const WB_NUMBER_WORDS = {
-            fr: ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'],
+            afrikaans: ['een','twee','drie','vier','vyf','ses','sewe','agt','nege','tien'],
+            ar: ['واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة'],
+            burmese: ['တစ်','နှစ်','သုံး','လေး','ငါး','ခြောက်','ခုနှစ်','ရှစ်','ကိုး','ဆယ်'],
+            cantonese: ['一','二','三','四','五','六','七','八','九','十'],
+            croatian: ['jedan','dva','tri','četiri','pet','šest','sedam','osam','devet','deset'],
+            dutch: ['een','twee','drie','vier','vijf','zes','zeven','acht','negen','tien'],
             en: ['one','two','three','four','five','six','seven','eight','nine','ten'],
-            es: ['uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'],
+            fr: ['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'],
             de: ['eins','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn'],
+            he: ['אחת','שתיים','שלוש','ארבע','חמש','שש','שבע','שמונה','תשע','עשר'],
+            hi: ['एक','दो','तीन','चार','पांच','छह','सात','आठ','नौ','दस'],
             it: ['uno','due','tre','quattro','cinque','sei','sette','otto','nove','dieci'],
             ja: ['一','二','三','四','五','六','七','八','九','十'],
-            'zh-pinyin': ['yī','èr','sān','sì','wǔ','liù','qī','bā','jiǔ','shí'],
-            'zh-hanzi': ['一','二','三','四','五','六','七','八','九','十'],
-            cantonese: ['一','二','三','四','五','六','七','八','九','十'],
-            he: ['אחת','שתיים','שלוש','ארבע','חמש','שש','שבע','שמונה','תשע','עשר'],
-            ar: ['واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة'],
-            sinhala: ['එක','දෙක','තුන','හතර','පහ','හය','හත','අට','නවය','දහය'],
-            vi: ['một','hai','ba','bốn','năm','sáu','bảy','tám','chín','mười'],
-            ur: ['ایک','دو','تین','چار','پانچ','چھ','سات','آٹھ','نو','دس'],
-            hi: ['एक','दो','तीन','चार','पांच','छह','सात','आठ','नौ','दस'],
-            uk: ["один","два","три","чотири","п'ять","шість","сім","вісім","дев'ять","десять"],
-            ru: ['один','два','три','четыре','пять','шесть','семь','восемь','девять','десять'],
+            korean: ['하나','둘','셋','넷','다섯','여섯','일곱','여덟','아홉','열'],
             macedonian: ['еден','два','три','четири','пет','шест','седум','осум','девет','десет'],
-            afrikaans: ['een','twee','drie','vier','vyf','ses','sewe','agt','nege','tien'],
+            'zh-hanzi': ['一','二','三','四','五','六','七','八','九','十'],
+            'zh-pinyin': ['yī','èr','sān','sì','wǔ','liù','qī','bā','jiǔ','shí'],
+            punjabi: ['ਇੱਕ','ਦੋ','ਤਿੰਨ','ਚਾਰ','ਪੰਜ','ਛੇ','ਸੱਤ','ਅੱਠ','ਨੌਂ','ਦਸ'],
+            ru: ['один','два','три','четыре','пять','шесть','семь','восемь','девять','десять'],
             serbian: ['један','два','три','четири','пет','шест','седам','осам','девет','десет'],
-            croatian: ['jedan','dva','tri','četiri','pet','šest','sedam','osam','devet','deset']
+            sinhala: ['එක','දෙක','තුන','හතර','පහ','හය','හත','අට','නවය','දහය'],
+            es: ['uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'],
+            tamil: ['ஒன்று','இரண்டு','மூன்று','நான்கு','ஐந்து','ஆறு','ஏழு','எட்டு','ஒன்பது','பத்து'],
+            thai: ['หนึ่ง','สอง','สาม','สี่','ห้า','หก','เจ็ด','แปด','เก้า','สิบ'],
+            uk: ["один","два","три","чотири","п'ять","шість","сім","вісім","дев'ять","десять"],
+            ur: ['ایک','دو','تین','چار','پانچ','چھ','سات','آٹھ','نو','دس'],
+            vi: ['một','hai','ba','bốn','năm','sáu','bảy','tám','chín','mười']
         };
 
         const WB_SILENCE_WORD = {
-            fr: 'Silence', en: 'Silence', es: 'Silencio', de: 'Stille', it: 'Silenzio',
-            ja: '静かに', 'zh-pinyin': 'Ānjìng', 'zh-hanzi': '安静', cantonese: '安靜',
-            he: 'שקט', ar: 'صمت', sinhala: 'නිශ්ශබ්දතාවය', vi: 'Im lặng', ur: 'خاموشی',
-            hi: 'मौन', uk: 'Тиша', ru: 'Тишина', macedonian: 'Тишина',
-            afrikaans: 'Stilte', serbian: 'Тишина', croatian: 'Tišina'
+            afrikaans: 'Stilte', ar: 'صمت', burmese: 'တိတ်ဆိတ်', cantonese: '安靜', croatian: 'Tišina', dutch: 'Stilte', en: 'Silence', fr: 'Silence', de: 'Stille', he: 'שקט', hi: 'मौन', it: 'Silenzio', ja: '静かに', korean: '조용히', macedonian: 'Тишина', 'zh-hanzi': '安静', 'zh-pinyin': 'Ānjìng', punjabi: 'ਚੁੱਪ', ru: 'Тишина', serbian: 'Тишина', sinhala: 'නිශ්ශබ්දතාවය', es: 'Silencio', tamil: 'அமைதி', thai: 'เงียบ', uk: 'Тиша', ur: 'خاموشی', vi: 'Im lặng'
         };
 
         let wbDB = null;
@@ -5625,14 +5670,18 @@
                 if (outcomeFilter && session.outcome !== outcomeFilter) return;
                 const entry = session.scores.find(s => s.id === studentId);
                 if (!entry) return;
-                const classAverage = session.scores.reduce((sum, s) => sum + s.points, 0) / session.scores.length;
-                rows.push({ date: session.date, criteria: session.criteria, outcome: session.outcome, points: entry.points, classAverage: Math.round(classAverage * 100) / 100 });
+                const presentScores = session.scores.filter(s => !s.absent);
+                const classAverage = presentScores.length > 0
+                    ? presentScores.reduce((sum, s) => sum + s.points, 0) / presentScores.length
+                    : null;
+                rows.push({ date: session.date, criteria: session.criteria, outcome: session.outcome, points: entry.points, absent: !!entry.absent, classAverage: classAverage !== null ? Math.round(classAverage * 100) / 100 : null });
             });
             rows.sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
             return rows;
         }
 
-        function rosterBuildLineChartSVG(rows, studentName) {
+        function rosterBuildLineChartSVG(allRows, studentName) {
+            const rows = allRows.filter(r => !r.absent && r.classAverage !== null);
             const width = 660, height = 260, padLeft = 36, padRight = 16, padTop = 30, padBottom = 40;
             const plotW = width - padLeft - padRight, plotH = height - padTop - padBottom;
             const studentVals = rows.map(r => r.points);
@@ -5679,7 +5728,7 @@
             if (!student) { chartArea.innerHTML = ''; emptyMsg.style.display = 'block'; return; }
 
             const rows = rosterGetStudentSessionData(classId, studentId, outcomeFilter);
-            if (rows.length === 0) {
+            if (rows.length === 0 || rows.every(r => r.absent)) {
                 chartArea.innerHTML = '';
                 emptyMsg.style.display = 'block';
                 return;
@@ -5696,15 +5745,16 @@
             if (!student) return;
 
             const rows = rosterGetStudentSessionData(classId, studentId, '');
-            const avgPoints = rows.length > 0 ? Math.round((rows.reduce((sum, r) => sum + r.points, 0) / rows.length) * 100) / 100 : null;
+            const presentRows = rows.filter(r => !r.absent);
+            const avgPoints = presentRows.length > 0 ? Math.round((presentRows.reduce((sum, r) => sum + r.points, 0) / presentRows.length) * 100) / 100 : null;
 
             let tableRows = rows.map(r => `
                 <tr>
                     <td style="padding:6px 10px; border-bottom:1px solid #ECE7DE;">${rosterEscapeHtml(r.date)}</td>
                     <td style="padding:6px 10px; border-bottom:1px solid #ECE7DE;">${rosterEscapeHtml(r.criteria)}</td>
                     <td style="padding:6px 10px; border-bottom:1px solid #ECE7DE;">${rosterEscapeHtml(r.outcome || '-')}</td>
-                    <td style="padding:6px 10px; border-bottom:1px solid #ECE7DE; text-align:center;">${r.points}</td>
-                    <td style="padding:6px 10px; border-bottom:1px solid #ECE7DE; text-align:center;">${r.classAverage}</td>
+                    <td style="padding:6px 10px; border-bottom:1px solid #ECE7DE; text-align:center;">${r.absent ? '<em style="color:#8B8579;">Absent</em>' : r.points}</td>
+                    <td style="padding:6px 10px; border-bottom:1px solid #ECE7DE; text-align:center;">${r.absent || r.classAverage === null ? '-' : r.classAverage}</td>
                 </tr>`).join('');
 
             document.getElementById('wb-report-content').innerHTML = `
@@ -5852,12 +5902,26 @@
                 date: new Date().toISOString().slice(0, 10),
                 criteria,
                 outcome: outcome || null,
-                scores: cls.students.map(s => ({ id: s.id, name: s.name, points: 0 }))
+                scores: cls.students.map(s => ({ id: s.id, name: s.name, points: 0, absent: false }))
             };
             rosterState.assessmentSessions.push(session);
             rosterRememberSyllabusOutcome(outcome);
             assessmentActiveSessionId = session.id;
-            assessmentPickerState = { classId, order: [], index: -1, currentId: null };
+
+            const useRandomOrder = document.getElementById('wb-assessment-random-order-toggle').checked;
+            const currentStudentIds = cls.students.map(s => s.id);
+            let initialOrder;
+            if (useRandomOrder) {
+                initialOrder = rosterShuffle(currentStudentIds);
+            } else {
+                // The saved line order, filtered to drop any students who've
+                // since left the roster, with any newly-added students
+                // appended at the end so they're never silently skipped.
+                const saved = (Array.isArray(cls.studentOrder) ? cls.studentOrder : []).filter(id => currentStudentIds.includes(id));
+                const missing = currentStudentIds.filter(id => !saved.includes(id));
+                initialOrder = saved.concat(missing);
+            }
+            assessmentPickerState = { classId, order: initialOrder, index: -1, currentId: null, useRandomOrder };
             rosterAdvancePool(assessmentPickerState);
             rosterSaveState();
 
@@ -5867,11 +5931,129 @@
             rosterRenderAssessmentLive();
         }
 
+        // Advances the assessment tracker's picker, respecting line order vs
+        // random order for this session - unlike rosterAdvancePool (shared
+        // with the Random Student picker, which always reshuffles), line
+        // order needs to loop back to the same fixed sequence when it runs
+        // out, not reshuffle into a new random one.
+        function rosterAdvanceAssessmentPool(direction) {
+            direction = direction || 1;
+            const pickerState = assessmentPickerState;
+            const cls = rosterGetClass(pickerState.classId);
+            if (!cls || cls.students.length === 0 || pickerState.order.length === 0) { pickerState.currentId = null; return; }
+
+            if (pickerState.useRandomOrder) {
+                rosterAdvancePool(pickerState, direction);
+                return;
+            }
+
+            let newIndex = pickerState.index + direction;
+            if (newIndex >= pickerState.order.length) newIndex = 0;
+            else if (newIndex < 0) newIndex = pickerState.order.length - 1;
+            pickerState.index = newIndex;
+            pickerState.currentId = pickerState.order[newIndex];
+        }
+
         function rosterRenderAssessmentLive() {
             const cls = rosterGetClass(assessmentPickerState.classId);
             const student = cls && assessmentPickerState.currentId ? cls.students.find(s => s.id === assessmentPickerState.currentId) : null;
             document.getElementById('wb-assessment-name').textContent = student ? student.name : '-';
             rosterUpdateNameFontSize('wb-assessment-name');
+        }
+
+        // --- Set Line Order (drag-and-drop) ---
+        function wbOpenLineOrderEditor() {
+            const classId = document.getElementById('wb-assessment-class-select').value;
+            const cls = rosterGetClass(classId);
+            if (!cls || cls.students.length === 0) return;
+
+            const currentStudentIds = cls.students.map(s => s.id);
+            const saved = (Array.isArray(cls.studentOrder) ? cls.studentOrder : []).filter(id => currentStudentIds.includes(id));
+            const missing = currentStudentIds.filter(id => !saved.includes(id));
+            const order = saved.concat(missing);
+
+            const list = document.getElementById('wb-lineorder-list');
+            list.innerHTML = '';
+            order.forEach(id => {
+                const student = cls.students.find(s => s.id === id);
+                if (!student) return;
+                const row = document.createElement('div');
+                row.className = 'interactive';
+                row.dataset.studentId = id;
+                row.style.cssText = 'display:flex; align-items:center; gap:10px; padding:8px 12px; background:var(--hub-paper, #FBF9F5); border:1px solid var(--hub-line); border-radius:10px; touch-action:none;';
+                row.innerHTML = `<span class="wb-lineorder-handle" style="cursor:grab; font-size:16px; color:var(--hub-ink-soft, #8B8579); user-select:none;">☰</span><span style="flex:1; font-weight:700; color:var(--hub-ink);">${rosterEscapeHtml(student.name)}</span>`;
+                list.appendChild(row);
+            });
+            wbMakeLineOrderDraggable(list);
+
+            const overlay = document.getElementById('wb-lineorder-overlay');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+        }
+
+        // Pointer-based drag reordering (not native HTML5 drag-and-drop,
+        // which doesn't work on touch devices like iPads) - drags the
+        // grabbed row visually with the pointer, and swaps its position in
+        // the list whenever the pointer crosses the midpoint of a neighbour.
+        function wbMakeLineOrderDraggable(listEl) {
+            Array.from(listEl.children).forEach(row => {
+                const handle = row.querySelector('.wb-lineorder-handle');
+                if (!handle) return;
+                handle.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
+                    const draggedEl = row;
+                    const startY = e.clientY;
+                    const startRect = draggedEl.getBoundingClientRect();
+                    draggedEl.style.position = 'relative';
+                    draggedEl.style.zIndex = '10';
+                    draggedEl.style.boxShadow = 'var(--hub-shadow-md)';
+                    handle.setPointerCapture(e.pointerId);
+
+                    const onMove = (moveEvt) => {
+                        const deltaY = moveEvt.clientY - startY;
+                        draggedEl.style.transform = `translateY(${deltaY}px)`;
+
+                        const draggedMid = startRect.top + startRect.height / 2 + deltaY;
+                        const siblings = Array.from(listEl.children).filter(s => s !== draggedEl);
+                        for (const sib of siblings) {
+                            const rect = sib.getBoundingClientRect();
+                            const sibMid = rect.top + rect.height / 2;
+                            const draggedIsBefore = Array.from(listEl.children).indexOf(draggedEl) < Array.from(listEl.children).indexOf(sib);
+                            if (draggedIsBefore && draggedMid > sibMid) {
+                                listEl.insertBefore(sib, draggedEl);
+                                break;
+                            } else if (!draggedIsBefore && draggedMid < sibMid) {
+                                listEl.insertBefore(draggedEl, sib);
+                                break;
+                            }
+                        }
+                    };
+                    const onUp = (upEvt) => {
+                        handle.releasePointerCapture(upEvt.pointerId);
+                        draggedEl.style.transform = '';
+                        draggedEl.style.position = '';
+                        draggedEl.style.zIndex = '';
+                        draggedEl.style.boxShadow = '';
+                        handle.removeEventListener('pointermove', onMove);
+                        handle.removeEventListener('pointerup', onUp);
+                        handle.removeEventListener('pointercancel', onUp);
+                    };
+                    handle.addEventListener('pointermove', onMove);
+                    handle.addEventListener('pointerup', onUp);
+                    handle.addEventListener('pointercancel', onUp);
+                });
+            });
+        }
+
+        function wbSaveLineOrder() {
+            const classId = document.getElementById('wb-assessment-class-select').value;
+            const cls = rosterGetClass(classId);
+            if (!cls) return;
+            cls.studentOrder = Array.from(document.getElementById('wb-lineorder-list').children).map(row => row.dataset.studentId);
+            rosterSaveState();
+            const overlay = document.getElementById('wb-lineorder-overlay');
+            overlay.classList.add('hidden');
+            overlay.classList.remove('flex');
         }
 
         function rosterGetActiveSession() {
@@ -5887,6 +6069,21 @@
             const entry = session.scores.find(s => s.id === assessmentPickerState.currentId);
             if (!entry) return;
             entry.points += delta;
+            session.date = new Date().toISOString().slice(0, 10);
+            rosterDebouncedSave();
+        }
+
+        // Marks the current student absent for this session, kept distinct
+        // from a score of 0 - a 0 means they were assessed and didn't meet
+        // the criteria, while absent means there's no assessment to speak
+        // of at all. Keeping these separate is the whole point: otherwise
+        // there'd be no way to later tell the two apart in the data.
+        function rosterMarkCurrentStudentAbsent() {
+            const session = rosterGetActiveSession();
+            if (!session || !assessmentPickerState.currentId) return;
+            const entry = session.scores.find(s => s.id === assessmentPickerState.currentId);
+            if (!entry) return;
+            entry.absent = true;
             session.date = new Date().toISOString().slice(0, 10);
             rosterDebouncedSave();
         }
@@ -6542,6 +6739,28 @@
             }
         }
 
+        // Shrinks the cover title's font size until it fits the space
+        // available on the blank left side of the cover - unlike
+        // fitTextToBox elsewhere (single line, width only), this allows
+        // wrapping across multiple lines and checks both dimensions, since
+        // titles vary hugely in length across languages (a short English
+        // title vs. a much longer German or Ukrainian one).
+        function bbsFitCoverTitle() {
+            const el = document.getElementById('bbs-cover-title-text');
+            const container = document.getElementById('bbs-cover-title-overlay');
+            if (!el || !container || container.clientWidth === 0) return;
+            const padding = 72; // matches the overlay's own 36px padding on each side
+            const maxWidth = Math.max(80, container.clientWidth - padding);
+            const maxHeight = Math.max(60, container.clientHeight - padding);
+            let fontSize = 68;
+            const minFontSize = 22;
+            el.style.setProperty('font-size', fontSize + 'px', 'important');
+            while ((el.scrollHeight > maxHeight || el.scrollWidth > maxWidth) && fontSize > minFontSize) {
+                fontSize -= 2;
+                el.style.setProperty('font-size', fontSize + 'px', 'important');
+            }
+        }
+
         function bbsResolveTitle(title) {
             if (!title) return '';
             if (typeof title === 'string') return title;
@@ -6661,6 +6880,7 @@
             }
             wrap.style.width = boxW + 'px';
             wrap.style.height = boxH + 'px';
+            bbsFitCoverTitle();
         }
 
         // index === -1 is the book's front cover: the left side is left
@@ -6685,6 +6905,10 @@
                 document.getElementById('bbs-grapheme-row').style.display = 'none';
                 coverImg.src = BOBOTS_BOOKSHELF_BASE + bbsCurrentBookFolder + '/' + (bbsCurrentBook.cover || 'cover.jpg');
                 coverImg.style.display = 'block';
+                const titleText = bbsResolveTitle(bbsCurrentBook.title);
+                document.getElementById('bbs-cover-title-text').innerHTML = bbsColorCodingEnabled ? colorizeSentenceText(titleText) : rosterEscapeHtml(titleText);
+                document.getElementById('bbs-cover-title-overlay').style.display = 'flex';
+                bbsFitCoverTitle();
                 document.getElementById('bbs-prev-page-btn').disabled = true;
                 document.getElementById('bbs-prev-page-btn').classList.add('bbs-nav-disabled');
                 document.getElementById('bbs-next-page-btn').disabled = false;
@@ -6701,6 +6925,7 @@
             pageText.style.display = 'flex';
             ttsControls.style.display = 'flex';
             coverImg.style.display = 'none';
+            document.getElementById('bbs-cover-title-overlay').style.display = 'none';
             bbsRenderGraphemeRow();
 
             document.getElementById('bbs-page-image').src = BOBOTS_BOOKSHELF_BASE + bbsCurrentBookFolder + '/' + page.image;
@@ -7004,12 +7229,16 @@
         // ================================================================
         // SILENT TRANSLATOR - sends a private, translated audio reading of
         // any text box directly to specific students' own connected
-        // devices, with no English included - supporting comprehension
-        // access without displacing the English exposure students already
-        // get from the board and the teacher directly.
+        // devices (or, optionally, straight out of that device's own
+        // speakers, for students without a Bluetooth device to pair) -
+        // supporting comprehension access without displacing the English
+        // exposure students already get from the board and the teacher
+        // directly. English is available as a target language too, for
+        // cases where broadcasting an English reading is specifically
+        // needed.
         // ================================================================
         let silentTranslatorEnabled = false;
-        let silentTranslatorDevices = []; // [{ id, deviceId, deviceLabel, language, volume, audioEl }]
+        let silentTranslatorDevices = []; // [{ id, deviceId, deviceLabel, language, volume, useDefaultAudio, audioEl }]
         let silentTranslatorNextRowId = 1;
         let silentTranslatorAvailableDevices = []; // populated once via stUnlockDevices()
 
@@ -7028,29 +7257,33 @@
         // this feature's own stated use case, and now also added to the
         // hub's main language lists for consistency.
         const SILENT_TRANSLATOR_LANGUAGES = [
-            { value: 'fr', label: 'French (Français)' },
-            { value: 'zh-pinyin', label: 'Mandarin (Pinyin)' },
-            { value: 'zh-hanzi', label: 'Mandarin (Hanzi)' },
-            { value: 'cantonese', label: 'Cantonese' },
-            { value: 'ja', label: 'Japanese (日本語)' },
-            { value: 'de', label: 'German (Deutsch)' },
-            { value: 'it', label: 'Italian (Italiano)' },
-            { value: 'es', label: 'Spanish (Español)' },
-            { value: 'he', label: 'Hebrew (עברית)' },
-            { value: 'ar', label: 'Arabic (العربية)' },
-            { value: 'sinhala', label: 'Sinhala (සිංහල)' },
-            { value: 'vi', label: 'Vietnamese (Tiếng Việt)' },
-            { value: 'ur', label: 'Urdu (اردو)' },
-            { value: 'hi', label: 'Hindi (हिन्दी)' },
-            { value: 'uk', label: 'Ukrainian (Українська)' },
-            { value: 'ru', label: 'Russian (Русский)' },
-            { value: 'macedonian', label: 'Macedonian (Македонски)' },
             { value: 'afrikaans', label: 'Afrikaans' },
-            { value: 'serbian', label: 'Serbian (Српски)' },
+            { value: 'ar', label: 'Arabic (العربية)' },
+            { value: 'burmese', label: 'Burmese (မြန်မာဘာသာ)' },
+            { value: 'cantonese', label: 'Cantonese' },
             { value: 'croatian', label: 'Croatian (Hrvatski)' },
+            { value: 'dutch', label: 'Dutch (Nederlands)' },
+            { value: 'en', label: 'English' },
+            { value: 'fr', label: 'French (Français)' },
+            { value: 'de', label: 'German (Deutsch)' },
+            { value: 'he', label: 'Hebrew (עברית)' },
+            { value: 'hi', label: 'Hindi (हिन्दी)' },
+            { value: 'it', label: 'Italian (Italiano)' },
+            { value: 'ja', label: 'Japanese (日本語)' },
+            { value: 'korean', label: 'Korean (한국어)' },
+            { value: 'macedonian', label: 'Macedonian (Македонски)' },
+            { value: 'zh-hanzi', label: 'Mandarin (Hanzi)' },
+            { value: 'zh-pinyin', label: 'Mandarin (Pinyin)' },
             { value: 'punjabi', label: 'Punjabi (ਪੰਜਾਬੀ)' },
+            { value: 'ru', label: 'Russian (Русский)' },
+            { value: 'serbian', label: 'Serbian (Српски)' },
+            { value: 'sinhala', label: 'Sinhala (සිංහල)' },
+            { value: 'es', label: 'Spanish (Español)' },
             { value: 'tamil', label: 'Tamil (தமிழ்)' },
-            { value: 'korean', label: 'Korean (한국어)' }
+            { value: 'thai', label: 'Thai (ภาษาไทย)' },
+            { value: 'uk', label: 'Ukrainian (Українська)' },
+            { value: 'ur', label: 'Urdu (اردو)' },
+            { value: 'vi', label: 'Vietnamese (Tiếng Việt)' }
         ];
 
         function stOpenPanel() {
@@ -7094,6 +7327,7 @@
                 topRow.style.cssText = 'display:flex; gap:8px; align-items:center;';
                 const deviceSelect = stBuildDeviceSelect(row);
                 deviceSelect.style.flex = '1';
+                deviceSelect.disabled = !!row.useDefaultAudio;
                 const removeBtn = document.createElement('button');
                 removeBtn.className = 'wb-circle-btn interactive';
                 removeBtn.style.cssText = 'width:26px; height:26px; font-size:12px; color:#dc2626; flex-shrink:0;';
@@ -7101,6 +7335,26 @@
                 removeBtn.onclick = () => stRemoveDeviceRow(row.id);
                 topRow.appendChild(deviceSelect);
                 topRow.appendChild(removeBtn);
+
+                const defaultAudioRow = document.createElement('label');
+                defaultAudioRow.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;';
+                const defaultAudioCheckbox = document.createElement('input');
+                defaultAudioCheckbox.type = 'checkbox';
+                defaultAudioCheckbox.checked = !!row.useDefaultAudio;
+                defaultAudioCheckbox.addEventListener('change', (e) => {
+                    row.useDefaultAudio = e.target.checked;
+                    deviceSelect.disabled = row.useDefaultAudio;
+                    stEnsureAudioElementForRow(row);
+                    if (silentTranslatorEnabled) {
+                        if (row.useDefaultAudio) { stStopKeepAlive(row); }
+                        else if (row.deviceId) { stStartKeepAlive(row); }
+                    }
+                    wbDebouncedSave();
+                });
+                const defaultAudioLabel = document.createElement('span');
+                defaultAudioLabel.textContent = '🔊 Play on this device\'s own speakers (no Bluetooth needed)';
+                defaultAudioRow.appendChild(defaultAudioCheckbox);
+                defaultAudioRow.appendChild(defaultAudioLabel);
 
                 const langSelect = document.createElement('select');
                 langSelect.className = 'hub-input wb-select';
@@ -7135,6 +7389,7 @@
                 volRow.appendChild(volSlider);
 
                 rowEl.appendChild(topRow);
+                rowEl.appendChild(defaultAudioRow);
                 rowEl.appendChild(langSelect);
                 rowEl.appendChild(volRow);
                 list.appendChild(rowEl);
@@ -7148,6 +7403,7 @@
                 deviceLabel: '',
                 language: SILENT_TRANSLATOR_LANGUAGES[0].value,
                 volume: 80,
+                useDefaultAudio: false,
                 audioEl: null
             });
             stRenderDeviceList();
@@ -7217,13 +7473,19 @@
                 document.body.appendChild(row.audioEl);
             }
             row.audioEl.volume = (row.volume || 80) / 100;
-            if (row.deviceId && row.audioEl.setSinkId) {
-                // This MUST be awaited before playback starts - otherwise
-                // .play() can fire before the device switch has actually
-                // taken effect, and the audio plays on whatever the
-                // previous (often default) output happened to be.
+            if (row.audioEl.setSinkId) {
+                // Once set, sinkId persists on an audio element until
+                // explicitly changed again - so a row that previously had a
+                // real device selected needs an explicit reset back to ''
+                // (the system default) when "use default audio" is checked,
+                // not just a skip of this whole block.
+                const targetSinkId = (row.deviceId && !row.useDefaultAudio) ? row.deviceId : '';
                 try {
-                    await row.audioEl.setSinkId(row.deviceId);
+                    // This MUST be awaited before playback starts - otherwise
+                    // .play() can fire before the device switch has actually
+                    // taken effect, and the audio plays on whatever the
+                    // previous output happened to be.
+                    await row.audioEl.setSinkId(targetSinkId);
                 } catch (e) {
                     console.warn('Could not set audio output device:', e);
                 }
@@ -7255,7 +7517,7 @@
         }
 
         function stStartAllKeepAlives() {
-            silentTranslatorDevices.forEach(row => { if (row.deviceId) stStartKeepAlive(row); });
+            silentTranslatorDevices.forEach(row => { if (row.deviceId && !row.useDefaultAudio) stStartKeepAlive(row); });
         }
 
         // --- Per-text-box TTS button - only present while the tool is on ---
@@ -7292,7 +7554,7 @@
             // controls - not from this button.
             if (silentTranslatorEnabled) {
                 silentTranslatorDevices.forEach(row => {
-                    if (row.deviceId && row.language) stTranslateAndSendToDevice(elData.text, row);
+                    if (row.language && (row.deviceId || row.useDefaultAudio)) stTranslateAndSendToDevice(elData.text, row);
                 });
             }
         }
@@ -7780,6 +8042,13 @@
             };
             document.getElementById('wb-assessment-start-btn').onclick = rosterStartAssessmentSession;
             document.getElementById('wb-assessment-viewdata-btn').onclick = rosterOpenDataViewer;
+            document.getElementById('wb-assessment-lineorder-btn').onclick = wbOpenLineOrderEditor;
+            document.getElementById('wb-lineorder-close-btn').onclick = () => {
+                const overlay = document.getElementById('wb-lineorder-overlay');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            };
+            document.getElementById('wb-lineorder-save-btn').onclick = wbSaveLineOrder;
             document.getElementById('wb-dataviewer-close-btn').onclick = () => {
                 document.getElementById('wb-dataviewer-overlay').classList.add('hidden');
                 document.getElementById('wb-dataviewer-overlay').classList.remove('flex');
@@ -8040,8 +8309,9 @@
 
                 if (e.key === 'ArrowUp') { e.preventDefault(); rosterAdjustAssessmentScore(1); }
                 else if (e.key === 'ArrowDown') { e.preventDefault(); rosterAdjustAssessmentScore(-1); }
-                else if (e.key === 'ArrowRight') { e.preventDefault(); rosterAdvancePool(assessmentPickerState, 1); rosterRenderAssessmentLive(); }
-                else if (e.key === 'ArrowLeft') { e.preventDefault(); rosterAdvancePool(assessmentPickerState, -1); rosterRenderAssessmentLive(); }
+                else if (e.key === 'ArrowRight') { e.preventDefault(); rosterAdvanceAssessmentPool(1); rosterRenderAssessmentLive(); }
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); rosterAdvanceAssessmentPool(-1); rosterRenderAssessmentLive(); }
+                else if (e.key === 'n' || e.key === 'N') { e.preventDefault(); rosterMarkCurrentStudentAbsent(); rosterAdvanceAssessmentPool(1); rosterRenderAssessmentLive(); }
             });
         }
 
@@ -10955,11 +11225,13 @@
                     bbsRenderGraphemeRow();
                     bbsLoadLiteralMeanings(selectedLanguage).then(() => {
                         if (bbsCurrentPageIndex >= 0) bbsRenderPageText();
+                        else if (bbsCurrentPageIndex === -1) bbsRenderPage(-1);
                     });
                 }
                 const bbsLibraryScreen = document.getElementById('bobot-bookshelf-library-screen');
                 if (bbsLibraryScreen && bbsLibraryScreen.style.display !== 'none') {
                     bbsAutoCheckFrenchColorCoding();
+                    bbsRenderLibraryGrid();
                 }
             });
 
@@ -11962,7 +12234,31 @@
             }
         }
 
+        // Every "screen" a student can be looking at, one at a time - the
+        // title/config screen, each individual tool, and the shared canvas
+        // view used by Quest/Picture/Kart/Potato. Each tool's own launch
+        // function has historically hidden only a hand-picked list of
+        // "screens it assumed came before it" - which quietly missed newer
+        // screens added later (Bobot's Bookshelf specifically), letting one
+        // remain visible on top of whichever tool launched next, with that
+        // new tool's own logic (including its own audio) running normally
+        // but invisibly underneath. Hiding every possible screen centrally,
+        // before any tool-specific launch logic runs, closes this off
+        // entirely rather than patching one missed combination at a time.
+        const ALL_TOOL_SCREEN_IDS = [
+            'title-screen', 'coder-screen', 'bobot-screen',
+            'bobot-bookshelf-library-screen', 'bobot-bookshelf-reader-screen',
+            'whiteboard-screen', 'game-view-shell', 'results-screen'
+        ];
+        function hideAllToolScreens() {
+            ALL_TOOL_SCREEN_IDS.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+        }
+
         function launchSelectedActivity() {
+            hideAllToolScreens();
             initAudio();
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
@@ -12028,8 +12324,13 @@
         // deployed function's URL.
         // ====================================================================
         const CLOUD_TTS_CONFIG = {
+            burmese: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'my-MM' },
+            fr: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'fr-FR', voiceName: 'fr-FR-Wavenet-A' },
+            korean: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'ko-KR' },
+            punjabi: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'pa-IN' },
             sinhala: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'si-LK', voiceName: 'si-LK-SameeraNeural' },
-            fr: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'fr-FR', voiceName: 'fr-FR-Wavenet-A' }
+            tamil: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'ta-IN' },
+            thai: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'th-TH' }
         };
         const cloudTtsAudioCache = {}; // avoids refetching the same word twice
         // Browser TTS explicitly cancels any in-progress utterance before
@@ -13858,18 +14159,14 @@
             document.getElementById('kart-level-editor-toggle-btn').style.display = 'none';
             pauseBackgroundMusic();
             canvas.style.display = 'none';
-            document.getElementById('game-view-shell').style.display = 'none';
             document.getElementById('ui-board').style.display = 'none';
             document.getElementById('kart-ui-board').style.display = 'none';
             document.getElementById('kart-complete-overlay').classList.add('hidden');
             document.getElementById('kart-complete-overlay').classList.remove('flex');
-            document.getElementById('coder-screen').style.display = 'none';
             stopAllBobotVideos();
-            document.getElementById('bobot-screen').style.display = 'none';
-            document.getElementById('whiteboard-screen').style.display = 'none';
             wbPauseAllTimers();
             wbStopBackgroundMedia();
-            document.getElementById('results-screen').style.display = 'none';
+            hideAllToolScreens();
             document.getElementById('title-screen').style.display = 'flex';
             // The whiteboard's own language dropdown is a second switch for the
             // same shared selectedLanguage - if it was changed while in there,
