@@ -2092,6 +2092,8 @@
                 <div style="font-weight:800; color:var(--hub-ink);">Loading book...</div>
             </div>
             <button id="bbs-reader-back-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:16px; left:16px; z-index:20; width:36px; height:36px;" title="Back to library">←</button>
+            <input type="range" id="bbs-bg-volume-slider" class="interactive bbs-overlay-btn" min="0" max="100" value="50" style="position:absolute; top:22px; right:104px; z-index:20; width:90px;" title="Background audio volume">
+            <button id="bbs-bg-mute-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:16px; right:60px; z-index:20; width:36px; height:36px;" title="Mute background audio">🔊</button>
             <button class="fullscreen-toggle-btn wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:16px; right:16px; z-index:20; width:36px; height:36px;" title="Toggle fullscreen">⛶</button>
             <button id="bbs-prev-page-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:50%; left:16px; transform:translateY(-50%); z-index:20; width:44px; height:44px; font-size:20px;" title="Previous page">←</button>
             <button id="bbs-next-page-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="position:absolute; top:50%; right:16px; transform:translateY(-50%); z-index:20; width:44px; height:44px; font-size:20px;" title="Next page">→</button>
@@ -6900,7 +6902,7 @@
             if (index === -1) {
                 imageWrap.style.visibility = 'hidden';
                 pageText.style.display = 'none';
-                ttsControls.style.display = 'none';
+                ttsControls.style.display = 'flex';
                 document.getElementById('bbs-page-translation').style.display = 'none';
                 document.getElementById('bbs-grapheme-row').style.display = 'none';
                 coverImg.src = BOBOTS_BOOKSHELF_BASE + bbsCurrentBookFolder + '/' + (bbsCurrentBook.cover || 'cover.jpg');
@@ -6973,6 +6975,7 @@
         // "Global meaning" = the sentence-level translation, shown/spoken
         // via the Translate button at the bottom of the page.
         function bbsGetPageText() {
+            if (bbsCurrentPageIndex === -1) return bbsResolveTitle(bbsCurrentBook.title);
             const page = bbsCurrentBook.pages[bbsCurrentPageIndex];
             if (!page || !page.globalMeanings) return '';
             return page.globalMeanings[selectedLanguage] || page.globalMeanings.en || '';
@@ -7040,6 +7043,12 @@
             document.getElementById('bbs-page-text-inner').innerHTML = html;
         }
 
+        // Kept entirely separate from the main hub's music/TTS volume
+        // settings - this only ever affects the book's own ambient
+        // background audio, never the TTS/translate buttons.
+        let bbsBgVolume = 0.5;
+        let bbsBgMuted = false;
+
         function bbsSwitchBackgroundAudio(audioFilename) {
             if (bbsBgAudioEl) {
                 bbsBgAudioEl.pause();
@@ -7048,7 +7057,7 @@
             if (!audioFilename) return;
             bbsBgAudioEl = new Audio(BOBOTS_BOOKSHELF_BASE + 'bobots-bookshelf-audio/' + audioFilename);
             bbsBgAudioEl.loop = true;
-            bbsBgAudioEl.volume = 0.5;
+            bbsBgAudioEl.volume = bbsBgMuted ? 0 : bbsBgVolume;
             bbsBgAudioEl.play().catch(e => console.warn("Bobot's Bookshelf: background audio couldn't autoplay yet (needs a click on the page first)", e));
         }
 
@@ -7139,13 +7148,18 @@
         }
 
         function bbsToggleSentenceTranslation() {
-            const page = bbsCurrentBook.pages[bbsCurrentPageIndex];
             const el = document.getElementById('bbs-page-translation');
             if (el.style.display === 'block') {
                 el.style.display = 'none';
                 return;
             }
-            const translation = page.globalMeanings && page.globalMeanings.en;
+            let translation;
+            if (bbsCurrentPageIndex === -1) {
+                translation = bbsCurrentBook.title && bbsCurrentBook.title.en;
+            } else {
+                const page = bbsCurrentBook.pages[bbsCurrentPageIndex];
+                translation = page && page.globalMeanings && page.globalMeanings.en;
+            }
             if (!translation) return;
             el.textContent = translation;
             el.style.display = 'block';
@@ -7179,6 +7193,19 @@
             });
             document.getElementById('bbs-prev-page-btn').onclick = bbsPrevPage;
             document.getElementById('bbs-next-page-btn').onclick = bbsNextPage;
+            document.getElementById('bbs-bg-mute-btn').onclick = () => {
+                bbsBgMuted = !bbsBgMuted;
+                document.getElementById('bbs-bg-mute-btn').textContent = bbsBgMuted ? '🔇' : '🔊';
+                if (bbsBgAudioEl) bbsBgAudioEl.volume = bbsBgMuted ? 0 : bbsBgVolume;
+            };
+            document.getElementById('bbs-bg-volume-slider').addEventListener('input', (e) => {
+                bbsBgVolume = parseInt(e.target.value, 10) / 100;
+                if (bbsBgMuted) {
+                    bbsBgMuted = false;
+                    document.getElementById('bbs-bg-mute-btn').textContent = '🔊';
+                }
+                if (bbsBgAudioEl) bbsBgAudioEl.volume = bbsBgVolume;
+            });
             document.getElementById('bbs-page-text').addEventListener('click', (e) => {
                 const wordEl = e.target.closest('.bbs-word');
                 if (wordEl) bbsHandleWordTap(wordEl);
