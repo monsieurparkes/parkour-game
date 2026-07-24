@@ -2103,8 +2103,11 @@
                     <div id="bbs-page-image-wrap" style="width:50%; height:100%; overflow:hidden; border-radius:var(--hub-radius-md) 0 0 var(--hub-radius-md); background:#f2f0ea;">
                         <img id="bbs-page-image" style="width:100%; height:100%; object-fit:cover; display:block;">
                     </div>
-                    <div id="bbs-cover-title-overlay" style="display:none; position:absolute; left:0; top:0; width:50%; height:100%; align-items:center; justify-content:center; padding:36px; box-sizing:border-box; text-align:center;">
-                        <div id="bbs-cover-title-text" style="font-family:'OpenDyslexic', sans-serif; font-weight:800; line-height:1.3; letter-spacing:0.02em; color:var(--hub-ink); overflow-wrap:break-word;"></div>
+                    <div id="bbs-cover-title-overlay" style="display:none; position:absolute; left:0; top:0; width:50%; height:100%; flex-direction:column; align-items:center; padding:36px; box-sizing:border-box; text-align:center;">
+                        <div id="bbs-cover-title-text-wrap" style="flex:1; display:flex; align-items:center; justify-content:center; width:100%; min-height:0;">
+                            <div id="bbs-cover-title-text" style="font-family:'OpenDyslexic', sans-serif; font-weight:800; line-height:1.3; letter-spacing:0.02em; color:var(--hub-ink); overflow-wrap:break-word;"></div>
+                        </div>
+                        <div id="bbs-cover-tts-slot" style="width:100%; display:flex; justify-content:center; flex-shrink:0;"></div>
                     </div>
                     <div id="bbs-page-text-wrap" style="width:50%; height:100%; background:var(--hub-surface); border:1px solid var(--hub-line); border-left:none; border-radius:0 var(--hub-radius-md) var(--hub-radius-md) 0; padding:28px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
                         <img id="bbs-cover-image" style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
@@ -6749,11 +6752,12 @@
         // title vs. a much longer German or Ukrainian one).
         function bbsFitCoverTitle() {
             const el = document.getElementById('bbs-cover-title-text');
+            const titleWrap = document.getElementById('bbs-cover-title-text-wrap');
             const container = document.getElementById('bbs-cover-title-overlay');
-            if (!el || !container || container.clientWidth === 0) return;
-            const padding = 72; // matches the overlay's own 36px padding on each side
-            const maxWidth = Math.max(80, container.clientWidth - padding);
-            const maxHeight = Math.max(60, container.clientHeight - padding);
+            if (!el || !titleWrap || !container || container.clientWidth === 0) return;
+            const horizontalPadding = 72; // matches the overlay's own 36px padding on each side
+            const maxWidth = Math.max(80, container.clientWidth - horizontalPadding);
+            const maxHeight = Math.max(60, titleWrap.clientHeight);
             let fontSize = 68;
             const minFontSize = 22;
             el.style.setProperty('font-size', fontSize + 'px', 'important');
@@ -6903,6 +6907,7 @@
                 imageWrap.style.visibility = 'hidden';
                 pageText.style.display = 'none';
                 ttsControls.style.display = 'flex';
+                document.getElementById('bbs-cover-tts-slot').appendChild(ttsControls);
                 document.getElementById('bbs-page-translation').style.display = 'none';
                 document.getElementById('bbs-grapheme-row').style.display = 'none';
                 coverImg.src = BOBOTS_BOOKSHELF_BASE + bbsCurrentBookFolder + '/' + (bbsCurrentBook.cover || 'cover.jpg');
@@ -6926,6 +6931,8 @@
             imageWrap.style.visibility = 'visible';
             pageText.style.display = 'flex';
             ttsControls.style.display = 'flex';
+            const graphemeRowEl = document.getElementById('bbs-grapheme-row');
+            graphemeRowEl.parentElement.insertBefore(ttsControls, graphemeRowEl);
             coverImg.style.display = 'none';
             document.getElementById('bbs-cover-title-overlay').style.display = 'none';
             bbsRenderGraphemeRow();
