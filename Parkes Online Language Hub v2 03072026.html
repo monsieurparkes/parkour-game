@@ -836,6 +836,41 @@
             filter: drop-shadow(0 6px 8px rgba(0,0,0,0.25));
         }
         .wb-syntax-house-roof { display: block; width: 100%; height: 26px; }
+        .wb-syntax-space-car { width: 70px !important; }
+        .wb-syntax-space-car-driveway {
+            width: 100%;
+            height: 14px;
+            background: repeating-linear-gradient(90deg, #b7b2a8 0px, #b7b2a8 8px, #a49f95 8px, #a49f95 16px);
+            border-radius: 2px;
+        }
+        .wb-syntax-space-car-body {
+            width: 100%;
+            height: 64px;
+            border-radius: 10px 10px 6px 6px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 3px 6px rgba(255,255,255,0.35), inset 0 -8px 10px rgba(0,0,0,0.15);
+        }
+        .wb-syntax-space-car-plate {
+            width: 40px;
+            height: 16px;
+            background: #f5f2ea;
+            border: 1.5px solid rgba(0,0,0,0.25);
+            border-radius: 2px;
+        }
+        .wb-syntax-space-car-light {
+            position: absolute;
+            top: 8px;
+            width: 10px;
+            height: 8px;
+            background: #d81e1e;
+            border-radius: 2px;
+            box-shadow: 0 0 4px rgba(216,30,30,0.7);
+        }
+        .wb-syntax-space-car-light.left { left: 6px; }
+        .wb-syntax-space-car-light.right { right: 6px; }
         .wb-syntax-house-body {
             width: 100%;
             height: 78px;
@@ -900,7 +935,13 @@
             border: 1.5px solid rgba(0,0,0,0.3);
             border-radius: 3px 3px 0 0;
         }
-        .wb-syntax-bubbles-on .wb-syntax-house-word span,
+        .wb-syntax-bubbles-on .wb-syntax-house-word {
+            background: rgba(255,255,255,0.92);
+            border-radius: 6px;
+            padding: 2px 8px;
+            display: inline-block;
+            max-width: calc(100% - 12px);
+        }
         .wb-syntax-bubbles-on #wb-syntax-sentence-text span {
             background: rgba(255,255,255,0.92);
             border-radius: 3px;
@@ -2754,10 +2795,11 @@
                         <div style="display:flex; align-items:center; gap:6px;">
                             <strong style="font-size:13px; color:var(--hub-ink);">🏘️ Syntax Street</strong>
                             <button id="wb-syntax-add-house-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:15px; font-weight:800;" title="Add a house">+</button>
+                            <button id="wb-syntax-add-space-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:13px;" title="Add a space (for words that flow together with no gap, like this car sitting between two houses)">🚗</button>
                         </div>
                         <div id="wb-syntax-settings-wrap" class="wb-dropdown-wrap" style="display:flex; gap:4px; align-items:center;">
                             <button id="wb-syntax-settings-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:12px;" title="Settings">⚙️</button>
-                            <div id="wb-syntax-settings-menu" class="wb-dropdown-menu hub-font" style="display:none; right:0; left:auto; min-width:230px;">
+                            <div id="wb-syntax-settings-menu" class="wb-dropdown-menu hub-font" style="display:none; position:fixed; right:auto; left:auto; min-width:230px;">
                                 <div class="hub-checkbox-row">
                                     <input type="checkbox" id="wb-syntax-bubble-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
                                     <label for="wb-syntax-bubble-toggle" style="font-size:13px; cursor:pointer;">Background bubble behind text</label>
@@ -4534,7 +4576,7 @@
                                 i += 2;
                                 continue;
                             }
-                            if (two === 'ou') {
+                            if (two === 'ou' || two === 'où') {
                                 c1.color = '#ff3131';
                                 c2.color = '#ff3131';
                                 i += 2;
@@ -6453,6 +6495,33 @@
             return house;
         }
 
+        // The "space car" - an explicit, manually-placed space between two
+        // houses, shaped like a car's rear view sitting on a driveway.
+        // Reuses the base house class so the existing drag-to-reorder
+        // machinery treats it identically to a house, just visually and
+        // semantically different (no word, no category, isSpace:true).
+        function rosterBuildSpaceCarEl(color) {
+            const carColor = color || '#5B8DEF';
+            const car = document.createElement('div');
+            car.className = 'wb-syntax-house wb-syntax-space-car';
+            car.dataset.isSpace = 'true';
+            car.innerHTML = `
+                <div style="height:26px;"></div>
+                <div class="wb-syntax-space-car-body" style="background:linear-gradient(160deg, ${rosterShadeColor(carColor, 18)} 0%, ${carColor} 55%, ${rosterShadeColor(carColor, -10)} 100%);">
+                    <div class="wb-syntax-space-car-light left"></div>
+                    <div class="wb-syntax-space-car-plate"></div>
+                    <div class="wb-syntax-space-car-light right"></div>
+                </div>
+                <div class="wb-syntax-space-car-driveway"></div>`;
+            return car;
+        }
+
+        function rosterAddSpaceCar() {
+            syntaxStreetSentence.push({ instanceId: syntaxNextInstanceId++, isSpace: true });
+            rosterDebouncedSave();
+            rosterRenderSyntaxStreetScene();
+        }
+
         function rosterOpenSyntaxStreet() {
             document.getElementById('wb-syntax-panel').style.display = 'block';
             rosterRenderSyntaxStreetScene();
@@ -6466,7 +6535,7 @@
         // existing one to add a blank house that's ready for a word. ---
         function rosterOpenSyntaxCategoryMenu(anchorEl) {
             const menu = document.getElementById('wb-syntax-category-menu');
-            document.getElementById('wb-syntax-new-category-form').style.display = 'none';
+            rosterCancelSyntaxCategoryEdit();
             rosterRenderSyntaxCategoryMenuList();
             const rect = anchorEl.getBoundingClientRect();
             menu.style.left = Math.min(rect.left, window.innerWidth - 232) + 'px';
@@ -6477,6 +6546,11 @@
         function rosterCloseSyntaxCategoryMenu() {
             document.getElementById('wb-syntax-category-menu').style.display = 'none';
         }
+
+        // null while creating a brand new category; set to a category's
+        // index while the right-click edit form is pre-filled with its
+        // current name/colour, reusing the same form either way.
+        let syntaxCategoryEditIndex = null;
 
         function rosterRenderSyntaxCategoryMenuList() {
             const list = document.getElementById('wb-syntax-category-menu-list');
@@ -6492,7 +6566,12 @@
                 btn.className = 'hub-btn-ghost interactive';
                 btn.style.cssText = 'flex:1; text-align:left; font-size:12px; padding:6px 8px; display:flex; align-items:center; gap:6px;';
                 btn.innerHTML = `<span style="width:10px; height:10px; border-radius:50%; background:${cat.color}; flex-shrink:0;"></span>${rosterEscapeHtml(cat.name)}`;
+                btn.title = 'Click to add a house - right-click to rename or recolour';
                 btn.onclick = () => rosterAddBlankHouse(cat.name, cat.color);
+                btn.oncontextmenu = (e) => {
+                    e.preventDefault();
+                    rosterOpenSyntaxCategoryEditForm(i);
+                };
                 const delBtn = document.createElement('button');
                 delBtn.className = 'wb-circle-btn interactive';
                 delBtn.style.cssText = 'width:22px; height:22px; font-size:10px; color:#dc2626; flex-shrink:0;';
@@ -6512,6 +6591,21 @@
             });
         }
 
+        // Pre-fills the existing new-category form with this category's
+        // current name/colour instead of blank defaults, and repurposes its
+        // submit button to save changes to the existing category rather
+        // than create a new one - avoids needing a second, near-identical
+        // form just for editing.
+        function rosterOpenSyntaxCategoryEditForm(index) {
+            const cat = rosterState.syntaxStreetCategories[index];
+            if (!cat) return;
+            syntaxCategoryEditIndex = index;
+            document.getElementById('wb-syntax-new-category-name-input').value = cat.name;
+            document.getElementById('wb-syntax-new-category-color-input').value = cat.color;
+            document.getElementById('wb-syntax-create-category-btn').textContent = 'Save Changes';
+            document.getElementById('wb-syntax-new-category-form').style.display = 'flex';
+        }
+
         function rosterAddBlankHouse(categoryName, color) {
             syntaxStreetSentence.push({
                 instanceId: syntaxNextInstanceId++,
@@ -6529,12 +6623,44 @@
             const colorInput = document.getElementById('wb-syntax-new-category-color-input');
             const name = nameInput.value.trim();
             if (!name) return;
+
+            if (syntaxCategoryEditIndex !== null) {
+                const cat = rosterState.syntaxStreetCategories[syntaxCategoryEditIndex];
+                if (!cat) { rosterCancelSyntaxCategoryEdit(); return; }
+                const nameTaken = rosterState.syntaxStreetCategories.some((c, i) => i !== syntaxCategoryEditIndex && c.name === name);
+                if (nameTaken) { alert("A category with that name already exists."); return; }
+                const oldName = cat.name;
+                const newColor = colorInput.value;
+                syntaxStreetSentence.forEach(h => {
+                    if (h.category === oldName) { h.category = name; h.color = newColor; }
+                });
+                cat.name = name;
+                cat.color = newColor;
+                rosterCancelSyntaxCategoryEdit();
+                rosterDebouncedSave();
+                rosterRenderSyntaxCategoryMenuList();
+                rosterRenderSyntaxStreetScene();
+                return;
+            }
+
             if (rosterState.syntaxStreetCategories.some(c => c.name === name)) { alert("A category with that name already exists."); return; }
             rosterState.syntaxStreetCategories.push({ name, color: colorInput.value, words: [] });
             nameInput.value = '';
             rosterDebouncedSave();
             document.getElementById('wb-syntax-new-category-form').style.display = 'none';
             rosterRenderSyntaxCategoryMenuList();
+        }
+
+        // Resets the shared form back to "create a new category" mode -
+        // called after a successful edit, and whenever the form/menu is
+        // closed some other way so a stray edit-in-progress can't leak
+        // into the next time it's opened.
+        function rosterCancelSyntaxCategoryEdit() {
+            syntaxCategoryEditIndex = null;
+            document.getElementById('wb-syntax-new-category-name-input').value = '';
+            document.getElementById('wb-syntax-new-category-color-input').value = '#5B4EFF';
+            document.getElementById('wb-syntax-create-category-btn').textContent = 'Create';
+            document.getElementById('wb-syntax-new-category-form').style.display = 'none';
         }
 
         // --- Floating word picker: search, add, or remove words for one
@@ -6666,7 +6792,8 @@
                     document.removeEventListener('mouseup', onUp);
                     document.body.style.userSelect = '';
                     if (!dragging) {
-                        rosterOpenSyntaxWordPicker(instanceId, houseEl);
+                        const entry = syntaxStreetSentence.find(h => h.instanceId === instanceId);
+                        if (entry && !entry.isSpace) rosterOpenSyntaxWordPicker(instanceId, houseEl);
                         return;
                     }
                     if (clone) clone.remove();
@@ -6805,6 +6932,55 @@
             });
         }
 
+        // Pre-fetches and caches every word and sentence's audio for the
+        // whole book, in the currently selected language, while the
+        // loading overlay is still showing - so the first tap on any word
+        // later doesn't have to wait on a live network request. Only does
+        // anything for languages actually routed through Cloud TTS
+        // (browser TTS has no such delay to avoid in the first place).
+        // Individual failures are skipped silently rather than blocking
+        // the book from opening - a word that didn't pre-cache just falls
+        // back to being fetched live on its first tap, exactly like
+        // before this existed.
+        async function bbsPrecacheBookAudio() {
+            const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
+            if (!cloudConfig || !bbsCurrentBook) return;
+
+            const jobs = new Map(); // cacheKey -> { text, rate }
+            const addJob = (rawText, rate) => {
+                const spoken = bbsPhoneticizeForSpeech(rawText, selectedLanguage);
+                const cleanText = prepareTextForSpeech(spoken);
+                const cacheKey = cloudConfig.languageCode + '::' + (rate || 'default') + '::' + cleanText;
+                if (!cloudTtsAudioCache[cacheKey]) jobs.set(cacheKey, { text: cleanText, rate });
+            };
+
+            bbsCurrentBook.pages.forEach(page => {
+                const sentenceRaw = (page.globalMeanings && (page.globalMeanings[selectedLanguage] || page.globalMeanings.en)) || '';
+                if (!sentenceRaw) return;
+                addJob(sentenceRaw, undefined); // normal-speed sentence button
+                addJob(sentenceRaw, 0.6);       // slow (snail) sentence button
+                bbsTokenizeTextForSpeech(sentenceRaw, selectedLanguage).forEach(token => addJob(token, undefined));
+            });
+
+            const jobList = Array.from(jobs.entries());
+            if (jobList.length === 0) return;
+
+            const CONCURRENCY = 4;
+            let cursor = 0;
+            async function worker() {
+                while (cursor < jobList.length) {
+                    const [cacheKey, job] = jobList[cursor++];
+                    try {
+                        const base64Audio = await fetchCloudTTSAudio(job.text, cloudConfig, job.rate);
+                        if (base64Audio) cloudTtsAudioCache[cacheKey] = base64Audio;
+                    } catch (e) {
+                        // Skipped silently - falls back to the existing lazy fetch-on-tap behavior later.
+                    }
+                }
+            }
+            await Promise.all(Array.from({ length: Math.min(CONCURRENCY, jobList.length) }, worker));
+        }
+
         async function bbsOpenBook(bookFolder) {
             try {
                 const res = await fetch(BOBOTS_BOOKSHELF_BASE + bookFolder + '/book-manifest.json');
@@ -6833,7 +7009,8 @@
                 });
                 await Promise.all([
                     ...imageUrls.map(bbsPreloadImage),
-                    bbsLoadLiteralMeanings(selectedLanguage)
+                    bbsLoadLiteralMeanings(selectedLanguage),
+                    bbsPrecacheBookAudio()
                 ]);
 
                 loadingOverlay.style.display = 'none';
@@ -7018,6 +7195,19 @@
                 bbsCurrentLiteralMeanings = {};
             }
             bbsLiteralMeaningsCache[lang] = bbsCurrentLiteralMeanings;
+        }
+
+        // Extracted from bbsRenderPageText so the same tokenization rules
+        // can be reused for pre-caching every page's words, not just the
+        // one currently on screen. Returns the "original" (speech-ready)
+        // form of each tappable unit - exactly what bbsHandleWordTap
+        // would actually speak for that token.
+        function bbsTokenizeTextForSpeech(text, lang) {
+            if (bbsIsCjkLanguage(lang)) {
+                return [...text].filter(ch => !/[\s.,!?;:'"()、。！？…「」・]/.test(ch));
+            }
+            return text.split(/(\s+)/)
+                .filter(chunk => chunk !== '' && !/^\s+$/.test(chunk));
         }
 
         function bbsRenderPageText() {
@@ -7641,16 +7831,25 @@
         }
 
         function rosterGetSyntaxSentenceText() {
-            const words = rosterGetSyntaxSentenceWords();
-            if (words.length === 0) return '';
-            return words.join(' ') + syntaxStreetPunctuation;
+            if (syntaxStreetSentence.length === 0) return '';
+            let text = '';
+            let isFirstWord = true;
+            syntaxStreetSentence.forEach(h => {
+                if (h.isSpace) {
+                    text += ' ';
+                } else {
+                    text += isFirstWord ? rosterCapitalizeFirst(h.word) : h.word;
+                    isFirstWord = false;
+                }
+            });
+            return text + syntaxStreetPunctuation;
         }
 
         function rosterRenderSyntaxStreetScene() {
             const row = document.getElementById('wb-syntax-houses-row');
             row.innerHTML = '';
             syntaxStreetSentence.forEach(house => {
-                const houseEl = rosterBuildHouseEl(house.word, house.category, house.color);
+                const houseEl = house.isSpace ? rosterBuildSpaceCarEl(house.color) : rosterBuildHouseEl(house.word, house.category, house.color);
                 houseEl.id = 'wb-syntax-house-' + house.instanceId;
                 const delBtn = document.createElement('div');
                 delBtn.className = 'wb-syntax-house-delete';
@@ -7688,10 +7887,6 @@
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
 
-        function rosterGetSyntaxSentenceWords() {
-            return syntaxStreetSentence.map((h, i) => i === 0 ? rosterCapitalizeFirst(h.word) : h.word);
-        }
-
         // Normal read uses the SAME voice-selection the rest of the hub
         // uses (getBestVoice, matching whatever language is active) rather
         // than a bare, unconfigured utterance - which is what made it sound
@@ -7706,15 +7901,23 @@
 
         // Each house re-speaks its own word normally (same voice as the
         // main read) - a quick jiggle is the only visual feedback now.
+        // Space cars are skipped entirely - there's no word for one to say.
+        let syntaxSpokeFirstWord = false;
         function rosterSpeakSyntaxHousesComically(index) {
+            if (index === 0) syntaxSpokeFirstWord = false;
             if (index >= syntaxStreetSentence.length) return;
             const house = syntaxStreetSentence[index];
+            if (house.isSpace) {
+                rosterSpeakSyntaxHousesComically(index + 1);
+                return;
+            }
             const houseEl = document.getElementById('wb-syntax-house-' + house.instanceId);
             if (houseEl) {
                 houseEl.classList.add('wb-syntax-house-shaking');
                 setTimeout(() => houseEl.classList.remove('wb-syntax-house-shaking'), 400);
             }
-            const word = index === 0 ? rosterCapitalizeFirst(house.word) : house.word;
+            const word = !syntaxSpokeFirstWord ? rosterCapitalizeFirst(house.word) : house.word;
+            syntaxSpokeFirstWord = true;
             speakOneInLanguage(word, selectedLanguage).then(() => {
                 rosterSpeakSyntaxHousesComically(index + 1);
             });
@@ -8232,12 +8435,30 @@
             document.getElementById('wb-syntax-settings-btn').onclick = (e) => {
                 e.stopPropagation();
                 const menu = document.getElementById('wb-syntax-settings-menu');
-                menu.style.display = (menu.style.display === 'none' || !menu.style.display) ? 'flex' : 'none';
+                const isOpen = menu.style.display === 'flex';
+                if (isOpen) {
+                    menu.style.display = 'none';
+                    return;
+                }
+                // Moved to document.body so it isn't clipped by
+                // wb-syntax-panel's own overflow:hidden - that clipping
+                // was cutting off everything below the checkbox (the zoom
+                // slider and font-size select), since the panel only
+                // clips content to its own bounds, not knowing the
+                // dropdown needs to extend past them.
+                document.body.appendChild(menu);
+                const btnRect = e.currentTarget.getBoundingClientRect();
+                menu.style.display = 'flex';
+                let left = btnRect.right - 230;
+                left = Math.max(4, Math.min(left, window.innerWidth - 234));
+                menu.style.left = left + 'px';
+                menu.style.top = (btnRect.bottom + 6) + 'px';
             };
             document.addEventListener('click', (e) => {
                 const wrap = document.getElementById('wb-syntax-settings-wrap');
-                if (wrap && !wrap.contains(e.target)) {
-                    document.getElementById('wb-syntax-settings-menu').style.display = 'none';
+                const menu = document.getElementById('wb-syntax-settings-menu');
+                if (wrap && menu && !wrap.contains(e.target) && !menu.contains(e.target)) {
+                    menu.style.display = 'none';
                 }
             });
             document.getElementById('wb-syntax-bubble-toggle').addEventListener('change', (e) => {
@@ -8254,6 +8475,7 @@
             document.getElementById('wb-syntax-add-house-btn').onclick = (e) => {
                 rosterOpenSyntaxCategoryMenu(e.currentTarget);
             };
+            document.getElementById('wb-syntax-add-space-btn').onclick = rosterAddSpaceCar;
             document.getElementById('wb-syntax-new-category-toggle-btn').onclick = () => {
                 const form = document.getElementById('wb-syntax-new-category-form');
                 form.style.display = form.style.display === 'none' ? 'flex' : 'none';
@@ -11261,6 +11483,7 @@
                         if (bbsCurrentPageIndex >= 0) bbsRenderPageText();
                         else if (bbsCurrentPageIndex === -1) bbsRenderPage(-1);
                     });
+                    bbsPrecacheBookAudio();
                 }
                 const bbsLibraryScreen = document.getElementById('bobot-bookshelf-library-screen');
                 if (bbsLibraryScreen && bbsLibraryScreen.style.display !== 'none') {
@@ -12359,7 +12582,8 @@
         // ====================================================================
         const CLOUD_TTS_CONFIG = {
             burmese: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'my-MM' },
-            fr: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'fr-FR', voiceName: 'fr-FR-Wavenet-A' },
+            en: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'en-AU', voiceName: 'en-AU-WilliamMultilingualNeural' },
+            fr: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'fr-FR', voiceName: 'fr-FR-MauriceNeural' },
             korean: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'ko-KR' },
             punjabi: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'pa-IN' },
             sinhala: { proxyUrl: 'https://synthesizespeech-foymcbipwa-uc.a.run.app', languageCode: 'si-LK', voiceName: 'si-LK-SameeraNeural' },
