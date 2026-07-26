@@ -6942,9 +6942,9 @@
         // the book from opening - a word that didn't pre-cache just falls
         // back to being fetched live on its first tap, exactly like
         // before this existed.
-        async function bbsPrecacheBookAudio() {
+        async function bbsPrecacheBookAudio(pages) {
             const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
-            if (!cloudConfig || !bbsCurrentBook) return;
+            if (!cloudConfig || !pages || pages.length === 0) return;
 
             const jobs = new Map(); // cacheKey -> { text, rate }
             const addJob = (rawText, rate) => {
@@ -6954,7 +6954,7 @@
                 if (!cloudTtsAudioCache[cacheKey]) jobs.set(cacheKey, { text: cleanText, rate });
             };
 
-            bbsCurrentBook.pages.forEach(page => {
+            pages.forEach(page => {
                 const sentenceRaw = (page.globalMeanings && (page.globalMeanings[selectedLanguage] || page.globalMeanings.en)) || '';
                 if (!sentenceRaw) return;
                 addJob(sentenceRaw, undefined); // normal-speed sentence button
@@ -6995,22 +6995,30 @@
                 const loadingOverlay = document.getElementById('bbs-loading-overlay');
                 loadingOverlay.style.display = 'flex';
 
-                // Every image (cover + every page) is fully loaded and
-                // cached by the browser before the book becomes viewable at
-                // all - otherwise turning to a page whose image hasn't
-                // finished loading yet shows a blank/broken frame for a
-                // moment. Since these are all being fetched into the
-                // browser's normal image cache, once loaded here they
-                // display instantly on their actual page without
-                // re-fetching.
-                const imageUrls = [BOBOTS_BOOKSHELF_BASE + bookFolder + '/' + (bbsCurrentBook.cover || 'cover.jpg')];
-                bbsCurrentBook.pages.forEach(page => {
-                    if (page.image) imageUrls.push(BOBOTS_BOOKSHELF_BASE + bookFolder + '/' + page.image);
+                // Only the cover and the first two pages need to be fully
+                // ready before the book is shown - a teacher opening a book
+                // shouldn't wait on content they won't reach for several
+                // minutes. Everything from page 3 onward keeps loading
+                // quietly in the background once the book is already open
+                // and being read, so it's ready well before it's actually
+                // needed without holding up the start of the lesson.
+                const priorityPages = bbsCurrentBook.pages.slice(0, 2);
+                const backgroundPages = bbsCurrentBook.pages.slice(2);
+
+                const coverUrl = BOBOTS_BOOKSHELF_BASE + bookFolder + '/' + (bbsCurrentBook.cover || 'cover.jpg');
+                const priorityImageUrls = [coverUrl];
+                priorityPages.forEach(page => {
+                    if (page.image) priorityImageUrls.push(BOBOTS_BOOKSHELF_BASE + bookFolder + '/' + page.image);
                 });
+                const backgroundImageUrls = [];
+                backgroundPages.forEach(page => {
+                    if (page.image) backgroundImageUrls.push(BOBOTS_BOOKSHELF_BASE + bookFolder + '/' + page.image);
+                });
+
                 await Promise.all([
-                    ...imageUrls.map(bbsPreloadImage),
+                    ...priorityImageUrls.map(bbsPreloadImage),
                     bbsLoadLiteralMeanings(selectedLanguage),
-                    bbsPrecacheBookAudio()
+                    bbsPrecacheBookAudio(priorityPages)
                 ]);
 
                 loadingOverlay.style.display = 'none';
@@ -7022,6 +7030,18 @@
                 requestAnimationFrame(() => requestAnimationFrame(bbsResizePages));
                 bbsRenderPage(-1);
                 bbsShowControlsBriefly();
+
+                // Fired only now that the book is already open and
+                // readable - deliberately not awaited, so it never delays
+                // anything above. Individual image/audio failures here are
+                // already handled quietly inside bbsPreloadImage and
+                // bbsPrecacheBookAudio themselves.
+                if (backgroundPages.length > 0) {
+                    Promise.all([
+                        ...backgroundImageUrls.map(bbsPreloadImage),
+                        bbsPrecacheBookAudio(backgroundPages)
+                    ]);
+                }
             } catch (e) {
                 console.error('Bobot\'s Bookshelf: could not open book', bookFolder, e);
             }
@@ -11483,7 +11503,7 @@
                         if (bbsCurrentPageIndex >= 0) bbsRenderPageText();
                         else if (bbsCurrentPageIndex === -1) bbsRenderPage(-1);
                     });
-                    bbsPrecacheBookAudio();
+                    bbsPrecacheBookAudio(bbsCurrentBook.pages);
                 }
                 const bbsLibraryScreen = document.getElementById('bobot-bookshelf-library-screen');
                 if (bbsLibraryScreen && bbsLibraryScreen.style.display !== 'none') {
