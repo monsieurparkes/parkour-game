@@ -1634,6 +1634,7 @@
                                 <option value="sinhala">Sinhala (සිංහල)</option>
                                 <option value="es">Spanish (Español)</option>
                                 <option value="tamil">Tamil (தமிழ்)</option>
+                                <option value="telugu">Telugu (తెలుగు)</option>
                                 <option value="thai">Thai (ภาษาไทย)</option>
                                 <option value="uk">Ukrainian (Українська)</option>
                                 <option value="ur">Urdu (اردو)</option>
@@ -1960,6 +1961,33 @@
                             <button id="settings-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
                     </div>
+
+                    <!-- STEP 6: Lava Literacy Settings -->
+                    <div id="landing-step-lava-settings" class="landing-step" style="display:none;">
+                        <h2 class="hub-step-title">🌋 Lava Literacy Settings</h2>
+                        <div class="hub-group hub-font text-left">
+                            <div class="hub-row">
+                                <p class="hub-hint mt-0">Mark each decodable chunk with a full stop, within each word - e.g. <strong>c.a.st.le</strong> or <strong>sh.i.p</strong>. Separate words with a space - e.g. <strong>c.a.t d.o.g</strong>.</p>
+                                <label class="hub-label" for="lava-phrase-input">Word or phrase, chunked</label>
+                                <input type="text" id="lava-phrase-input" class="hub-input" placeholder="c.a.st.le">
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-label" for="lava-decode-time-input">Decoding time per chunk (seconds)</label>
+                                <input type="number" id="lava-decode-time-input" class="hub-input" min="2" max="60" value="8" style="max-width:120px;">
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-checkbox-row" style="display:flex; align-items:center; gap:8px;">
+                                    <input type="checkbox" id="lava-colorcoding-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
+                                    <span>Colour-code the chunks</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-3 pt-6 pb-2">
+                            <button id="lava-settings-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
+                            <button id="lava-settings-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Launch Activity</button>
+                        </div>
+                        <p id="lava-settings-error" class="hub-hint" style="color:#dc2626; display:none;"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2255,6 +2283,7 @@
                         <option value="sinhala">Sinhala (සිංහල)</option>
                         <option value="es">Spanish (Español)</option>
                         <option value="tamil">Tamil (தமிழ்)</option>
+                        <option value="telugu">Telugu (తెలుగు)</option>
                         <option value="thai">Thai (ภาษาไทย)</option>
                         <option value="uk">Ukrainian (Українська)</option>
                         <option value="ur">Urdu (اردو)</option>
@@ -3024,6 +3053,10 @@
                     <canvas id="gameCanvas"></canvas>
                     <div id="kart-wrong-banner" dir="auto" class="hidden absolute left-1/2 top-6 -translate-x-1/2 bg-rose-500 text-white font-bold text-sm rounded-2xl border-2 border-rose-700 shadow-lg px-6 py-3 text-center max-w-[80%]" style="pointer-events:none;">
                     </div>
+                    <div id="lava-ui-board" style="display:none; position:absolute; top:12px; left:50%; transform:translateX(-50%); background:rgba(15,15,15,0.72); color:white; border-radius:16px; padding:8px 20px; text-align:center; font-family:'OpenDyslexic', sans-serif; pointer-events:none;">
+                        <div style="font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; opacity:0.75;">Decode</div>
+                        <div id="lava-timer-display" style="font-size:26px; font-weight:800; line-height:1.1;">8</div>
+                    </div>
                     <!-- Virtual Mobile D-Pad -->
             <div class="controls">
                 <div class="flex items-end gap-4">
@@ -3750,6 +3783,7 @@
             'sinhala': 'si-LK',
             'es': 'es-ES',
             'tamil': 'ta-IN',
+            'telugu': 'te-IN',
             'thai': 'th-TH',
             'uk': 'uk-UA',
             'ur': 'ur-PK',
@@ -3789,6 +3823,7 @@
             'sinhala': { locale: 'si-LK', prefix: "අද ", suffix: "." },
             'es': { locale: 'es-ES', prefix: "hoy es ", suffix: "." },
             'tamil': { locale: 'ta-IN', prefix: "இன்று தேதி ", suffix: "." },
+            'telugu': { locale: 'te-IN', prefix: "ఈరోజు ", suffix: "." },
             'thai': { locale: 'th-TH', prefix: "วันนี้คือ ", suffix: "" },
             'uk': { locale: 'uk-UA', prefix: "сьогодні ", suffix: "." },
             'ur': { locale: 'ur-PK-u-nu-arabext', prefix: "آج ", suffix: "." },
@@ -3826,6 +3861,7 @@
             sinhala: { header: "මගේ අර්තාපල් කොහෙද?", locs: { shower: "ෂවර් එකේ", toilet: "වැසිකිළියේ", bed: "ඇඳ මත", wardrobe: "අල්මාරියේ", lamp: "ලාම්පුව මත", toybox: "සෙල්ලම් පෙට්ටියේ", 'red-roof': "රතු වහලය මත", 'black-roof': "කළු වහලය මත", television: "රූපවාහිනිය මත", lounge: "සෝෆා එක මත", fridge: "ෆ්‍රිජ් එක මත", bin: "කුණු බඳුනට උඩින්", 'coffee-table': "කෝපි මේසයට උඩින්", sink: "සින්ක් එකට උඩින්", computer: "පරිගණකය මත", bookcase: "පොත් රාක්කය මත", 'washing-machine': "සෝදන යන්ත්‍රය මත", 'washing-basket': "රෙදි කූඩයට උඩින්", 'ironing-board': "ඉස්ත්‍රි පුවරුව මත", 'blue-roof': "නිල් වහලය මත" } },
             es: { header: "¿Dónde está mi patata?", locs: { shower: "en la ducha", toilet: "en el inodoro", bed: "en la cama", wardrobe: "en el armario", lamp: "en la lámpara", toybox: "en el baúl de juguetes", 'red-roof': "en el tejado rojo", 'black-roof': "en el tejado negro", television: "en la televisión", lounge: "en el sofá", fridge: "en la nevera", bin: "sobre el cubo de basura", 'coffee-table': "sobre la mesa de centro", sink: "sobre el fregadero", computer: "en el ordenador", bookcase: "en la estantería", 'washing-machine': "en la lavadora", 'washing-basket': "sobre el cesto de la ropa", 'ironing-board': "en la tabla de planchar", 'blue-roof': "en el tejado azul" } },
             tamil: { header: "என் உருளைக்கிழங்கு எங்கே?", locs: { shower: "ஷவரில்", toilet: "கழிப்பிடத்தின் மேல்", bed: "படுக்கையின் மேல்", wardrobe: "அலமாரியின் மேல்", lamp: "விளக்கின் மேல்", toybox: "பொம்மைப் பெட்டியின் மேல்", 'red-roof': "சிவப்பு கூரையின் மேல்", 'black-roof': "கருப்பு கூரையின் மேல்", television: "தொலைக்காட்சியின் மேல்", lounge: "சோபாவின் மேல்", fridge: "குளிர்சாதனப் பெட்டியின் மேல்", bin: "குப்பைத் தொட்டிக்கு மேலே", 'coffee-table': "காபி மேசைக்கு மேலே", sink: "சமையலறை சிங்குக்கு மேலே", computer: "கணினியின் மேல்", bookcase: "புத்தக அலமாரியின் மேல்", 'washing-machine': "துணி துவைக்கும் இயந்திரத்தின் மேல்", 'washing-basket': "துணிக் கூடைக்கு மேலே", 'ironing-board': "இஸ்திரி பலகையின் மேல்", 'blue-roof': "நீல கூரையின் மேல்" } },
+            telugu: { header: "నా బంగాళాదుంప ఎక్కడ ఉంది?", locs: { shower: "స్నానపు గదిలో", toilet: "మరుగుదొడ్డి మీద", bed: "మంచం మీద", wardrobe: "బట్టల అల్మారా మీద", lamp: "దీపం మీద", toybox: "బొమ్మల పెట్టెలో", 'red-roof': "ఎరుపు పైకప్పు మీద", 'black-roof': "నలుపు పైకప్పు మీద", television: "టెలివిజన్ మీద", lounge: "సోఫా మీద", fridge: "ఫ్రిజ్ మీద", bin: "చెత్త బుట్ట పైన", 'coffee-table': "కాఫీ టేబుల్ పైన", sink: "వంటగది సింక్ పైన", computer: "కంప్యూటర్ మీద", bookcase: "పుస్తకాల అల్మారా మీద", 'washing-machine': "వాషింగ్ మెషీన్ మీద", 'washing-basket': "బట్టల బుట్ట పైన", 'ironing-board': "ఇస్త్రీ బల్ల మీద", 'blue-roof': "నీలం పైకప్పు మీద" } },
             thai: { header: "มันฝรั่งของฉันอยู่ที่ไหน", locs: { shower: "ในฝักบัว", toilet: "บนโถส้วม", bed: "บนเตียง", wardrobe: "บนตู้เสื้อผ้า", lamp: "บนโคมไฟ", toybox: "บนกล่องของเล่น", 'red-roof': "บนหลังคาสีแดง", 'black-roof': "บนหลังคาสีดำ", television: "บนโทรทัศน์", lounge: "บนโซฟา", fridge: "บนตู้เย็น", bin: "เหนือถังขยะ", 'coffee-table': "เหนือโต๊ะกาแฟ", sink: "เหนืออ่างล้างจานในครัว", computer: "บนคอมพิวเตอร์", bookcase: "บนชั้นหนังสือ", 'washing-machine': "บนเครื่องซักผ้า", 'washing-basket': "เหนือตะกร้าผ้า", 'ironing-board': "บนโต๊ะรีดผ้า", 'blue-roof': "บนหลังคาสีน้ำเงิน" } },
             uk: { header: "Де моя картопля?", locs: { shower: "у душі", toilet: "на туалеті", bed: "на ліжку", wardrobe: "на шафі", lamp: "на лампі", toybox: "у скрині з іграшками", 'red-roof': "на червоному даху", 'black-roof': "на чорному даху", television: "на телевізорі", lounge: "на дивані", fridge: "на холодильнику", bin: "над смітником", 'coffee-table': "над журнальним столиком", sink: "над кухонною мийкою", computer: "на комп'ютері", bookcase: "на книжковій шафі", 'washing-machine': "на пральній машині", 'washing-basket': "над кошиком для білизни", 'ironing-board': "на прасувальній дошці", 'blue-roof': "на синьому даху" } },
             ur: { header: "میرا آلو کہاں ہے؟", locs: { shower: "شاور میں", toilet: "بیت الخلا پر", bed: "بستر پر", wardrobe: "الماری پر", lamp: "لیمپ پر", toybox: "کھلونوں کے ڈبے میں", 'red-roof': "سرخ چھت پر", 'black-roof': "کالی چھت پر", television: "ٹیلی ویژن پر", lounge: "صوفے پر", fridge: "فریج پر", bin: "کوڑے دان کے اوپر", 'coffee-table': "کافی ٹیبل کے اوپر", sink: "کچن سنک کے اوپر", computer: "کمپیوٹر پر", bookcase: "کتابوں کی الماری پر", 'washing-machine': "واشنگ مشین پر", 'washing-basket': "کپڑوں کی ٹوکری کے اوپر", 'ironing-board': "استری بورڈ پر", 'blue-roof': "نیلی چھت پر" } },
@@ -4906,6 +4942,7 @@
             sinhala: ['එක','දෙක','තුන','හතර','පහ','හය','හත','අට','නවය','දහය'],
             es: ['uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'],
             tamil: ['ஒன்று','இரண்டு','மூன்று','நான்கு','ஐந்து','ஆறு','ஏழு','எட்டு','ஒன்பது','பத்து'],
+            telugu: ['ఒకటి','రెండు','మూడు','నాలుగు','ఐదు','ఆరు','ఏడు','ఎనిమిది','తొమ్మిది','పది'],
             thai: ['หนึ่ง','สอง','สาม','สี่','ห้า','หก','เจ็ด','แปด','เก้า','สิบ'],
             uk: ["один","два","три","чотири","п'ять","шість","сім","вісім","дев'ять","десять"],
             ur: ['ایک','دو','تین','چار','پانچ','چھ','سات','آٹھ','نو','دس'],
@@ -4913,7 +4950,7 @@
         };
 
         const WB_SILENCE_WORD = {
-            afrikaans: 'Stilte', ar: 'صمت', burmese: 'တိတ်ဆိတ်', cantonese: '安靜', croatian: 'Tišina', dutch: 'Stilte', en: 'Silence', fr: 'Silence', de: 'Stille', he: 'שקט', hi: 'मौन', it: 'Silenzio', ja: '静かに', korean: '조용히', macedonian: 'Тишина', 'zh-hanzi': '安静', 'zh-pinyin': 'Ānjìng', punjabi: 'ਚੁੱਪ', ru: 'Тишина', serbian: 'Тишина', sinhala: 'නිශ්ශබ්දතාවය', es: 'Silencio', tamil: 'அமைதி', thai: 'เงียบ', uk: 'Тиша', ur: 'خاموشی', vi: 'Im lặng'
+            afrikaans: 'Stilte', ar: 'صمت', burmese: 'တိတ်ဆိတ်', cantonese: '安靜', croatian: 'Tišina', dutch: 'Stilte', en: 'Silence', fr: 'Silence', de: 'Stille', he: 'שקט', hi: 'मौन', it: 'Silenzio', ja: '静かに', korean: '조용히', macedonian: 'Тишина', 'zh-hanzi': '安静', 'zh-pinyin': 'Ānjìng', punjabi: 'ਚੁੱਪ', ru: 'Тишина', serbian: 'Тишина', sinhala: 'නිශ්ශබ්දතාවය', es: 'Silencio', tamil: 'அமைதி', telugu: 'నిశ్శబ్దం', thai: 'เงียบ', uk: 'Тиша', ur: 'خاموشی', vi: 'Im lặng'
         };
 
         let wbDB = null;
@@ -7524,6 +7561,7 @@
             { value: 'sinhala', label: 'Sinhala (සිංහල)' },
             { value: 'es', label: 'Spanish (Español)' },
             { value: 'tamil', label: 'Tamil (தமிழ்)' },
+            { value: 'telugu', label: 'Telugu (తెలుగు)' },
             { value: 'thai', label: 'Thai (ภาษาไทย)' },
             { value: 'uk', label: 'Ukrainian (Українська)' },
             { value: 'ur', label: 'Urdu (اردو)' },
@@ -11595,12 +11633,20 @@
                 speakWord(dateTextForSpeech);
             };
 
-            document.getElementById('start-button').onclick = launchSelectedActivity;
+            document.getElementById('start-button').onclick = () => {
+                if (selectedLobbyMode === 'lava') {
+                    showLandingStep('lava-settings');
+                } else {
+                    launchSelectedActivity();
+                }
+            };
             document.getElementById('back-to-config').onclick = resetToConfig;
             document.getElementById('coder-back-btn').onclick = resetToConfig;
             document.getElementById('results-try-again-btn').onclick = () => {
                 if (selectedLobbyMode === 'bobot') {
                     generateBobotGame();
+                } else if (selectedLobbyMode === 'lava') {
+                    generateLavaLiteracy();
                 } else {
                     startQuestGame();
                 }
@@ -11729,7 +11775,14 @@
             document.getElementById('vocab-code-input').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') document.getElementById('vocab-code-go-btn').click();
             });
-            document.getElementById('player-return-btn').onclick = () => showLandingStep('settings');
+            document.getElementById('player-return-btn').onclick = () => {
+                showLandingStep(selectedLobbyMode === 'lava' ? 'wheel' : 'settings');
+            };
+            document.getElementById('lava-settings-return-btn').onclick = () => showLandingStep('player');
+            document.getElementById('lava-settings-confirm-btn').onclick = generateLavaLiteracy;
+            document.getElementById('lava-phrase-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('lava-settings-confirm-btn').click();
+            });
             document.getElementById('settings-return-btn').onclick = () => {
                 if (selectedLobbyMode === 'coder' || selectedLobbyMode === 'kart' || selectedLobbyMode === 'potato' || selectedLobbyMode === 'bobot') {
                     showLandingStep('wheel');
@@ -12312,7 +12365,8 @@
             { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing.' },
             { id: 'bookshelf', label: "Bobot's Bookshelf", icon: '📚', accent: '--hub-rose', accentSoft: '--hub-rose-soft', desc: 'Digital picture books with tap-to-translate words and read-aloud support.' },
             { id: 'whiteboard', label: 'Whiteboard', icon: '🖊️', accent: '--hub-plum', accentSoft: '--hub-plum-soft', desc: 'A digital whiteboard for teachers with grapheme colour-coding and classroom management tools.' },
-            { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' }
+            { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' },
+            { id: 'lava', label: 'Lava Literacy', icon: '🌋', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'Teacher-driven decoding practice - jump chunk by chunk across the lava before time runs out.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
         let pendingKartSubmode = 'picture'; // defaults to Picture Parkour Kart, per design
@@ -12324,7 +12378,7 @@
         let playerIdleAnimTimer = null;
 
         function showLandingStep(step) {
-            ['wheel', 'submode', 'kart-submode', 'player', 'settings'].forEach(s => {
+            ['wheel', 'submode', 'kart-submode', 'player', 'settings', 'lava-settings'].forEach(s => {
                 const el = document.getElementById('landing-step-' + s);
                 if (el) el.style.display = (s === step) ? '' : 'none';
             });
@@ -12409,6 +12463,9 @@
                 showLandingStep('settings');
             } else if (toolId === 'bookshelf') {
                 bobotsBookshelfOpenLibrary();
+            } else if (toolId === 'lava') {
+                selectMode('lava');
+                showLandingStep('player');
             }
         }
 
@@ -14858,6 +14915,445 @@
             cameraY = (canvas.height * 0.85 / targetScale) - 815;
         }
 
+        // ====================================================================
+        // LAVA LITERACY - a teacher-driven decoding game. The teacher (not
+        // the student) drives the same P4RK-0UR/Bobot character across a
+        // straight line of chunk platforms using the exact same
+        // movement/jump keys as the rest of Parkour - there's no separate
+        // "advance" input, jumping to the next platform IS the advance.
+        // Each platform's countdown starts the moment the character lands
+        // on it; if the teacher hasn't moved on by the time it expires,
+        // that platform fades to half-opacity and stops being solid,
+        // dropping the character into the lava to retry it.
+        // ====================================================================
+        const LAVA_RTL_LANGUAGES = ['ar', 'he', 'ur'];
+        const LAVA_PLATFORM_Y = 900;
+        const LAVA_FLOAT_HEIGHT = 260; // how far above the lava's surface the platforms/chunks float
+        const LAVA_BASE_FONT_SIZE = 40; // world-space size used both for measuring chunk width and for drawing
+        const LAVA_WITHIN_WORD_GAP = 8; // tight gap between chunks of the same word - reads naturally, like the word itself
+        const LAVA_BETWEEN_ELEMENT_GAP = 100; // wider gap between words, and around the whole-word/safe platforms
+        const LAVA_CHUNK_SIDE_PADDING = 12; // horizontal walkable margin on each side of a chunk's own text
+
+        let lavaPlatforms = [];
+        let lavaCurrentIndex = -1;
+        let lavaTimeRemaining = 0;
+        let lavaDecodeTimeSetting = 8;
+        let lavaColorCodingOn = true;
+        let lavaBeepedThisSecondMark = null;
+        let lavaLevelComplete = false;
+        let lavaCameraX = 0;
+        const LAVA_ZOOM = 2.0; // fixed - never changes based on word/chunk length
+        let lavaBubbles = []; // ambient bubbling-lava animation particles
+        let lavaStartTime = 0;
+        let lavaScore = { chunksCompleted: 0, chunksFallen: 0, wordsCompleted: 0, totalChunks: 0, totalWords: 0 };
+
+        // Splits "c.a.st.le is.a.big" into a flat sequence of platforms:
+        // a neutral starting platform first, then every chunk of a word,
+        // then that word's orange whole-word platform, then a green
+        // no-timer safe platform, then on to the next word. Widths are
+        // measured from the actual rendered text, and chunks within the
+        // same word sit close together (reading naturally, like the word
+        // itself) while a wider gap separates distinct words.
+        function lavaParsePhrase(phraseStr) {
+            const words = phraseStr.trim().split(/\s+/).filter(w => w.length > 0);
+            if (words.length === 0) return [];
+
+            ctx.font = `800 ${LAVA_BASE_FONT_SIZE}px 'OpenDyslexic', sans-serif`;
+            const measure = (text) => text ? ctx.measureText(text).width : LAVA_BASE_FONT_SIZE * 1.4;
+
+            const platforms = [{ text: '', type: 'start', hasTimer: false, color: '#94a3b8' }];
+            words.forEach(word => {
+                const chunks = word.split('.').map(c => c.trim()).filter(c => c.length > 0);
+                if (chunks.length === 0) return;
+                chunks.forEach(chunk => {
+                    platforms.push({ text: chunk, type: 'chunk', hasTimer: true, color: null });
+                });
+                platforms.push({ text: chunks.join(''), type: 'wholeword', hasTimer: true, color: '#f59e0b' });
+                platforms.push({ text: '', type: 'safe', hasTimer: false, color: '#10b981' });
+            });
+
+            let xCursor = 0;
+            platforms.forEach((p, i) => {
+                p.textWidth = measure(p.text);
+                p.w = p.textWidth + LAVA_CHUNK_SIDE_PADDING * 2;
+                const prev = platforms[i - 1];
+                if (i === 0) {
+                    p.x = 0;
+                } else {
+                    // Tight gap only between two chunks of the very same
+                    // word (both type 'chunk'); everywhere else - into a
+                    // whole-word platform, into safe, into the next word's
+                    // first chunk - gets the wider breathing-room gap.
+                    const tight = prev.type === 'chunk' && p.type === 'chunk';
+                    xCursor += prev.w / 2 + (tight ? LAVA_WITHIN_WORD_GAP : LAVA_BETWEEN_ELEMENT_GAP) + p.w / 2;
+                    p.x = xCursor;
+                }
+            });
+            return platforms;
+        }
+
+        function generateLavaLiteracy() {
+            const phraseInput = document.getElementById('lava-phrase-input').value;
+            const platforms = lavaParsePhrase(phraseInput);
+            const errorEl = document.getElementById('lava-settings-error');
+            if (platforms.length === 0) {
+                errorEl.textContent = 'Please type at least one word with its chunks marked (e.g. c.a.t).';
+                errorEl.style.display = 'block';
+                return;
+            }
+            errorEl.style.display = 'none';
+
+            lavaDecodeTimeSetting = Math.max(2, parseInt(document.getElementById('lava-decode-time-input').value, 10) || 8);
+            lavaColorCodingOn = document.getElementById('lava-colorcoding-toggle').checked;
+
+            const isRtl = LAVA_RTL_LANGUAGES.includes(selectedLanguage);
+            if (isRtl) platforms.forEach(p => p.x = -p.x);
+            platforms.forEach(p => { p.fallen = false; p.opacity = 1; });
+            const minX = Math.min(...platforms.map(p => p.x - p.w / 2));
+            platforms.forEach(p => p.x += (400 - minX));
+
+            lavaPlatforms = platforms;
+            lavaCurrentIndex = -1;
+            lavaLevelComplete = false;
+            lavaStartTime = Date.now();
+            lavaScore = {
+                chunksCompleted: 0, chunksFallen: 0, wordsCompleted: 0,
+                totalChunks: platforms.filter(p => p.type === 'chunk').length,
+                totalWords: platforms.filter(p => p.type === 'wholeword').length
+            };
+
+            player.x = lavaPlatforms[0].x - player.w / 2;
+            player.y = LAVA_PLATFORM_Y - player.h;
+            player.vx = 0; player.vy = 0;
+            player.grounded = true;
+            player.facingRight = !isRtl;
+            player.animFrame = 0; player.animTimer = 0; player.state = 'idle';
+
+            lastTime = 0;
+            gameStarted = true;
+
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'none';
+            const kartUiBoard = document.getElementById('kart-ui-board');
+            if (kartUiBoard) kartUiBoard.style.display = 'none';
+            const uiBoard = document.getElementById('ui-board');
+            if (uiBoard) uiBoard.style.display = 'none';
+            document.getElementById('lava-ui-board').style.display = 'block';
+            canvas.style.display = 'block';
+            document.getElementById('game-view-shell').style.display = 'flex';
+
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+
+            lavaStartPlatformTimer(0);
+            requestAnimationFrame(gameLoop);
+        }
+
+        function lavaStartPlatformTimer(index) {
+            const platform = lavaPlatforms[index];
+            if (!platform) return;
+            lavaCurrentIndex = index;
+            lavaBeepedThisSecondMark = null;
+            lavaTimeRemaining = platform.hasTimer ? lavaDecodeTimeSetting : Infinity;
+        }
+
+        function lavaFindPlatformUnderPlayer() {
+            const centerX = player.x + player.w / 2;
+            for (let i = 0; i < lavaPlatforms.length; i++) {
+                const p = lavaPlatforms[i];
+                if (p.fallen) continue;
+                if (centerX >= p.x - p.w / 2 - 4 && centerX <= p.x + p.w / 2 + 4) return i;
+            }
+            return -1;
+        }
+
+        function playLavaBeep() {
+            if (!fxEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.09, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.12);
+            } catch (e) {}
+        }
+
+        function playLavaHitSound() {
+            if (!fxEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.35);
+                gain.gain.setValueAtTime(0.22, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            } catch (e) {}
+        }
+
+        function updateLavaPhysics(dt) {
+            if (lavaLevelComplete) return;
+            let moving = false;
+            const jumpKeyDown = keys['ArrowUp'] || keys['KeyW'] || keys['Space'];
+
+            if (keys['ArrowLeft'] || keys['KeyA']) {
+                player.vx = -customMoveSpeed;
+                player.facingRight = false;
+                moving = true;
+            } else if (keys['ArrowRight'] || keys['KeyD']) {
+                player.vx = customMoveSpeed;
+                player.facingRight = true;
+                moving = true;
+            } else {
+                player.vx *= Math.pow(friction, dt);
+                if (Math.abs(player.vx) < 0.1) player.vx = 0;
+            }
+
+            if (jumpKeyDown && player.jumpKeyReleased && player.grounded) {
+                player.vy = jumpForce;
+                player.grounded = false;
+                playJumpSound();
+            }
+            player.jumpKeyReleased = !jumpKeyDown;
+
+            player.vy += gravity * dt;
+            player.x += player.vx * dt;
+            player.y += player.vy * dt;
+
+            const underIndex = lavaFindPlatformUnderPlayer();
+            const surfaceY = LAVA_PLATFORM_Y - player.h;
+            if (underIndex !== -1 && player.y >= surfaceY && player.vy >= 0) {
+                player.y = surfaceY;
+                player.vy = 0;
+                player.grounded = true;
+                if (underIndex !== lavaCurrentIndex) {
+                    if (lavaCurrentIndex !== -1 && underIndex > lavaCurrentIndex) {
+                        for (let i = lavaCurrentIndex; i < underIndex; i++) {
+                            const passed = lavaPlatforms[i];
+                            if (passed.type === 'chunk') lavaScore.chunksCompleted++;
+                            else if (passed.type === 'wholeword') lavaScore.wordsCompleted++;
+                        }
+                    }
+                    lavaStartPlatformTimer(underIndex);
+                }
+            } else {
+                player.grounded = false;
+            }
+
+            // Hit the lava - feedback sound, then straight back to the very
+            // start of the whole sequence. This is a practice tool, not a
+            // lives-based challenge, so a fall never permanently ends
+            // anything - it just means starting the run over.
+            if (player.y > LAVA_PLATFORM_Y + LAVA_FLOAT_HEIGHT) {
+                lavaScore.chunksFallen++;
+                lavaScore.chunksCompleted = 0;
+                lavaScore.wordsCompleted = 0;
+                lavaPlatforms.forEach(p => { p.fallen = false; p.opacity = 1; });
+                playLavaHitSound();
+                player.x = lavaPlatforms[0].x - player.w / 2;
+                player.y = LAVA_PLATFORM_Y - player.h;
+                player.vx = 0; player.vy = 0;
+                player.grounded = true;
+                lavaStartPlatformTimer(0);
+            }
+
+            if (lavaCurrentIndex !== -1) {
+                const activePlatform = lavaPlatforms[lavaCurrentIndex];
+                if (activePlatform.hasTimer && !activePlatform.fallen) {
+                    lavaTimeRemaining -= dt / TARGET_FPS;
+                    const secondsLeft = Math.ceil(lavaTimeRemaining);
+                    if (secondsLeft <= 3 && secondsLeft >= 1 && secondsLeft !== lavaBeepedThisSecondMark) {
+                        lavaBeepedThisSecondMark = secondsLeft;
+                        playLavaBeep();
+                    }
+                    if (lavaTimeRemaining <= 0) {
+                        activePlatform.fallen = true;
+                        activePlatform.opacity = 0.5;
+                    }
+                }
+            }
+
+            if (lavaCurrentIndex === lavaPlatforms.length - 1 && player.grounded && !lavaLevelComplete) {
+                lavaLevelComplete = true;
+                setTimeout(() => showLavaResults(), 500);
+            }
+
+            player.state = !player.grounded ? 'jump' : (Math.abs(player.vx) > 0.5 && moving ? 'walk' : 'idle');
+            player.animTimer += dt;
+            if (player.animTimer > 12) {
+                player.animFrame = (player.animFrame + 1) % 2;
+                player.animTimer = 0;
+            }
+
+            lavaCameraX = player.x - (canvas.width / 2 - player.w / 2);
+
+            const timerEl = document.getElementById('lava-timer-display');
+            if (timerEl) {
+                const active = lavaCurrentIndex !== -1 ? lavaPlatforms[lavaCurrentIndex] : null;
+                timerEl.textContent = (active && active.hasTimer && !active.fallen) ? Math.max(0, Math.ceil(lavaTimeRemaining)) : '—';
+            }
+        }
+
+        // Fits the camera tightly around just the platform before, the
+        // current one, and the one after - "what's visible is essentially
+        // just the letters before and after the current one."
+        // Tracks the player's X directly and continuously - deliberately
+        // no window-fitting or re-centring tied to which platform they've
+        // landed on, since that's exactly what caused the jittery framing
+        // whenever landing on a new word. Vertical framing is completely
+        // fixed and never moves, so only X ever changes.
+        function lavaComputeCamera() {
+            lavaCameraX = player.x + player.w / 2;
+        }
+
+        function lavaUpdateBubbles(dt) {
+            const lavaSurfaceWorldY = LAVA_PLATFORM_Y + LAVA_FLOAT_HEIGHT;
+            // Occasionally spawn a new bubble somewhere within view of the current camera position
+            if (Math.random() < 0.06 * dt) {
+                lavaBubbles.push({
+                    x: lavaCameraX + (Math.random() - 0.5) * 700,
+                    y: lavaSurfaceWorldY + Math.random() * 30,
+                    r: 4 + Math.random() * 10,
+                    life: 0,
+                    maxLife: 30 + Math.random() * 30
+                });
+            }
+            lavaBubbles.forEach(b => b.life += dt);
+            lavaBubbles = lavaBubbles.filter(b => b.life < b.maxLife);
+        }
+
+        function renderLavaScene() {
+            lavaComputeCamera();
+            lavaUpdateBubbles(1);
+            const zoom = LAVA_ZOOM;
+            // Fixed offset above the platform surface - enough headroom that a
+            // full jump stays within frame, with the lava still visible below.
+            const vAnchorY = LAVA_PLATFORM_Y - 90;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            skyGrad.addColorStop(0, '#3a1f1f');
+            skyGrad.addColorStop(1, '#7a2e12');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.scale(zoom, zoom);
+            ctx.translate(-lavaCameraX, -vAnchorY);
+
+            const lavaSurfaceWorldY = LAVA_PLATFORM_Y + LAVA_FLOAT_HEIGHT;
+            const lavaGrad = ctx.createLinearGradient(0, lavaSurfaceWorldY, 0, lavaSurfaceWorldY + 400);
+            lavaGrad.addColorStop(0, '#ff7a1a');
+            lavaGrad.addColorStop(1, '#c81d1d');
+            ctx.fillStyle = lavaGrad;
+            ctx.fillRect(lavaCameraX - 4000, lavaSurfaceWorldY, 8000, 800);
+
+            // Ominous bubbling on the lava surface
+            lavaBubbles.forEach(b => {
+                const phase = b.life / b.maxLife; // 0 (just born) to 1 (about to pop/vanish)
+                const currentR = b.r * (0.4 + 0.6 * Math.sin(phase * Math.PI));
+                ctx.globalAlpha = 0.55 * (1 - phase * 0.5);
+                ctx.fillStyle = phase < 0.7 ? '#ffcc33' : '#7a1a1a';
+                ctx.beginPath();
+                ctx.arc(b.x, b.y - currentR * 0.3, currentR, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            });
+
+            const chunkFont = `800 ${LAVA_BASE_FONT_SIZE}px 'OpenDyslexic', sans-serif`;
+            lavaPlatforms.forEach(p => {
+                if (p.x < lavaCameraX - 600 || p.x > lavaCameraX + 600) return; // culling far-off platforms
+                if (p.fallen) return;
+
+                if (p.type === 'start' || p.type === 'safe') {
+                    // No letters to stand on for these - a small, plain platform instead.
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x - p.w / 2, LAVA_PLATFORM_Y, p.w, 14);
+                    ctx.globalAlpha = 1;
+                } else if (p.text) {
+                    // A wide speech-bubble, matching Sentence Parkour's own
+                    // word cards - white fill, dark border, rounded
+                    // corners - with the chunk's actual letters as the
+                    // walkable surface sitting right on top of it.
+                    const bubbleH = LAVA_BASE_FONT_SIZE * 1.5;
+                    const bubbleW = p.textWidth + LAVA_CHUNK_SIDE_PADDING * 2.5;
+                    const bubbleTop = LAVA_PLATFORM_Y - bubbleH;
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.strokeStyle = p.type === 'wholeword' ? '#f59e0b' : '#1e293b';
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.roundRect(p.x - bubbleW / 2, bubbleTop, bubbleW, bubbleH, bubbleH / 2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    if (lavaColorCodingOn) {
+                        drawColoredText(ctx, p.text, p.x, LAVA_PLATFORM_Y - bubbleH / 2, chunkFont);
+                    } else {
+                        ctx.font = chunkFont;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillStyle = '#1e293b';
+                        ctx.fillText(p.text, p.x, LAVA_PLATFORM_Y - bubbleH / 2);
+                    }
+                    ctx.globalAlpha = 1;
+                }
+            });
+
+            const activeSprites = getActiveSprites();
+            let sprite = player.state === 'jump' ? activeSprites.jump : (player.state === 'walk' ? (player.animFrame === 0 ? activeSprites.walk1 : activeSprites.walk2) : (player.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2));
+            if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
+                let rH = player.state === 'jump' ? 70 * 0.8 : 70;
+                let rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
+                ctx.save();
+                if (!player.facingRight) {
+                    ctx.scale(-1, 1);
+                    ctx.translate(-(player.x + 25) * 2, 0);
+                }
+                ctx.drawImage(sprite, player.x + oX, player.y + oY + 4, rW, rH);
+                ctx.restore();
+            }
+
+            ctx.restore();
+        }
+
+        function showLavaResults() {
+            gameStarted = false;
+            const endTime = Date.now();
+            const durationMs = endTime - (lavaStartTime || endTime);
+            const totalAttempts = lavaScore.totalChunks + lavaScore.chunksFallen;
+            const accuracy = totalAttempts > 0 ? Math.round((lavaScore.totalChunks / totalAttempts) * 100) : 100;
+
+            document.getElementById('results-name').textContent = '—';
+            document.getElementById('results-datetime').textContent = new Date(endTime).toLocaleString();
+            document.getElementById('results-duration').textContent = formatDuration(durationMs);
+            document.getElementById('results-accuracy').textContent = accuracy + '%';
+            document.getElementById('results-mistakes').textContent = lavaScore.chunksFallen;
+            document.getElementById('results-vocab').textContent =
+                `${lavaScore.wordsCompleted}/${lavaScore.totalWords} words, ${lavaScore.chunksCompleted}/${lavaScore.totalChunks} chunks decoded`;
+
+            document.getElementById('lava-ui-board').style.display = 'none';
+            canvas.style.display = 'none';
+            document.getElementById('game-view-shell').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'flex';
+        }
+
         function gameLoop(now) {
             if (!gameStarted) return;
             if (!lastTime) lastTime = now;
@@ -14873,6 +15369,8 @@
                     updateKartPhysics(dt);
                 } else if (selectedLobbyMode === 'potato') {
                     updatePotatoPhysics(dt);
+                } else if (selectedLobbyMode === 'lava') {
+                    updateLavaPhysics(dt);
                 } else {
                     updatePhysics(dt);
                 }
@@ -14883,6 +15381,8 @@
                 renderKartGame();
             } else if (selectedLobbyMode === 'potato') {
                 renderPotatoWorld();
+            } else if (selectedLobbyMode === 'lava') {
+                renderLavaScene();
             } else {
                 renderWhiteboard();
             }
