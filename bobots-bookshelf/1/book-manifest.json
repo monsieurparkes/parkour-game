@@ -26,7 +26,8 @@
     "uk": "Малий Паркур бачить і чує",
     "ur": "چھوٹا پارکور دیکھتا اور سنتا ہے",
     "vi": "Parkour nhỏ nhìn thấy và nghe thấy",
-    "dutch": "Kleine Parkour ziet en hoort"
+    "dutch": "Kleine Parkour ziet en hoort",
+    "telugu": "చిన్ని పార్కూర్ చూస్తుంది వింటుంది"
   },
   "cover": "cover.jpg",
   "pages": [
@@ -61,7 +62,8 @@
         "korean": "\"새가 보여요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน เห็น นก!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ ငှက် တစ်ကောင် မြင်တယ်!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik zie een vogel!\" zei Kleine Parkour."
+        "dutch": "\"Ik zie een vogel!\" zei Kleine Parkour.",
+        "telugu": "\"నేను ఒక పక్షిని చూస్తున్నాను!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -95,7 +97,8 @@
         "korean": "\"개가 들려요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน ได้ยิน หมา!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ ခွေး တစ်ကောင် ကြားတယ်!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik hoor een hond!\" zei Kleine Parkour."
+        "dutch": "\"Ik hoor een hond!\" zei Kleine Parkour.",
+        "telugu": "\"నేను ఒక కుక్కను వింటున్నాను!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -129,7 +132,8 @@
         "korean": "\"집이 보여요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน เห็น บ้าน!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ အိမ် တစ်လုံး မြင်တယ်!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik zie een huis!\" zei Kleine Parkour."
+        "dutch": "\"Ik zie een huis!\" zei Kleine Parkour.",
+        "telugu": "\"నేను ఒక ఇంటిని చూస్తున్నాను!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -163,7 +167,8 @@
         "korean": "\"노래가 들려요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน ได้ยิน เพลง!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ သီချင်း တစ်ပုဒ် ကြားတယ်!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik hoor een liedje!\" zei Kleine Parkour."
+        "dutch": "\"Ik hoor een liedje!\" zei Kleine Parkour.",
+        "telugu": "\"నేను ఒక పాటను వింటున్నాను!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -197,7 +202,8 @@
         "korean": "\"비행기가 보여요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน เห็น เครื่องบิน!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ လေယာဉ် တစ်စီး မြင်တယ်!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik zie een vliegtuig!\" zei Kleine Parkour."
+        "dutch": "\"Ik zie een vliegtuig!\" zei Kleine Parkour.",
+        "telugu": "\"నేను ఒక విమానాన్ని చూస్తున్నాను!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -231,7 +237,8 @@
         "korean": "\"바람이 들려요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน ได้ยิน ลม!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ လေ ကြားတယ်!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik hoor de wind!\" zei Kleine Parkour."
+        "dutch": "\"Ik hoor de wind!\" zei Kleine Parkour.",
+        "telugu": "\"నేను గాలిని వింటున్నాను!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -265,7 +272,8 @@
         "korean": "\"보여요... 로봇 코알라?\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน เห็น... หุ่นยนต์ โคอาล่า?\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ မြင်တယ်... ရိုဘော့ ကိုအာလာ တစ်ကောင် လား?\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik zie... een robotkoala?\" zei Kleine Parkour."
+        "dutch": "\"Ik zie... een robotkoala?\" zei Kleine Parkour.",
+        "telugu": "\"నేను చూస్తున్నాను... ఒక రోబో కోఆలానా?\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -299,7 +307,8 @@
         "korean": "\"들려요... 붐 붐?\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน ได้ยิน... ตูม ตูม?\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ ကြားတယ်... ဘွမ်း ဘွမ်း?\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik hoor... boem boem?\" zei Kleine Parkour."
+        "dutch": "\"Ik hoor... boem boem?\" zei Kleine Parkour.",
+        "telugu": "\"నేను వింటున్నాను... బూమ్ బూమ్?\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -333,7 +342,8 @@
         "korean": "\"많은 것들이 보여요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน เห็น สิ่งของ มากมาย!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ အရာ အများကြီး မြင်တယ်!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik zie heel veel dingen!\" zei Kleine Parkour."
+        "dutch": "\"Ik zie heel veel dingen!\" zei Kleine Parkour.",
+        "telugu": "\"నేను చాలా విషయాలు చూస్తున్నాను!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     },
     {
@@ -367,7 +377,8 @@
         "korean": "\"많은 것들이 들려요. 이건 제 세상이에요!\" 작은 파쿠르가 말했어요.",
         "thai": "\"ฉัน ได้ยิน สิ่งของ มากมาย นี่ คือ โลก ของฉัน!\" น้อง ปาร์กัวร์ พูด",
         "burmese": "\"ငါ အရာ အများကြီး ကြားတယ်။ ဒါ ငါ့ ကမ္ဘာ ပဲ!\" ပါကူးလေး က ပြောတယ်။",
-        "dutch": "\"Ik hoor heel veel dingen. Het is mijn wereld!\" zei Kleine Parkour."
+        "dutch": "\"Ik hoor heel veel dingen. Het is mijn wereld!\" zei Kleine Parkour.",
+        "telugu": "\"నేను చాలా విషయాలు వింటున్నాను. ఇది నా ప్రపంచం!\" చిన్ని పార్కూర్ చెప్పింది."
       }
     }
   ]
