@@ -1,0 +1,359 @@
+{
+  "小": {
+    "en": [
+      "little, small"
+    ]
+  },
+  "帕": {
+    "en": [
+      "(sound part of 帕库尔, Parkour's name)"
+    ],
+    "compounds": [
+      {
+        "chars": "帕库尔",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "库": {
+    "en": [
+      "(sound part of 帕库尔, Parkour's name)"
+    ],
+    "compounds": [
+      {
+        "chars": "帕库尔",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "尔": {
+    "en": [
+      "(sound part of 帕库尔, Parkour's name)"
+    ],
+    "compounds": [
+      {
+        "chars": "帕库尔",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "说": {
+    "en": [
+      "say, said"
+    ]
+  },
+  "我": {
+    "en": [
+      "I, me"
+    ]
+  },
+  "看": {
+    "en": [
+      "look, watch"
+    ],
+    "compounds": [
+      {
+        "chars": "看见",
+        "en": [
+          "see, catch sight of"
+        ]
+      }
+    ]
+  },
+  "见": {
+    "en": [
+      "see, perceive"
+    ],
+    "compounds": [
+      {
+        "chars": "看见",
+        "en": [
+          "see, catch sight of"
+        ]
+      },
+      {
+        "chars": "听见",
+        "en": [
+          "hear"
+        ]
+      }
+    ]
+  },
+  "一": {
+    "en": [
+      "one"
+    ]
+  },
+  "只": {
+    "en": [
+      "(measure word for animals)"
+    ]
+  },
+  "鸟": {
+    "en": [
+      "bird"
+    ]
+  },
+  "听": {
+    "en": [
+      "listen"
+    ],
+    "compounds": [
+      {
+        "chars": "听见",
+        "en": [
+          "hear"
+        ]
+      }
+    ]
+  },
+  "狗": {
+    "en": [
+      "dog"
+    ]
+  },
+  "座": {
+    "en": [
+      "(measure word for buildings)"
+    ]
+  },
+  "房": {
+    "en": [
+      "house, room"
+    ],
+    "compounds": [
+      {
+        "chars": "房子",
+        "en": [
+          "house"
+        ]
+      }
+    ]
+  },
+  "子": {
+    "en": [
+      "(noun suffix)"
+    ],
+    "compounds": [
+      {
+        "chars": "房子",
+        "en": [
+          "house"
+        ]
+      }
+    ]
+  },
+  "首": {
+    "en": [
+      "(measure word for songs/poems)"
+    ]
+  },
+  "歌": {
+    "en": [
+      "song"
+    ]
+  },
+  "架": {
+    "en": [
+      "(measure word for machines/frames)"
+    ]
+  },
+  "飞": {
+    "en": [
+      "fly"
+    ],
+    "compounds": [
+      {
+        "chars": "飞机",
+        "en": [
+          "aeroplane"
+        ]
+      }
+    ]
+  },
+  "机": {
+    "en": [
+      "machine"
+    ],
+    "compounds": [
+      {
+        "chars": "飞机",
+        "en": [
+          "aeroplane"
+        ]
+      },
+      {
+        "chars": "机器人",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "风": {
+    "en": [
+      "wind"
+    ]
+  },
+  "个": {
+    "en": [
+      "(general measure word)"
+    ]
+  },
+  "器": {
+    "en": [
+      "utensil, vessel"
+    ],
+    "compounds": [
+      {
+        "chars": "机器人",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "人": {
+    "en": [
+      "person"
+    ],
+    "compounds": [
+      {
+        "chars": "机器人",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "考": {
+    "en": [
+      "(sound part of 考拉, 'koala' - no independent meaning here)"
+    ],
+    "compounds": [
+      {
+        "chars": "考拉",
+        "en": [
+          "koala"
+        ]
+      }
+    ]
+  },
+  "拉": {
+    "en": [
+      "pull (sound part of 考拉, \"koala\" here)"
+    ],
+    "compounds": [
+      {
+        "chars": "考拉",
+        "en": [
+          "koala"
+        ]
+      }
+    ]
+  },
+  "轰": {
+    "en": [
+      "boom (sound of a loud bang)"
+    ]
+  },
+  "很": {
+    "en": [
+      "very"
+    ],
+    "compounds": [
+      {
+        "chars": "很多",
+        "en": [
+          "a lot, many"
+        ]
+      }
+    ]
+  },
+  "多": {
+    "en": [
+      "many, much"
+    ],
+    "compounds": [
+      {
+        "chars": "很多",
+        "en": [
+          "a lot, many"
+        ]
+      }
+    ]
+  },
+  "东": {
+    "en": [
+      "east"
+    ],
+    "compounds": [
+      {
+        "chars": "东西",
+        "en": [
+          "things, stuff (idiomatic - literally \"east-west\")"
+        ]
+      }
+    ]
+  },
+  "西": {
+    "en": [
+      "west"
+    ],
+    "compounds": [
+      {
+        "chars": "东西",
+        "en": [
+          "things, stuff (idiomatic - literally \"east-west\")"
+        ]
+      }
+    ]
+  },
+  "这": {
+    "en": [
+      "this"
+    ]
+  },
+  "是": {
+    "en": [
+      "is, am, are"
+    ]
+  },
+  "的": {
+    "en": [
+      "(possessive particle, like 's or 'of')"
+    ]
+  },
+  "世": {
+    "en": [
+      "generation, era"
+    ],
+    "compounds": [
+      {
+        "chars": "世界",
+        "en": [
+          "world"
+        ]
+      }
+    ]
+  },
+  "界": {
+    "en": [
+      "boundary, realm"
+    ],
+    "compounds": [
+      {
+        "chars": "世界",
+        "en": [
+          "world"
+        ]
+      }
+    ]
+  }
+}
