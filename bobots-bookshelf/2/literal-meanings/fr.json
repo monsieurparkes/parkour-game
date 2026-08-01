@@ -1,0 +1,19 @@
+{
+  "bonjour": ["hello"],
+  "dit": ["says", "said"],
+  "petit": ["little, small"],
+  "parkour": ["Parkour (the character's name)"],
+  "le": ["the"],
+  "robot": ["robot"],
+  "je": ["I"],
+  "mappelle": ["my name is (literally: I call myself)"],
+  "comment": ["how"],
+  "tu": ["you (informal)"],
+  "tappelles": ["your name is (literally: you call yourself)"],
+  "cest": ["it's", "this is"],
+  "un": ["a", "an"],
+  "il": ["he", "it"],
+  "boum": ["boom"],
+  "bobot": ["Bobot (the robot koala's name)"],
+  "oui": ["yes"]
+}

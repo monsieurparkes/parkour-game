@@ -1,0 +1,59 @@
+{
+  "здраво": [
+    "hi, hello"
+  ],
+  "рекао": [
+    "said (he)"
+  ],
+  "је": [
+    "(auxiliary, part of 'рекао је' = 'he said')"
+  ],
+  "мали": [
+    "little, small"
+  ],
+  "паркур": [
+    "Parkour (the character's name)"
+  ],
+  "робот": [
+    "robot"
+  ],
+  "ја": [
+    "I"
+  ],
+  "се": [
+    "(reflexive particle, part of 'зовем се' = 'I am called')"
+  ],
+  "зовем": [
+    "(I) call myself"
+  ],
+  "како": [
+    "how"
+  ],
+  "ти": [
+    "you (informal)"
+  ],
+  "зовеш": [
+    "(you) call yourself"
+  ],
+  "бум": [
+    "boom"
+  ],
+  "ово": [
+    "this"
+  ],
+  "он": [
+    "he"
+  ],
+  "каже": [
+    "(he) says"
+  ],
+  "ли": [
+    "(question particle)"
+  ],
+  "да": [
+    "yes"
+  ],
+  "боботе": [
+    "Bobot (vocative form, used when speaking directly to him)"
+  ]
+}

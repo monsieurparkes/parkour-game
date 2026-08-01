@@ -1,0 +1,59 @@
+{
+  "bok": [
+    "hi, hello"
+  ],
+  "rekao": [
+    "said (he)"
+  ],
+  "je": [
+    "(auxiliary, part of 'rekao je' = 'he said')"
+  ],
+  "mali": [
+    "little, small"
+  ],
+  "parkour": [
+    "Parkour (the character's name)"
+  ],
+  "robot": [
+    "robot"
+  ],
+  "zovem": [
+    "(I) am called"
+  ],
+  "se": [
+    "(reflexive particle, part of 'zovem se' = 'I am called')"
+  ],
+  "kako": [
+    "how"
+  ],
+  "ti": [
+    "you (informal)"
+  ],
+  "zoveš": [
+    "(you) are called"
+  ],
+  "bum": [
+    "boom"
+  ],
+  "to": [
+    "this, that"
+  ],
+  "on": [
+    "he"
+  ],
+  "kaže": [
+    "(he) says"
+  ],
+  "li": [
+    "(question particle)"
+  ],
+  "bobot": [
+    "Bobot (the robot koala's name)"
+  ],
+  "da": [
+    "yes"
+  ],
+  "bobote": [
+    "Bobot (vocative form, used when speaking directly to him)"
+  ]
+}

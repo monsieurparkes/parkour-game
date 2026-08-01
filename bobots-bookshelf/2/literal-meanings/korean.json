@@ -1,0 +1,50 @@
+{
+  "안녕": [
+    "hello"
+  ],
+  "작은": [
+    "little, small"
+  ],
+  "파쿠르가": [
+    "Parkour (with subject marker)"
+  ],
+  "말했어요": [
+    "said"
+  ],
+  "로봇이": [
+    "robot (with subject marker)"
+  ],
+  "내": [
+    "my"
+  ],
+  "이름은": [
+    "name (with topic marker)"
+  ],
+  "파쿠르야": [
+    "(my name) is Parkour (informal)"
+  ],
+  "네": [
+    "your"
+  ],
+  "뭐야": [
+    "what is (informal)"
+  ],
+  "보": [
+    "(stammer sound, part of Bobot's name)"
+  ],
+  "붐": [
+    "boom"
+  ],
+  "라고": [
+    "(quotative particle, 'that')"
+  ],
+  "하네": [
+    "says"
+  ],
+  "보봇이야": [
+    "(it) is Bobot (informal)"
+  ],
+  "응": [
+    "yes (informal)"
+  ]
+}

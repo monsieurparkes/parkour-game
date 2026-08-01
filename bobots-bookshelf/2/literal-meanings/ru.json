@@ -1,0 +1,47 @@
+{
+  "привет": [
+    "hello"
+  ],
+  "сказал": [
+    "said"
+  ],
+  "маленький": [
+    "little, small"
+  ],
+  "паркур": [
+    "Parkour (the character's name)"
+  ],
+  "робот": [
+    "robot"
+  ],
+  "меня": [
+    "me (part of 'меня зовут' = 'I am called')"
+  ],
+  "зовут": [
+    "(they) call - part of 'меня зовут' = 'my name is'"
+  ],
+  "как": [
+    "how"
+  ],
+  "тебя": [
+    "you (part of 'как тебя зовут' = 'what is your name')"
+  ],
+  "бум": [
+    "boom"
+  ],
+  "это": [
+    "this, it"
+  ],
+  "он": [
+    "he"
+  ],
+  "говорит": [
+    "says"
+  ],
+  "бобот": [
+    "Bobot (the robot koala's name)"
+  ],
+  "да": [
+    "yes"
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "你": {
+    "en": [
+      "you"
+    ],
+    "compounds": [
+      {
+        "chars": "你好",
+        "en": [
+          "hello"
+        ]
+      }
+    ]
+  },
+  "好": {
+    "en": [
+      "good"
+    ],
+    "compounds": [
+      {
+        "chars": "你好",
+        "en": [
+          "hello"
+        ]
+      }
+    ]
+  },
+  "小": {
+    "en": [
+      "little, small"
+    ]
+  },
+  "帕": {
+    "en": [
+      "(sound part of 帕库尔, Parkour's name)"
+    ],
+    "compounds": [
+      {
+        "chars": "帕库尔",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "库": {
+    "en": [
+      "(sound part of 帕库尔, Parkour's name)"
+    ],
+    "compounds": [
+      {
+        "chars": "帕库尔",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "尔": {
+    "en": [
+      "(sound part of 帕库尔, Parkour's name)"
+    ],
+    "compounds": [
+      {
+        "chars": "帕库尔",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "话": {
+    "en": [
+      "say, said (Cantonese)"
+    ]
+  },
+  "机": {
+    "en": [
+      "machine"
+    ],
+    "compounds": [
+      {
+        "chars": "机器人",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "器": {
+    "en": [
+      "utensil, vessel"
+    ],
+    "compounds": [
+      {
+        "chars": "机器人",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "人": {
+    "en": [
+      "person"
+    ],
+    "compounds": [
+      {
+        "chars": "机器人",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "我": {
+    "en": [
+      "I, me"
+    ]
+  },
+  "叫": {
+    "en": [
+      "call, be called"
+    ]
+  },
+  "咩": {
+    "en": [
+      "what (Cantonese)"
+    ]
+  },
+  "名": {
+    "en": [
+      "name"
+    ]
+  },
+  "波": {
+    "en": [
+      "(stammer sound / sound part of 波波特, Bobot's name)"
+    ],
+    "compounds": [
+      {
+        "chars": "波波特",
+        "en": [
+          "Bobot (the robot koala's name)"
+        ]
+      }
+    ]
+  },
+  "轰": {
+    "en": [
+      "boom (sound of a loud bang)"
+    ]
+  },
+  "呢": {
+    "en": [
+      "this (Cantonese)"
+    ]
+  },
+  "个": {
+    "en": [
+      "(measure word)"
+    ]
+  },
+  "係": {
+    "en": [
+      "is, am, are (Cantonese)"
+    ]
+  },
+  "佢": {
+    "en": [
+      "he, it (Cantonese)"
+    ]
+  },
+  "咪": {
+    "en": [
+      "(part of 係咪, question form 'is it...?')"
+    ],
+    "compounds": [
+      {
+        "chars": "係咪",
+        "en": [
+          "is it...? (question form)"
+        ]
+      }
+    ]
+  },
+  "呀": {
+    "en": [
+      "(sentence-final particle, softens statement / adds emphasis)"
+    ]
+  }
+}

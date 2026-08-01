@@ -1,0 +1,53 @@
+{
+  "hola": [
+    "hello"
+  ],
+  "dijo": [
+    "said"
+  ],
+  "pequeño": [
+    "little, small"
+  ],
+  "parkour": [
+    "Parkour (the character's name)"
+  ],
+  "el": [
+    "the"
+  ],
+  "robot": [
+    "robot"
+  ],
+  "me": [
+    "myself (part of 'me llamo' = 'I am called')"
+  ],
+  "llamo": [
+    "(I) call"
+  ],
+  "cómo": [
+    "how"
+  ],
+  "te": [
+    "yourself (part of 'te llamas' = 'you are called')"
+  ],
+  "llamas": [
+    "(you) call"
+  ],
+  "bum": [
+    "boom"
+  ],
+  "es": [
+    "is"
+  ],
+  "un": [
+    "a, an"
+  ],
+  "dice": [
+    "says"
+  ],
+  "bobot": [
+    "Bobot (the robot koala's name)"
+  ],
+  "sí": [
+    "yes"
+  ]
+}

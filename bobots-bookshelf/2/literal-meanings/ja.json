@@ -1,0 +1,562 @@
+{
+  "こ": {
+    "en": [
+      "(part of こんにちは 'hello')"
+    ],
+    "compounds": [
+      {
+        "chars": "こんにちは",
+        "en": [
+          "hello"
+        ]
+      }
+    ]
+  },
+  "ん": {
+    "en": [
+      "(part of こんにちは 'hello')"
+    ],
+    "compounds": [
+      {
+        "chars": "こんにちは",
+        "en": [
+          "hello"
+        ]
+      },
+      {
+        "chars": "うん",
+        "en": [
+          "yeah, yes (informal)"
+        ]
+      }
+    ]
+  },
+  "に": {
+    "en": [
+      "(part of こんにちは 'hello')"
+    ],
+    "compounds": [
+      {
+        "chars": "こんにちは",
+        "en": [
+          "hello"
+        ]
+      }
+    ]
+  },
+  "ち": {
+    "en": [
+      "(part of こんにちは 'hello')"
+    ],
+    "compounds": [
+      {
+        "chars": "こんにちは",
+        "en": [
+          "hello"
+        ]
+      }
+    ]
+  },
+  "は": {
+    "en": [
+      "(topic marker particle)"
+    ],
+    "compounds": [
+      {
+        "chars": "こんにちは",
+        "en": [
+          "hello"
+        ]
+      }
+    ]
+  },
+  "と": {
+    "en": [
+      "(quotative particle, marks a quotation - 'said ...')"
+    ]
+  },
+  "プ": {
+    "en": [
+      "(part of プチ・パルクール, 'little Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "little Parkour"
+        ]
+      }
+    ]
+  },
+  "チ": {
+    "en": [
+      "(part of プチ・パルクール, 'little Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "little Parkour"
+        ]
+      }
+    ]
+  },
+  "・": {
+    "en": [
+      "(interpunct, separates parts of a foreign loanword name)"
+    ]
+  },
+  "パ": {
+    "en": [
+      "(sound part of パルクール, 'Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "little Parkour"
+        ]
+      },
+      {
+        "chars": "パルクール",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "ル": {
+    "en": [
+      "(sound part of パルクール, 'Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "little Parkour"
+        ]
+      },
+      {
+        "chars": "パルクール",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "ク": {
+    "en": [
+      "(sound part of パルクール, 'Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "little Parkour"
+        ]
+      },
+      {
+        "chars": "パルクール",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "ー": {
+    "en": [
+      "(long vowel mark, part of パルクール, 'Parkour')"
+    ],
+    "compounds": [
+      {
+        "chars": "プチ・パルクール",
+        "en": [
+          "little Parkour"
+        ]
+      },
+      {
+        "chars": "パルクール",
+        "en": [
+          "Parkour (the character's name)"
+        ]
+      }
+    ]
+  },
+  "言": {
+    "en": [
+      "say"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "い": {
+    "en": [
+      "(part of 言いました 'said')"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "ま": {
+    "en": [
+      "(part of 言いました 'said')"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "し": {
+    "en": [
+      "(part of 言いました 'said')"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "た": {
+    "en": [
+      "(past tense ending, part of 言いました 'said')"
+    ],
+    "compounds": [
+      {
+        "chars": "言いました",
+        "en": [
+          "said"
+        ]
+      }
+    ]
+  },
+  "ロ": {
+    "en": [
+      "(part of ロボット 'robot')"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      }
+    ]
+  },
+  "ボ": {
+    "en": [
+      "(part of ロボット 'robot' / ボボット 'Bobot')"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      },
+      {
+        "chars": "ボボット",
+        "en": [
+          "Bobot (the robot koala's name)"
+        ]
+      }
+    ]
+  },
+  "ッ": {
+    "en": [
+      "(small tsu, doubles the following consonant)"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      },
+      {
+        "chars": "ボボット",
+        "en": [
+          "Bobot (the robot koala's name)"
+        ]
+      }
+    ]
+  },
+  "ト": {
+    "en": [
+      "(part of ロボット 'robot' / ボボット 'Bobot')"
+    ],
+    "compounds": [
+      {
+        "chars": "ロボット",
+        "en": [
+          "robot"
+        ]
+      },
+      {
+        "chars": "ボボット",
+        "en": [
+          "Bobot (the robot koala's name)"
+        ]
+      }
+    ]
+  },
+  "ぼ": {
+    "en": [
+      "(part of ぼく 'I, me' - casual)"
+    ],
+    "compounds": [
+      {
+        "chars": "ぼく",
+        "en": [
+          "I, me (casual)"
+        ]
+      }
+    ]
+  },
+  "く": {
+    "en": [
+      "(part of ぼく 'I, me' - casual)"
+    ],
+    "compounds": [
+      {
+        "chars": "ぼく",
+        "en": [
+          "I, me (casual)"
+        ]
+      }
+    ]
+  },
+  "の": {
+    "en": [
+      "(possessive particle, 'of')"
+    ]
+  },
+  "名": {
+    "en": [
+      "name"
+    ],
+    "compounds": [
+      {
+        "chars": "名前",
+        "en": [
+          "name"
+        ]
+      }
+    ]
+  },
+  "前": {
+    "en": [
+      "front, before"
+    ],
+    "compounds": [
+      {
+        "chars": "名前",
+        "en": [
+          "name"
+        ]
+      }
+    ]
+  },
+  "で": {
+    "en": [
+      "(part of です, polite copula 'is/am/are')"
+    ],
+    "compounds": [
+      {
+        "chars": "です",
+        "en": [
+          "is, am, are (polite)"
+        ]
+      }
+    ]
+  },
+  "す": {
+    "en": [
+      "(part of です)"
+    ],
+    "compounds": [
+      {
+        "chars": "です",
+        "en": [
+          "is, am, are (polite)"
+        ]
+      }
+    ]
+  },
+  "き": {
+    "en": [
+      "(part of きみ 'you' - casual)"
+    ],
+    "compounds": [
+      {
+        "chars": "きみ",
+        "en": [
+          "you (casual)"
+        ]
+      }
+    ]
+  },
+  "み": {
+    "en": [
+      "(part of きみ 'you' - casual)"
+    ],
+    "compounds": [
+      {
+        "chars": "きみ",
+        "en": [
+          "you (casual)"
+        ]
+      }
+    ]
+  },
+  "ド": {
+    "en": [
+      "(part of ドンドン, the boom-boom sound)"
+    ],
+    "compounds": [
+      {
+        "chars": "ドンドン",
+        "en": [
+          "boom boom"
+        ]
+      }
+    ]
+  },
+  "ン": {
+    "en": [
+      "(part of ドンドン, the boom-boom sound)"
+    ],
+    "compounds": [
+      {
+        "chars": "ドンドン",
+        "en": [
+          "boom boom"
+        ]
+      }
+    ]
+  },
+  "れ": {
+    "en": [
+      "(part of これ 'this')"
+    ],
+    "compounds": [
+      {
+        "chars": "これ",
+        "en": [
+          "this"
+        ]
+      }
+    ]
+  },
+  "だ": {
+    "en": [
+      "is, am, are (casual)"
+    ]
+  },
+  "っ": {
+    "en": [
+      "(small tsu, part of って)"
+    ],
+    "compounds": [
+      {
+        "chars": "って",
+        "en": [
+          "(casual quotative particle, 'that/said')"
+        ]
+      }
+    ]
+  },
+  "て": {
+    "en": [
+      "(part of って / 言ってる)"
+    ],
+    "compounds": [
+      {
+        "chars": "って",
+        "en": [
+          "(casual quotative particle, 'that/said')"
+        ]
+      },
+      {
+        "chars": "言ってる",
+        "en": [
+          "is saying"
+        ]
+      }
+    ]
+  },
+  "る": {
+    "en": [
+      "(verb ending, part of 言ってる 'is saying')"
+    ],
+    "compounds": [
+      {
+        "chars": "言ってる",
+        "en": [
+          "is saying"
+        ]
+      }
+    ]
+  },
+  "か": {
+    "en": [
+      "(part of かな, expresses wondering/uncertainty)"
+    ],
+    "compounds": [
+      {
+        "chars": "かな",
+        "en": [
+          "I wonder..., is it...?"
+        ]
+      }
+    ]
+  },
+  "な": {
+    "en": [
+      "(part of かな)"
+    ],
+    "compounds": [
+      {
+        "chars": "かな",
+        "en": [
+          "I wonder..., is it...?"
+        ]
+      }
+    ]
+  },
+  "う": {
+    "en": [
+      "(part of うん 'yeah, yes')"
+    ],
+    "compounds": [
+      {
+        "chars": "うん",
+        "en": [
+          "yeah, yes (informal)"
+        ]
+      }
+    ]
+  },
+  "よ": {
+    "en": [
+      "(emphasis particle, adds confidence/assertion to a statement)"
+    ]
+  }
+}
