@@ -412,8 +412,12 @@
         }
         .tool-grid-1x2 {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
+            justify-items: center;
+        }
+        .tool-grid-1x2 > *:first-child {
+            grid-column: 1 / 3;
         }
         .landing-tools-row.wb-tiles-disabled {
             opacity: 0.35;
@@ -1972,6 +1976,20 @@
                                 <input type="text" id="lava-phrase-input" class="hub-input" placeholder="c.a.st.le">
                             </div>
                             <div class="hub-row">
+                                <label class="hub-label">Have a code? (optional)</label>
+                                <div style="display:flex; gap:8px; align-items:center;">
+                                    <input type="text" id="lava-vocab-code-input" class="hub-input" placeholder="Enter code" style="flex:1; text-transform:uppercase;">
+                                    <button id="lava-vocab-code-go-btn" class="hub-btn-primary interactive">Go</button>
+                                </div>
+                                <p id="lava-vocab-code-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Oops! Try again!</p>
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-checkbox-row" style="display:flex; align-items:center; gap:8px;">
+                                    <input type="checkbox" id="lava-random-order-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <span>Random order (shuffles the words, not the chunks within a word)</span>
+                                </label>
+                            </div>
+                            <div class="hub-row">
                                 <label class="hub-label" for="lava-decode-time-input">Decoding time per chunk (seconds)</label>
                                 <input type="number" id="lava-decode-time-input" class="hub-input" min="2" max="60" value="8" style="max-width:120px;">
                             </div>
@@ -1979,6 +1997,12 @@
                                 <label class="hub-checkbox-row" style="display:flex; align-items:center; gap:8px;">
                                     <input type="checkbox" id="lava-colorcoding-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
                                     <span>Colour-code the chunks</span>
+                                </label>
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-checkbox-row" style="display:flex; align-items:center; gap:8px;">
+                                    <input type="checkbox" id="lava-translation-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <span>Add a translation platform after each whole word (the student says the English aloud - nothing is shown or translated automatically)</span>
                                 </label>
                             </div>
                         </div>
@@ -2943,7 +2967,7 @@
                 </div>
             </div>
 
-            <button class="fullscreen-toggle-btn wb-circle-btn interactive" title="Toggle fullscreen">
+            <button id="game-shell-fullscreen-btn" class="fullscreen-toggle-btn wb-circle-btn interactive" title="Toggle fullscreen">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
             </button>
             <button id="kart-controls-help-btn" class="wb-circle-btn interactive" title="Game Controls">
@@ -3051,6 +3075,7 @@
         <div id="game-middle-row" style="display:flex; flex:1; min-height:0; gap:10px;">
                 <div id="game-canvas-wrap" style="position:relative; flex:1; min-height:0; min-width:0; border:3px solid var(--hub-line); border-radius:var(--hub-radius-lg); overflow:hidden; background:#bae6fd;">
                     <canvas id="gameCanvas"></canvas>
+                    <button id="lava-fullscreen-btn" class="fullscreen-toggle-btn wb-circle-btn interactive bbs-overlay-btn" style="display:none; position:absolute; top:16px; right:16px; z-index:20; width:36px; height:36px;" title="Toggle fullscreen">⛶</button>
                     <div id="kart-wrong-banner" dir="auto" class="hidden absolute left-1/2 top-6 -translate-x-1/2 bg-rose-500 text-white font-bold text-sm rounded-2xl border-2 border-rose-700 shadow-lg px-6 py-3 text-center max-w-[80%]" style="pointer-events:none;">
                     </div>
                     <div id="lava-ui-board" style="display:none; position:absolute; top:12px; left:50%; transform:translateX(-50%); background:rgba(15,15,15,0.72); color:white; border-radius:16px; padding:8px 20px; text-align:center; font-family:'OpenDyslexic', sans-serif; pointer-events:none;">
@@ -3884,6 +3909,13 @@
         const LOCALIZED_LOCATIONS = {
             'fr': { where: "où ?", city: "dans la ville", forest: "dans la forêt", sky: "dans le ciel", water: "dans l'eau", shop: "dans un magasin" },
             'en': { where: "where?", city: "in the city", forest: "in the forest", sky: "in the sky", water: "in the water", shop: "in a shop" },
+            'korean': { where: "어디?", city: "도시에서", forest: "숲에서", sky: "하늘에서", water: "물속에서", shop: "가게에서" },
+            'tamil': { where: "எங்கே?", city: "நகரத்தில்", forest: "காட்டில்", sky: "வானத்தில்", water: "தண்ணீரில்", shop: "கடையில்" },
+            'telugu': { where: "ఎక్కడ?", city: "నగరంలో", forest: "అడవిలో", sky: "ఆకాశంలో", water: "నీటిలో", shop: "దుకాణంలో" },
+            'punjabi': { where: "ਕਿੱਥੇ?", city: "ਸ਼ਹਿਰ ਵਿੱਚ", forest: "ਜੰਗਲ ਵਿੱਚ", sky: "ਅਸਮਾਨ ਵਿੱਚ", water: "ਪਾਣੀ ਵਿੱਚ", shop: "ਦੁਕਾਨ ਵਿੱਚ" },
+            'thai': { where: "ที่ไหน?", city: "ในเมือง", forest: "ในป่า", sky: "บนท้องฟ้า", water: "ในน้ำ", shop: "ในร้านค้า" },
+            'burmese': { where: "ဘယ်မှာလဲ။", city: "မြို့ထဲမှာ", forest: "တောထဲမှာ", sky: "မိုးကောင်းကင်မှာ", water: "ရေထဲမှာ", shop: "ဆိုင်ထဲမှာ" },
+            'dutch': { where: "waar?", city: "in de stad", forest: "in het bos", sky: "in de lucht", water: "in het water", shop: "in een winkel" },
             'zh-pinyin': { where: "nǎlǐ?", city: "zài chéngshì lǐ", forest: "zài sēnlín lǐ", sky: "zài tiānkōng lǐ", water: "zài shuǐ lǐ", shop: "zài shāngdiàn lǐ" },
             'zh-hanzi': { where: "在哪里？", city: "在城市里", forest: "在森林里", sky: "在天空里", water: "在水里", shop: "在商店里" },
             'cantonese': { where: "喺邊度？", city: "喺城市度", forest: "喺森林度", sky: "喺天空度", water: "喺水度", shop: "喺舖頭度" },
@@ -4077,14 +4109,14 @@
         // Specific "at the [shop]" phrasing for the Where? hint, so a word inside a building
         // names that exact shop rather than a vague "in a shop".
         const SHOP_LOCATION_PHRASES = {
-            cafe: { fr: "au café", en: "at the café", de: "im Café", it: "al caffè", es: "en el café", ja: "カフェで", 'zh-pinyin': "zài kāfēi guǎn", 'zh-hanzi': "在咖啡馆", cantonese: "喺咖啡室", he: "בבית קפה", ar: "في مقهى", sinhala: "කෝපි කඩේදී", vi: "ở quán cà phê", ur: "کیفے میں", hi: "कैफ़े में", uk: "у кафе", ru: "в кафе", macedonian: "во кафуле", afrikaans: "by die kafee", serbian: "у кафићу", croatian: "u kafiću" },
-            bakery: { fr: "à la boulangerie", en: "at the bakery", de: "in der Bäckerei", it: "alla panetteria", es: "en la panadería", ja: "パン屋で", 'zh-pinyin': "zài miànbāo diàn", 'zh-hanzi': "在面包店", cantonese: "喺麵包舖", he: "במאפייה", ar: "في مخبز", sinhala: "පාන් කඩේදී", vi: "ở tiệm bánh mì", ur: "بیکری میں", hi: "बेकरी में", uk: "у пекарні", ru: "в пекарне", macedonian: "во пекара", afrikaans: "by die bakkery", serbian: "у пекари", croatian: "u pekarnici" },
-            pharmacy: { fr: "à la pharmacie", en: "at the pharmacy", de: "in der Apotheke", it: "alla farmacia", es: "en la farmacia", ja: "薬局で", 'zh-pinyin': "zài yàofáng", 'zh-hanzi': "在药房", cantonese: "喺藥房", he: "בבית מרקחת", ar: "في صيدلية", sinhala: "ෆාමසියේදී", vi: "ở nhà thuốc", ur: "فارمیسی میں", hi: "फार्मेसी में", uk: "в аптеці", ru: "в аптеке", macedonian: "во аптека", afrikaans: "by die apteek", serbian: "у апотеци", croatian: "u ljekarni" },
-            supermarket: { fr: "au supermarché", en: "at the supermarket", de: "im Supermarkt", it: "al supermercato", es: "en el supermercado", ja: "スーパーで", 'zh-pinyin': "zài chāoshì", 'zh-hanzi': "在超市", cantonese: "喺超級市場", he: "בסופרמרקט", ar: "في سوبر ماركت", sinhala: "සුපිරි වෙළඳසැලේදී", vi: "ở siêu thị", ur: "سپر مارکیٹ میں", hi: "सुपरमार्केट में", uk: "в супермаркеті", ru: "в супермаркете", macedonian: "во супермаркет", afrikaans: "by die supermark", serbian: "у супермаркету", croatian: "u supermarketu" },
-            restaurant: { fr: "au restaurant", en: "at the restaurant", de: "im Restaurant", it: "al ristorante", es: "en el restaurante", ja: "レストランで", 'zh-pinyin': "zài cāntīng", 'zh-hanzi': "在餐厅", cantonese: "喺餐廳", he: "במסעדה", ar: "في مطعم", sinhala: "අවන්හලේදී", vi: "ở nhà hàng", ur: "ریستوران میں", hi: "रेस्तराँ में", uk: "в ресторані", ru: "в ресторане", macedonian: "во ресторан", afrikaans: "by die restaurant", serbian: "у ресторану", croatian: "u restoranu" },
-            hospital: { fr: "à l'hôpital", en: "at the hospital", de: "im Krankenhaus", it: "all'ospedale", es: "en el hospital", ja: "病院で", 'zh-pinyin': "zài yīyuàn", 'zh-hanzi': "在医院", cantonese: "喺醫院", he: "בבית חולים", ar: "في مستشفى", sinhala: "රෝහලේදී", vi: "ở bệnh viện", ur: "ہسپتال میں", hi: "अस्पताल में", uk: "в лікарні", ru: "в больнице", macedonian: "во болница", afrikaans: "by die hospitaal", serbian: "у болници", croatian: "u bolnici" },
-            vet: { fr: "chez le vétérinaire", en: "at the vet", de: "beim Tierarzt", it: "dal veterinario", es: "en el veterinario", ja: "動物病院で", 'zh-pinyin': "zài chǒngwù yīyuàn", 'zh-hanzi': "在宠物医院", cantonese: "喺獸醫", he: "אצל הווטרינר", ar: "عند الطبيب البيطري", sinhala: "සත්ව වෛද්‍යවරයා ළඟ", vi: "ở chỗ bác sĩ thú y", ur: "جانوروں کے ڈاکٹر کے پاس", hi: "पशु चिकित्सक के पास", uk: "у ветеринара", ru: "у ветеринара", macedonian: "кај ветеринар", afrikaans: "by die veearts", serbian: "код ветеринара", croatian: "kod veterinara" },
-            bookshop: { fr: "à la librairie", en: "at the bookshop", de: "in der Buchhandlung", it: "alla libreria", es: "en la librería", ja: "本屋で", 'zh-pinyin': "zài shūdiàn", 'zh-hanzi': "在书店", cantonese: "喺書店", he: "בחנות ספרים", ar: "في مكتبة", sinhala: "පොත් සාප්පුවේදී", vi: "ở hiệu sách", ur: "کتابوں کی دکان میں", hi: "किताबों की दुकान में", uk: "в книгарні", ru: "в книжном магазине", macedonian: "во книжарница", afrikaans: "by die boekwinkel", serbian: "у књижари", croatian: "u knjižari" }
+            cafe: { fr: "au café", en: "at the café", de: "im Café", it: "al caffè", es: "en el café", ja: "カフェで", 'zh-pinyin': "zài kāfēi guǎn", 'zh-hanzi': "在咖啡馆", cantonese: "喺咖啡室", he: "בבית קפה", ar: "في مقهى", sinhala: "කෝපි කඩේදී", vi: "ở quán cà phê", ur: "کیفے میں", hi: "कैफ़े में", uk: "у кафе", ru: "в кафе", macedonian: "во кафуле", afrikaans: "by die kafee", serbian: "у кафићу", croatian: "u kafiću", korean: "카페에서", tamil: "கஃபேவில்", telugu: "కేఫేలో", punjabi: "ਕੈਫੇ ਵਿੱਚ", thai: "ที่ร้านกาแฟ", burmese: "ကော်ဖီဆိုင်မှာ", dutch: "in het café" },
+            bakery: { fr: "à la boulangerie", en: "at the bakery", de: "in der Bäckerei", it: "alla panetteria", es: "en la panadería", ja: "パン屋で", 'zh-pinyin': "zài miànbāo diàn", 'zh-hanzi': "在面包店", cantonese: "喺麵包舖", he: "במאפייה", ar: "في مخبز", sinhala: "පාන් කඩේදී", vi: "ở tiệm bánh mì", ur: "بیکری میں", hi: "बेकरी में", uk: "у пекарні", ru: "в пекарне", macedonian: "во пекара", afrikaans: "by die bakkery", serbian: "у пекари", croatian: "u pekarnici", korean: "빵집에서", tamil: "பேக்கரியில்", telugu: "బేకరీలో", punjabi: "ਬੇਕਰੀ ਵਿੱਚ", thai: "ที่ร้านเบเกอรี่", burmese: "မုန့်ဆိုင်မှာ", dutch: "in de bakkerij" },
+            pharmacy: { fr: "à la pharmacie", en: "at the pharmacy", de: "in der Apotheke", it: "alla farmacia", es: "en la farmacia", ja: "薬局で", 'zh-pinyin': "zài yàofáng", 'zh-hanzi': "在药房", cantonese: "喺藥房", he: "בבית מרקחת", ar: "في صيدلية", sinhala: "ෆාමසියේදී", vi: "ở nhà thuốc", ur: "فارمیسی میں", hi: "फार्मेसी में", uk: "в аптеці", ru: "в аптеке", macedonian: "во аптека", afrikaans: "by die apteek", serbian: "у апотеци", croatian: "u ljekarni", korean: "약국에서", tamil: "மருந்தகத்தில்", telugu: "మందుల దుకాణంలో", punjabi: "ਦਵਾਈ ਦੀ ਦੁਕਾਨ ਵਿੱਚ", thai: "ที่ร้านขายยา", burmese: "ဆေးဆိုင်မှာ", dutch: "in de apotheek" },
+            supermarket: { fr: "au supermarché", en: "at the supermarket", de: "im Supermarkt", it: "al supermercato", es: "en el supermercado", ja: "スーパーで", 'zh-pinyin': "zài chāoshì", 'zh-hanzi': "在超市", cantonese: "喺超級市場", he: "בסופרמרקט", ar: "في سوبر ماركت", sinhala: "සුපිරි වෙළඳසැලේදී", vi: "ở siêu thị", ur: "سپر مارکیٹ میں", hi: "सुपरमार्केट में", uk: "в супермаркеті", ru: "в супермаркете", macedonian: "во супермаркет", afrikaans: "by die supermark", serbian: "у супермаркету", croatian: "u supermarketu", korean: "슈퍼마켓에서", tamil: "சூப்பர்மார்க்கெட்டில்", telugu: "సూపర్ మార్కెట్‌లో", punjabi: "ਸੁਪਰਮਾਰਕੀਟ ਵਿੱਚ", thai: "ที่ซูเปอร์มาร์เก็ต", burmese: "စူပါမားကတ်မှာ", dutch: "in de supermarkt" },
+            restaurant: { fr: "au restaurant", en: "at the restaurant", de: "im Restaurant", it: "al ristorante", es: "en el restaurante", ja: "レストランで", 'zh-pinyin': "zài cāntīng", 'zh-hanzi': "在餐厅", cantonese: "喺餐廳", he: "במסעדה", ar: "في مطعم", sinhala: "අවන්හලේදී", vi: "ở nhà hàng", ur: "ریستوران میں", hi: "रेस्तराँ में", uk: "в ресторані", ru: "в ресторане", macedonian: "во ресторан", afrikaans: "by die restaurant", serbian: "у ресторану", croatian: "u restoranu", korean: "식당에서", tamil: "உணவகத்தில்", telugu: "రెస్టారెంట్‌లో", punjabi: "ਰੈਸਟੋਰੈਂਟ ਵਿੱਚ", thai: "ที่ร้านอาหาร", burmese: "စားသောက်ဆိုင်မှာ", dutch: "in het restaurant" },
+            hospital: { fr: "à l'hôpital", en: "at the hospital", de: "im Krankenhaus", it: "all'ospedale", es: "en el hospital", ja: "病院で", 'zh-pinyin': "zài yīyuàn", 'zh-hanzi': "在医院", cantonese: "喺醫院", he: "בבית חולים", ar: "في مستشفى", sinhala: "රෝහලේදී", vi: "ở bệnh viện", ur: "ہسپتال میں", hi: "अस्पताल में", uk: "в лікарні", ru: "в больнице", macedonian: "во болница", afrikaans: "by die hospitaal", serbian: "у болници", croatian: "u bolnici", korean: "병원에서", tamil: "மருத்துவமனையில்", telugu: "ఆసుపత్రిలో", punjabi: "ਹਸਪਤਾਲ ਵਿੱਚ", thai: "ที่โรงพยาบาล", burmese: "ဆေးရုံမှာ", dutch: "in het ziekenhuis" },
+            vet: { fr: "chez le vétérinaire", en: "at the vet", de: "beim Tierarzt", it: "dal veterinario", es: "en el veterinario", ja: "動物病院で", 'zh-pinyin': "zài chǒngwù yīyuàn", 'zh-hanzi': "在宠物医院", cantonese: "喺獸醫", he: "אצל הווטרינר", ar: "عند الطبيب البيطري", sinhala: "සත්ව වෛද්‍යවරයා ළඟ", vi: "ở chỗ bác sĩ thú y", ur: "جانوروں کے ڈاکٹر کے پاس", hi: "पशु चिकित्सक के पास", uk: "у ветеринара", ru: "у ветеринара", macedonian: "кај ветеринар", afrikaans: "by die veearts", serbian: "код ветеринара", croatian: "kod veterinara", korean: "동물병원에서", tamil: "விலங்கு மருத்துவமனையில்", telugu: "పశు వైద్యశాలలో", punjabi: "ਪਸ਼ੂ ਹਸਪਤਾਲ ਵਿੱਚ", thai: "ที่โรงพยาบาลสัตว์", burmese: "တိရစ္ဆာန်ဆေးရုံမှာ", dutch: "bij de dierenarts" },
+            bookshop: { fr: "à la librairie", en: "at the bookshop", de: "in der Buchhandlung", it: "alla libreria", es: "en la librería", ja: "本屋で", 'zh-pinyin': "zài shūdiàn", 'zh-hanzi': "在书店", cantonese: "喺書店", he: "בחנות ספרים", ar: "في مكتبة", sinhala: "පොත් සාප්පුවේදී", vi: "ở hiệu sách", ur: "کتابوں کی دکان میں", hi: "किताबों की दुकान में", uk: "в книгарні", ru: "в книжном магазине", macedonian: "во книжарница", afrikaans: "by die boekwinkel", serbian: "у књижари", croatian: "u knjižari", korean: "서점에서", tamil: "புத்தகக் கடையில்", telugu: "పుస్తకాల దుకాణంలో", punjabi: "ਕਿਤਾਬਾਂ ਦੀ ਦੁਕਾਨ ਵਿੱਚ", thai: "ที่ร้านหนังสือ", burmese: "စာအုပ်ဆိုင်မှာ", dutch: "in de boekwinkel" }
         };
 
 
@@ -11775,6 +11807,12 @@
             document.getElementById('vocab-code-input').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') document.getElementById('vocab-code-go-btn').click();
             });
+            document.getElementById('lava-vocab-code-go-btn').onclick = () => {
+                handleVocabCodeSubmit('lava-vocab-code-input', 'lava-vocab-code-error', 'lava-phrase-input', () => {}, 'lavalitcodes/');
+            };
+            document.getElementById('lava-vocab-code-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('lava-vocab-code-go-btn').click();
+            });
             document.getElementById('player-return-btn').onclick = () => {
                 showLandingStep(selectedLobbyMode === 'lava' ? 'wheel' : 'settings');
             };
@@ -11872,6 +11910,7 @@
             document.querySelectorAll('.fullscreen-toggle-btn').forEach(btn => {
                 btn.onclick = toggleFullscreen;
             });
+            document.getElementById('game-canvas-wrap').addEventListener('mousemove', bbsShowControlsBriefly);
 
             const controlsHelpBtn = document.getElementById('controls-help-btn');
             const controlsHelpOverlay = document.getElementById('controls-help-overlay');
@@ -12549,14 +12588,14 @@
         // match, e.g. "ANIMALS1.txt".
         const WB_VOCAB_CODE_BASE_URL = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/vocabcodes/';
 
-        async function handleVocabCodeSubmit(codeInputId, errorId, vocabInputId, onSuccess) {
+        async function handleVocabCodeSubmit(codeInputId, errorId, vocabInputId, onSuccess, subfolder) {
             const codeInput = document.getElementById(codeInputId);
             const errorEl = document.getElementById(errorId);
             const code = codeInput.value.trim().toUpperCase();
             if (!code) return;
             errorEl.style.display = 'none';
             try {
-                const response = await fetch(WB_VOCAB_CODE_BASE_URL + encodeURIComponent(code) + '.txt');
+                const response = await fetch(WB_VOCAB_CODE_BASE_URL + (subfolder || '') + encodeURIComponent(code) + '.txt');
                 if (!response.ok) throw new Error('code not found');
                 const text = (await response.text()).trim();
                 if (!text) throw new Error('empty file');
@@ -12783,7 +12822,7 @@
             const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
             if (!currentWordObj) return null;
             const locKey = currentWordObj.location;
-            const langData = LOCALIZED_LOCATIONS[selectedLanguage];
+            const langData = LOCALIZED_LOCATIONS[selectedLanguage] || LOCALIZED_LOCATIONS.en;
             let locationPart;
             if (currentWordObj.inShop !== undefined) {
                 const shopType = cityBuildings[currentWordObj.inShop] && cityBuildings[currentWordObj.inShop].shopType;
@@ -14496,6 +14535,9 @@
             canvas.style.display = 'none';
             document.getElementById('ui-board').style.display = 'none';
             document.getElementById('kart-ui-board').style.display = 'none';
+            document.getElementById('lava-ui-board').style.display = 'none';
+            document.getElementById('lava-fullscreen-btn').style.display = 'none';
+            document.getElementById('game-shell-fullscreen-btn').style.display = 'flex';
             document.getElementById('kart-complete-overlay').classList.add('hidden');
             document.getElementById('kart-complete-overlay').classList.remove('flex');
             stopAllBobotVideos();
@@ -14777,7 +14819,7 @@
 
             const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
             const locKey = currentWordObj ? currentWordObj.location : 'city';
-            const langData = LOCALIZED_LOCATIONS[selectedLanguage];
+            const langData = LOCALIZED_LOCATIONS[selectedLanguage] || LOCALIZED_LOCATIONS.en;
 
             const questHeaderEl = document.getElementById('quest-header-label');
             if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
@@ -14928,11 +14970,12 @@
         // ====================================================================
         const LAVA_RTL_LANGUAGES = ['ar', 'he', 'ur'];
         const LAVA_PLATFORM_Y = 900;
-        const LAVA_FLOAT_HEIGHT = 260; // how far above the lava's surface the platforms/chunks float
+        const LAVA_FLOAT_HEIGHT = 4; // how far above the lava's surface the platforms/chunks float
         const LAVA_BASE_FONT_SIZE = 40; // world-space size used both for measuring chunk width and for drawing
         const LAVA_WITHIN_WORD_GAP = 8; // tight gap between chunks of the same word - reads naturally, like the word itself
         const LAVA_BETWEEN_ELEMENT_GAP = 100; // wider gap between words, and around the whole-word/safe platforms
         const LAVA_CHUNK_SIDE_PADDING = 12; // horizontal walkable margin on each side of a chunk's own text
+        const LAVA_BUBBLE_HEIGHT = LAVA_BASE_FONT_SIZE * 1.5; // height of the speech-bubble platforms; the character stands on TOP of this
 
         let lavaPlatforms = [];
         let lavaCurrentIndex = -1;
@@ -14954,28 +14997,49 @@
         // measured from the actual rendered text, and chunks within the
         // same word sit close together (reading naturally, like the word
         // itself) while a wider gap separates distinct words.
-        function lavaParsePhrase(phraseStr) {
+        function lavaParsePhrase(phraseStr, includeTranslation, randomOrder) {
             const words = phraseStr.trim().split(/\s+/).filter(w => w.length > 0);
             if (words.length === 0) return [];
+            const orderedWords = randomOrder ? rosterShuffle(words) : words;
 
             ctx.font = `800 ${LAVA_BASE_FONT_SIZE}px 'OpenDyslexic', sans-serif`;
             const measure = (text) => text ? ctx.measureText(text).width : LAVA_BASE_FONT_SIZE * 1.4;
 
             const platforms = [{ text: '', type: 'start', hasTimer: false, color: '#94a3b8' }];
-            words.forEach(word => {
+            for (const word of orderedWords) {
                 const chunks = word.split('.').map(c => c.trim()).filter(c => c.length > 0);
-                if (chunks.length === 0) return;
+                if (chunks.length === 0) continue;
                 chunks.forEach(chunk => {
                     platforms.push({ text: chunk, type: 'chunk', hasTimer: true, color: null });
                 });
-                platforms.push({ text: chunks.join(''), type: 'wholeword', hasTimer: true, color: '#f59e0b' });
+                const wholeWord = chunks.join('');
+                platforms.push({ text: wholeWord, type: 'wholeword', hasTimer: true, color: '#f59e0b' });
+                if (includeTranslation) {
+                    // A plain platform, same shape as the safe one, just
+                    // orange - no text of its own, since the student can
+                    // already see the whole word on the bubble just
+                    // before it. No translation is fetched or shown here;
+                    // the student is expected to say the English
+                    // translation aloud themselves while the teacher
+                    // decides whether to advance.
+                    platforms.push({ text: '', type: 'translation', hasTimer: true, color: '#f59e0b' });
+                }
                 platforms.push({ text: '', type: 'safe', hasTimer: false, color: '#10b981' });
-            });
+            }
 
             let xCursor = 0;
             platforms.forEach((p, i) => {
                 p.textWidth = measure(p.text);
                 p.w = p.textWidth + LAVA_CHUNK_SIDE_PADDING * 2;
+                // Bubble-type platforms (chunk/wholeword) are stood on at
+                // the TOP of the speech bubble, so the character is
+                // visibly on top of the letters rather than overlapping
+                // in front of them. The plain start/safe/translation
+                // platforms have no bubble, so they keep the flat
+                // surface height.
+                p.surfaceY = (p.type === 'chunk' || p.type === 'wholeword')
+                    ? LAVA_PLATFORM_Y - LAVA_BUBBLE_HEIGHT
+                    : LAVA_PLATFORM_Y;
                 const prev = platforms[i - 1];
                 if (i === 0) {
                     p.x = 0;
@@ -14994,8 +15058,11 @@
 
         function generateLavaLiteracy() {
             const phraseInput = document.getElementById('lava-phrase-input').value;
-            const platforms = lavaParsePhrase(phraseInput);
+            const includeTranslation = document.getElementById('lava-translation-toggle').checked;
+            const randomOrder = document.getElementById('lava-random-order-toggle').checked;
             const errorEl = document.getElementById('lava-settings-error');
+            const platforms = lavaParsePhrase(phraseInput, includeTranslation, randomOrder);
+
             if (platforms.length === 0) {
                 errorEl.textContent = 'Please type at least one word with its chunks marked (e.g. c.a.t).';
                 errorEl.style.display = 'block';
@@ -15023,7 +15090,7 @@
             };
 
             player.x = lavaPlatforms[0].x - player.w / 2;
-            player.y = LAVA_PLATFORM_Y - player.h;
+            player.y = lavaPlatforms[0].surfaceY - player.h;
             player.vx = 0; player.vy = 0;
             player.grounded = true;
             player.facingRight = !isRtl;
@@ -15039,6 +15106,9 @@
             const uiBoard = document.getElementById('ui-board');
             if (uiBoard) uiBoard.style.display = 'none';
             document.getElementById('lava-ui-board').style.display = 'block';
+            document.getElementById('game-shell-fullscreen-btn').style.display = 'none';
+            document.getElementById('lava-fullscreen-btn').style.display = 'flex';
+            bbsShowControlsBriefly();
             canvas.style.display = 'block';
             document.getElementById('game-view-shell').style.display = 'flex';
 
@@ -15134,8 +15204,9 @@
             player.y += player.vy * dt;
 
             const underIndex = lavaFindPlatformUnderPlayer();
-            const surfaceY = LAVA_PLATFORM_Y - player.h;
-            if (underIndex !== -1 && player.y >= surfaceY && player.vy >= 0) {
+            const targetPlatform = underIndex !== -1 ? lavaPlatforms[underIndex] : null;
+            const surfaceY = targetPlatform ? targetPlatform.surfaceY - player.h : null;
+            if (targetPlatform && player.y >= surfaceY && player.vy >= 0) {
                 player.y = surfaceY;
                 player.vy = 0;
                 player.grounded = true;
@@ -15164,7 +15235,7 @@
                 lavaPlatforms.forEach(p => { p.fallen = false; p.opacity = 1; });
                 playLavaHitSound();
                 player.x = lavaPlatforms[0].x - player.w / 2;
-                player.y = LAVA_PLATFORM_Y - player.h;
+                player.y = lavaPlatforms[0].surfaceY - player.h;
                 player.vx = 0; player.vy = 0;
                 player.grounded = true;
                 lavaStartPlatformTimer(0);
@@ -15235,13 +15306,17 @@
             lavaBubbles = lavaBubbles.filter(b => b.life < b.maxLife);
         }
 
+        const LAVA_CHAR_FRAME_FRACTION = 2 / 3; // how far down the frame (from the top) the character's standing surface sits - was about 1/3 from the top, now 1/3 from the bottom
+
         function renderLavaScene() {
             lavaComputeCamera();
             lavaUpdateBubbles(1);
             const zoom = LAVA_ZOOM;
-            // Fixed offset above the platform surface - enough headroom that a
-            // full jump stays within frame, with the lava still visible below.
-            const vAnchorY = LAVA_PLATFORM_Y - 90;
+            // Computed fresh each frame from the actual canvas height, so
+            // the character's standing surface always lands at the same
+            // fractional position in frame regardless of screen size.
+            const charSurfaceWorldY = LAVA_PLATFORM_Y - LAVA_BUBBLE_HEIGHT;
+            const vAnchorY = charSurfaceWorldY - (canvas.height / zoom) * (LAVA_CHAR_FRAME_FRACTION - 0.5);
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -15280,37 +15355,38 @@
                 if (p.x < lavaCameraX - 600 || p.x > lavaCameraX + 600) return; // culling far-off platforms
                 if (p.fallen) return;
 
-                if (p.type === 'start' || p.type === 'safe') {
+                if (p.type === 'start' || p.type === 'safe' || p.type === 'translation') {
                     // No letters to stand on for these - a small, plain platform instead.
                     ctx.globalAlpha = p.opacity;
                     ctx.fillStyle = p.color;
-                    ctx.fillRect(p.x - p.w / 2, LAVA_PLATFORM_Y, p.w, 14);
+                    ctx.fillRect(p.x - p.w / 2, p.surfaceY, p.w, 14);
                     ctx.globalAlpha = 1;
                 } else if (p.text) {
                     // A wide speech-bubble, matching Sentence Parkour's own
-                    // word cards - white fill, dark border, rounded
+                    // word cards - white fill, coloured border, rounded
                     // corners - with the chunk's actual letters as the
-                    // walkable surface sitting right on top of it.
-                    const bubbleH = LAVA_BASE_FONT_SIZE * 1.5;
+                    // walkable surface sitting right on top of it. The
+                    // bubble's own top edge (p.surfaceY) is exactly where
+                    // the character's feet land - the same value the
+                    // physics uses - so the two can never drift apart.
                     const bubbleW = p.textWidth + LAVA_CHUNK_SIDE_PADDING * 2.5;
-                    const bubbleTop = LAVA_PLATFORM_Y - bubbleH;
                     ctx.globalAlpha = p.opacity;
                     ctx.fillStyle = '#ffffff';
-                    ctx.strokeStyle = p.type === 'wholeword' ? '#f59e0b' : '#1e293b';
+                    ctx.strokeStyle = p.type === 'wholeword' ? '#f59e0b' : '#ef4444';
                     ctx.lineWidth = 4;
                     ctx.beginPath();
-                    ctx.roundRect(p.x - bubbleW / 2, bubbleTop, bubbleW, bubbleH, bubbleH / 2);
+                    ctx.roundRect(p.x - bubbleW / 2, p.surfaceY, bubbleW, LAVA_BUBBLE_HEIGHT, LAVA_BUBBLE_HEIGHT / 2);
                     ctx.fill();
                     ctx.stroke();
 
                     if (lavaColorCodingOn) {
-                        drawColoredText(ctx, p.text, p.x, LAVA_PLATFORM_Y - bubbleH / 2, chunkFont);
+                        drawColoredText(ctx, p.text, p.x, p.surfaceY + LAVA_BUBBLE_HEIGHT / 2, chunkFont);
                     } else {
                         ctx.font = chunkFont;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
                         ctx.fillStyle = '#1e293b';
-                        ctx.fillText(p.text, p.x, LAVA_PLATFORM_Y - bubbleH / 2);
+                        ctx.fillText(p.text, p.x, p.surfaceY + LAVA_BUBBLE_HEIGHT / 2);
                     }
                     ctx.globalAlpha = 1;
                 }
@@ -15349,6 +15425,8 @@
                 `${lavaScore.wordsCompleted}/${lavaScore.totalWords} words, ${lavaScore.chunksCompleted}/${lavaScore.totalChunks} chunks decoded`;
 
             document.getElementById('lava-ui-board').style.display = 'none';
+            document.getElementById('lava-fullscreen-btn').style.display = 'none';
+            document.getElementById('game-shell-fullscreen-btn').style.display = 'flex';
             canvas.style.display = 'none';
             document.getElementById('game-view-shell').style.display = 'none';
             document.getElementById('results-screen').style.display = 'flex';
