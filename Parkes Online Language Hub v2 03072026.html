@@ -9546,6 +9546,23 @@
             content.innerHTML = elData.text ? wbColorizeForDisplay(elData.text) : '';
             wbApplyTextElementStyles(elData, content);
             wbApplySizeRangesToDom(elData, content);
+            wbGrowTextBoxToFitContent(elData, content);
+        }
+
+        // Text boxes only ever grow taller to fit their content, never
+        // shrink automatically - a teacher's own manual resize (making a
+        // box deliberately taller than its text currently needs) is never
+        // undone by typing, deleting, or a font-size change. The box
+        // grows downward only: its top edge (elData.y) and its width are
+        // never touched, only elData.height increases.
+        function wbGrowTextBoxToFitContent(elData, content) {
+            if (elData.type !== 'text') return;
+            const needed = content.scrollHeight;
+            if (needed > elData.height) {
+                elData.height = needed;
+                const domEl = content.closest('.wb-element');
+                if (domEl) domEl.style.height = needed + 'px';
+            }
         }
 
         // Lets part of a text box's text have its own font size (e.g. a
