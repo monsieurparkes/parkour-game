@@ -1990,6 +1990,12 @@
                                 </label>
                             </div>
                             <div class="hub-row">
+                                <label class="hub-checkbox-row" style="display:flex; align-items:center; gap:8px;">
+                                    <input type="checkbox" id="lava-return-to-start-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <span>Return to start after mistakes (otherwise, falling sends the student back to the last safe platform, not all the way to the beginning)</span>
+                                </label>
+                            </div>
+                            <div class="hub-row">
                                 <label class="hub-label" for="lava-decode-time-input">Decoding time per chunk (seconds)</label>
                                 <input type="number" id="lava-decode-time-input" class="hub-input" min="2" max="60" value="8" style="max-width:120px;">
                             </div>
@@ -3076,6 +3082,7 @@
                 <div id="game-canvas-wrap" style="position:relative; flex:1; min-height:0; min-width:0; border:3px solid var(--hub-line); border-radius:var(--hub-radius-lg); overflow:hidden; background:#bae6fd;">
                     <canvas id="gameCanvas"></canvas>
                     <button id="lava-fullscreen-btn" class="fullscreen-toggle-btn wb-circle-btn interactive bbs-overlay-btn" style="display:none; position:absolute; top:16px; right:16px; z-index:20; width:36px; height:36px;" title="Toggle fullscreen">⛶</button>
+                    <button id="lava-back-to-settings-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="display:none; position:absolute; top:16px; left:16px; z-index:20; width:36px; height:36px;" title="Back to settings">←</button>
                     <div id="kart-wrong-banner" dir="auto" class="hidden absolute left-1/2 top-6 -translate-x-1/2 bg-rose-500 text-white font-bold text-sm rounded-2xl border-2 border-rose-700 shadow-lg px-6 py-3 text-center max-w-[80%]" style="pointer-events:none;">
                     </div>
                     <div id="lava-ui-board" style="display:none; position:absolute; top:12px; left:50%; transform:translateX(-50%); background:rgba(15,15,15,0.72); color:white; border-radius:16px; padding:8px 20px; text-align:center; font-family:'OpenDyslexic', sans-serif; pointer-events:none;">
@@ -3682,6 +3689,16 @@
         // collision zone should be wider too - otherwise the kart visually drives
         // onto a wide card well before the (previously fixed-size) zone registers it.
         function getKartItemCollisionRadius(item) {
+            if (pendingKartSubmode === 'picture') {
+                // Picture items are always drawn at the same fixed visual
+                // size no matter how long their underlying word/label is
+                // (see the 90 * proj.scale * 3 sizing in renderKartGame),
+                // so the collision radius has to be a small, fixed value
+                // too - deliberately tight, so the kart has to pass
+                // through close to the centre rather than clipping it
+                // from well off to the side.
+                return 30;
+            }
             const textLength = (item.text || '').replace(/[\[\]]/g, '').length;
             return 55 + textLength * 6;
         }
@@ -11835,6 +11852,10 @@
             };
             document.getElementById('lava-settings-return-btn').onclick = () => showLandingStep('player');
             document.getElementById('lava-settings-confirm-btn').onclick = generateLavaLiteracy;
+            document.getElementById('lava-back-to-settings-btn').onclick = () => {
+                resetToConfig();
+                showLandingStep('lava-settings');
+            };
             document.getElementById('lava-phrase-input').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') document.getElementById('lava-settings-confirm-btn').click();
             });
@@ -14554,6 +14575,7 @@
             document.getElementById('kart-ui-board').style.display = 'none';
             document.getElementById('lava-ui-board').style.display = 'none';
             document.getElementById('lava-fullscreen-btn').style.display = 'none';
+            document.getElementById('lava-back-to-settings-btn').style.display = 'none';
             document.getElementById('game-shell-fullscreen-btn').style.display = 'flex';
             document.getElementById('kart-complete-overlay').classList.add('hidden');
             document.getElementById('kart-complete-overlay').classList.remove('flex');
@@ -15006,6 +15028,9 @@
         let lavaBubbles = []; // ambient bubbling-lava animation particles
         let lavaStartTime = 0;
         let lavaScore = { chunksCompleted: 0, chunksFallen: 0, wordsCompleted: 0, totalChunks: 0, totalWords: 0 };
+        let lavaLastSafeIndex = 0; // index of the last 'safe' or 'start' platform the player has actually stood on
+        let lavaLastSafeScore = { chunksCompleted: 0, wordsCompleted: 0 }; // progress snapshot at that point, restored on a local respawn
+        let lavaReturnToStartOnFall = false; // when true, falling always sends the player all the way back to the beginning instead of the last safe platform
 
         // Splits "c.a.st.le is.a.big" into a flat sequence of platforms:
         // a neutral starting platform first, then every chunk of a word,
@@ -15089,6 +15114,7 @@
 
             lavaDecodeTimeSetting = Math.max(2, parseInt(document.getElementById('lava-decode-time-input').value, 10) || 8);
             lavaColorCodingOn = document.getElementById('lava-colorcoding-toggle').checked;
+            lavaReturnToStartOnFall = document.getElementById('lava-return-to-start-toggle').checked;
 
             const isRtl = LAVA_RTL_LANGUAGES.includes(selectedLanguage);
             if (isRtl) platforms.forEach(p => p.x = -p.x);
@@ -15100,6 +15126,8 @@
             lavaCurrentIndex = -1;
             lavaLevelComplete = false;
             lavaStartTime = Date.now();
+            lavaLastSafeIndex = 0;
+            lavaLastSafeScore = { chunksCompleted: 0, wordsCompleted: 0 };
             lavaScore = {
                 chunksCompleted: 0, chunksFallen: 0, wordsCompleted: 0,
                 totalChunks: platforms.filter(p => p.type === 'chunk').length,
@@ -15125,6 +15153,7 @@
             document.getElementById('lava-ui-board').style.display = 'block';
             document.getElementById('game-shell-fullscreen-btn').style.display = 'none';
             document.getElementById('lava-fullscreen-btn').style.display = 'flex';
+            document.getElementById('lava-back-to-settings-btn').style.display = 'flex';
             bbsShowControlsBriefly();
             canvas.style.display = 'block';
             document.getElementById('game-view-shell').style.display = 'flex';
@@ -15235,27 +15264,36 @@
                             else if (passed.type === 'wholeword') lavaScore.wordsCompleted++;
                         }
                     }
+                    if (targetPlatform.type === 'safe' || targetPlatform.type === 'start') {
+                        lavaLastSafeIndex = underIndex;
+                        lavaLastSafeScore = { chunksCompleted: lavaScore.chunksCompleted, wordsCompleted: lavaScore.wordsCompleted };
+                    }
                     lavaStartPlatformTimer(underIndex);
                 }
             } else {
                 player.grounded = false;
             }
 
-            // Hit the lava - feedback sound, then straight back to the very
-            // start of the whole sequence. This is a practice tool, not a
-            // lives-based challenge, so a fall never permanently ends
-            // anything - it just means starting the run over.
+            // Hit the lava - feedback sound, then respawn. By default,
+            // back to the last safe platform actually reached, with
+            // progress restored to that point - a quick, local retry
+            // rather than losing the whole run. If "Return to start after
+            // mistakes" is on, always goes all the way back to the
+            // beginning instead. Either way this is a practice tool, not
+            // a lives-based challenge, so a fall never permanently ends
+            // anything.
             if (player.y > LAVA_PLATFORM_Y + LAVA_FLOAT_HEIGHT) {
                 lavaScore.chunksFallen++;
-                lavaScore.chunksCompleted = 0;
-                lavaScore.wordsCompleted = 0;
+                const respawnIndex = lavaReturnToStartOnFall ? 0 : lavaLastSafeIndex;
+                lavaScore.chunksCompleted = lavaReturnToStartOnFall ? 0 : lavaLastSafeScore.chunksCompleted;
+                lavaScore.wordsCompleted = lavaReturnToStartOnFall ? 0 : lavaLastSafeScore.wordsCompleted;
                 lavaPlatforms.forEach(p => { p.fallen = false; p.opacity = 1; });
                 playLavaHitSound();
-                player.x = lavaPlatforms[0].x - player.w / 2;
-                player.y = lavaPlatforms[0].surfaceY - player.h;
+                player.x = lavaPlatforms[respawnIndex].x - player.w / 2;
+                player.y = lavaPlatforms[respawnIndex].surfaceY - player.h;
                 player.vx = 0; player.vy = 0;
                 player.grounded = true;
-                lavaStartPlatformTimer(0);
+                lavaStartPlatformTimer(respawnIndex);
             }
 
             if (lavaCurrentIndex !== -1) {
@@ -15443,6 +15481,7 @@
 
             document.getElementById('lava-ui-board').style.display = 'none';
             document.getElementById('lava-fullscreen-btn').style.display = 'none';
+            document.getElementById('lava-back-to-settings-btn').style.display = 'none';
             document.getElementById('game-shell-fullscreen-btn').style.display = 'flex';
             canvas.style.display = 'none';
             document.getElementById('game-view-shell').style.display = 'none';
