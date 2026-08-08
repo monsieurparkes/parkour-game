@@ -5,11 +5,13 @@
       "albums": {
         "petit-parkour": {
           "label": "Petit Parkour",
+          "cover": "cover.jpg",
           "songs": [
             {
               "track": 8,
               "title": "Cher la pomme de terre",
-              "folder": "8"
+              "folder": "8",
+              "cover": "cover.png"
             }
           ]
         }
