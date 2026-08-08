@@ -1705,32 +1705,32 @@
     },
     {
       "start": 131.007,
-      "end": 134.671,
+      "end": 132.829,
       "words": [
         {
           "text": "Dans",
           "start": 131.007,
-          "end": 131.428
+          "end": 131.42
         },
         {
           "text": "la",
-          "start": 131.455,
-          "end": 131.754
+          "start": 131.447,
+          "end": 131.644
         },
         {
           "text": "mer",
-          "start": 131.786,
-          "end": 132.794
+          "start": 131.672,
+          "end": 132.111
         },
         {
           "text": "la",
-          "start": 133.018,
-          "end": 133.423
+          "start": 132.139,
+          "end": 132.343
         },
         {
           "text": "mer",
-          "start": 133.45,
-          "end": 134.671
+          "start": 132.371,
+          "end": 132.829
         }
       ],
       "translations": {
@@ -1738,38 +1738,38 @@
       }
     },
     {
-      "start": 134.699,
-      "end": 138.363,
+      "start": 132.857,
+      "end": 134.686,
       "words": [
         {
           "text": "C'est",
-          "start": 134.699,
-          "end": 135.152
+          "start": 132.857,
+          "end": 133.314
         },
         {
           "text": "Cher",
-          "start": 135.179,
-          "end": 135.696
+          "start": 133.34,
+          "end": 133.683
         },
         {
           "text": "la",
-          "start": 135.728,
-          "end": 136.278
+          "start": 133.713,
+          "end": 133.918
         },
         {
           "text": "pomme",
-          "start": 136.31,
-          "end": 136.992
+          "start": 133.94,
+          "end": 134.317
         },
         {
           "text": "de",
-          "start": 137.019,
-          "end": 137.654
+          "start": 134.323,
+          "end": 134.45
         },
         {
           "text": "terre",
-          "start": 137.686,
-          "end": 138.363
+          "start": 134.482,
+          "end": 134.686
         }
       ],
       "translations": {
@@ -1777,38 +1777,38 @@
       }
     },
     {
-      "start": 138.391,
-      "end": 142.055,
+      "start": 134.699,
+      "end": 138.363,
       "words": [
         {
           "text": "Cher",
-          "start": 138.391,
-          "end": 138.775
+          "start": 134.699,
+          "end": 135.112
         },
         {
           "text": "Cher",
-          "start": 138.802,
-          "end": 139.591
+          "start": 135.14,
+          "end": 135.57
         },
         {
           "text": "habite",
-          "start": 139.65,
-          "end": 140.231
+          "start": 135.6,
+          "end": 136.489
         },
         {
           "text": "dans",
-          "start": 140.274,
-          "end": 140.524
+          "start": 136.519,
+          "end": 136.949
         },
         {
           "text": "un",
-          "start": 140.551,
-          "end": 140.78
+          "start": 136.98,
+          "end": 137.386
         },
         {
           "text": "éclair",
-          "start": 140.812,
-          "end": 142.055
+          "start": 137.414,
+          "end": 138.363
         }
       ],
       "translations": {
@@ -1816,53 +1816,53 @@
       }
     },
     {
-      "start": 142.083,
-      "end": 147.555,
+      "start": 138.391,
+      "end": 142.052,
       "words": [
         {
           "text": "Dans",
-          "start": 142.083,
-          "end": 142.499
+          "start": 138.391,
+          "end": 138.8
         },
         {
           "text": "la",
-          "start": 142.526,
-          "end": 142.904
+          "start": 138.829,
+          "end": 139.029
         },
         {
           "text": "mer",
-          "start": 142.936,
-          "end": 144.131
+          "start": 139.057,
+          "end": 139.724
         },
         {
           "text": "avec",
-          "start": 144.398,
-          "end": 145.427
+          "start": 139.755,
+          "end": 140.126
         },
         {
           "text": "mon",
-          "start": 145.619,
-          "end": 146.168
+          "start": 140.157,
+          "end": 140.601
         },
         {
           "text": "père",
-          "start": 146.2,
-          "end": 146.515
+          "start": 140.633,
+          "end": 141.064
         },
         {
           "text": "et",
-          "start": 146.558,
-          "end": 146.766
+          "start": 141.096,
+          "end": 141.313
         },
         {
           "text": "ma",
-          "start": 146.792,
-          "end": 147.059
+          "start": 141.341,
+          "end": 141.566
         },
         {
           "text": "mère",
-          "start": 147.091,
-          "end": 147.555
+          "start": 141.595,
+          "end": 142.052
         }
       ],
       "translations": {
@@ -1870,33 +1870,33 @@
       }
     },
     {
-      "start": 147.586,
-      "end": 151.25,
+      "start": 142.083,
+      "end": 143.865,
       "words": [
         {
           "text": "Dans",
-          "start": 147.586,
-          "end": 148.098
+          "start": 142.083,
+          "end": 142.461
         },
         {
           "text": "la",
-          "start": 148.183,
-          "end": 148.877
+          "start": 142.489,
+          "end": 142.669
         },
         {
           "text": "mer",
-          "start": 148.999,
-          "end": 150.029
+          "start": 142.697,
+          "end": 143.133
         },
         {
           "text": "la",
-          "start": 150.061,
-          "end": 150.354
+          "start": 143.164,
+          "end": 143.362
         },
         {
           "text": "mer",
-          "start": 150.402,
-          "end": 151.25
+          "start": 143.39,
+          "end": 143.865
         }
       ],
       "translations": {
@@ -1904,33 +1904,267 @@
       }
     },
     {
-      "start": 151.278,
-      "end": 160.0,
+      "start": 143.894,
+      "end": 145.732,
       "words": [
         {
           "text": "Cher",
-          "start": 151.278,
-          "end": 152.035
+          "start": 143.894,
+          "end": 144.47
         },
         {
           "text": "la",
-          "start": 152.697,
-          "end": 152.974
+          "start": 144.498,
+          "end": 144.771
         },
         {
           "text": "pomme",
-          "start": 153.006,
-          "end": 154.579
+          "start": 144.787,
+          "end": 145.195
         },
         {
           "text": "de",
-          "start": 154.953,
-          "end": 156.099
+          "start": 145.227,
+          "end": 145.505
         },
         {
           "text": "terre",
-          "start": 156.126,
-          "end": 160.0
+          "start": 145.521,
+          "end": 145.732
+        }
+      ],
+      "translations": {
+        "en": "Cher the potato!"
+      }
+    },
+    {
+      "start": 145.754,
+      "end": 147.562,
+      "words": [
+        {
+          "text": "Dans",
+          "start": 145.754,
+          "end": 146.153
+        },
+        {
+          "text": "la",
+          "start": 146.18,
+          "end": 146.377
+        },
+        {
+          "text": "mer",
+          "start": 146.405,
+          "end": 146.844
+        },
+        {
+          "text": "la",
+          "start": 146.872,
+          "end": 147.076
+        },
+        {
+          "text": "mer",
+          "start": 147.104,
+          "end": 147.562
+        }
+      ],
+      "translations": {
+        "en": "In the sea, the sea"
+      }
+    },
+    {
+      "start": 147.59,
+      "end": 149.419,
+      "words": [
+        {
+          "text": "C'est",
+          "start": 147.59,
+          "end": 148.047
+        },
+        {
+          "text": "Cher",
+          "start": 148.073,
+          "end": 148.416
+        },
+        {
+          "text": "la",
+          "start": 148.446,
+          "end": 148.651
+        },
+        {
+          "text": "pomme",
+          "start": 148.673,
+          "end": 149.05
+        },
+        {
+          "text": "de",
+          "start": 149.056,
+          "end": 149.183
+        },
+        {
+          "text": "terre",
+          "start": 149.215,
+          "end": 149.419
+        }
+      ],
+      "translations": {
+        "en": "It's Cher the potato!"
+      }
+    },
+    {
+      "start": 149.432,
+      "end": 153.096,
+      "words": [
+        {
+          "text": "Cher",
+          "start": 149.432,
+          "end": 149.845
+        },
+        {
+          "text": "Cher",
+          "start": 149.873,
+          "end": 150.303
+        },
+        {
+          "text": "habite",
+          "start": 150.333,
+          "end": 151.222
+        },
+        {
+          "text": "dans",
+          "start": 151.252,
+          "end": 151.682
+        },
+        {
+          "text": "un",
+          "start": 151.713,
+          "end": 152.119
+        },
+        {
+          "text": "éclair",
+          "start": 152.147,
+          "end": 153.096
+        }
+      ],
+      "translations": {
+        "en": "Cher, Cher lives in a bolt of lightning!"
+      }
+    },
+    {
+      "start": 153.124,
+      "end": 156.826,
+      "words": [
+        {
+          "text": "Dans",
+          "start": 153.124,
+          "end": 153.555
+        },
+        {
+          "text": "la",
+          "start": 153.591,
+          "end": 153.774
+        },
+        {
+          "text": "mer",
+          "start": 153.796,
+          "end": 154.486
+        },
+        {
+          "text": "avec",
+          "start": 154.517,
+          "end": 154.883
+        },
+        {
+          "text": "mon",
+          "start": 154.917,
+          "end": 155.358
+        },
+        {
+          "text": "père",
+          "start": 155.384,
+          "end": 155.809
+        },
+        {
+          "text": "et",
+          "start": 155.842,
+          "end": 156.058
+        },
+        {
+          "text": "ma",
+          "start": 156.086,
+          "end": 156.328
+        },
+        {
+          "text": "mère",
+          "start": 156.357,
+          "end": 156.826
+        }
+      ],
+      "translations": {
+        "en": "In the sea with my father and my mother"
+      }
+    },
+    {
+      "start": 156.857,
+      "end": 158.633,
+      "words": [
+        {
+          "text": "Dans",
+          "start": 156.857,
+          "end": 157.235
+        },
+        {
+          "text": "la",
+          "start": 157.263,
+          "end": 157.455
+        },
+        {
+          "text": "mer",
+          "start": 157.483,
+          "end": 157.918
+        },
+        {
+          "text": "la",
+          "start": 157.933,
+          "end": 158.124
+        },
+        {
+          "text": "mer",
+          "start": 158.158,
+          "end": 158.633
+        }
+      ],
+      "translations": {
+        "en": "In the sea, the sea"
+      }
+    },
+    {
+      "start": 158.662,
+      "end": 160.465,
+      "words": [
+        {
+          "text": "Cher",
+          "start": 158.662,
+          "end": 159.256
+        },
+        {
+          "text": "la",
+          "start": 159.272,
+          "end": 159.537
+        },
+        {
+          "text": "pomme",
+          "start": 159.549,
+          "end": 159.957
+        },
+        {
+          "text": "de",
+          "start": 159.989,
+          "end": 160.273
+        },
+        {
+          "text": "terre",
+          "start": 160.289,
+          "end": 160.465
         }
       ],
       "translations": {
