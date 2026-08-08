@@ -11,28 +11,28 @@
   "cover": "cover.png",
   "phrases": [
     {
-      "start": 15.08,
-      "end": 16.95,
+      "start": 14.768,
+      "end": 16.576,
       "words": [
         {
           "text": "Où",
-          "start": 15.08,
-          "end": 15.6
+          "start": 14.768,
+          "end": 15.397
         },
         {
           "text": "où",
-          "start": 15.6,
-          "end": 16.1
+          "start": 15.424,
+          "end": 15.851
         },
         {
           "text": "où",
-          "start": 16.1,
-          "end": 16.6
+          "start": 15.883,
+          "end": 16.149
         },
         {
           "text": "est",
-          "start": 16.6,
-          "end": 16.95
+          "start": 16.181,
+          "end": 16.576
         }
       ],
       "translations": {
@@ -40,38 +40,38 @@
       }
     },
     {
-      "start": 17.1,
-      "end": 18.95,
+      "start": 16.602,
+      "end": 18.431,
       "words": [
         {
           "text": "Où",
-          "start": 17.1,
-          "end": 17.38
+          "start": 16.602,
+          "end": 16.826
         },
         {
           "text": "est",
-          "start": 17.38,
-          "end": 17.62
+          "start": 16.853,
+          "end": 16.943
         },
         {
           "text": "ma",
-          "start": 17.62,
-          "end": 17.88
+          "start": 16.965,
+          "end": 17.178
         },
         {
           "text": "pomme",
-          "start": 17.88,
-          "end": 18.38
+          "start": 17.21,
+          "end": 17.455
         },
         {
           "text": "de",
-          "start": 18.38,
-          "end": 18.62
+          "start": 17.482,
+          "end": 17.679
         },
         {
-          "text": "terre ?",
-          "start": 18.62,
-          "end": 18.95
+          "text": "terre",
+          "start": 17.685,
+          "end": 18.431
         }
       ],
       "translations": {
@@ -79,33 +79,33 @@
       }
     },
     {
-      "start": 19.1,
-      "end": 21.13,
+      "start": 18.46,
+      "end": 20.305,
       "words": [
         {
           "text": "Oh",
-          "start": 19.1,
-          "end": 19.6
+          "start": 18.46,
+          "end": 18.945
         },
         {
           "text": "là",
-          "start": 19.6,
-          "end": 20.1
+          "start": 19.068,
+          "end": 19.489
         },
         {
           "text": "oh",
-          "start": 20.1,
-          "end": 20.6
+          "start": 19.521,
+          "end": 19.729
         },
         {
           "text": "là",
-          "start": 20.6,
-          "end": 20.88
+          "start": 19.761,
+          "end": 20.119
         },
         {
           "text": "là",
-          "start": 20.88,
-          "end": 21.13
+          "start": 20.145,
+          "end": 20.305
         }
       ],
       "translations": {
@@ -113,23 +113,23 @@
       }
     },
     {
-      "start": 21.1,
-      "end": 22.95,
+      "start": 20.317,
+      "end": 22.125,
       "words": [
         {
           "text": "J'appelle",
-          "start": 21.1,
-          "end": 22.1
+          "start": 20.317,
+          "end": 21.096
         },
         {
           "text": "ma",
-          "start": 22.1,
-          "end": 22.46
+          "start": 21.122,
+          "end": 21.336
         },
         {
           "text": "mère",
-          "start": 22.46,
-          "end": 22.95
+          "start": 21.368,
+          "end": 22.125
         }
       ],
       "translations": {
@@ -137,18 +137,18 @@
       }
     },
     {
-      "start": 23.1,
-      "end": 24.73,
+      "start": 22.152,
+      "end": 23.955,
       "words": [
         {
           "text": "Maman",
-          "start": 23.1,
-          "end": 24.1
+          "start": 22.152,
+          "end": 23.155
         },
         {
           "text": "maman",
-          "start": 24.1,
-          "end": 24.73
+          "start": 23.203,
+          "end": 23.955
         }
       ],
       "translations": {
@@ -156,38 +156,38 @@
       }
     },
     {
-      "start": 24.88,
-      "end": 26.77,
+      "start": 23.986,
+      "end": 25.794,
       "words": [
         {
           "text": "Où",
-          "start": 24.88,
-          "end": 25.14
+          "start": 23.986,
+          "end": 24.226
         },
         {
           "text": "est",
-          "start": 25.14,
-          "end": 25.4
+          "start": 24.253,
+          "end": 24.322
         },
         {
           "text": "ma",
-          "start": 25.4,
-          "end": 25.66
+          "start": 24.354,
+          "end": 24.541
         },
         {
           "text": "pomme",
-          "start": 25.66,
-          "end": 26.16
+          "start": 24.546,
+          "end": 24.823
         },
         {
           "text": "de",
-          "start": 26.16,
-          "end": 26.4
+          "start": 24.85,
+          "end": 25.047
         },
         {
-          "text": "terre ?",
-          "start": 26.4,
-          "end": 26.77
+          "text": "terre",
+          "start": 25.047,
+          "end": 25.794
         }
       ],
       "translations": {
@@ -195,33 +195,33 @@
       }
     },
     {
-      "start": 26.92,
-      "end": 28.89,
+      "start": 25.821,
+      "end": 27.65,
       "words": [
         {
           "text": "Je",
-          "start": 26.92,
-          "end": 27.18
+          "start": 25.821,
+          "end": 26.232
         },
         {
           "text": "vois",
-          "start": 27.18,
-          "end": 27.88
+          "start": 26.258,
+          "end": 26.696
         },
         {
           "text": "oh",
-          "start": 27.88,
-          "end": 28.38
+          "start": 26.728,
+          "end": 26.936
         },
         {
           "text": "là",
-          "start": 28.38,
-          "end": 28.64
+          "start": 26.968,
+          "end": 27.266
         },
         {
           "text": "là",
-          "start": 28.64,
-          "end": 28.89
+          "start": 27.304,
+          "end": 27.65
         }
       ],
       "translations": {
@@ -229,38 +229,38 @@
       }
     },
     {
-      "start": 28.9,
-      "end": 30.87,
+      "start": 27.678,
+      "end": 29.486,
       "words": [
         {
           "text": "Je",
-          "start": 28.9,
-          "end": 29.16
+          "start": 27.678,
+          "end": 27.774
         },
         {
           "text": "vois",
-          "start": 29.16,
-          "end": 29.66
+          "start": 27.785,
+          "end": 28.142
         },
         {
           "text": "ta",
-          "start": 29.66,
-          "end": 29.9
+          "start": 28.158,
+          "end": 28.387
         },
         {
           "text": "pomme",
-          "start": 29.9,
-          "end": 30.38
+          "start": 28.419,
+          "end": 28.777
         },
         {
           "text": "de",
-          "start": 30.38,
-          "end": 30.62
+          "start": 28.793,
+          "end": 28.985
         },
         {
-          "text": "terre !",
-          "start": 30.62,
-          "end": 30.87
+          "text": "terre",
+          "start": 29.017,
+          "end": 29.486
         }
       ],
       "translations": {
@@ -268,28 +268,28 @@
       }
     },
     {
-      "start": 30.98,
-      "end": 32.79,
+      "start": 29.513,
+      "end": 31.358,
       "words": [
         {
           "text": "Dans",
-          "start": 30.98,
-          "end": 31.22
+          "start": 29.513,
+          "end": 29.961
         },
         {
           "text": "l'air",
-          "start": 31.22,
-          "end": 32.18
+          "start": 29.988,
+          "end": 30.436
         },
         {
           "text": "dans",
-          "start": 32.18,
-          "end": 32.44
+          "start": 30.468,
+          "end": 30.718
         },
         {
           "text": "l'air",
-          "start": 32.44,
-          "end": 32.79
+          "start": 30.75,
+          "end": 31.358
         }
       ],
       "translations": {
@@ -297,38 +297,38 @@
       }
     },
     {
-      "start": 32.94,
-      "end": 34.89,
+      "start": 31.37,
+      "end": 33.199,
       "words": [
         {
           "text": "Je",
-          "start": 32.94,
-          "end": 33.18
+          "start": 31.37,
+          "end": 31.493
         },
         {
           "text": "vois",
-          "start": 33.18,
-          "end": 33.68
+          "start": 31.493,
+          "end": 31.711
         },
         {
           "text": "ta",
-          "start": 33.68,
-          "end": 33.92
+          "start": 31.743,
+          "end": 31.903
         },
         {
           "text": "pomme",
-          "start": 33.92,
-          "end": 34.4
+          "start": 31.935,
+          "end": 32.293
         },
         {
           "text": "de",
-          "start": 34.4,
-          "end": 34.64
+          "start": 32.319,
+          "end": 32.565
         },
         {
-          "text": "terre !",
-          "start": 34.64,
-          "end": 34.89
+          "text": "terre",
+          "start": 32.597,
+          "end": 33.199
         }
       ],
       "translations": {
@@ -336,28 +336,28 @@
       }
     },
     {
-      "start": 34.92,
-      "end": 36.73,
+      "start": 33.228,
+      "end": 35.063,
       "words": [
         {
           "text": "Dans",
-          "start": 34.92,
-          "end": 35.16
+          "start": 33.228,
+          "end": 33.665
         },
         {
           "text": "l'air",
-          "start": 35.16,
-          "end": 36.12
+          "start": 33.692,
+          "end": 34.103
         },
         {
           "text": "dans",
-          "start": 36.12,
-          "end": 36.38
+          "start": 34.135,
+          "end": 34.385
         },
         {
           "text": "l'air",
-          "start": 36.38,
-          "end": 36.73
+          "start": 34.417,
+          "end": 35.063
         }
       ],
       "translations": {
@@ -365,28 +365,28 @@
       }
     },
     {
-      "start": 36.88,
-      "end": 38.71,
+      "start": 35.085,
+      "end": 36.898,
       "words": [
         {
           "text": "Oui",
-          "start": 36.88,
-          "end": 37.38
+          "start": 35.085,
+          "end": 35.458
         },
         {
           "text": "oui",
-          "start": 37.38,
-          "end": 37.86
+          "start": 35.485,
+          "end": 35.848
         },
         {
           "text": "oh",
-          "start": 37.86,
-          "end": 38.36
+          "start": 35.89,
+          "end": 36.098
         },
         {
-          "text": "yeah !",
-          "start": 38.36,
-          "end": 38.71
+          "text": "yeah",
+          "start": 36.13,
+          "end": 36.898
         }
       ],
       "translations": {
@@ -394,28 +394,28 @@
       }
     },
     {
-      "start": 38.86,
-      "end": 40.67,
+      "start": 36.92,
+      "end": 38.728,
       "words": [
         {
           "text": "Dans",
-          "start": 38.86,
-          "end": 39.1
+          "start": 36.92,
+          "end": 37.347
         },
         {
           "text": "l'air",
-          "start": 39.1,
-          "end": 40.06
+          "start": 37.373,
+          "end": 37.752
         },
         {
           "text": "dans",
-          "start": 40.06,
-          "end": 40.32
+          "start": 37.784,
+          "end": 38.099
         },
         {
           "text": "l'air",
-          "start": 40.32,
-          "end": 40.67
+          "start": 38.259,
+          "end": 38.728
         }
       ],
       "translations": {
@@ -423,38 +423,38 @@
       }
     },
     {
-      "start": 40.82,
-      "end": 42.77,
+      "start": 38.754,
+      "end": 40.583,
       "words": [
         {
           "text": "Je",
-          "start": 40.82,
-          "end": 41.06
+          "start": 38.754,
+          "end": 38.802
         },
         {
           "text": "vois",
-          "start": 41.06,
-          "end": 41.56
+          "start": 38.807,
+          "end": 39.106
         },
         {
           "text": "ta",
-          "start": 41.56,
-          "end": 41.8
+          "start": 39.138,
+          "end": 39.277
         },
         {
           "text": "pomme",
-          "start": 41.8,
-          "end": 42.28
+          "start": 39.309,
+          "end": 39.634
         },
         {
           "text": "de",
-          "start": 42.28,
-          "end": 42.52
+          "start": 39.661,
+          "end": 39.954
         },
         {
-          "text": "terre !",
-          "start": 42.52,
-          "end": 42.77
+          "text": "terre",
+          "start": 39.986,
+          "end": 40.583
         }
       ],
       "translations": {
@@ -462,28 +462,28 @@
       }
     },
     {
-      "start": 42.8,
-      "end": 44.61,
+      "start": 40.612,
+      "end": 42.425,
       "words": [
         {
           "text": "Dans",
-          "start": 42.8,
-          "end": 43.04
+          "start": 40.612,
+          "end": 41.039
         },
         {
           "text": "l'air",
-          "start": 43.04,
-          "end": 44.0
+          "start": 41.065,
+          "end": 41.684
         },
         {
           "text": "dans",
-          "start": 44.0,
-          "end": 44.26
+          "start": 41.716,
+          "end": 41.999
         },
         {
           "text": "l'air",
-          "start": 44.26,
-          "end": 44.61
+          "start": 42.031,
+          "end": 42.425
         }
       ],
       "translations": {
@@ -491,28 +491,28 @@
       }
     },
     {
-      "start": 44.76,
-      "end": 50.95,
+      "start": 42.446,
+      "end": 47.822,
       "words": [
         {
           "text": "Oui",
-          "start": 44.76,
-          "end": 45.26
+          "start": 42.446,
+          "end": 42.841
         },
         {
           "text": "oui",
-          "start": 45.26,
-          "end": 45.74
+          "start": 42.889,
+          "end": 43.171
         },
         {
           "text": "oh",
-          "start": 45.74,
-          "end": 46.24
+          "start": 43.433,
+          "end": 43.721
         },
         {
-          "text": "yeah !",
-          "start": 46.24,
-          "end": 50.95
+          "text": "yeah",
+          "start": 43.753,
+          "end": 47.822
         }
       ],
       "translations": {
@@ -520,28 +520,28 @@
       }
     },
     {
-      "start": 51.1,
-      "end": 52.93,
+      "start": 47.972,
+      "end": 49.785,
       "words": [
         {
           "text": "Où",
-          "start": 51.1,
-          "end": 51.6
+          "start": 47.972,
+          "end": 48.601
         },
         {
           "text": "où",
-          "start": 51.6,
-          "end": 52.08
+          "start": 48.628,
+          "end": 49.039
         },
         {
           "text": "où",
-          "start": 52.08,
-          "end": 52.58
+          "start": 49.071,
+          "end": 49.337
         },
         {
           "text": "est",
-          "start": 52.58,
-          "end": 52.93
+          "start": 49.369,
+          "end": 49.785
         }
       ],
       "translations": {
@@ -549,38 +549,38 @@
       }
     },
     {
-      "start": 53.08,
-      "end": 54.93,
+      "start": 49.807,
+      "end": 51.636,
       "words": [
         {
           "text": "Où",
-          "start": 53.08,
-          "end": 53.34
+          "start": 49.807,
+          "end": 50.036
         },
         {
           "text": "est",
-          "start": 53.34,
-          "end": 53.58
+          "start": 50.063,
+          "end": 50.159
         },
         {
           "text": "ma",
-          "start": 53.58,
-          "end": 53.84
+          "start": 50.18,
+          "end": 50.367
         },
         {
           "text": "pomme",
-          "start": 53.84,
-          "end": 54.32
+          "start": 50.383,
+          "end": 50.644
         },
         {
           "text": "de",
-          "start": 54.32,
-          "end": 54.58
+          "start": 50.671,
+          "end": 50.874
         },
         {
-          "text": "terre ?",
-          "start": 54.58,
-          "end": 54.93
+          "text": "terre",
+          "start": 50.874,
+          "end": 51.636
         }
       ],
       "translations": {
@@ -588,33 +588,33 @@
       }
     },
     {
-      "start": 55.08,
-      "end": 57.05,
+      "start": 51.664,
+      "end": 53.499,
       "words": [
         {
           "text": "Oh",
-          "start": 55.08,
-          "end": 55.56
+          "start": 51.664,
+          "end": 52.235
         },
         {
           "text": "là",
-          "start": 55.56,
-          "end": 56.06
+          "start": 52.261,
+          "end": 52.688
         },
         {
           "text": "oh",
-          "start": 56.06,
-          "end": 56.54
+          "start": 52.72,
+          "end": 52.928
         },
         {
           "text": "là",
-          "start": 56.54,
-          "end": 56.8
+          "start": 52.96,
+          "end": 53.307
         },
         {
           "text": "là",
-          "start": 56.8,
-          "end": 57.05
+          "start": 53.333,
+          "end": 53.499
         }
       ],
       "translations": {
@@ -622,23 +622,23 @@
       }
     },
     {
-      "start": 57.06,
-      "end": 58.89,
+      "start": 53.499,
+      "end": 55.328,
       "words": [
         {
           "text": "J'appelle",
-          "start": 57.06,
-          "end": 58.04
+          "start": 53.499,
+          "end": 54.363
         },
         {
           "text": "mon",
-          "start": 58.04,
-          "end": 58.4
+          "start": 54.363,
+          "end": 54.576
         },
         {
           "text": "père",
-          "start": 58.4,
-          "end": 58.89
+          "start": 54.587,
+          "end": 55.328
         }
       ],
       "translations": {
@@ -646,18 +646,18 @@
       }
     },
     {
-      "start": 59.04,
-      "end": 60.67,
+      "start": 55.356,
+      "end": 57.164,
       "words": [
         {
           "text": "Papa",
-          "start": 59.04,
-          "end": 60.02
+          "start": 55.356,
+          "end": 56.263
         },
         {
           "text": "papa",
-          "start": 60.02,
-          "end": 60.67
+          "start": 56.289,
+          "end": 57.164
         }
       ],
       "translations": {
@@ -665,38 +665,38 @@
       }
     },
     {
-      "start": 60.82,
-      "end": 62.67,
+      "start": 57.191,
+      "end": 59.02,
       "words": [
         {
           "text": "Où",
-          "start": 60.82,
-          "end": 61.08
+          "start": 57.191,
+          "end": 57.431
         },
         {
           "text": "est",
-          "start": 61.08,
-          "end": 61.34
+          "start": 57.458,
+          "end": 57.527
         },
         {
           "text": "ma",
-          "start": 61.34,
-          "end": 61.6
+          "start": 57.554,
+          "end": 57.714
         },
         {
           "text": "pomme",
-          "start": 61.6,
-          "end": 62.08
+          "start": 57.746,
+          "end": 58.012
         },
         {
           "text": "de",
-          "start": 62.08,
-          "end": 62.32
+          "start": 58.039,
+          "end": 58.194
         },
         {
-          "text": "terre ?",
-          "start": 62.32,
-          "end": 62.67
+          "text": "terre",
+          "start": 58.226,
+          "end": 59.02
         }
       ],
       "translations": {
@@ -704,33 +704,33 @@
       }
     },
     {
-      "start": 62.82,
-      "end": 64.81,
+      "start": 59.048,
+      "end": 60.856,
       "words": [
         {
           "text": "Je",
-          "start": 62.82,
-          "end": 63.08
+          "start": 59.048,
+          "end": 59.421
         },
         {
           "text": "vois",
-          "start": 63.08,
-          "end": 63.82
+          "start": 59.448,
+          "end": 59.917
         },
         {
           "text": "oh",
-          "start": 63.82,
-          "end": 64.3
+          "start": 60.013,
+          "end": 60.221
         },
         {
           "text": "là",
-          "start": 64.3,
-          "end": 64.56
+          "start": 60.253,
+          "end": 60.504
         },
         {
           "text": "là",
-          "start": 64.56,
-          "end": 64.81
+          "start": 60.531,
+          "end": 60.856
         }
       ],
       "translations": {
@@ -738,38 +738,38 @@
       }
     },
     {
-      "start": 64.82,
-      "end": 66.79,
+      "start": 60.883,
+      "end": 64.448,
       "words": [
         {
           "text": "Je",
-          "start": 64.82,
-          "end": 65.08
+          "start": 60.883,
+          "end": 61.139
         },
         {
           "text": "vois",
-          "start": 65.08,
-          "end": 65.58
+          "start": 61.16,
+          "end": 61.379
         },
         {
           "text": "ta",
-          "start": 65.58,
-          "end": 65.82
+          "start": 61.411,
+          "end": 61.63
         },
         {
           "text": "pomme",
-          "start": 65.82,
-          "end": 66.3
+          "start": 61.662,
+          "end": 61.998
         },
         {
           "text": "de",
-          "start": 66.3,
-          "end": 66.54
+          "start": 62.003,
+          "end": 62.2
         },
         {
-          "text": "terre !",
-          "start": 66.54,
-          "end": 66.79
+          "text": "terre",
+          "start": 62.232,
+          "end": 64.448
         }
       ],
       "translations": {
@@ -777,28 +777,28 @@
       }
     },
     {
-      "start": 66.9,
-      "end": 68.71,
+      "start": 64.598,
+      "end": 66.406,
       "words": [
         {
           "text": "Dans",
-          "start": 66.9,
-          "end": 67.14
+          "start": 64.598,
+          "end": 65.057
         },
         {
           "text": "l'air",
-          "start": 67.14,
-          "end": 68.1
+          "start": 65.083,
+          "end": 65.478
         },
         {
           "text": "dans",
-          "start": 68.1,
-          "end": 68.36
+          "start": 65.51,
+          "end": 65.761
         },
         {
           "text": "l'air",
-          "start": 68.36,
-          "end": 68.71
+          "start": 65.793,
+          "end": 66.406
         }
       ],
       "translations": {
@@ -806,38 +806,38 @@
       }
     },
     {
-      "start": 68.86,
-      "end": 70.81,
+      "start": 66.432,
+      "end": 68.24,
       "words": [
         {
           "text": "Je",
-          "start": 68.86,
-          "end": 69.1
+          "start": 66.432,
+          "end": 66.539
         },
         {
           "text": "vois",
-          "start": 69.1,
-          "end": 69.6
+          "start": 66.56,
+          "end": 66.8
         },
         {
           "text": "ta",
-          "start": 69.6,
-          "end": 69.84
+          "start": 66.832,
+          "end": 66.901
         },
         {
           "text": "pomme",
-          "start": 69.84,
-          "end": 70.32
+          "start": 66.933,
+          "end": 67.312
         },
         {
           "text": "de",
-          "start": 70.32,
-          "end": 70.56
+          "start": 67.339,
+          "end": 67.616
         },
         {
-          "text": "terre !",
-          "start": 70.56,
-          "end": 70.81
+          "text": "terre",
+          "start": 67.648,
+          "end": 68.24
         }
       ],
       "translations": {
@@ -845,28 +845,28 @@
       }
     },
     {
-      "start": 70.84,
-      "end": 72.65,
+      "start": 68.267,
+      "end": 70.102,
       "words": [
         {
           "text": "Dans",
-          "start": 70.84,
-          "end": 71.08
+          "start": 68.267,
+          "end": 68.534
         },
         {
           "text": "l'air",
-          "start": 71.08,
-          "end": 72.04
+          "start": 68.56,
+          "end": 69.046
         },
         {
           "text": "dans",
-          "start": 72.04,
-          "end": 72.3
+          "start": 69.083,
+          "end": 69.36
         },
         {
           "text": "l'air",
-          "start": 72.3,
-          "end": 72.65
+          "start": 69.392,
+          "end": 70.102
         }
       ],
       "translations": {
@@ -874,28 +874,28 @@
       }
     },
     {
-      "start": 72.8,
-      "end": 74.63,
+      "start": 70.124,
+      "end": 71.959,
       "words": [
         {
           "text": "Oui",
-          "start": 72.8,
-          "end": 73.3
+          "start": 70.124,
+          "end": 70.791
         },
         {
           "text": "oui",
-          "start": 73.3,
-          "end": 73.78
+          "start": 70.817,
+          "end": 71.281
         },
         {
           "text": "oh",
-          "start": 73.78,
-          "end": 74.28
+          "start": 71.313,
+          "end": 71.521
         },
         {
-          "text": "yeah !",
-          "start": 74.28,
-          "end": 74.63
+          "text": "yeah",
+          "start": 71.553,
+          "end": 71.959
         }
       ],
       "translations": {
@@ -903,28 +903,28 @@
       }
     },
     {
-      "start": 74.78,
-      "end": 76.59,
+      "start": 71.982,
+      "end": 73.79,
       "words": [
         {
           "text": "Dans",
-          "start": 74.78,
-          "end": 75.02
+          "start": 71.982,
+          "end": 72.419
         },
         {
           "text": "l'air",
-          "start": 75.02,
-          "end": 75.98
+          "start": 72.446,
+          "end": 72.979
         },
         {
           "text": "dans",
-          "start": 75.98,
-          "end": 76.24
+          "start": 73.011,
+          "end": 73.337
         },
         {
           "text": "l'air",
-          "start": 76.24,
-          "end": 76.59
+          "start": 73.369,
+          "end": 73.79
         }
       ],
       "translations": {
@@ -932,38 +932,38 @@
       }
     },
     {
-      "start": 76.74,
-      "end": 78.69,
+      "start": 73.816,
+      "end": 75.624,
       "words": [
         {
           "text": "Je",
-          "start": 76.74,
-          "end": 76.98
+          "start": 73.816,
+          "end": 73.923
         },
         {
           "text": "vois",
-          "start": 76.98,
-          "end": 77.48
+          "start": 73.928,
+          "end": 74.152
         },
         {
           "text": "ta",
-          "start": 77.48,
-          "end": 77.72
+          "start": 74.184,
+          "end": 74.307
         },
         {
           "text": "pomme",
-          "start": 77.72,
-          "end": 78.2
+          "start": 74.339,
+          "end": 74.712
         },
         {
           "text": "de",
-          "start": 78.2,
-          "end": 78.44
+          "start": 74.728,
+          "end": 74.979
         },
         {
-          "text": "terre !",
-          "start": 78.44,
-          "end": 78.69
+          "text": "terre",
+          "start": 75.011,
+          "end": 75.624
         }
       ],
       "translations": {
@@ -971,28 +971,28 @@
       }
     },
     {
-      "start": 78.72,
-      "end": 80.53,
+      "start": 75.651,
+      "end": 77.502,
       "words": [
         {
           "text": "Dans",
-          "start": 78.72,
-          "end": 78.96
+          "start": 75.651,
+          "end": 76.094
         },
         {
           "text": "l'air",
-          "start": 78.96,
-          "end": 79.92
+          "start": 76.12,
+          "end": 76.702
         },
         {
           "text": "dans",
-          "start": 79.92,
-          "end": 80.18
+          "start": 76.734,
+          "end": 77.064
         },
         {
           "text": "l'air",
-          "start": 80.18,
-          "end": 80.53
+          "start": 77.096,
+          "end": 77.502
         }
       ],
       "translations": {
@@ -1000,28 +1000,28 @@
       }
     },
     {
-      "start": 80.68,
-      "end": 82.83,
+      "start": 77.508,
+      "end": 79.321,
       "words": [
         {
           "text": "Oui",
-          "start": 80.68,
-          "end": 81.18
+          "start": 77.508,
+          "end": 77.967
         },
         {
           "text": "oui",
-          "start": 81.18,
-          "end": 81.66
+          "start": 77.993,
+          "end": 78.324
         },
         {
           "text": "oh",
-          "start": 81.66,
-          "end": 82.16
+          "start": 78.516,
+          "end": 78.799
         },
         {
-          "text": "yeah !",
-          "start": 82.16,
-          "end": 82.83
+          "text": "yeah",
+          "start": 78.831,
+          "end": 79.321
         }
       ],
       "translations": {
@@ -1029,28 +1029,28 @@
       }
     },
     {
-      "start": 82.98,
-      "end": 84.79,
+      "start": 79.343,
+      "end": 81.108,
       "words": [
         {
           "text": "Je",
-          "start": 82.98,
-          "end": 83.46
+          "start": 79.343,
+          "end": 79.85
         },
         {
           "text": "je",
-          "start": 83.46,
-          "end": 83.94
+          "start": 79.892,
+          "end": 80.292
         },
         {
           "text": "je",
-          "start": 83.94,
-          "end": 84.44
+          "start": 80.324,
+          "end": 80.596
         },
         {
           "text": "suis",
-          "start": 84.44,
-          "end": 84.79
+          "start": 80.628,
+          "end": 81.108
         }
       ],
       "translations": {
@@ -1058,38 +1058,38 @@
       }
     },
     {
-      "start": 84.94,
-      "end": 86.79,
+      "start": 81.131,
+      "end": 82.982,
       "words": [
         {
           "text": "Je",
-          "start": 84.94,
-          "end": 85.2
+          "start": 81.131,
+          "end": 81.275
         },
         {
           "text": "suis",
-          "start": 85.2,
-          "end": 85.46
+          "start": 81.28,
+          "end": 81.526
         },
         {
           "text": "la",
-          "start": 85.46,
-          "end": 85.72
+          "start": 81.558,
+          "end": 81.739
         },
         {
           "text": "pomme",
-          "start": 85.72,
-          "end": 86.2
+          "start": 81.76,
+          "end": 82.038
         },
         {
           "text": "de",
-          "start": 86.2,
-          "end": 86.44
+          "start": 82.064,
+          "end": 82.256
         },
         {
-          "text": "terre !",
-          "start": 86.44,
-          "end": 86.79
+          "text": "terre",
+          "start": 82.256,
+          "end": 82.982
         }
       ],
       "translations": {
@@ -1097,33 +1097,33 @@
       }
     },
     {
-      "start": 86.94,
-      "end": 88.91,
+      "start": 83.011,
+      "end": 84.869,
       "words": [
         {
           "text": "Oh",
-          "start": 86.94,
-          "end": 87.42
+          "start": 83.011,
+          "end": 83.464
         },
         {
           "text": "là",
-          "start": 87.42,
-          "end": 87.92
+          "start": 83.646,
+          "end": 84.035
         },
         {
           "text": "oh",
-          "start": 87.92,
-          "end": 88.4
+          "start": 84.067,
+          "end": 84.275
         },
         {
           "text": "là",
-          "start": 88.4,
-          "end": 88.66
+          "start": 84.307,
+          "end": 84.664
         },
         {
           "text": "là",
-          "start": 88.66,
-          "end": 88.91
+          "start": 84.691,
+          "end": 84.869
         }
       ],
       "translations": {
@@ -1131,23 +1131,23 @@
       }
     },
     {
-      "start": 88.92,
-      "end": 90.79,
+      "start": 84.869,
+      "end": 86.672,
       "words": [
         {
           "text": "Je",
-          "start": 88.92,
-          "end": 89.18
+          "start": 84.869,
+          "end": 85.434
         },
         {
           "text": "m'appelle",
-          "start": 89.18,
-          "end": 90.18
+          "start": 85.461,
+          "end": 85.941
         },
         {
           "text": "Cher",
-          "start": 90.18,
-          "end": 90.79
+          "start": 85.957,
+          "end": 86.672
         }
       ],
       "translations": {
@@ -1155,28 +1155,28 @@
       }
     },
     {
-      "start": 90.94,
-      "end": 92.75,
+      "start": 86.703,
+      "end": 88.538,
       "words": [
         {
           "text": "Je",
-          "start": 90.94,
-          "end": 91.42
+          "start": 86.703,
+          "end": 87.215
         },
         {
           "text": "je",
-          "start": 91.42,
-          "end": 91.9
+          "start": 87.306,
+          "end": 87.636
         },
         {
           "text": "je",
-          "start": 91.9,
-          "end": 92.4
+          "start": 87.679,
+          "end": 87.978
         },
         {
           "text": "suis",
-          "start": 92.4,
-          "end": 92.75
+          "start": 88.004,
+          "end": 88.538
         }
       ],
       "translations": {
@@ -1184,38 +1184,38 @@
       }
     },
     {
-      "start": 92.9,
-      "end": 94.75,
+      "start": 88.561,
+      "end": 90.364,
       "words": [
         {
           "text": "Je",
-          "start": 92.9,
-          "end": 93.16
+          "start": 88.561,
+          "end": 88.684
         },
         {
           "text": "suis",
-          "start": 93.16,
-          "end": 93.42
+          "start": 88.684,
+          "end": 88.876
         },
         {
           "text": "la",
-          "start": 93.42,
-          "end": 93.68
+          "start": 88.908,
+          "end": 89.078
         },
         {
           "text": "pomme",
-          "start": 93.68,
-          "end": 94.16
+          "start": 89.11,
+          "end": 89.436
         },
         {
           "text": "de",
-          "start": 94.16,
-          "end": 94.4
+          "start": 89.462,
+          "end": 89.692
         },
         {
-          "text": "terre !",
-          "start": 94.4,
-          "end": 94.75
+          "text": "terre",
+          "start": 89.724,
+          "end": 90.364
         }
       ],
       "translations": {
@@ -1223,33 +1223,33 @@
       }
     },
     {
-      "start": 94.9,
-      "end": 96.89,
+      "start": 90.395,
+      "end": 92.224,
       "words": [
         {
           "text": "Je",
-          "start": 94.9,
-          "end": 95.16
+          "start": 90.395,
+          "end": 90.795
         },
         {
           "text": "vois",
-          "start": 95.16,
-          "end": 95.88
+          "start": 90.822,
+          "end": 91.254
         },
         {
           "text": "oh",
-          "start": 95.88,
-          "end": 96.38
+          "start": 91.286,
+          "end": 91.494
         },
         {
           "text": "là",
-          "start": 96.38,
-          "end": 96.64
+          "start": 91.526,
+          "end": 91.851
         },
         {
           "text": "là",
-          "start": 96.64,
-          "end": 96.89
+          "start": 91.878,
+          "end": 92.224
         }
       ],
       "translations": {
@@ -1257,33 +1257,33 @@
       }
     },
     {
-      "start": 96.9,
-      "end": 99.09,
+      "start": 92.253,
+      "end": 94.11,
       "words": [
         {
           "text": "Cher",
-          "start": 96.9,
-          "end": 97.88
+          "start": 92.253,
+          "end": 92.834
         },
         {
           "text": "la",
-          "start": 97.88,
-          "end": 98.12
+          "start": 92.861,
+          "end": 93.128
         },
         {
           "text": "pomme",
-          "start": 98.12,
-          "end": 98.6
+          "start": 93.16,
+          "end": 93.624
         },
         {
           "text": "de",
-          "start": 98.6,
-          "end": 98.84
+          "start": 93.656,
+          "end": 93.89
         },
         {
-          "text": "terre !",
-          "start": 98.84,
-          "end": 99.09
+          "text": "terre",
+          "start": 93.917,
+          "end": 94.11
         }
       ],
       "translations": {
@@ -1291,28 +1291,28 @@
       }
     },
     {
-      "start": 99.12,
-      "end": 100.93,
+      "start": 94.11,
+      "end": 95.923,
       "words": [
         {
           "text": "Dans",
-          "start": 99.12,
-          "end": 99.36
+          "start": 94.11,
+          "end": 94.585
         },
         {
           "text": "l'air",
-          "start": 99.36,
-          "end": 100.32
+          "start": 94.611,
+          "end": 94.995
         },
         {
           "text": "dans",
-          "start": 100.32,
-          "end": 100.58
+          "start": 95.027,
+          "end": 95.475
         },
         {
           "text": "l'air",
-          "start": 100.58,
-          "end": 100.93
+          "start": 95.507,
+          "end": 95.923
         }
       ],
       "translations": {
@@ -1320,271 +1320,271 @@
       }
     },
     {
-      "start": 101.08,
-      "end": 103.03,
+      "start": 95.945,
+      "end": 97.78,
       "words": [
         {
           "text": "C'est",
-          "start": 101.08,
-          "end": 101.32
+          "start": 95.945,
+          "end": 96.276
         },
         {
           "text": "Cher",
-          "start": 101.32,
-          "end": 101.82
+          "start": 96.302,
+          "end": 96.777
         },
         {
           "text": "la",
-          "start": 101.82,
-          "end": 102.06
+          "start": 96.809,
+          "end": 97.001
         },
         {
           "text": "pomme",
-          "start": 102.06,
-          "end": 102.54
+          "start": 97.033,
+          "end": 97.374
         },
         {
           "text": "de",
-          "start": 102.54,
-          "end": 102.78
-        },
-        {
-          "text": "terre !",
-          "start": 102.78,
-          "end": 103.03
-        }
-      ],
-      "translations": {
-        "en": "It's Cher the potato!"
-      }
-    },
-    {
-      "start": 103.06,
-      "end": 104.87,
-      "words": [
-        {
-          "text": "Dans",
-          "start": 103.06,
-          "end": 103.3
-        },
-        {
-          "text": "l'air",
-          "start": 103.3,
-          "end": 104.26
-        },
-        {
-          "text": "dans",
-          "start": 104.26,
-          "end": 104.52
-        },
-        {
-          "text": "l'air",
-          "start": 104.52,
-          "end": 104.87
-        }
-      ],
-      "translations": {
-        "en": "In the air, in the air"
-      }
-    },
-    {
-      "start": 105.02,
-      "end": 106.85,
-      "words": [
-        {
-          "text": "Oui",
-          "start": 105.02,
-          "end": 105.52
-        },
-        {
-          "text": "oui",
-          "start": 105.52,
-          "end": 106.0
-        },
-        {
-          "text": "oh",
-          "start": 106.0,
-          "end": 106.5
-        },
-        {
-          "text": "yeah !",
-          "start": 106.5,
-          "end": 106.85
-        }
-      ],
-      "translations": {
-        "en": "Yes, yes, oh yeah!"
-      }
-    },
-    {
-      "start": 107.0,
-      "end": 108.81,
-      "words": [
-        {
-          "text": "Dans",
-          "start": 107.0,
-          "end": 107.24
-        },
-        {
-          "text": "l'air",
-          "start": 107.24,
-          "end": 108.2
-        },
-        {
-          "text": "dans",
-          "start": 108.2,
-          "end": 108.46
-        },
-        {
-          "text": "l'air",
-          "start": 108.46,
-          "end": 108.81
-        }
-      ],
-      "translations": {
-        "en": "In the air, in the air"
-      }
-    },
-    {
-      "start": 108.96,
-      "end": 110.91,
-      "words": [
-        {
-          "text": "C'est",
-          "start": 108.96,
-          "end": 109.2
-        },
-        {
-          "text": "Cher",
-          "start": 109.2,
-          "end": 109.7
-        },
-        {
-          "text": "la",
-          "start": 109.7,
-          "end": 109.94
-        },
-        {
-          "text": "pomme",
-          "start": 109.94,
-          "end": 110.42
-        },
-        {
-          "text": "de",
-          "start": 110.42,
-          "end": 110.66
-        },
-        {
-          "text": "terre !",
-          "start": 110.66,
-          "end": 110.91
-        }
-      ],
-      "translations": {
-        "en": "It's Cher the potato!"
-      }
-    },
-    {
-      "start": 110.94,
-      "end": 112.75,
-      "words": [
-        {
-          "text": "Dans",
-          "start": 110.94,
-          "end": 111.18
-        },
-        {
-          "text": "l'air",
-          "start": 111.18,
-          "end": 112.14
-        },
-        {
-          "text": "dans",
-          "start": 112.14,
-          "end": 112.4
-        },
-        {
-          "text": "l'air",
-          "start": 112.4,
-          "end": 112.75
-        }
-      ],
-      "translations": {
-        "en": "In the air, in the air"
-      }
-    },
-    {
-      "start": 112.9,
-      "end": 122.73,
-      "words": [
-        {
-          "text": "Oui",
-          "start": 112.9,
-          "end": 113.4
-        },
-        {
-          "text": "oui",
-          "start": 113.4,
-          "end": 113.88
-        },
-        {
-          "text": "oh",
-          "start": 113.88,
-          "end": 114.38
-        },
-        {
-          "text": "yeah !",
-          "start": 114.38,
-          "end": 122.73
-        }
-      ],
-      "translations": {
-        "en": "Yes, yes, oh yeah!"
-      }
-    },
-    {
-      "start": 122.88,
-      "end": 126.71,
-      "words": [
-        {
-          "text": "Je",
-          "start": 122.88,
-          "end": 123.12
-        },
-        {
-          "text": "je",
-          "start": 123.12,
-          "end": 123.38
-        },
-        {
-          "text": "m'appelle",
-          "start": 123.38,
-          "end": 124.1
-        },
-        {
-          "text": "Cher",
-          "start": 124.1,
-          "end": 124.6
-        },
-        {
-          "text": "la",
-          "start": 124.6,
-          "end": 124.84
-        },
-        {
-          "text": "pomme",
-          "start": 124.84,
-          "end": 125.32
-        },
-        {
-          "text": "de",
-          "start": 125.32,
-          "end": 125.56
+          "start": 97.401,
+          "end": 97.593
         },
         {
           "text": "terre",
-          "start": 125.56,
-          "end": 126.71
+          "start": 97.625,
+          "end": 97.78
+        }
+      ],
+      "translations": {
+        "en": "It's Cher the potato!"
+      }
+    },
+    {
+      "start": 97.802,
+      "end": 99.637,
+      "words": [
+        {
+          "text": "Dans",
+          "start": 97.802,
+          "end": 98.207
+        },
+        {
+          "text": "l'air",
+          "start": 98.255,
+          "end": 98.655
+        },
+        {
+          "text": "dans",
+          "start": 98.687,
+          "end": 99.167
+        },
+        {
+          "text": "l'air",
+          "start": 99.199,
+          "end": 99.637
+        }
+      ],
+      "translations": {
+        "en": "In the air, in the air"
+      }
+    },
+    {
+      "start": 99.637,
+      "end": 101.472,
+      "words": [
+        {
+          "text": "Oui",
+          "start": 99.637,
+          "end": 100.058
+        },
+        {
+          "text": "oui",
+          "start": 100.085,
+          "end": 100.378
+        },
+        {
+          "text": "oh",
+          "start": 100.656,
+          "end": 100.88
+        },
+        {
+          "text": "yeah",
+          "start": 100.912,
+          "end": 101.472
+        }
+      ],
+      "translations": {
+        "en": "Yes, yes, oh yeah!"
+      }
+    },
+    {
+      "start": 101.494,
+      "end": 103.307,
+      "words": [
+        {
+          "text": "Dans",
+          "start": 101.494,
+          "end": 101.937
+        },
+        {
+          "text": "l'air",
+          "start": 101.963,
+          "end": 102.401
+        },
+        {
+          "text": "dans",
+          "start": 102.438,
+          "end": 102.875
+        },
+        {
+          "text": "l'air",
+          "start": 102.907,
+          "end": 103.307
+        }
+      ],
+      "translations": {
+        "en": "In the air, in the air"
+      }
+    },
+    {
+      "start": 103.329,
+      "end": 105.158,
+      "words": [
+        {
+          "text": "C'est",
+          "start": 103.329,
+          "end": 103.777
+        },
+        {
+          "text": "Cher",
+          "start": 103.804,
+          "end": 104.15
+        },
+        {
+          "text": "la",
+          "start": 104.182,
+          "end": 104.39
+        },
+        {
+          "text": "pomme",
+          "start": 104.412,
+          "end": 104.785
+        },
+        {
+          "text": "de",
+          "start": 104.79,
+          "end": 104.918
+        },
+        {
+          "text": "terre",
+          "start": 104.95,
+          "end": 105.158
+        }
+      ],
+      "translations": {
+        "en": "It's Cher the potato!"
+      }
+    },
+    {
+      "start": 105.186,
+      "end": 106.999,
+      "words": [
+        {
+          "text": "Dans",
+          "start": 105.186,
+          "end": 105.613
+        },
+        {
+          "text": "l'air",
+          "start": 105.639,
+          "end": 105.991
+        },
+        {
+          "text": "dans",
+          "start": 106.023,
+          "end": 106.327
+        },
+        {
+          "text": "l'air",
+          "start": 106.37,
+          "end": 106.999
+        }
+      ],
+      "translations": {
+        "en": "In the air, in the air"
+      }
+    },
+    {
+      "start": 107.021,
+      "end": 116.089,
+      "words": [
+        {
+          "text": "Oui",
+          "start": 107.021,
+          "end": 107.517
+        },
+        {
+          "text": "oui",
+          "start": 107.544,
+          "end": 107.81
+        },
+        {
+          "text": "oh",
+          "start": 107.992,
+          "end": 108.349
+        },
+        {
+          "text": "yeah",
+          "start": 108.392,
+          "end": 116.089
+        }
+      ],
+      "translations": {
+        "en": "Yes, yes, oh yeah!"
+      }
+    },
+    {
+      "start": 116.239,
+      "end": 119.903,
+      "words": [
+        {
+          "text": "Je",
+          "start": 116.239,
+          "end": 116.708
+        },
+        {
+          "text": "je",
+          "start": 116.735,
+          "end": 117.146
+        },
+        {
+          "text": "m'appelle",
+          "start": 117.178,
+          "end": 117.962
+        },
+        {
+          "text": "Cher",
+          "start": 117.994,
+          "end": 118.452
+        },
+        {
+          "text": "la",
+          "start": 118.479,
+          "end": 118.655
+        },
+        {
+          "text": "pomme",
+          "start": 118.671,
+          "end": 118.922
+        },
+        {
+          "text": "de",
+          "start": 118.954,
+          "end": 119.14
+        },
+        {
+          "text": "terre",
+          "start": 119.167,
+          "end": 119.903
         }
       ],
       "translations": {
@@ -1592,38 +1592,38 @@
       }
     },
     {
-      "start": 126.86,
-      "end": 130.73,
+      "start": 119.931,
+      "end": 123.595,
       "words": [
         {
           "text": "Je",
-          "start": 126.86,
-          "end": 127.1
+          "start": 119.931,
+          "end": 120.4
         },
         {
           "text": "je",
-          "start": 127.1,
-          "end": 127.36
+          "start": 120.454,
+          "end": 120.864
         },
         {
           "text": "j'habite",
-          "start": 127.36,
-          "end": 128.08
+          "start": 120.896,
+          "end": 121.819
         },
         {
           "text": "dans",
-          "start": 128.08,
-          "end": 128.58
+          "start": 122.064,
+          "end": 122.534
         },
         {
           "text": "la",
-          "start": 128.58,
-          "end": 128.82
+          "start": 122.56,
+          "end": 122.768
         },
         {
           "text": "mer",
-          "start": 128.82,
-          "end": 130.73
+          "start": 122.8,
+          "end": 123.595
         }
       ],
       "translations": {
@@ -1631,33 +1631,33 @@
       }
     },
     {
-      "start": 130.88,
-      "end": 134.73,
+      "start": 123.623,
+      "end": 127.287,
       "words": [
         {
           "text": "J'adore",
-          "start": 130.88,
-          "end": 131.88
+          "start": 123.623,
+          "end": 124.098
         },
         {
           "text": "j'adore",
-          "start": 131.88,
-          "end": 132.88
+          "start": 124.172,
+          "end": 125.138
         },
         {
           "text": "j'adore",
-          "start": 132.88,
-          "end": 133.62
+          "start": 125.191,
+          "end": 126.215
         },
         {
           "text": "la",
-          "start": 133.62,
-          "end": 133.86
+          "start": 126.247,
+          "end": 126.455
         },
         {
           "text": "mer",
-          "start": 133.86,
-          "end": 134.73
+          "start": 126.482,
+          "end": 127.287
         }
       ],
       "translations": {
@@ -1665,38 +1665,38 @@
       }
     },
     {
-      "start": 134.88,
-      "end": 138.15,
+      "start": 127.315,
+      "end": 130.979,
       "words": [
         {
           "text": "J'habite",
-          "start": 134.88,
-          "end": 135.6
+          "start": 127.315,
+          "end": 128.248
         },
         {
           "text": "j'habite",
-          "start": 135.6,
-          "end": 136.32
+          "start": 128.275,
+          "end": 128.979
         },
         {
           "text": "dans",
-          "start": 136.32,
-          "end": 136.64
+          "start": 129.011,
+          "end": 129.443
         },
         {
           "text": "un",
-          "start": 136.64,
-          "end": 136.88
+          "start": 129.475,
+          "end": 129.726
         },
         {
           "text": "grand",
-          "start": 136.88,
-          "end": 137.2
+          "start": 129.752,
+          "end": 130.019
         },
         {
           "text": "éclair",
-          "start": 137.2,
-          "end": 138.15
+          "start": 130.051,
+          "end": 130.979
         }
       ],
       "translations": {
@@ -1704,33 +1704,33 @@
       }
     },
     {
-      "start": 138.3,
-      "end": 140.27,
+      "start": 131.007,
+      "end": 134.671,
       "words": [
         {
           "text": "Dans",
-          "start": 138.3,
-          "end": 138.6
+          "start": 131.007,
+          "end": 131.428
         },
         {
           "text": "la",
-          "start": 138.6,
-          "end": 138.84
+          "start": 131.455,
+          "end": 131.754
         },
         {
           "text": "mer",
-          "start": 138.84,
-          "end": 139.62
+          "start": 131.786,
+          "end": 132.794
         },
         {
           "text": "la",
-          "start": 139.62,
-          "end": 140.0
+          "start": 133.018,
+          "end": 133.423
         },
         {
           "text": "mer",
-          "start": 140.0,
-          "end": 140.27
+          "start": 133.45,
+          "end": 134.671
         }
       ],
       "translations": {
@@ -1738,38 +1738,38 @@
       }
     },
     {
-      "start": 140.42,
-      "end": 142.27,
+      "start": 134.699,
+      "end": 138.363,
       "words": [
         {
           "text": "C'est",
-          "start": 140.42,
-          "end": 140.68
+          "start": 134.699,
+          "end": 135.152
         },
         {
           "text": "Cher",
-          "start": 140.68,
-          "end": 141.04
+          "start": 135.179,
+          "end": 135.696
         },
         {
           "text": "la",
-          "start": 141.04,
-          "end": 141.3
+          "start": 135.728,
+          "end": 136.278
         },
         {
           "text": "pomme",
-          "start": 141.3,
-          "end": 141.7
+          "start": 136.31,
+          "end": 136.992
         },
         {
           "text": "de",
-          "start": 141.7,
-          "end": 141.94
+          "start": 137.019,
+          "end": 137.654
         },
         {
-          "text": "terre !",
-          "start": 141.94,
-          "end": 142.27
+          "text": "terre",
+          "start": 137.686,
+          "end": 138.363
         }
       ],
       "translations": {
@@ -1777,38 +1777,38 @@
       }
     },
     {
-      "start": 142.42,
-      "end": 145.29,
+      "start": 138.391,
+      "end": 142.055,
       "words": [
         {
           "text": "Cher",
-          "start": 142.42,
-          "end": 142.9
+          "start": 138.391,
+          "end": 138.775
         },
         {
           "text": "Cher",
-          "start": 142.9,
-          "end": 143.36
+          "start": 138.802,
+          "end": 139.591
         },
         {
           "text": "habite",
-          "start": 143.36,
-          "end": 144.0
+          "start": 139.65,
+          "end": 140.231
         },
         {
           "text": "dans",
-          "start": 144.0,
-          "end": 144.34
+          "start": 140.274,
+          "end": 140.524
         },
         {
           "text": "un",
-          "start": 144.34,
-          "end": 144.6
+          "start": 140.551,
+          "end": 140.78
         },
         {
-          "text": "éclair !",
-          "start": 144.6,
-          "end": 145.29
+          "text": "éclair",
+          "start": 140.812,
+          "end": 142.055
         }
       ],
       "translations": {
@@ -1816,53 +1816,53 @@
       }
     },
     {
-      "start": 145.44,
-      "end": 149.79,
+      "start": 142.083,
+      "end": 147.555,
       "words": [
         {
           "text": "Dans",
-          "start": 145.44,
-          "end": 145.74
+          "start": 142.083,
+          "end": 142.499
         },
         {
           "text": "la",
-          "start": 145.74,
-          "end": 145.98
+          "start": 142.526,
+          "end": 142.904
         },
         {
           "text": "mer",
-          "start": 145.98,
-          "end": 146.58
+          "start": 142.936,
+          "end": 144.131
         },
         {
           "text": "avec",
-          "start": 146.58,
-          "end": 147.3
+          "start": 144.398,
+          "end": 145.427
         },
         {
           "text": "mon",
-          "start": 147.3,
-          "end": 147.68
+          "start": 145.619,
+          "end": 146.168
         },
         {
           "text": "père",
-          "start": 147.68,
-          "end": 148.12
+          "start": 146.2,
+          "end": 146.515
         },
         {
           "text": "et",
-          "start": 148.12,
-          "end": 148.38
+          "start": 146.558,
+          "end": 146.766
         },
         {
           "text": "ma",
-          "start": 148.38,
-          "end": 148.64
+          "start": 146.792,
+          "end": 147.059
         },
         {
           "text": "mère",
-          "start": 148.64,
-          "end": 149.79
+          "start": 147.091,
+          "end": 147.555
         }
       ],
       "translations": {
@@ -1870,33 +1870,33 @@
       }
     },
     {
-      "start": 149.94,
-      "end": 151.91,
+      "start": 147.586,
+      "end": 151.25,
       "words": [
         {
           "text": "Dans",
-          "start": 149.94,
-          "end": 150.24
+          "start": 147.586,
+          "end": 148.098
         },
         {
           "text": "la",
-          "start": 150.24,
-          "end": 150.48
+          "start": 148.183,
+          "end": 148.877
         },
         {
           "text": "mer",
-          "start": 150.48,
-          "end": 151.26
+          "start": 148.999,
+          "end": 150.029
         },
         {
           "text": "la",
-          "start": 151.26,
-          "end": 151.64
+          "start": 150.061,
+          "end": 150.354
         },
         {
           "text": "mer",
-          "start": 151.64,
-          "end": 151.91
+          "start": 150.402,
+          "end": 151.25
         }
       ],
       "translations": {
@@ -1904,267 +1904,33 @@
       }
     },
     {
-      "start": 152.06,
-      "end": 153.73,
+      "start": 151.278,
+      "end": 160.0,
       "words": [
         {
           "text": "Cher",
-          "start": 152.06,
-          "end": 152.58
+          "start": 151.278,
+          "end": 152.035
         },
         {
           "text": "la",
-          "start": 152.58,
-          "end": 152.84
+          "start": 152.697,
+          "end": 152.974
         },
         {
           "text": "pomme",
-          "start": 152.84,
-          "end": 153.24
+          "start": 153.006,
+          "end": 154.579
         },
         {
           "text": "de",
-          "start": 153.24,
-          "end": 153.48
+          "start": 154.953,
+          "end": 156.099
         },
         {
-          "text": "terre !",
-          "start": 153.48,
-          "end": 153.73
-        }
-      ],
-      "translations": {
-        "en": "Cher the potato!"
-      }
-    },
-    {
-      "start": 153.44,
-      "end": 155.41,
-      "words": [
-        {
-          "text": "Dans",
-          "start": 153.44,
-          "end": 153.74
-        },
-        {
-          "text": "la",
-          "start": 153.74,
-          "end": 153.98
-        },
-        {
-          "text": "mer",
-          "start": 153.98,
-          "end": 154.76
-        },
-        {
-          "text": "la",
-          "start": 154.76,
-          "end": 155.14
-        },
-        {
-          "text": "mer",
-          "start": 155.14,
-          "end": 155.41
-        }
-      ],
-      "translations": {
-        "en": "In the sea, the sea"
-      }
-    },
-    {
-      "start": 155.56,
-      "end": 157.41,
-      "words": [
-        {
-          "text": "C'est",
-          "start": 155.56,
-          "end": 155.82
-        },
-        {
-          "text": "Cher",
-          "start": 155.82,
-          "end": 156.18
-        },
-        {
-          "text": "la",
-          "start": 156.18,
-          "end": 156.44
-        },
-        {
-          "text": "pomme",
-          "start": 156.44,
-          "end": 156.84
-        },
-        {
-          "text": "de",
-          "start": 156.84,
-          "end": 157.08
-        },
-        {
-          "text": "terre !",
-          "start": 157.08,
-          "end": 157.41
-        }
-      ],
-      "translations": {
-        "en": "It's Cher the potato!"
-      }
-    },
-    {
-      "start": 157.56,
-      "end": 160.43,
-      "words": [
-        {
-          "text": "Cher",
-          "start": 157.56,
-          "end": 158.04
-        },
-        {
-          "text": "Cher",
-          "start": 158.04,
-          "end": 158.5
-        },
-        {
-          "text": "habite",
-          "start": 158.5,
-          "end": 159.14
-        },
-        {
-          "text": "dans",
-          "start": 159.14,
-          "end": 159.48
-        },
-        {
-          "text": "un",
-          "start": 159.48,
-          "end": 159.74
-        },
-        {
-          "text": "éclair !",
-          "start": 159.74,
-          "end": 160.43
-        }
-      ],
-      "translations": {
-        "en": "Cher, Cher lives in a bolt of lightning!"
-      }
-    },
-    {
-      "start": 160.58,
-      "end": 164.43,
-      "words": [
-        {
-          "text": "Dans",
-          "start": 160.58,
-          "end": 160.88
-        },
-        {
-          "text": "la",
-          "start": 160.88,
-          "end": 161.12
-        },
-        {
-          "text": "mer",
-          "start": 161.12,
-          "end": 161.72
-        },
-        {
-          "text": "avec",
-          "start": 161.72,
-          "end": 162.44
-        },
-        {
-          "text": "mon",
-          "start": 162.44,
-          "end": 162.82
-        },
-        {
-          "text": "père",
-          "start": 162.82,
-          "end": 163.26
-        },
-        {
-          "text": "et",
-          "start": 163.26,
-          "end": 163.52
-        },
-        {
-          "text": "ma",
-          "start": 163.52,
-          "end": 163.78
-        },
-        {
-          "text": "mère",
-          "start": 163.78,
-          "end": 164.43
-        }
-      ],
-      "translations": {
-        "en": "In the sea with my father and my mother"
-      }
-    },
-    {
-      "start": 164.58,
-      "end": 166.55,
-      "words": [
-        {
-          "text": "Dans",
-          "start": 164.58,
-          "end": 164.88
-        },
-        {
-          "text": "la",
-          "start": 164.88,
-          "end": 165.12
-        },
-        {
-          "text": "mer",
-          "start": 165.12,
-          "end": 165.9
-        },
-        {
-          "text": "la",
-          "start": 165.9,
-          "end": 166.28
-        },
-        {
-          "text": "mer",
-          "start": 166.28,
-          "end": 166.55
-        }
-      ],
-      "translations": {
-        "en": "In the sea, the sea"
-      }
-    },
-    {
-      "start": 166.7,
-      "end": 170.12,
-      "words": [
-        {
-          "text": "Cher",
-          "start": 166.7,
-          "end": 167.22
-        },
-        {
-          "text": "la",
-          "start": 167.22,
-          "end": 167.48
-        },
-        {
-          "text": "pomme",
-          "start": 167.48,
-          "end": 167.88
-        },
-        {
-          "text": "de",
-          "start": 167.88,
-          "end": 168.12
-        },
-        {
-          "text": "terre !",
-          "start": 168.12,
-          "end": 170.12
+          "text": "terre",
+          "start": 156.126,
+          "end": 160.0
         }
       ],
       "translations": {
