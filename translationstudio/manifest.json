@@ -1,0 +1,19 @@
+{
+  "languages": {
+    "french": {
+      "label": "French",
+      "albums": {
+        "petit-parkour": {
+          "label": "Petit Parkour",
+          "songs": [
+            {
+              "track": 8,
+              "title": "Cher la pomme de terre",
+              "folder": "8"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
