@@ -8,6 +8,12 @@
           "cover": "cover.jpg",
           "songs": [
             {
+              "track": 7,
+              "title": "Je suis une Nintendo",
+              "folder": "7",
+              "cover": "cover.png"
+            },
+            {
               "track": 8,
               "title": "Cher la pomme de terre",
               "folder": "8",
