@@ -11,23 +11,23 @@
   "cover": "cover.png",
   "phrases": [
     {
-      "start": 15.15,
-      "end": 17.61,
+      "start": 15.135,
+      "end": 17.02,
       "words": [
         {
           "text": "Je",
-          "start": 15.15,
-          "end": 15.772
+          "start": 15.135,
+          "end": 15.517
         },
         {
           "text": "suis",
-          "start": 15.79,
-          "end": 16.237
+          "start": 15.521,
+          "end": 15.993
         },
         {
           "text": "Mario",
-          "start": 16.255,
-          "end": 17.61
+          "start": 15.997,
+          "end": 17.02
         }
       ],
       "translations": {
@@ -35,23 +35,23 @@
       }
     },
     {
-      "start": 17.635,
-      "end": 20.605,
+      "start": 17.079,
+      "end": 18.763,
       "words": [
         {
           "text": "Je",
-          "start": 17.635,
-          "end": 18.102
+          "start": 17.079,
+          "end": 17.269
         },
         {
           "text": "suis",
-          "start": 18.12,
-          "end": 18.917
+          "start": 17.273,
+          "end": 17.503
         },
         {
           "text": "Bowser",
-          "start": 18.935,
-          "end": 20.605
+          "start": 17.507,
+          "end": 18.763
         }
       ],
       "translations": {
@@ -59,38 +59,38 @@
       }
     },
     {
-      "start": 20.63,
-      "end": 22.545,
+      "start": 18.913,
+      "end": 22.404,
       "words": [
         {
           "text": "Je",
-          "start": 20.63,
-          "end": 20.867
+          "start": 18.913,
+          "end": 19.221
         },
         {
           "text": "suis",
-          "start": 20.885,
-          "end": 21.137
+          "start": 19.225,
+          "end": 19.702
         },
         {
           "text": "Peach",
-          "start": 21.155,
-          "end": 21.372
+          "start": 19.706,
+          "end": 20.473
         },
         {
           "text": "et",
-          "start": 21.39,
-          "end": 21.762
+          "start": 20.585,
+          "end": 20.715
         },
         {
           "text": "Yoshi",
-          "start": 21.78,
-          "end": 22.062
+          "start": 20.719,
+          "end": 21.627
         },
         {
           "text": "vert",
-          "start": 22.08,
-          "end": 22.545
+          "start": 21.631,
+          "end": 22.404
         }
       ],
       "translations": {
@@ -98,23 +98,23 @@
       }
     },
     {
-      "start": 22.57,
-      "end": 24.415,
+      "start": 22.554,
+      "end": 24.278,
       "words": [
         {
           "text": "Je",
-          "start": 22.57,
-          "end": 23.162
+          "start": 22.554,
+          "end": 22.866
         },
         {
           "text": "suis",
-          "start": 23.18,
-          "end": 23.622
+          "start": 22.87,
+          "end": 23.382
         },
         {
           "text": "Toad",
-          "start": 23.64,
-          "end": 24.415
+          "start": 23.386,
+          "end": 24.278
         }
       ],
       "translations": {
@@ -122,23 +122,23 @@
       }
     },
     {
-      "start": 24.44,
-      "end": 26.245,
+      "start": 24.428,
+      "end": 26.104,
       "words": [
         {
           "text": "Je",
-          "start": 24.44,
-          "end": 24.802
+          "start": 24.428,
+          "end": 24.651
         },
         {
           "text": "suis",
-          "start": 24.82,
-          "end": 25.182
+          "start": 24.655,
+          "end": 25.052
         },
         {
           "text": "Luigi",
-          "start": 25.2,
-          "end": 26.245
+          "start": 25.056,
+          "end": 26.104
         }
       ],
       "translations": {
@@ -146,43 +146,43 @@
       }
     },
     {
-      "start": 26.27,
-      "end": 29.755,
+      "start": 26.254,
+      "end": 29.828,
       "words": [
         {
           "text": "Je",
-          "start": 26.27,
-          "end": 26.397
+          "start": 26.254,
+          "end": 26.6
         },
         {
           "text": "suis",
-          "start": 26.415,
-          "end": 26.887
+          "start": 26.604,
+          "end": 27.13
         },
         {
           "text": "Donkey",
-          "start": 26.905,
-          "end": 27.547
+          "start": 27.134,
+          "end": 27.693
         },
         {
           "text": "Kong",
-          "start": 27.565,
-          "end": 27.772
+          "start": 27.697,
+          "end": 27.989
         },
         {
           "text": "et",
-          "start": 27.79,
-          "end": 28.232
+          "start": 27.993,
+          "end": 28.111
         },
         {
           "text": "Koopa",
-          "start": 28.25,
-          "end": 28.732
+          "start": 28.115,
+          "end": 28.672
         },
         {
           "text": "aussi",
-          "start": 28.75,
-          "end": 29.755
+          "start": 28.676,
+          "end": 29.828
         }
       ],
       "translations": {
@@ -190,23 +190,23 @@
       }
     },
     {
-      "start": 29.78,
-      "end": 32.385,
+      "start": 29.978,
+      "end": 31.794,
       "words": [
         {
           "text": "Je",
-          "start": 29.78,
-          "end": 30.542
+          "start": 29.978,
+          "end": 30.291
         },
         {
           "text": "suis",
-          "start": 30.56,
-          "end": 31.012
+          "start": 30.295,
+          "end": 30.767
         },
         {
           "text": "Mario",
-          "start": 31.03,
-          "end": 32.385
+          "start": 30.771,
+          "end": 31.794
         }
       ],
       "translations": {
@@ -214,23 +214,23 @@
       }
     },
     {
-      "start": 32.41,
-      "end": 35.38,
+      "start": 31.853,
+      "end": 33.536,
       "words": [
         {
           "text": "Je",
-          "start": 32.41,
-          "end": 32.872
+          "start": 31.853,
+          "end": 32.042
         },
         {
           "text": "suis",
-          "start": 32.89,
-          "end": 33.687
+          "start": 32.046,
+          "end": 32.276
         },
         {
           "text": "Bowser",
-          "start": 33.705,
-          "end": 35.38
+          "start": 32.28,
+          "end": 33.536
         }
       ],
       "translations": {
@@ -238,38 +238,38 @@
       }
     },
     {
-      "start": 35.405,
-      "end": 37.32,
+      "start": 33.686,
+      "end": 37.176,
       "words": [
         {
           "text": "Je",
-          "start": 35.405,
-          "end": 35.642
+          "start": 33.686,
+          "end": 33.994
         },
         {
           "text": "suis",
-          "start": 35.66,
-          "end": 35.897
+          "start": 33.998,
+          "end": 34.475
         },
         {
           "text": "Peach",
-          "start": 35.915,
-          "end": 36.147
+          "start": 34.479,
+          "end": 35.247
         },
         {
           "text": "et",
-          "start": 36.165,
-          "end": 36.537
+          "start": 35.358,
+          "end": 35.488
         },
         {
           "text": "Yoshi",
-          "start": 36.555,
-          "end": 36.837
+          "start": 35.492,
+          "end": 36.4
         },
         {
           "text": "vert",
-          "start": 36.855,
-          "end": 37.32
+          "start": 36.404,
+          "end": 37.176
         }
       ],
       "translations": {
@@ -277,23 +277,23 @@
       }
     },
     {
-      "start": 37.345,
-      "end": 39.06,
+      "start": 37.326,
+      "end": 39.054,
       "words": [
         {
           "text": "Je",
-          "start": 37.345,
-          "end": 37.932
+          "start": 37.326,
+          "end": 37.64
         },
         {
           "text": "suis",
-          "start": 37.95,
-          "end": 38.397
+          "start": 37.644,
+          "end": 38.156
         },
         {
           "text": "Toad",
-          "start": 38.415,
-          "end": 39.06
+          "start": 38.16,
+          "end": 39.054
         }
       ],
       "translations": {
@@ -301,23 +301,23 @@
       }
     },
     {
-      "start": 39.21,
-      "end": 41.015,
+      "start": 39.204,
+      "end": 40.877,
       "words": [
         {
           "text": "Je",
-          "start": 39.21,
-          "end": 39.577
+          "start": 39.204,
+          "end": 39.425
         },
         {
           "text": "suis",
-          "start": 39.595,
-          "end": 39.957
+          "start": 39.429,
+          "end": 39.826
         },
         {
           "text": "Luigi",
-          "start": 39.975,
-          "end": 41.015
+          "start": 39.83,
+          "end": 40.877
         }
       ],
       "translations": {
@@ -325,43 +325,43 @@
       }
     },
     {
-      "start": 41.04,
-      "end": 44.525,
+      "start": 41.027,
+      "end": 44.366,
       "words": [
         {
           "text": "Je",
-          "start": 41.04,
-          "end": 41.167
+          "start": 41.027,
+          "end": 41.374
         },
         {
           "text": "suis",
-          "start": 41.185,
-          "end": 41.662
+          "start": 41.378,
+          "end": 41.904
         },
         {
           "text": "Donkey",
-          "start": 41.68,
-          "end": 42.307
+          "start": 41.908,
+          "end": 42.467
         },
         {
           "text": "Kong",
-          "start": 42.325,
-          "end": 42.547
+          "start": 42.471,
+          "end": 42.763
         },
         {
           "text": "et",
-          "start": 42.565,
-          "end": 43.007
+          "start": 42.767,
+          "end": 42.885
         },
         {
           "text": "Koopa",
-          "start": 43.025,
-          "end": 43.507
+          "start": 42.889,
+          "end": 43.446
         },
         {
           "text": "aussi",
-          "start": 43.525,
-          "end": 44.525
+          "start": 43.45,
+          "end": 44.366
         }
       ],
       "translations": {
@@ -369,28 +369,28 @@
       }
     },
     {
-      "start": 44.55,
-      "end": 46.44,
+      "start": 44.511,
+      "end": 46.296,
       "words": [
         {
           "text": "Je",
-          "start": 44.55,
-          "end": 44.892
+          "start": 44.511,
+          "end": 44.735
         },
         {
           "text": "suis",
-          "start": 44.91,
-          "end": 45.117
+          "start": 44.739,
+          "end": 45.094
         },
         {
           "text": "une",
-          "start": 45.135,
-          "end": 45.537
+          "start": 45.098,
+          "end": 45.292
         },
         {
           "text": "Nintendo",
-          "start": 45.555,
-          "end": 46.44
+          "start": 45.296,
+          "end": 46.296
         }
       ],
       "translations": {
@@ -398,23 +398,23 @@
       }
     },
     {
-      "start": 46.465,
-      "end": 47.6,
+      "start": 46.446,
+      "end": 47.91,
       "words": [
         {
           "text": "Vas-y",
-          "start": 46.465,
-          "end": 46.915
+          "start": 46.446,
+          "end": 47.092
         },
         {
           "text": "Go",
-          "start": 46.945,
-          "end": 47.162
+          "start": 47.166,
+          "end": 47.607
         },
         {
           "text": "Go",
-          "start": 47.18,
-          "end": 47.6
+          "start": 47.611,
+          "end": 47.91
         }
       ],
       "translations": {
@@ -422,28 +422,28 @@
       }
     },
     {
-      "start": 47.625,
-      "end": 50.11,
+      "start": 48.06,
+      "end": 49.966,
       "words": [
         {
           "text": "Je",
-          "start": 47.625,
-          "end": 48.062
+          "start": 48.06,
+          "end": 48.426
         },
         {
           "text": "suis",
-          "start": 48.08,
-          "end": 48.207
+          "start": 48.43,
+          "end": 48.781
         },
         {
           "text": "une",
-          "start": 48.225,
-          "end": 48.547
+          "start": 48.785,
+          "end": 48.983
         },
         {
           "text": "Nintendo",
-          "start": 48.565,
-          "end": 50.11
+          "start": 48.987,
+          "end": 49.966
         }
       ],
       "translations": {
@@ -451,23 +451,23 @@
       }
     },
     {
-      "start": 50.135,
-      "end": 52.63,
+      "start": 50.116,
+      "end": 52.474,
       "words": [
         {
           "text": "Vas-y",
-          "start": 50.135,
-          "end": 51.302
+          "start": 50.116,
+          "end": 50.767
         },
         {
           "text": "Go",
-          "start": 51.32,
-          "end": 51.812
+          "start": 50.859,
+          "end": 51.285
         },
         {
           "text": "Go",
-          "start": 51.83,
-          "end": 52.63
+          "start": 51.289,
+          "end": 52.474
         }
       ],
       "translations": {
@@ -475,33 +475,33 @@
       }
     },
     {
-      "start": 52.655,
-      "end": 54.965,
+      "start": 52.624,
+      "end": 55.967,
       "words": [
         {
           "text": "Je",
-          "start": 52.655,
-          "end": 53.187
+          "start": 52.624,
+          "end": 52.908
         },
         {
           "text": "saute",
-          "start": 53.205,
-          "end": 53.422
+          "start": 52.912,
+          "end": 53.384
         },
         {
           "text": "et",
-          "start": 53.44,
-          "end": 53.877
+          "start": 53.388,
+          "end": 53.542
         },
         {
           "text": "je",
-          "start": 53.895,
-          "end": 54.372
+          "start": 53.546,
+          "end": 53.75
         },
         {
           "text": "marche",
-          "start": 54.39,
-          "end": 54.965
+          "start": 53.754,
+          "end": 55.967
         }
       ],
       "translations": {
@@ -509,48 +509,48 @@
       }
     },
     {
-      "start": 55.09,
-      "end": 58.025,
+      "start": 56.117,
+      "end": 59.657,
       "words": [
         {
           "text": "Je",
-          "start": 55.09,
-          "end": 55.542
+          "start": 56.117,
+          "end": 56.346
         },
         {
           "text": "tourne",
-          "start": 55.56,
-          "end": 55.677
+          "start": 56.388,
+          "end": 56.765
         },
         {
           "text": "à",
-          "start": 55.695,
-          "end": 56.142
+          "start": 56.769,
+          "end": 56.844
         },
         {
           "text": "gauche",
-          "start": 56.16,
-          "end": 56.407
+          "start": 56.848,
+          "end": 57.096
         },
         {
           "text": "et",
-          "start": 56.425,
-          "end": 56.872
+          "start": 57.1,
+          "end": 57.306
         },
         {
           "text": "tourne",
-          "start": 56.89,
-          "end": 57.027
+          "start": 57.31,
+          "end": 57.584
         },
         {
           "text": "à",
-          "start": 57.045,
-          "end": 57.332
+          "start": 57.588,
+          "end": 57.904
         },
         {
           "text": "droite",
-          "start": 57.35,
-          "end": 58.025
+          "start": 58.005,
+          "end": 59.657
         }
       ],
       "translations": {
@@ -558,33 +558,33 @@
       }
     },
     {
-      "start": 58.05,
-      "end": 59.805,
+      "start": 59.807,
+      "end": 61.388,
       "words": [
         {
           "text": "Je",
-          "start": 58.05,
-          "end": 58.277
+          "start": 59.807,
+          "end": 59.98
         },
         {
           "text": "danse",
-          "start": 58.295,
-          "end": 58.5
+          "start": 59.984,
+          "end": 60.326
         },
         {
           "text": "et",
-          "start": 58.825,
-          "end": 59.197
+          "start": 60.33,
+          "end": 60.475
         },
         {
           "text": "je",
-          "start": 59.215,
-          "end": 59.302
+          "start": 60.479,
+          "end": 60.639
         },
         {
           "text": "cours",
-          "start": 59.32,
-          "end": 59.805
+          "start": 60.643,
+          "end": 61.388
         }
       ],
       "translations": {
@@ -592,33 +592,33 @@
       }
     },
     {
-      "start": 59.83,
-      "end": 62.875,
+      "start": 61.466,
+      "end": 62.881,
       "words": [
         {
           "text": "Je",
-          "start": 59.83,
-          "end": 60.357
+          "start": 61.466,
+          "end": 61.522
         },
         {
           "text": "tombe",
-          "start": 60.375,
-          "end": 60.762
+          "start": 61.526,
+          "end": 61.682
         },
         {
           "text": "dans",
-          "start": 60.78,
-          "end": 61.487
+          "start": 61.686,
+          "end": 61.859
         },
         {
           "text": "un",
-          "start": 61.505,
-          "end": 61.967
+          "start": 61.863,
+          "end": 62.103
         },
         {
           "text": "trou",
-          "start": 61.985,
-          "end": 62.875
+          "start": 62.107,
+          "end": 62.881
         }
       ],
       "translations": {
@@ -626,28 +626,28 @@
       }
     },
     {
-      "start": 63.025,
-      "end": 64.73,
+      "start": 63.031,
+      "end": 64.717,
       "words": [
         {
           "text": "Je",
-          "start": 63.025,
-          "end": 63.337
+          "start": 63.031,
+          "end": 63.23
         },
         {
           "text": "monte",
-          "start": 63.355,
-          "end": 63.622
+          "start": 63.234,
+          "end": 63.588
         },
         {
           "text": "je",
-          "start": 63.64,
-          "end": 64.022
+          "start": 63.592,
+          "end": 63.918
         },
         {
           "text": "descends",
-          "start": 64.04,
-          "end": 64.73
+          "start": 63.922,
+          "end": 64.717
         }
       ],
       "translations": {
@@ -655,33 +655,33 @@
       }
     },
     {
-      "start": 64.88,
-      "end": 67.245,
+      "start": 64.867,
+      "end": 67.231,
       "words": [
         {
           "text": "J’arrête",
-          "start": 64.88,
-          "end": 65.427
+          "start": 64.867,
+          "end": 65.359
         },
         {
           "text": "et",
-          "start": 65.445,
-          "end": 65.862
+          "start": 65.42,
+          "end": 65.834
         },
         {
           "text": "je",
-          "start": 65.88,
-          "end": 66.357
+          "start": 65.854,
+          "end": 66.301
         },
         {
           "text": "go",
-          "start": 66.375,
-          "end": 66.472
+          "start": 66.354,
+          "end": 66.583
         },
         {
           "text": "Vas-y",
-          "start": 66.49,
-          "end": 67.245
+          "start": 66.627,
+          "end": 67.231
         }
       ],
       "translations": {
@@ -689,33 +689,33 @@
       }
     },
     {
-      "start": 67.395,
-      "end": 70.845,
+      "start": 67.381,
+      "end": 70.747,
       "words": [
         {
           "text": "Je",
-          "start": 67.395,
-          "end": 68.187
+          "start": 67.381,
+          "end": 67.678
         },
         {
           "text": "saute",
-          "start": 68.205,
-          "end": 68.642
+          "start": 67.682,
+          "end": 68.152
         },
         {
           "text": "et",
-          "start": 68.66,
-          "end": 69.127
+          "start": 68.156,
+          "end": 68.307
         },
         {
           "text": "je",
-          "start": 69.145,
-          "end": 69.44
+          "start": 68.311,
+          "end": 68.517
         },
         {
           "text": "marche",
-          "start": 70.07,
-          "end": 70.845
+          "start": 68.521,
+          "end": 70.747
         }
       ],
       "translations": {
@@ -723,48 +723,48 @@
       }
     },
     {
-      "start": 70.89,
-      "end": 74.525,
+      "start": 70.897,
+      "end": 74.426,
       "words": [
         {
           "text": "Je",
-          "start": 70.89,
-          "end": 71.177
+          "start": 70.897,
+          "end": 71.104
         },
         {
           "text": "tourne",
-          "start": 71.195,
-          "end": 71.637
+          "start": 71.145,
+          "end": 71.532
         },
         {
           "text": "à",
-          "start": 71.655,
-          "end": 72.097
+          "start": 71.536,
+          "end": 71.608
         },
         {
           "text": "gauche",
-          "start": 72.115,
-          "end": 72.367
+          "start": 71.612,
+          "end": 71.966
         },
         {
           "text": "et",
-          "start": 72.385,
-          "end": 72.797
+          "start": 71.971,
+          "end": 72.016
         },
         {
           "text": "tourne",
-          "start": 72.815,
-          "end": 72.96
+          "start": 72.07,
+          "end": 72.256
         },
         {
           "text": "à",
-          "start": 73.345,
-          "end": 73.738
+          "start": 72.26,
+          "end": 72.637
         },
         {
           "text": "droite",
-          "start": 73.768,
-          "end": 74.525
+          "start": 72.766,
+          "end": 74.426
         }
       ],
       "translations": {
@@ -772,33 +772,33 @@
       }
     },
     {
-      "start": 74.57,
-      "end": 77.66,
+      "start": 74.576,
+      "end": 76.16,
       "words": [
         {
           "text": "Je",
-          "start": 74.57,
-          "end": 75.122
+          "start": 74.576,
+          "end": 74.75
         },
         {
           "text": "danse",
-          "start": 75.14,
-          "end": 75.512
+          "start": 74.754,
+          "end": 75.09
         },
         {
           "text": "et",
-          "start": 75.53,
-          "end": 76.252
+          "start": 75.094,
+          "end": 75.235
         },
         {
           "text": "je",
-          "start": 76.27,
-          "end": 76.927
+          "start": 75.239,
+          "end": 75.403
         },
         {
           "text": "cours",
-          "start": 76.945,
-          "end": 77.66
+          "start": 75.407,
+          "end": 76.16
         }
       ],
       "translations": {
@@ -806,33 +806,33 @@
       }
     },
     {
-      "start": 77.81,
-      "end": 79.47,
+      "start": 76.237,
+      "end": 77.662,
       "words": [
         {
           "text": "Je",
-          "start": 77.81,
-          "end": 78.107
+          "start": 76.237,
+          "end": 76.291
         },
         {
           "text": "tombe",
-          "start": 78.125,
-          "end": 78.377
+          "start": 76.295,
+          "end": 76.445
         },
         {
           "text": "dans",
-          "start": 78.395,
-          "end": 78.777
+          "start": 76.449,
+          "end": 76.621
         },
         {
           "text": "un",
-          "start": 78.795,
-          "end": 79.077
+          "start": 76.625,
+          "end": 76.863
         },
         {
           "text": "trou",
-          "start": 79.095,
-          "end": 79.47
+          "start": 76.867,
+          "end": 77.662
         }
       ],
       "translations": {
@@ -840,28 +840,28 @@
       }
     },
     {
-      "start": 79.62,
-      "end": 81.01,
+      "start": 77.812,
+      "end": 79.472,
       "words": [
         {
           "text": "Je",
-          "start": 79.62,
-          "end": 79.957
+          "start": 77.812,
+          "end": 77.99
         },
         {
           "text": "monte",
-          "start": 79.975,
-          "end": 80.192
+          "start": 77.994,
+          "end": 78.315
         },
         {
           "text": "je",
-          "start": 80.21,
-          "end": 80.642
+          "start": 78.359,
+          "end": 78.675
         },
         {
           "text": "descends",
-          "start": 80.66,
-          "end": 81.01
+          "start": 78.679,
+          "end": 79.472
         }
       ],
       "translations": {
@@ -869,33 +869,33 @@
       }
     },
     {
-      "start": 81.12,
-      "end": 96.28,
+      "start": 79.622,
+      "end": 96.284,
       "words": [
         {
           "text": "J’arrête",
-          "start": 81.12,
-          "end": 81.407
+          "start": 79.622,
+          "end": 80.131
         },
         {
           "text": "et",
-          "start": 81.425,
-          "end": 81.487
+          "start": 80.177,
+          "end": 80.587
         },
         {
           "text": "je",
-          "start": 81.505,
-          "end": 81.567
+          "start": 80.626,
+          "end": 81.068
         },
         {
           "text": "go",
-          "start": 81.585,
-          "end": 81.635
+          "start": 81.106,
+          "end": 81.394
         },
         {
           "text": "Vas-y",
-          "start": 81.665,
-          "end": 96.28
+          "start": 81.398,
+          "end": 96.284
         }
       ],
       "translations": {
@@ -903,23 +903,23 @@
       }
     },
     {
-      "start": 96.43,
-      "end": 98.15,
+      "start": 96.434,
+      "end": 98.159,
       "words": [
         {
           "text": "Je",
-          "start": 96.43,
-          "end": 97.037
+          "start": 96.434,
+          "end": 96.765
         },
         {
           "text": "suis",
-          "start": 97.055,
-          "end": 97.312
+          "start": 96.769,
+          "end": 97.359
         },
         {
           "text": "Link",
-          "start": 97.33,
-          "end": 98.15
+          "start": 97.363,
+          "end": 98.159
         }
       ],
       "translations": {
@@ -927,23 +927,23 @@
       }
     },
     {
-      "start": 98.3,
-      "end": 100.03,
+      "start": 98.309,
+      "end": 100.029,
       "words": [
         {
           "text": "Je",
-          "start": 98.3,
-          "end": 98.677
+          "start": 98.309,
+          "end": 98.504
         },
         {
           "text": "suis",
-          "start": 98.695,
-          "end": 99.332
+          "start": 98.508,
+          "end": 98.739
         },
         {
           "text": "Zelda",
-          "start": 99.35,
-          "end": 100.03
+          "start": 98.743,
+          "end": 100.029
         }
       ],
       "translations": {
@@ -951,38 +951,38 @@
       }
     },
     {
-      "start": 100.18,
-      "end": 103.68,
+      "start": 100.179,
+      "end": 103.679,
       "words": [
         {
           "text": "Je",
-          "start": 100.18,
-          "end": 100.532
+          "start": 100.179,
+          "end": 100.346
         },
         {
           "text": "suis",
-          "start": 100.55,
-          "end": 100.707
+          "start": 100.35,
+          "end": 100.552
         },
         {
           "text": "Ganondorf",
-          "start": 100.725,
-          "end": 101.662
+          "start": 100.556,
+          "end": 101.596
         },
         {
           "text": "et",
-          "start": 101.68,
-          "end": 101.887
+          "start": 101.628,
+          "end": 101.787
         },
         {
           "text": "un",
-          "start": 101.905,
-          "end": 102.327
+          "start": 101.791,
+          "end": 102.111
         },
         {
           "text": "ocarina",
-          "start": 102.345,
-          "end": 103.68
+          "start": 102.115,
+          "end": 103.679
         }
       ],
       "translations": {
@@ -990,28 +990,28 @@
       }
     },
     {
-      "start": 103.83,
-      "end": 105.57,
+      "start": 103.829,
+      "end": 105.579,
       "words": [
         {
           "text": "Je",
-          "start": 103.83,
-          "end": 104.222
+          "start": 103.829,
+          "end": 104.054
         },
         {
           "text": "suis",
-          "start": 104.24,
-          "end": 104.402
+          "start": 104.058,
+          "end": 104.301
         },
         {
           "text": "un",
-          "start": 104.42,
-          "end": 104.757
+          "start": 104.305,
+          "end": 104.517
         },
         {
           "text": "chuchu",
-          "start": 104.775,
-          "end": 105.57
+          "start": 104.521,
+          "end": 105.579
         }
       ],
       "translations": {
@@ -1019,28 +1019,28 @@
       }
     },
     {
-      "start": 105.72,
-      "end": 107.43,
+      "start": 105.729,
+      "end": 107.438,
       "words": [
         {
           "text": "Je",
-          "start": 105.72,
-          "end": 106.082
+          "start": 105.729,
+          "end": 105.877
         },
         {
           "text": "suis",
-          "start": 106.1,
-          "end": 106.272
+          "start": 105.881,
+          "end": 106.154
         },
         {
           "text": "un",
-          "start": 106.29,
-          "end": 106.672
+          "start": 106.158,
+          "end": 106.453
         },
         {
           "text": "moblin",
-          "start": 106.69,
-          "end": 107.43
+          "start": 106.457,
+          "end": 107.438
         }
       ],
       "translations": {
@@ -1048,48 +1048,48 @@
       }
     },
     {
-      "start": 107.58,
-      "end": 111.04,
+      "start": 107.588,
+      "end": 111.043,
       "words": [
         {
           "text": "Je",
-          "start": 107.58,
-          "end": 107.932
+          "start": 107.588,
+          "end": 107.745
         },
         {
           "text": "suis",
-          "start": 107.95,
-          "end": 108.137
+          "start": 107.749,
+          "end": 108.023
         },
         {
           "text": "un",
-          "start": 108.155,
-          "end": 108.377
+          "start": 108.027,
+          "end": 108.341
         },
         {
           "text": "lynel",
-          "start": 108.395,
-          "end": 109.017
+          "start": 108.345,
+          "end": 108.67
         },
         {
           "text": "et",
-          "start": 109.035,
-          "end": 109.372
+          "start": 108.674,
+          "end": 109.224
         },
         {
           "text": "un",
-          "start": 109.39,
-          "end": 109.747
+          "start": 109.228,
+          "end": 109.35
         },
         {
           "text": "chef",
-          "start": 109.765,
-          "end": 109.942
+          "start": 109.354,
+          "end": 109.589
         },
         {
           "text": "bokoblin",
-          "start": 109.96,
-          "end": 111.04
+          "start": 109.593,
+          "end": 111.043
         }
       ],
       "translations": {
@@ -1097,23 +1097,23 @@
       }
     },
     {
-      "start": 111.19,
-      "end": 112.93,
+      "start": 111.193,
+      "end": 112.935,
       "words": [
         {
           "text": "Je",
-          "start": 111.19,
-          "end": 111.792
+          "start": 111.193,
+          "end": 111.541
         },
         {
           "text": "suis",
-          "start": 111.81,
-          "end": 112.257
+          "start": 111.545,
+          "end": 112.115
         },
         {
           "text": "Link",
-          "start": 112.275,
-          "end": 112.93
+          "start": 112.119,
+          "end": 112.935
         }
       ],
       "translations": {
@@ -1121,22 +1121,22 @@
       }
     },
     {
-      "start": 113.08,
+      "start": 113.085,
       "end": 114.8,
       "words": [
         {
           "text": "Je",
-          "start": 113.08,
-          "end": 113.442
+          "start": 113.085,
+          "end": 113.283
         },
         {
           "text": "suis",
-          "start": 113.46,
-          "end": 114.097
+          "start": 113.287,
+          "end": 113.504
         },
         {
           "text": "Zelda",
-          "start": 114.115,
+          "start": 113.508,
           "end": 114.8
         }
       ],
@@ -1146,37 +1146,37 @@
     },
     {
       "start": 114.95,
-      "end": 118.46,
+      "end": 118.461,
       "words": [
         {
           "text": "Je",
           "start": 114.95,
-          "end": 115.477
+          "end": 115.118
         },
         {
           "text": "suis",
-          "start": 115.495,
-          "end": 115.587
+          "start": 115.122,
+          "end": 115.315
         },
         {
           "text": "Ganondorf",
-          "start": 115.605,
-          "end": 116.407
+          "start": 115.319,
+          "end": 116.379
         },
         {
           "text": "et",
-          "start": 116.425,
-          "end": 116.672
+          "start": 116.396,
+          "end": 116.562
         },
         {
           "text": "un",
-          "start": 116.69,
-          "end": 117.097
+          "start": 116.566,
+          "end": 116.879
         },
         {
           "text": "ocarina",
-          "start": 117.115,
-          "end": 118.46
+          "start": 116.883,
+          "end": 118.461
         }
       ],
       "translations": {
@@ -1184,28 +1184,28 @@
       }
     },
     {
-      "start": 118.61,
-      "end": 120.34,
+      "start": 118.611,
+      "end": 120.343,
       "words": [
         {
           "text": "Je",
-          "start": 118.61,
-          "end": 118.962
+          "start": 118.611,
+          "end": 118.828
         },
         {
           "text": "suis",
-          "start": 118.98,
-          "end": 119.167
+          "start": 118.832,
+          "end": 119.085
         },
         {
           "text": "un",
-          "start": 119.185,
-          "end": 119.517
+          "start": 119.089,
+          "end": 119.293
         },
         {
           "text": "chuchu",
-          "start": 119.535,
-          "end": 120.34
+          "start": 119.297,
+          "end": 120.343
         }
       ],
       "translations": {
@@ -1213,28 +1213,28 @@
       }
     },
     {
-      "start": 120.49,
-      "end": 122.17,
+      "start": 120.493,
+      "end": 122.198,
       "words": [
         {
           "text": "Je",
-          "start": 120.49,
-          "end": 120.842
+          "start": 120.493,
+          "end": 120.654
         },
         {
           "text": "suis",
-          "start": 120.86,
-          "end": 121.257
+          "start": 120.658,
+          "end": 120.922
         },
         {
           "text": "un",
-          "start": 121.275,
-          "end": 121.447
+          "start": 120.926,
+          "end": 121.222
         },
         {
           "text": "moblin",
-          "start": 121.465,
-          "end": 122.17
+          "start": 121.226,
+          "end": 122.198
         }
       ],
       "translations": {
@@ -1242,48 +1242,48 @@
       }
     },
     {
-      "start": 122.32,
-      "end": 125.61,
+      "start": 122.348,
+      "end": 125.613,
       "words": [
         {
           "text": "Je",
-          "start": 122.32,
-          "end": 122.707
+          "start": 122.348,
+          "end": 122.511
         },
         {
           "text": "suis",
-          "start": 122.725,
-          "end": 122.907
+          "start": 122.515,
+          "end": 122.789
         },
         {
           "text": "un",
-          "start": 122.925,
-          "end": 123.152
+          "start": 122.793,
+          "end": 123.109
         },
         {
           "text": "lynel",
-          "start": 123.17,
-          "end": 123.767
+          "start": 123.113,
+          "end": 123.435
         },
         {
           "text": "et",
-          "start": 123.785,
-          "end": 123.957
+          "start": 123.439,
+          "end": 123.983
         },
         {
           "text": "un",
-          "start": 123.975,
-          "end": 124.262
+          "start": 123.987,
+          "end": 124.113
         },
         {
           "text": "chef",
-          "start": 124.28,
-          "end": 124.507
+          "start": 124.117,
+          "end": 124.354
         },
         {
           "text": "bokoblin",
-          "start": 124.525,
-          "end": 125.61
+          "start": 124.358,
+          "end": 125.613
         }
       ],
       "translations": {
@@ -1291,28 +1291,28 @@
       }
     },
     {
-      "start": 125.76,
-      "end": 127.52,
+      "start": 125.763,
+      "end": 127.525,
       "words": [
         {
           "text": "Je",
-          "start": 125.76,
-          "end": 126.132
+          "start": 125.763,
+          "end": 125.963
         },
         {
           "text": "suis",
-          "start": 126.15,
-          "end": 126.337
+          "start": 125.967,
+          "end": 126.325
         },
         {
           "text": "une",
-          "start": 126.355,
-          "end": 126.772
+          "start": 126.329,
+          "end": 126.519
         },
         {
           "text": "Nintendo",
-          "start": 126.79,
-          "end": 127.52
+          "start": 126.523,
+          "end": 127.525
         }
       ],
       "translations": {
@@ -1320,23 +1320,23 @@
       }
     },
     {
-      "start": 127.67,
-      "end": 128.705,
+      "start": 127.675,
+      "end": 129.14,
       "words": [
         {
           "text": "Vas-y",
-          "start": 127.67,
-          "end": 128.392
+          "start": 127.675,
+          "end": 128.398
         },
         {
           "text": "Go",
-          "start": 128.41,
-          "end": 128.472
+          "start": 128.402,
+          "end": 128.842
         },
         {
           "text": "Go",
-          "start": 128.49,
-          "end": 128.705
+          "start": 128.846,
+          "end": 129.14
         }
       ],
       "translations": {
@@ -1344,28 +1344,28 @@
       }
     },
     {
-      "start": 128.84,
-      "end": 131.19,
+      "start": 129.29,
+      "end": 131.195,
       "words": [
         {
           "text": "Je",
-          "start": 128.84,
-          "end": 129.297
+          "start": 129.29,
+          "end": 129.657
         },
         {
           "text": "suis",
-          "start": 129.315,
-          "end": 129.447
+          "start": 129.661,
+          "end": 130.017
         },
         {
           "text": "une",
-          "start": 129.465,
-          "end": 130.042
+          "start": 130.021,
+          "end": 130.209
         },
         {
           "text": "Nintendo",
-          "start": 130.06,
-          "end": 131.19
+          "start": 130.213,
+          "end": 131.195
         }
       ],
       "translations": {
@@ -1373,23 +1373,23 @@
       }
     },
     {
-      "start": 131.34,
-      "end": 133.67,
+      "start": 131.345,
+      "end": 133.678,
       "words": [
         {
           "text": "Vas-y",
-          "start": 131.34,
-          "end": 132.432
+          "start": 131.345,
+          "end": 131.991
         },
         {
           "text": "Go",
-          "start": 132.45,
-          "end": 133.007
+          "start": 132.085,
+          "end": 132.449
         },
         {
           "text": "Go",
-          "start": 133.025,
-          "end": 133.67
+          "start": 132.52,
+          "end": 133.678
         }
       ],
       "translations": {
@@ -1397,33 +1397,33 @@
       }
     },
     {
-      "start": 133.82,
-      "end": 136.14,
+      "start": 133.828,
+      "end": 137.166,
       "words": [
         {
           "text": "Je",
-          "start": 133.82,
-          "end": 134.382
+          "start": 133.828,
+          "end": 134.108
         },
         {
           "text": "saute",
-          "start": 134.4,
-          "end": 134.622
+          "start": 134.112,
+          "end": 134.584
         },
         {
           "text": "et",
-          "start": 134.64,
-          "end": 135.077
+          "start": 134.588,
+          "end": 134.742
         },
         {
           "text": "je",
-          "start": 135.095,
-          "end": 135.572
+          "start": 134.746,
+          "end": 134.95
         },
         {
           "text": "marche",
-          "start": 135.59,
-          "end": 136.14
+          "start": 134.954,
+          "end": 137.166
         }
       ],
       "translations": {
@@ -1431,48 +1431,48 @@
       }
     },
     {
-      "start": 136.29,
-      "end": 139.195,
+      "start": 137.316,
+      "end": 140.952,
       "words": [
         {
           "text": "Je",
-          "start": 136.29,
-          "end": 136.747
+          "start": 137.316,
+          "end": 137.546
         },
         {
           "text": "tourne",
-          "start": 136.765,
-          "end": 136.877
+          "start": 137.58,
+          "end": 137.971
         },
         {
           "text": "à",
-          "start": 136.895,
-          "end": 137.312
+          "start": 137.975,
+          "end": 138.045
         },
         {
           "text": "gauche",
-          "start": 137.33,
-          "end": 137.607
+          "start": 138.049,
+          "end": 138.424
         },
         {
           "text": "et",
-          "start": 137.625,
-          "end": 137.862
+          "start": 138.428,
+          "end": 138.484
         },
         {
           "text": "tourne",
-          "start": 137.88,
-          "end": 138.227
+          "start": 138.508,
+          "end": 138.784
         },
         {
           "text": "à",
-          "start": 138.245,
-          "end": 138.532
+          "start": 138.787,
+          "end": 139.098
         },
         {
           "text": "droite",
-          "start": 138.55,
-          "end": 139.195
+          "start": 139.205,
+          "end": 140.952
         }
       ],
       "translations": {
@@ -1480,33 +1480,33 @@
       }
     },
     {
-      "start": 139.22,
-      "end": 140.86,
+      "start": 141.008,
+      "end": 142.587,
       "words": [
         {
           "text": "Je",
-          "start": 139.22,
-          "end": 139.507
+          "start": 141.008,
+          "end": 141.18
         },
         {
           "text": "danse",
-          "start": 139.525,
-          "end": 139.7
+          "start": 141.184,
+          "end": 141.526
         },
         {
           "text": "et",
-          "start": 140.025,
-          "end": 140.402
+          "start": 141.53,
+          "end": 141.675
         },
         {
           "text": "je",
-          "start": 140.42,
-          "end": 140.502
+          "start": 141.679,
+          "end": 141.839
         },
         {
           "text": "cours",
-          "start": 140.52,
-          "end": 140.86
+          "start": 141.843,
+          "end": 142.587
         }
       ],
       "translations": {
@@ -1514,33 +1514,33 @@
       }
     },
     {
-      "start": 141.01,
-      "end": 144.08,
+      "start": 142.666,
+      "end": 144.081,
       "words": [
         {
           "text": "Je",
-          "start": 141.01,
-          "end": 141.537
+          "start": 142.666,
+          "end": 142.722
         },
         {
           "text": "tombe",
-          "start": 141.555,
-          "end": 141.962
+          "start": 142.726,
+          "end": 142.881
         },
         {
           "text": "dans",
-          "start": 141.98,
-          "end": 142.692
+          "start": 142.885,
+          "end": 143.059
         },
         {
           "text": "un",
-          "start": 142.71,
-          "end": 143.167
+          "start": 143.062,
+          "end": 143.303
         },
         {
           "text": "trou",
-          "start": 143.185,
-          "end": 144.08
+          "start": 143.306,
+          "end": 144.081
         }
       ],
       "translations": {
@@ -1548,28 +1548,28 @@
       }
     },
     {
-      "start": 144.23,
-      "end": 145.91,
+      "start": 144.231,
+      "end": 145.917,
       "words": [
         {
           "text": "Je",
-          "start": 144.23,
-          "end": 144.537
+          "start": 144.231,
+          "end": 144.43
         },
         {
           "text": "monte",
-          "start": 144.555,
-          "end": 144.822
+          "start": 144.434,
+          "end": 144.762
         },
         {
           "text": "je",
-          "start": 144.84,
-          "end": 145.222
+          "start": 144.791,
+          "end": 145.119
         },
         {
           "text": "descends",
-          "start": 145.24,
-          "end": 145.91
+          "start": 145.123,
+          "end": 145.917
         }
       ],
       "translations": {
@@ -1577,32 +1577,32 @@
       }
     },
     {
-      "start": 146.06,
+      "start": 146.067,
       "end": 148.43,
       "words": [
         {
           "text": "J’arrête",
-          "start": 146.06,
-          "end": 146.622
+          "start": 146.067,
+          "end": 146.554
         },
         {
           "text": "et",
-          "start": 146.64,
-          "end": 147.067
+          "start": 146.62,
+          "end": 147.051
         },
         {
           "text": "je",
-          "start": 147.085,
-          "end": 147.312
+          "start": 147.055,
+          "end": 147.501
         },
         {
           "text": "go",
-          "start": 147.33,
-          "end": 147.557
+          "start": 147.555,
+          "end": 147.796
         },
         {
           "text": "Vas-y",
-          "start": 147.575,
+          "start": 147.827,
           "end": 148.43
         }
       ],
@@ -1612,32 +1612,32 @@
     },
     {
       "start": 148.58,
-      "end": 152.045,
+      "end": 151.946,
       "words": [
         {
           "text": "Je",
           "start": 148.58,
-          "end": 149.177
+          "end": 148.876
         },
         {
           "text": "saute",
-          "start": 149.195,
-          "end": 149.842
+          "start": 148.88,
+          "end": 149.352
         },
         {
           "text": "et",
-          "start": 149.86,
-          "end": 150.327
+          "start": 149.356,
+          "end": 149.508
         },
         {
           "text": "je",
-          "start": 150.345,
-          "end": 150.645
+          "start": 149.512,
+          "end": 149.718
         },
         {
           "text": "marche",
-          "start": 151.27,
-          "end": 152.045
+          "start": 149.722,
+          "end": 151.946
         }
       ],
       "translations": {
@@ -1645,48 +1645,48 @@
       }
     },
     {
-      "start": 152.09,
-      "end": 155.725,
+      "start": 152.096,
+      "end": 155.626,
       "words": [
         {
           "text": "Je",
-          "start": 152.09,
-          "end": 152.382
+          "start": 152.096,
+          "end": 152.305
         },
         {
           "text": "tourne",
-          "start": 152.4,
-          "end": 152.837
+          "start": 152.377,
+          "end": 152.728
         },
         {
           "text": "à",
-          "start": 152.855,
-          "end": 153.297
+          "start": 152.732,
+          "end": 152.808
         },
         {
           "text": "gauche",
-          "start": 153.315,
-          "end": 153.567
+          "start": 152.812,
+          "end": 153.073
         },
         {
           "text": "et",
-          "start": 153.585,
-          "end": 153.992
+          "start": 153.077,
+          "end": 153.214
         },
         {
           "text": "tourne",
-          "start": 154.01,
-          "end": 154.155
+          "start": 153.295,
+          "end": 153.457
         },
         {
           "text": "à",
-          "start": 154.555,
-          "end": 154.938
+          "start": 153.461,
+          "end": 153.838
         },
         {
           "text": "droite",
-          "start": 154.968,
-          "end": 155.725
+          "start": 153.966,
+          "end": 155.626
         }
       ],
       "translations": {
@@ -1694,33 +1694,33 @@
       }
     },
     {
-      "start": 155.77,
-      "end": 158.86,
+      "start": 155.776,
+      "end": 157.359,
       "words": [
         {
           "text": "Je",
-          "start": 155.77,
-          "end": 156.307
+          "start": 155.776,
+          "end": 155.947
         },
         {
           "text": "danse",
-          "start": 156.325,
-          "end": 156.992
+          "start": 155.951,
+          "end": 156.289
         },
         {
           "text": "et",
-          "start": 157.01,
-          "end": 157.452
+          "start": 156.293,
+          "end": 156.435
         },
         {
           "text": "je",
-          "start": 157.47,
-          "end": 158.127
+          "start": 156.439,
+          "end": 156.604
         },
         {
           "text": "cours",
-          "start": 158.145,
-          "end": 158.86
+          "start": 156.608,
+          "end": 157.359
         }
       ],
       "translations": {
@@ -1728,33 +1728,33 @@
       }
     },
     {
-      "start": 159.01,
-      "end": 160.66,
+      "start": 157.436,
+      "end": 158.861,
       "words": [
         {
           "text": "Je",
-          "start": 159.01,
-          "end": 159.307
+          "start": 157.436,
+          "end": 157.488
         },
         {
           "text": "tombe",
-          "start": 159.325,
-          "end": 159.582
+          "start": 157.492,
+          "end": 157.643
         },
         {
           "text": "dans",
-          "start": 159.6,
-          "end": 159.977
+          "start": 157.647,
+          "end": 157.82
         },
         {
           "text": "un",
-          "start": 159.995,
-          "end": 160.227
+          "start": 157.824,
+          "end": 158.063
         },
         {
           "text": "trou",
-          "start": 160.245,
-          "end": 160.66
+          "start": 158.067,
+          "end": 158.861
         }
       ],
       "translations": {
@@ -1762,28 +1762,28 @@
       }
     },
     {
-      "start": 160.81,
-      "end": 162.225,
+      "start": 159.011,
+      "end": 160.665,
       "words": [
         {
           "text": "Je",
-          "start": 160.81,
-          "end": 161.067
+          "start": 159.011,
+          "end": 159.19
         },
         {
           "text": "monte",
-          "start": 161.085,
-          "end": 161.387
+          "start": 159.194,
+          "end": 159.515
         },
         {
           "text": "je",
-          "start": 161.405,
-          "end": 161.837
+          "start": 159.559,
+          "end": 159.875
         },
         {
           "text": "descends",
-          "start": 161.855,
-          "end": 162.225
+          "start": 159.879,
+          "end": 160.665
         }
       ],
       "translations": {
@@ -1791,33 +1791,33 @@
       }
     },
     {
-      "start": 162.32,
-      "end": 177.5,
+      "start": 160.815,
+      "end": 177.505,
       "words": [
         {
           "text": "J’arrête",
-          "start": 162.32,
-          "end": 162.607
+          "start": 160.815,
+          "end": 161.329
         },
         {
           "text": "et",
-          "start": 162.625,
-          "end": 162.712
+          "start": 161.378,
+          "end": 161.78
         },
         {
           "text": "je",
-          "start": 162.73,
-          "end": 162.795
+          "start": 161.826,
+          "end": 162.269
         },
         {
           "text": "go",
-          "start": 162.975,
-          "end": 163.117
+          "start": 162.305,
+          "end": 162.593
         },
         {
           "text": "Vas-y",
-          "start": 163.135,
-          "end": 177.5
+          "start": 162.597,
+          "end": 177.505
         }
       ],
       "translations": {
@@ -1825,23 +1825,23 @@
       }
     },
     {
-      "start": 177.65,
-      "end": 179.35,
+      "start": 177.655,
+      "end": 179.354,
       "words": [
         {
           "text": "Je",
-          "start": 177.65,
-          "end": 177.987
+          "start": 177.655,
+          "end": 177.85
         },
         {
           "text": "suis",
-          "start": 178.005,
-          "end": 178.242
+          "start": 177.854,
+          "end": 178.103
         },
         {
           "text": "Pikachu",
-          "start": 178.26,
-          "end": 179.35
+          "start": 178.107,
+          "end": 179.354
         }
       ],
       "translations": {
@@ -1849,23 +1849,23 @@
       }
     },
     {
-      "start": 179.5,
-      "end": 181.305,
+      "start": 179.504,
+      "end": 181.226,
       "words": [
         {
           "text": "Je",
-          "start": 179.5,
-          "end": 179.897
+          "start": 179.504,
+          "end": 179.703
         },
         {
           "text": "suis",
-          "start": 179.915,
-          "end": 180.167
+          "start": 179.707,
+          "end": 179.976
         },
         {
           "text": "Bulbizarre",
-          "start": 180.185,
-          "end": 181.305
+          "start": 179.98,
+          "end": 181.226
         }
       ],
       "translations": {
@@ -1873,33 +1873,33 @@
       }
     },
     {
-      "start": 181.37,
-      "end": 183.34,
+      "start": 181.376,
+      "end": 183.346,
       "words": [
         {
           "text": "Je",
-          "start": 181.37,
-          "end": 181.512
+          "start": 181.376,
+          "end": 181.544
         },
         {
           "text": "suis",
-          "start": 181.53,
-          "end": 181.747
+          "start": 181.548,
+          "end": 181.702
         },
         {
           "text": "Magicarpe",
-          "start": 181.765,
-          "end": 182.412
+          "start": 181.706,
+          "end": 182.287
         },
         {
           "text": "et",
-          "start": 182.43,
-          "end": 182.607
+          "start": 182.37,
+          "end": 182.425
         },
         {
           "text": "Gardevoir",
-          "start": 182.625,
-          "end": 183.34
+          "start": 182.429,
+          "end": 183.346
         }
       ],
       "translations": {
@@ -1907,23 +1907,23 @@
       }
     },
     {
-      "start": 183.49,
-      "end": 184.9,
+      "start": 183.496,
+      "end": 184.904,
       "words": [
         {
           "text": "Je",
-          "start": 183.49,
-          "end": 183.747
+          "start": 183.496,
+          "end": 183.7
         },
         {
           "text": "suis",
-          "start": 183.765,
-          "end": 183.997
+          "start": 183.704,
+          "end": 184.023
         },
         {
           "text": "Dracaufeu",
-          "start": 184.015,
-          "end": 184.9
+          "start": 184.027,
+          "end": 184.904
         }
       ],
       "translations": {
@@ -1931,23 +1931,23 @@
       }
     },
     {
-      "start": 185.05,
-      "end": 186.77,
+      "start": 185.054,
+      "end": 186.777,
       "words": [
         {
           "text": "Je",
-          "start": 185.05,
-          "end": 185.542
+          "start": 185.054,
+          "end": 185.258
         },
         {
           "text": "suis",
-          "start": 185.56,
-          "end": 185.817
+          "start": 185.262,
+          "end": 185.508
         },
         {
           "text": "Koraidon",
-          "start": 185.835,
-          "end": 186.77
+          "start": 185.512,
+          "end": 186.777
         }
       ],
       "translations": {
@@ -1955,33 +1955,33 @@
       }
     },
     {
-      "start": 186.92,
-      "end": 190.73,
+      "start": 186.927,
+      "end": 190.739,
       "words": [
         {
           "text": "Je",
-          "start": 186.92,
-          "end": 187.272
+          "start": 186.927,
+          "end": 187.107
         },
         {
           "text": "suis",
-          "start": 187.29,
-          "end": 187.467
+          "start": 187.111,
+          "end": 187.327
         },
         {
           "text": "Carapuce",
-          "start": 187.485,
-          "end": 188.767
+          "start": 187.331,
+          "end": 188.748
         },
         {
           "text": "et",
-          "start": 188.785,
-          "end": 189.307
+          "start": 188.752,
+          "end": 189.234
         },
         {
           "text": "Miraidon",
-          "start": 189.325,
-          "end": 190.73
+          "start": 189.305,
+          "end": 190.739
         }
       ],
       "translations": {
@@ -1989,23 +1989,23 @@
       }
     },
     {
-      "start": 190.88,
-      "end": 192.26,
+      "start": 190.889,
+      "end": 192.264,
       "words": [
         {
           "text": "Je",
-          "start": 190.88,
-          "end": 191.182
+          "start": 190.889,
+          "end": 190.995
         },
         {
           "text": "suis",
-          "start": 191.2,
-          "end": 191.392
+          "start": 190.999,
+          "end": 191.475
         },
         {
           "text": "Pikachu",
-          "start": 191.41,
-          "end": 192.26
+          "start": 191.479,
+          "end": 192.264
         }
       ],
       "translations": {
@@ -2013,23 +2013,23 @@
       }
     },
     {
-      "start": 192.41,
-      "end": 194.23,
+      "start": 192.414,
+      "end": 194.144,
       "words": [
         {
           "text": "Je",
-          "start": 192.41,
-          "end": 192.757
+          "start": 192.414,
+          "end": 192.629
         },
         {
           "text": "suis",
-          "start": 192.775,
-          "end": 193.197
+          "start": 192.633,
+          "end": 192.88
         },
         {
           "text": "Bulbizarre",
-          "start": 193.215,
-          "end": 194.23
+          "start": 192.884,
+          "end": 194.144
         }
       ],
       "translations": {
@@ -2037,33 +2037,33 @@
       }
     },
     {
-      "start": 194.29,
-      "end": 196.065,
+      "start": 194.294,
+      "end": 196.007,
       "words": [
         {
           "text": "Je",
-          "start": 194.29,
-          "end": 194.457
+          "start": 194.294,
+          "end": 194.463
         },
         {
           "text": "suis",
-          "start": 194.475,
-          "end": 194.652
+          "start": 194.466,
+          "end": 194.639
         },
         {
           "text": "Magicarpe",
-          "start": 194.67,
-          "end": 195.112
+          "start": 194.643,
+          "end": 195.29
         },
         {
           "text": "et",
-          "start": 195.13,
-          "end": 195.342
+          "start": 195.294,
+          "end": 195.337
         },
         {
           "text": "Gardevoir",
-          "start": 195.36,
-          "end": 196.065
+          "start": 195.341,
+          "end": 196.007
         }
       ],
       "translations": {
@@ -2071,23 +2071,23 @@
       }
     },
     {
-      "start": 196.15,
-      "end": 198.12,
+      "start": 196.157,
+      "end": 198.122,
       "words": [
         {
           "text": "Je",
-          "start": 196.15,
-          "end": 196.512
+          "start": 196.157,
+          "end": 196.528
         },
         {
           "text": "suis",
-          "start": 196.53,
-          "end": 196.682
+          "start": 196.532,
+          "end": 196.686
         },
         {
           "text": "Dracaufeu",
-          "start": 196.7,
-          "end": 198.12
+          "start": 196.69,
+          "end": 198.122
         }
       ],
       "translations": {
@@ -2095,23 +2095,23 @@
       }
     },
     {
-      "start": 198.27,
-      "end": 201.55,
+      "start": 198.272,
+      "end": 199.673,
       "words": [
         {
           "text": "Je",
-          "start": 198.27,
-          "end": 198.767
+          "start": 198.272,
+          "end": 198.527
         },
         {
           "text": "suis",
-          "start": 198.785,
-          "end": 199.377
+          "start": 198.531,
+          "end": 198.773
         },
         {
           "text": "Koraidon",
-          "start": 199.395,
-          "end": 201.55
+          "start": 198.777,
+          "end": 199.673
         }
       ],
       "translations": {
@@ -2119,33 +2119,33 @@
       }
     },
     {
-      "start": 201.7,
-      "end": 205.51,
+      "start": 199.823,
+      "end": 203.376,
       "words": [
         {
           "text": "Je",
-          "start": 201.7,
-          "end": 202.032
+          "start": 199.823,
+          "end": 200.003
         },
         {
           "text": "suis",
-          "start": 202.05,
-          "end": 202.502
+          "start": 200.007,
+          "end": 200.223
         },
         {
           "text": "Carapuce",
-          "start": 202.52,
-          "end": 203.672
+          "start": 200.227,
+          "end": 201.697
         },
         {
           "text": "et",
-          "start": 203.69,
-          "end": 204.067
+          "start": 201.701,
+          "end": 202.191
         },
         {
           "text": "Miraidon",
-          "start": 204.085,
-          "end": 205.51
+          "start": 202.237,
+          "end": 203.376
         }
       ],
       "translations": {
@@ -2153,28 +2153,28 @@
       }
     },
     {
-      "start": 205.66,
-      "end": 208.75,
+      "start": 203.526,
+      "end": 205.512,
       "words": [
         {
           "text": "Je",
-          "start": 205.66,
-          "end": 206.087
+          "start": 203.526,
+          "end": 203.819
         },
         {
           "text": "suis",
-          "start": 206.105,
-          "end": 206.372
+          "start": 203.823,
+          "end": 204.011
         },
         {
           "text": "une",
-          "start": 206.39,
-          "end": 207.017
+          "start": 204.067,
+          "end": 204.464
         },
         {
           "text": "Nintendo",
-          "start": 207.035,
-          "end": 208.75
+          "start": 204.529,
+          "end": 205.512
         }
       ],
       "translations": {
@@ -2182,23 +2182,23 @@
       }
     },
     {
-      "start": 208.9,
-      "end": 210.46,
+      "start": 205.662,
+      "end": 208.752,
       "words": [
         {
           "text": "Vas-y",
-          "start": 208.9,
-          "end": 209.612
+          "start": 205.662,
+          "end": 207.014
         },
         {
           "text": "Go",
-          "start": 209.63,
-          "end": 210.082
+          "start": 207.018,
+          "end": 207.955
         },
         {
           "text": "Go",
-          "start": 210.1,
-          "end": 210.46
+          "start": 207.959,
+          "end": 208.752
         }
       ],
       "translations": {
@@ -2206,28 +2206,28 @@
       }
     },
     {
-      "start": 210.52,
-      "end": 212.42,
+      "start": 208.902,
+      "end": 212.421,
       "words": [
         {
           "text": "Je",
+          "start": 208.902,
+          "end": 209.535
+        },
+        {
+          "text": "suis",
+          "start": 209.637,
+          "end": 210.064
+        },
+        {
+          "text": "une",
+          "start": 210.068,
+          "end": 210.398
+        },
+        {
+          "text": "Nintendo",
           "start": 210.52,
-          "end": 210.667
-        },
-        {
-          "text": "suis",
-          "start": 210.685,
-          "end": 211.272
-        },
-        {
-          "text": "une",
-          "start": 211.29,
-          "end": 211.447
-        },
-        {
-          "text": "Nintendo",
-          "start": 211.465,
-          "end": 212.42
+          "end": 212.421
         }
       ],
       "translations": {
@@ -2235,23 +2235,23 @@
       }
     },
     {
-      "start": 212.57,
-      "end": 214.9,
+      "start": 212.571,
+      "end": 214.902,
       "words": [
         {
           "text": "Vas-y",
-          "start": 212.57,
-          "end": 213.737
+          "start": 212.571,
+          "end": 213.232
         },
         {
           "text": "Go",
-          "start": 213.755,
-          "end": 214.247
+          "start": 213.317,
+          "end": 213.682
         },
         {
           "text": "Go",
-          "start": 214.265,
-          "end": 214.9
+          "start": 213.734,
+          "end": 214.902
         }
       ],
       "translations": {
@@ -2259,33 +2259,33 @@
       }
     },
     {
-      "start": 215.05,
-      "end": 217.815,
+      "start": 215.052,
+      "end": 218.385,
       "words": [
         {
           "text": "Je",
-          "start": 215.05,
-          "end": 215.607
+          "start": 215.052,
+          "end": 215.333
         },
         {
           "text": "saute",
-          "start": 215.625,
-          "end": 216.092
+          "start": 215.337,
+          "end": 215.807
         },
         {
           "text": "et",
-          "start": 216.11,
-          "end": 216.592
+          "start": 215.811,
+          "end": 215.963
         },
         {
           "text": "je",
-          "start": 216.61,
-          "end": 217.082
+          "start": 215.967,
+          "end": 216.169
         },
         {
           "text": "marche",
-          "start": 217.1,
-          "end": 217.815
+          "start": 216.173,
+          "end": 218.385
         }
       ],
       "translations": {
@@ -2293,48 +2293,48 @@
       }
     },
     {
-      "start": 217.95,
-      "end": 220.405,
+      "start": 218.535,
+      "end": 222.193,
       "words": [
         {
           "text": "Je",
-          "start": 217.95,
-          "end": 218.202
+          "start": 218.535,
+          "end": 218.768
         },
         {
           "text": "tourne",
-          "start": 218.22,
-          "end": 218.517
+          "start": 218.808,
+          "end": 219.185
         },
         {
           "text": "à",
-          "start": 218.535,
-          "end": 218.832
+          "start": 219.189,
+          "end": 219.267
         },
         {
           "text": "gauche",
-          "start": 218.85,
-          "end": 219.077
+          "start": 219.271,
+          "end": 219.616
         },
         {
           "text": "et",
-          "start": 219.095,
-          "end": 219.297
+          "start": 219.62,
+          "end": 219.689
         },
         {
           "text": "tourne",
-          "start": 219.315,
-          "end": 219.587
+          "start": 219.717,
+          "end": 220.018
         },
         {
           "text": "à",
-          "start": 219.605,
-          "end": 219.747
+          "start": 220.022,
+          "end": 220.315
         },
         {
           "text": "droite",
-          "start": 219.765,
-          "end": 220.405
+          "start": 220.404,
+          "end": 222.193
         }
       ],
       "translations": {
@@ -2342,33 +2342,33 @@
       }
     },
     {
-      "start": 220.43,
-      "end": 222.215,
+      "start": 222.244,
+      "end": 223.816,
       "words": [
         {
           "text": "Je",
-          "start": 220.43,
-          "end": 220.605
+          "start": 222.244,
+          "end": 222.407
         },
         {
           "text": "danse",
-          "start": 220.73,
-          "end": 220.955
+          "start": 222.411,
+          "end": 222.747
         },
         {
           "text": "et",
-          "start": 220.99,
-          "end": 221.402
+          "start": 222.751,
+          "end": 222.902
         },
         {
           "text": "je",
-          "start": 221.42,
-          "end": 221.617
+          "start": 222.906,
+          "end": 223.07
         },
         {
           "text": "cours",
-          "start": 221.635,
-          "end": 222.215
+          "start": 223.074,
+          "end": 223.816
         }
       ],
       "translations": {
@@ -2376,32 +2376,32 @@
       }
     },
     {
-      "start": 222.24,
+      "start": 223.898,
       "end": 225.29,
       "words": [
         {
           "text": "Je",
-          "start": 222.24,
-          "end": 222.777
+          "start": 223.898,
+          "end": 223.952
         },
         {
           "text": "tombe",
-          "start": 222.795,
-          "end": 223.192
+          "start": 223.956,
+          "end": 224.12
         },
         {
           "text": "dans",
-          "start": 223.21,
-          "end": 223.912
+          "start": 224.124,
+          "end": 224.294
         },
         {
           "text": "un",
-          "start": 223.93,
-          "end": 224.387
+          "start": 224.298,
+          "end": 224.528
         },
         {
           "text": "trou",
-          "start": 224.405,
+          "start": 224.532,
           "end": 225.29
         }
       ],
@@ -2411,27 +2411,27 @@
     },
     {
       "start": 225.44,
-      "end": 227.04,
+      "end": 227.148,
       "words": [
         {
           "text": "Je",
           "start": 225.44,
-          "end": 225.762
+          "end": 225.658
         },
         {
           "text": "monte",
-          "start": 225.78,
-          "end": 226.047
+          "start": 225.662,
+          "end": 225.984
         },
         {
           "text": "je",
-          "start": 226.065,
-          "end": 226.447
+          "start": 226.02,
+          "end": 226.35
         },
         {
           "text": "descends",
-          "start": 226.465,
-          "end": 227.04
+          "start": 226.354,
+          "end": 227.148
         }
       ],
       "translations": {
@@ -2439,33 +2439,33 @@
       }
     },
     {
-      "start": 227.18,
-      "end": 229.66,
+      "start": 227.298,
+      "end": 229.67,
       "words": [
         {
           "text": "J’arrête",
-          "start": 227.18,
-          "end": 227.847
+          "start": 227.298,
+          "end": 227.783
         },
         {
           "text": "et",
-          "start": 227.865,
-          "end": 228.302
+          "start": 227.836,
+          "end": 228.281
         },
         {
           "text": "je",
-          "start": 228.32,
-          "end": 228.487
+          "start": 228.299,
+          "end": 228.726
         },
         {
           "text": "go",
-          "start": 228.505,
-          "end": 228.792
+          "start": 228.782,
+          "end": 229.06
         },
         {
           "text": "Vas-y",
-          "start": 228.81,
-          "end": 229.66
+          "start": 229.064,
+          "end": 229.67
         }
       ],
       "translations": {
@@ -2473,33 +2473,33 @@
       }
     },
     {
-      "start": 229.81,
-      "end": 233.255,
+      "start": 229.82,
+      "end": 233.156,
       "words": [
         {
           "text": "Je",
-          "start": 229.81,
-          "end": 230.387
+          "start": 229.82,
+          "end": 230.099
         },
         {
           "text": "saute",
-          "start": 230.405,
-          "end": 231.067
+          "start": 230.103,
+          "end": 230.575
         },
         {
           "text": "et",
-          "start": 231.085,
-          "end": 231.757
+          "start": 230.579,
+          "end": 230.729
         },
         {
           "text": "je",
-          "start": 231.775,
-          "end": 231.865
+          "start": 230.733,
+          "end": 230.935
         },
         {
           "text": "marche",
-          "start": 232.07,
-          "end": 233.255
+          "start": 230.939,
+          "end": 233.156
         }
       ],
       "translations": {
@@ -2507,48 +2507,48 @@
       }
     },
     {
-      "start": 233.3,
-      "end": 236.965,
+      "start": 233.306,
+      "end": 236.861,
       "words": [
         {
           "text": "Je",
-          "start": 233.3,
-          "end": 233.602
+          "start": 233.306,
+          "end": 233.544
         },
         {
           "text": "tourne",
-          "start": 233.62,
-          "end": 234.062
+          "start": 233.579,
+          "end": 233.953
         },
         {
           "text": "à",
-          "start": 234.08,
-          "end": 234.527
+          "start": 233.957,
+          "end": 234.033
         },
         {
           "text": "gauche",
-          "start": 234.545,
-          "end": 234.802
+          "start": 234.037,
+          "end": 234.201
         },
         {
           "text": "et",
-          "start": 234.82,
-          "end": 235.227
+          "start": 234.205,
+          "end": 234.461
         },
         {
           "text": "tourne",
-          "start": 235.245,
-          "end": 235.4
+          "start": 234.521,
+          "end": 234.712
         },
         {
           "text": "à",
-          "start": 235.755,
-          "end": 236.172
+          "start": 234.716,
+          "end": 235.026
         },
         {
           "text": "droite",
-          "start": 236.202,
-          "end": 236.965
+          "start": 235.03,
+          "end": 236.861
         }
       ],
       "translations": {
@@ -2556,33 +2556,33 @@
       }
     },
     {
-      "start": 237.01,
-      "end": 240.05,
+      "start": 237.011,
+      "end": 238.595,
       "words": [
         {
           "text": "Je",
-          "start": 237.01,
-          "end": 237.542
+          "start": 237.011,
+          "end": 237.177
         },
         {
           "text": "danse",
-          "start": 237.56,
-          "end": 237.952
+          "start": 237.181,
+          "end": 237.519
         },
         {
           "text": "et",
-          "start": 237.97,
-          "end": 238.677
+          "start": 237.523,
+          "end": 237.666
         },
         {
           "text": "je",
-          "start": 238.695,
-          "end": 239.147
+          "start": 237.67,
+          "end": 237.832
         },
         {
           "text": "cours",
-          "start": 239.165,
-          "end": 240.05
+          "start": 237.836,
+          "end": 238.595
         }
       ],
       "translations": {
@@ -2590,33 +2590,33 @@
       }
     },
     {
-      "start": 240.2,
-      "end": 241.995,
+      "start": 238.662,
+      "end": 240.055,
       "words": [
         {
           "text": "Je",
-          "start": 240.2,
-          "end": 240.527
+          "start": 238.662,
+          "end": 238.722
         },
         {
           "text": "tombe",
-          "start": 240.545,
-          "end": 240.812
+          "start": 238.726,
+          "end": 238.879
         },
         {
           "text": "dans",
-          "start": 240.83,
-          "end": 241.202
+          "start": 238.883,
+          "end": 239.06
         },
         {
           "text": "un",
-          "start": 241.22,
-          "end": 241.487
+          "start": 239.064,
+          "end": 239.301
         },
         {
           "text": "trou",
-          "start": 241.505,
-          "end": 241.995
+          "start": 239.305,
+          "end": 240.055
         }
       ],
       "translations": {
@@ -2624,28 +2624,28 @@
       }
     },
     {
-      "start": 242.02,
-      "end": 243.455,
+      "start": 240.205,
+      "end": 241.877,
       "words": [
         {
           "text": "Je",
-          "start": 242.02,
-          "end": 242.147
+          "start": 240.205,
+          "end": 240.423
         },
         {
           "text": "monte",
-          "start": 242.165,
-          "end": 242.612
+          "start": 240.427,
+          "end": 240.75
         },
         {
           "text": "je",
-          "start": 242.63,
-          "end": 242.842
+          "start": 240.784,
+          "end": 241.111
         },
         {
           "text": "descends",
-          "start": 242.86,
-          "end": 243.455
+          "start": 241.115,
+          "end": 241.877
         }
       ],
       "translations": {
@@ -2653,33 +2653,33 @@
       }
     },
     {
-      "start": 243.53,
-      "end": 246.87,
+      "start": 242.027,
+      "end": 244.74,
       "words": [
         {
           "text": "J’arrête",
-          "start": 243.53,
-          "end": 244.297
+          "start": 242.027,
+          "end": 242.553
         },
         {
           "text": "et",
-          "start": 244.315,
-          "end": 244.902
+          "start": 242.599,
+          "end": 243.032
         },
         {
           "text": "je",
-          "start": 244.92,
-          "end": 245.147
+          "start": 243.06,
+          "end": 243.486
         },
         {
           "text": "go",
-          "start": 245.165,
-          "end": 245.837
+          "start": 243.514,
+          "end": 243.795
         },
         {
           "text": "Vas-y",
-          "start": 245.855,
-          "end": 246.87
+          "start": 243.829,
+          "end": 244.74
         }
       ],
       "translations": {
@@ -2687,28 +2687,28 @@
       }
     },
     {
-      "start": 246.98,
-      "end": 248.15,
+      "start": 244.89,
+      "end": 246.421,
       "words": [
         {
           "text": "Je",
-          "start": 246.98,
-          "end": 247.117
+          "start": 244.89,
+          "end": 245.111
         },
         {
           "text": "suis",
-          "start": 247.135,
-          "end": 247.437
+          "start": 245.115,
+          "end": 245.401
         },
         {
           "text": "une",
-          "start": 247.455,
-          "end": 247.607
+          "start": 245.405,
+          "end": 245.829
         },
         {
           "text": "Nintendo",
-          "start": 247.625,
-          "end": 248.15
+          "start": 245.833,
+          "end": 246.421
         }
       ],
       "translations": {
@@ -2716,23 +2716,23 @@
       }
     },
     {
-      "start": 248.17,
-      "end": 248.965,
+      "start": 246.571,
+      "end": 247.513,
       "words": [
         {
           "text": "Vas-y",
-          "start": 248.17,
-          "end": 248.322
+          "start": 246.571,
+          "end": 246.985
         },
         {
           "text": "Go",
-          "start": 248.34,
-          "end": 248.692
+          "start": 246.989,
+          "end": 247.327
         },
         {
           "text": "Go",
-          "start": 248.71,
-          "end": 248.965
+          "start": 247.42,
+          "end": 247.513
         }
       ],
       "translations": {
@@ -2740,28 +2740,28 @@
       }
     },
     {
-      "start": 248.985,
-      "end": 249.88,
+      "start": 247.606,
+      "end": 248.541,
       "words": [
         {
           "text": "Je",
-          "start": 248.985,
-          "end": 249.137
+          "start": 247.606,
+          "end": 247.802
         },
         {
           "text": "suis",
-          "start": 249.155,
-          "end": 249.347
+          "start": 247.806,
+          "end": 247.982
         },
         {
           "text": "une",
-          "start": 249.365,
-          "end": 249.592
+          "start": 247.986,
+          "end": 248.042
         },
         {
           "text": "Nintendo",
-          "start": 249.61,
-          "end": 249.88
+          "start": 248.046,
+          "end": 248.541
         }
       ],
       "translations": {
@@ -2769,23 +2769,23 @@
       }
     },
     {
-      "start": 249.9,
-      "end": 252.475,
+      "start": 248.58,
+      "end": 251.118,
       "words": [
         {
           "text": "Vas-y",
-          "start": 249.9,
-          "end": 250.127
+          "start": 248.58,
+          "end": 248.716
         },
         {
           "text": "Go",
-          "start": 250.145,
-          "end": 250.227
+          "start": 248.72,
+          "end": 248.936
         },
         {
           "text": "Go",
-          "start": 250.245,
-          "end": 252.475
+          "start": 248.94,
+          "end": 251.118
         }
       ],
       "translations": {
