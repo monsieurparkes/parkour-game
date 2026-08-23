@@ -384,6 +384,27 @@
             gap: 20px;
             padding: 8px 0;
         }
+        .tool-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        .tool-group-label {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--hub-ink);
+            opacity: 0.5;
+        }
+        .tool-group-bubble {
+            background: var(--hub-surface);
+            border-radius: 40px;
+            box-shadow: var(--hub-shadow-md);
+            border: 2px solid var(--hub-line);
+            padding: 24px;
+        }
         .landing-tools-row {
             display: flex;
             gap: 52px;
@@ -410,14 +431,14 @@
             gap: 16px;
             justify-content: center;
         }
+        .syntax-scramble-reel-text {
+            font-size: 17px;
+        }
         .tool-grid-1x2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             justify-items: center;
-        }
-        .tool-grid-1x2 > *:first-child {
-            grid-column: 1 / 3;
         }
         .landing-tools-row.wb-tiles-disabled {
             opacity: 0.35;
@@ -1576,6 +1597,13 @@
 
     <div id="game-container">
 
+        <!-- Floating translation bubble for tapped words - lives at the top
+             level, outside every individual tool screen, so it's never
+             accidentally hidden by a screen it doesn't belong to being
+             set to display:none. Shared between Bobot's Bookshelf and
+             Translation Studio. -->
+        <div id="bbs-word-bubble" style="display:none; position:fixed; z-index:400; background:var(--hub-surface); color:var(--hub-ink); border:1px solid var(--hub-line); border-radius:9999px; padding:8px 16px; font-family:'OpenDyslexic', sans-serif; font-size:14px; font-weight:700; cursor:pointer; box-shadow:var(--hub-shadow-sm);"></div>
+
         <!-- How To Use This Hub Modal -->
         <div id="how-to-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
             <div class="hub-font p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg);">
@@ -1597,9 +1625,16 @@
         </div>
 
         <div id="share-overlay" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-6 z-[200] interactive backdrop-blur-sm dyslexic-font">
-            <div class="hub-font p-8 flex flex-col items-center gap-4" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M2 2.5h7m1 0h4m1 0h3m2 0h1m3 0h7M2 3.5h1m5 0h1m1 0h2m1 0h5m1 0h1m1 0h1m2 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m4 0h2m3 0h2m2 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h2m1 0h4m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m2 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m2 0h1m1 0h4m1 0h2m4 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m1 0h1m2 0h2m3 0h1M2 10.5h1m2 0h6m3 0h7m2 0h1m2 0h1m1 0h3M2 11.5h1m1 0h1m1 0h1m5 0h2m2 0h2m1 0h3m1 0h1m1 0h2m1 0h2M2 12.5h1m2 0h4m1 0h1m2 0h2m1 0h3m3 0h2m1 0h1m2 0h1M2 13.5h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1M2 14.5h1m1 0h3m1 0h2m2 0h2m1 0h3m4 0h1m1 0h2m4 0h1M3 15.5h1m1 0h3m1 0h6m2 0h2m1 0h1m3 0h1m1 0h5M2 16.5h2m4 0h7m1 0h10m2 0h1m1 0h1M2 17.5h1m1 0h1m5 0h1m1 0h5m1 0h1m2 0h1m1 0h4m1 0h1m1 0h1M4 18.5h5m3 0h1m1 0h1m6 0h2m4 0h1M2 19.5h5m2 0h1m4 0h1m2 0h1m2 0h4m2 0h1m1 0h2M2 20.5h2m1 0h2m1 0h1m1 0h2m3 0h3m3 0h1m1 0h2m2 0h1m2 0h1M2 21.5h3m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m3 0h1m1 0h5M2 22.5h3m1 0h1m1 0h1m6 0h1m2 0h2m1 0h9M10 23.5h1m1 0h2m1 0h1m1 0h6m3 0h2M2 24.5h7m1 0h4m1 0h1m1 0h3m1 0h2m1 0h1m1 0h2M2 25.5h1m5 0h1m1 0h2m3 0h1m3 0h1m1 0h2m3 0h1m2 0h1M2 26.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m2 0h8m1 0h2M2 27.5h1m1 0h3m1 0h1m1 0h1m3 0h7m1 0h2m1 0h1m4 0h1M2 28.5h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h1m1 0h1m3 0h1m1 0h2m1 0h3M2 29.5h1m5 0h1m4 0h2m3 0h1m1 0h1m4 0h1m1 0h2m1 0h1M2 30.5h7m1 0h4m3 0h1m3 0h2m1 0h1m1 0h2"/></svg>
-                <p class="font-bold" style="color:var(--hub-ink); font-size:35px;">www.parkesonline.com.au/hub</p>
+            <div class="hub-font p-8 flex flex-col items-center gap-4" style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); max-width:90vw;">
+                <div id="share-qr-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M2 2.5h7m1 0h4m1 0h3m2 0h1m3 0h7M2 3.5h1m5 0h1m1 0h2m1 0h5m1 0h1m1 0h1m2 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m4 0h2m3 0h2m2 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h2m1 0h4m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m2 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m2 0h1m1 0h4m1 0h2m4 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m1 0h1m2 0h2m3 0h1M2 10.5h1m2 0h6m3 0h7m2 0h1m2 0h1m1 0h3M2 11.5h1m1 0h1m1 0h1m5 0h2m2 0h2m1 0h3m1 0h1m1 0h2m1 0h2M2 12.5h1m2 0h4m1 0h1m2 0h2m1 0h3m3 0h2m1 0h1m2 0h1M2 13.5h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h1m2 0h1m2 0h1M2 14.5h1m1 0h3m1 0h2m2 0h2m1 0h3m4 0h1m1 0h2m4 0h1M3 15.5h1m1 0h3m1 0h6m2 0h2m1 0h1m3 0h1m1 0h5M2 16.5h2m4 0h7m1 0h10m2 0h1m1 0h1M2 17.5h1m1 0h1m5 0h1m1 0h5m1 0h1m2 0h1m1 0h4m1 0h1m1 0h1M4 18.5h5m3 0h1m1 0h1m6 0h2m4 0h1M2 19.5h5m2 0h1m4 0h1m2 0h1m2 0h4m2 0h1m1 0h2M2 20.5h2m1 0h2m1 0h1m1 0h2m3 0h3m3 0h1m1 0h2m2 0h1m2 0h1M2 21.5h3m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m3 0h1m1 0h5M2 22.5h3m1 0h1m1 0h1m6 0h1m2 0h2m1 0h9M10 23.5h1m1 0h2m1 0h1m1 0h6m3 0h2M2 24.5h7m1 0h4m1 0h1m1 0h3m1 0h2m1 0h1m1 0h2M2 25.5h1m5 0h1m1 0h2m3 0h1m3 0h1m1 0h2m3 0h1m2 0h1M2 26.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m2 0h8m1 0h2M2 27.5h1m1 0h3m1 0h1m1 0h1m3 0h7m1 0h2m1 0h1m4 0h1M2 28.5h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h1m1 0h1m3 0h1m1 0h2m1 0h3M2 29.5h1m5 0h1m4 0h2m3 0h1m1 0h1m4 0h1m1 0h2m1 0h1M2 30.5h7m1 0h4m3 0h1m3 0h2m1 0h1m1 0h2"/></svg>
+                </div>
+                <div id="share-qr-secondary" style="display:none; width:600px; max-width:100%; aspect-ratio:1/1; align-items:center; justify-content:center; flex-direction:column; gap:12px;">
+                    <img id="share-qr-secondary-img" src="https://cdn.jsdelivr.net/gh/monsieurparkes/parkour-game@main/parkoursprites/student-access-qr.png" alt="Student-friendly access QR code" style="width:100%; height:100%; object-fit:contain; display:block;">
+                    <p id="share-qr-secondary-fallback" style="display:none; color:var(--hub-ink); opacity:0.6; font-size:15px; font-weight:700; text-align:center; max-width:400px;">This QR code hasn't been uploaded yet.</p>
+                </div>
+                <p id="share-url-text" class="font-bold" style="color:var(--hub-ink); font-size:35px; text-align:center;">www.parkesonline.com.au/hub</p>
+                <button id="share-qr-toggle-btn" class="hub-btn-ghost hub-font interactive" style="font-size:13px;">Having trouble? Try this instead</button>
                 <button id="share-close-btn" class="hub-circle-btn interactive" title="Close" style="width:34px; height:34px;">✕</button>
             </div>
         </div>
@@ -1647,6 +1682,20 @@
                         </div>
                     </div>
 
+                    <div class="flex items-center justify-center gap-3 flex-wrap" style="margin-bottom:24px;">
+                        <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                            How to Use This Hub
+                        </button>
+                        <button id="share-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            Share
+                        </button>
+                        <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive inline-flex items-center gap-2" title="Full Screen">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
+                            Full Screen
+                        </button>
+                    </div>
+
                     <!-- Legacy elements kept (hidden) purely so existing selectMode() JS logic
                          doesn't break - the wheel below is now the real tool picker. -->
                     <div style="display:none;">
@@ -1659,24 +1708,21 @@
                     <div id="landing-step-wheel" class="landing-step">
                         <h2 class="hub-step-title">What would you like to do?</h2>
                         <div id="landing-tools-row" class="landing-tools-row">
-                            <div id="tool-grid-main" class="tool-grid-pyramid">
-                                <div id="tool-grid-main-row1" class="tool-grid-pyramid-row"></div>
-                                <div id="tool-grid-main-row2" class="tool-grid-pyramid-row"></div>
+                            <div class="tool-group">
+                                <div class="tool-group-label">Learner Tools</div>
+                                <div class="tool-group-bubble">
+                                    <div id="tool-grid-main" class="tool-grid-pyramid">
+                                        <div id="tool-grid-main-row1" class="tool-grid-pyramid-row"></div>
+                                        <div id="tool-grid-main-row2" class="tool-grid-pyramid-row"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="tool-grid-side" class="tool-grid-1x2"></div>
-                        </div>
-
-                        <div class="flex items-center justify-center gap-3 flex-wrap mt-6">
-                            <button id="how-to-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                                How to Use This Hub
-                            </button>
-                            <button id="share-btn" class="hub-btn-ghost hub-font interactive inline-flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-                                Share
-                            </button>
-                            <button class="fullscreen-toggle-btn hub-btn-ghost hub-font interactive" title="Full Screen">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
-                            </button>
+                            <div class="tool-group">
+                                <div class="tool-group-label">Teacher Tools</div>
+                                <div class="tool-group-bubble">
+                                    <div id="tool-grid-side" class="tool-grid-1x2"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1880,6 +1926,10 @@
                                     <input type="checkbox" id="challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
                                     <label for="challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
                                 </div>
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="magpie-mode-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="magpie-mode-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🐦 Magpie Mode (extra challenge)</label>
+                                </div>
                             </div>
 
                             <!-- Dynamic Custom Grapheme Panel inside Settings -->
@@ -1939,6 +1989,10 @@
                                 <div class="hub-checkbox-row">
                                     <input type="checkbox" id="picture-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
                                     <label for="picture-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
+                                </div>
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="magpie-mode-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="magpie-mode-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🐦 Magpie Mode (extra challenge)</label>
                                 </div>
                             </div>
 
@@ -2004,6 +2058,19 @@
                                     <input type="checkbox" id="lava-colorcoding-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
                                     <span>Colour-code the chunks</span>
                                 </label>
+                            </div>
+                            <div class="hub-row">
+                                <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                                <div id="default-grapheme-row-lava" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                                    <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                                    <input type="color" id="default-grapheme-color-lava" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
+                                </div>
+                                <div id="sinhala-vowel-signs-row-lava" style="display:none;" class="mb-3 interactive">
+                                    <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                                    <div id="sinhala-vowel-signs-list-lava" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5"></div>
+                                    <p class="hub-hint">Add consonants manually below.</p>
+                                </div>
+                                <div id="lava-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
                             </div>
                             <div class="hub-row">
                                 <label class="hub-checkbox-row" style="display:flex; align-items:center; gap:8px;">
@@ -2168,9 +2235,22 @@
                     <div class="hub-group hub-font" style="margin-bottom:24px;">
                         <div class="hub-row">
                             <div class="hub-checkbox-row">
-                                <input type="checkbox" id="bbs-colorcoding-toggle" class="w-5 h-5 rounded accent-[var(--hub-rose)] interactive">
+                                <input type="checkbox" id="bbs-colorcoding-toggle" class="w-5 h-5 rounded accent-[var(--hub-rose)] interactive" checked>
                                 <label for="bbs-colorcoding-toggle" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Grapheme Colour-Coding</label>
                             </div>
+                        </div>
+                        <div class="hub-row">
+                            <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                            <div id="default-grapheme-row-bbs" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                                <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                                <input type="color" id="default-grapheme-color-bbs" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
+                            </div>
+                            <div id="sinhala-vowel-signs-row-bbs" style="display:none;" class="mb-3 interactive">
+                                <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                                <div id="sinhala-vowel-signs-list-bbs" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5"></div>
+                                <p class="hub-hint">Add consonants manually below.</p>
+                            </div>
+                            <div id="bbs-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
                         </div>
                     </div>
 
@@ -2226,10 +2306,162 @@
                         <div id="bbs-grapheme-row" style="display:none; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;"></div>
                     </div>
                 </div>
-
-                <!-- Floating translation bubble for tapped words -->
-                <div id="bbs-word-bubble" style="display:none; position:fixed; z-index:400; background:var(--hub-surface); color:var(--hub-ink); border:1px solid var(--hub-line); border-radius:9999px; padding:8px 16px; font-family:'OpenDyslexic', sans-serif; font-size:14px; font-weight:700; cursor:pointer; box-shadow:var(--hub-shadow-sm);"></div>
             </div>
+        </div>
+
+        <!-- Translation Studio: library screen (languages -> albums -> songs) -->
+        <div id="syntax-scramble-screen" class="hub-font" style="display:none; width:100%; height:100%; overflow-y:auto; background:var(--hub-paper);">
+            <div style="max-width:1000px; margin:0 auto; padding:32px 24px; display:flex; flex-direction:column; gap:20px; min-height:100%; box-sizing:border-box;">
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <button id="syntax-scramble-back-btn" class="hub-circle-btn interactive" title="Back">←</button>
+                    <h2 class="hub-step-title" style="margin:0;">🥚 Syntax Scramble</h2>
+                    <div style="width:34px;"></div>
+                </div>
+
+                <div id="syntax-scramble-final-sentence" class="dyslexic-font" style="text-align:center; font-size:32px; font-weight:800; min-height:70px; padding:20px; background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); display:flex; align-items:center; justify-content:center; flex-wrap:wrap; color:var(--hub-ink);"></div>
+
+                <div style="display:flex; justify-content:center;">
+                    <button id="syntax-scramble-go-btn" class="hub-btn-primary interactive" style="font-size:19px; padding:14px 44px;">🥚 Scramble!</button>
+                </div>
+
+                <div id="syntax-scramble-slots" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; position:relative;"></div>
+
+                <button id="syntax-scramble-add-slot-btn" class="hub-btn-ghost interactive" style="align-self:center;">➕ Add a Word Box</button>
+
+                <button id="syntax-scramble-grapheme-toggle-btn" class="hub-btn-ghost interactive" style="align-self:center; margin-top:8px;">🎨 Custom Colour Coding</button>
+
+                <div id="syntax-scramble-grapheme-panel" style="display:none; flex-direction:column; gap:8px; background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); padding:20px; box-sizing:border-box;">
+                    <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                    <div id="default-grapheme-row-syntaxscramble" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                        <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                        <input type="color" id="default-grapheme-color-syntaxscramble" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
+                    </div>
+                    <div id="sinhala-vowel-signs-row-syntaxscramble" style="display:none;" class="mb-3 interactive">
+                        <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                        <div id="sinhala-vowel-signs-list-syntaxscramble" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5"></div>
+                        <p class="hub-hint">Add consonants manually below.</p>
+                    </div>
+                    <div id="syntaxscramble-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+                </div>
+
+                <button id="syntax-scramble-library-toggle-btn" class="hub-btn-ghost interactive" style="align-self:center; margin-top:8px;">📚 Vocabulary Library</button>
+
+                <div id="syntax-scramble-library-panel" style="display:none; flex-direction:column; gap:12px; background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); padding:20px; box-sizing:border-box;">
+                    <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+                        <button id="syntax-scramble-library-add-folder-btn" class="hub-btn-ghost interactive">➕ New Folder</button>
+                        <button id="syntax-scramble-library-export-btn" class="hub-btn-ghost interactive">⬇ Export Library</button>
+                        <button id="syntax-scramble-library-import-btn" class="hub-btn-ghost interactive">⬆ Import Library</button>
+                        <input type="file" id="syntax-scramble-library-import-input" accept="application/json" class="hidden">
+                    </div>
+                    <p class="hub-hint" style="text-align:center; margin:0;">Drag a word box down here to archive it into a folder - open a folder and drag a box back up into the main area to use it again.</p>
+                    <div id="syntax-scramble-library-folders" style="display:flex; flex-direction:column; gap:10px;"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="translation-studio-library-screen" class="hub-font" style="display:none; width:100%; height:100%; overflow-y:auto;">
+            <div class="w-full h-full flex flex-col items-center overflow-y-auto py-8 px-6">
+                <div class="w-full max-w-2xl mx-auto">
+                    <h2 class="hub-step-title">🎧 Translation Studio</h2>
+
+                    <div class="hub-group hub-font" style="margin-bottom:24px;">
+                        <div class="hub-row">
+                            <label class="hub-label" for="ts-translate-into-select">Translate into…</label>
+                            <select id="ts-translate-into-select" class="hub-input">
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                        <div class="hub-row">
+                            <div class="hub-checkbox-row">
+                                <input type="checkbox" id="ts-colorcoding-toggle" class="w-5 h-5 rounded accent-[var(--hub-plum)] interactive" checked>
+                                <label for="ts-colorcoding-toggle" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Grapheme Colour-Coding</label>
+                            </div>
+                        </div>
+                        <div class="hub-row">
+                            <div class="hub-checkbox-row">
+                                <input type="checkbox" id="ts-always-show-translation-toggle" class="w-5 h-5 rounded accent-[var(--hub-plum)] interactive">
+                                <label for="ts-always-show-translation-toggle" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Always Show Translations</label>
+                            </div>
+                        </div>
+                        <div class="hub-row">
+                            <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                            <div id="default-grapheme-row-ts" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                                <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                                <input type="color" id="default-grapheme-color-ts" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
+                            </div>
+                            <div id="sinhala-vowel-signs-row-ts" style="display:none;" class="mb-3 interactive">
+                                <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                                <div id="sinhala-vowel-signs-list-ts" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5"></div>
+                                <p class="hub-hint">Add consonants manually below.</p>
+                            </div>
+                            <div id="ts-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+                        </div>
+                    </div>
+
+                    <div id="ts-breadcrumb" class="hub-hint" style="text-align:center; font-weight:800; display:none;"></div>
+                    <div id="ts-library-status" class="hub-hint" style="text-align:center;">Loading songs…</div>
+                    <div id="ts-library-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:20px; width:100%;"></div>
+
+                    <div class="flex justify-center pt-6 pb-2">
+                        <button id="ts-library-back-btn" class="hub-btn-ghost hub-font interactive">← Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Translation Studio: player screen -->
+        <div id="translation-studio-player-screen" class="hub-font" style="display:none; position:relative; width:100%; height:100%; background:var(--hub-paper); overflow:hidden;">
+            <div id="ts-loading-overlay" class="hub-font" style="display:none; position:absolute; inset:0; z-index:50; background:var(--hub-paper); align-items:center; justify-content:center; flex-direction:column; gap:12px;">
+                <div style="font-size:32px;">🎧</div>
+                <div style="font-weight:800; color:var(--hub-ink);">Loading song...</div>
+            </div>
+            <button id="ts-player-back-btn" class="wb-circle-btn interactive" style="position:absolute; top:16px; left:16px; z-index:20; width:36px; height:36px;" title="Back to library">←</button>
+            <button class="fullscreen-toggle-btn wb-circle-btn interactive" style="position:absolute; top:16px; right:16px; z-index:20; width:36px; height:36px;" title="Toggle fullscreen">⛶</button>
+
+            <div style="display:flex; flex-direction:column; width:100%; height:100%; padding:24px; box-sizing:border-box;">
+                <div id="ts-song-title" style="font-weight:800; font-size:20px; text-align:center; color:var(--hub-ink); flex-shrink:0;"></div>
+
+                <div style="flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;">
+                    <div id="ts-phrase-viewport" style="position:relative; overflow:hidden; width:100%; max-width:900px; height:288px;">
+                        <div id="ts-phrase-reel" style="position:absolute; top:0; left:0; width:100%; display:flex; flex-direction:column;"></div>
+                    </div>
+                    <div id="ts-translation-display" class="dyslexic-font" style="font-size:18px; color:var(--hub-ink); opacity:0.7; text-align:center; min-height:26px;"></div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; align-items:center; gap:14px; flex-shrink:0;">
+                    <div style="width:80%; max-width:700px;">
+                        <input type="range" id="ts-scrub-bar" min="0" max="1000" value="0" step="1" class="interactive" style="width:100%;">
+                        <div style="display:flex; justify-content:space-between; font-size:12px; opacity:0.7; color:var(--hub-ink);">
+                            <span id="ts-time-current">0:00</span>
+                            <span id="ts-time-total">0:00</span>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; align-items:center; gap:14px;">
+                        <button id="ts-translation-btn" class="interactive" style="padding:0 26px; height:48px; border-radius:9999px; background:var(--hub-surface); border:2px solid var(--hub-plum); color:var(--hub-ink); font-weight:800; font-size:15px; letter-spacing:0.02em; cursor:pointer; white-space:nowrap; box-shadow:var(--hub-shadow-sm);" title="Show and hear the translation">Translate</button>
+                        <button id="ts-play-pause-btn" class="wb-circle-btn interactive" style="width:56px; height:56px; font-size:22px;">▶️</button>
+                    </div>
+
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <label class="hub-label" style="margin:0;" for="ts-speed-slider">Speed</label>
+                        <input type="range" id="ts-speed-slider" class="interactive" min="0.5" max="1.5" step="0.05" value="1" style="width:150px;">
+                        <span id="ts-speed-value" style="min-width:38px; font-weight:700; color:var(--hub-ink);">1.0x</span>
+                    </div>
+
+                    <div style="display:flex; gap:28px;">
+                        <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+                            <label class="hub-label" style="margin:0;">🎤 Vocals</label>
+                            <input type="range" id="ts-vocals-volume" class="interactive" min="0" max="100" value="100">
+                        </div>
+                        <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+                            <label class="hub-label" style="margin:0;">🎵 Backing</label>
+                            <input type="range" id="ts-music-volume" class="interactive" min="0" max="100" value="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div id="whiteboard-screen" class="hub-font">
@@ -2242,10 +2474,6 @@
                         </button>
                         <div id="wb-tools-menu" class="wb-dropdown-menu" style="display:none;">
                             <div class="wb-tools-menu-group-label">Curriculum and Assessment</div>
-                            <div class="wb-tools-menu-row">
-                                <button id="wb-open-syntax-btn" class="hub-btn-ghost interactive w-full">🏘️ Syntax Street</button>
-                                <span class="wb-tools-help-icon" data-help="A drag-and-drop sentence builder - houses represent words that snap into place along a street to build and read sentences aloud.">?</span>
-                            </div>
                             <div class="wb-tools-menu-row">
                                 <button id="wb-open-assessment-btn" class="hub-btn-ghost interactive w-full">📊 Class Tracker</button>
                                 <span class="wb-tools-help-icon" data-help="A private, keyboard-scored way to record a mark for each student during a lesson, without ever showing scores on screen.">?</span>
@@ -2689,33 +2917,6 @@
                     </div>
                 </div>
 
-                <!-- Syntax Street: "+" menu for creating or selecting a word-class category -->
-                <div id="wb-syntax-category-menu" class="hub-font" style="display:none; position:fixed; z-index:400; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:10px; width:220px;">
-                    <div id="wb-syntax-category-menu-list" style="display:flex; flex-direction:column; gap:4px; max-height:200px; overflow-y:auto; margin-bottom:8px;"></div>
-                    <div id="wb-syntax-new-category-form" style="display:none; flex-direction:column; gap:6px; border-top:1px solid var(--hub-line); padding-top:8px; margin-bottom:8px;">
-                        <div style="display:flex; gap:6px; align-items:center;">
-                            <input type="color" id="wb-syntax-new-category-color-input" value="#5B4EFF" class="interactive" style="width:30px; height:30px; padding:0; border:1px solid var(--hub-line); border-radius:8px; cursor:pointer; flex-shrink:0;">
-                            <input type="text" id="wb-syntax-new-category-name-input" class="hub-input" placeholder="Category name..." style="flex:1; font-size:12px;">
-                        </div>
-                        <button id="wb-syntax-create-category-btn" class="hub-btn-primary interactive" style="font-size:12px;">Create</button>
-                    </div>
-                    <button id="wb-syntax-new-category-toggle-btn" class="hub-btn-ghost interactive w-full" style="font-size:12px;">➕ New Category</button>
-                </div>
-
-                <!-- Syntax Street: floating word picker, opened by clicking a house - search, add, or remove -->
-                <div id="wb-syntax-word-picker" class="hub-font" style="display:none; position:fixed; z-index:400; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:10px; width:220px;">
-                    <input type="text" id="wb-syntax-word-picker-search" class="hub-input" placeholder="Search or add a word..." style="width:100%; margin-bottom:8px; font-size:12px; box-sizing:border-box;">
-                    <div id="wb-syntax-word-picker-list" style="display:flex; flex-direction:column; gap:2px; max-height:170px; overflow-y:auto;"></div>
-                    <button id="wb-syntax-word-picker-delete-house-btn" class="hub-btn-ghost interactive w-full mt-2" style="font-size:11px; color:#dc2626; border-color:#fecdd3;">🗑️ Remove This House</button>
-                </div>
-
-                <!-- Syntax Street: end-of-sentence punctuation picker -->
-                <div id="wb-syntax-punctuation-picker" class="hub-font" style="display:none; position:fixed; z-index:400; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); box-shadow:var(--hub-shadow-lg); padding:8px; display:flex; gap:4px;">
-                    <button class="wb-syntax-punct-choice hub-btn-ghost interactive" style="font-size:18px; font-weight:800; width:38px; height:38px; padding:0;" data-punct=".">.</button>
-                    <button class="wb-syntax-punct-choice hub-btn-ghost interactive" style="font-size:18px; font-weight:800; width:38px; height:38px; padding:0;" data-punct="?">?</button>
-                    <button class="wb-syntax-punct-choice hub-btn-ghost interactive" style="font-size:18px; font-weight:800; width:38px; height:38px; padding:0;" data-punct="!">!</button>
-                </div>
-
                 <!-- Dojo: huge celebration overlay for awarding a point - front and centre, built for quick use on a big display -->
                 <div id="wb-dojo-celebration-overlay" class="hub-font" style="display:none; position:fixed; inset:0; background:rgba(24,18,12,0.88); z-index:5000; flex-direction:column; align-items:center; justify-content:center; padding:32px;">
                     <div style="display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:28px;">
@@ -2821,6 +3022,7 @@
                         <div id="wb-assessment-live" style="display:none; flex-direction:column; gap:6px; flex:1;">
                             <p class="hub-hint mt-0 mb-0" id="wb-assessment-criteria-label" style="font-weight:800;"></p>
                             <div id="wb-assessment-name" class="font-black text-center" style="color:var(--hub-ink); flex:1; display:flex; align-items:center; justify-content:center; overflow:hidden;">-</div>
+                            <div id="wb-assessment-feedback-dot" style="width:7px; height:7px; border-radius:50%; background:var(--hub-ink); opacity:0.22; margin:0 auto; transform:scale(1); transition:transform 0.16s ease;"></div>
                             <button id="wb-assessment-end-btn" class="hub-btn-ghost interactive w-full" style="color:#dc2626; border-color:#fecdd3;">End Session</button>
                         </div>
                     </div>
@@ -2846,71 +3048,6 @@
                     <div id="wb-dojo-class-goal-banner" style="display:none; margin:0 12px 8px; padding:8px 12px; background:var(--hub-violet-soft); border-radius:10px; text-align:center; font-weight:800; font-size:13px; color:var(--hub-ink);"></div>
                     <div id="wb-dojo-student-grid" style="padding:6px 12px 12px; display:grid; grid-template-columns:repeat(auto-fill, minmax(78px, 1fr)); gap:10px; overflow-y:auto; height:calc(100% - 96px);"></div>
                     <div id="wb-dojo-resize-handle" class="wb-panel-resize-handle interactive"></div>
-                </div>
-
-                <!-- Syntax Street - modular drag-and-drop sentence building tool -->
-                <div id="wb-syntax-panel" class="hub-font" style="display:none; position:absolute; top:20px; left:20px; z-index:150; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-md); width:720px; height:460px; overflow:hidden;">
-                    <div id="wb-syntax-drag-handle" style="display:flex; align-items:center; justify-content:space-between; cursor:grab; padding:10px 12px; border-bottom:1px solid var(--hub-line);">
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <strong style="font-size:13px; color:var(--hub-ink);">🏘️ Syntax Street</strong>
-                            <button id="wb-syntax-add-house-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:15px; font-weight:800;" title="Add a house">+</button>
-                            <button id="wb-syntax-add-space-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:13px;" title="Add a space (for words that flow together with no gap, like this car sitting between two houses)">🚗</button>
-                        </div>
-                        <div id="wb-syntax-settings-wrap" class="wb-dropdown-wrap" style="display:flex; gap:4px; align-items:center;">
-                            <button id="wb-syntax-settings-btn" class="wb-circle-btn interactive" style="width:24px; height:24px; font-size:12px;" title="Settings">⚙️</button>
-                            <div id="wb-syntax-settings-menu" class="wb-dropdown-menu hub-font" style="display:none; position:fixed; right:auto; left:auto; min-width:230px;">
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="wb-syntax-bubble-toggle" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                                    <label for="wb-syntax-bubble-toggle" style="font-size:13px; cursor:pointer;">Background bubble behind text</label>
-                                </div>
-                                <label class="hub-label" style="margin-top:8px;">Street view zoom</label>
-                                <input type="range" id="wb-syntax-view-zoom-slider" min="60" max="180" value="100" class="w-full interactive">
-                                <label class="hub-label" style="margin-top:8px;">Text size</label>
-                                <select id="wb-syntax-fontsize-select" class="hub-input wb-select interactive" style="width:100%;">
-                                    <option value="11">Small</option>
-                                    <option value="13" selected>Medium</option>
-                                    <option value="16">Large</option>
-                                    <option value="19">Extra Large</option>
-                                </select>
-                            </div>
-                            <button id="wb-syntax-close-btn" class="wb-circle-btn interactive" style="width:24px; height:24px;">✕</button>
-                        </div>
-                    </div>
-                    <div id="wb-syntax-scene-wrap" style="height:calc(100% - 45px); display:flex; flex-direction:column; position:relative; overflow:hidden;">
-                        <div id="wb-syntax-scene-zoomable" style="display:flex; flex-direction:column; height:100%; transform-origin:center center;">
-                        <div id="wb-syntax-grass" style="flex:1; position:relative; overflow:hidden;">
-                            <svg id="wb-syntax-sky-svg" viewBox="0 0 700 320" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%;">
-                                <defs>
-                                    <linearGradient id="wbSyntaxSkyGrad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#8ec9f0"/>
-                                        <stop offset="100%" stop-color="#c9e8fb"/>
-                                    </linearGradient>
-                                    <linearGradient id="wbSyntaxGrassGrad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#8fe08a"/>
-                                        <stop offset="100%" stop-color="#6ecb6a"/>
-                                    </linearGradient>
-                                </defs>
-                                <rect x="0" y="0" width="700" height="320" fill="url(#wbSyntaxSkyGrad)"/>
-                                <g fill="white" opacity="0.9">
-                                    <ellipse cx="90" cy="55" rx="34" ry="16"/><ellipse cx="120" cy="48" rx="26" ry="14"/><ellipse cx="60" cy="50" rx="22" ry="12"/>
-                                    <ellipse cx="430" cy="40" rx="30" ry="14"/><ellipse cx="460" cy="34" rx="24" ry="12"/><ellipse cx="400" cy="36" rx="20" ry="11"/>
-                                    <ellipse cx="620" cy="70" rx="32" ry="15"/><ellipse cx="650" cy="62" rx="24" ry="12"/>
-                                </g>
-                                <path d="M0,230 Q175,195 350,225 T700,220 L700,320 L0,320 Z" fill="url(#wbSyntaxGrassGrad)"/>
-                            </svg>
-                            <div id="wb-syntax-shout-layer" style="position:absolute; inset:0; pointer-events:none;"></div>
-                            <div id="wb-syntax-houses-row" style="position:absolute; bottom:14px; left:0; right:0; display:flex; justify-content:center; align-items:flex-end; gap:16px; flex-wrap:wrap; padding:0 24px;"></div>
-                        </div>
-                        <div id="wb-syntax-road-wrap" style="height:88px; flex-shrink:0; position:relative;">
-                            <div id="wb-syntax-footpath" style="position:absolute; top:0; left:0; right:0; height:16px; background:repeating-linear-gradient(90deg, #d4d4d8 0px, #d4d4d8 38px, #b8b8bd 38px, #b8b8bd 40px); border-bottom:2px solid #9a9aa0;"></div>
-                            <div id="wb-syntax-road" style="position:absolute; inset:0; top:16px; background:#4b4b52; display:flex; align-items:center; justify-content:center;">
-                                <div id="wb-syntax-sentence-text" style="color:white; font-size:17px; font-weight:800; font-family:'OpenDyslexic', sans-serif; text-align:center; padding:0 60px; line-height:1.3; position:relative;"></div>
-                                <button id="wb-syntax-speak-btn" class="interactive" style="position:absolute; right:14px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; font-size:19px; background:white; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.35);" title="Read the sentence aloud">🔊</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div id="wb-syntax-resize-handle" class="wb-panel-resize-handle interactive"></div>
                 </div>
 
                 <!-- Silent Interpreter - sends a private translated audio reading of
@@ -3304,6 +3441,7 @@
             <div class="bg-white p-8 rounded-3xl max-w-lg w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 space-y-4 interactive">
                 <div class="text-6xl">🏆</div>
                 <h2 class="text-2xl font-black text-slate-800">Well Done!</h2>
+                <p id="results-magpie-badge" class="text-[11px] font-bold text-slate-400 -mt-2" style="display:none;">🐦 Played with Magpie Mode</p>
 
                 <div class="text-left bg-slate-50 rounded-2xl p-4 space-y-2 border-2 border-slate-200">
                     <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Name</span> <span id="results-name" dir="auto" class="font-black text-slate-900 text-right"></span></p>
@@ -3363,6 +3501,32 @@
 
         const keys = {};
 
+        // ==================================================================
+        // Magpie Mode - an optional extra-challenge variant for Sentence
+        // and Picture Parkour. When on: the player and Bobot sprites swap
+        // to their helmet-wearing "_MM" equivalents, and a magpie
+        // periodically swoops at wherever the player is standing.
+        // ==================================================================
+        const MAGPIE_MODE_ASSET_BASE = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/';
+        // Derived from the existing sprite URLs rather than hand-duplicated,
+        // so every current (and future) sprite key automatically gets an
+        // _MM counterpart at the same filename, just suffixed - matching
+        // the convention described: PARKOURIDLE1.png -> PARKOURIDLE1_MM.png.
+        function buildMagpieSpriteUrls(sourceUrls) {
+            const out = {};
+            Object.entries(sourceUrls).forEach(([key, url]) => {
+                const filename = url.substring(url.lastIndexOf('/') + 1); // e.g. "PARKOURIDLE1.png"
+                const dot = filename.lastIndexOf('.');
+                const mmFilename = filename.slice(0, dot) + '_MM' + filename.slice(dot);
+                out[key] = MAGPIE_MODE_ASSET_BASE + mmFilename;
+            });
+            return out;
+        }
+        const SPRITE_URLS_MM = buildMagpieSpriteUrls(SPRITE_URLS);
+        const SPRITE_URLS_BOBOT_MM = buildMagpieSpriteUrls(SPRITE_URLS_BOBOT);
+        const MAGPIE_IMAGE_URL = MAGPIE_MODE_ASSET_BASE + 'MAGPIE.png';
+        const MAGPIE_SWOOP_SOUND_URL = MAGPIE_MODE_ASSET_BASE + 'swoopsound.mp3';
+
         // Bobot's jump/crawl source images appear to have more padding than its idle sprites
         // (and more than the P4RK-0UR unit's equivalents), making Bobot look too small in
         // those states at the same computed height. These boost just those two states for
@@ -3378,6 +3542,29 @@
         let images = {}, imagesLoaded = false, gameStarted = false, score = 0, isModalOpen = false;
         let imagesBobot = {}, imagesBobotLoaded = false;
         let selectedCharacter = 'parkour'; // 'parkour' (P4RK-0UR UNIT) or 'bobot'
+
+        // Magpie Mode state
+        let imagesMM = {}, imagesMMLoaded = false;
+        let imagesBobotMM = {}, imagesBobotMMLoaded = false;
+        let magpieSpriteImg = null;
+        let magpieSwoopAudio = null;
+        let magpieModeOn = false; // the settings-screen toggle's current value
+        let roundHadMagpieMode = false; // snapshotted when a round starts, so the results screen reflects what was actually played even if the toggle changes afterward
+        let magpieActive = false; // true only while a quest/picture round with Magpie Mode is actually in progress
+        let magpiePhase = 'idle'; // 'idle' | 'hover' | 'swooping'
+        let magpieTimer = 0; // counts down (seconds) to the next hover/swoop cycle while idle
+        let magpieHoverElapsed = 0;
+        let magpieSwoopElapsed = 0;
+        let magpieHoverSide = 'left'; // which top corner it enters from this cycle
+        let magpieX = 0, magpieY = 0; // current world position while hovering or swooping
+        let magpieSwoopStartX = 0, magpieSwoopStartY = 0;
+        let magpieSwoopTargetX = 0, magpieSwoopTargetY = 0;
+        let magpieHasHitPlayerThisSwoop = false;
+        const MAGPIE_HOVER_DURATION = 1.2; // seconds spent visibly hovering before swooping - the player's warning
+        const MAGPIE_SWOOP_DURATION = 0.8; // seconds for the swoop itself
+        const MAGPIE_MIN_CYCLE = 9, MAGPIE_MAX_CYCLE = 13; // seconds between swoops, randomised a little so it isn't a predictable metronome
+        const MAGPIE_SIZE = 64; // rendered height in world units; width follows the sprite's own aspect ratio
+
         let lastTime = 0, vocabularyList = [], activeWords = [], currentTargetWord = null;
         let customMoveSpeed = 3.0;
         let debugMode = false;
@@ -4335,6 +4522,18 @@
             } catch(e) {}
         }
 
+        function playMagpieSwoopSound() {
+            if (!fxEnabled || !magpieSwoopAudio) return;
+            try {
+                // Clone rather than reuse the single loaded element, so a
+                // swoop that starts while a previous one is still finishing
+                // (e.g. after a quick settings change) doesn't cut it off.
+                const node = magpieSwoopAudio.cloneNode(true);
+                node.volume = 0.6;
+                node.play().catch(() => {}); // silently ignore - e.g. the file hasn't been uploaded yet, or autoplay was blocked
+            } catch(e) {}
+        }
+
         function playBeachBallBounceSound(bounceNumber) {
             if (!fxEnabled) return;
             try {
@@ -5128,6 +5327,25 @@
         // student), but live in the same roster file for simplicity.
         function rosterEnsureSyntaxStreetCategories() {
             if (!Array.isArray(rosterState.syntaxStreetCategories)) rosterState.syntaxStreetCategories = [];
+        }
+
+        // The punctuation box is always present at the end of the sentence -
+        // separate from the teacher's own word-class boxes, since it can't
+        // be removed, duplicated, or reordered the way those can.
+        // The vocabulary library - folders of archived word boxes a
+        // teacher can return to later, kept entirely separate from the
+        // active Syntax Scramble boxes so archiving one class's
+        // vocabulary doesn't affect what's currently in use.
+        function rosterEnsureSyntaxScrambleLibrary() {
+            if (!rosterState.syntaxScrambleLibrary || !Array.isArray(rosterState.syntaxScrambleLibrary.folders)) {
+                rosterState.syntaxScrambleLibrary = { folders: [] };
+            }
+        }
+
+        function rosterEnsureSyntaxScramblePunctuation() {
+            if (!rosterState.syntaxScramblePunctuation || !Array.isArray(rosterState.syntaxScramblePunctuation.words)) {
+                rosterState.syntaxScramblePunctuation = { words: ['.', '!', '?'] };
+            }
         }
 
         // Converts any old-format plain-string categories (from a file saved
@@ -6069,20 +6287,23 @@
         // with the Random Student picker, which always reshuffles), line
         // order needs to loop back to the same fixed sequence when it runs
         // out, not reshuffle into a new random one.
+        // Advances the assessment tracker's picker through this session's
+        // fixed roster - bounded, unlike rosterAdvancePool (shared with the
+        // Random Student picker, which reshuffles and keeps going forever,
+        // correctly, since that picker is meant to run indefinitely). An
+        // assessment session covers a fixed roster once, so advancing past
+        // either end holds in place rather than cycling back around -
+        // otherwise holding a key down at the end of the class list would
+        // silently wrap back onto, and risk overwriting, students already
+        // assessed at the start.
         function rosterAdvanceAssessmentPool(direction) {
             direction = direction || 1;
             const pickerState = assessmentPickerState;
             const cls = rosterGetClass(pickerState.classId);
             if (!cls || cls.students.length === 0 || pickerState.order.length === 0) { pickerState.currentId = null; return; }
 
-            if (pickerState.useRandomOrder) {
-                rosterAdvancePool(pickerState, direction);
-                return;
-            }
-
             let newIndex = pickerState.index + direction;
-            if (newIndex >= pickerState.order.length) newIndex = 0;
-            else if (newIndex < 0) newIndex = pickerState.order.length - 1;
+            newIndex = Math.max(0, Math.min(newIndex, pickerState.order.length - 1));
             pickerState.index = newIndex;
             pickerState.currentId = pickerState.order[newIndex];
         }
@@ -6196,6 +6417,17 @@
         // Silently adjusts the current student's score - deliberately no
         // visual feedback anywhere, since the whole point is that students
         // watching the same screen never see a number change.
+        // Brief, subtle pulse on the small feedback dot - confirms a
+        // keyboard score adjustment was actually registered, without
+        // drawing attention the way a larger animation or sound would.
+        function rosterPulseAssessmentFeedback() {
+            const dot = document.getElementById('wb-assessment-feedback-dot');
+            if (!dot) return;
+            dot.style.transform = 'scale(2.2)';
+            clearTimeout(dot._pulseTimer);
+            dot._pulseTimer = setTimeout(() => { dot.style.transform = 'scale(1)'; }, 120);
+        }
+
         function rosterAdjustAssessmentScore(delta) {
             const session = rosterGetActiveSession();
             if (!session || !assessmentPickerState.currentId) return;
@@ -6204,6 +6436,7 @@
             entry.points += delta;
             session.date = new Date().toISOString().slice(0, 10);
             rosterDebouncedSave();
+            rosterPulseAssessmentFeedback();
         }
 
         // Marks the current student absent for this session, kept distinct
@@ -6913,7 +7146,7 @@
         let bbsCurrentBookFolder = null;
         let bbsCurrentLiteralMeanings = null;
         let bbsCurrentPageIndex = 0;
-        let bbsColorCodingEnabled = false;
+        let bbsColorCodingEnabled = true;
 
         // Colour-coding defaults ON whenever French is the active target
         // language, since that's specifically what it's built to support -
@@ -6929,6 +7162,1630 @@
         }
         let bbsBgAudioEl = null;
         let bbsWiredUp = false;
+
+        // ====================================================================
+        // TRANSLATION STUDIO - listen to a song with its lyrics displayed
+        // phrase by phrase, one word highlighted at a time in sync with the
+        // audio, tap any word for its literal translation. Songs are
+        // organised by their own fixed language, then by album; a separate
+        // "Translate into" setting decides which language the translations
+        // and glosses are shown in - independent of the song's own
+        // language, since (unlike the rest of the hub) knowing the target
+        // language alone isn't enough here.
+        // ====================================================================
+        const TRANSLATION_STUDIO_BASE = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/translationstudio/';
+        // Translation Studio's manifest/folder structure uses full language
+        // names (matching the GitHub folder layout, e.g. translationstudio/
+        // french/...), but the hub's own TTS system (CLOUD_TTS_CONFIG,
+        // speakOneInLanguage) keys off its own short codes ('fr', 'en').
+        // This bridges the two without changing either existing convention.
+        const TS_LANG_TO_TTS_CODE = { french: 'fr', english: 'en' };
+        let tsLibraryManifest = null;
+        let tsWiredUp = false;
+        let tsLibraryView = 'languages'; // 'languages' | 'albums' | 'songs'
+        let tsCurrentLanguageKey = null;
+        let tsCurrentAlbumKey = null;
+        let tsTranslateInto = 'en';
+        let tsColorCodingOn = true;
+        let tsAlwaysShowTranslation = false;
+        let tsSongData = null;
+        let tsCurrentPhraseIndex = -1;
+        let tsLastActivePhraseIndex = -1;
+        let tsRafId = null;
+        let tsScrubbing = false;
+
+        async function tsOpenLibrary() {
+            pauseBackgroundMusic();
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('translation-studio-library-screen').style.display = 'flex';
+            tsWireUpOnce();
+            tsLibraryView = 'languages';
+            tsCurrentLanguageKey = null;
+            tsCurrentAlbumKey = null;
+
+            const status = document.getElementById('ts-library-status');
+            const grid = document.getElementById('ts-library-grid');
+            grid.innerHTML = '';
+            status.style.display = 'block';
+            status.textContent = 'Loading songs…';
+
+            try {
+                if (!tsLibraryManifest) {
+                    const res = await fetch(TRANSLATION_STUDIO_BASE + 'manifest.json');
+                    if (!res.ok) throw new Error('Manifest returned ' + res.status);
+                    tsLibraryManifest = await res.json();
+                }
+                tsRenderLibraryGrid();
+                status.style.display = 'none';
+            } catch (e) {
+                console.error('Translation Studio: could not load the library manifest', e);
+                status.textContent = "Couldn't load Translation Studio right now - check your connection and try again.";
+            }
+        }
+
+        function tsMakeTextTile(labelText, onClick) {
+            const tile = document.createElement('div');
+            tile.className = 'interactive';
+            tile.style.cssText = 'cursor:pointer; border:1px solid var(--hub-line); border-radius:var(--hub-radius-md); padding:20px 12px; text-align:center; background:var(--hub-surface); font-weight:800; color:var(--hub-ink); box-shadow:var(--hub-shadow-sm);';
+            tile.textContent = labelText;
+            tile.onclick = onClick;
+            return tile;
+        }
+
+        function tsMakeImageTile(labelText, subLabelText, imageUrl, onClick) {
+            const card = document.createElement('div');
+            card.className = 'interactive';
+            card.style.cssText = 'cursor:pointer; text-align:center; transition:transform 0.15s ease;';
+            card.innerHTML = `
+                <div style="aspect-ratio:1/1; border-radius:var(--hub-radius-md); overflow:hidden; box-shadow:var(--hub-shadow-sm); border:1px solid var(--hub-line); background:#f2f0ea;">
+                    <img src="${imageUrl}" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
+                <div style="margin-top:8px; font-weight:800; font-size:13px; color:var(--hub-ink);">${rosterEscapeHtml(labelText)}</div>
+                ${subLabelText ? `<div class="hub-hint" style="margin:2px 0 0;">${rosterEscapeHtml(subLabelText)}</div>` : ''}
+            `;
+            card.onclick = onClick;
+            return card;
+        }
+
+        function tsRenderLibraryGrid() {
+            const grid = document.getElementById('ts-library-grid');
+            const breadcrumb = document.getElementById('ts-breadcrumb');
+            grid.innerHTML = '';
+
+            if (tsLibraryView === 'languages') {
+                breadcrumb.style.display = 'none';
+                const languages = tsLibraryManifest.languages || {};
+                Object.keys(languages).forEach(langKey => {
+                    grid.appendChild(tsMakeTextTile(languages[langKey].label, () => tsSelectLanguage(langKey)));
+                });
+            } else if (tsLibraryView === 'albums') {
+                breadcrumb.style.display = 'block';
+                breadcrumb.textContent = tsLibraryManifest.languages[tsCurrentLanguageKey].label;
+                const albums = tsLibraryManifest.languages[tsCurrentLanguageKey].albums || {};
+                Object.keys(albums).forEach(albumKey => {
+                    const album = albums[albumKey];
+                    // Album cover lives at the album's own folder level
+                    const coverUrl = TRANSLATION_STUDIO_BASE + tsCurrentLanguageKey + '/' + albumKey + '/' + (album.cover || 'cover.jpg');
+                    grid.appendChild(tsMakeImageTile(album.label, '', coverUrl, () => tsSelectAlbum(albumKey)));
+                });
+            } else if (tsLibraryView === 'songs') {
+                const langLabel = tsLibraryManifest.languages[tsCurrentLanguageKey].label;
+                const albumObj = tsLibraryManifest.languages[tsCurrentLanguageKey].albums[tsCurrentAlbumKey];
+                breadcrumb.style.display = 'block';
+                breadcrumb.textContent = langLabel + ' – ' + albumObj.label;
+                (albumObj.songs || []).slice().sort((a, b) => (a.track || 0) - (b.track || 0)).forEach(song => {
+                    // Song cover lives one level deeper, in the song's own track folder
+                    const coverUrl = TRANSLATION_STUDIO_BASE + tsCurrentLanguageKey + '/' + tsCurrentAlbumKey + '/' + song.folder + '/' + (song.cover || 'cover.png');
+                    const subLabel = song.track ? 'Track ' + song.track : '';
+                    grid.appendChild(tsMakeImageTile(song.title, subLabel, coverUrl, () => tsOpenSong(tsCurrentLanguageKey, tsCurrentAlbumKey, song.folder)));
+                });
+            }
+        }
+
+        function tsSelectLanguage(langKey) {
+            tsCurrentLanguageKey = langKey;
+            tsLibraryView = 'albums';
+            tsRenderLibraryGrid();
+        }
+
+        function tsSelectAlbum(albumKey) {
+            tsCurrentAlbumKey = albumKey;
+            tsLibraryView = 'songs';
+            tsRenderLibraryGrid();
+        }
+
+        function tsLibraryGoBack() {
+            if (tsLibraryView === 'songs') {
+                tsLibraryView = 'albums';
+                tsRenderLibraryGrid();
+            } else if (tsLibraryView === 'albums') {
+                tsLibraryView = 'languages';
+                tsRenderLibraryGrid();
+            } else {
+                resetToConfig();
+            }
+        }
+
+        function tsWireUpOnce() {
+            if (tsWiredUp) return;
+            tsWiredUp = true;
+            document.getElementById('ts-library-back-btn').onclick = tsLibraryGoBack;
+            document.getElementById('ts-translate-into-select').onchange = (e) => {
+                tsTranslateInto = e.target.value;
+                if (tsSongData) { tsRebuildReel(tsCurrentPhraseIndex); tsUpdateTranslationDisplay(); }
+            };
+            document.getElementById('ts-colorcoding-toggle').onchange = (e) => {
+                tsColorCodingOn = e.target.checked;
+                if (tsSongData) tsRebuildReel(tsCurrentPhraseIndex);
+            };
+            document.getElementById('ts-always-show-translation-toggle').onchange = (e) => {
+                tsAlwaysShowTranslation = e.target.checked;
+                if (tsSongData) tsUpdateTranslationDisplay();
+            };
+            document.getElementById('ts-player-back-btn').onclick = tsCloseSong;
+            document.getElementById('ts-play-pause-btn').onclick = tsTogglePlayPause;
+            document.getElementById('ts-translation-btn').onclick = tsShowAndSpeakTranslation;
+
+            document.getElementById('ts-vocals-volume').addEventListener('input', (e) => {
+                if (tsVocalsGain) tsVocalsGain.gain.value = e.target.value / 100;
+            });
+            document.getElementById('ts-music-volume').addEventListener('input', (e) => {
+                if (tsMusicGain) tsMusicGain.gain.value = e.target.value / 100;
+            });
+
+            document.getElementById('ts-speed-slider').addEventListener('input', (e) => {
+                const rate = parseFloat(e.target.value);
+                tsSetPlaybackRate(rate);
+                document.getElementById('ts-speed-value').textContent = rate.toFixed(2).replace(/0$/, '') + 'x';
+            });
+
+            const scrubBar = document.getElementById('ts-scrub-bar');
+            scrubBar.addEventListener('mousedown', tsScrubStart);
+            scrubBar.addEventListener('touchstart', tsScrubStart, { passive: true });
+            scrubBar.addEventListener('input', (e) => {
+                if (!tsSongData) return;
+                const duration = tsSongTotalDuration();
+                tsScrubTo((e.target.value / 1000) * duration);
+            });
+            scrubBar.addEventListener('mouseup', tsScrubEnd);
+            scrubBar.addEventListener('touchend', tsScrubEnd);
+        }
+
+
+        function tsSongTotalDuration() {
+            if (!tsSongData || tsSongData.phrases.length === 0) return 0;
+            return tsSongData.phrases[tsSongData.phrases.length - 1].end;
+        }
+
+        // Pre-fetches cloud TTS audio for a set of phrases: every individual
+        // word (spoken in the song's own language, for word-tap) and each
+        // phrase's whole translation (spoken in the target language, for
+        // the Translate button) - mirrors bbsPrecacheBookAudio's exact
+        // caching approach and shares the same cloudTtsAudioCache, so
+        // anything already cached is skipped automatically.
+        async function tsPrecachePhraseAudio(phrases) {
+            if (!phrases || phrases.length === 0) return;
+            const songConfig = CLOUD_TTS_CONFIG[TS_LANG_TO_TTS_CODE[tsSongData.songLanguage]];
+            const translateConfig = CLOUD_TTS_CONFIG[TS_LANG_TO_TTS_CODE[tsTranslateInto] || tsTranslateInto];
+
+            const jobs = new Map(); // cacheKey -> { text, config }
+            const addJob = (rawText, config) => {
+                if (!config || !rawText) return;
+                const cleanText = prepareTextForSpeech(rawText);
+                const cacheKey = config.languageCode + '::default::' + cleanText;
+                if (!cloudTtsAudioCache[cacheKey]) jobs.set(cacheKey, { text: cleanText, config });
+            };
+
+            phrases.forEach(phrase => {
+                phrase.words.forEach(w => addJob(w.text, songConfig));
+                addJob(phrase.translations[tsTranslateInto], translateConfig);
+            });
+
+            const jobList = Array.from(jobs.entries());
+            if (jobList.length === 0) return;
+
+            const CONCURRENCY = 4;
+            let cursor = 0;
+            async function worker() {
+                while (cursor < jobList.length) {
+                    const [cacheKey, job] = jobList[cursor++];
+                    try {
+                        const base64Audio = await fetchCloudTTSAudio(job.text, job.config, undefined);
+                        if (base64Audio) cloudTtsAudioCache[cacheKey] = base64Audio;
+                    } catch (e) {
+                        // Skipped silently - falls back to the existing lazy fetch-on-tap behavior later.
+                    }
+                }
+            }
+            await Promise.all(Array.from({ length: Math.min(CONCURRENCY, jobList.length) }, worker));
+        }
+
+        // ==================================================================
+        // Web Audio API sync engine. Both tracks are decoded once into
+        // AudioBuffers and played through AudioBufferSourceNode instances
+        // that are always started together, in the same function call,
+        // scheduled against the exact same AudioContext clock - this is
+        // what actually guarantees they can never drift apart, rather than
+        // relying on two independent <audio> elements (each with their own
+        // internal decode/seek pipeline) and periodically nudging them
+        // back in line after the fact.
+        // ==================================================================
+        let tsVocalsBuffer = null;
+        let tsMusicBuffer = null;
+        let tsVocalsGain = null;
+        let tsMusicGain = null;
+        let tsVocalsSource = null;
+        let tsMusicSource = null;
+        let tsPlaybackOffset = 0;       // song-time position (seconds) - authoritative while paused
+        let tsPlaybackStartCtxTime = 0; // audioCtx.currentTime at the moment playback last (re)started
+        let tsPlaybackRate = 1;
+        let tsIsPlaying = false;
+        let tsWasPlayingBeforeScrub = false;
+        let tsScrubPreviewTimer = null;
+
+        function tsGetCurrentTime() {
+            if (!tsIsPlaying) return tsPlaybackOffset;
+            return tsPlaybackOffset + (audioCtx.currentTime - tsPlaybackStartCtxTime) * tsPlaybackRate;
+        }
+
+        function tsStopSources() {
+            if (tsVocalsSource) { try { tsVocalsSource.onended = null; tsVocalsSource.stop(); } catch (e) {} tsVocalsSource.disconnect(); tsVocalsSource = null; }
+            if (tsMusicSource) { try { tsMusicSource.stop(); } catch (e) {} tsMusicSource.disconnect(); tsMusicSource = null; }
+        }
+
+        // Starts both tracks together from a given song-time offset - the
+        // single place sync is actually established, since both start()
+        // calls happen in the same tick against the same clock reference.
+        function tsStartBothAt(offset) {
+            tsStopSources();
+            tsVocalsSource = audioCtx.createBufferSource();
+            tsVocalsSource.buffer = tsVocalsBuffer;
+            tsVocalsSource.playbackRate.value = tsPlaybackRate;
+            tsVocalsSource.connect(tsVocalsGain);
+            tsMusicSource = audioCtx.createBufferSource();
+            tsMusicSource.buffer = tsMusicBuffer;
+            tsMusicSource.playbackRate.value = tsPlaybackRate;
+            tsMusicSource.connect(tsMusicGain);
+
+            const startAt = audioCtx.currentTime;
+            const clampedOffset = Math.max(0, Math.min(offset, tsVocalsBuffer.duration));
+            tsVocalsSource.start(startAt, clampedOffset);
+            tsMusicSource.start(startAt, clampedOffset);
+            tsPlaybackStartCtxTime = startAt;
+            tsPlaybackOffset = clampedOffset;
+            tsIsPlaying = true;
+
+            tsVocalsSource.onended = () => {
+                if (tsIsPlaying && tsGetCurrentTime() >= tsSongTotalDuration() - 0.05) {
+                    tsIsPlaying = false;
+                    document.getElementById('ts-play-pause-btn').textContent = '▶️';
+                }
+            };
+        }
+
+        function tsPausePlayback() {
+            if (!tsIsPlaying) return;
+            tsPlaybackOffset = tsGetCurrentTime();
+            tsIsPlaying = false;
+            tsStopSources();
+        }
+
+        function tsSetPlaybackRate(rate) {
+            if (tsIsPlaying) {
+                // Re-anchor at the current position - captured using the
+                // rate that was actually in effect up to this moment, not
+                // the new one, or every speed change would silently shift
+                // the computed song-time position by however much time has
+                // elapsed since the last anchor.
+                tsPlaybackOffset = tsGetCurrentTime();
+                tsPlaybackStartCtxTime = audioCtx.currentTime;
+            }
+            tsPlaybackRate = rate;
+            if (tsIsPlaying) {
+                // playbackRate is a live-adjustable param on an already-
+                // running source, so no stop/restart click is needed.
+                if (tsVocalsSource) tsVocalsSource.playbackRate.value = rate;
+                if (tsMusicSource) tsMusicSource.playbackRate.value = rate;
+            }
+        }
+
+        function tsTogglePlayPause() {
+            if (!tsSongData) return;
+            const btn = document.getElementById('ts-play-pause-btn');
+            if (tsIsPlaying) {
+                tsPausePlayback();
+                btn.textContent = '▶️';
+            } else {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                tsStartBothAt(tsPlaybackOffset >= tsSongTotalDuration() ? 0 : tsPlaybackOffset);
+                btn.textContent = '⏸️';
+                tsDismissWordGloss();
+            }
+        }
+
+        function tsFormatTime(seconds) {
+            const s = Math.max(0, Math.floor(seconds || 0));
+            return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+        }
+
+        function tsUpdateTimeDisplay(current, total) {
+            document.getElementById('ts-time-current').textContent = tsFormatTime(current);
+            document.getElementById('ts-time-total').textContent = tsFormatTime(total);
+        }
+
+        function tsPlaybackTick() {
+            if (!tsSongData) { tsRafId = requestAnimationFrame(tsPlaybackTick); return; }
+            const t = tsGetCurrentTime();
+            const duration = tsSongTotalDuration();
+
+            if (!tsScrubbing) {
+                document.getElementById('ts-scrub-bar').value = duration > 0 ? Math.round((t / duration) * 1000) : 0;
+                tsUpdateTimeDisplay(t, duration);
+                tsUpdatePhraseForTime(t);
+            }
+
+            tsRafId = requestAnimationFrame(tsPlaybackTick);
+        }
+
+        function tsFindPhraseIndexForTime(t) {
+            const phrases = tsSongData.phrases;
+            for (let i = 0; i < phrases.length; i++) {
+                if (t >= phrases[i].start && t < phrases[i].end) return i;
+            }
+            return -1; // between phrases (a gap/instrumental) - nothing shown
+        }
+
+        // ==================================================================
+        // Phrase "reel" - a teleprompter-style continuous scroll rather than
+        // a hard content swap. Three row slots [prev, current, next] always
+        // exist at a fixed row height; advancing to the next phrase slides
+        // the whole reel up by exactly one row while the outgoing row
+        // shrinks/dims into the prev slot and the incoming row grows/
+        // brightens into the current slot - then, once the CSS transition
+        // finishes, the row that scrolled off is removed and the reel snaps
+        // back to zero with no transition, ready for the next advance. Only
+        // used for natural +1 forward progression; any jump (opening a
+        // song, scrubbing) does an instant, non-animated rebuild instead,
+        // since that's not a "next line" moment worth animating.
+        // ==================================================================
+        const TS_ROW_HEIGHT = 96;
+        const TS_REEL_TRANSITION_MS = 450;
+        let tsReelPhraseIndices = [null, null, null];
+        let tsReelRows = [null, null, null];
+        let tsCurrentRowEl = null;
+        let tsReelAnimating = false;
+        let tsCurrentWordSpan = null;
+        let tsDismissWordGloss = () => {}; // set to the active bubble's hide function whenever a word gloss is shown; called on resuming playback
+
+        function tsBuildPhraseRow(phraseIndex, isCurrent) {
+            const row = document.createElement('div');
+            row.className = 'ts-phrase-row dyslexic-font';
+            row.dataset.phraseIndex = phraseIndex === null ? '' : phraseIndex;
+            row.style.cssText = 'height:' + TS_ROW_HEIGHT + 'px; display:flex; align-items:center; justify-content:center; text-align:center; flex-wrap:nowrap; white-space:nowrap; padding:0 12px; box-sizing:border-box; color:var(--hub-ink); transition:opacity ' + TS_REEL_TRANSITION_MS + 'ms ease, font-size ' + TS_REEL_TRANSITION_MS + 'ms ease, gap ' + TS_REEL_TRANSITION_MS + 'ms ease; font-size:' + (isCurrent ? '46px' : '22px') + '; opacity:' + (isCurrent ? '1' : '0.35') + '; gap:' + (isCurrent ? '26px' : '14px') + ';';
+            if (phraseIndex === null || !tsSongData.phrases[phraseIndex]) return row;
+
+            const phrase = tsSongData.phrases[phraseIndex];
+            phrase.words.forEach((w, i) => {
+                const span = document.createElement('span');
+                span.dataset.wordIndex = i;
+                // transform (not font-size or width) is what makes the
+                // enlargement safe - it's a paint-time effect, not a
+                // layout one, so growing one word can never push its
+                // neighbours around.
+                span.style.cssText = 'display:inline-block; border-radius:6px; padding:2px 4px; transition:transform 0.12s; transform:scale(1); transform-origin:center;';
+                span.innerHTML = tsColorCodingOn ? colorizeSentenceText(w.text) : rosterEscapeHtml(w.text);
+                row.appendChild(span);
+            });
+            tsApplyRowRole(row, phraseIndex, isCurrent);
+            return row;
+        }
+
+        // Shrinks a row's font-size just enough to keep its content on one
+        // line within the available width - never lets it wrap, since a
+        // wrapped row needs more than the reel's fixed row height and
+        // throws off the whole scroll alignment. Only shrinks, never grows
+        // past the role's own base size.
+        function tsFitRowFontSize(row) {
+            const reel = document.getElementById('ts-phrase-reel');
+            if (!reel || !row.isConnected) return;
+            const availableWidth = reel.clientWidth - 24; // row's own 12px padding on each side
+            if (availableWidth <= 0) return;
+            const baseFontSize = parseFloat(row.style.fontSize);
+            if (!baseFontSize) return;
+            const contentWidth = row.scrollWidth;
+            if (contentWidth > availableWidth) {
+                const fitted = Math.max(10, baseFontSize * (availableWidth / contentWidth));
+                row.style.fontSize = fitted + 'px';
+            }
+        }
+
+        // Re-styles an existing row for its new role and rewires word-tap
+        // interactivity accordingly - only the current (centre) row is
+        // tappable for a gloss; prev/next are context only.
+        function tsApplyRowRole(row, phraseIndex, isCurrent) {
+            row.style.fontSize = isCurrent ? '46px' : '22px';
+            row.style.opacity = isCurrent ? '1' : '0.35';
+            row.style.gap = isCurrent ? '26px' : '14px';
+            const phrase = (phraseIndex !== null && tsSongData.phrases[phraseIndex]) ? tsSongData.phrases[phraseIndex] : null;
+            [...row.children].forEach(span => {
+                span.className = isCurrent ? 'ts-word interactive' : 'ts-word';
+                span.style.cursor = isCurrent ? 'pointer' : 'default';
+                if (isCurrent && phrase) {
+                    const wordIndex = parseInt(span.dataset.wordIndex, 10);
+                    const w = phrase.words[wordIndex];
+                    span.onclick = (e) => { e.stopPropagation(); tsShowWordGloss(span, w.text); };
+                } else {
+                    span.onclick = null;
+                }
+            });
+            tsFitRowFontSize(row);
+        }
+
+        // Instant, non-animated rebuild - used for opening a song or any
+        // jump that isn't a natural +1 step from where the reel already is.
+        function tsRebuildReel(currentIndex) {
+            const reel = document.getElementById('ts-phrase-reel');
+            reel.style.transition = 'none';
+            reel.style.transform = 'translateY(0)';
+            reel.innerHTML = '';
+            tsCurrentWordSpan = null;
+
+            const indices = currentIndex === -1
+                ? [null, null, null]
+                : [
+                    currentIndex - 1 >= 0 ? currentIndex - 1 : null,
+                    currentIndex,
+                    currentIndex + 1 < tsSongData.phrases.length ? currentIndex + 1 : null
+                ];
+            const rows = indices.map((idx, slot) => tsBuildPhraseRow(idx, slot === 1));
+            rows.forEach(row => reel.appendChild(row));
+            rows.forEach(row => tsFitRowFontSize(row));
+
+            tsReelPhraseIndices = indices;
+            tsReelRows = rows;
+            tsCurrentRowEl = rows[1];
+
+            void reel.offsetHeight; // force reflow before transitions can apply again
+            reel.style.transition = '';
+        }
+
+        // Animated +1 advance - the actual "scrolling text" effect.
+        function tsAdvanceReelByOne(newCurrentIndex) {
+            const reel = document.getElementById('ts-phrase-reel');
+            const newNextIndex = newCurrentIndex + 1 < tsSongData.phrases.length ? newCurrentIndex + 1 : null;
+
+            const incomingRow = tsBuildPhraseRow(newNextIndex, false);
+            reel.appendChild(incomingRow);
+            tsFitRowFontSize(incomingRow);
+
+            tsApplyRowRole(tsReelRows[1], tsReelPhraseIndices[1], false); // was current -> becomes prev
+            tsApplyRowRole(tsReelRows[2], tsReelPhraseIndices[2], true);  // was next -> becomes current
+
+            if (tsCurrentWordSpan) tsCurrentWordSpan.style.transform = 'scale(1)';
+            tsCurrentWordSpan = null;
+            tsCurrentRowEl = tsReelRows[2]; // word-highlighting can target this row immediately - only the slide itself is still animating
+
+            tsReelAnimating = true;
+            reel.style.transition = 'transform ' + TS_REEL_TRANSITION_MS + 'ms ease';
+            reel.style.transform = 'translateY(-' + TS_ROW_HEIGHT + 'px)';
+
+            const onDone = () => {
+                reel.removeEventListener('transitionend', onDone);
+                if (tsReelRows[0]) tsReelRows[0].remove();
+                reel.style.transition = 'none';
+                reel.style.transform = 'translateY(0)';
+                void reel.offsetHeight;
+                reel.style.transition = '';
+
+                tsReelPhraseIndices = [tsReelPhraseIndices[1], tsReelPhraseIndices[2], newNextIndex];
+                tsReelRows = [tsReelRows[1], tsReelRows[2], incomingRow];
+                tsCurrentRowEl = tsReelRows[1];
+                tsReelAnimating = false;
+
+                // If the phrase advanced again while this animation was
+                // still running, catch up instantly rather than chaining
+                // animations - correctness over smoothness in that rare case.
+                if (tsCurrentPhraseIndex !== tsReelPhraseIndices[1]) {
+                    tsRebuildReel(tsCurrentPhraseIndex);
+                }
+            };
+            reel.addEventListener('transitionend', onDone);
+            setTimeout(() => { if (tsReelAnimating) onDone(); }, TS_REEL_TRANSITION_MS + 200);
+        }
+
+        function tsUpdateTranslationDisplay() {
+            const translationEl = document.getElementById('ts-translation-display');
+            if (tsCurrentPhraseIndex === -1) {
+                translationEl.textContent = '';
+                return;
+            }
+            const phrase = tsSongData.phrases[tsCurrentPhraseIndex];
+            translationEl.textContent = tsAlwaysShowTranslation ? (phrase.translations[tsTranslateInto] || '') : '';
+        }
+
+        function tsUpdatePhraseForTime(t) {
+            const newIndex = tsFindPhraseIndexForTime(t);
+            if (newIndex === tsCurrentPhraseIndex) {
+                tsUpdateWordHighlight(t);
+                return;
+            }
+            tsCurrentPhraseIndex = newIndex;
+
+            if (newIndex === -1) {
+                // Entering the brief gap before the next phrase begins -
+                // leave the reel exactly as it is, so the phrase that just
+                // finished stays visible and full-size right up until the
+                // next one is ready to scroll in, rather than clearing for
+                // this short buffer window.
+                tsUpdateTranslationDisplay();
+                tsUpdateWordHighlight(t);
+                return;
+            }
+
+            // Natural playback always passes through that brief -1 gap
+            // between phrases (t sweeps through it frame by frame), so
+            // comparing against the literal previous phrase index would
+            // never recognise a true "next line" step during real
+            // playback - only scrubbing could land directly inside the
+            // next phrase and skip the gap. Comparing against the last
+            // actual phrase shown instead means both cases now animate.
+            const isNaturalAdvance = !tsReelAnimating && tsLastActivePhraseIndex !== -1 && newIndex === tsLastActivePhraseIndex + 1;
+            tsLastActivePhraseIndex = newIndex;
+
+            if (!tsReelAnimating) {
+                if (isNaturalAdvance) tsAdvanceReelByOne(newIndex);
+                else tsRebuildReel(newIndex);
+            }
+            tsUpdateTranslationDisplay();
+            tsUpdateWordHighlight(t);
+        }
+
+        // Shows the current phrase's translation on demand (for when
+        // "Always Show Translations" is off) and reads it aloud in the
+        // target language, regardless of whichever language the hub's
+        // own selector is currently set to - matching how bilingual
+        // feedback elsewhere in the hub already works.
+        function tsShowAndSpeakTranslation() {
+            if (!tsSongData || tsCurrentPhraseIndex === -1) return;
+            const phrase = tsSongData.phrases[tsCurrentPhraseIndex];
+            const translation = phrase.translations[tsTranslateInto] || '';
+            if (!translation) return;
+            document.getElementById('ts-translation-display').textContent = translation;
+            speakOneInLanguage(translation, tsTranslateInto);
+        }
+
+        function tsUpdateWordHighlight(t) {
+            if (tsCurrentPhraseIndex === -1 || !tsCurrentRowEl) return;
+            const phrase = tsSongData.phrases[tsCurrentPhraseIndex];
+            if (!phrase) return;
+            let activeSpan = null;
+            for (let i = 0; i < phrase.words.length; i++) {
+                if (t >= phrase.words[i].start && t < phrase.words[i].end) {
+                    activeSpan = tsCurrentRowEl.querySelector('.ts-word[data-word-index="' + i + '"]');
+                    break;
+                }
+            }
+            if (activeSpan === tsCurrentWordSpan) return;
+            if (tsCurrentWordSpan) tsCurrentWordSpan.style.transform = 'scale(1)';
+            if (activeSpan) activeSpan.style.transform = 'scale(1.35)';
+            tsCurrentWordSpan = activeSpan;
+        }
+
+        function tsShowWordGloss(span, originalText) {
+            const key = originalText.toLowerCase().replace(/[.,!?;:'"()„\u201c\u201d\u00ab\u00bb\u2026\u2013\u2014\u00a1\u00bf\[\]]/g, '').trim();
+            const gloss = (tsSongData.glossary[tsTranslateInto] || {})[key];
+            const songTtsCode = TS_LANG_TO_TTS_CODE[tsSongData.songLanguage];
+            if (songTtsCode) speakOneInLanguage(originalText, songTtsCode);
+            const bubble = document.getElementById('bbs-word-bubble');
+            bubble.textContent = gloss || '?';
+            const rect = span.getBoundingClientRect();
+            bubble.style.left = (rect.left + rect.width / 2) + 'px';
+            bubble.style.top = (rect.top - 12) + 'px';
+            bubble.style.transform = 'translate(-50%, -100%)';
+            bubble.style.display = 'block';
+
+            const hideBubble = () => { bubble.style.display = 'none'; };
+            bubble.onclick = hideBubble;
+            tsDismissWordGloss = hideBubble; // called on resuming playback, for touch screens with no hover
+
+            if (span._tsGlossHideHandler) span.removeEventListener('mouseleave', span._tsGlossHideHandler);
+            span._tsGlossHideHandler = hideBubble;
+            span.addEventListener('mouseleave', hideBubble, { once: true });
+        }
+
+        // Forward-scrub audible preview: dragging briefly plays both
+        // tracks together (as one unit, at the same offset) so the
+        // position can be heard, not just seen - a short burst at each
+        // drag movement rather than continuous audio, and not true
+        // reverse-audio playback (a separate, harder stretch goal).
+        function tsScrubStart() {
+            tsScrubbing = true;
+            tsWasPlayingBeforeScrub = tsIsPlaying;
+            if (tsIsPlaying) tsPausePlayback();
+        }
+
+        function tsScrubTo(newTime) {
+            tsPlaybackOffset = Math.max(0, Math.min(newTime, tsSongTotalDuration()));
+            tsUpdateTimeDisplay(tsPlaybackOffset, tsSongTotalDuration());
+            tsUpdatePhraseForTime(tsPlaybackOffset);
+
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            tsStartBothAt(tsPlaybackOffset); // both tracks together, as one unit
+            clearTimeout(tsScrubPreviewTimer);
+            tsScrubPreviewTimer = setTimeout(() => {
+                if (tsScrubbing) tsPausePlayback();
+            }, 150);
+        }
+
+        function tsScrubEnd() {
+            tsScrubbing = false;
+            clearTimeout(tsScrubPreviewTimer);
+            if (tsWasPlayingBeforeScrub) {
+                if (!tsIsPlaying) tsStartBothAt(tsPlaybackOffset);
+                document.getElementById('ts-play-pause-btn').textContent = '⏸️';
+            } else {
+                if (tsIsPlaying) tsPausePlayback();
+                document.getElementById('ts-play-pause-btn').textContent = '▶️';
+            }
+        }
+
+        async function tsOpenSong(langKey, albumKey, folder) {
+            const basePath = TRANSLATION_STUDIO_BASE + langKey + '/' + albumKey + '/' + folder + '/';
+            const status = document.getElementById('ts-library-status');
+            status.style.display = 'block';
+            status.textContent = 'Loading song…';
+            let songData;
+            try {
+                const res = await fetch(basePath + 'song.json');
+                if (!res.ok) throw new Error('song.json returned ' + res.status);
+                songData = await res.json();
+                songData._basePath = basePath;
+            } catch (e) {
+                console.error('Translation Studio: could not load this song', e);
+                status.textContent = "Couldn't load this song right now - check your connection and try again.";
+                return;
+            }
+            status.style.display = 'none';
+            tsSongData = songData;
+
+            document.getElementById('translation-studio-library-screen').style.display = 'none';
+            document.getElementById('translation-studio-player-screen').style.display = 'block';
+            document.getElementById('ts-song-title').textContent = tsSongData.title;
+            document.getElementById('ts-loading-overlay').style.display = 'flex';
+
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') await audioCtx.resume();
+
+                // Only the vocals/music tracks and the first two phrases'
+                // audio (every word in them, plus their translations) need
+                // to be fully ready before the song is playable - a
+                // teacher opening a song shouldn't wait on lines they
+                // won't reach for a couple of minutes. Everything from
+                // phrase three onward keeps pre-fetching quietly in the
+                // background once the song is already open and playing.
+                const priorityPhrases = tsSongData.phrases.slice(0, 2);
+                const backgroundPhrases = tsSongData.phrases.slice(2);
+
+                const [vocalsArrayBuf, musicArrayBuf] = await Promise.all([
+                    fetch(basePath + tsSongData.audio.vocals).then(r => r.arrayBuffer()),
+                    fetch(basePath + tsSongData.audio.music).then(r => r.arrayBuffer()),
+                    tsPrecachePhraseAudio(priorityPhrases)
+                ]);
+                [tsVocalsBuffer, tsMusicBuffer] = await Promise.all([
+                    audioCtx.decodeAudioData(vocalsArrayBuf),
+                    audioCtx.decodeAudioData(musicArrayBuf)
+                ]);
+
+                tsPrecachePhraseAudio(backgroundPhrases); // not awaited - continues quietly after the song opens
+            } catch (e) {
+                console.error('Translation Studio: could not load this song', e);
+                document.getElementById('ts-loading-overlay').style.display = 'none';
+                document.getElementById('translation-studio-player-screen').style.display = 'none';
+                document.getElementById('translation-studio-library-screen').style.display = 'flex';
+                status.style.display = 'block';
+                status.textContent = "Couldn't load this song right now - check your connection and try again.";
+                return;
+            }
+            document.getElementById('ts-loading-overlay').style.display = 'none';
+
+            if (tsVocalsGain) tsVocalsGain.disconnect();
+            if (tsMusicGain) tsMusicGain.disconnect();
+            tsVocalsGain = audioCtx.createGain();
+            tsMusicGain = audioCtx.createGain();
+            tsVocalsGain.connect(audioCtx.destination);
+            tsMusicGain.connect(audioCtx.destination);
+            tsVocalsGain.gain.value = document.getElementById('ts-vocals-volume').value / 100;
+            tsMusicGain.gain.value = document.getElementById('ts-music-volume').value / 100;
+
+            tsPlaybackRate = parseFloat(document.getElementById('ts-speed-slider').value);
+            tsPlaybackOffset = 0;
+            tsIsPlaying = false;
+            tsStopSources();
+
+            tsCurrentPhraseIndex = -1;
+            tsLastActivePhraseIndex = -1;
+            tsRebuildReel(-1);
+            document.getElementById('ts-translation-display').textContent = '';
+            document.getElementById('ts-play-pause-btn').textContent = '▶️';
+            tsUpdateTimeDisplay(0, tsSongTotalDuration());
+            document.getElementById('ts-scrub-bar').value = 0;
+
+            if (tsRafId) cancelAnimationFrame(tsRafId);
+            tsRafId = requestAnimationFrame(tsPlaybackTick);
+        }
+
+
+        function tsCloseSong() {
+            tsPausePlayback();
+            if (tsRafId) { cancelAnimationFrame(tsRafId); tsRafId = null; }
+            tsSongData = null;
+            document.getElementById('translation-studio-player-screen').style.display = 'none';
+            document.getElementById('translation-studio-library-screen').style.display = 'flex';
+        }
+
+
+        // ==================================================================
+        // SYNTAX SCRAMBLE - a simple word-class "slot machine". Each word
+        // box is a category (reusing the same rosterState.syntaxStreetCategories
+        // data the old Syntax Street feature used, so anything a teacher
+        // already set up there carries over automatically); pressing
+        // Scramble spins each box through its own candidate words in turn,
+        // landing on a randomly-chosen one, building a sentence.
+        // ==================================================================
+        let syntaxScrambleWiredUp = false;
+
+        function syntaxScrambleRenderSlots() {
+            rosterEnsureSyntaxStreetCategories();
+            const container = document.getElementById('syntax-scramble-slots');
+            container.innerHTML = '';
+            rosterState.syntaxStreetCategories.forEach((cat, index) => {
+                const slot = document.createElement('div');
+                slot.className = 'interactive';
+                slot.dataset.syntaxSlotType = 'category';
+                slot._syntaxScrambleCategory = cat; // direct object reference, read back after a drag to rebuild the array in the new order
+                slot.style.cssText = `display:flex; flex-direction:column; gap:6px; width:180px; flex:0 0 180px; background:var(--hub-surface); border:2px solid ${cat.color || '#5B4EFF'}; border-radius:16px; padding:12px; box-shadow:var(--hub-shadow-sm); box-sizing:border-box;`;
+
+                // Top row - drag handle (reorder) and duplicate button.
+                // Pointer-based dragging (wired up separately, in
+                // syntaxScrambleMakeSlotsDraggable) rather than native
+                // HTML5 drag-and-drop, which doesn't work reliably on
+                // touch devices like the iPads this hub runs on.
+                const topRow = document.createElement('div');
+                topRow.style.cssText = 'display:flex; align-items:center; justify-content:space-between;';
+                const dragHandle = document.createElement('span');
+                dragHandle.className = 'syntax-scramble-drag-handle interactive';
+                dragHandle.textContent = '☰';
+                dragHandle.title = 'Drag to reorder';
+                dragHandle.style.cssText = 'cursor:grab; font-size:15px; color:var(--hub-ink-soft, #8B8579); user-select:none; touch-action:none; padding:2px 6px;';
+                const duplicateBtn = document.createElement('button');
+                duplicateBtn.className = 'hub-circle-btn interactive';
+                duplicateBtn.style.cssText = 'width:24px; height:24px; font-size:12px;';
+                duplicateBtn.textContent = '📋';
+                duplicateBtn.title = 'Duplicate this word box (keeps all its words)';
+                duplicateBtn.onclick = () => syntaxScrambleDuplicateSlot(cat);
+
+                // Freezing keeps this box showing whatever it's already
+                // showing when Scramble is pressed - it doesn't spin or
+                // change - so a teacher can lock one part of the sentence
+                // (e.g. the subject) while the rest keeps varying.
+                const freezeBtn = document.createElement('button');
+                freezeBtn.className = 'interactive';
+                const applyTeacherFreezeBtnStyle = () => {
+                    freezeBtn.style.cssText = cat.frozen
+                        ? 'font-size:11px; font-weight:800; padding:3px 10px; border-radius:12px; border:2px solid #2563EB; background:#2563EB; color:#ffffff; cursor:pointer; white-space:nowrap;'
+                        : 'font-size:11px; font-weight:800; padding:3px 10px; border-radius:12px; border:2px solid #2563EB; background:#ffffff; color:#2563EB; cursor:pointer; white-space:nowrap;';
+                    freezeBtn.textContent = cat.frozen ? 'Frozen' : 'Freeze';
+                    freezeBtn.title = cat.frozen ? "Frozen - won't change when scrambled. Click to unfreeze." : "Freeze this box so it won't change when scrambled";
+                };
+                applyTeacherFreezeBtnStyle();
+                freezeBtn.onclick = () => {
+                    cat.frozen = !cat.frozen;
+                    rosterDebouncedSave();
+                    // Only this button's own appearance updates - no full
+                    // slot re-render, which would otherwise reset the
+                    // reel back to its placeholder and lose whatever word
+                    // it was currently showing.
+                    applyTeacherFreezeBtnStyle();
+                };
+
+                const rightButtons = document.createElement('div');
+                rightButtons.style.cssText = 'display:flex; gap:4px; align-items:center;';
+                rightButtons.appendChild(freezeBtn);
+                rightButtons.appendChild(duplicateBtn);
+                topRow.appendChild(dragHandle);
+                topRow.appendChild(rightButtons);
+
+                // Fixed-width reel - sits directly above this slot's own
+                // editing controls, so it's visually clear which candidate
+                // words it cycles through. Fixed width (not sized to
+                // whatever word is currently showing) avoids any layout
+                // jank as different-length words cycle past during a spin.
+                const reelBox = document.createElement('div');
+                reelBox.className = 'syntax-scramble-reel-box';
+                reelBox.style.cssText = 'width:100%; min-height:44px; display:flex; align-items:center; justify-content:center; background:var(--hub-paper); border:2px solid var(--hub-line); border-radius:10px; padding:4px 6px; box-sizing:border-box; overflow:hidden;';
+                const reelText = document.createElement('span');
+                reelText.className = 'syntax-scramble-reel-text dyslexic-font';
+                reelText.style.cssText = 'font-weight:800; display:inline-block; transition:transform 0.12s ease; color:var(--hub-ink); opacity:0.35;';
+                reelText.textContent = '—';
+                reelBox.appendChild(reelText);
+
+                const nameInput = document.createElement('input');
+                nameInput.type = 'text';
+                nameInput.className = 'hub-input interactive';
+                nameInput.placeholder = 'Word class (e.g. Subject)';
+                nameInput.value = cat.name || '';
+                nameInput.style.cssText = 'font-weight:800; font-size:13px;';
+                nameInput.addEventListener('input', (e) => {
+                    cat.name = e.target.value;
+                    rosterDebouncedSave();
+                });
+
+                const wordsArea = document.createElement('textarea');
+                wordsArea.className = 'hub-input interactive';
+                wordsArea.placeholder = 'One word per line...';
+                wordsArea.rows = 4;
+                wordsArea.style.cssText = 'font-size:13px; resize:vertical;';
+                wordsArea.value = (cat.words || []).join('\n');
+                wordsArea.addEventListener('input', (e) => {
+                    cat.words = e.target.value.split('\n').map(w => w.trim()).filter(Boolean);
+                    rosterDebouncedSave();
+                });
+
+                const bottomRow = document.createElement('div');
+                bottomRow.style.cssText = 'display:flex; justify-content:space-between; align-items:center;';
+
+                const colorInput = document.createElement('input');
+                colorInput.type = 'color';
+                colorInput.className = 'interactive';
+                colorInput.value = cat.color || '#5B4EFF';
+                colorInput.style.cssText = 'width:28px; height:28px; border-radius:6px; cursor:pointer; border:1px solid var(--hub-line); padding:0;';
+                colorInput.addEventListener('input', (e) => {
+                    cat.color = e.target.value;
+                    slot.style.borderColor = e.target.value;
+                    reelBox.style.borderColor = e.target.value;
+                    rosterDebouncedSave();
+                });
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'hub-circle-btn interactive';
+                removeBtn.style.cssText = 'width:26px; height:26px; font-size:12px; color:#dc2626;';
+                removeBtn.textContent = '✕';
+                removeBtn.title = 'Remove this word box';
+                removeBtn.onclick = () => {
+                    rosterState.syntaxStreetCategories.splice(index, 1);
+                    rosterDebouncedSave();
+                    syntaxScrambleRenderSlots();
+                };
+
+                bottomRow.appendChild(colorInput);
+                bottomRow.appendChild(removeBtn);
+                slot.appendChild(topRow);
+                slot.appendChild(reelBox);
+                slot.appendChild(nameInput);
+                slot.appendChild(wordsArea);
+                slot.appendChild(bottomRow);
+                container.appendChild(slot);
+            });
+
+            // The punctuation box - always present, always last, can't be
+            // removed or reordered like the teacher's own boxes, but its
+            // own candidate marks are still editable (e.g. a teacher might
+            // remove "!" for an exercise focused only on statements).
+            rosterEnsureSyntaxScramblePunctuation();
+            const punctuationState = rosterState.syntaxScramblePunctuation;
+            const punctSlot = document.createElement('div');
+            punctSlot.className = 'interactive';
+            punctSlot.dataset.syntaxSlotType = 'punctuation';
+            punctSlot.style.cssText = 'display:flex; flex-direction:column; gap:6px; width:140px; background:var(--hub-surface); border:2px dashed var(--hub-line); border-radius:16px; padding:12px; box-shadow:var(--hub-shadow-sm); box-sizing:border-box;';
+
+            const punctReelBox = document.createElement('div');
+            punctReelBox.className = 'syntax-scramble-reel-box';
+            punctReelBox.id = 'syntax-scramble-punctuation-reel-box';
+            punctReelBox.style.cssText = 'width:100%; min-height:44px; display:flex; align-items:center; justify-content:center; background:var(--hub-paper); border:2px solid var(--hub-line); border-radius:10px; padding:4px 6px; box-sizing:border-box; overflow:hidden;';
+            const punctReelText = document.createElement('span');
+            punctReelText.className = 'syntax-scramble-reel-text dyslexic-font';
+            punctReelText.id = 'syntax-scramble-punctuation-reel-text';
+            punctReelText.style.cssText = 'font-weight:800; display:inline-block; transition:transform 0.12s ease; color:var(--hub-ink); opacity:0.35;';
+            punctReelText.textContent = '—';
+            punctReelBox.appendChild(punctReelText);
+
+            const punctLabelRow = document.createElement('div');
+            punctLabelRow.style.cssText = 'display:flex; align-items:center; justify-content:space-between;';
+            const punctLabel = document.createElement('div');
+            punctLabel.textContent = 'Punctuation';
+            punctLabel.style.cssText = 'font-weight:800; font-size:13px; color:var(--hub-ink); opacity:0.7;';
+            const punctFreezeBtn = document.createElement('button');
+            punctFreezeBtn.className = 'interactive';
+            const applyPunctFreezeBtnStyle = () => {
+                punctFreezeBtn.style.cssText = punctuationState.frozen
+                    ? 'font-size:10px; font-weight:800; padding:2px 8px; border-radius:12px; border:2px solid #2563EB; background:#2563EB; color:#ffffff; cursor:pointer; white-space:nowrap;'
+                    : 'font-size:10px; font-weight:800; padding:2px 8px; border-radius:12px; border:2px solid #2563EB; background:#ffffff; color:#2563EB; cursor:pointer; white-space:nowrap;';
+                punctFreezeBtn.textContent = punctuationState.frozen ? 'Frozen' : 'Freeze';
+                punctFreezeBtn.title = punctuationState.frozen ? "Frozen - won't change when scrambled. Click to unfreeze." : "Freeze this box so it won't change when scrambled";
+            };
+            applyPunctFreezeBtnStyle();
+            punctFreezeBtn.onclick = () => {
+                punctuationState.frozen = !punctuationState.frozen;
+                rosterDebouncedSave();
+                // Only this button's own appearance updates - no full
+                // slot re-render, which would otherwise reset the reel
+                // back to its placeholder and lose whatever mark it was
+                // currently showing.
+                applyPunctFreezeBtnStyle();
+            };
+            punctLabelRow.appendChild(punctLabel);
+            punctLabelRow.appendChild(punctFreezeBtn);
+
+            const punctWordsArea = document.createElement('textarea');
+            punctWordsArea.className = 'hub-input interactive';
+            punctWordsArea.placeholder = 'One mark per line...';
+            punctWordsArea.rows = 4;
+            punctWordsArea.style.cssText = 'font-size:13px; resize:vertical;';
+            punctWordsArea.value = punctuationState.words.join('\n');
+            punctWordsArea.addEventListener('input', (e) => {
+                punctuationState.words = e.target.value.split('\n').map(w => w.trim()).filter(Boolean);
+                rosterDebouncedSave();
+            });
+
+            punctSlot.appendChild(punctReelBox);
+            punctSlot.appendChild(punctLabelRow);
+            punctSlot.appendChild(punctWordsArea);
+            container.appendChild(punctSlot);
+
+            syntaxScrambleMakeSlotsDraggable();
+        }
+
+        // Duplicates a word-class box, including all of its candidate
+        // words - lets a teacher reuse the same noun (for example) in more
+        // than one sentence position, or invert parts of a sentence,
+        // without retyping the whole word list. Takes the category object
+        // itself rather than an index, since indices shift after a
+        // drag-reorder but the object reference stays stable.
+        function syntaxScrambleDuplicateSlot(originalCat) {
+            rosterEnsureSyntaxStreetCategories();
+            const index = rosterState.syntaxStreetCategories.indexOf(originalCat);
+            if (index === -1) return;
+            const copy = { name: originalCat.name, color: originalCat.color, words: [...(originalCat.words || [])] };
+            rosterState.syntaxStreetCategories.splice(index + 1, 0, copy);
+            rosterDebouncedSave();
+            syntaxScrambleRenderSlots();
+        }
+
+        // Pointer-based drag reordering - matches the same approach used
+        // elsewhere in the app (e.g. Set Line Order) rather than native
+        // HTML5 drag-and-drop, which doesn't work reliably on touch
+        // devices like the iPads this hub runs on. Adapted for a
+        // wrapping grid (these boxes can wrap onto multiple rows on
+        // narrower screens) via nearest-sibling distance rather than a
+        // single-axis midpoint comparison. Only category boxes are ever
+        // draggable or valid drop targets - the punctuation box always
+        // stays fixed at the end.
+        function syntaxScrambleMakeSlotsDraggable() {
+            const container = document.getElementById('syntax-scramble-slots');
+            const teacherSlots = Array.from(container.children).filter(el => el.dataset.syntaxSlotType === 'category');
+
+            teacherSlots.forEach(slot => {
+                const handle = slot.querySelector('.syntax-scramble-drag-handle');
+                if (!handle) return;
+                handle.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
+                    const draggedEl = slot;
+                    const startRect = draggedEl.getBoundingClientRect();
+                    const pointerOffsetX = e.clientX - startRect.left;
+                    const pointerOffsetY = e.clientY - startRect.top;
+
+                    // A thin line marks where the box will land if
+                    // released now. The dragged box stays exactly where
+                    // it already is in the DOM (still a child of
+                    // container) but is taken out of the normal flex flow
+                    // via position:fixed, which is viewport-relative and
+                    // - unlike position:absolute anchored to a scrollable
+                    // ancestor - is never clipped when dragged further
+                    // down the page than the currently visible scrolled
+                    // area, such as down to the vocabulary library. Only
+                    // the placeholder line moves within the row as the
+                    // pointer travels, giving one stable, predictable drop
+                    // target instead of boxes swapping unpredictably on
+                    // every pixel of movement.
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'syntax-scramble-drop-indicator';
+                    placeholder.style.cssText = 'width:4px; align-self:stretch; background:var(--hub-violet, #5B4EFF); border-radius:2px; flex-shrink:0;';
+                    container.insertBefore(placeholder, draggedEl);
+
+                    draggedEl.style.position = 'fixed';
+                    draggedEl.style.left = startRect.left + 'px';
+                    draggedEl.style.top = startRect.top + 'px';
+                    draggedEl.style.margin = '0';
+                    draggedEl.style.zIndex = '50';
+                    draggedEl.style.boxShadow = 'var(--hub-shadow-lg)';
+                    draggedEl.style.pointerEvents = 'none';
+                    handle.setPointerCapture(e.pointerId);
+
+                    // Auto-scrolls the screen while the pointer sits near
+                    // its top or bottom edge - the vocabulary library can
+                    // sit below the fold, and a touch drag can't also
+                    // perform a separate scroll gesture at the same time,
+                    // so without this a folder that isn't already visible
+                    // when the drag starts would be unreachable.
+                    const scrollScreen = document.getElementById('syntax-scramble-screen');
+                    const AUTO_SCROLL_EDGE_PX = 70;
+                    const AUTO_SCROLL_SPEED_PX = 14;
+                    let autoScrollInterval = null;
+                    let autoScrollDirection = 0;
+                    const updateAutoScroll = (clientY) => {
+                        const screenRect = scrollScreen.getBoundingClientRect();
+                        let direction = 0;
+                        if (clientY < screenRect.top + AUTO_SCROLL_EDGE_PX) direction = -1;
+                        else if (clientY > screenRect.bottom - AUTO_SCROLL_EDGE_PX) direction = 1;
+                        if (direction === autoScrollDirection) return;
+                        autoScrollDirection = direction;
+                        if (autoScrollInterval) { clearInterval(autoScrollInterval); autoScrollInterval = null; }
+                        if (direction !== 0) {
+                            autoScrollInterval = setInterval(() => {
+                                scrollScreen.scrollTop += direction * AUTO_SCROLL_SPEED_PX;
+                            }, 16);
+                        }
+                    };
+                    const stopAutoScroll = () => {
+                        if (autoScrollInterval) { clearInterval(autoScrollInterval); autoScrollInterval = null; }
+                        autoScrollDirection = 0;
+                    };
+
+                    // Finds a library folder the dragged box currently
+                    // overlaps, using a bounding-box intersection test
+                    // rather than a single-point hit-test at one exact
+                    // pixel - any part of the box overlapping any part of
+                    // a folder counts, which is far more forgiving than
+                    // requiring the release point to land precisely on the
+                    // folder, and works regardless of what happens to be
+                    // topmost at that one pixel.
+                    const findOverlappingFolder = () => {
+                        const draggedRect = draggedEl.getBoundingClientRect();
+                        const folderEls = document.querySelectorAll('.syntax-scramble-library-folder');
+                        for (const folderEl of folderEls) {
+                            const folderRect = folderEl.getBoundingClientRect();
+                            const overlaps = draggedRect.left < folderRect.right && draggedRect.right > folderRect.left &&
+                                              draggedRect.top < folderRect.bottom && draggedRect.bottom > folderRect.top;
+                            if (overlaps) return folderEl;
+                        }
+                        return null;
+                    };
+                    let highlightedFolderEl = null;
+                    const updateFolderHighlight = () => {
+                        const overlapping = findOverlappingFolder();
+                        if (overlapping === highlightedFolderEl) return;
+                        if (highlightedFolderEl) {
+                            highlightedFolderEl.style.borderColor = 'var(--hub-line)';
+                            highlightedFolderEl.style.background = 'var(--hub-paper)';
+                        }
+                        if (overlapping) {
+                            overlapping.style.borderColor = 'var(--hub-violet, #5B4EFF)';
+                            overlapping.style.background = '#EDE9FE';
+                        }
+                        highlightedFolderEl = overlapping;
+                    };
+
+                    const onMove = (moveEvt) => {
+                        draggedEl.style.left = (moveEvt.clientX - pointerOffsetX) + 'px';
+                        draggedEl.style.top = (moveEvt.clientY - pointerOffsetY) + 'px';
+                        updateAutoScroll(moveEvt.clientY);
+                        updateFolderHighlight();
+
+                        // Find the nearest teacher-slot sibling (excluding
+                        // the placeholder) by centre-point distance, then
+                        // place the indicator just before or after it
+                        // depending on which side the pointer is closer to.
+                        const siblings = Array.from(container.children).filter(el => el !== placeholder && el.dataset.syntaxSlotType === 'category');
+                        if (siblings.length === 0) return;
+                        let closest = null, closestDist = Infinity;
+                        siblings.forEach(sib => {
+                            const rect = sib.getBoundingClientRect();
+                            const dist = Math.hypot((rect.left + rect.width / 2) - moveEvt.clientX, (rect.top + rect.height / 2) - moveEvt.clientY);
+                            if (dist < closestDist) { closestDist = dist; closest = sib; }
+                        });
+                        const rect = closest.getBoundingClientRect();
+                        const placeBefore = moveEvt.clientX < rect.left + rect.width / 2;
+                        container.insertBefore(placeholder, placeBefore ? closest : closest.nextSibling);
+                    };
+                    const onUp = (upEvt) => {
+                        handle.releasePointerCapture(upEvt.pointerId);
+                        stopAutoScroll();
+
+                        // Uses the same overlap test as the live highlight
+                        // during the drag, so the drop always matches
+                        // whatever was visibly highlighted - not a
+                        // separate, potentially inconsistent check.
+                        const targetFolderEl = findOverlappingFolder();
+                        if (highlightedFolderEl) {
+                            highlightedFolderEl.style.borderColor = 'var(--hub-line)';
+                            highlightedFolderEl.style.background = 'var(--hub-paper)';
+                        }
+
+                        draggedEl.style.position = '';
+                        draggedEl.style.left = '';
+                        draggedEl.style.top = '';
+                        draggedEl.style.width = '';
+                        draggedEl.style.margin = '';
+                        draggedEl.style.zIndex = '';
+                        draggedEl.style.boxShadow = '';
+                        draggedEl.style.pointerEvents = '';
+                        handle.removeEventListener('pointermove', onMove);
+                        handle.removeEventListener('pointerup', onUp);
+                        handle.removeEventListener('pointercancel', onUp);
+
+                        // Check whether the box overlapped a library
+                        // folder - if so, archive it there instead of
+                        // placing it back into the main row.
+                        if (targetFolderEl) {
+                            placeholder.remove();
+                            rosterEnsureSyntaxScrambleLibrary();
+                            const folder = rosterState.syntaxScrambleLibrary.folders.find(f => f.id === targetFolderEl.dataset.folderId);
+                            const cat = draggedEl._syntaxScrambleCategory;
+                            draggedEl.remove(); // the re-render below builds fresh elements, so this one must go
+                            if (folder && cat) {
+                                rosterState.syntaxStreetCategories = rosterState.syntaxStreetCategories.filter(c => c !== cat);
+                                folder.boxes.push({ name: cat.name, color: cat.color, words: [...(cat.words || [])] });
+                                rosterDebouncedSave();
+                                syntaxScrambleRenderSlots();
+                                syntaxScrambleRenderLibrary();
+                                return;
+                            }
+                            syntaxScrambleRenderSlots();
+                            return;
+                        }
+
+                        // Put the dragged box back exactly where the
+                        // placeholder currently sits, then remove the
+                        // placeholder - this is the only point where the
+                        // dragged box's real DOM position actually changes.
+                        container.insertBefore(draggedEl, placeholder);
+                        placeholder.remove();
+
+                        rosterState.syntaxStreetCategories = Array.from(container.children)
+                            .filter(el => el.dataset.syntaxSlotType === 'category')
+                            .map(el => el._syntaxScrambleCategory);
+                        rosterDebouncedSave();
+                    };
+                    handle.addEventListener('pointermove', onMove);
+                    handle.addEventListener('pointerup', onUp);
+                    handle.addEventListener('pointercancel', onUp);
+                });
+            });
+        }
+
+        // Tracks which folders are currently expanded - transient UI
+        // state only, not persisted, so it doesn't need to survive a
+        // page reload any more than a normal accordion would.
+        let syntaxScrambleExpandedFolderIds = new Set();
+
+        // Drag handler for boxes sitting inside an expanded library
+        // folder - dragging one out onto the main slots area copies it
+        // there (the original stays archived in the folder, since a
+        // teacher may want to reuse the same vocabulary across more than
+        // one class over time).
+        function syntaxScrambleMakeLibraryBoxesDraggable() {
+            document.querySelectorAll('.syntax-scramble-library-box').forEach(boxEl => {
+                const handle = boxEl.querySelector('.syntax-scramble-library-drag-handle');
+                if (!handle) return;
+                handle.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
+                    const startX = e.clientX, startY = e.clientY;
+                    boxEl.style.position = 'relative';
+                    boxEl.style.zIndex = '10';
+                    boxEl.style.boxShadow = 'var(--hub-shadow-lg)';
+                    handle.setPointerCapture(e.pointerId);
+
+                    const onMove = (moveEvt) => {
+                        boxEl.style.transform = `translate(${moveEvt.clientX - startX}px, ${moveEvt.clientY - startY}px)`;
+                    };
+                    const onUp = (upEvt) => {
+                        handle.releasePointerCapture(upEvt.pointerId);
+                        boxEl.style.transform = '';
+                        boxEl.style.position = '';
+                        boxEl.style.zIndex = '';
+                        boxEl.style.boxShadow = '';
+                        handle.removeEventListener('pointermove', onMove);
+                        handle.removeEventListener('pointerup', onUp);
+                        handle.removeEventListener('pointercancel', onUp);
+
+                        boxEl.style.pointerEvents = 'none';
+                        const dropTarget = document.elementFromPoint(upEvt.clientX, upEvt.clientY);
+                        boxEl.style.pointerEvents = '';
+
+                        const mainContainer = document.getElementById('syntax-scramble-slots');
+                        const droppedOnMain = dropTarget && (dropTarget === mainContainer || mainContainer.contains(dropTarget));
+                        if (droppedOnMain) {
+                            const box = boxEl._syntaxScrambleLibraryBox;
+                            rosterEnsureSyntaxStreetCategories();
+                            rosterState.syntaxStreetCategories.push({ name: box.name, color: box.color, words: [...(box.words || [])] });
+                            rosterDebouncedSave();
+                            syntaxScrambleRenderSlots();
+                        }
+                        // Dropped somewhere else - nothing happens, the
+                        // box simply stays in the folder.
+                    };
+                    handle.addEventListener('pointermove', onMove);
+                    handle.addEventListener('pointerup', onUp);
+                    handle.addEventListener('pointercancel', onUp);
+                });
+            });
+        }
+
+        function syntaxScrambleRenderLibrary() {
+            rosterEnsureSyntaxScrambleLibrary();
+            const container = document.getElementById('syntax-scramble-library-folders');
+            container.innerHTML = '';
+
+            rosterState.syntaxScrambleLibrary.folders.forEach((folder) => {
+                const isExpanded = syntaxScrambleExpandedFolderIds.has(folder.id);
+                const folderEl = document.createElement('div');
+                folderEl.className = 'syntax-scramble-library-folder';
+                folderEl.dataset.folderId = folder.id;
+                folderEl.style.cssText = 'background:var(--hub-paper); border:2px solid var(--hub-line); border-radius:14px; overflow:hidden;';
+
+                const header = document.createElement('div');
+                header.style.cssText = 'display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer;';
+                const expandIcon = document.createElement('span');
+                expandIcon.textContent = isExpanded ? '▼' : '▶';
+                expandIcon.style.cssText = 'font-size:12px; color:var(--hub-ink-soft, #8B8579); user-select:none;';
+                const nameInput = document.createElement('input');
+                nameInput.type = 'text';
+                nameInput.className = 'hub-input interactive';
+                nameInput.value = folder.name || '';
+                nameInput.placeholder = 'Folder name (e.g. Year 7 - Family)';
+                nameInput.style.cssText = 'flex:1; font-weight:800; font-size:13px;';
+                nameInput.addEventListener('click', (e) => e.stopPropagation());
+                nameInput.addEventListener('input', (e) => { folder.name = e.target.value; rosterDebouncedSave(); });
+                const countLabel = document.createElement('span');
+                countLabel.textContent = `(${folder.boxes.length})`;
+                countLabel.style.cssText = 'font-size:12px; color:var(--hub-ink-soft, #8B8579); white-space:nowrap;';
+                const duplicateFolderBtn = document.createElement('button');
+                duplicateFolderBtn.className = 'hub-circle-btn interactive';
+                duplicateFolderBtn.style.cssText = 'width:24px; height:24px; font-size:12px;';
+                duplicateFolderBtn.textContent = '📋';
+                duplicateFolderBtn.title = 'Duplicate this folder';
+                duplicateFolderBtn.onclick = (e) => { e.stopPropagation(); syntaxScrambleDuplicateFolder(folder); };
+                const removeFolderBtn = document.createElement('button');
+                removeFolderBtn.className = 'hub-circle-btn interactive';
+                removeFolderBtn.style.cssText = 'width:24px; height:24px; font-size:12px; color:#dc2626;';
+                removeFolderBtn.textContent = '✕';
+                removeFolderBtn.title = 'Remove this folder';
+                removeFolderBtn.onclick = (e) => { e.stopPropagation(); syntaxScrambleRemoveFolder(folder); };
+
+                header.appendChild(expandIcon);
+                header.appendChild(nameInput);
+                header.appendChild(countLabel);
+                header.appendChild(duplicateFolderBtn);
+                header.appendChild(removeFolderBtn);
+                header.onclick = () => {
+                    if (isExpanded) syntaxScrambleExpandedFolderIds.delete(folder.id);
+                    else syntaxScrambleExpandedFolderIds.add(folder.id);
+                    syntaxScrambleRenderLibrary();
+                };
+
+                const boxesList = document.createElement('div');
+                boxesList.className = 'syntax-scramble-library-boxes';
+                boxesList.dataset.folderId = folder.id;
+                boxesList.style.cssText = `display:${isExpanded ? 'flex' : 'none'}; flex-direction:column; gap:6px; padding:8px 12px 12px 32px;`;
+
+                if (isExpanded) {
+                    folder.boxes.forEach((box) => {
+                        const boxEl = document.createElement('div');
+                        boxEl.className = 'syntax-scramble-library-box interactive';
+                        boxEl.style.cssText = `display:flex; align-items:center; gap:8px; padding:6px 10px; background:var(--hub-surface); border:2px solid ${box.color || '#5B4EFF'}; border-radius:10px;`;
+                        boxEl._syntaxScrambleLibraryBox = box;
+                        boxEl._syntaxScrambleLibraryFolder = folder;
+
+                        const handle = document.createElement('span');
+                        handle.className = 'syntax-scramble-library-drag-handle';
+                        handle.textContent = '☰';
+                        handle.title = 'Drag up into the main area to use this box';
+                        handle.style.cssText = 'cursor:grab; font-size:14px; color:var(--hub-ink-soft, #8B8579); user-select:none; touch-action:none;';
+
+                        const label = document.createElement('span');
+                        const wordCount = (box.words || []).length;
+                        label.textContent = `${box.name || '(unnamed)'} — ${wordCount} word${wordCount === 1 ? '' : 's'}`;
+                        label.style.cssText = 'flex:1; font-size:12px; font-weight:700; color:var(--hub-ink);';
+
+                        const duplicateBoxBtn = document.createElement('button');
+                        duplicateBoxBtn.className = 'hub-circle-btn interactive';
+                        duplicateBoxBtn.style.cssText = 'width:22px; height:22px; font-size:11px;';
+                        duplicateBoxBtn.textContent = '📋';
+                        duplicateBoxBtn.title = 'Duplicate this box within the folder';
+                        duplicateBoxBtn.onclick = () => syntaxScrambleDuplicateLibraryBox(folder, box);
+
+                        const removeBoxBtn = document.createElement('button');
+                        removeBoxBtn.className = 'hub-circle-btn interactive';
+                        removeBoxBtn.style.cssText = 'width:22px; height:22px; font-size:11px; color:#dc2626;';
+                        removeBoxBtn.textContent = '✕';
+                        removeBoxBtn.title = 'Remove this box from the folder';
+                        removeBoxBtn.onclick = () => syntaxScrambleRemoveLibraryBox(folder, box);
+
+                        boxEl.appendChild(handle);
+                        boxEl.appendChild(label);
+                        boxEl.appendChild(duplicateBoxBtn);
+                        boxEl.appendChild(removeBoxBtn);
+                        boxesList.appendChild(boxEl);
+                    });
+                }
+
+                folderEl.appendChild(header);
+                folderEl.appendChild(boxesList);
+                container.appendChild(folderEl);
+            });
+
+            syntaxScrambleMakeLibraryBoxesDraggable();
+        }
+
+        function syntaxScrambleAddFolder() {
+            rosterEnsureSyntaxScrambleLibrary();
+            rosterState.syntaxScrambleLibrary.folders.push({ id: rosterUid(), name: '', boxes: [] });
+            rosterDebouncedSave();
+            syntaxScrambleRenderLibrary();
+        }
+
+        function syntaxScrambleRemoveFolder(folder) {
+            const wordCount = folder.boxes.reduce((sum, b) => sum + (b.words || []).length, 0);
+            const label = folder.name || '(unnamed folder)';
+            if (folder.boxes.length > 0 && !confirm(`Remove "${label}" and its ${folder.boxes.length} word box${folder.boxes.length === 1 ? '' : 'es'} (${wordCount} words total)? This can't be undone.`)) return;
+            rosterState.syntaxScrambleLibrary.folders = rosterState.syntaxScrambleLibrary.folders.filter(f => f !== folder);
+            syntaxScrambleExpandedFolderIds.delete(folder.id);
+            rosterDebouncedSave();
+            syntaxScrambleRenderLibrary();
+        }
+
+        function syntaxScrambleDuplicateFolder(folder) {
+            const index = rosterState.syntaxScrambleLibrary.folders.indexOf(folder);
+            if (index === -1) return;
+            const copy = {
+                id: rosterUid(),
+                name: folder.name,
+                boxes: folder.boxes.map(b => ({ name: b.name, color: b.color, words: [...(b.words || [])] }))
+            };
+            rosterState.syntaxScrambleLibrary.folders.splice(index + 1, 0, copy);
+            rosterDebouncedSave();
+            syntaxScrambleRenderLibrary();
+        }
+
+        function syntaxScrambleRemoveLibraryBox(folder, box) {
+            folder.boxes = folder.boxes.filter(b => b !== box);
+            rosterDebouncedSave();
+            syntaxScrambleRenderLibrary();
+        }
+
+        function syntaxScrambleDuplicateLibraryBox(folder, box) {
+            const index = folder.boxes.indexOf(box);
+            if (index === -1) return;
+            const copy = { name: box.name, color: box.color, words: [...(box.words || [])] };
+            folder.boxes.splice(index + 1, 0, copy);
+            rosterDebouncedSave();
+            syntaxScrambleRenderLibrary();
+        }
+
+        // Scoped narrowly to just the vocabulary library - not the whole
+        // class roster - so a teacher exporting their word boxes to back
+        // up or share with a colleague never also exports student names,
+        // scores, or behaviour data.
+        function syntaxScrambleExportLibrary() {
+            rosterEnsureSyntaxScrambleLibrary();
+            const blob = new Blob([JSON.stringify(rosterState.syntaxScrambleLibrary, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'syntax-scramble-vocabulary-library.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function syntaxScrambleImportLibrary(file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const parsed = JSON.parse(reader.result);
+                    if (!parsed || !Array.isArray(parsed.folders)) throw new Error('Not a valid vocabulary library file');
+                    rosterState.syntaxScrambleLibrary = parsed;
+                    syntaxScrambleExpandedFolderIds = new Set();
+                    rosterSaveState();
+                    syntaxScrambleRenderLibrary();
+                } catch (e) {
+                    alert("That file doesn't look like a Vocabulary Library export.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function syntaxScrambleAddSlot() {
+            rosterEnsureSyntaxStreetCategories();
+            const palette = ['#5B4EFF', '#FF6B6B', '#4ECDC4', '#FFD93D', '#95E06C', '#FF9F45'];
+            const color = palette[rosterState.syntaxStreetCategories.length % palette.length];
+            rosterState.syntaxStreetCategories.push({ name: '', color, words: [] });
+            rosterDebouncedSave();
+            syntaxScrambleRenderSlots();
+        }
+
+        function playSyntaxScrambleTickSound() {
+            if (!fxEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch(e) {}
+        }
+
+        function playSyntaxScrambleSettleSound() {
+            if (!fxEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.12);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.2);
+            } catch(e) {}
+        }
+
+        async function syntaxScramblePlay() {
+            rosterEnsureSyntaxStreetCategories();
+            rosterEnsureSyntaxScramblePunctuation();
+            const categories = rosterState.syntaxStreetCategories;
+            if (categories.length === 0) return;
+
+            // The punctuation reel shares the same class as the teacher
+            // reels (for consistent styling), so it has to be explicitly
+            // excluded here rather than picked up by a generic query -
+            // otherwise the reel count would never match the category
+            // count and the whole function would silently do nothing.
+            const allReelTexts = [...document.querySelectorAll('#syntax-scramble-slots .syntax-scramble-reel-text')];
+            const punctuationReelText = document.getElementById('syntax-scramble-punctuation-reel-text');
+            const teacherReelTexts = allReelTexts.filter(el => el !== punctuationReelText);
+            if (teacherReelTexts.length !== categories.length || !punctuationReelText) return;
+
+            const REEL_WIDTH_PX = 156; // slot width (180px) minus its own padding/border
+            const wordsFor = (words) => (words && words.length > 0) ? words : ['...'];
+
+            const slots = categories.map((cat, i) => ({ reelEl: teacherReelTexts[i], words: wordsFor(cat.words), frozen: !!cat.frozen }));
+            slots.push({ reelEl: punctuationReelText, words: wordsFor(rosterState.syntaxScramblePunctuation.words), frozen: !!rosterState.syntaxScramblePunctuation.frozen });
+
+            // Every non-frozen reel starts cycling at the same time,
+            // independently - each one keeps spinning through its own
+            // candidate words until its own turn to lock in. Frozen reels
+            // never spin at all - they keep showing whatever they already
+            // show, letting a teacher lock one part of the sentence while
+            // the rest keeps varying.
+            const spinTimers = slots.map((slot) => {
+                if (slot.frozen) return null;
+                slot.reelEl.style.opacity = '1';
+                return setInterval(() => {
+                    slot.reelEl.innerHTML = colorizeSentenceText(slot.words[Math.floor(Math.random() * slot.words.length)]);
+                    fitTextToBox(slot.reelEl, REEL_WIDTH_PX, 11);
+                    playSyntaxScrambleTickSound();
+                }, 70);
+            });
+
+            // Locks in left-to-right normally (so punctuation, positioned
+            // last, locks last too) - right-to-left for RTL languages
+            // reverses the whole sequence, so punctuation locks first
+            // instead. The boxes themselves stay exactly where they are;
+            // only the ORDER they lock in changes.
+            const isRtl = LAVA_RTL_LANGUAGES.includes(selectedLanguage);
+            const lockOrder = [...slots.keys()];
+            if (isRtl) lockOrder.reverse();
+
+            const finalValues = new Array(slots.length);
+            const INITIAL_DELAY_MS = 700, STAGGER_MS = 450;
+            for (let step = 0; step < lockOrder.length; step++) {
+                await new Promise(resolve => setTimeout(resolve, step === 0 ? INITIAL_DELAY_MS : STAGGER_MS));
+                const idx = lockOrder[step];
+                const slot = slots[idx];
+                let finalWord;
+                if (slot.frozen) {
+                    // Nothing was spinning, so settle on whatever this
+                    // reel already shows - or its first candidate word if
+                    // it's never been scrambled before (still showing the
+                    // placeholder), so a frozen-but-never-scrambled box
+                    // still contributes something real to the sentence.
+                    const currentText = slot.reelEl.textContent.trim();
+                    finalWord = (currentText && currentText !== '\u2014') ? currentText : slot.words[0];
+                } else {
+                    clearInterval(spinTimers[idx]);
+                    finalWord = slot.words[Math.floor(Math.random() * slot.words.length)];
+                }
+                finalValues[idx] = finalWord;
+                slot.reelEl.innerHTML = colorizeSentenceText(finalWord);
+                fitTextToBox(slot.reelEl, REEL_WIDTH_PX, 11);
+                slot.reelEl.style.transform = slot.frozen ? 'scale(1.15)' : 'scale(1.3)';
+                playSyntaxScrambleSettleSound();
+                setTimeout(() => { slot.reelEl.style.transform = 'scale(1)'; }, 150);
+            }
+
+            // All reels have locked - the last value is always the
+            // punctuation mark (it's always the last slot), everything
+            // before it is the sentence body in natural (not lock) order.
+            const punctuationMark = finalValues[finalValues.length - 1];
+            const bodyWords = finalValues.slice(0, -1);
+            syntaxScrambleShowFinalSentence(bodyWords, punctuationMark);
+        }
+
+        // Capitalises the first letter of the sentence and applies the
+        // current language's own spacing convention before the final
+        // punctuation mark (French places a space before ! and ?, but not
+        // before a full stop) - updates the always-visible display in
+        // place, never toggling it on and off between scrambles.
+        function syntaxScrambleShowFinalSentence(bodyWords, punctuationMark) {
+            const finalDisplay = document.getElementById('syntax-scramble-final-sentence');
+            const capitalizedBody = bodyWords.map((w, i) => (i === 0 && w.length > 0) ? w.charAt(0).toUpperCase() + w.slice(1) : w);
+            const bodyHTML = capitalizedBody.map(w => colorizeSentenceText(w)).join(' ');
+
+            const FRENCH_SPACED_PUNCTUATION = ['!', '?'];
+            const needsSpaceBeforePunctuation = selectedLanguage === 'fr' && FRENCH_SPACED_PUNCTUATION.includes(punctuationMark);
+            const punctuationHTML = (needsSpaceBeforePunctuation ? '\u00A0' : '') + colorizeSentenceText(punctuationMark);
+
+            // Wrapped in a single span so this is the flex container's only
+            // direct child - a flex container treats whitespace-only text
+            // nodes between direct children as if they don't exist, which
+            // was silently swallowing the space between words. Nested
+            // inside one element, the words and spaces are ordinary text
+            // flow instead, unaffected by the parent's flex layout.
+            finalDisplay.innerHTML = `<span>${bodyHTML}${punctuationHTML}</span>`;
+        }
+
+        function syntaxScrambleWireUpOnce() {
+            if (syntaxScrambleWiredUp) return;
+            syntaxScrambleWiredUp = true;
+            document.getElementById('syntax-scramble-back-btn').onclick = resetToConfig;
+            document.getElementById('syntax-scramble-add-slot-btn').onclick = syntaxScrambleAddSlot;
+            document.getElementById('syntax-scramble-go-btn').onclick = syntaxScramblePlay;
+
+            const graphemePanel = document.getElementById('syntax-scramble-grapheme-panel');
+            document.getElementById('syntax-scramble-grapheme-toggle-btn').onclick = () => {
+                const isOpen = graphemePanel.style.display === 'flex';
+                graphemePanel.style.display = isOpen ? 'none' : 'flex';
+            };
+
+            const libraryPanel = document.getElementById('syntax-scramble-library-panel');
+            document.getElementById('syntax-scramble-library-toggle-btn').onclick = () => {
+                const isOpen = libraryPanel.style.display === 'flex';
+                libraryPanel.style.display = isOpen ? 'none' : 'flex';
+            };
+            document.getElementById('syntax-scramble-library-add-folder-btn').onclick = syntaxScrambleAddFolder;
+            document.getElementById('syntax-scramble-library-export-btn').onclick = syntaxScrambleExportLibrary;
+            document.getElementById('syntax-scramble-library-import-btn').onclick = () => document.getElementById('syntax-scramble-library-import-input').click();
+            document.getElementById('syntax-scramble-library-import-input').addEventListener('change', (e) => {
+                if (e.target.files[0]) syntaxScrambleImportLibrary(e.target.files[0]);
+            });
+        }
+
+        async function syntaxScrambleOpen() {
+            hideAllToolScreens();
+            await rosterLoadState();
+            rosterEnsureSyntaxStreetCategories();
+            rosterEnsureSyntaxScramblePunctuation();
+            rosterEnsureSyntaxScrambleLibrary();
+            document.getElementById('syntax-scramble-screen').style.display = 'block';
+            syntaxScrambleWireUpOnce();
+            syntaxScrambleRenderSlots();
+            syntaxScrambleRenderLibrary();
+            document.getElementById('syntax-scramble-final-sentence').innerHTML = '';
+        }
 
         async function bobotsBookshelfOpenLibrary() {
             pauseBackgroundMusic();
@@ -8194,7 +10051,7 @@
         // wbElements and the roster tool panels - so bring-to-front/
         // send-to-back/forward/backward work identically across both,
         // via the SAME right-click menu every other element already uses.
-        const ROSTER_TOOL_PANEL_IDS = ['wb-namepicker-panel', 'wb-assessment-panel', 'wb-dojo-panel', 'wb-syntax-panel'];
+        const ROSTER_TOOL_PANEL_IDS = ['wb-namepicker-panel', 'wb-assessment-panel', 'wb-dojo-panel'];
 
         function rosterGetAllLayeredItems() {
             const items = wbElements.map(elData => ({
@@ -8531,97 +10388,6 @@
             document.getElementById('wb-st-settings-overlay').addEventListener('wheel', (e) => e.stopPropagation());
             rosterMakeDraggable('wb-silent-translator-panel', 'wb-st-drag-handle', null);
 
-            document.getElementById('wb-open-syntax-btn').onclick = () => {
-                document.getElementById('wb-tools-menu').style.display = 'none';
-                rosterMaybePromptFileSetup();
-                rosterOpenSyntaxStreet();
-            };
-            document.getElementById('wb-syntax-close-btn').onclick = rosterCloseSyntaxStreet;
-            document.getElementById('wb-syntax-speak-btn').onclick = rosterSpeakSyntaxSentence;
-
-            document.getElementById('wb-syntax-settings-btn').onclick = (e) => {
-                e.stopPropagation();
-                const menu = document.getElementById('wb-syntax-settings-menu');
-                const isOpen = menu.style.display === 'flex';
-                if (isOpen) {
-                    menu.style.display = 'none';
-                    return;
-                }
-                // Moved to document.body so it isn't clipped by
-                // wb-syntax-panel's own overflow:hidden - that clipping
-                // was cutting off everything below the checkbox (the zoom
-                // slider and font-size select), since the panel only
-                // clips content to its own bounds, not knowing the
-                // dropdown needs to extend past them.
-                document.body.appendChild(menu);
-                const btnRect = e.currentTarget.getBoundingClientRect();
-                menu.style.display = 'flex';
-                let left = btnRect.right - 230;
-                left = Math.max(4, Math.min(left, window.innerWidth - 234));
-                menu.style.left = left + 'px';
-                menu.style.top = (btnRect.bottom + 6) + 'px';
-            };
-            document.addEventListener('click', (e) => {
-                const wrap = document.getElementById('wb-syntax-settings-wrap');
-                const menu = document.getElementById('wb-syntax-settings-menu');
-                if (wrap && menu && !wrap.contains(e.target) && !menu.contains(e.target)) {
-                    menu.style.display = 'none';
-                }
-            });
-            document.getElementById('wb-syntax-bubble-toggle').addEventListener('change', (e) => {
-                document.getElementById('wb-syntax-panel').classList.toggle('wb-syntax-bubbles-on', e.target.checked);
-            });
-            document.getElementById('wb-syntax-view-zoom-slider').addEventListener('input', (e) => {
-                document.getElementById('wb-syntax-scene-zoomable').style.transform = `scale(${e.target.value / 100})`;
-            });
-            document.getElementById('wb-syntax-fontsize-select').addEventListener('change', (e) => {
-                syntaxStreetFontSize = parseInt(e.target.value, 10);
-                rosterRenderSyntaxStreetScene();
-            });
-
-            document.getElementById('wb-syntax-add-house-btn').onclick = (e) => {
-                rosterOpenSyntaxCategoryMenu(e.currentTarget);
-            };
-            document.getElementById('wb-syntax-add-space-btn').onclick = rosterAddSpaceCar;
-            document.getElementById('wb-syntax-new-category-toggle-btn').onclick = () => {
-                const form = document.getElementById('wb-syntax-new-category-form');
-                form.style.display = form.style.display === 'none' ? 'flex' : 'none';
-            };
-            document.getElementById('wb-syntax-create-category-btn').onclick = rosterAddSyntaxCategory;
-            document.getElementById('wb-syntax-new-category-name-input').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') rosterAddSyntaxCategory();
-            });
-
-            document.getElementById('wb-syntax-word-picker-search').addEventListener('input', (e) => {
-                rosterRenderSyntaxWordPickerList(e.target.value);
-            });
-            document.getElementById('wb-syntax-word-picker-delete-house-btn').onclick = () => {
-                if (syntaxWordPickerHouseId !== null) {
-                    rosterRemoveSyntaxHouse(syntaxWordPickerHouseId);
-                    rosterCloseSyntaxWordPicker();
-                }
-            };
-            document.querySelectorAll('.wb-syntax-punct-choice').forEach(btn => {
-                btn.onclick = () => rosterSetSyntaxPunctuation(btn.dataset.punct);
-            });
-
-            document.addEventListener('click', (e) => {
-                const catMenu = document.getElementById('wb-syntax-category-menu');
-                if (catMenu.style.display === 'block' && !e.target.closest('#wb-syntax-category-menu') && e.target.id !== 'wb-syntax-add-house-btn') {
-                    rosterCloseSyntaxCategoryMenu();
-                }
-                const wordPicker = document.getElementById('wb-syntax-word-picker');
-                if (wordPicker.style.display === 'block' && !e.target.closest('#wb-syntax-word-picker') && !e.target.closest('.wb-syntax-house') && !e.target.closest('#wb-syntax-category-menu')) {
-                    rosterCloseSyntaxWordPicker();
-                }
-                const punctPicker = document.getElementById('wb-syntax-punctuation-picker');
-                if (punctPicker.style.display === 'flex' && !e.target.closest('#wb-syntax-punctuation-picker') && e.target.id !== 'wb-syntax-punctuation-widget') {
-                    rosterCloseSyntaxPunctuationPicker();
-                }
-            });
-            document.getElementById('wb-syntax-category-menu').addEventListener('wheel', (e) => e.stopPropagation());
-            document.getElementById('wb-syntax-word-picker').addEventListener('wheel', (e) => e.stopPropagation());
-            rosterMakeDraggable('wb-syntax-panel', 'wb-syntax-drag-handle', 'wb-syntax-resize-handle');
 
             // Right-click any tool panel to bring up the SAME layer menu
             // used by every other whiteboard element - no separate arrow
@@ -9491,7 +11257,7 @@
         // --- Rendering ---
         function wbRenderAllElements() {
             const world = document.getElementById('wb-world');
-            const toolPanels = ['wb-namepicker-panel', 'wb-assessment-panel', 'wb-dojo-panel', 'wb-syntax-panel', 'wb-silent-translator-panel']
+            const toolPanels = ['wb-namepicker-panel', 'wb-assessment-panel', 'wb-dojo-panel', 'wb-silent-translator-panel']
                 .map(id => document.getElementById(id))
                 .filter(Boolean);
             world.innerHTML = '';
@@ -10777,101 +12543,80 @@
             return Array.from(str).map(ch => 'U+' + ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')).join(' ');
         }
 
-        function renderGraphemeEditors() {
-            const lobbyContainer = document.getElementById('lobby-grapheme-container');
-            const workspaceContainer = document.getElementById('workspace-grapheme-container');
-            const pictureContainer = document.getElementById('picture-grapheme-container');
-
-            lobbyContainer.innerHTML = '';
-            workspaceContainer.innerHTML = '';
-            pictureContainer.innerHTML = '';
-
-            customGraphemes.forEach((cg, idx) => {
-                const lobbyRow = document.createElement('div');
-                lobbyRow.className = 'flex flex-col gap-0.5';
-                lobbyRow.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
-                        <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
-                    </div>
-                    <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
-                `;
-                const textInput = lobbyRow.querySelector('input[type="text"]');
-                const colorInput = lobbyRow.querySelector('input[type="color"]');
-                const codeLabel = lobbyRow.querySelector('.codepoint-label');
-
-                textInput.addEventListener('input', (e) => {
-                    customGraphemes[idx].text = e.target.value;
-                    codeLabel.textContent = getCodePointsLabel(e.target.value);
-                    if (idx === customGraphemes.length - 1 && e.target.value.length > 0) {
-                        syncCustomGraphemeArrays();
-                    }
-                });
-                colorInput.addEventListener('input', (e) => {
-                    customGraphemes[idx].color = e.target.value;
-                    syncCustomGraphemeArrays();
-                });
-                lobbyContainer.appendChild(lobbyRow);
-
-                const workItem = document.createElement('div');
-                workItem.className = 'flex flex-col gap-0.5 bg-slate-100 p-1.5 rounded-xl border border-slate-300';
-                workItem.innerHTML = `
+        function buildGraphemeRow(cg, idx, compact) {
+            const row = document.createElement('div');
+            if (compact) {
+                row.className = 'flex flex-col gap-0.5 bg-slate-100 p-1.5 rounded-xl border border-slate-300';
+                row.innerHTML = `
                     <div class="flex items-center gap-1">
                         <input type="text" value="${cg.text}" placeholder="..." class="w-16 p-1 text-xs border border-slate-400 rounded-md font-bold text-slate-800 focus:outline-none" data-index="${idx}">
                         <input type="color" value="${cg.color}" class="w-6 h-6 rounded cursor-pointer border border-slate-400" data-index="${idx}">
                     </div>
                     <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
-                const workText = workItem.querySelector('input[type="text"]');
-                const workColor = workItem.querySelector('input[type="color"]');
-                const workCodeLabel = workItem.querySelector('.codepoint-label');
-
-                workText.addEventListener('input', (e) => {
-                    customGraphemes[idx].text = e.target.value;
-                    workCodeLabel.textContent = getCodePointsLabel(e.target.value);
-                    if (idx === customGraphemes.length - 1 && e.target.value.length > 0) {
-                        syncCustomGraphemeArrays();
-                    }
-                });
-                workColor.addEventListener('input', (e) => {
-                    customGraphemes[idx].color = e.target.value;
-                    syncCustomGraphemeArrays();
-                });
-                workspaceContainer.appendChild(workItem);
-
-                const pictureRow = document.createElement('div');
-                pictureRow.className = 'flex flex-col gap-0.5';
-                pictureRow.innerHTML = `
+            } else {
+                row.className = 'flex flex-col gap-0.5';
+                row.innerHTML = `
                     <div class="flex items-center gap-2">
                         <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
                         <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
                     </div>
                     <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
-                const pictureText = pictureRow.querySelector('input[type="text"]');
-                const pictureColor = pictureRow.querySelector('input[type="color"]');
-                const pictureCodeLabel = pictureRow.querySelector('.codepoint-label');
+            }
+            const textInput = row.querySelector('input[type="text"]');
+            const colorInput = row.querySelector('input[type="color"]');
+            const codeLabel = row.querySelector('.codepoint-label');
 
-                pictureText.addEventListener('input', (e) => {
-                    customGraphemes[idx].text = e.target.value;
-                    pictureCodeLabel.textContent = getCodePointsLabel(e.target.value);
-                    if (idx === customGraphemes.length - 1 && e.target.value.length > 0) {
-                        syncCustomGraphemeArrays();
-                    }
-                });
-                pictureColor.addEventListener('input', (e) => {
-                    customGraphemes[idx].color = e.target.value;
+            textInput.addEventListener('input', (e) => {
+                customGraphemes[idx].text = e.target.value;
+                codeLabel.textContent = getCodePointsLabel(e.target.value);
+                if (idx === customGraphemes.length - 1 && e.target.value.length > 0) {
                     syncCustomGraphemeArrays();
+                }
+            });
+            colorInput.addEventListener('input', (e) => {
+                customGraphemes[idx].color = e.target.value;
+                syncCustomGraphemeArrays();
+            });
+            return row;
+        }
+
+        // Each settings screen that offers colour-coding gets its own copy
+        // of this editor, rendered into its own container - lobby/picture/
+        // Bookshelf/Translation Studio all use the same larger row style;
+        // the compact workspace (Colour Coder) toolbar uses a smaller,
+        // boxed variant. All containers stay in sync with the same
+        // underlying customGraphemes array.
+        const GRAPHEME_EDITOR_CONTAINERS = [
+            { id: 'lobby-grapheme-container', compact: false },
+            { id: 'workspace-grapheme-container', compact: true },
+            { id: 'picture-grapheme-container', compact: false },
+            { id: 'bbs-grapheme-container', compact: false },
+            { id: 'ts-grapheme-container', compact: false },
+            { id: 'lava-grapheme-container', compact: false },
+            { id: 'syntaxscramble-grapheme-container', compact: false }
+        ];
+
+        function renderGraphemeEditors() {
+            GRAPHEME_EDITOR_CONTAINERS.forEach(c => {
+                const el = document.getElementById(c.id);
+                if (el) el.innerHTML = '';
+            });
+            customGraphemes.forEach((cg, idx) => {
+                GRAPHEME_EDITOR_CONTAINERS.forEach(c => {
+                    const el = document.getElementById(c.id);
+                    if (el) el.appendChild(buildGraphemeRow(cg, idx, c.compact));
                 });
-                pictureContainer.appendChild(pictureRow);
             });
         }
+
 
         // The "all other graphemes" default colour only makes sense for non-French languages:
         // French already has the built-in grapheme scheme applied automatically.
         function updateDefaultGraphemeRowVisibility() {
             const show = selectedLanguage !== 'fr';
-            ['default-grapheme-row-lobby', 'default-grapheme-row-workspace', 'default-grapheme-row-picture'].forEach(id => {
+            ['default-grapheme-row-lobby', 'default-grapheme-row-workspace', 'default-grapheme-row-picture', 'default-grapheme-row-bbs', 'default-grapheme-row-ts', 'default-grapheme-row-lava', 'default-grapheme-row-syntaxscramble'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = show ? 'flex' : 'none';
             });
@@ -10968,7 +12713,7 @@
 
         function updateSinhalaVowelSignsVisibility() {
             const show = selectedLanguage === 'sinhala';
-            ['sinhala-vowel-signs-row-lobby', 'sinhala-vowel-signs-row-workspace', 'sinhala-vowel-signs-row-picture'].forEach(id => {
+            ['sinhala-vowel-signs-row-lobby', 'sinhala-vowel-signs-row-workspace', 'sinhala-vowel-signs-row-picture', 'sinhala-vowel-signs-row-bbs', 'sinhala-vowel-signs-row-ts', 'sinhala-vowel-signs-row-lava', 'sinhala-vowel-signs-row-syntaxscramble'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = show ? 'block' : 'none';
             });
@@ -10976,6 +12721,10 @@
                 renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-lobby', false);
                 renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-workspace', true);
                 renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-picture', false);
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-bbs', false);
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-ts', false);
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-lava', false);
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-syntaxscramble', false);
             }
         }
 
@@ -10988,7 +12737,7 @@
 
         function setDefaultGraphemeColor(color) {
             defaultGraphemeColor = color;
-            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture'].forEach(id => {
+            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture', 'default-grapheme-color-bbs', 'default-grapheme-color-ts', 'default-grapheme-color-lava', 'default-grapheme-color-syntaxscramble'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.value = color;
             });
@@ -11560,7 +13309,15 @@
         }
 
         function getActiveSprites() {
-            return selectedCharacter === 'bobot' ? imagesBobot : images;
+            const normal = selectedCharacter === 'bobot' ? imagesBobot : images;
+            if (!magpieModeOn) return normal;
+            const mm = selectedCharacter === 'bobot' ? imagesBobotMM : imagesMM;
+            const merged = {};
+            Object.keys(normal).forEach(key => {
+                const mmSprite = mm[key];
+                merged[key] = (mmSprite && mmSprite.complete && mmSprite.naturalWidth !== 0) ? mmSprite : normal[key];
+            });
+            return merged;
         }
 
         function loadAssets() {
@@ -11658,6 +13415,36 @@
                 };
                 imagesBobot[k].src = u;
             });
+
+            let mmCount = 0, mmTotal = Object.keys(SPRITE_URLS_MM).length;
+            Object.entries(SPRITE_URLS_MM).forEach(([k, u]) => {
+                imagesMM[k] = new Image();
+                imagesMM[k].onload = () => { if (++mmCount === mmTotal) imagesMMLoaded = true; };
+                imagesMM[k].onerror = () => {
+                    console.warn(`Could not load Magpie Mode sprite: ${k}. Falling back to the normal sprite.`);
+                    if (++mmCount === mmTotal) imagesMMLoaded = true;
+                };
+                imagesMM[k].src = u;
+            });
+
+            let bobotMMCount = 0, bobotMMTotal = Object.keys(SPRITE_URLS_BOBOT_MM).length;
+            Object.entries(SPRITE_URLS_BOBOT_MM).forEach(([k, u]) => {
+                imagesBobotMM[k] = new Image();
+                imagesBobotMM[k].onload = () => { if (++bobotMMCount === bobotMMTotal) imagesBobotMMLoaded = true; };
+                imagesBobotMM[k].onerror = () => {
+                    console.warn(`Could not load Magpie Mode Bobot sprite: ${k}. Falling back to the normal sprite.`);
+                    if (++bobotMMCount === bobotMMTotal) imagesBobotMMLoaded = true;
+                };
+                imagesBobotMM[k].src = u;
+            });
+
+            magpieSpriteImg = new Image();
+            magpieSpriteImg.onerror = () => console.warn('Could not load the magpie sprite yet - Magpie Mode will run without a visible magpie until MAGPIE.png is uploaded.');
+            magpieSpriteImg.src = MAGPIE_IMAGE_URL;
+
+            magpieSwoopAudio = new Audio();
+            magpieSwoopAudio.onerror = () => console.warn('Could not load the magpie swoop sound yet - Magpie Mode will run silently until swoopsound.mp3 is uploaded.');
+            magpieSwoopAudio.src = MAGPIE_SWOOP_SOUND_URL;
 
             const GAME_PREVENT_KEYS = new Set(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space', 'ShiftLeft', 'ShiftRight']);
 
@@ -11869,7 +13656,7 @@
 
             showLandingStep('wheel');
 
-            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture'].forEach(id => {
+            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture', 'default-grapheme-color-bbs', 'default-grapheme-color-ts', 'default-grapheme-color-lava', 'default-grapheme-color-syntaxscramble'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('input', (e) => setDefaultGraphemeColor(e.target.value));
             });
@@ -11917,9 +13704,35 @@
 
             const shareBtn = document.getElementById('share-btn');
             const shareOverlay = document.getElementById('share-overlay');
+            const shareQrPrimary = document.getElementById('share-qr-primary');
+            const shareQrSecondary = document.getElementById('share-qr-secondary');
+            const shareQrToggleBtn = document.getElementById('share-qr-toggle-btn');
+            const shareUrlText = document.getElementById('share-url-text');
+            const SHARE_URL_PRIMARY = 'www.parkesonline.com.au/hub';
+            const SHARE_URL_SECONDARY = 'www.parkesonline.com.au/hub-s';
+            let shareShowingSecondary = false;
+
+            document.getElementById('share-qr-secondary-img').onerror = function() {
+                this.style.display = 'none';
+                document.getElementById('share-qr-secondary-fallback').style.display = 'block';
+            };
+
+            const shareApplyQrView = () => {
+                shareQrPrimary.style.display = shareShowingSecondary ? 'none' : 'block';
+                shareQrSecondary.style.display = shareShowingSecondary ? 'flex' : 'none';
+                shareUrlText.textContent = shareShowingSecondary ? SHARE_URL_SECONDARY : SHARE_URL_PRIMARY;
+                shareQrToggleBtn.textContent = shareShowingSecondary ? 'Back to the main QR code' : 'Having trouble? Try this instead';
+            };
+
             shareBtn.onclick = () => {
+                shareShowingSecondary = false;
+                shareApplyQrView();
                 shareOverlay.classList.remove('hidden');
                 shareOverlay.classList.add('flex');
+            };
+            shareQrToggleBtn.onclick = () => {
+                shareShowingSecondary = !shareShowingSecondary;
+                shareApplyQrView();
             };
             document.getElementById('share-close-btn').onclick = () => {
                 shareOverlay.classList.add('hidden');
@@ -12441,9 +14254,11 @@
             { id: 'potato', label: 'Potato Parkour', icon: '🥔', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3138d2a4b35eb2a6aba1eac3bac1befe869410d2/cherfront.png', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'A built-in vocabulary hunt - no setup needed, just play.' },
             { id: 'bobot', label: 'Go Go Bobot!', icon: '🐨', image: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTJUMP.png', accent: '--hub-steel', accentSoft: '--hub-steel-soft', desc: 'Match the verb to what Bobot is doing.' },
             { id: 'bookshelf', label: "Bobot's Bookshelf", icon: '📚', accent: '--hub-rose', accentSoft: '--hub-rose-soft', desc: 'Digital picture books with tap-to-translate words and read-aloud support.' },
+            { id: 'translationstudio', label: 'Translation Studio', icon: '🎧', accent: '--hub-plum', accentSoft: '--hub-plum-soft', desc: 'Listen to a song with word-by-word literal translations, synced as it plays.' },
             { id: 'whiteboard', label: 'Whiteboard', icon: '🖊️', accent: '--hub-plum', accentSoft: '--hub-plum-soft', desc: 'A digital whiteboard for teachers with grapheme colour-coding and classroom management tools.' },
             { id: 'coder', label: 'Colour Coder', icon: '🖍️', accent: '--hub-mint', accentSoft: '--hub-mint-soft', desc: 'Colour-code any text instantly.' },
-            { id: 'lava', label: 'Lava Literacy', icon: '🌋', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'Teacher-driven decoding practice - jump chunk by chunk across the lava before time runs out.' }
+            { id: 'lava', label: 'Lava Literacy', icon: '🌋', accent: '--hub-earth', accentSoft: '--hub-earth-soft', desc: 'Teacher-driven decoding practice - jump chunk by chunk across the lava before time runs out.' },
+            { id: 'syntaxscramble', label: 'Syntax Scramble', icon: '🥚', accent: '--hub-rose', accentSoft: '--hub-rose-soft', desc: 'Fill word-class boxes with vocabulary, then scramble to build a new sentence each time.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
         let pendingKartSubmode = 'picture'; // defaults to Picture Parkour Kart, per design
@@ -12515,9 +14330,9 @@
             row1.innerHTML = '';
             row2.innerHTML = '';
             sideGrid.innerHTML = '';
-            HUB_TOOLS.slice(0, 2).forEach(tool => row1.appendChild(wbBuildToolTile(tool)));
-            HUB_TOOLS.slice(2, 5).forEach(tool => row2.appendChild(wbBuildToolTile(tool)));
-            HUB_TOOLS.slice(5).forEach(tool => sideGrid.appendChild(wbBuildToolTile(tool)));
+            HUB_TOOLS.slice(0, 3).forEach(tool => row1.appendChild(wbBuildToolTile(tool)));
+            HUB_TOOLS.slice(3, 6).forEach(tool => row2.appendChild(wbBuildToolTile(tool)));
+            HUB_TOOLS.slice(6).forEach(tool => sideGrid.appendChild(wbBuildToolTile(tool)));
         }
 
         function selectTool(toolId) {
@@ -12540,9 +14355,13 @@
                 showLandingStep('settings');
             } else if (toolId === 'bookshelf') {
                 bobotsBookshelfOpenLibrary();
+            } else if (toolId === 'translationstudio') {
+                tsOpenLibrary();
             } else if (toolId === 'lava') {
                 selectMode('lava');
                 showLandingStep('player');
+            } else if (toolId === 'syntaxscramble') {
+                syntaxScrambleOpen();
             }
         }
 
@@ -12597,8 +14416,11 @@
                 HUB_CHARACTERS.forEach(ch => {
                     const img = document.getElementById('player-idle-img-' + ch.id);
                     if (!img) return;
-                    const spriteSet = ch.id === 'bobot' ? imagesBobot : images;
-                    const spriteImg = (frame % 2 === 0) ? spriteSet.idle1 : spriteSet.idle2;
+                    const normalSet = ch.id === 'bobot' ? imagesBobot : images;
+                    const mmSet = ch.id === 'bobot' ? imagesBobotMM : imagesMM;
+                    const key = (frame % 2 === 0) ? 'idle1' : 'idle2';
+                    const mmSprite = mmSet[key];
+                    const spriteImg = (magpieModeOn && mmSprite && mmSprite.complete && mmSprite.naturalWidth !== 0) ? mmSprite : normalSet[key];
                     if (spriteImg && spriteImg.src) img.src = spriteImg.src;
                 });
                 frame++;
@@ -12659,7 +14481,8 @@
         const ALL_TOOL_SCREEN_IDS = [
             'title-screen', 'coder-screen', 'bobot-screen',
             'bobot-bookshelf-library-screen', 'bobot-bookshelf-reader-screen',
-            'whiteboard-screen', 'game-view-shell', 'results-screen'
+            'translation-studio-library-screen', 'translation-studio-player-screen',
+            'whiteboard-screen', 'game-view-shell', 'results-screen', 'syntax-scramble-screen'
         ];
         function hideAllToolScreens() {
             ALL_TOOL_SCREEN_IDS.forEach(id => {
@@ -13887,6 +15710,7 @@
 
             colourCodedEnabled = document.getElementById('colour-coded').checked;
             challengeModeEnabled = document.getElementById('challenge-mode').checked;
+            magpieModeOn = document.getElementById('magpie-mode-quest').checked;
 
             startQuestGame();
         }
@@ -14509,6 +16333,7 @@
 
             colourCodedEnabled = document.getElementById('picture-colour-coded').checked;
             challengeModeEnabled = document.getElementById('picture-challenge-mode').checked;
+            magpieModeOn = document.getElementById('magpie-mode-picture').checked;
 
             startQuestGame();
         }
@@ -14524,6 +16349,12 @@
             inShopInterior = null;
             resetCollectedWordsLog();
             distributeWords();
+
+            roundHadMagpieMode = magpieModeOn;
+            magpieActive = magpieModeOn;
+            magpiePhase = 'idle';
+            magpieTimer = MAGPIE_MIN_CYCLE + Math.random() * (MAGPIE_MAX_CYCLE - MAGPIE_MIN_CYCLE);
+            magpieHasHitPlayerThisSwoop = false;
 
             const questHeaderEl = document.getElementById('quest-header-label');
             if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
@@ -14767,6 +16598,7 @@
         function fitTextToBox(el, maxWidthPx, minFontSizePx) {
             minFontSizePx = minFontSizePx || 11;
             el.style.whiteSpace = 'nowrap';
+            el.style.wordBreak = '';
             el.style.removeProperty('font-size');
             let fontSize = parseFloat(window.getComputedStyle(el).fontSize);
             while (el.scrollWidth > maxWidthPx && fontSize > minFontSizePx) {
@@ -14776,6 +16608,17 @@
                 // this whole function a no-op - matching its priority here is
                 // what actually lets the shrink take effect.
                 el.style.setProperty('font-size', fontSize + 'px', 'important');
+            }
+            // Shrinking down to the minimum readable size still isn't always
+            // enough - a long enough word on a narrow enough screen would
+            // otherwise keep overflowing horizontally into the button area
+            // with nothing left to give. Wrapping to a second line as a last
+            // resort guarantees the text never extends past its own column,
+            // since a wrapped block's width is bounded by its container
+            // rather than by how long the text itself is.
+            if (el.scrollWidth > maxWidthPx) {
+                el.style.whiteSpace = 'normal';
+                el.style.wordBreak = 'break-word';
             }
         }
 
@@ -14936,6 +16779,7 @@
             document.getElementById('results-accuracy').textContent = accuracy + '%';
             document.getElementById('results-mistakes').textContent = mistakeCount;
             document.getElementById('results-vocab').textContent = vocabularyList.join(', ');
+            document.getElementById('results-magpie-badge').style.display = roundHadMagpieMode ? 'block' : 'none';
 
             document.getElementById('ui-board').style.display = 'none';
             canvas.style.display = 'none';
@@ -15478,6 +17322,7 @@
             document.getElementById('results-mistakes').textContent = lavaScore.chunksFallen;
             document.getElementById('results-vocab').textContent =
                 `${lavaScore.wordsCompleted}/${lavaScore.totalWords} words, ${lavaScore.chunksCompleted}/${lavaScore.totalChunks} chunks decoded`;
+            document.getElementById('results-magpie-badge').style.display = 'none';
 
             document.getElementById('lava-ui-board').style.display = 'none';
             document.getElementById('lava-fullscreen-btn').style.display = 'none';
@@ -16322,6 +18167,88 @@
             });
         }
 
+        // Magpie Mode's swoop cycle. magpieX/magpieY are always in world
+        // coordinates (matching the player), even while hovering - the
+        // hover position is recomputed from the current camera each frame
+        // so it visually stays pinned to a screen corner as the player
+        // (and therefore the camera) moves, without needing a separate
+        // screen-space code path.
+        function updateMagpie(dt) {
+            if (!magpieActive) return;
+            const dtSeconds = dt / 60; // dt is expressed in 60fps-frame units, not seconds
+            const camX = -player.x + (canvas.width / 2) / targetScale;
+
+            const positionHover = () => {
+                const screenMarginX = 70, screenMarginY = 60;
+                const targetScreenX = magpieHoverSide === 'left' ? screenMarginX : (canvas.width - screenMarginX);
+                magpieX = targetScreenX / targetScale - camX;
+                magpieY = screenMarginY / targetScale - cameraY;
+            };
+
+            if (magpiePhase === 'idle') {
+                magpieTimer -= dtSeconds;
+                if (magpieTimer <= 0) {
+                    magpieHoverSide = Math.random() < 0.5 ? 'left' : 'right';
+                    magpieHoverElapsed = 0;
+                    magpiePhase = 'hover';
+                    positionHover(); // computed immediately, not left at (0,0) until the next frame
+                }
+                return;
+            }
+
+            if (magpiePhase === 'hover') {
+                positionHover();
+
+                magpieHoverElapsed += dtSeconds;
+                if (magpieHoverElapsed >= MAGPIE_HOVER_DURATION) {
+                    magpieSwoopStartX = magpieX;
+                    magpieSwoopStartY = magpieY;
+                    magpieSwoopTargetX = player.x + 25; // aim at roughly the player's centre, not their corner
+                    magpieSwoopTargetY = player.y + 35;
+                    magpieSwoopElapsed = 0;
+                    magpieHasHitPlayerThisSwoop = false;
+                    magpiePhase = 'swooping';
+                    playMagpieSwoopSound();
+                }
+                return;
+            }
+
+            if (magpiePhase === 'swooping') {
+                magpieSwoopElapsed += dtSeconds;
+                const progress = Math.min(1, magpieSwoopElapsed / MAGPIE_SWOOP_DURATION);
+                const eased = progress * progress; // ease-in - starts slow, dives fast, reading as a genuine swoop
+                magpieX = magpieSwoopStartX + (magpieSwoopTargetX - magpieSwoopStartX) * eased;
+                magpieY = magpieSwoopStartY + (magpieSwoopTargetY - magpieSwoopStartY) * eased;
+
+
+                if (!magpieHasHitPlayerThisSwoop) {
+                    const half = MAGPIE_SIZE / 2;
+                    const mX = magpieX - half, mY = magpieY - half;
+                    const pX = player.x, pY = player.y, pW = 50, pH = 70;
+                    if (mX < pX + pW && mX + MAGPIE_SIZE > pX && mY < pY + pH && mY + MAGPIE_SIZE > pY) {
+                        score = Math.max(0, score - 2);
+                        magpieHasHitPlayerThisSwoop = true;
+                    }
+                }
+
+                if (progress >= 1) {
+                    magpiePhase = 'idle';
+                    magpieTimer = MAGPIE_MIN_CYCLE + Math.random() * (MAGPIE_MAX_CYCLE - MAGPIE_MIN_CYCLE);
+                }
+            }
+        }
+
+        // Draws the magpie at its current world position - called from
+        // within the same camera-transformed context the player itself is
+        // drawn in, so no separate coordinate handling is needed here.
+        function renderMagpie() {
+            if (!magpieActive || magpiePhase === 'idle') return;
+            const sprite = magpieSpriteImg;
+            if (!sprite || !sprite.complete || sprite.naturalWidth === 0) return;
+            const h = MAGPIE_SIZE, w = h * (sprite.width / sprite.height);
+            ctx.drawImage(sprite, magpieX - w / 2, magpieY - h / 2, w, h);
+        }
+
         function updatePhysics(dt) {
             if (dt === 0) return;
 
@@ -16329,6 +18256,8 @@
                 updateShopInteriorPhysics(dt);
                 return;
             }
+
+            updateMagpie(dt);
 
             let moving = false;
             
@@ -17652,6 +19581,8 @@
                 ctx.restore();
             }
 
+            renderMagpie();
+
             if (debugMode) {
                 ctx.save();
                 ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
@@ -17732,6 +19663,49 @@
         // was exactly why the landing page's tiles sometimes took a long
         // time to appear, varying with network conditions for resources
         // that have nothing to do with the tiles themselves.
+        // iOS Safari has a well-documented quirk where a page's vh/vw CSS
+        // units can be miscalculated when that page is loaded inside an
+        // iframe (as this one is, on the school's Squarespace site) -
+        // instead of reflecting the iframe's actual rendered size, they
+        // can reflect the wrong reference, making the whole app render
+        // oversized and clipped, with no fix available from fullscreen or
+        // scrolling since the miscalculation is at the CSS engine level.
+        // window.innerWidth/innerHeight are not subject to this quirk -
+        // they reliably reflect the iframe's own actual dimensions - so
+        // this replicates the same 16:9-with-portrait-fallback sizing the
+        // CSS above already expresses, but computed in JS and applied as
+        // explicit pixel values, overriding the vh/vw rules once this
+        // runs. Safe to run everywhere, not just suspected iframe cases:
+        // it produces the same result as the CSS when vh/vw are already
+        // correct, since it's reading the same real dimensions either way.
+        function applyGameContainerSizing() {
+            const vw = window.innerWidth, vh = window.innerHeight;
+            document.body.style.height = vh + 'px';
+
+            const container = document.getElementById('game-container');
+            if (!container) return;
+
+            if (vw / vh <= 1) {
+                // Portrait screens: fill the available box, no forced aspect ratio
+                container.style.width = '';
+                container.style.height = '';
+                container.style.maxWidth = vw + 'px';
+                container.style.maxHeight = vh + 'px';
+                container.style.aspectRatio = 'auto';
+            } else {
+                const targetW = Math.min(vw, vh * 16 / 9);
+                const targetH = Math.min(vh, vw * 9 / 16);
+                container.style.width = targetW + 'px';
+                container.style.height = targetH + 'px';
+                container.style.maxWidth = '';
+                container.style.maxHeight = '';
+                container.style.aspectRatio = '16 / 9';
+            }
+        }
+        applyGameContainerSizing();
+        window.addEventListener('resize', applyGameContainerSizing);
+        window.addEventListener('orientationchange', () => setTimeout(applyGameContainerSizing, 100));
+
         loadAssets();
 
         // If the phone-detection script at the top of <head> flagged this
