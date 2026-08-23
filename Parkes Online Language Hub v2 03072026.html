@@ -3,32 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <script>
-    // On a phone specifically (not iPad, not computer), the whole app gets
-    // wrapped in an iframe held at a fixed "desktop-like" reference size
-    // and then scaled down as one unit to fit the actual small screen -
-    // so every fixed-px font/button/spacing value throughout the app
-    // shrinks together in exact proportion, rather than staying full-size
-    // inside a much smaller viewport. Detection runs immediately (hiding
-    // the page right away so there's no flash of unscaled content before
-    // the wrap happens), but the actual wrapping itself happens later,
-    // once the page has fully loaded, using plain DOM APIs rather than
-    // document.write() - which technically works by having the browser
-    // restart parsing on a freshly-written document, but is an old, quirky
-    // mechanism to depend on. Computer and iPad are completely unaffected:
-    // this check is false for both, so the page loads and displays
-    // completely normally with nothing hidden and nothing extra run.
+    // On a phone or tablet (not a real desktop/laptop computer), the whole
+    // app gets wrapped in an iframe held at a fixed "desktop-like"
+    // reference size and then scaled down as one unit to fit the actual
+    // screen - so every fixed-px font/button/spacing value throughout the
+    // app shrinks together in exact proportion, rather than staying
+    // full-size inside a much smaller viewport. Detection runs
+    // immediately (hiding the page right away so there's no flash of
+    // unscaled content before the wrap happens), but the actual wrapping
+    // itself happens later, once the page has fully loaded, using plain
+    // DOM APIs rather than document.write() - which technically works by
+    // having the browser restart parsing on a freshly-written document,
+    // but is an old, quirky mechanism to depend on. A real computer is
+    // unaffected: the check below is false for it, so the page loads and
+    // displays completely normally with nothing hidden and nothing extra
+    // run.
     (function() {
-        function isMobilePhone() {
+        function needsFrameWrap() {
             var ua = navigator.userAgent;
-            if (/iPhone|iPod/.test(ua)) return true; // iPad deliberately excluded
-            if (/Android/.test(ua) && /Mobile/.test(ua)) return true; // Android tablets omit "Mobile"
+            if (/iPhone|iPod/.test(ua)) return true;
+            if (/Android/.test(ua) && /Mobile/.test(ua)) return true; // Android phones
+            if (/iPad/.test(ua)) return true; // covers the rare case where "Request Mobile Website" has been chosen instead of the default
+            // iPadOS Safari masquerades as desktop macOS Safari by
+            // default - its user agent has no "iPad" string in it at all,
+            // identical to a real Mac's. The standard, reliable way to
+            // tell them apart is that only the iPad reports touch support.
+            if (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1) return true;
+            if (/Android/.test(ua) && !/Mobile/.test(ua)) return true; // Android tablets omit "Mobile"
             return false;
         }
         // bbEmbedded=1 marks this as the iframe's own copy of the page,
         // loading a second time - skip re-wrapping to avoid an infinite
         // loop of iframes wrapping iframes.
         var alreadyEmbedded = /[?&]bbEmbedded=1(&|$)/.test(window.location.search);
-        if (alreadyEmbedded || !isMobilePhone()) return;
+        if (alreadyEmbedded || !needsFrameWrap()) return;
         document.documentElement.style.visibility = 'hidden';
         window.bbNeedsMobileWrap = true;
     })();
