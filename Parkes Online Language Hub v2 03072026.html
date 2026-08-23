@@ -19713,6 +19713,9 @@
         applyGameContainerSizing();
         window.addEventListener('resize', applyGameContainerSizing);
         window.addEventListener('orientationchange', () => setTimeout(applyGameContainerSizing, 100));
+        ['fullscreenchange', 'webkitfullscreenchange', 'MSFullscreenChange'].forEach(evt => {
+            document.addEventListener(evt, () => setTimeout(applyGameContainerSizing, 100));
+        });
 
         loadAssets();
 
