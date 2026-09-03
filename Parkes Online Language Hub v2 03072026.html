@@ -1985,6 +1985,16 @@
                             </div>
 
                             <div class="hub-row">
+                                <label class="hub-label" for="picture-archive-code-input">Or Load From Your Archive</label>
+                                <p class="hub-hint mt-0 mb-3">Enter the code for a folder in your own GitHub image archive - every image in it loads in, named after its target word, just like uploading your own.</p>
+                                <div class="flex items-center gap-2">
+                                    <input type="text" id="picture-archive-code-input" dir="auto" class="hub-input" placeholder="Archive folder code...">
+                                    <button id="picture-archive-load-btn" class="hub-btn-ghost hub-font interactive" style="flex-shrink:0;">Load</button>
+                                </div>
+                                <p id="picture-archive-status" class="hub-hint mt-2" style="display:none;"></p>
+                            </div>
+
+                            <div class="hub-row">
                                 <label for="picture-student-name-input" class="hub-label">Student Name (optional)</label>
                                 <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
                             </div>
@@ -2700,9 +2710,10 @@
                 <div style="background:var(--hub-surface); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-lg); padding:24px; width:100%; max-width:440px; text-align:center;">
                     <div class="text-3xl mb-2">📁</div>
                     <strong style="font-size:15px; color:var(--hub-ink);">Set Up Your Classroom Data File</strong>
-                    <p class="hub-hint mt-2" style="text-align:left;">Choose an appropriate name and save location for this classroom data file, which will be used to store all your class information and assessment data. Save it on your device, preferably in a location that auto-saves using cloud storage such as OneDrive. No data is stored or accessed by Parkes Online for privacy.</p>
+                    <p class="hub-hint mt-2" style="text-align:left;">If you've already saved a classroom data file before, open it to pick up where you left off. Otherwise, choose a name and save location for a new one, which will be used to store all your class information and assessment data. Save it on your device, preferably in a location that auto-saves using cloud storage such as OneDrive. No data is stored or accessed by Parkes Online for privacy.</p>
                     <div class="flex flex-col gap-2 mt-3">
-                        <button id="wb-file-setup-choose-btn" class="hub-btn-primary interactive w-full">Choose File Location</button>
+                        <button id="wb-file-setup-open-btn" class="hub-btn-primary interactive w-full">Open An Existing File</button>
+                        <button id="wb-file-setup-choose-btn" class="hub-btn-ghost interactive w-full">Create A New File</button>
                         <button id="wb-file-setup-skip-btn" class="hub-btn-ghost interactive w-full">Skip - use this browser's storage only</button>
                     </div>
                 </div>
@@ -3684,9 +3695,10 @@
         }
 
         function recordWordCollected(text, englishOverride) {
-            const lower = text.toLowerCase().trim();
-            if (!lower || collectedWordsLog.some(w => w.text === lower)) return;
-            collectedWordsLog.push({ text: lower, englishOverride: englishOverride || null });
+            const trimmed = text.trim();
+            const lower = trimmed.toLowerCase();
+            if (!lower || collectedWordsLog.some(w => w.text.toLowerCase() === lower)) return;
+            collectedWordsLog.push({ text: trimmed, englishOverride: englishOverride || null });
             renderCollectedWordsPanel();
         }
 
@@ -5569,6 +5581,32 @@
                 }
             } catch (e) {
                 console.warn('Reconnect failed:', e);
+            }
+        }
+
+        async function rosterOpenExistingFile() {
+            try {
+                const [handle] = await window.showOpenFilePicker({
+                    types: [{ description: 'Classroom Data', accept: { 'application/json': ['.json'] } }],
+                    multiple: false
+                });
+                await rosterReadFileIntoState(handle);
+                rosterFileHandle = handle;
+                await rosterPersistFileHandle(handle);
+                rosterFileSetupDismissed = true;
+                try { localStorage.setItem('polhRosterFileSetupDismissed', '1'); } catch (e) {}
+                const overlay = document.getElementById('wb-file-setup-overlay');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+                document.getElementById('wb-file-reconnect-btn').style.display = 'none';
+                rosterRenderManageClasses();
+                rosterRefreshClassSelects();
+                rosterRenderOutcomeDatalist();
+            } catch (e) {
+                if (e.name !== 'AbortError') {
+                    console.warn('Could not open classroom file:', e);
+                    alert("That file couldn't be opened. Please check it's a classroom data file you saved from this app before.");
+                }
             }
         }
 
@@ -10184,6 +10222,7 @@
             if (rosterWiredUp) return;
             rosterWiredUp = true;
 
+            document.getElementById('wb-file-setup-open-btn').onclick = rosterOpenExistingFile;
             document.getElementById('wb-file-setup-choose-btn').onclick = rosterChooseFileLocation;
             document.getElementById('wb-file-setup-skip-btn').onclick = rosterSkipFileSetup;
             document.getElementById('wb-file-reconnect-btn').onclick = rosterReconnectFile;
@@ -13545,6 +13584,97 @@
                 }
             });
 
+            // Loads a teacher's own archive folder from GitHub by code -
+            // same end result as the upload handler above (populates
+            // pictureImageMap/pictureFileNames and refreshes the same UI),
+            // just sourced from a live GitHub directory listing instead of
+            // local files. Images are served through jsDelivr rather than
+            // a raw.githubusercontent.com URL, since this content gets
+            // played by students on a network that blocks GitHub directly.
+            const PICTURE_ARCHIVE_OWNER = 'monsieurparkes';
+            const PICTURE_ARCHIVE_REPO = 'parkour-game';
+            const PICTURE_ARCHIVE_BRANCH = 'main';
+            const PICTURE_ARCHIVE_FOLDER = 'picture-archive';
+            const PICTURE_ARCHIVE_IMAGE_EXTENSIONS = /\.(png|jpe?g|gif|webp)$/i;
+
+            async function loadPictureArchiveCode() {
+                const codeInput = document.getElementById('picture-archive-code-input');
+                const statusEl = document.getElementById('picture-archive-status');
+                const loadBtn = document.getElementById('picture-archive-load-btn');
+                const code = codeInput.value.trim();
+                if (!code) {
+                    statusEl.textContent = 'Enter a code first.';
+                    statusEl.style.display = 'block';
+                    return;
+                }
+
+                loadBtn.disabled = true;
+                loadBtn.textContent = 'Loading…';
+                statusEl.textContent = 'Looking for that folder…';
+                statusEl.style.display = 'block';
+
+                try {
+                    const apiUrl = `https://api.github.com/repos/${PICTURE_ARCHIVE_OWNER}/${PICTURE_ARCHIVE_REPO}/contents/${PICTURE_ARCHIVE_FOLDER}/${encodeURIComponent(code)}?ref=${PICTURE_ARCHIVE_BRANCH}`;
+                    const response = await fetch(apiUrl);
+
+                    if (response.status === 404) {
+                        statusEl.textContent = `No archive folder found for "${code}" - check the code, or that the folder has been added to GitHub.`;
+                        return;
+                    }
+                    if (response.status === 403) {
+                        statusEl.textContent = "GitHub's request limit was hit just now - wait a few minutes and try again.";
+                        return;
+                    }
+                    if (!response.ok) {
+                        statusEl.textContent = `Couldn't load that archive (error ${response.status}). Try again in a moment.`;
+                        return;
+                    }
+
+                    const entries = await response.json();
+                    if (!Array.isArray(entries)) {
+                        statusEl.textContent = `"${code}" isn't a folder in the archive.`;
+                        return;
+                    }
+
+                    const imageEntries = entries.filter(entry => entry.type === 'file' && PICTURE_ARCHIVE_IMAGE_EXTENSIONS.test(entry.name));
+                    if (imageEntries.length === 0) {
+                        statusEl.textContent = `That folder exists, but has no images in it yet.`;
+                        return;
+                    }
+
+                    pictureImageMap = {};
+                    pictureFileNames = [];
+                    selectedPresetCategoryId = '';
+                    presetSelectedFiles = [];
+                    renderPresetCategoryTiles();
+                    appendUploadTile('preset-category-tiles', 'picture-file-input');
+
+                    imageEntries.forEach(entry => {
+                        const dotIndex = entry.name.lastIndexOf('.');
+                        const word = (dotIndex > 0 ? entry.name.slice(0, dotIndex) : entry.name).trim();
+                        if (!word) return;
+
+                        pictureFileNames.push(word);
+
+                        const img = new Image();
+                        img.src = `https://cdn.jsdelivr.net/gh/${PICTURE_ARCHIVE_OWNER}/${PICTURE_ARCHIVE_REPO}@${PICTURE_ARCHIVE_BRANCH}/${PICTURE_ARCHIVE_FOLDER}/${code}/${entry.name}`;
+                        const isPng = /\.png$/i.test(entry.name);
+                        pictureImageMap[word.toLowerCase()] = { img, isPng };
+                    });
+
+                    statusEl.textContent = `✓ ${pictureFileNames.length} image${pictureFileNames.length === 1 ? '' : 's'} loaded from "${code}"`;
+                } catch (err) {
+                    statusEl.textContent = "Couldn't reach GitHub - check the connection and try again.";
+                } finally {
+                    loadBtn.disabled = false;
+                    loadBtn.textContent = 'Load';
+                }
+            }
+            document.getElementById('picture-archive-load-btn').onclick = loadPictureArchiveCode;
+            document.getElementById('picture-archive-code-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') loadPictureArchiveCode();
+            });
+
             document.getElementById('kart-picture-file-input').addEventListener('change', (e) => {
                 const files = Array.from(e.target.files || []);
                 pictureImageMap = {};
@@ -13747,7 +13877,27 @@
                 shareOverlay.classList.remove('flex');
             };
 
+            // Fullscreen content escapes any CSS transform applied by an
+            // ancestor - and the self-scaling wrap (see the frame-wrap
+            // script at the top of <head>) uses exactly such a transform
+            // to make the whole app fit a phone or tablet screen
+            // correctly. Actually invoking fullscreen while wrapped would
+            // break out of that scaling entirely, snapping every
+            // fixed-size element back to its full, un-scaled native size
+            // - which is what was causing things to visibly enlarge (and
+            // then overflow) the moment fullscreen activated. The wrapped
+            // page is already effectively fullscreen via that same
+            // scaling, so the buttons are hidden there instead of
+            // offering a control that would only make things worse.
+            const isWrappedFrame = /[?&]bbEmbedded=1(&|$)/.test(window.location.search);
+            if (isWrappedFrame) {
+                document.querySelectorAll('.fullscreen-toggle-btn').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+            }
+
             const toggleFullscreen = () => {
+                if (isWrappedFrame) return;
                 const el = document.getElementById('game-container');
                 const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
                 try {
@@ -14688,7 +14838,7 @@
         // word - shared by the normal and slow location TTS buttons so the logic
         // only lives in one place.
         function getCurrentLocationSpeechPhrase() {
-            const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
+            const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord.toLowerCase());
             if (!currentWordObj) return null;
             const locKey = currentWordObj.location;
             const langData = LOCALIZED_LOCATIONS[selectedLanguage] || LOCALIZED_LOCATIONS.en;
@@ -15654,7 +15804,7 @@
                 return;
             }
             const target = available[Math.floor(Math.random() * available.length)];
-            currentTargetWord = target.text.toLowerCase();
+            currentTargetWord = target.text;
 
             const instructionEl = document.getElementById('instruction-text');
             if (challengeModeEnabled) {
@@ -16584,7 +16734,7 @@
                     : chosenCandidate;
 
                 activeWords.push({
-                    text: word.toLowerCase(), 
+                    text: word,
                     x: placementXY.x,
                     y: placementXY.y,
                     w: CARD_W, 
@@ -16687,7 +16837,7 @@
             }
 
             const nextTarget = available[Math.floor(Math.random() * available.length) || 0];
-            currentTargetWord = nextTarget.text.toLowerCase();
+            currentTargetWord = nextTarget.text;
 
             const instructionEl = document.getElementById('instruction-text');
             if (challengeModeEnabled) {
@@ -16724,7 +16874,7 @@
             }
             fitTextToBoxDeferred(instructionEl, 'quest-text-zone');
 
-            const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
+            const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord.toLowerCase());
             const locKey = currentWordObj ? currentWordObj.location : 'city';
             const langData = LOCALIZED_LOCATIONS[selectedLanguage] || LOCALIZED_LOCATIONS.en;
 
@@ -17478,14 +17628,14 @@
                 // In the new default (single-potato) mode, anything other than
                 // the current target simply isn't there yet - only the
                 // revealed potato can be collided with.
-                if (!potatoFullWorldMode && item.text.toLowerCase() !== currentTargetWord) continue;
+                if (!potatoFullWorldMode && item.text.toLowerCase() !== currentTargetWord.toLowerCase()) continue;
                 if (item.wrongCooldown) {
                     const dx2 = (hbX + hbW / 2) - (item.x + item.w / 2), dy2 = (potatoPlayer.y + 35) - (item.y + item.h / 2);
                     if (Math.sqrt(dx2 * dx2 + dy2 * dy2) > 60) item.wrongCooldown = false;
                     continue;
                 }
                 if (hbX < item.x + item.w && hbX + hbW > item.x && headY < item.y + item.h && feetY > item.y) {
-                    if (item.text.toLowerCase() === currentTargetWord) {
+                    if (item.text.toLowerCase() === currentTargetWord.toLowerCase()) {
                         playChime(true);
                         score += 1;
                         item.collected = true;
@@ -17587,7 +17737,7 @@
             const time = performance.now() / 400;
             potatoItems.forEach(item => {
                 if (item.collected || item.wrongCooldown) return;
-                if (!potatoFullWorldMode && item.text.toLowerCase() !== currentTargetWord) return;
+                if (!potatoFullWorldMode && item.text.toLowerCase() !== currentTargetWord.toLowerCase()) return;
                 if (potatoSpriteBack.complete && potatoSpriteBack.naturalWidth > 0) {
                     ctx.drawImage(potatoSpriteBack, item.x, item.y + Math.sin(time + item.x * 0.05) * 5, item.w, item.h);
                 }
@@ -18178,7 +18328,7 @@
                 const cardX = 300 + idx * 70, cardY = 330;
                 const hbX = player.x, hbY = player.y, hbW = 50, hbH = 70;
                 if (hbX < cardX + shopWord.w && hbX + hbW > cardX && hbY < cardY + shopWord.h && hbY + hbH > cardY) {
-                    if (shopWord.text.toLowerCase() === currentTargetWord) {
+                    if (shopWord.text.toLowerCase() === currentTargetWord.toLowerCase()) {
                         playChime(true);
                         score += 10;
                         shopWord.collected = true;
@@ -18463,13 +18613,13 @@
                     const overlapY = hbY < bobbingY + word.h && hbY + hbH > bobbingY;
 
                     if (overlapX && overlapY) { 
-                        if (word.text.toLowerCase() === currentTargetWord) { 
+                        if (word.text.toLowerCase() === currentTargetWord.toLowerCase()) { 
                             playChime(true);
                             score += 10; 
                             word.collected = true; 
                             recordWordCollected(word.text);
                             const successImage = word.imageEl;
-                            successAnims.push({ x: word.x, y: bobbingY, vy: 0, delay: 20, w: word.w, h: word.h, text: word.text.toLowerCase(), imageEl: successImage, imageIsPng: word.imageIsPng });
+                            successAnims.push({ x: word.x, y: bobbingY, vy: 0, delay: 20, w: word.w, h: word.h, text: word.text, imageEl: successImage, imageIsPng: word.imageIsPng });
                             nextQuest({ delaySpeechMs: getCelebrationSoundDelayMs() }); 
                             document.getElementById('quest-box').classList.add('pop-effect'); 
                             setTimeout(() => document.getElementById('quest-box').classList.remove('pop-effect'), 400); 
@@ -18842,9 +18992,9 @@
                 ctx.fill();
                 ctx.stroke();
 
-                const textToShow = shopWord.text.toLowerCase().replace(/[\[\]]/g, '');
+                const textToShow = shopWord.text.replace(/[\[\]]/g, '');
                 if (colourCodedEnabled) {
-                    drawColoredText(ctx, shopWord.text.toLowerCase(), cardX + shopWord.w / 2, cardY + shopWord.h / 2 + 1.5, "bold 11px 'OpenDyslexic', sans-serif");
+                    drawColoredText(ctx, shopWord.text, cardX + shopWord.w / 2, cardY + shopWord.h / 2 + 1.5, "bold 11px 'OpenDyslexic', sans-serif");
                 } else {
                     ctx.fillStyle = '#1e293b';
                     ctx.textAlign = 'center';
@@ -19471,7 +19621,7 @@
                         ctx.save();
                         ctx.font = "bold 11px 'OpenDyslexic', sans-serif";
                         
-                        const textToShow = word.text.toLowerCase();
+                        const textToShow = word.text;
                         const cleanTextForMeasurement = textToShow.replace(/[\[\]]/g, '');
                         
                         const textWidth = ctx.measureText(cleanTextForMeasurement).width;
