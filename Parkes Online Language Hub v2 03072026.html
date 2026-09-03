@@ -14141,8 +14141,8 @@
                 const instructionEl = document.getElementById('instruction-text');
                 const locationTextEl = document.getElementById('location-text');
                 const kartTargetEl = document.getElementById('kart-target-text');
-                if (instructionEl) fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
-                if (locationTextEl) fitTextToBox(locationTextEl, getMaxTargetBoxTextWidth());
+                if (instructionEl) fitTextToBoxDeferred(instructionEl, 'quest-text-zone');
+                if (locationTextEl) fitTextToBoxDeferred(locationTextEl, 'location-text-zone');
                 if (kartTargetEl) fitTextToBox(kartTargetEl, getMaxKartTargetTextWidth());
             });
             resize();
@@ -14156,8 +14156,8 @@
                 const boardResizeObserver = new ResizeObserver(() => {
                     const instructionEl = document.getElementById('instruction-text');
                     const locationTextEl = document.getElementById('location-text');
-                    if (instructionEl && instructionEl.textContent.trim()) fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
-                    if (locationTextEl && locationTextEl.textContent.trim()) fitTextToBox(locationTextEl, getMaxTargetBoxTextWidth());
+                    if (instructionEl && instructionEl.textContent.trim()) fitTextToBoxDeferred(instructionEl, 'quest-text-zone');
+                    if (locationTextEl && locationTextEl.textContent.trim()) fitTextToBoxDeferred(locationTextEl, 'location-text-zone');
                 });
                 boardResizeObserver.observe(uiBoardCenter);
             }
@@ -15666,7 +15666,7 @@
                 instructionEl.innerHTML = colorizeSentenceText(currentTargetWord);
                 instructionEl.style.color = '';
             }
-            fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
+            fitTextToBoxDeferred(instructionEl, 'quest-text-zone');
 
             document.getElementById('score').innerText = score.toString().padStart(2, '0');
             const speakDelayMs = options.delaySpeechMs || 0;
@@ -16630,24 +16630,41 @@
             }
         }
 
-        function getMaxTargetBoxTextWidth() {
-            const center = document.getElementById('ui-board-center');
-            if (!center || center.clientWidth === 0) {
-                const vw = window.innerWidth || 800;
-                if (vw < 500) return 160;
-                if (vw < 900) return 240;
-                return 340;
+        // Fits immediately (as before), then re-measures and re-fits again
+        // one paint cycle later - a defensive safety net for the rare case
+        // where the zone hadn't fully settled into its final layout at the
+        // moment of the first, synchronous measurement (e.g. right as a
+        // screen first becomes visible). fitTextToBox is idempotent, so
+        // this costs nothing when the first fit was already correct - it
+        // only matters on the rare occasion the zone's width changes
+        // between the two passes.
+        function fitTextToBoxDeferred(el, zoneId, minFontSizePx) {
+            fitTextToBox(el, getMaxTargetBoxTextWidth(zoneId), minFontSizePx);
+            requestAnimationFrame(() => {
+                fitTextToBox(el, getMaxTargetBoxTextWidth(zoneId), minFontSizePx);
+            });
+        }
+
+        function getMaxTargetBoxTextWidth(zoneId) {
+            // Measures the actual text zone directly - this is already
+            // exactly the width the flexbox layout guarantees this zone
+            // (its flex-shrink:0 sibling tts-zone never encroaches, and
+            // this zone's own min-width:0 lets it take exactly what's
+            // left), so there's no separate formula with its own
+            // constants that can quietly fall out of sync with the real
+            // layout as it evolves.
+            zoneId = zoneId || 'quest-text-zone';
+            const zone = document.getElementById(zoneId);
+            if (zone && zone.clientWidth > 0) {
+                return Math.max(80, zone.clientWidth);
             }
-            // Now that the TTS buttons live in their own explicit zone
-            // (quest-tts-zone / location-tts-zone) rather than being
-            // inferred, this measures that zone's actual current width
-            // directly instead of guessing a fixed pixel amount - so it
-            // stays correct even if the buttons themselves are resized
-            // later, rather than needing this number hand-tuned again.
-            const ttsZone = document.getElementById('quest-tts-zone') || document.getElementById('location-tts-zone');
-            const ttsZoneWidth = (ttsZone && ttsZone.clientWidth > 0) ? ttsZone.clientWidth : 76;
-            const rowGap = 12; // the gap between the text-zone and tts-zone
-            return Math.max(80, (center.clientWidth - 48) / 2 - 24 - ttsZoneWidth - rowGap);
+            // Zone not laid out yet (e.g. called before its parent screen
+            // has been made visible) - conservative fallback based on
+            // viewport width alone.
+            const vw = window.innerWidth || 800;
+            if (vw < 500) return 160;
+            if (vw < 900) return 240;
+            return 340;
         }
 
         function getMaxKartTargetTextWidth() {
@@ -16705,7 +16722,7 @@
                 instructionEl.textContent = strippedTarget;
                 instructionEl.style.color = ''; 
             }
-            fitTextToBox(instructionEl, getMaxTargetBoxTextWidth());
+            fitTextToBoxDeferred(instructionEl, 'quest-text-zone');
 
             const currentWordObj = activeWords.find(w => w.text.toLowerCase() === currentTargetWord);
             const locKey = currentWordObj ? currentWordObj.location : 'city';
@@ -16732,7 +16749,7 @@
             document.getElementById('where-title').innerHTML = colorizeSentenceText(whereLabel);
             const locationTextEl = document.getElementById('location-text');
             locationTextEl.innerHTML = colorizeSentenceText(locationLabel);
-            fitTextToBox(locationTextEl, getMaxTargetBoxTextWidth());
+            fitTextToBoxDeferred(locationTextEl, 'location-text-zone');
 
             document.getElementById('score').innerText = score.toString().padStart(2, '0');
             const speakDelayMs = options.delaySpeechMs || 0;
