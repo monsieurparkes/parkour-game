@@ -1,11 +1,1 @@
-le nord
-l'est
-le sud
-l'ouest
-marche
-vers
-la direction
-l'escalier
-mètres
-appuie
-tourne
+le nord, l'est, le sud, l'ouest, marche, vers, la direction, l'escalier, mètres, appuie, tourne
