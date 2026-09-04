@@ -15028,7 +15028,7 @@
                 kartWords = pictureFileNames.concat(presetWords);
             } else {
                 const rawInput = document.getElementById('kart-vocab-input').value;
-                kartWords = rawInput.split(',').map(w => w.trim()).filter(w => w.length > 0);
+                kartWords = rawInput.split(/[,\n]/).map(w => w.trim()).filter(w => w.length > 0);
             }
 
             kartVocabularyList = kartWords.slice(0, KART_ITEM_SLOTS.length);
@@ -15855,7 +15855,7 @@
 
         function generateWhiteboard() {
             const rawInput = document.getElementById('vocab-input').value;
-            vocabularyList = rawInput.split(',')
+            vocabularyList = rawInput.split(/[,\n]/)
                 .map(w => w.trim())
                 .filter(w => w.length > 0);
 
