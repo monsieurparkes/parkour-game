@@ -2807,6 +2807,40 @@
             "tamil": "நீச்சல் குளத்தில்",
             "telugu": "స్విమ్మింగ్ పూల్‌లో"
           }
+        },
+        {
+          "file": "dans la jungle.png",
+          "definition": "A dense, tropical forest full of trees, plants, and wild animals.",
+          "translations": {
+            "fr": "dans la jungle",
+            "en": "in the jungle",
+            "es": "en la selva",
+            "de": "im Dschungel",
+            "it": "nella giungla",
+            "ja": "ジャングルで",
+            "korean": "정글에서",
+            "zh-hanzi": "在丛林里",
+            "zh-pinyin": "zài cónglín lǐ",
+            "cantonese": "喺叢林",
+            "he": "בג'ונגל",
+            "ar": "في الأدغال",
+            "sinhala": "කැලෑවේ",
+            "vi": "trong rừng rậm",
+            "ur": "گھنے جنگل میں",
+            "hi": "घने जंगल में",
+            "uk": "в джунглях",
+            "ru": "в джунглях",
+            "macedonian": "во џунгла",
+            "afrikaans": "in die oerwoud",
+            "serbian": "у џунгли",
+            "croatian": "u džungli",
+            "punjabi": "ਸੰਘਣੇ ਜੰਗਲ ਵਿੱਚ",
+            "dutch": "in de jungle",
+            "thai": "ในป่าดงดิบ",
+            "burmese": "သစ်တောအုပ်ထဲမှာ",
+            "tamil": "அடர்ந்த காட்டில்",
+            "telugu": "దట్టమైన అడవిలో"
+          }
         }
       ]
     },
