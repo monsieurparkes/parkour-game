@@ -1890,8 +1890,20 @@
                         <!-- Shared Parkour Settings Panel -->
                         <div id="quest-settings" class="hub-group hub-font text-left">
                             <div class="hub-row">
-                                <label for="student-name-input" class="hub-label">Student Name (optional)</label>
-                                <input type="text" id="student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                                    <div>
+                                        <label for="student-name-input" class="hub-label">Student Name (optional)</label>
+                                        <input type="text" id="student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                                    </div>
+                                    <div>
+                                        <label for="vocab-code-input" class="hub-label">Have a code? (optional)</label>
+                                        <div style="display:flex; gap:8px; align-items:center;">
+                                            <input type="text" id="vocab-code-input" class="hub-input" placeholder="Enter code" style="flex:1; text-transform:uppercase;">
+                                            <button id="vocab-code-go-btn" class="hub-btn-primary interactive">Go</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p id="vocab-code-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Oops! Try again!</p>
                             </div>
 
                             <div class="hub-row" style="display:none;">
@@ -1916,15 +1928,6 @@
                                 <p class="hub-hint">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
                             </div>
 
-                            <div class="hub-row">
-                                <label class="hub-label">Have a code? (optional)</label>
-                                <div style="display:flex; gap:8px; align-items:center;">
-                                    <input type="text" id="vocab-code-input" class="hub-input" placeholder="Enter code" style="flex:1; text-transform:uppercase;">
-                                    <button id="vocab-code-go-btn" class="hub-btn-primary interactive">Go</button>
-                                </div>
-                                <p id="vocab-code-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Oops! Try again!</p>
-                            </div>
-
                             <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div class="hub-checkbox-row">
                                     <input type="checkbox" id="colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
@@ -1938,7 +1941,12 @@
                                     <input type="checkbox" id="magpie-mode-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
                                     <label for="magpie-mode-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🐦 Magpie Mode (extra challenge)</label>
                                 </div>
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="extra-locations-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="extra-locations-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations (buildings)</label>
+                                </div>
                             </div>
+                            <p class="hub-hint mt-0 mb-0">Off by default: building doors are locked and no words spawn inside, keeping the focus on the target vocabulary itself rather than building names. Tick this to open the buildings up as extra locations.</p>
 
                             <!-- Dynamic Custom Grapheme Panel inside Settings -->
                             <div class="hub-row">
@@ -2012,7 +2020,12 @@
                                     <input type="checkbox" id="magpie-mode-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
                                     <label for="magpie-mode-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🐦 Magpie Mode (extra challenge)</label>
                                 </div>
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="extra-locations-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="extra-locations-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations (buildings)</label>
+                                </div>
                             </div>
+                            <p class="hub-hint mt-0 mb-0">Off by default: building doors are locked, keeping the focus on exploring outdoors for the target pictures. Tick this to open the buildings up as extra locations.</p>
 
                             <!-- Dynamic Custom Grapheme Panel inside Settings -->
                             <div class="hub-row">
@@ -3462,6 +3475,12 @@
                 <h2 class="text-2xl font-black text-slate-800">Well Done!</h2>
                 <p id="results-magpie-badge" class="text-[11px] font-bold text-slate-400 -mt-2" style="display:none;">🐦 Played with Magpie Mode</p>
 
+                <div id="results-code-summary" class="text-left" style="display:none;">
+                    <p class="text-sm font-bold text-slate-700">Today I checked my understanding of:</p>
+                    <p id="results-code-words" dir="auto" class="text-sm font-black text-slate-900 mt-1 mb-2 leading-relaxed"></p>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">NESA Modern Languages Syllabus outcomes MLE-UND-01, ML1-UND-01, ML2-UND-01, ML3-UND-01, ML4-UND-01, ML5-UND-01</p>
+                </div>
+
                 <div class="text-left bg-slate-50 rounded-2xl p-4 space-y-2 border-2 border-slate-200">
                     <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Name</span> <span id="results-name" dir="auto" class="font-black text-slate-900 text-right"></span></p>
                     <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Completed</span> <span id="results-datetime" class="font-black text-slate-900 text-right"></span></p>
@@ -3649,6 +3668,8 @@
         let selectedLanguage = "fr"; // Global target language selection (fr, en, de, etc.)
         let colourCodedEnabled = true; // State of color coding
         let challengeModeEnabled = false; // Hides the written target word, listen-only
+        let extraLocationsEnabled = false; // Off by default: building doors locked, no words spawn inside
+        let vocabCodeWasUsed = false; // Set when a round's vocabulary came from a teacher-supplied code
         let selectedLobbyMode = "quest"; // Lobby selection state
         let cameraY = 0, targetScale = 0.55; // Sized nicely for screen views
 
@@ -4235,7 +4256,9 @@
             { x: 700, y: -300, w: 170, h: 40 },
             { x: 1100, y: -150, w: 180, h: 40 },
             { x: 1500, y: -400, w: 200, h: 40 },
-            { x: -1300, y: -300, w: 180, h: 40 }
+            { x: -1300, y: -300, w: 180, h: 40 },
+            { x: 286, y: -100, w: 180, h: 40 },
+            { x: 449, y: -150, w: 180, h: 40 }
         ];
 
         const forestTrees = [
@@ -13772,6 +13795,9 @@
             document.getElementById('lava-vocab-code-input').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') document.getElementById('lava-vocab-code-go-btn').click();
             });
+            ['vocab-input', 'kart-vocab-input'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => { vocabCodeWasUsed = false; });
+            });
             document.getElementById('player-return-btn').onclick = () => {
                 showLandingStep(selectedLobbyMode === 'lava' ? 'wheel' : 'settings');
             };
@@ -14606,6 +14632,11 @@
         // match, e.g. "ANIMALS1.txt".
         const WB_VOCAB_CODE_BASE_URL = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/vocabcodes/';
 
+        const WB_VOCAB_CODE_CHALLENGE_CHECKBOX_MAP = {
+            'vocab-input': 'challenge-mode',
+            'kart-vocab-input': 'kart-challenge-mode'
+        };
+
         async function handleVocabCodeSubmit(codeInputId, errorId, vocabInputId, onSuccess, subfolder) {
             const codeInput = document.getElementById(codeInputId);
             const errorEl = document.getElementById(errorId);
@@ -14619,6 +14650,17 @@
                 if (!text) throw new Error('empty file');
                 document.getElementById(vocabInputId).value = text;
                 errorEl.style.display = 'none';
+                if (vocabInputId === 'vocab-input' || vocabInputId === 'kart-vocab-input') {
+                    vocabCodeWasUsed = true;
+                }
+                // A code is a ready-made, teacher-vetted vocabulary set, so it's
+                // reasonable to default straight to the more rigorous, listen-only
+                // mode rather than making the student separately opt into it.
+                const challengeCheckboxId = WB_VOCAB_CODE_CHALLENGE_CHECKBOX_MAP[vocabInputId];
+                if (challengeCheckboxId) {
+                    const challengeCheckbox = document.getElementById(challengeCheckboxId);
+                    if (challengeCheckbox) challengeCheckbox.checked = true;
+                }
                 onSuccess();
             } catch (e) {
                 errorEl.style.display = 'block';
@@ -15868,6 +15910,7 @@
 
             colourCodedEnabled = document.getElementById('colour-coded').checked;
             challengeModeEnabled = document.getElementById('challenge-mode').checked;
+            extraLocationsEnabled = document.getElementById('extra-locations-quest').checked;
             magpieModeOn = document.getElementById('magpie-mode-quest').checked;
 
             startQuestGame();
@@ -16491,6 +16534,7 @@
 
             colourCodedEnabled = document.getElementById('picture-colour-coded').checked;
             challengeModeEnabled = document.getElementById('picture-challenge-mode').checked;
+            extraLocationsEnabled = document.getElementById('extra-locations-picture').checked;
             magpieModeOn = document.getElementById('magpie-mode-picture').checked;
 
             startQuestGame();
@@ -16553,6 +16597,7 @@
 
         function resetToConfig() {
             gameStarted = false;
+            vocabCodeWasUsed = false;
             updateCollectedWordsPanelVisibility();
             if (levelEditorActive) exitLevelEditor();
             document.getElementById('level-editor-toggle-btn').style.display = 'none';
@@ -16603,8 +16648,11 @@
             let waterCandidates = [];
 
             // One slot per building; only used in quest mode (Picture Parkour doesn't yet
-            // support images inside shop interiors).
-            let shopCandidates = selectedLobbyMode === 'quest'
+            // support images inside shop interiors) and only when the teacher has
+            // opted into buildings as extra locations - off by default, so the
+            // learning focus stays on the target vocabulary rather than the
+            // building names, and doors stay locked to match (see findNearbyShopDoor).
+            let shopCandidates = (selectedLobbyMode === 'quest' && extraLocationsEnabled)
                 ? shuffle(cityBuildings.map((b, i) => ({ buildingIndex: i })))
                 : [];
 
@@ -16955,6 +17003,14 @@
             document.getElementById('results-mistakes').textContent = mistakeCount;
             document.getElementById('results-vocab').textContent = vocabularyList.join(', ');
             document.getElementById('results-magpie-badge').style.display = roundHadMagpieMode ? 'block' : 'none';
+
+            const codeSummaryEl = document.getElementById('results-code-summary');
+            if (vocabCodeWasUsed) {
+                document.getElementById('results-code-words').textContent = vocabularyList.join(', ');
+                codeSummaryEl.style.display = 'block';
+            } else {
+                codeSummaryEl.style.display = 'none';
+            }
 
             document.getElementById('ui-board').style.display = 'none';
             canvas.style.display = 'none';
@@ -18222,6 +18278,7 @@
         // Being 'grounded' isn't enough on its own - a player standing on a roof is also
         // grounded, so we additionally require their feet to be at true ground height.
         function findNearbyShopDoor() {
+            if (!extraLocationsEnabled) return null; // doors locked by default
             const px = player.x + 25;
             const feetY = player.y + 70;
             if (feetY < 810) return null; // not at street level (e.g. standing on a roof)
@@ -18994,7 +19051,7 @@
 
                 const textToShow = shopWord.text.replace(/[\[\]]/g, '');
                 if (colourCodedEnabled) {
-                    drawColoredText(ctx, shopWord.text, cardX + shopWord.w / 2, cardY + shopWord.h / 2 + 1.5, "bold 11px 'OpenDyslexic', sans-serif");
+                    drawColoredText(ctx, shopWord.text, cardX + shopWord.w / 2, cardY + shopWord.h / 2 + 1.5, "bold 22px 'OpenDyslexic', sans-serif");
                 } else {
                     ctx.fillStyle = '#1e293b';
                     ctx.textAlign = 'center';
@@ -19619,7 +19676,7 @@
                         }
                     } else {
                         ctx.save();
-                        ctx.font = "bold 11px 'OpenDyslexic', sans-serif";
+                        ctx.font = "bold 22px 'OpenDyslexic', sans-serif";
                         
                         const textToShow = word.text;
                         const cleanTextForMeasurement = textToShow.replace(/[\[\]]/g, '');
@@ -19638,7 +19695,7 @@
                         ctx.stroke();
                         
                         if (colourCodedEnabled) {
-                            drawColoredText(ctx, textToShow, word.x + word.w / 2, finalY + word.h / 2 + 1.5, "bold 11px 'OpenDyslexic', sans-serif");
+                            drawColoredText(ctx, textToShow, word.x + word.w / 2, finalY + word.h / 2 + 1.5, "bold 22px 'OpenDyslexic', sans-serif");
                         } else {
                             ctx.fillStyle = '#1e293b';
                             ctx.textAlign = 'center';
