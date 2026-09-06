@@ -3578,7 +3578,7 @@
         const BOBOT_JUMP_SCALE_BOOST = 1.3;
         const BOBOT_CRAWL_SCALE_BOOST = 1.5;
         const MAGPIE_SPRITE_CRAWL_SCALE_BOOST = 1.15; // slightly larger crawl sprite while Magpie Mode's own sprite set is in use - purely visual, the collision box is unaffected
-        const MAGPIE_SPRITE_WALK_SCALE_BOOST = 1.06; // slightly larger walk sprite while Magpie Mode's own sprite set is in use - purely visual, the collision box is unaffected
+        const MAGPIE_SPRITE_WALK_SCALE_BOOST = 1.03; // slightly larger walk sprite while Magpie Mode's own sprite set is in use - purely visual, the collision box is unaffected
         // Potato Parkour specifically needs Bobot smaller overall (tighter world,
         // small potato hitboxes) - this factor is applied uniformly across every
         // animation state there, so the proportions between states stay identical
@@ -13721,6 +13721,7 @@
                     });
 
                     statusEl.textContent = `✓ ${pictureFileNames.length} image${pictureFileNames.length === 1 ? '' : 's'} loaded from "${code}"`;
+                    vocabCodeWasUsed = true;
                 } catch (err) {
                     statusEl.textContent = "Couldn't reach GitHub - check the connection and try again.";
                 } finally {
@@ -13830,7 +13831,7 @@
             document.getElementById('lava-vocab-code-input').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') document.getElementById('lava-vocab-code-go-btn').click();
             });
-            ['vocab-input', 'kart-vocab-input'].forEach(id => {
+            ['vocab-input', 'kart-vocab-input', 'picture-archive-code-input'].forEach(id => {
                 document.getElementById(id).addEventListener('input', () => { vocabCodeWasUsed = false; });
             });
             document.getElementById('magpie-mode-picture').addEventListener('change', (e) => {
@@ -17080,12 +17081,8 @@
             }
 
             const codeSummaryEl = document.getElementById('results-code-summary');
-            if (vocabCodeWasUsed) {
-                document.getElementById('results-code-words').textContent = vocabularyList.join(', ');
-                codeSummaryEl.style.display = 'block';
-            } else {
-                codeSummaryEl.style.display = 'none';
-            }
+            document.getElementById('results-code-words').textContent = vocabularyList.join(', ');
+            codeSummaryEl.style.display = 'block';
 
             document.getElementById('ui-board').style.display = 'none';
             canvas.style.display = 'none';
