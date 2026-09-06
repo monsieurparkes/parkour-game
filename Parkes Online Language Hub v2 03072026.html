@@ -1993,10 +1993,9 @@
                             </div>
 
                             <div class="hub-row">
-                                <label class="hub-label" for="picture-archive-code-input">Or Load From Your Archive</label>
-                                <p class="hub-hint mt-0 mb-3">Enter the code for a folder in your own GitHub image archive - every image in it loads in, named after its target word, just like uploading your own.</p>
+                                <label class="hub-label" for="picture-archive-code-input">Have a code? (optional)</label>
                                 <div class="flex items-center gap-2">
-                                    <input type="text" id="picture-archive-code-input" dir="auto" class="hub-input" placeholder="Archive folder code...">
+                                    <input type="text" id="picture-archive-code-input" dir="auto" class="hub-input" placeholder="Enter code">
                                     <button id="picture-archive-load-btn" class="hub-btn-ghost hub-font interactive" style="flex-shrink:0;">Load</button>
                                 </div>
                                 <p id="picture-archive-status" class="hub-hint mt-2" style="display:none;"></p>
@@ -2025,7 +2024,6 @@
                                     <label for="extra-locations-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations (buildings)</label>
                                 </div>
                             </div>
-                            <p class="hub-hint mt-0 mb-0">Off by default: building doors are locked, keeping the focus on exploring outdoors for the target pictures. Tick this to open the buildings up as extra locations.</p>
 
                             <!-- Dynamic Custom Grapheme Panel inside Settings -->
                             <div class="hub-row">
@@ -3589,19 +3587,26 @@
         let magpieModeOn = false; // the settings-screen toggle's current value
         let roundHadMagpieMode = false; // snapshotted when a round starts, so the results screen reflects what was actually played even if the toggle changes afterward
         let magpieActive = false; // true only while a quest/picture round with Magpie Mode is actually in progress
-        let magpiePhase = 'idle'; // 'idle' | 'hover' | 'swooping'
+        let magpiePhase = 'idle'; // 'idle' | 'entering' | 'hover' | 'swooping'
         let magpieTimer = 0; // counts down (seconds) to the next hover/swoop cycle while idle
+        let magpieEnterElapsed = 0;
         let magpieHoverElapsed = 0;
         let magpieSwoopElapsed = 0;
-        let magpieHoverSide = 'left'; // which top corner it enters from this cycle
-        let magpieX = 0, magpieY = 0; // current world position while hovering or swooping
+        let magpieHoverSide = 'left'; // which top corner it enters from this cycle - alternates deterministically, not random
+        let magpieX = 0, magpieY = 0; // current world position while entering, hovering, or swooping
         let magpieSwoopStartX = 0, magpieSwoopStartY = 0;
-        let magpieSwoopTargetX = 0, magpieSwoopTargetY = 0;
+        let magpieSwoopPeakX = 0, magpieSwoopPeakY = 0; // aimed at the player's head, partway through the swoop
+        let magpieSwoopEndX = 0, magpieSwoopEndY = 0; // the opposite top corner - the swoop continues past the player rather than stopping there
+        let magpieWiggleTime = 0; // accumulates whenever the magpie is visible, drives its cosmetic wiggle
         let magpieHasHitPlayerThisSwoop = false;
         const MAGPIE_HOVER_DURATION = 1.2; // seconds spent visibly hovering before swooping - the player's warning
-        const MAGPIE_SWOOP_DURATION = 0.8; // seconds for the swoop itself
+        const MAGPIE_SWOOP_DURATION = 3.5; // seconds for the full corner-to-corner swoop
+        const MAGPIE_ENTER_DURATION = 0.7; // seconds spent flying in from off-screen to the hover position
+        const MAGPIE_ENTER_OFFSET = 220; // how far beyond the screen edge it starts from, in screen pixels
         const MAGPIE_MIN_CYCLE = 9, MAGPIE_MAX_CYCLE = 13; // seconds between swoops, randomised a little so it isn't a predictable metronome
-        const MAGPIE_SIZE = 64; // rendered height in world units; width follows the sprite's own aspect ratio
+        const MAGPIE_SIZE = 40; // rendered height in world units; width follows the sprite's own aspect ratio
+        const MAGPIE_WIGGLE_SPEED = 6; // radians per second - how fast it wobbles
+        const MAGPIE_WIGGLE_AMOUNT = 0.12; // radians - how far it tilts each way, kept subtle
 
         let lastTime = 0, vocabularyList = [], activeWords = [], currentTargetWord = null;
         let customMoveSpeed = 3.0;
@@ -14461,7 +14466,14 @@
             const innerWrapper = document.getElementById('landing-flow-inner');
             if (innerWrapper) innerWrapper.classList.toggle('landing-wide', step === 'settings');
             if (step === 'wheel') renderToolGrid();
-            if (step === 'player') renderPlayerSelect();
+            if (step === 'player') {
+                if (selectedLobbyMode === 'quest') {
+                    magpieModeOn = document.getElementById('magpie-mode-quest').checked;
+                } else if (selectedLobbyMode === 'picture') {
+                    magpieModeOn = document.getElementById('magpie-mode-picture').checked;
+                }
+                renderPlayerSelect();
+            }
             if (step === 'settings') {
                 const settingsConfirmBtn = document.getElementById('settings-confirm-btn');
                 if (settingsConfirmBtn) settingsConfirmBtn.textContent = (selectedLobbyMode === 'kart' || selectedLobbyMode === 'bobot') ? 'Launch Activity' : 'Continue';
@@ -18408,22 +18420,44 @@
         function updateMagpie(dt) {
             if (!magpieActive) return;
             const dtSeconds = dt / 60; // dt is expressed in 60fps-frame units, not seconds
+            magpieWiggleTime += dtSeconds;
             const camX = -player.x + (canvas.width / 2) / targetScale;
+            const screenMarginX = 70, screenMarginY = 60;
+            const hoverScreenX = magpieHoverSide === 'left' ? screenMarginX : (canvas.width - screenMarginX);
 
             const positionHover = () => {
-                const screenMarginX = 70, screenMarginY = 60;
-                const targetScreenX = magpieHoverSide === 'left' ? screenMarginX : (canvas.width - screenMarginX);
-                magpieX = targetScreenX / targetScale - camX;
+                magpieX = hoverScreenX / targetScale - camX;
                 magpieY = screenMarginY / targetScale - cameraY;
             };
 
             if (magpiePhase === 'idle') {
                 magpieTimer -= dtSeconds;
                 if (magpieTimer <= 0) {
-                    magpieHoverSide = Math.random() < 0.5 ? 'left' : 'right';
+                    magpieEnterElapsed = 0;
+                    magpiePhase = 'entering';
+                }
+                return;
+            }
+
+            if (magpiePhase === 'entering') {
+                // Flies in from further along the same side it's about to
+                // hover on - starting from just outside the visible play
+                // area rather than simply appearing at the hover corner -
+                // and arrives with a gentle ease-out rather than a hard stop.
+                magpieEnterElapsed += dtSeconds;
+                const progress = Math.min(1, magpieEnterElapsed / MAGPIE_ENTER_DURATION);
+                const eased = 1 - (1 - progress) * (1 - progress);
+                const entryScreenX = magpieHoverSide === 'left'
+                    ? (screenMarginX - MAGPIE_ENTER_OFFSET)
+                    : (canvas.width - screenMarginX + MAGPIE_ENTER_OFFSET);
+                const startX = entryScreenX / targetScale - camX;
+                const targetX = hoverScreenX / targetScale - camX;
+                magpieX = startX + (targetX - startX) * eased;
+                magpieY = screenMarginY / targetScale - cameraY;
+                if (progress >= 1) {
                     magpieHoverElapsed = 0;
                     magpiePhase = 'hover';
-                    positionHover(); // computed immediately, not left at (0,0) until the next frame
+                    positionHover(); // snaps exactly onto the hover position, clearing any tiny easing rounding
                 }
                 return;
             }
@@ -18433,12 +18467,17 @@
 
                 magpieHoverElapsed += dtSeconds;
                 if (magpieHoverElapsed >= MAGPIE_HOVER_DURATION) {
+                    const otherSide = magpieHoverSide === 'left' ? 'right' : 'left';
                     magpieSwoopStartX = magpieX;
                     magpieSwoopStartY = magpieY;
-                    magpieSwoopTargetX = player.x + 25; // aim at roughly the player's centre, not their corner
-                    magpieSwoopTargetY = player.y + 35;
+                    const endScreenX = otherSide === 'left' ? screenMarginX : (canvas.width - screenMarginX);
+                    magpieSwoopEndX = endScreenX / targetScale - camX;
+                    magpieSwoopEndY = screenMarginY / targetScale - cameraY;
+                    magpieSwoopPeakX = player.x + 25; // roughly the player's centre, horizontally
+                    magpieSwoopPeakY = player.y + 10; // head height - low enough that crawling ducks under it
                     magpieSwoopElapsed = 0;
                     magpieHasHitPlayerThisSwoop = false;
+                    magpieHoverSide = otherSide; // next cycle enters from the side this one is heading toward
                     magpiePhase = 'swooping';
                     playMagpieSwoopSound();
                 }
@@ -18448,17 +18487,35 @@
             if (magpiePhase === 'swooping') {
                 magpieSwoopElapsed += dtSeconds;
                 const progress = Math.min(1, magpieSwoopElapsed / MAGPIE_SWOOP_DURATION);
-                const eased = progress * progress; // ease-in - starts slow, dives fast, reading as a genuine swoop
-                magpieX = magpieSwoopStartX + (magpieSwoopTargetX - magpieSwoopStartX) * eased;
-                magpieY = magpieSwoopStartY + (magpieSwoopTargetY - magpieSwoopStartY) * eased;
 
+                // Horizontal motion is a steady sweep from corner to corner.
+                magpieX = magpieSwoopStartX + (magpieSwoopEndX - magpieSwoopStartX) * progress;
+
+                // Vertical motion is a genuine parabola through three points -
+                // the start height, a dip to the player's head at whatever
+                // progress value corresponds to the magpie being horizontally
+                // above them, and back up to the end height - rather than a
+                // straight line that stops at the player. Clamped away from
+                // the very ends so the curve stays well-behaved even if the
+                // player is standing close to one of the hover corners.
+                const rawSpan = magpieSwoopEndX - magpieSwoopStartX;
+                const rawPeakT = rawSpan !== 0 ? (magpieSwoopPeakX - magpieSwoopStartX) / rawSpan : 0.5;
+                const tPeak = Math.min(0.8, Math.max(0.2, rawPeakT));
+                const t = progress;
+                const y0 = magpieSwoopStartY, y1 = magpieSwoopPeakY, y2 = magpieSwoopEndY;
+                const L0 = ((t - tPeak) * (t - 1)) / ((0 - tPeak) * (0 - 1));
+                const L1 = ((t - 0) * (t - 1)) / ((tPeak - 0) * (tPeak - 1));
+                const L2 = ((t - 0) * (t - tPeak)) / ((1 - 0) * (1 - tPeak));
+                magpieY = y0 * L0 + y1 * L1 + y2 * L2;
 
                 if (!magpieHasHitPlayerThisSwoop) {
                     const half = MAGPIE_SIZE / 2;
                     const mX = magpieX - half, mY = magpieY - half;
                     const pX = player.x, pY = player.y, pW = 50, pH = 70;
                     if (mX < pX + pW && mX + MAGPIE_SIZE > pX && mY < pY + pH && mY + MAGPIE_SIZE > pY) {
-                        score = Math.max(0, score - 2);
+                        score = Math.max(0, score - 5);
+                        document.getElementById('score').innerText = score.toString().padStart(2, '0');
+                        playChime(false);
                         magpieHasHitPlayerThisSwoop = true;
                     }
                 }
@@ -18478,7 +18535,25 @@
             const sprite = magpieSpriteImg;
             if (!sprite || !sprite.complete || sprite.naturalWidth === 0) return;
             const h = MAGPIE_SIZE, w = h * (sprite.width / sprite.height);
-            ctx.drawImage(sprite, magpieX - w / 2, magpieY - h / 2, w, h);
+            const wiggleAngle = Math.sin(magpieWiggleTime * MAGPIE_WIGGLE_SPEED) * MAGPIE_WIGGLE_AMOUNT;
+            // Assumes the sprite art faces right by default, mirroring it
+            // whenever travel is right-to-left so it visually faces the
+            // way it's actually flying rather than always facing one way
+            // regardless of direction. While hovering, magpieHoverSide
+            // already tells us which way the upcoming swoop will head
+            // (hovering on the right means the next swoop heads left), so
+            // it can face the correct way even before the swoop starts.
+            // If the source art actually faces left instead, just invert
+            // this one condition.
+            const movingLeft = magpiePhase === 'swooping'
+                ? (magpieSwoopEndX < magpieSwoopStartX)
+                : (magpieHoverSide === 'right');
+            ctx.save();
+            ctx.translate(magpieX, magpieY);
+            ctx.rotate(wiggleAngle);
+            if (movingLeft) ctx.scale(-1, 1);
+            ctx.drawImage(sprite, -w / 2, -h / 2, w, h);
+            ctx.restore();
         }
 
         function updatePhysics(dt) {
