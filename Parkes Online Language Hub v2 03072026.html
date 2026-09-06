@@ -2006,28 +2006,35 @@
                                 <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
                             </div>
 
-                            <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="picture-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
-                                    <label for="picture-colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
-                                </div>
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="picture-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                                    <label for="picture-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
-                                </div>
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="magpie-mode-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                                    <label for="magpie-mode-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🐦 Magpie Mode (extra challenge)</label>
-                                </div>
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="extra-locations-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                                    <label for="extra-locations-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations (buildings)</label>
+                            <div class="hub-row">
+                                <label class="hub-label mb-1">Choose Your Challenge</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="magpie-mode-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="magpie-mode-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none flex items-center gap-1" style="color:var(--hub-ink);"><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:18px; height:18px; object-fit:contain;" alt="">Magpie Mode</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="mega-magpie-mode-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="mega-magpie-mode-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none flex items-center gap-0.5" style="color:var(--hub-ink);"><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain;" alt=""><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain;" alt=""><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain; margin-right:2px;" alt="">Mega Magpie Mode</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="picture-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="picture-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Listening Only</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="extra-locations-picture" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="extra-locations-picture" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations</label>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Dynamic Custom Grapheme Panel inside Settings -->
                             <div class="hub-row">
                                 <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                                <div class="hub-checkbox-row mb-3">
+                                    <input type="checkbox" id="picture-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
+                                    <label for="picture-colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
+                                </div>
                                 <div id="default-grapheme-row-picture" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
                                     <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
                                     <input type="color" id="default-grapheme-color-picture" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
@@ -3471,7 +3478,7 @@
             <div class="bg-white p-8 rounded-3xl max-w-lg w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 space-y-4 interactive">
                 <div class="text-6xl">🏆</div>
                 <h2 class="text-2xl font-black text-slate-800">Well Done!</h2>
-                <p id="results-magpie-badge" class="text-[11px] font-bold text-slate-400 -mt-2" style="display:none;">🐦 Played with Magpie Mode</p>
+                <p id="results-modes-played" class="text-[11px] font-bold text-slate-400 -mt-2 leading-relaxed" style="display:none;"></p>
 
                 <div id="results-code-summary" class="text-left" style="display:none;">
                     <p class="text-sm font-bold text-slate-700">Today I checked my understanding of:</p>
@@ -3485,6 +3492,7 @@
                     <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Duration</span> <span id="results-duration" class="font-black text-slate-900 text-right"></span></p>
                     <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Accuracy</span> <span id="results-accuracy" class="font-black text-slate-900 text-right"></span></p>
                     <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Mistakes learnt from</span> <span id="results-mistakes" class="font-black text-slate-900 text-right"></span></p>
+                    <p id="results-true-score-row" class="text-sm font-bold text-slate-700 flex justify-between gap-2" style="display:none;"><span>Score (excl. Magpie deductions)</span> <span id="results-true-score" class="font-black text-slate-900 text-right"></span></p>
                 </div>
 
                 <div class="text-left">
@@ -3569,6 +3577,8 @@
         // Bobot specifically, tuned independently.
         const BOBOT_JUMP_SCALE_BOOST = 1.3;
         const BOBOT_CRAWL_SCALE_BOOST = 1.5;
+        const MAGPIE_SPRITE_CRAWL_SCALE_BOOST = 1.15; // slightly larger crawl sprite while Magpie Mode's own sprite set is in use - purely visual, the collision box is unaffected
+        const MAGPIE_SPRITE_WALK_SCALE_BOOST = 1.06; // slightly larger walk sprite while Magpie Mode's own sprite set is in use - purely visual, the collision box is unaffected
         // Potato Parkour specifically needs Bobot smaller overall (tighter world,
         // small potato hitboxes) - this factor is applied uniformly across every
         // animation state there, so the proportions between states stay identical
@@ -3584,26 +3594,46 @@
         let imagesBobotMM = {}, imagesBobotMMLoaded = false;
         let magpieSpriteImg = null;
         let magpieSwoopAudio = null;
-        let magpieModeOn = false; // the settings-screen toggle's current value
+        let magpieModeOn = false; // true for EITHER Magpie Mode or Mega Magpie Mode - sprite selection etc. don't need to distinguish between them
+        let megaMagpieModeOn = false; // true only for the Mega variant specifically - gates the more intense spawn behaviour
         let roundHadMagpieMode = false; // snapshotted when a round starts, so the results screen reflects what was actually played even if the toggle changes afterward
+        let roundHadMegaMagpieMode = false;
+        let roundHadListeningOnly = false;
+        let roundHadExtraLocations = false;
+        let magpieDeductionTotal = 0; // running total of points actually lost to magpie hits this round, for the results screen's true score
         let magpieActive = false; // true only while a quest/picture round with Magpie Mode is actually in progress
-        let magpiePhase = 'idle'; // 'idle' | 'entering' | 'hover' | 'swooping'
-        let magpieTimer = 0; // counts down (seconds) to the next hover/swoop cycle while idle
-        let magpieEnterElapsed = 0;
-        let magpieHoverElapsed = 0;
-        let magpieSwoopElapsed = 0;
-        let magpieHoverSide = 'left'; // which top corner it enters from this cycle - alternates deterministically, not random
-        let magpieX = 0, magpieY = 0; // current world position while entering, hovering, or swooping
-        let magpieSwoopStartX = 0, magpieSwoopStartY = 0;
-        let magpieSwoopPeakX = 0, magpieSwoopPeakY = 0; // aimed at the player's head, partway through the swoop
-        let magpieSwoopEndX = 0, magpieSwoopEndY = 0; // the opposite top corner - the swoop continues past the player rather than stopping there
-        let magpieWiggleTime = 0; // accumulates whenever the magpie is visible, drives its cosmetic wiggle
-        let magpieHasHitPlayerThisSwoop = false;
+        // Each magpie is its own small state object so Mega Magpie Mode can
+        // occasionally run two independently, at the same time, without any
+        // duplicated update/render logic - see updateOneMagpie/renderOneMagpie.
+        function createMagpieInstance() {
+            return {
+                phase: 'idle', // 'idle' | 'entering' | 'hover' | 'swooping'
+                timer: 0, // only meaningful for magpieA - counts down (seconds) to its next cycle while idle
+                enterElapsed: 0,
+                hoverElapsed: 0,
+                swoopElapsed: 0,
+                hoverSide: 'left', // which top corner it enters from this cycle
+                x: 0, y: 0, // current world position while entering, hovering, or swooping
+                swoopStartX: 0, swoopStartY: 0,
+                swoopPeakX: 0, swoopPeakY: 0, // aimed at the player's head, partway through the swoop
+                swoopEndX: 0, swoopEndY: 0, // the opposite top corner - the swoop continues past the player rather than stopping there
+                wiggleTime: 0, // accumulates whenever visible, drives its cosmetic wiggle
+                hasHitPlayerThisSwoop: false,
+                hoverScreenY: 60, // this cycle's hover/entry/exit height in screen pixels - varies for Mega Magpie Mode
+            };
+        }
+        let magpieA = createMagpieInstance(); // the always-present magpie for both Magpie Mode and Mega Magpie Mode
+        let magpieB = createMagpieInstance(); // Mega Magpie Mode's occasional second, simultaneous magpie from the opposite side - stays dormant (phase 'idle') otherwise
         const MAGPIE_HOVER_DURATION = 1.2; // seconds spent visibly hovering before swooping - the player's warning
         const MAGPIE_SWOOP_DURATION = 3.5; // seconds for the full corner-to-corner swoop
         const MAGPIE_ENTER_DURATION = 0.7; // seconds spent flying in from off-screen to the hover position
         const MAGPIE_ENTER_OFFSET = 220; // how far beyond the screen edge it starts from, in screen pixels
         const MAGPIE_MIN_CYCLE = 9, MAGPIE_MAX_CYCLE = 13; // seconds between swoops, randomised a little so it isn't a predictable metronome
+        const MAGPIE_MEGA_MIN_CYCLE = 0.875, MAGPIE_MEGA_MAX_CYCLE = 1.375; // Mega Magpie Mode's baseline - quartered again from the previous 3.5-5.5s for a much more hectic pace
+        const MAGPIE_MEGA_QUICK_CYCLE_CHANCE = 0.25; // how often Mega Magpie Mode instead fires back-to-back with barely a pause
+        const MAGPIE_MEGA_QUICK_CYCLE_SECONDS = 0.125; // also quartered from 0.5s
+        const MAGPIE_MEGA_LOW_ENTRY_CHANCE = 0.35; // how often Mega Magpie Mode enters noticeably lower on screen instead of the usual top corner
+        const MAGPIE_MEGA_DOUBLE_SPAWN_CHANCE = 0.3; // how often Mega Magpie Mode also launches a second magpie from the opposite side at the same moment
         const MAGPIE_SIZE = 40; // rendered height in world units; width follows the sprite's own aspect ratio
         const MAGPIE_WIGGLE_SPEED = 6; // radians per second - how fast it wobbles
         const MAGPIE_WIGGLE_AMOUNT = 0.12; // radians - how far it tilts each way, kept subtle
@@ -13803,6 +13833,12 @@
             ['vocab-input', 'kart-vocab-input'].forEach(id => {
                 document.getElementById(id).addEventListener('input', () => { vocabCodeWasUsed = false; });
             });
+            document.getElementById('magpie-mode-picture').addEventListener('change', (e) => {
+                if (e.target.checked) document.getElementById('mega-magpie-mode-picture').checked = false;
+            });
+            document.getElementById('mega-magpie-mode-picture').addEventListener('change', (e) => {
+                if (e.target.checked) document.getElementById('magpie-mode-picture').checked = false;
+            });
             document.getElementById('player-return-btn').onclick = () => {
                 showLandingStep(selectedLobbyMode === 'lava' ? 'wheel' : 'settings');
             };
@@ -14470,7 +14506,9 @@
                 if (selectedLobbyMode === 'quest') {
                     magpieModeOn = document.getElementById('magpie-mode-quest').checked;
                 } else if (selectedLobbyMode === 'picture') {
-                    magpieModeOn = document.getElementById('magpie-mode-picture').checked;
+                    const megaChecked = document.getElementById('mega-magpie-mode-picture').checked;
+                    magpieModeOn = document.getElementById('magpie-mode-picture').checked || megaChecked;
+                    megaMagpieModeOn = megaChecked;
                 }
                 renderPlayerSelect();
             }
@@ -16547,7 +16585,8 @@
             colourCodedEnabled = document.getElementById('picture-colour-coded').checked;
             challengeModeEnabled = document.getElementById('picture-challenge-mode').checked;
             extraLocationsEnabled = document.getElementById('extra-locations-picture').checked;
-            magpieModeOn = document.getElementById('magpie-mode-picture').checked;
+            megaMagpieModeOn = document.getElementById('mega-magpie-mode-picture').checked;
+            magpieModeOn = document.getElementById('magpie-mode-picture').checked || megaMagpieModeOn;
 
             startQuestGame();
         }
@@ -16565,10 +16604,14 @@
             distributeWords();
 
             roundHadMagpieMode = magpieModeOn;
+            roundHadMegaMagpieMode = megaMagpieModeOn;
+            roundHadListeningOnly = challengeModeEnabled;
+            roundHadExtraLocations = extraLocationsEnabled;
+            magpieDeductionTotal = 0;
             magpieActive = magpieModeOn;
-            magpiePhase = 'idle';
-            magpieTimer = MAGPIE_MIN_CYCLE + Math.random() * (MAGPIE_MAX_CYCLE - MAGPIE_MIN_CYCLE);
-            magpieHasHitPlayerThisSwoop = false;
+            magpieA = createMagpieInstance();
+            magpieA.timer = getNextMagpieCycleSeconds();
+            magpieB = createMagpieInstance();
 
             const questHeaderEl = document.getElementById('quest-header-label');
             if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
@@ -17014,7 +17057,27 @@
             document.getElementById('results-accuracy').textContent = accuracy + '%';
             document.getElementById('results-mistakes').textContent = mistakeCount;
             document.getElementById('results-vocab').textContent = vocabularyList.join(', ');
-            document.getElementById('results-magpie-badge').style.display = roundHadMagpieMode ? 'block' : 'none';
+
+            const activeModes = [];
+            if (roundHadMegaMagpieMode) activeModes.push('🐦🐦🐦 Mega Magpie Mode');
+            else if (roundHadMagpieMode) activeModes.push('🐦 Magpie Mode');
+            if (roundHadListeningOnly) activeModes.push('👂 Listening Only');
+            if (roundHadExtraLocations) activeModes.push('🏠 Extra Locations');
+            const modesPlayedEl = document.getElementById('results-modes-played');
+            if (activeModes.length > 0) {
+                modesPlayedEl.textContent = activeModes.join('  •  ');
+                modesPlayedEl.style.display = 'block';
+            } else {
+                modesPlayedEl.style.display = 'none';
+            }
+
+            const trueScoreRowEl = document.getElementById('results-true-score-row');
+            if (magpieDeductionTotal > 0) {
+                document.getElementById('results-true-score').textContent = (score + magpieDeductionTotal).toString();
+                trueScoreRowEl.style.display = 'flex';
+            } else {
+                trueScoreRowEl.style.display = 'none';
+            }
 
             const codeSummaryEl = document.getElementById('results-code-summary');
             if (vocabCodeWasUsed) {
@@ -17565,7 +17628,8 @@
             document.getElementById('results-mistakes').textContent = lavaScore.chunksFallen;
             document.getElementById('results-vocab').textContent =
                 `${lavaScore.wordsCompleted}/${lavaScore.totalWords} words, ${lavaScore.chunksCompleted}/${lavaScore.totalChunks} chunks decoded`;
-            document.getElementById('results-magpie-badge').style.display = 'none';
+            document.getElementById('results-modes-played').style.display = 'none';
+            document.getElementById('results-true-score-row').style.display = 'none';
 
             document.getElementById('lava-ui-board').style.display = 'none';
             document.getElementById('lava-fullscreen-btn').style.display = 'none';
@@ -18411,85 +18475,101 @@
             });
         }
 
-        // Magpie Mode's swoop cycle. magpieX/magpieY are always in world
+        // Magpie Mode's swoop cycle. Each instance's x/y are always in world
         // coordinates (matching the player), even while hovering - the
         // hover position is recomputed from the current camera each frame
         // so it visually stays pinned to a screen corner as the player
         // (and therefore the camera) moves, without needing a separate
         // screen-space code path.
-        function updateMagpie(dt) {
-            if (!magpieActive) return;
-            const dtSeconds = dt / 60; // dt is expressed in 60fps-frame units, not seconds
-            magpieWiggleTime += dtSeconds;
+        function getNextMagpieCycleSeconds() {
+            if (megaMagpieModeOn) {
+                if (Math.random() < MAGPIE_MEGA_QUICK_CYCLE_CHANCE) return MAGPIE_MEGA_QUICK_CYCLE_SECONDS;
+                return MAGPIE_MEGA_MIN_CYCLE + Math.random() * (MAGPIE_MEGA_MAX_CYCLE - MAGPIE_MEGA_MIN_CYCLE);
+            }
+            return MAGPIE_MIN_CYCLE + Math.random() * (MAGPIE_MAX_CYCLE - MAGPIE_MIN_CYCLE);
+        }
+
+        // Advances one magpie instance through its idle/entering/hover/swooping
+        // cycle. magpieA is primary: it runs its own idle countdown and always
+        // re-queues itself. magpieB is secondary: it stays dormant (phase
+        // 'idle') until updateMagpie's Mega Magpie Mode logic below explicitly
+        // launches it, and simply goes dormant again afterward rather than
+        // re-queuing itself.
+        function updateOneMagpie(m, dtSeconds, isPrimary) {
+            m.wiggleTime += dtSeconds;
             const camX = -player.x + (canvas.width / 2) / targetScale;
-            const screenMarginX = 70, screenMarginY = 60;
-            const hoverScreenX = magpieHoverSide === 'left' ? screenMarginX : (canvas.width - screenMarginX);
+            const screenMarginX = 70;
+            const hoverScreenX = m.hoverSide === 'left' ? screenMarginX : (canvas.width - screenMarginX);
 
             const positionHover = () => {
-                magpieX = hoverScreenX / targetScale - camX;
-                magpieY = screenMarginY / targetScale - cameraY;
+                m.x = hoverScreenX / targetScale - camX;
+                m.y = m.hoverScreenY / targetScale - cameraY;
             };
 
-            if (magpiePhase === 'idle') {
-                magpieTimer -= dtSeconds;
-                if (magpieTimer <= 0) {
-                    magpieEnterElapsed = 0;
-                    magpiePhase = 'entering';
+            if (m.phase === 'idle') {
+                if (!isPrimary) return; // launched externally by the primary's cycle-start logic, not its own timer
+                m.timer -= dtSeconds;
+                if (m.timer <= 0) {
+                    m.hoverScreenY = (megaMagpieModeOn && Math.random() < MAGPIE_MEGA_LOW_ENTRY_CHANCE)
+                        ? 60 + Math.random() * 260 // noticeably lower on screen, not just the usual top corner
+                        : 60;
+                    m.enterElapsed = 0;
+                    m.phase = 'entering';
                 }
                 return;
             }
 
-            if (magpiePhase === 'entering') {
+            if (m.phase === 'entering') {
                 // Flies in from further along the same side it's about to
                 // hover on - starting from just outside the visible play
                 // area rather than simply appearing at the hover corner -
                 // and arrives with a gentle ease-out rather than a hard stop.
-                magpieEnterElapsed += dtSeconds;
-                const progress = Math.min(1, magpieEnterElapsed / MAGPIE_ENTER_DURATION);
+                m.enterElapsed += dtSeconds;
+                const progress = Math.min(1, m.enterElapsed / MAGPIE_ENTER_DURATION);
                 const eased = 1 - (1 - progress) * (1 - progress);
-                const entryScreenX = magpieHoverSide === 'left'
+                const entryScreenX = m.hoverSide === 'left'
                     ? (screenMarginX - MAGPIE_ENTER_OFFSET)
                     : (canvas.width - screenMarginX + MAGPIE_ENTER_OFFSET);
                 const startX = entryScreenX / targetScale - camX;
                 const targetX = hoverScreenX / targetScale - camX;
-                magpieX = startX + (targetX - startX) * eased;
-                magpieY = screenMarginY / targetScale - cameraY;
+                m.x = startX + (targetX - startX) * eased;
+                m.y = m.hoverScreenY / targetScale - cameraY;
                 if (progress >= 1) {
-                    magpieHoverElapsed = 0;
-                    magpiePhase = 'hover';
+                    m.hoverElapsed = 0;
+                    m.phase = 'hover';
                     positionHover(); // snaps exactly onto the hover position, clearing any tiny easing rounding
                 }
                 return;
             }
 
-            if (magpiePhase === 'hover') {
+            if (m.phase === 'hover') {
                 positionHover();
 
-                magpieHoverElapsed += dtSeconds;
-                if (magpieHoverElapsed >= MAGPIE_HOVER_DURATION) {
-                    const otherSide = magpieHoverSide === 'left' ? 'right' : 'left';
-                    magpieSwoopStartX = magpieX;
-                    magpieSwoopStartY = magpieY;
+                m.hoverElapsed += dtSeconds;
+                if (m.hoverElapsed >= MAGPIE_HOVER_DURATION) {
+                    const otherSide = m.hoverSide === 'left' ? 'right' : 'left';
+                    m.swoopStartX = m.x;
+                    m.swoopStartY = m.y;
                     const endScreenX = otherSide === 'left' ? screenMarginX : (canvas.width - screenMarginX);
-                    magpieSwoopEndX = endScreenX / targetScale - camX;
-                    magpieSwoopEndY = screenMarginY / targetScale - cameraY;
-                    magpieSwoopPeakX = player.x + 25; // roughly the player's centre, horizontally
-                    magpieSwoopPeakY = player.y + 10; // head height - low enough that crawling ducks under it
-                    magpieSwoopElapsed = 0;
-                    magpieHasHitPlayerThisSwoop = false;
-                    magpieHoverSide = otherSide; // next cycle enters from the side this one is heading toward
-                    magpiePhase = 'swooping';
+                    m.swoopEndX = endScreenX / targetScale - camX;
+                    m.swoopEndY = m.hoverScreenY / targetScale - cameraY;
+                    m.swoopPeakX = player.x + 25; // roughly the player's centre, horizontally
+                    m.swoopPeakY = player.y + 10; // head height - low enough that crawling ducks under it
+                    m.swoopElapsed = 0;
+                    m.hasHitPlayerThisSwoop = false;
+                    m.hoverSide = otherSide; // next cycle enters from the side this one is heading toward
+                    m.phase = 'swooping';
                     playMagpieSwoopSound();
                 }
                 return;
             }
 
-            if (magpiePhase === 'swooping') {
-                magpieSwoopElapsed += dtSeconds;
-                const progress = Math.min(1, magpieSwoopElapsed / MAGPIE_SWOOP_DURATION);
+            if (m.phase === 'swooping') {
+                m.swoopElapsed += dtSeconds;
+                const progress = Math.min(1, m.swoopElapsed / MAGPIE_SWOOP_DURATION);
 
                 // Horizontal motion is a steady sweep from corner to corner.
-                magpieX = magpieSwoopStartX + (magpieSwoopEndX - magpieSwoopStartX) * progress;
+                m.x = m.swoopStartX + (m.swoopEndX - m.swoopStartX) * progress;
 
                 // Vertical motion is a genuine parabola through three points -
                 // the start height, a dip to the player's head at whatever
@@ -18498,62 +18578,102 @@
                 // straight line that stops at the player. Clamped away from
                 // the very ends so the curve stays well-behaved even if the
                 // player is standing close to one of the hover corners.
-                const rawSpan = magpieSwoopEndX - magpieSwoopStartX;
-                const rawPeakT = rawSpan !== 0 ? (magpieSwoopPeakX - magpieSwoopStartX) / rawSpan : 0.5;
+                const rawSpan = m.swoopEndX - m.swoopStartX;
+                const rawPeakT = rawSpan !== 0 ? (m.swoopPeakX - m.swoopStartX) / rawSpan : 0.5;
                 const tPeak = Math.min(0.8, Math.max(0.2, rawPeakT));
                 const t = progress;
-                const y0 = magpieSwoopStartY, y1 = magpieSwoopPeakY, y2 = magpieSwoopEndY;
+                const y0 = m.swoopStartY, y1 = m.swoopPeakY, y2 = m.swoopEndY;
                 const L0 = ((t - tPeak) * (t - 1)) / ((0 - tPeak) * (0 - 1));
                 const L1 = ((t - 0) * (t - 1)) / ((tPeak - 0) * (tPeak - 1));
                 const L2 = ((t - 0) * (t - tPeak)) / ((1 - 0) * (1 - tPeak));
-                magpieY = y0 * L0 + y1 * L1 + y2 * L2;
+                m.y = y0 * L0 + y1 * L1 + y2 * L2;
 
-                if (!magpieHasHitPlayerThisSwoop) {
+                if (!m.hasHitPlayerThisSwoop) {
                     const half = MAGPIE_SIZE / 2;
-                    const mX = magpieX - half, mY = magpieY - half;
-                    const pX = player.x, pY = player.y, pW = 50, pH = 70;
+                    const mX = m.x - half, mY = m.y - half;
+                    const pW = 50, pH = (player.state === 'crawl') ? 31 : 70;
+                    const pX = player.x, pY = player.y + (70 - pH); // anchored to the feet, matching the platform/word hitboxes
                     if (mX < pX + pW && mX + MAGPIE_SIZE > pX && mY < pY + pH && mY + MAGPIE_SIZE > pY) {
+                        const actualDeduction = Math.min(5, score);
                         score = Math.max(0, score - 5);
+                        magpieDeductionTotal += actualDeduction;
                         document.getElementById('score').innerText = score.toString().padStart(2, '0');
                         playChime(false);
-                        magpieHasHitPlayerThisSwoop = true;
+                        m.hasHitPlayerThisSwoop = true;
                     }
                 }
 
                 if (progress >= 1) {
-                    magpiePhase = 'idle';
-                    magpieTimer = MAGPIE_MIN_CYCLE + Math.random() * (MAGPIE_MAX_CYCLE - MAGPIE_MIN_CYCLE);
+                    m.phase = 'idle';
+                    if (isPrimary) {
+                        m.timer = getNextMagpieCycleSeconds();
+                    }
+                    // magpieB doesn't re-queue itself here - it simply goes
+                    // dormant until the primary's next cycle-start decides
+                    // whether to launch it again.
                 }
             }
         }
 
-        // Draws the magpie at its current world position - called from
-        // within the same camera-transformed context the player itself is
-        // drawn in, so no separate coordinate handling is needed here.
-        function renderMagpie() {
-            if (!magpieActive || magpiePhase === 'idle') return;
+        function updateMagpie(dt) {
+            if (!magpieActive) return;
+            const dtSeconds = dt / 60; // dt is expressed in 60fps-frame units, not seconds
+
+            const wasIdle = magpieA.phase === 'idle';
+            updateOneMagpie(magpieA, dtSeconds, true);
+
+            // Mega Magpie Mode occasionally launches a second magpie from the
+            // opposite side at the exact same moment the primary one begins a
+            // new cycle - a genuinely chaotic, both-sides-at-once moment -
+            // rather than ever interrupting a second magpie still mid-cycle
+            // from an earlier simultaneous launch.
+            if (wasIdle && magpieA.phase === 'entering' && megaMagpieModeOn && magpieB.phase === 'idle'
+                && Math.random() < MAGPIE_MEGA_DOUBLE_SPAWN_CHANCE) {
+                magpieB.hoverSide = magpieA.hoverSide === 'left' ? 'right' : 'left';
+                magpieB.hoverScreenY = (Math.random() < MAGPIE_MEGA_LOW_ENTRY_CHANCE)
+                    ? 60 + Math.random() * 260
+                    : 60;
+                magpieB.enterElapsed = 0;
+                magpieB.phase = 'entering';
+            }
+
+            if (magpieB.phase !== 'idle') {
+                updateOneMagpie(magpieB, dtSeconds, false);
+            }
+        }
+
+        // Draws one magpie instance at its current world position - called
+        // from within the same camera-transformed context the player itself
+        // is drawn in, so no separate coordinate handling is needed here.
+        function renderOneMagpie(m) {
+            if (m.phase === 'idle') return;
             const sprite = magpieSpriteImg;
             if (!sprite || !sprite.complete || sprite.naturalWidth === 0) return;
             const h = MAGPIE_SIZE, w = h * (sprite.width / sprite.height);
-            const wiggleAngle = Math.sin(magpieWiggleTime * MAGPIE_WIGGLE_SPEED) * MAGPIE_WIGGLE_AMOUNT;
+            const wiggleAngle = Math.sin(m.wiggleTime * MAGPIE_WIGGLE_SPEED) * MAGPIE_WIGGLE_AMOUNT;
             // Assumes the sprite art faces right by default, mirroring it
-            // whenever travel is right-to-left so it visually faces the
-            // way it's actually flying rather than always facing one way
-            // regardless of direction. While hovering, magpieHoverSide
-            // already tells us which way the upcoming swoop will head
-            // (hovering on the right means the next swoop heads left), so
-            // it can face the correct way even before the swoop starts.
-            // If the source art actually faces left instead, just invert
-            // this one condition.
-            const movingLeft = magpiePhase === 'swooping'
-                ? (magpieSwoopEndX < magpieSwoopStartX)
-                : (magpieHoverSide === 'right');
+            // whenever travel is right-to-left so it visually faces the way
+            // it's actually flying rather than always facing one way
+            // regardless of direction. While hovering, hoverSide already
+            // tells us which way the upcoming swoop will head (hovering on
+            // the right means the next swoop heads left), so it can face the
+            // correct way even before the swoop starts. If the source art
+            // actually faces left instead, just invert this one condition.
+            const movingLeft = m.phase === 'swooping'
+                ? (m.swoopEndX < m.swoopStartX)
+                : (m.hoverSide === 'right');
             ctx.save();
-            ctx.translate(magpieX, magpieY);
+            ctx.translate(m.x, m.y);
             ctx.rotate(wiggleAngle);
             if (movingLeft) ctx.scale(-1, 1);
             ctx.drawImage(sprite, -w / 2, -h / 2, w, h);
             ctx.restore();
+        }
+
+        function renderMagpie() {
+            if (!magpieActive) return;
+            renderOneMagpie(magpieA);
+            renderOneMagpie(magpieB);
         }
 
         function updatePhysics(dt) {
@@ -19801,6 +19921,11 @@
             let sprite = player.state === 'crawl' ? (player.animFrame === 0 ? activeSprites.crawl1 : activeSprites.crawl2) : (player.state === 'jump' ? activeSprites.jump : (player.state === 'walk' ? (player.animFrame === 0 ? activeSprites.walk1 : activeSprites.walk2) : (player.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2)));
             if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
                 let rH = player.state === 'crawl' ? 70 * 4/9 : (player.state === 'jump' ? 70 * 0.8 : 70);
+                if (magpieModeOn && player.state === 'crawl') {
+                    rH *= MAGPIE_SPRITE_CRAWL_SCALE_BOOST;
+                } else if (magpieModeOn && player.state === 'walk') {
+                    rH *= MAGPIE_SPRITE_WALK_SCALE_BOOST;
+                }
                 if (selectedCharacter === 'bobot' && player.state === 'crawl') {
                     rH *= BOBOT_CRAWL_SCALE_BOOST;
                 } else if (selectedCharacter === 'bobot' && player.state === 'jump') {
