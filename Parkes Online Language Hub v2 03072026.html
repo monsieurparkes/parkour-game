@@ -131,6 +131,11 @@
             background: #fafaf9; /* Porcelain Whiteboard Color */
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none; /* iOS's long-press "copy/share" callout can trigger the same blue-highlight artifact */
         }
 
         /* Portrait screens (phones, and tablets held upright): fill the viewport instead of
@@ -1884,6 +1889,10 @@
                                     <input type="checkbox" id="kart-challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
                                     <label for="kart-challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
                                 </div>
+                                <div class="hub-checkbox-row">
+                                    <input type="checkbox" id="kart-fast-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                    <label for="kart-fast-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏎️ Fast Mode</label>
+                                </div>
                             </div>
                         </div>
 
@@ -3475,7 +3484,8 @@
 
         <!-- Assessment Results Screen: shown once every word has been collected -->
         <div id="results-screen" class="dyslexic-font">
-            <div class="bg-white p-8 rounded-3xl max-w-lg w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 space-y-4 interactive">
+            <div class="bg-white p-8 rounded-3xl max-w-lg w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 space-y-4 interactive relative">
+                <img id="results-character-preview" alt="" style="display:none; position:absolute; top:14px; right:14px; width:60px; height:82px; object-fit:contain;">
                 <div class="text-6xl">🏆</div>
                 <h2 class="text-2xl font-black text-slate-800">Well Done!</h2>
                 <p id="results-modes-played" class="text-[11px] font-bold text-slate-400 -mt-2 leading-relaxed" style="display:none;"></p>
@@ -3543,6 +3553,17 @@
             crawl2: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/3a574b446b83361e1d208d81cac3f8d9c469555f/BOBOTCRAWL2.png'
         };
 
+        // Cher: a flying character with only two frames total (no separate
+        // walk/jump/crawl art needed, since she never touches those states -
+        // see selectedCharacter === 'cher' handling in updatePhysics).
+        const SPRITE_URLS_CHER = {
+            idle1: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/CHERIDLE1.png',
+            idle2: 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/CHERIDLE2.png'
+        };
+        const CHER_ACCEL_EASE = 0.18; // how quickly Cher's actual velocity eases toward its target per frame - not instant, for a less start/stop feel
+        const CHER_TILT_FACTOR = 0.18; // how much of her direction-of-travel angle actually shows as a sprite tilt - kept slight, not a full rotation
+        const CHER_TILT_EASE = 0.2; // how quickly that tilt itself eases toward its target
+
         const keys = {};
 
         // ==================================================================
@@ -3568,6 +3589,7 @@
         }
         const SPRITE_URLS_MM = buildMagpieSpriteUrls(SPRITE_URLS);
         const SPRITE_URLS_BOBOT_MM = buildMagpieSpriteUrls(SPRITE_URLS_BOBOT);
+        const SPRITE_URLS_CHER_MM = buildMagpieSpriteUrls(SPRITE_URLS_CHER);
         const MAGPIE_IMAGE_URL = MAGPIE_MODE_ASSET_BASE + 'MAGPIE.png';
         const MAGPIE_SWOOP_SOUND_URL = MAGPIE_MODE_ASSET_BASE + 'swoopsound.mp3';
 
@@ -3592,6 +3614,8 @@
         // Magpie Mode state
         let imagesMM = {}, imagesMMLoaded = false;
         let imagesBobotMM = {}, imagesBobotMMLoaded = false;
+        let imagesCher = {}, imagesCherLoaded = false;
+        let imagesCherMM = {}, imagesCherMMLoaded = false;
         let magpieSpriteImg = null;
         let magpieSwoopAudio = null;
         let magpieModeOn = false; // true for EITHER Magpie Mode or Mega Magpie Mode - sprite selection etc. don't need to distinguish between them
@@ -3600,6 +3624,7 @@
         let roundHadMegaMagpieMode = false;
         let roundHadListeningOnly = false;
         let roundHadExtraLocations = false;
+        let roundCharacterUsed = 'parkour'; // which character was actually played this round, snapshotted so the results screen reflects it even if the selection changes afterward
         let magpieDeductionTotal = 0; // running total of points actually lost to magpie hits this round, for the results screen's true score
         let magpieActive = false; // true only while a quest/picture round with Magpie Mode is actually in progress
         // Each magpie is its own small state object so Mega Magpie Mode can
@@ -3867,6 +3892,23 @@
         // middle - purely for visual/track-shape variety, kept well clear of the
         // checkpoint/finish zones on the top/bottom straights.
         const KART_NOTCH = { x: 250, y: 550, w: 250, h: 300 };
+        // A second notch on the opposite side, offset differently (not a mirror
+        // image) so the track isn't perfectly symmetric, plus a circular island
+        // obstacle on the top straight - together turning the plain rectangular
+        // ring into something with real chicanes to navigate. Both are placed
+        // clear of every fixed item slot and the checkpoint/finish bands.
+        const KART_NOTCH_2 = { x: 1900, y: 150, w: 150, h: 200 };
+        // Two more chicanes, on the bottom and top straights this time (the
+        // first pair only touched the left/right sides) - both placed clear
+        // of the finish/checkpoint bands and every item slot.
+        const KART_NOTCH_3 = { x: 50, y: 1050, w: 280, h: 140 };
+        const KART_NOTCH_4 = { x: 2050, y: 0, w: 300, h: 150 };
+        const KART_ISLAND = { x: 950, y: 175, r: 90 };
+        // Two further islands, one on the bottom straight and one on the
+        // left straight, so every side of the loop has something to weave
+        // around rather than just the top.
+        const KART_ISLAND_2 = { x: 1800, y: 1250, r: 80 };
+        const KART_ISLAND_3 = { x: 150, y: 700, r: 60 };
         const KART_FINISH_X = 1200; // x-position of the finish line / checkpoint (vertical bands)
         // Spread around all four sides of the track, and deliberately kept well clear
         // of the spawn point / finish line area (around x:1100-1300, y:1050-1400) so
@@ -3879,6 +3921,9 @@
         ];
         const KART_MAX_SPEED = 3.375, KART_REVERSE_MAX_SPEED = 1.5, KART_OFFTRACK_MAX_SPEED = 1.125;
         const KART_ACCEL = 0.09, KART_TURN_RATE = 3.4, KART_FRICTION = 0.985;
+        const KART_START_X = 1100, KART_START_Y = 1225, KART_START_ANGLE = 0;
+        let kartFastModeOn = false; // the settings-screen toggle's current value, off by default
+        const KART_FAST_MODE_SPEED_MULTIPLIER = 1.45;
         const KART_ANGULAR_EASE = 6; // how quickly the turn rate itself ramps up/down toward its target
 
         // ================================================================
@@ -3970,9 +4015,11 @@
             const inOuter = x >= 0 && x <= KART_WORLD_W && y >= 0 && y <= KART_WORLD_H;
             const inInfield = x >= KART_INFIELD.x && x <= KART_INFIELD.x + KART_INFIELD.w &&
                                y >= KART_INFIELD.y && y <= KART_INFIELD.y + KART_INFIELD.h;
-            const inNotch = x >= KART_NOTCH.x && x <= KART_NOTCH.x + KART_NOTCH.w &&
-                             y >= KART_NOTCH.y && y <= KART_NOTCH.y + KART_NOTCH.h;
-            return inOuter && !inInfield && !inNotch;
+            const inRect = (r) => x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h;
+            const inCircle = (c) => { const dx = x - c.x, dy = y - c.y; return (dx * dx + dy * dy) <= (c.r * c.r); };
+            const blocked = inInfield || inRect(KART_NOTCH) || inRect(KART_NOTCH_2) || inRect(KART_NOTCH_3) || inRect(KART_NOTCH_4) ||
+                             inCircle(KART_ISLAND) || inCircle(KART_ISLAND_2) || inCircle(KART_ISLAND_3);
+            return inOuter && !blocked;
         }
 
         // ---- Pseudo-3D "Mode 7 style" behind-the-kart camera ----
@@ -3987,6 +4034,7 @@
         const KART_FOCAL_LENGTH = 130;
         const KART_MAX_DRAW_DISTANCE = 2600;
         let kartBufferCanvas = null, kartBufferCtx = null, kartBufferImageData = null;
+        let kartLavaTime = 0; // updated once per frame in renderKartFloor, not per-pixel - drives the bubbling lava animation
 
         function ensureKartBuffer() {
             if (kartBufferCanvas) return;
@@ -4004,11 +4052,12 @@
         function sampleTrackColor(worldX, worldY) {
             const inInfield = worldX >= KART_INFIELD.x && worldX <= KART_INFIELD.x + KART_INFIELD.w &&
                                worldY >= KART_INFIELD.y && worldY <= KART_INFIELD.y + KART_INFIELD.h;
-            const inNotch = worldX >= KART_NOTCH.x && worldX <= KART_NOTCH.x + KART_NOTCH.w &&
-                             worldY >= KART_NOTCH.y && worldY <= KART_NOTCH.y + KART_NOTCH.h;
-            if (inInfield || inNotch) return [74, 222, 128]; // grass green
+            const inRect = (r) => worldX >= r.x && worldX <= r.x + r.w && worldY >= r.y && worldY <= r.y + r.h;
+            const inCircle = (c) => { const dx = worldX - c.x, dy = worldY - c.y; return (dx * dx + dy * dy) <= (c.r * c.r); };
             const inOuter = worldX >= 0 && worldX <= KART_WORLD_W && worldY >= 0 && worldY <= KART_WORLD_H;
-            if (!inOuter) return [74, 222, 128]; // grass beyond the track's world bounds too
+            const blocked = inInfield || inRect(KART_NOTCH) || inRect(KART_NOTCH_2) || inRect(KART_NOTCH_3) || inRect(KART_NOTCH_4) ||
+                             inCircle(KART_ISLAND) || inCircle(KART_ISLAND_2) || inCircle(KART_ISLAND_3);
+            if (blocked || !inOuter) return sampleLavaColor(worldX, worldY);
 
             // Finish line: a vertical band spanning the FULL width of the bottom
             // straight (perpendicular to the left-right direction of travel there),
@@ -4029,6 +4078,22 @@
             // Simple road-marking stripes for visual interest/depth cues
             const stripe = (Math.floor(worldX / 120) + Math.floor(worldY / 120)) % 2 === 0;
             return stripe ? [87, 83, 78] : [78, 74, 69];
+        }
+
+        // Bubbling lava: a dark base colour with sparse, pulsing brighter spots -
+        // cheap per-pixel maths (no sqrt, no per-pixel Date/performance calls,
+        // since kartLavaTime is refreshed once per frame by renderKartFloor).
+        function sampleLavaColor(worldX, worldY) {
+            const bubble = Math.sin(worldX * 0.025 + kartLavaTime) * Math.sin(worldY * 0.025 - kartLavaTime * 1.3);
+            if (bubble > 0.75) {
+                const glow = (bubble - 0.75) / 0.25; // 0-1, brighter toward the centre of each bubble
+                return [
+                    200 + glow * 55,
+                    90 + glow * 100,
+                    20 + glow * 20
+                ];
+            }
+            return [150, 35, 10];
         }
 
         function renderKartSky() {
@@ -13414,9 +13479,9 @@
         }
 
         function getActiveSprites() {
-            const normal = selectedCharacter === 'bobot' ? imagesBobot : images;
+            const normal = selectedCharacter === 'bobot' ? imagesBobot : (selectedCharacter === 'cher' ? imagesCher : images);
             if (!magpieModeOn) return normal;
-            const mm = selectedCharacter === 'bobot' ? imagesBobotMM : imagesMM;
+            const mm = selectedCharacter === 'bobot' ? imagesBobotMM : (selectedCharacter === 'cher' ? imagesCherMM : imagesMM);
             const merged = {};
             Object.keys(normal).forEach(key => {
                 const mmSprite = mm[key];
@@ -13543,6 +13608,28 @@
                 imagesBobotMM[k].src = u;
             });
 
+            let cherCount = 0, cherTotal = Object.keys(SPRITE_URLS_CHER).length;
+            Object.entries(SPRITE_URLS_CHER).forEach(([k, u]) => {
+                imagesCher[k] = new Image();
+                imagesCher[k].onload = () => { if (++cherCount === cherTotal) imagesCherLoaded = true; };
+                imagesCher[k].onerror = () => {
+                    console.warn(`Could not load Cher sprite: ${k}. Falling back to drawings.`);
+                    if (++cherCount === cherTotal) imagesCherLoaded = true;
+                };
+                imagesCher[k].src = u;
+            });
+
+            let cherMMCount = 0, cherMMTotal = Object.keys(SPRITE_URLS_CHER_MM).length;
+            Object.entries(SPRITE_URLS_CHER_MM).forEach(([k, u]) => {
+                imagesCherMM[k] = new Image();
+                imagesCherMM[k].onload = () => { if (++cherMMCount === cherMMTotal) imagesCherMMLoaded = true; };
+                imagesCherMM[k].onerror = () => {
+                    console.warn(`Could not load Magpie Mode Cher sprite: ${k}. Falling back to the normal sprite.`);
+                    if (++cherMMCount === cherMMTotal) imagesCherMMLoaded = true;
+                };
+                imagesCherMM[k].src = u;
+            });
+
             magpieSpriteImg = new Image();
             magpieSpriteImg.onerror = () => console.warn('Could not load the magpie sprite yet - Magpie Mode will run without a visible magpie until MAGPIE.png is uploaded.');
             magpieSpriteImg.src = MAGPIE_IMAGE_URL;
@@ -13583,6 +13670,15 @@
                     keys['ShiftLeft'] = false;
                     keys['ShiftRight'] = false;
                 }
+            });
+            window.addEventListener('blur', () => {
+                // If focus shifts away while a key is held (clicking elsewhere,
+                // switching tabs, an iframe boundary, etc.) the browser can
+                // fail to deliver the matching keyup - leaving that key
+                // permanently "held" and the character moving on its own.
+                // Nothing can be reliably tracked while unfocused anyway, so
+                // clear every key now rather than risk one staying stuck.
+                Object.keys(keys).forEach(code => { keys[code] = false; });
             });
 
             const ttsDateBtn = document.getElementById('tts-date-btn');
@@ -14491,9 +14587,44 @@
 
         const HUB_CHARACTERS = [
             { id: 'parkour', label: 'P4RK-0UR UNIT' },
-            { id: 'bobot', label: 'Bobot' }
+            { id: 'bobot', label: 'Bobot' },
+            { id: 'cher', label: 'Cher' }
         ];
         let playerIdleAnimTimer = null;
+
+        // Whenever the user returns to the main hub, every mode-specific
+        // toggle should start fresh rather than carry over from whatever
+        // was last played - this is what previously let things like Magpie
+        // Mode sprites, or a prior activity's settings screen, bleed into
+        // an unrelated later game.
+        function resetModeSelections() {
+            magpieModeOn = false;
+            megaMagpieModeOn = false;
+            challengeModeEnabled = false;
+            extraLocationsEnabled = false;
+            colourCodedEnabled = true;
+            selectedCharacter = 'parkour';
+            kartFastModeOn = false;
+            const checkboxDefaults = {
+                'colour-coded': true,
+                'challenge-mode': false,
+                'magpie-mode-quest': false,
+                'extra-locations-quest': false,
+                'magpie-mode-picture': false,
+                'mega-magpie-mode-picture': false,
+                'picture-challenge-mode': false,
+                'extra-locations-picture': false,
+                'picture-colour-coded': true,
+                'potato-challenge-mode': false,
+                'potato-full-world-mode': false,
+                'kart-challenge-mode': false,
+                'kart-fast-mode': false,
+            };
+            Object.keys(checkboxDefaults).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.checked = checkboxDefaults[id];
+            });
+        }
 
         function showLandingStep(step) {
             ['wheel', 'submode', 'kart-submode', 'player', 'settings', 'lava-settings'].forEach(s => {
@@ -14501,8 +14632,11 @@
                 if (el) el.style.display = (s === step) ? '' : 'none';
             });
             const innerWrapper = document.getElementById('landing-flow-inner');
-            if (innerWrapper) innerWrapper.classList.toggle('landing-wide', step === 'settings');
-            if (step === 'wheel') renderToolGrid();
+            if (innerWrapper) innerWrapper.classList.toggle('landing-wide', step === 'settings' || step === 'player');
+            if (step === 'wheel') {
+                resetModeSelections();
+                renderToolGrid();
+            }
             if (step === 'player') {
                 if (selectedLobbyMode === 'quest') {
                     magpieModeOn = document.getElementById('magpie-mode-quest').checked;
@@ -14651,13 +14785,22 @@
                 HUB_CHARACTERS.forEach(ch => {
                     const img = document.getElementById('player-idle-img-' + ch.id);
                     if (!img) return;
-                    const normalSet = ch.id === 'bobot' ? imagesBobot : images;
-                    const mmSet = ch.id === 'bobot' ? imagesBobotMM : imagesMM;
+                    const normalSet = ch.id === 'bobot' ? imagesBobot : (ch.id === 'cher' ? imagesCher : images);
+                    const mmSet = ch.id === 'bobot' ? imagesBobotMM : (ch.id === 'cher' ? imagesCherMM : imagesMM);
                     const key = (frame % 2 === 0) ? 'idle1' : 'idle2';
                     const mmSprite = mmSet[key];
                     const spriteImg = (magpieModeOn && mmSprite && mmSprite.complete && mmSprite.naturalWidth !== 0) ? mmSprite : normalSet[key];
                     if (spriteImg && spriteImg.src) img.src = spriteImg.src;
                 });
+                const resultsImg = document.getElementById('results-character-preview');
+                if (resultsImg) {
+                    const normalSet = roundCharacterUsed === 'bobot' ? imagesBobot : (roundCharacterUsed === 'cher' ? imagesCher : images);
+                    const mmSet = roundCharacterUsed === 'bobot' ? imagesBobotMM : (roundCharacterUsed === 'cher' ? imagesCherMM : imagesMM);
+                    const key = (frame % 2 === 0) ? 'idle1' : 'idle2';
+                    const mmSprite = mmSet[key];
+                    const spriteImg = (roundHadMagpieMode && mmSprite && mmSprite.complete && mmSprite.naturalWidth !== 0) ? mmSprite : normalSet[key];
+                    if (spriteImg && spriteImg.src) resultsImg.src = spriteImg.src;
+                }
                 frame++;
             };
             tick();
@@ -15133,6 +15276,7 @@
             const nameInput = document.getElementById('kart-student-name-input');
             studentName = nameInput ? nameInput.value.trim() : '';
             challengeModeEnabled = document.getElementById('kart-challenge-mode').checked;
+            kartFastModeOn = document.getElementById('kart-fast-mode').checked;
 
             startKartGame();
         }
@@ -15163,7 +15307,7 @@
             lastTime = 0;
             resetCollectedWordsLog();
 
-            kart.x = 1100; kart.y = 1225; kart.angle = 0; kart.speed = 0; kart.angularVelocity = 0;
+            kart.x = KART_START_X; kart.y = KART_START_Y; kart.angle = KART_START_ANGLE; kart.speed = 0; kart.angularVelocity = 0;
 
             kartItems = KART_ITEM_SLOTS.slice(0, kartVocabularyList.length).map((slot, i) => {
                 const word = kartVocabularyList[i];
@@ -15207,6 +15351,13 @@
 
             speakSequence([feedbackText, kartCurrentTargetWord]);
             setTimeout(() => showTtsAttentionHint('kart-tts-button'), 400);
+        }
+        function showKartLavaFeedback() {
+            const banner = document.getElementById('kart-wrong-banner');
+            banner.textContent = '🔥 Into the lava! Back to the start...';
+            banner.classList.remove('hidden');
+            clearTimeout(kartWrongBannerTimeout);
+            kartWrongBannerTimeout = setTimeout(() => banner.classList.add('hidden'), 1800);
         }
 
         function nextKartTarget(options) {
@@ -16608,6 +16759,7 @@
             roundHadMegaMagpieMode = megaMagpieModeOn;
             roundHadListeningOnly = challengeModeEnabled;
             roundHadExtraLocations = extraLocationsEnabled;
+            roundCharacterUsed = selectedCharacter;
             magpieDeductionTotal = 0;
             magpieActive = magpieModeOn;
             magpieA = createMagpieInstance();
@@ -17070,6 +17222,18 @@
                 modesPlayedEl.style.display = 'block';
             } else {
                 modesPlayedEl.style.display = 'none';
+            }
+
+            // A small animated preview of whichever character (and Magpie
+            // Mode state) was actually used this round, at a glance - only
+            // meaningful for Sentence/Picture Parkour, where character
+            // selection actually applies.
+            const characterPreviewEl = document.getElementById('results-character-preview');
+            if (selectedLobbyMode === 'quest' || selectedLobbyMode === 'picture') {
+                characterPreviewEl.style.display = 'block';
+                startPlayerIdleAnimation();
+            } else {
+                characterPreviewEl.style.display = 'none';
             }
 
             const trueScoreRowEl = document.getElementById('results-true-score-row');
@@ -17595,9 +17759,11 @@
             });
 
             const activeSprites = getActiveSprites();
-            let sprite = player.state === 'jump' ? activeSprites.jump : (player.state === 'walk' ? (player.animFrame === 0 ? activeSprites.walk1 : activeSprites.walk2) : (player.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2));
+            let sprite = selectedCharacter === 'cher'
+                ? (player.state === 'jump' ? activeSprites.idle1 : (player.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2))
+                : (player.state === 'jump' ? activeSprites.jump : (player.state === 'walk' ? (player.animFrame === 0 ? activeSprites.walk1 : activeSprites.walk2) : (player.animFrame === 0 ? activeSprites.idle1 : activeSprites.idle2)));
             if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
-                let rH = player.state === 'jump' ? 70 * 0.8 : 70;
+                let rH = (player.state === 'jump' && selectedCharacter !== 'cher') ? 70 * 0.8 : 70;
                 let rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
                 ctx.save();
                 if (!player.facingRight) {
@@ -17925,24 +18091,24 @@
         function updateKartPhysics(dt) {
             const turnInput = (keys['ArrowLeft'] || keys['KeyA'] ? -1 : 0) + (keys['ArrowRight'] || keys['KeyD'] ? 1 : 0);
             const accelInput = (keys['ArrowUp'] || keys['KeyW'] || keys['btn-jump'] ? 1 : 0) - (keys['ArrowDown'] || keys['KeyS'] ? 1 : 0);
-            const onTrack = isKartOnTrack(kart.x, kart.y);
+
+            const speedMult = kartFastModeOn ? KART_FAST_MODE_SPEED_MULTIPLIER : 1;
+            const effectiveMaxSpeed = KART_MAX_SPEED * speedMult;
+            const effectiveAccel = KART_ACCEL * speedMult;
 
             if (accelInput > 0) {
-                kart.speed = Math.min(kart.speed + KART_ACCEL * dt, onTrack ? KART_MAX_SPEED : KART_OFFTRACK_MAX_SPEED);
+                kart.speed = Math.min(kart.speed + effectiveAccel * dt, effectiveMaxSpeed);
             } else if (accelInput < 0) {
-                kart.speed = Math.max(kart.speed - KART_ACCEL * dt, -KART_REVERSE_MAX_SPEED);
+                kart.speed = Math.max(kart.speed - effectiveAccel * dt, -KART_REVERSE_MAX_SPEED);
             } else {
                 kart.speed *= Math.pow(KART_FRICTION, dt);
                 if (Math.abs(kart.speed) < 0.05) kart.speed = 0;
-            }
-            if (!onTrack) {
-                kart.speed = Math.max(-KART_OFFTRACK_MAX_SPEED, Math.min(kart.speed, KART_OFFTRACK_MAX_SPEED));
             }
 
             // Turning eases toward a target rate rather than snapping to it instantly,
             // and that target rate itself scales with current speed - barely any turn
             // authority at a crawl, full authority at top speed.
-            const speedFactor = Math.min(1, Math.abs(kart.speed) / KART_MAX_SPEED);
+            const speedFactor = Math.min(1, Math.abs(kart.speed) / effectiveMaxSpeed);
             const targetAngularVelocity = turnInput * KART_TURN_RATE * speedFactor;
             kart.angularVelocity += (targetAngularVelocity - kart.angularVelocity) * Math.min(1, KART_ANGULAR_EASE * dt);
             if (Math.abs(kart.speed) > 0.2) {
@@ -17962,6 +18128,19 @@
                 kart.x = newX; // slide along a wall hit at an angle, rather than hard-stopping
             } else if (!kartLevelEditorBlocksPosition(kart.x, newY)) {
                 kart.y = newY;
+            }
+
+            // Touching the lava sends the kart straight back to the start line,
+            // rather than the old "just drive slower on the grass" penalty.
+            if (!isKartOnTrack(kart.x, kart.y)) {
+                kart.x = KART_START_X;
+                kart.y = KART_START_Y;
+                kart.angle = KART_START_ANGLE;
+                kart.speed = 0;
+                kart.angularVelocity = 0;
+                showKartLavaFeedback();
+                document.getElementById('kart-lap-text').textContent = kartLap + 1;
+                return;
             }
 
             // Checkpoint (top straight) then finish line (bottom straight), in that order,
@@ -18012,6 +18191,7 @@
 
         function renderKartFloor() {
             ensureKartBuffer();
+            kartLavaTime = performance.now() / 300;
             const data = kartBufferImageData.data;
             const angleRad = kart.angle * Math.PI / 180;
             const cosA = Math.cos(angleRad), sinA = Math.sin(angleRad);
@@ -18401,6 +18581,7 @@
             let moving = false;
             const isRunning = keys['ShiftLeft'] || keys['ShiftRight'];
             const cSpeed = customMoveSpeed * (isRunning ? 2.4 : 1.0);
+            const isCher = selectedCharacter === 'cher';
 
             const nearInteriorDoor = player.x < 70;
             const jumpKeyDown = keys['ArrowUp'] || keys['KeyW'] || keys['Space'];
@@ -18422,34 +18603,68 @@
                 if (Math.abs(player.vx) < 0.1) player.vx = 0;
             }
 
-            if (jumpKeyDown && player.jumpKeyReleased && player.grounded) {
-                player.vy = jumpForce;
-                player.grounded = false;
-                playJumpSound();
+            if (isCher) {
+                if (jumpKeyDown) {
+                    player.vy = -cSpeed;
+                    moving = true;
+                } else if (keys['ArrowDown'] || keys['KeyS']) {
+                    player.vy = cSpeed;
+                    moving = true;
+                } else {
+                    player.vy = 0;
+                }
+                player.jumpKeyReleased = !jumpKeyDown;
+            } else {
+                if (jumpKeyDown && player.jumpKeyReleased && player.grounded) {
+                    player.vy = jumpForce;
+                    player.grounded = false;
+                    playJumpSound();
+                }
+                player.jumpKeyReleased = !jumpKeyDown;
+                player.vy += gravity * dt;
             }
-            player.jumpKeyReleased = !jumpKeyDown;
-
-            player.vy += gravity * dt;
             player.x += player.vx * dt;
             player.y += player.vy * dt;
 
             const floorY = 330;
-            if (player.y >= floorY) {
-                player.y = floorY;
-                player.vy = 0;
-                player.grounded = true;
+            if (isCher) {
+                const ceilingY = 60; // this room is small and enclosed, so a modest ceiling is enough
+                if (player.y < ceilingY) { player.y = ceilingY; player.vy = 0; }
+                if (player.y >= floorY) {
+                    player.y = floorY;
+                    player.vy = 0;
+                    player.grounded = true;
+                } else {
+                    player.grounded = false;
+                }
+            } else {
+                if (player.y >= floorY) {
+                    player.y = floorY;
+                    player.vy = 0;
+                    player.grounded = true;
+                }
             }
 
             const minX = 10, maxX = 420;
             if (player.x < minX) player.x = minX;
             if (player.x > maxX) player.x = maxX;
 
+            if (isCher) {
+                player.state = 'idle';
+                player.animTimer += dt;
+                const cherThres = moving ? (isRunning ? 4 : 6) : 20;
+                if (player.animTimer > cherThres) {
+                    player.animFrame = (player.animFrame + 1) % 2;
+                    player.animTimer = 0;
+                }
+            } else {
             player.state = !player.grounded ? 'jump' : (Math.abs(player.vx) > 0.5 && moving ? 'walk' : 'idle');
             player.animTimer += dt;
             if (player.animTimer > 12) {
                 player.animFrame = (player.animFrame + 1) % 2;
                 player.animTimer = 0;
                 if (player.state === 'walk') playFootstepSound();
+            }
             }
 
             // Collecting the word(s) inside this shop, if any are assigned here
@@ -18673,6 +18888,20 @@
             renderOneMagpie(magpieB);
         }
 
+        // The ground's actual height at a given world x - flat at 815 up to
+        // the beach, sloping down to 1110 across the beach itself (x:1900-2450,
+        // matching the slope collision below exactly), then flat at 1110 from
+        // there into the sand and water. Used by Cher's ground-only clamp so
+        // she follows the real contour of the land instead of a single flat
+        // barrier that would wall her out of the water entirely.
+        function getGroundYAtX(centerX) {
+            if (centerX >= 1900 && centerX <= 2450) {
+                const ratio = (centerX - 1900) / (2450 - 1900);
+                return 815 + ratio * (1110 - 815);
+            }
+            return centerX > 2450 ? 1110 : 815;
+        }
+
         function updatePhysics(dt) {
             if (dt === 0) return;
 
@@ -18691,8 +18920,47 @@
 
             player.isUnderwater = player.x + 25 > waterX && player.y + 70 > waterY;
 
-            let isCrawl = (keys['ArrowDown'] || keys['KeyS'] || keys['btn-down']) && player.grounded;
+            const isCher = selectedCharacter === 'cher';
+            let isCrawl = !isCher && (keys['ArrowDown'] || keys['KeyS'] || keys['btn-down']) && player.grounded;
             if (isCrawl) cSpeed *= 0.6;
+
+            if (isCher) {
+                // Flies freely rather than jumping - up/down move her at
+                // the same speed as left/right (including the run boost),
+                // with no gravity. Entering a shop while grounded near its
+                // door still takes priority, same as every other character.
+                // Velocity eases toward its target rather than snapping
+                // instantly, for a less start/stop feel, and a slight tilt
+                // toward her direction of travel is computed here for
+                // rendering to pick up.
+                const leftDown = keys['ArrowLeft'] || keys['KeyA'];
+                const rightDown = keys['ArrowRight'] || keys['KeyD'];
+                const upKeyDown = keys['ArrowUp'] || keys['KeyW'] || keys['Space'];
+                const downDown = keys['ArrowDown'] || keys['KeyS'] || keys['btn-down'];
+
+                if (upKeyDown && player.jumpKeyReleased) {
+                    const nearbyDoorIndex = findNearbyShopDoor();
+                    if (nearbyDoorIndex !== null && player.grounded) {
+                        enterShop(nearbyDoorIndex);
+                    }
+                    player.jumpKeyReleased = false;
+                } else if (!upKeyDown) {
+                    player.jumpKeyReleased = true;
+                }
+
+                const targetVx = leftDown ? -cSpeed : (rightDown ? cSpeed : 0);
+                const targetVy = upKeyDown ? -cSpeed : (downDown ? cSpeed : 0);
+                const accelEase = Math.min(1, CHER_ACCEL_EASE * dt);
+                player.vx += (targetVx - player.vx) * accelEase;
+                player.vy += (targetVy - player.vy) * accelEase;
+                if (leftDown) player.facingRight = false;
+                if (rightDown) player.facingRight = true;
+                moving = Math.abs(player.vx) > 0.15 || Math.abs(player.vy) > 0.15;
+
+                const cherSpeed = Math.sqrt(player.vx * player.vx + player.vy * player.vy);
+                const targetTilt = cherSpeed > 0.15 ? (player.vy / cherSpeed) * CHER_TILT_FACTOR : 0;
+                player.cherTilt = (player.cherTilt || 0) + (targetTilt - (player.cherTilt || 0)) * Math.min(1, CHER_TILT_EASE * dt);
+            } else {
 
             if (keys['ArrowLeft'] || keys['KeyA']) {
                 player.vx = -cSpeed;
@@ -18707,33 +18975,34 @@
                 if (Math.abs(player.vx) < 0.1) player.vx = 0;
             }
 
-            if (keys['ArrowUp'] || keys['KeyW'] || keys['Space']) {
-                if (player.jumpKeyReleased) {
-                    const nearbyDoorIndex = findNearbyShopDoor();
-                    if (nearbyDoorIndex !== null && player.grounded) {
-                        enterShop(nearbyDoorIndex);
-                    } else if (player.isUnderwater) {
-                        player.vy = -3.2; 
-                        player.grounded = false;
-                        playSwimSound();
-                    } else if (player.grounded) {
-                        player.vy = jumpForce;
-                        player.grounded = false;
-                        player.jumpCount = 1;
-                        playJumpSound();
-                    } else if (player.jumpCount < 2) {
-                        player.vy = jumpForce; 
-                        player.jumpCount = 2;
-                        playJumpSound();
+                if (keys['ArrowUp'] || keys['KeyW'] || keys['Space']) {
+                    if (player.jumpKeyReleased) {
+                        const nearbyDoorIndex = findNearbyShopDoor();
+                        if (nearbyDoorIndex !== null && player.grounded) {
+                            enterShop(nearbyDoorIndex);
+                        } else if (player.isUnderwater) {
+                            player.vy = -3.2; 
+                            player.grounded = false;
+                            playSwimSound();
+                        } else if (player.grounded) {
+                            player.vy = jumpForce;
+                            player.grounded = false;
+                            player.jumpCount = 1;
+                            playJumpSound();
+                        } else if (player.jumpCount < 2) {
+                            player.vy = jumpForce; 
+                            player.jumpCount = 2;
+                            playJumpSound();
+                        }
+                        player.jumpKeyReleased = false;
                     }
-                    player.jumpKeyReleased = false;
+                } else {
+                    player.jumpKeyReleased = true;
                 }
-            } else {
-                player.jumpKeyReleased = true;
-            }
 
-            const activeGravity = player.isUnderwater ? (gravity * 0.8) : gravity;
-            player.vy += activeGravity * dt;
+                const activeGravity = player.isUnderwater ? (gravity * 0.8) : gravity;
+                player.vy += activeGravity * dt;
+            }
 
             player.x += player.vx * dt; 
             player.y += player.vy * dt;
@@ -18752,7 +19021,22 @@
             const hbY = player.y + (70 - hbH); 
 
             const isDownDropping = (keys['ControlLeft'] || keys['ControlRight']) && (keys['ArrowDown'] || keys['KeyS'] || keys['btn-down']);
-            
+
+            if (isCher) {
+                // Flies straight through every platform, building, cloud, and
+                // tree - only the ground itself stops her descent, following
+                // its real contour (including the sloped beach) rather than
+                // a single flat barrier, and an explicit ceiling stops her
+                // flying off the top of the world.
+                const CHER_WORLD_MIN_Y = -300;
+                if (player.y < CHER_WORLD_MIN_Y) { player.y = CHER_WORLD_MIN_Y; player.vy = 0; }
+                const cherGroundY = getGroundYAtX(player.x + 25);
+                if (player.y + 70 > cherGroundY) {
+                    player.y = cherGroundY - 70;
+                    player.vy = 0;
+                    player.grounded = true;
+                }
+            } else {
             platforms.forEach(plat => { 
                 const hOverlap = hbX < plat.x + plat.w && hbX + hbW > plat.x;
                 if (hOverlap) {
@@ -18815,6 +19099,7 @@
                     player.grounded = true;
                 }
             }
+            }
 
             if (player.grounded) {
                 player.jumpCount = 0;
@@ -18822,6 +19107,18 @@
 
             const isSwimmingInOpenWater = player.isUnderwater && !player.grounded;
 
+            if (isCher) {
+                // Always alternates idle1/idle2 rather than freezing on one
+                // frame - faster while moving (feels like a wing-flap, even
+                // faster while running), slower and gentler while stationary.
+                player.state = 'idle';
+                player.animTimer += dt;
+                const cherThres = moving ? (isRunning ? 4 : 6) : 20;
+                if (player.animTimer > cherThres) {
+                    player.animFrame = (player.animFrame + 1) % 2;
+                    player.animTimer = 0;
+                }
+            } else {
             player.state = isCrawl ? 'crawl' : (isSwimmingInOpenWater || !player.grounded ? 'jump' : (Math.abs(player.vx) > 0.5 && moving ? 'walk' : 'idle'));
             player.animTimer += dt; 
             
@@ -18840,6 +19137,7 @@
                 }
             }
             if (player.state === 'crawl' && !moving) player.animFrame = 0;
+            }
 
             for (let i = successAnims.length - 1; i >= 0; i--) {
                 let anim = successAnims[i];
@@ -19930,11 +20228,19 @@
                 }
                 let rW = rH * (sprite.width / sprite.height), oX = (50 - rW) / 2, oY = (70 - rH);
                 ctx.save();
+                if (selectedCharacter === 'cher') {
+                    const centerX = player.x + 25, centerY = player.y + oY + 4 + rH / 2;
+                    ctx.translate(centerX, centerY);
+                    if (!player.facingRight) ctx.scale(-1, 1);
+                    ctx.rotate(player.facingRight ? (player.cherTilt || 0) : -(player.cherTilt || 0));
+                    ctx.drawImage(sprite, -rW / 2, -rH / 2, rW, rH);
+                } else {
                 if (!player.facingRight) {
                     ctx.scale(-1, 1);
                     ctx.translate(-(player.x + 25) * 2, 0);
                 }
                 ctx.drawImage(sprite, player.x + oX, player.y + oY + 4, rW, rH);
+                }
                 ctx.restore();
             } else {
                 ctx.save();
@@ -20136,6 +20442,13 @@
         window.addEventListener('orientationchange', () => setTimeout(applyGameContainerSizing, 100));
         ['fullscreenchange', 'webkitfullscreenchange', 'MSFullscreenChange'].forEach(evt => {
             document.addEventListener(evt, () => setTimeout(applyGameContainerSizing, 100));
+        });
+        window.addEventListener('pageshow', (event) => {
+            // If the browser restored this page from its back/forward cache
+            // (e.g. a student navigated away mid-game, then pressed Back) no
+            // JS re-runs at all - the exact frozen prior state, stale
+            // settings included, would otherwise just silently resume.
+            if (event.persisted) resetToConfig();
         });
 
         loadAssets();
