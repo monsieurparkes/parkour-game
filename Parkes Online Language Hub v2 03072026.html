@@ -3592,6 +3592,12 @@
         const SPRITE_URLS_CHER_MM = buildMagpieSpriteUrls(SPRITE_URLS_CHER);
         const MAGPIE_IMAGE_URL = MAGPIE_MODE_ASSET_BASE + 'MAGPIE.png';
         const MAGPIE_SWOOP_SOUND_URL = MAGPIE_MODE_ASSET_BASE + 'swoopsound.mp3';
+        const SOUNDBOARD_BASE = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/soundboard/';
+        const CHARACTER_SOUND_URLS = {
+            parkour: SOUNDBOARD_BASE + 'parkourwoopwoop.mp3',
+            bobot: SOUNDBOARD_BASE + 'bobotboumboum.mp3',
+            cher: SOUNDBOARD_BASE + 'cherouiouiohyeah.mp3'
+        };
 
         // Bobot's jump/crawl source images appear to have more padding than its idle sprites
         // (and more than the P4RK-0UR unit's equivalents), making Bobot look too small in
@@ -3618,6 +3624,8 @@
         let imagesCherMM = {}, imagesCherMMLoaded = false;
         let magpieSpriteImg = null;
         let magpieSwoopAudio = null;
+        let characterSoundAudio = { parkour: null, bobot: null, cher: null };
+        let characterWasChosen = false; // tracks whether the user has actively picked a character this player-select visit - selectedCharacter itself keeps its default so nothing elsewhere needs to handle an empty selection
         let magpieModeOn = false; // true for EITHER Magpie Mode or Mega Magpie Mode - sprite selection etc. don't need to distinguish between them
         let megaMagpieModeOn = false; // true only for the Mega variant specifically - gates the more intense spawn behaviour
         let roundHadMagpieMode = false; // snapshotted when a round starts, so the results screen reflects what was actually played even if the toggle changes afterward
@@ -4674,6 +4682,15 @@
                 const node = magpieSwoopAudio.cloneNode(true);
                 node.volume = 0.6;
                 node.play().catch(() => {}); // silently ignore - e.g. the file hasn't been uploaded yet, or autoplay was blocked
+            } catch(e) {}
+        }
+        function playCharacterSound(charId) {
+            const audio = characterSoundAudio[charId];
+            if (!fxEnabled || !audio) return;
+            try {
+                const node = audio.cloneNode(true);
+                node.volume = 0.7;
+                node.play().catch(() => {});
             } catch(e) {}
         }
 
@@ -13638,6 +13655,13 @@
             magpieSwoopAudio.onerror = () => console.warn('Could not load the magpie swoop sound yet - Magpie Mode will run silently until swoopsound.mp3 is uploaded.');
             magpieSwoopAudio.src = MAGPIE_SWOOP_SOUND_URL;
 
+            Object.keys(CHARACTER_SOUND_URLS).forEach(charId => {
+                const audio = new Audio();
+                audio.onerror = () => console.warn(`Could not load the ${charId} character sound yet - it will play silently until uploaded to the soundboard folder.`);
+                audio.src = CHARACTER_SOUND_URLS[charId];
+                characterSoundAudio[charId] = audio;
+            });
+
             const GAME_PREVENT_KEYS = new Set(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space', 'ShiftLeft', 'ShiftRight']);
 
             window.addEventListener('keydown', e => {
@@ -13688,6 +13712,7 @@
             };
 
             document.getElementById('start-button').onclick = () => {
+                if (!characterWasChosen) return;
                 if (selectedLobbyMode === 'lava') {
                     showLandingStep('lava-settings');
                 } else {
@@ -14604,6 +14629,7 @@
             extraLocationsEnabled = false;
             colourCodedEnabled = true;
             selectedCharacter = 'parkour';
+            characterWasChosen = false;
             kartFastModeOn = false;
             const checkboxDefaults = {
                 'colour-coded': true,
@@ -14638,6 +14664,7 @@
                 renderToolGrid();
             }
             if (step === 'player') {
+                characterWasChosen = false;
                 if (selectedLobbyMode === 'quest') {
                     magpieModeOn = document.getElementById('magpie-mode-quest').checked;
                 } else if (selectedLobbyMode === 'picture') {
@@ -14764,10 +14791,12 @@
             grid.innerHTML = '';
             HUB_CHARACTERS.forEach(ch => {
                 const card = document.createElement('div');
-                card.className = 'player-card-big hub-font' + (selectedCharacter === ch.id ? ' selected' : '');
+                card.className = 'player-card-big hub-font' + (characterWasChosen && selectedCharacter === ch.id ? ' selected' : '');
                 card.innerHTML = `<img id="player-idle-img-${ch.id}" alt="${ch.label}"><span class="text-xs font-extrabold" style="color:var(--hub-ink);">${ch.label}</span>`;
                 card.onclick = () => {
                     selectedCharacter = ch.id;
+                    characterWasChosen = true;
+                    playCharacterSound(ch.id);
                     document.querySelectorAll('.character-radio').forEach(r => {
                         r.checked = (r.dataset.char === selectedCharacter);
                     });
@@ -14776,6 +14805,15 @@
                 grid.appendChild(card);
             });
             startPlayerIdleAnimation();
+            updateStartButtonEnabled();
+        }
+
+        function updateStartButtonEnabled() {
+            const btn = document.getElementById('start-button');
+            if (!btn) return;
+            btn.disabled = !characterWasChosen;
+            btn.classList.toggle('opacity-40', !characterWasChosen);
+            btn.classList.toggle('cursor-not-allowed', !characterWasChosen);
         }
 
         function startPlayerIdleAnimation() {
@@ -18674,7 +18712,7 @@
                 const hbX = player.x, hbY = player.y, hbW = 50, hbH = 70;
                 if (hbX < cardX + shopWord.w && hbX + hbW > cardX && hbY < cardY + shopWord.h && hbY + hbH > cardY) {
                     if (shopWord.text.toLowerCase() === currentTargetWord.toLowerCase()) {
-                        playChime(true);
+                        playCharacterSound(selectedCharacter);
                         score += 10;
                         shopWord.collected = true;
                         recordWordCollected(shopWord.text);
@@ -19161,7 +19199,7 @@
 
                     if (overlapX && overlapY) { 
                         if (word.text.toLowerCase() === currentTargetWord.toLowerCase()) { 
-                            playChime(true);
+                            playCharacterSound(selectedCharacter);
                             score += 10; 
                             word.collected = true; 
                             recordWordCollected(word.text);
