@@ -1,0 +1,1225 @@
+{
+  "en": [
+    {
+      "id": "kindy_1",
+      "label": "Kindergarten 1 (m, s, t, a)",
+      "grapheme": "",
+      "words": [
+        "a.m",
+        "a.t",
+        "a.s",
+        "t.a",
+        "m.a.t",
+        "s.a.t"
+      ]
+    },
+    {
+      "id": "kindy_2",
+      "label": "Kindergarten 2 (p, i, f, r)",
+      "grapheme": "",
+      "words": [
+        "s.i.t",
+        "f.i.t",
+        "p.i.t",
+        "t.i.p",
+        "r.i.p",
+        "s.i.p",
+        "t.a.p",
+        "m.a.p",
+        "r.a.t",
+        "f.a.t"
+      ]
+    },
+    {
+      "id": "kindy_3",
+      "label": "Kindergarten 3 (o, c, d, h)",
+      "grapheme": "",
+      "words": [
+        "c.a.t",
+        "c.o.t",
+        "d.o.t",
+        "h.o.t",
+        "h.o.p",
+        "t.o.p",
+        "d.a.d",
+        "h.a.d",
+        "h.a.m",
+        "h.a.t"
+      ]
+    },
+    {
+      "id": "kindy_4",
+      "label": "Kindergarten 4 (e, n, g, l)",
+      "grapheme": "",
+      "words": [
+        "n.e.t",
+        "l.e.g",
+        "l.o.g",
+        "h.e.n",
+        "t.e.n",
+        "p.e.n",
+        "l.e.t",
+        "l.a.p",
+        "n.a.p",
+        "p.e.t"
+      ]
+    },
+    {
+      "id": "kindy_5",
+      "label": "Kindergarten 5 (k, u, b, j)",
+      "grapheme": "",
+      "words": [
+        "b.u.g",
+        "b.u.s",
+        "b.u.n",
+        "c.u.b",
+        "c.u.p",
+        "j.u.g",
+        "j.a.m",
+        "j.o.b",
+        "r.u.g",
+        "r.u.n"
+      ]
+    },
+    {
+      "id": "kindy_6",
+      "label": "Kindergarten 6 (w, ck, ll, ff, ss)",
+      "grapheme": "",
+      "words": [
+        "b.a.ck",
+        "s.o.ck",
+        "d.u.ck",
+        "w.e.ll",
+        "b.e.ll",
+        "o.ff",
+        "p.u.ff",
+        "m.i.ss",
+        "b.o.ss",
+        "w.e.t"
+      ]
+    },
+    {
+      "id": "kindy_7",
+      "label": "Kindergarten 7 (sh, qu, ee, z/zz)",
+      "grapheme": "",
+      "words": [
+        "sh.o.p",
+        "sh.i.p",
+        "f.i.sh",
+        "d.i.sh",
+        "w.i.sh",
+        "q.u.ee.n",
+        "q.u.i.t",
+        "s.ee",
+        "b.ee",
+        "b.u.zz"
+      ]
+    },
+    {
+      "id": "kindy_8",
+      "label": "Kindergarten 8 (ch, v, x, y)",
+      "grapheme": "",
+      "words": [
+        "ch.i.p",
+        "ch.i.n",
+        "ch.a.t",
+        "v.a.n",
+        "v.e.t",
+        "f.o.x",
+        "b.o.x",
+        "s.i.x",
+        "y.e.s",
+        "m.y"
+      ]
+    },
+    {
+      "id": "kindy_9",
+      "label": "Kindergarten 9 (wh, th, oo, ng, ay)",
+      "grapheme": "",
+      "words": [
+        "wh.e.n",
+        "wh.i.p",
+        "th.i.s",
+        "th.a.t",
+        "m.oo.n",
+        "b.oo.k",
+        "s.i.ng",
+        "k.i.ng",
+        "d.ay",
+        "p.l.ay"
+      ]
+    },
+    {
+      "id": "kindy_10",
+      "label": "Kindergarten 10 (CVCC words)",
+      "grapheme": "",
+      "words": [
+        "f.a.s.t",
+        "h.a.n.d",
+        "l.a.m.p",
+        "m.i.l.k",
+        "h.e.l.p",
+        "b.e.l.t",
+        "t.e.n.t",
+        "n.e.s.t",
+        "d.e.s.k",
+        "l.i.s.t"
+      ]
+    },
+    {
+      "id": "kindy_11",
+      "label": "Kindergarten 11 (CCVC words)",
+      "grapheme": "",
+      "words": [
+        "s.t.o.p",
+        "f.r.o.g",
+        "s.w.i.m",
+        "t.r.i.p",
+        "p.l.a.n",
+        "d.r.o.p",
+        "s.t.e.p",
+        "s.p.i.n",
+        "g.r.a.b",
+        "s.t.e.m"
+      ]
+    },
+    {
+      "id": "kindy_12",
+      "label": "Kindergarten 12 (CVCC, CCVC words)",
+      "grapheme": "",
+      "words": [
+        "m.a.s.k",
+        "l.i.f.t",
+        "d.a.m.p",
+        "c.l.a.p",
+        "f.l.a.g",
+        "s.w.a.n",
+        "t.r.u.s.t",
+        "b.r.i.s.k",
+        "p.l.a.n.t",
+        "s.t.a.m.p"
+      ]
+    },
+    {
+      "id": "ck",
+      "label": "ck (duck)",
+      "grapheme": "ck",
+      "words": [
+        "d.u.ck",
+        "s.o.ck",
+        "r.o.ck",
+        "l.o.ck",
+        "k.i.ck",
+        "p.i.ck",
+        "s.i.ck",
+        "b.a.ck",
+        "n.e.ck",
+        "d.e.ck"
+      ]
+    },
+    {
+      "id": "sh",
+      "label": "sh (shell)",
+      "grapheme": "sh",
+      "words": [
+        "sh.e.ll",
+        "sh.i.p",
+        "sh.o.p",
+        "f.i.sh",
+        "d.i.sh",
+        "w.i.sh",
+        "c.a.sh",
+        "b.r.u.sh",
+        "sh.a.r.k",
+        "sh.u.t"
+      ]
+    },
+    {
+      "id": "wh",
+      "label": "wh (whale)",
+      "grapheme": "wh",
+      "words": [
+        "wh.a.l.e",
+        "wh.ee.l",
+        "wh.i.p",
+        "wh.e.n",
+        "wh.i.ch",
+        "wh.i.t.e",
+        "wh.ea.t",
+        "wh.i.s.k",
+        "wh.i.ff",
+        "wh.y"
+      ]
+    },
+    {
+      "id": "ch",
+      "label": "ch (chick)",
+      "grapheme": "ch",
+      "words": [
+        "ch.i.ck",
+        "ch.i.p",
+        "ch.i.n",
+        "ch.a.t",
+        "m.u.ch",
+        "s.u.ch",
+        "r.i.ch",
+        "l.u.n.ch",
+        "b.e.n.ch",
+        "ch.e.ss"
+      ]
+    },
+    {
+      "id": "th_thumb",
+      "label": "th (thumb)",
+      "grapheme": "th",
+      "words": [
+        "th.u.m.b",
+        "th.i.n",
+        "th.i.ck",
+        "m.o.th",
+        "c.l.o.th",
+        "b.a.th",
+        "p.a.th",
+        "th.i.n.k",
+        "th.a.n.k",
+        "th.o.r.n"
+      ]
+    },
+    {
+      "id": "th_feather",
+      "label": "th (feather)",
+      "grapheme": "th",
+      "words": [
+        "th.i.s",
+        "th.a.t",
+        "th.e.n",
+        "th.e.m",
+        "th.e.r.e",
+        "o.th.e.r",
+        "m.o.th.e.r",
+        "f.a.th.e.r",
+        "w.i.th",
+        "th.e.y"
+      ]
+    },
+    {
+      "id": "oo_moon",
+      "label": "oo (moon)",
+      "grapheme": "oo",
+      "words": [
+        "m.oo.n",
+        "s.p.oo.n",
+        "r.oo.m",
+        "f.oo.d",
+        "b.oo.t",
+        "r.oo.f",
+        "t.oo.th",
+        "z.oo",
+        "b.r.oo.m",
+        "s.c.h.oo.l"
+      ]
+    },
+    {
+      "id": "oo_book",
+      "label": "oo (book)",
+      "grapheme": "oo",
+      "words": [
+        "b.oo.k",
+        "l.oo.k",
+        "t.oo.k",
+        "f.oo.t",
+        "w.oo.d",
+        "g.oo.d",
+        "h.oo.d",
+        "c.oo.k",
+        "s.t.oo.d",
+        "h.oo.k"
+      ]
+    },
+    {
+      "id": "ng",
+      "label": "ng (swing)",
+      "grapheme": "ng",
+      "words": [
+        "s.w.i.ng",
+        "k.i.ng",
+        "r.i.ng",
+        "s.o.ng",
+        "l.o.ng",
+        "s.i.ng",
+        "w.i.ng",
+        "s.t.r.o.ng",
+        "b.r.i.ng",
+        "th.i.ng"
+      ]
+    },
+    {
+      "id": "compound_words",
+      "label": "Compound Words",
+      "grapheme": "",
+      "words": [
+        "s.u.n.s.e.t",
+        "f.oo.t.b.a.ll",
+        "b.a.ck.p.a.ck",
+        "b.a.th.t.u.b",
+        "c.u.p.c.a.k.e",
+        "r.ai.n.b.ow",
+        "b.i.r.th.d.ay",
+        "p.o.p.c.o.r.n",
+        "s.a.n.d.p.i.t",
+        "p.l.ay.g.r.ou.n.d"
+      ]
+    },
+    {
+      "id": "ay",
+      "label": "ay (play)",
+      "grapheme": "ay",
+      "words": [
+        "p.l.ay",
+        "d.ay",
+        "t.r.ay",
+        "s.t.ay",
+        "m.ay",
+        "p.l.ay.er",
+        "h.ay",
+        "c.l.ay",
+        "s.p.r.ay",
+        "w.ay"
+      ]
+    },
+    {
+      "id": "ai",
+      "label": "ai (rain)",
+      "grapheme": "ai",
+      "words": [
+        "r.ai.n",
+        "t.r.ai.n",
+        "s.n.ai.l",
+        "p.ai.n.t",
+        "m.ai.l",
+        "t.ai.l",
+        "w.ai.t",
+        "ch.ai.n",
+        "b.r.ai.n",
+        "p.l.ai.n"
+      ]
+    },
+    {
+      "id": "ee",
+      "label": "ee (tree)",
+      "grapheme": "ee",
+      "words": [
+        "t.r.ee",
+        "f.ee.t",
+        "g.r.ee.n",
+        "s.l.ee.p",
+        "q.u.ee.n",
+        "f.ee.d",
+        "s.ee.d",
+        "w.ee.k",
+        "s.t.ee.p",
+        "th.r.ee"
+      ]
+    },
+    {
+      "id": "ea_leaf",
+      "label": "ea (leaf)",
+      "grapheme": "ea",
+      "words": [
+        "l.ea.f",
+        "b.ea.ch",
+        "d.r.ea.m",
+        "m.ea.t",
+        "s.ea.t",
+        "t.ea.m",
+        "r.ea.d",
+        "s.ea.l",
+        "p.ea.ch",
+        "c.l.ea.n"
+      ]
+    },
+    {
+      "id": "oa",
+      "label": "oa (boat)",
+      "grapheme": "oa",
+      "words": [
+        "b.oa.t",
+        "c.oa.t",
+        "r.oa.d",
+        "g.oa.t",
+        "s.oa.p",
+        "f.oa.m",
+        "t.oa.d",
+        "l.oa.f",
+        "c.oa.ch",
+        "c.oa.s.t"
+      ]
+    },
+    {
+      "id": "ow_snow",
+      "label": "ow (snow)",
+      "grapheme": "ow",
+      "words": [
+        "s.n.ow",
+        "g.r.ow",
+        "s.l.ow",
+        "y.e.ll.ow",
+        "w.i.n.d.ow",
+        "b.l.ow",
+        "c.r.ow",
+        "th.r.ow",
+        "sh.ow",
+        "f.l.ow"
+      ]
+    },
+    {
+      "id": "_y_cry",
+      "label": "_y (cry)",
+      "grapheme": "y",
+      "words": [
+        "c.r.y",
+        "f.l.y",
+        "t.r.y",
+        "s.k.y",
+        "sh.y",
+        "d.r.y",
+        "wh.y",
+        "f.r.y",
+        "p.l.y",
+        "m.y"
+      ]
+    },
+    {
+      "id": "igh",
+      "label": "igh (light)",
+      "grapheme": "igh",
+      "words": [
+        "l.igh.t",
+        "n.igh.t",
+        "h.igh",
+        "s.igh.t",
+        "f.r.igh.t",
+        "t.igh.t",
+        "m.igh.t",
+        "r.igh.t",
+        "b.r.igh.t",
+        "f.l.igh.t"
+      ]
+    },
+    {
+      "id": "ue",
+      "label": "ue (glue)",
+      "grapheme": "ue",
+      "words": [
+        "g.l.ue",
+        "b.l.ue",
+        "t.r.ue",
+        "c.l.ue",
+        "r.e.s.c.ue",
+        "v.a.l.ue",
+        "s.t.a.t.ue",
+        "ar.g.ue",
+        "g.l.ue.y",
+        "q.ue.u.e"
+      ]
+    },
+    {
+      "id": "ew",
+      "label": "ew (grew)",
+      "grapheme": "ew",
+      "words": [
+        "g.r.ew",
+        "n.ew",
+        "ch.ew",
+        "c.r.ew",
+        "f.l.ew",
+        "d.r.ew",
+        "s.t.ew",
+        "th.r.ew",
+        "f.ew",
+        "b.l.ew"
+      ]
+    },
+    {
+      "id": "ar",
+      "label": "ar (star)",
+      "grapheme": "ar",
+      "words": [
+        "s.t.ar",
+        "c.ar",
+        "f.ar.m",
+        "p.ar.k",
+        "sh.ar.k",
+        "ar.m",
+        "c.ar.t",
+        "h.ar.d",
+        "y.ar.d",
+        "d.ar.k"
+      ]
+    },
+    {
+      "id": "or",
+      "label": "or (fork)",
+      "grapheme": "or",
+      "words": [
+        "f.or.k",
+        "c.or.n",
+        "s.t.or.m",
+        "sh.or.t",
+        "s.p.or.t",
+        "f.or.t",
+        "f.or.m",
+        "s.or.t",
+        "f.or.g.o.t",
+        "n.or.th"
+      ]
+    },
+    {
+      "id": "ore",
+      "label": "ore (snore)",
+      "grapheme": "ore",
+      "words": [
+        "s.n.ore",
+        "m.ore",
+        "s.t.ore",
+        "sh.ore",
+        "s.c.ore",
+        "c.ore",
+        "b.ore",
+        "w.ore",
+        "ch.ore",
+        "t.ore"
+      ]
+    },
+    {
+      "id": "ir",
+      "label": "ir (stir)",
+      "grapheme": "ir",
+      "words": [
+        "s.t.ir",
+        "g.ir.l",
+        "b.ir.d",
+        "sh.ir.t",
+        "f.ir.s.t",
+        "b.ir.th",
+        "th.ir.d",
+        "d.ir.t",
+        "sk.ir.t",
+        "ch.ir.p"
+      ]
+    },
+    {
+      "id": "ur",
+      "label": "ur (surf)",
+      "grapheme": "ur",
+      "words": [
+        "s.ur.f",
+        "t.ur.n",
+        "b.ur.n",
+        "h.ur.t",
+        "ch.ur.ch",
+        "n.ur.s.e",
+        "c.ur.l",
+        "b.l.ur",
+        "f.ur",
+        "t.ur.t.l.e"
+      ]
+    },
+    {
+      "id": "er_fern",
+      "label": "er (fern)",
+      "grapheme": "er",
+      "words": [
+        "f.er.n",
+        "h.er",
+        "w.i.n.t.er",
+        "s.i.s.t.er",
+        "b.r.o.th.er",
+        "m.o.th.er",
+        "f.a.th.er",
+        "p.ow.d.er",
+        "l.a.dd.er",
+        "r.i.v.er"
+      ]
+    },
+    {
+      "id": "split_a_e",
+      "label": "Split digraph a_e (bossy e)",
+      "grapheme": "a_e",
+      "words": [
+        "c.a.k.e",
+        "p.l.a.t.e",
+        "s.n.a.k.e",
+        "g.a.t.e",
+        "n.a.m.e",
+        "l.a.n.e",
+        "g.r.a.p.e",
+        "s.k.a.t.e",
+        "b.r.a.v.e",
+        "c.a.v.e"
+      ]
+    },
+    {
+      "id": "split_i_e",
+      "label": "Split digraph i_e (bossy e)",
+      "grapheme": "i_e",
+      "words": [
+        "b.i.k.e",
+        "k.i.t.e",
+        "t.i.m.e",
+        "s.l.i.d.e",
+        "s.m.i.l.e",
+        "p.i.p.e",
+        "r.i.d.e",
+        "f.i.v.e",
+        "h.i.d.e",
+        "sh.i.n.e"
+      ]
+    },
+    {
+      "id": "split_o_e",
+      "label": "Split digraph o_e (bossy e)",
+      "grapheme": "o_e",
+      "words": [
+        "b.o.n.e",
+        "r.o.p.e",
+        "n.o.s.e",
+        "h.o.m.e",
+        "h.o.l.e",
+        "n.o.t.e",
+        "s.t.o.n.e",
+        "s.m.o.k.e",
+        "c.l.o.s.e",
+        "j.o.k.e"
+      ]
+    },
+    {
+      "id": "split_u_e",
+      "label": "Split digraph u_e (bossy e)",
+      "grapheme": "u_e",
+      "words": [
+        "c.u.b.e",
+        "t.u.n.e",
+        "f.l.u.t.e",
+        "r.u.l.e",
+        "u.s.e",
+        "m.u.l.e",
+        "d.u.n.e",
+        "p.r.u.n.e",
+        "c.u.t.e",
+        "f.u.m.e"
+      ]
+    },
+    {
+      "id": "split_e_e",
+      "label": "Split digraph e_e (bossy e)",
+      "grapheme": "e_e",
+      "words": [
+        "th.e.s.e",
+        "th.e.m.e",
+        "c.o.m.p.e.t.e",
+        "e.x.t.r.e.m.e",
+        "d.e.l.e.t.e",
+        "c.o.n.c.r.e.t.e",
+        "e.v.e",
+        "g.e.n.e",
+        "s.c.e.n.e",
+        "s.u.p.r.e.m.e"
+      ]
+    },
+    {
+      "id": "ow_cow",
+      "label": "ow (cow)",
+      "grapheme": "ow",
+      "words": [
+        "c.ow",
+        "h.ow",
+        "n.ow",
+        "d.ow.n",
+        "t.ow.n",
+        "b.r.ow.n",
+        "c.l.ow.n",
+        "c.r.ow.n",
+        "g.ow.n",
+        "h.ow.l"
+      ]
+    },
+    {
+      "id": "ou_cloud",
+      "label": "ou (cloud)",
+      "grapheme": "ou",
+      "words": [
+        "c.l.ou.d",
+        "l.ou.d",
+        "s.ou.n.d",
+        "r.ou.n.d",
+        "f.ou.n.d",
+        "m.ou.th",
+        "h.ou.s.e",
+        "m.ou.s.e",
+        "ou.t",
+        "a.b.ou.t"
+      ]
+    },
+    {
+      "id": "aw",
+      "label": "aw (claw)",
+      "grapheme": "aw",
+      "words": [
+        "c.l.aw",
+        "p.aw",
+        "s.aw",
+        "r.aw",
+        "d.r.aw",
+        "s.t.r.aw",
+        "y.aw.n",
+        "d.aw.n",
+        "h.aw.k",
+        "c.r.aw.l"
+      ]
+    },
+    {
+      "id": "au",
+      "label": "au (autumn)",
+      "grapheme": "au",
+      "words": [
+        "au.t.u.m.n",
+        "s.au.s.a.g.e",
+        "s.au.c.e",
+        "s.au.c.e.p.a.n",
+        "au.th.or",
+        "d.i.n.o.s.au.r",
+        "as.t.r.o.n.au.t",
+        "c.au.s.e",
+        "p.au.s.e",
+        "h.au.n.t"
+      ]
+    },
+    {
+      "id": "_y_puppy",
+      "label": "_y (puppy)",
+      "grapheme": "y",
+      "words": [
+        "p.u.pp.y",
+        "h.a.pp.y",
+        "b.u.nn.y",
+        "f.u.nn.y",
+        "s.u.nn.y",
+        "j.e.ll.y",
+        "s.i.ll.y",
+        "b.a.b.y",
+        "l.a.d.y",
+        "l.o.ll.y"
+      ]
+    },
+    {
+      "id": "_ey_key",
+      "label": "_ey (key)",
+      "grapheme": "ey",
+      "words": [
+        "k.ey",
+        "m.o.n.k.ey",
+        "d.o.n.k.ey",
+        "ch.i.m.n.ey",
+        "h.o.n.ey",
+        "v.a.ll.ey",
+        "t.r.o.ll.ey",
+        "j.o.ck.ey",
+        "h.o.ck.ey",
+        "p.ar.s.l.ey"
+      ]
+    },
+    {
+      "id": "oy",
+      "label": "oy (boy)",
+      "grapheme": "oy",
+      "words": [
+        "b.oy",
+        "t.oy",
+        "j.oy",
+        "enj.oy",
+        "d.e.s.t.r.oy",
+        "ann.oy",
+        "r.oy.a.l",
+        "v.oy.a.g.e",
+        "c.oy",
+        "l.oy.a.l"
+      ]
+    },
+    {
+      "id": "oi",
+      "label": "oi (coin)",
+      "grapheme": "oi",
+      "words": [
+        "c.oi.n",
+        "j.oi.n",
+        "p.oi.n.t",
+        "v.oi.c.e",
+        "n.oi.s.e",
+        "s.oi.l",
+        "b.oi.l",
+        "f.oi.l",
+        "m.oi.s.t",
+        "s.p.oi.l"
+      ]
+    },
+    {
+      "id": "eer",
+      "label": "eer (cheer)",
+      "grapheme": "eer",
+      "words": [
+        "ch.eer",
+        "d.eer",
+        "st.eer",
+        "p.eer",
+        "v.o.l.u.n.t.eer",
+        "c.ar.eer",
+        "j.eer",
+        "sn.eer",
+        "r.ei.n.d.eer",
+        "p.i.o.n.eer"
+      ]
+    },
+    {
+      "id": "ear_hear",
+      "label": "ear (hear)",
+      "grapheme": "ear",
+      "words": [
+        "h.ear",
+        "ear",
+        "n.ear",
+        "y.ear",
+        "cl.ear",
+        "f.ear",
+        "t.ear",
+        "sm.ear",
+        "sp.ear",
+        "dr.ear.y"
+      ]
+    },
+    {
+      "id": "ear_bear",
+      "label": "ear (bear)",
+      "grapheme": "ear",
+      "words": [
+        "b.ear",
+        "p.ear",
+        "w.ear",
+        "t.ear",
+        "sw.ear",
+        "w.ear.i.ng",
+        "t.ear.i.ng",
+        "sw.ear.i.ng",
+        "b.ear.er",
+        "u.n.d.er.w.ear"
+      ]
+    },
+    {
+      "id": "air_hair",
+      "label": "air (hair)",
+      "grapheme": "air",
+      "words": [
+        "h.air",
+        "f.air",
+        "p.air",
+        "ch.air",
+        "st.air",
+        "h.air.c.u.t",
+        "h.air.b.r.u.sh",
+        "f.air.y",
+        "r.e.p.air",
+        "s.t.air.s"
+      ]
+    },
+    {
+      "id": "_are_beware",
+      "label": "_are (beware)",
+      "grapheme": "are",
+      "words": [
+        "b.e.w.are",
+        "c.are",
+        "d.are",
+        "r.are",
+        "sh.are",
+        "sc.are",
+        "fl.are",
+        "sp.are",
+        "sq.u.are",
+        "c.are.f.u.l"
+      ]
+    },
+    {
+      "id": "soft_c",
+      "label": "Soft c (c saying /s/)",
+      "grapheme": "c",
+      "words": [
+        "c.i.t.y",
+        "i.c.e",
+        "r.a.c.e",
+        "f.a.c.e",
+        "c.e.n.t",
+        "c.i.r.c.l.e",
+        "p.r.i.n.c.e.ss",
+        "d.a.n.c.e",
+        "f.e.n.c.e",
+        "c.y.c.l.e"
+      ]
+    },
+    {
+      "id": "soft_g",
+      "label": "Soft g (g saying /j/)",
+      "grapheme": "g",
+      "words": [
+        "g.i.a.n.t",
+        "g.e.m",
+        "c.a.g.e",
+        "p.a.g.e",
+        "s.t.a.g.e",
+        "g.i.n.g.er",
+        "g.y.m",
+        "or.a.n.g.e",
+        "c.h.a.n.g.e",
+        "v.i.ll.a.g.e"
+      ]
+    },
+    {
+      "id": "_dge_bridge",
+      "label": "_dge (bridge)",
+      "grapheme": "dge",
+      "words": [
+        "b.r.i.dge",
+        "e.dge",
+        "h.e.dge",
+        "l.e.dge",
+        "r.i.dge",
+        "f.u.dge",
+        "j.u.dge",
+        "b.a.dge",
+        "w.e.dge",
+        "d.o.dge"
+      ]
+    },
+    {
+      "id": "_ge_cage",
+      "label": "_ge (cage)",
+      "grapheme": "ge",
+      "words": [
+        "c.a.ge",
+        "p.a.ge",
+        "s.t.a.ge",
+        "hu.ge",
+        "c.a.ge.y",
+        "w.a.ge",
+        "r.a.ge",
+        "s.a.ge",
+        "s.t.a.ge.s",
+        "p.a.ge.s"
+      ]
+    },
+    {
+      "id": "_tch_catch",
+      "label": "_tch (catch)",
+      "grapheme": "tch",
+      "words": [
+        "c.a.tch",
+        "m.a.tch",
+        "p.a.tch",
+        "w.a.tch",
+        "b.a.tch",
+        "k.i.tch.e.n",
+        "s.k.e.tch",
+        "s.t.r.e.tch",
+        "sw.i.tch",
+        "f.e.tch"
+      ]
+    },
+    {
+      "id": "_ch_lunch",
+      "label": "_ch after short vowel (lunch)",
+      "grapheme": "ch",
+      "words": [
+        "l.u.n.ch",
+        "b.e.n.ch",
+        "m.u.n.ch",
+        "p.u.n.ch",
+        "b.r.a.n.ch",
+        "h.u.n.ch",
+        "p.i.n.ch",
+        "w.r.e.n.ch",
+        "c.r.u.n.ch",
+        "b.e.n.ch.e.s"
+      ]
+    },
+    {
+      "id": "doubling_rule",
+      "label": "Doubling rule (f, l, s + ck)",
+      "grapheme": "",
+      "words": [
+        "h.u.ff",
+        "b.e.ll",
+        "m.i.ss",
+        "d.u.ck",
+        "p.u.ff",
+        "sh.e.ll",
+        "g.r.a.ss",
+        "s.o.ck",
+        "st.u.ff",
+        "sm.e.ll"
+      ]
+    },
+    {
+      "id": "suffix_s_plural",
+      "label": "Suffix -s (plurals)",
+      "grapheme": "s",
+      "words": [
+        "c.a.t.s",
+        "d.o.g.s",
+        "b.oo.k.s",
+        "h.a.t.s",
+        "c.u.p.s",
+        "b.ir.d.s",
+        "d.e.s.k.s",
+        "p.e.n.s",
+        "f.r.o.g.s",
+        "d.u.ck.s"
+      ]
+    },
+    {
+      "id": "suffix_s_verb",
+      "label": "Suffix -s (verbs)",
+      "grapheme": "s",
+      "words": [
+        "r.u.n.s",
+        "j.u.m.p.s",
+        "w.a.l.k.s",
+        "p.l.ay.s",
+        "s.i.n.g.s",
+        "ea.t.s",
+        "s.l.ee.p.s",
+        "r.ea.d.s",
+        "h.o.p.s",
+        "t.a.l.k.s"
+      ]
+    },
+    {
+      "id": "suffix_ing",
+      "label": "Suffix -ing",
+      "grapheme": "ing",
+      "words": [
+        "j.u.m.p.ing",
+        "r.u.nn.ing",
+        "w.a.l.k.ing",
+        "p.l.ay.ing",
+        "s.i.ng.ing",
+        "ea.t.ing",
+        "s.l.ee.p.ing",
+        "s.w.i.mm.ing",
+        "t.a.l.k.ing",
+        "h.o.pp.ing"
+      ]
+    },
+    {
+      "id": "suffix_ed",
+      "label": "Suffix -ed (past tense)",
+      "grapheme": "ed",
+      "words": [
+        "j.u.m.p.ed",
+        "w.a.l.k.ed",
+        "p.l.ay.ed",
+        "l.oo.k.ed",
+        "t.a.l.k.ed",
+        "h.e.l.p.ed",
+        "c.oo.k.ed",
+        "p.ai.n.t.ed",
+        "r.ai.n.ed",
+        "s.t.ay.ed"
+      ]
+    },
+    {
+      "id": "suffix_er_comparative",
+      "label": "Suffix -er (comparative)",
+      "grapheme": "er",
+      "words": [
+        "f.a.s.t.er",
+        "s.l.ow.er",
+        "t.a.ll.er",
+        "s.m.a.ll.er",
+        "h.ar.d.er",
+        "s.o.f.t.er",
+        "q.u.i.ck.er",
+        "l.ou.d.er",
+        "c.o.l.d.er",
+        "w.ar.m.er"
+      ]
+    },
+    {
+      "id": "suffix_y_adjective",
+      "label": "Suffix -y (adjectives)",
+      "grapheme": "y",
+      "words": [
+        "r.ai.n.y",
+        "s.u.nn.y",
+        "w.i.n.d.y",
+        "c.l.ou.d.y",
+        "d.ir.t.y",
+        "d.u.s.t.y",
+        "s.n.ow.y",
+        "s.p.o.tt.y",
+        "b.u.m.p.y",
+        "s.l.ee.p.y"
+      ]
+    },
+    {
+      "id": "suffix_ly",
+      "label": "Suffix -ly (adverbs)",
+      "grapheme": "ly",
+      "words": [
+        "s.l.ow.ly",
+        "q.u.i.ck.ly",
+        "s.o.f.t.ly",
+        "l.ou.d.ly",
+        "s.a.d.ly",
+        "g.l.a.d.ly",
+        "b.r.a.v.e.ly",
+        "s.a.f.e.ly",
+        "n.i.c.e.ly",
+        "f.i.n.a.l.ly"
+      ]
+    },
+    {
+      "id": "prefix_un",
+      "label": "Prefix un-",
+      "grapheme": "un",
+      "words": [
+        "un.d.o",
+        "un.h.a.pp.y",
+        "un.f.air",
+        "un.l.o.ck",
+        "un.p.a.ck",
+        "un.t.i.d.y",
+        "un.w.e.ll",
+        "un.k.i.n.d",
+        "un.z.i.p",
+        "un.w.r.a.p"
+      ]
+    },
+    {
+      "id": "contractions",
+      "label": "Contractions",
+      "grapheme": "",
+      "words": [
+        "d.i.d.n't",
+        "c.a.n't",
+        "d.o.n't",
+        "sh.ou.l.d.n't",
+        "w.ou.l.d.n't",
+        "c.ou.l.d.n't",
+        "I.'m",
+        "i.t.'s",
+        "th.a.t.'s",
+        "w.e.'re"
+      ]
+    }
+  ],
+  "fr": []
+}
