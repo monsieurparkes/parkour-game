@@ -1742,7 +1742,7 @@
                     <!-- STEP 3: Parkour Submode -->
                     <div id="landing-step-submode" class="landing-step" style="display:none;">
                         <h2 class="hub-step-title">Parkour</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div id="submode-picture-card" class="submode-card hub-font selected" style="--mode-accent:var(--hub-marigold); --mode-accent-soft:var(--hub-marigold-soft);" onclick="chooseParkourSubmode('picture')">
                                 <div class="text-4xl mb-2">🖼️</div>
                                 <h3 class="font-extrabold" style="color:var(--hub-ink);">Picture Parkour</h3>
@@ -1752,6 +1752,11 @@
                                 <div class="text-4xl mb-2">📝</div>
                                 <h3 class="font-extrabold" style="color:var(--hub-ink);">Sentence Parkour</h3>
                                 <p class="text-xs mt-1" style="color:var(--hub-ink-soft);">Type your own vocabulary words to find.</p>
+                            </div>
+                            <div id="submode-word-card" class="submode-card hub-font" style="--mode-accent:var(--hub-mint); --mode-accent-soft:var(--hub-mint-soft);" onclick="chooseParkourSubmode('word')">
+                                <div class="text-4xl mb-2">🔤</div>
+                                <h3 class="font-extrabold" style="color:var(--hub-ink);">Word Parkour</h3>
+                                <p class="text-xs mt-1" style="color:var(--hub-ink-soft);">Spell a word by collecting its graphemes in order.</p>
                             </div>
                         </div>
                         <div class="flex justify-center gap-3 mt-6">
@@ -2054,6 +2059,79 @@
                                     <p class="hub-hint">Add consonants manually below.</p>
                                 </div>
                                 <div id="picture-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
+                                    <!-- Dynamically generated rows -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Word Parkour Settings Panel -->
+                        <div id="word-settings" class="hub-group hub-font text-left" style="display:none;">
+                            <div class="hub-row">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                                    <div>
+                                        <label for="word-student-name-input" class="hub-label">Student Name (optional)</label>
+                                        <input type="text" id="word-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                                    </div>
+                                    <div>
+                                        <label for="word-code-input" class="hub-label">Have a code? (optional)</label>
+                                        <div style="display:flex; gap:8px; align-items:center;">
+                                            <input type="text" id="word-code-input" class="hub-input" placeholder="Enter code" style="flex:1; text-transform:uppercase;">
+                                            <button id="word-code-go-btn" class="hub-btn-primary interactive">Go</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p id="word-code-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Oops! Try again!</p>
+                            </div>
+
+                            <div class="hub-row">
+                                <label for="word-preset-select" class="hub-label">Choose a Target Grapheme (optional)</label>
+                                <select id="word-preset-select" class="hub-input">
+                                    <option value="">-- Pick a phonics target --</option>
+                                </select>
+                                <p class="hub-hint">Loads 10 ready-made words for that target and colour-codes it red throughout the game.</p>
+                            </div>
+
+                            <div class="hub-row">
+                                <label class="hub-label">Words to Spell (one per line, graphemes separated by dots)</label>
+                                <textarea id="word-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="c.a.t&#10;sh.i.p&#10;s.i.t.s"></textarea>
+                                <p class="hub-hint">Each dot-separated chunk is one grapheme to find and collect, in order - e.g. "sh.i.p" for a word with the digraph "sh".</p>
+                            </div>
+
+                            <div class="hub-row">
+                                <label class="hub-label mb-1">Choose Your Challenge</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="magpie-mode-word" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="magpie-mode-word" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none flex items-center gap-1" style="color:var(--hub-ink);"><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:18px; height:18px; object-fit:contain;" alt="">Magpie Mode</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="mega-magpie-mode-word" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="mega-magpie-mode-word" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none flex items-center gap-0.5" style="color:var(--hub-ink);"><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain;" alt=""><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain;" alt=""><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain; margin-right:2px;" alt="">Mega Magpie Mode</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="extra-locations-word" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="extra-locations-word" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Custom Grapheme Panel inside Settings -->
+                            <div class="hub-row">
+                                <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                                <div class="hub-checkbox-row mb-3">
+                                    <input type="checkbox" id="word-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
+                                    <label for="word-colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
+                                </div>
+                                <div id="default-grapheme-row-word" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
+                                    <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
+                                    <input type="color" id="default-grapheme-color-word" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
+                                </div>
+                                <div id="sinhala-vowel-signs-row-word" style="display:none;" class="mb-3 interactive">
+                                    <p class="hub-hint mt-0 mb-2">Sinhala Vowel Diacritics (tick to colour-code — built in, no typing needed)</p>
+                                    <div id="sinhala-vowel-signs-list-word" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5"></div>
+                                    <p class="hub-hint">Add consonants manually below.</p>
+                                </div>
+                                <div id="word-grapheme-container" class="space-y-2 max-h-40 overflow-y-auto pr-1">
                                     <!-- Dynamically generated rows -->
                                 </div>
                             </div>
@@ -4948,13 +5026,54 @@
 
             const activeCustomGraphemes = customGraphemes
                 .filter(cg => cg.text && cg.text.trim().length > 0)
-                .map(cg => ({ text: cg.text.trim().normalize('NFC').toLowerCase(), color: cg.color }))
+                .map(cg => {
+                    const raw = cg.text.trim().normalize('NFC').toLowerCase();
+                    const underscoreIdx = raw.indexOf('_');
+                    return {
+                        text: raw,
+                        color: cg.color,
+                        color2: cg.color2 || null,
+                        // A split grapheme (e.g. "a_e") names two parts with exactly one
+                        // arbitrary character expected between them in the actual word -
+                        // that middle character is deliberately left uncoloured.
+                        isSplit: underscoreIdx !== -1,
+                        splitPart1: underscoreIdx !== -1 ? raw.slice(0, underscoreIdx) : null,
+                        splitPart2: underscoreIdx !== -1 ? raw.slice(underscoreIdx + 1) : null
+                    };
+                })
                 .sort((a, b) => b.text.length - a.text.length);
 
             let i = 0;
             while (i < chars.length) {
                 let customMatched = false;
                 for (let cg of activeCustomGraphemes) {
+                    if (cg.isSplit) {
+                        // Split grapheme: part1, then exactly one arbitrary character
+                        // (left untouched), then part2 - not required to be adjacent.
+                        const gapLen = 1;
+                        const totalLen = cg.splitPart1.length + gapLen + cg.splitPart2.length;
+                        if (cg.splitPart1.length === 0 || cg.splitPart2.length === 0 || i + totalLen > chars.length) continue;
+                        let match = true;
+                        for (let offset = 0; offset < cg.splitPart1.length; offset++) {
+                            if (chars[i + offset].isProtected || chars[i + offset].char.toLowerCase() !== cg.splitPart1[offset]) { match = false; break; }
+                        }
+                        if (match && chars[i + cg.splitPart1.length].isProtected) match = false;
+                        if (match) {
+                            const part2Start = i + cg.splitPart1.length + gapLen;
+                            for (let offset = 0; offset < cg.splitPart2.length; offset++) {
+                                if (chars[part2Start + offset].isProtected || chars[part2Start + offset].char.toLowerCase() !== cg.splitPart2[offset]) { match = false; break; }
+                            }
+                        }
+                        if (match) {
+                            for (let offset = 0; offset < cg.splitPart1.length; offset++) chars[i + offset].color = cg.color;
+                            const part2Start = i + cg.splitPart1.length + gapLen;
+                            for (let offset = 0; offset < cg.splitPart2.length; offset++) chars[part2Start + offset].color = cg.color2 || cg.color;
+                            i += totalLen;
+                            customMatched = true;
+                            break;
+                        }
+                        continue;
+                    }
                     if (i + cg.text.length <= chars.length) {
                         let match = true;
                         for (let offset = 0; offset < cg.text.length; offset++) {
@@ -4964,8 +5083,18 @@
                             }
                         }
                         if (match) {
-                            for (let offset = 0; offset < cg.text.length; offset++) {
-                                chars[i + offset].color = cg.color;
+                            if (cg.color2) {
+                                // A regular (adjacent) grapheme with two colours - e.g. the
+                                // built-in French "au" - splits at the midpoint, matching
+                                // how that existing case is already coloured below.
+                                const mid = Math.ceil(cg.text.length / 2);
+                                for (let offset = 0; offset < cg.text.length; offset++) {
+                                    chars[i + offset].color = (offset < mid) ? cg.color : cg.color2;
+                                }
+                            } else {
+                                for (let offset = 0; offset < cg.text.length; offset++) {
+                                    chars[i + offset].color = cg.color;
+                                }
                             }
                             // A Sinhala vowel sign must be shaped together with its preceding
                             // base consonant for the mark to position correctly - splitting
@@ -12732,12 +12861,15 @@
 
         function buildGraphemeRow(cg, idx, compact) {
             const row = document.createElement('div');
+            const hasSecond = !!cg.color2;
             if (compact) {
                 row.className = 'flex flex-col gap-0.5 bg-slate-100 p-1.5 rounded-xl border border-slate-300';
                 row.innerHTML = `
                     <div class="flex items-center gap-1">
                         <input type="text" value="${cg.text}" placeholder="..." class="w-16 p-1 text-xs border border-slate-400 rounded-md font-bold text-slate-800 focus:outline-none" data-index="${idx}">
                         <input type="color" value="${cg.color}" class="w-6 h-6 rounded cursor-pointer border border-slate-400" data-index="${idx}">
+                        <button type="button" class="second-color-toggle w-5 h-5 rounded-full border border-slate-400 text-slate-600 font-bold text-xs leading-none flex items-center justify-center interactive" title="Add a second colour (for split or two-tone graphemes, e.g. a_e)">${hasSecond ? '−' : '+'}</button>
+                        <input type="color" value="${cg.color2 || cg.color}" class="second-color-input w-6 h-6 rounded cursor-pointer border border-slate-400" style="display:${hasSecond ? 'inline-block' : 'none'};" data-index="${idx}">
                     </div>
                     <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
@@ -12747,12 +12879,16 @@
                     <div class="flex items-center gap-2">
                         <input type="text" value="${cg.text}" placeholder="..." class="w-24 p-2 text-xs border-2 border-slate-800 rounded-lg font-bold text-slate-800 focus:outline-none" data-index="${idx}">
                         <input type="color" value="${cg.color}" class="w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" data-index="${idx}">
+                        <button type="button" class="second-color-toggle w-6 h-6 rounded-full border-2 border-slate-800 text-slate-800 font-bold text-xs leading-none flex items-center justify-center interactive" title="Add a second colour (for split or two-tone graphemes, e.g. a_e)">${hasSecond ? '−' : '+'}</button>
+                        <input type="color" value="${cg.color2 || cg.color}" class="second-color-input w-8 h-8 rounded border-2 border-slate-800 cursor-pointer" style="display:${hasSecond ? 'inline-block' : 'none'};" data-index="${idx}">
                     </div>
                     <span class="codepoint-label text-[9px] font-mono text-slate-400">${getCodePointsLabel(cg.text)}</span>
                 `;
             }
             const textInput = row.querySelector('input[type="text"]');
             const colorInput = row.querySelector('input[type="color"]');
+            const secondColorToggle = row.querySelector('.second-color-toggle');
+            const secondColorInput = row.querySelector('.second-color-input');
             const codeLabel = row.querySelector('.codepoint-label');
 
             textInput.addEventListener('input', (e) => {
@@ -12764,6 +12900,19 @@
             });
             colorInput.addEventListener('input', (e) => {
                 customGraphemes[idx].color = e.target.value;
+                syncCustomGraphemeArrays();
+            });
+            secondColorToggle.addEventListener('click', () => {
+                if (customGraphemes[idx].color2) {
+                    customGraphemes[idx].color2 = null;
+                } else {
+                    customGraphemes[idx].color2 = secondColorInput.value;
+                }
+                syncCustomGraphemeArrays();
+                renderGraphemeEditors();
+            });
+            secondColorInput.addEventListener('input', (e) => {
+                customGraphemes[idx].color2 = e.target.value;
                 syncCustomGraphemeArrays();
             });
             return row;
@@ -12782,7 +12931,8 @@
             { id: 'bbs-grapheme-container', compact: false },
             { id: 'ts-grapheme-container', compact: false },
             { id: 'lava-grapheme-container', compact: false },
-            { id: 'syntaxscramble-grapheme-container', compact: false }
+            { id: 'syntaxscramble-grapheme-container', compact: false },
+            { id: 'word-grapheme-container', compact: false }
         ];
 
         function renderGraphemeEditors() {
@@ -12803,7 +12953,7 @@
         // French already has the built-in grapheme scheme applied automatically.
         function updateDefaultGraphemeRowVisibility() {
             const show = selectedLanguage !== 'fr';
-            ['default-grapheme-row-lobby', 'default-grapheme-row-workspace', 'default-grapheme-row-picture', 'default-grapheme-row-bbs', 'default-grapheme-row-ts', 'default-grapheme-row-lava', 'default-grapheme-row-syntaxscramble'].forEach(id => {
+            ['default-grapheme-row-lobby', 'default-grapheme-row-workspace', 'default-grapheme-row-picture', 'default-grapheme-row-bbs', 'default-grapheme-row-ts', 'default-grapheme-row-lava', 'default-grapheme-row-syntaxscramble', 'default-grapheme-row-word'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = show ? 'flex' : 'none';
             });
@@ -12900,7 +13050,7 @@
 
         function updateSinhalaVowelSignsVisibility() {
             const show = selectedLanguage === 'sinhala';
-            ['sinhala-vowel-signs-row-lobby', 'sinhala-vowel-signs-row-workspace', 'sinhala-vowel-signs-row-picture', 'sinhala-vowel-signs-row-bbs', 'sinhala-vowel-signs-row-ts', 'sinhala-vowel-signs-row-lava', 'sinhala-vowel-signs-row-syntaxscramble'].forEach(id => {
+            ['sinhala-vowel-signs-row-lobby', 'sinhala-vowel-signs-row-workspace', 'sinhala-vowel-signs-row-picture', 'sinhala-vowel-signs-row-bbs', 'sinhala-vowel-signs-row-ts', 'sinhala-vowel-signs-row-lava', 'sinhala-vowel-signs-row-syntaxscramble', 'sinhala-vowel-signs-row-word'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = show ? 'block' : 'none';
             });
@@ -12912,6 +13062,7 @@
                 renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-ts', false);
                 renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-lava', false);
                 renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-syntaxscramble', false);
+                renderSinhalaVowelSignsRow('sinhala-vowel-signs-list-word', false);
             }
         }
 
@@ -12924,7 +13075,7 @@
 
         function setDefaultGraphemeColor(color) {
             defaultGraphemeColor = color;
-            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture', 'default-grapheme-color-bbs', 'default-grapheme-color-ts', 'default-grapheme-color-lava', 'default-grapheme-color-syntaxscramble'].forEach(id => {
+            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture', 'default-grapheme-color-bbs', 'default-grapheme-color-ts', 'default-grapheme-color-lava', 'default-grapheme-color-syntaxscramble', 'default-grapheme-color-word'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.value = color;
             });
@@ -13887,6 +14038,7 @@
             });
 
             loadPresetManifest();
+            loadWordParkourPresetManifest();
 
             document.querySelectorAll('.character-radio').forEach(radio => {
                 radio.addEventListener('change', (e) => {
@@ -13952,6 +14104,15 @@
             document.getElementById('lava-vocab-code-input').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') document.getElementById('lava-vocab-code-go-btn').click();
             });
+            document.getElementById('word-code-go-btn').onclick = () => {
+                handleVocabCodeSubmit('word-code-input', 'word-code-error', 'word-input', () => showLandingStep('player'), 'wordparkourcodes/');
+            };
+            document.getElementById('word-code-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') document.getElementById('word-code-go-btn').click();
+            });
+            document.getElementById('word-preset-select').addEventListener('change', (e) => {
+                applyWordParkourPreset(e.target.value);
+            });
             ['vocab-input', 'kart-vocab-input', 'picture-archive-code-input'].forEach(id => {
                 document.getElementById(id).addEventListener('input', () => { vocabCodeWasUsed = false; });
             });
@@ -13983,7 +14144,7 @@
 
             showLandingStep('wheel');
 
-            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture', 'default-grapheme-color-bbs', 'default-grapheme-color-ts', 'default-grapheme-color-lava', 'default-grapheme-color-syntaxscramble'].forEach(id => {
+            ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture', 'default-grapheme-color-bbs', 'default-grapheme-color-ts', 'default-grapheme-color-lava', 'default-grapheme-color-syntaxscramble', 'default-grapheme-color-word'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('input', (e) => setDefaultGraphemeColor(e.target.value));
             });
@@ -14560,12 +14721,14 @@
 
             const questSettings = document.getElementById('quest-settings');
             const pictureSettings = document.getElementById('picture-settings');
+            const wordSettings = document.getElementById('word-settings');
             const kartSettings = document.getElementById('kart-settings');
             const potatoSettings = document.getElementById('potato-settings');
             const bobotSettings = document.getElementById('bobot-settings');
 
             questSettings.style.display = 'none';
             pictureSettings.style.display = 'none';
+            if (wordSettings) wordSettings.style.display = 'none';
             if (kartSettings) kartSettings.style.display = 'none';
             if (potatoSettings) potatoSettings.style.display = 'none';
             if (bobotSettings) bobotSettings.style.display = 'none';
@@ -14576,6 +14739,8 @@
             } else if (mode === 'picture') {
                 document.getElementById('mode-picture').classList.add('selected');
                 pictureSettings.style.display = 'block';
+            } else if (mode === 'word') {
+                if (wordSettings) wordSettings.style.display = 'block';
             } else if (mode === 'kart') {
                 if (kartSettings) kartSettings.style.display = 'block';
             } else if (mode === 'potato') {
@@ -14645,6 +14810,10 @@
                 'potato-full-world-mode': false,
                 'kart-challenge-mode': false,
                 'kart-fast-mode': false,
+                'magpie-mode-word': false,
+                'mega-magpie-mode-word': false,
+                'extra-locations-word': false,
+                'word-colour-coded': true,
             };
             Object.keys(checkboxDefaults).forEach(id => {
                 const el = document.getElementById(id);
@@ -14765,6 +14934,7 @@
             pendingParkourSubmode = mode;
             document.getElementById('submode-picture-card').classList.toggle('selected', mode === 'picture');
             document.getElementById('submode-sentence-card').classList.toggle('selected', mode === 'quest');
+            document.getElementById('submode-word-card').classList.toggle('selected', mode === 'word');
         }
 
         function chooseKartSubmode(mode) {
@@ -14934,6 +15104,8 @@
                 generateWhiteboard();
             } else if (selectedLobbyMode === 'picture') {
                 generatePictureBoard();
+            } else if (selectedLobbyMode === 'word') {
+                generateWordBoard();
             } else if (selectedLobbyMode === 'kart') {
                 generateKartRace();
             } else if (selectedLobbyMode === 'potato') {
@@ -16156,11 +16328,123 @@
             startQuestGame();
         }
 
+        // Word Parkour's equivalent of generateWhiteboard - parses the
+        // dot-chunked word list instead of a plain vocabulary list, and is
+        // always "listening only" by design (the word is only ever spoken,
+        // never shown as text), so there's no challenge-mode checkbox to read.
+        function generateWordBoard() {
+            const rawInput = document.getElementById('word-input').value;
+            wordParkourWords = parseWordParkourInput(rawInput);
+
+            if (wordParkourWords.length === 0) {
+                wordParkourWords = parseWordParkourInput('c.a.t\nd.o.g\ns.i.t');
+            }
+            vocabularyList = wordParkourWords.map(w => w.spelling);
+
+            const nameInput = document.getElementById('word-student-name-input');
+            studentName = nameInput ? nameInput.value.trim() : '';
+
+            colourCodedEnabled = document.getElementById('word-colour-coded').checked;
+            challengeModeEnabled = false;
+            extraLocationsEnabled = document.getElementById('extra-locations-word').checked;
+            const megaChecked = document.getElementById('mega-magpie-mode-word').checked;
+            magpieModeOn = document.getElementById('magpie-mode-word').checked || megaChecked;
+            megaMagpieModeOn = megaChecked;
+
+            startQuestGame();
+        }
+
         // Picture Parkour's equivalent of generateWhiteboard: the vocabulary list comes from
         // the names of the images the teacher/student selected, rather than a typed list.
         // Fetches the teacher-hosted manifest of preset image packs. If none exists yet
         // (e.g. the manifest.json hasn't been created on GitHub), this fails gracefully.
         let selectedPresetCategoryId = '';
+
+        // ================================================================
+        // WORD PARKOUR - spell a word by collecting its graphemes, in
+        // order, from a shared pool scattered around the world (no
+        // grapheme instance "belongs" to any particular word - any 's'
+        // satisfies any 's' currently needed).
+        // ================================================================
+        let wordParkourWords = []; // [{ spelling: 'plate', chunks: ['p','l','a','t','e'] }, ...]
+        let wordParkourCurrentWordIndex = 0;
+        let wordParkourCurrentChunkIndex = 0; // how many chunks of the CURRENT word have been correctly collected, in order
+
+        // Splits raw input (one word per line/comma, dot-separated graphemes,
+        // e.g. "c.a.t") into word objects. Matches Lava Literacy's existing
+        // dot-chunk notation exactly, so the same teaching convention carries
+        // straight over.
+        function parseWordParkourInput(rawText) {
+            const lines = (rawText || '').split(/[,\n]/).map(l => l.trim()).filter(l => l.length > 0);
+            return lines
+                .map(line => {
+                    const chunks = line.split('.').map(c => c.trim()).filter(c => c.length > 0);
+                    return { spelling: chunks.join(''), chunks };
+                })
+                .filter(w => w.chunks.length > 0);
+        }
+
+        // Word Parkour's phonics-target presets: a teacher-hosted manifest.json
+        // keyed by language, each entry naming a single grapheme target (matching
+        // a specific lesson in a structured phonics scope and sequence) with 10
+        // ready-made words. Picking one auto-fills the word list AND sets that
+        // grapheme's colour-coding rule to red, so the target is highlighted
+        // wherever it appears in the world - the whole point being to let a
+        // teacher organise word packs by target sound rather than by topic.
+        const WORD_PARKOUR_PRESET_MANIFEST_URL = 'https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/wordparkourpresets/manifest.json';
+        let wordParkourPresetManifest = null;
+
+        function loadWordParkourPresetManifest() {
+            const cacheBustedUrl = WORD_PARKOUR_PRESET_MANIFEST_URL + '?cb=' + Date.now();
+            fetch(cacheBustedUrl, { cache: 'no-store' })
+                .then(res => { if (!res.ok) throw new Error('Manifest not found'); return res.json(); })
+                .then(data => { wordParkourPresetManifest = data; renderWordParkourPresetDropdown(); })
+                .catch(() => { wordParkourPresetManifest = null; renderWordParkourPresetDropdown(); });
+        }
+
+        function renderWordParkourPresetDropdown() {
+            const select = document.getElementById('word-preset-select');
+            if (!select) return;
+            const previousValue = select.value;
+            select.innerHTML = '<option value="">-- Pick a phonics target --</option>';
+            const entries = (wordParkourPresetManifest && wordParkourPresetManifest[selectedLanguage]) || [];
+            entries.forEach(entry => {
+                const opt = document.createElement('option');
+                opt.value = entry.id;
+                opt.textContent = entry.label;
+                select.appendChild(opt);
+            });
+            // Keep the selection if this language still has that preset (e.g. a
+            // re-render triggered by something unrelated), otherwise reset to blank.
+            select.value = entries.some(e => e.id === previousValue) ? previousValue : '';
+        }
+
+        function applyWordParkourPreset(presetId) {
+            if (!presetId) return;
+            const entries = (wordParkourPresetManifest && wordParkourPresetManifest[selectedLanguage]) || [];
+            const entry = entries.find(e => e.id === presetId);
+            if (!entry) return;
+
+            document.getElementById('word-input').value = entry.words.join('\n');
+            document.getElementById('word-colour-coded').checked = true;
+            colourCodedEnabled = true;
+
+            // Some presets (compound words, contractions, the Kindergarten letter-group
+            // lists, etc.) have no single target grapheme to colour - leave the
+            // existing colour-coding rules untouched rather than matching against
+            // an empty string, which would otherwise hit the blank placeholder row.
+            if (entry.grapheme) {
+                const existingIdx = customGraphemes.findIndex(cg => cg.text.trim().toLowerCase() === entry.grapheme.toLowerCase());
+                if (existingIdx !== -1) {
+                    customGraphemes[existingIdx].color = '#ff0000';
+                    customGraphemes[existingIdx].color2 = null;
+                } else {
+                    customGraphemes.unshift({ text: entry.grapheme, color: '#ff0000' });
+                }
+                syncCustomGraphemeArrays();
+            }
+        }
+
 
         // ================================================================
         // GO GO BOBOT! - a verb-matching game, Bobot-only (no character
@@ -16791,7 +17075,13 @@
             lastTime = 0;
             inShopInterior = null;
             resetCollectedWordsLog();
-            distributeWords();
+            wordParkourCurrentWordIndex = 0;
+            wordParkourCurrentChunkIndex = 0;
+            if (selectedLobbyMode === 'word') {
+                distributeGraphemes();
+            } else {
+                distributeWords();
+            }
 
             roundHadMagpieMode = magpieModeOn;
             roundHadMegaMagpieMode = megaMagpieModeOn;
@@ -16829,7 +17119,11 @@
             beachBall.bounceVy = 0;
 
             gameStarted = true;
-            nextQuest();
+            if (selectedLobbyMode === 'word') {
+                nextWordParkourTarget();
+            } else {
+                nextQuest();
+            }
             updateLevelEditorButtonVisibility();
             updateCollectedWordsPanelVisibility();
             setTimeout(() => {
@@ -17043,6 +17337,160 @@
             });
         }
 
+        // Word Parkour's equivalent of distributeWords: scatters one card per
+        // grapheme INSTANCE needed across the whole word list (so "sits" needing
+        // two 's's, or two different words both needing an 's', both correctly
+        // result in two 's' cards existing at once) - no card is tied to any
+        // particular word; whichever one the player reaches first satisfies
+        // whichever occurrence is currently needed. Otherwise mirrors
+        // distributeWords' placement algorithm exactly.
+        function distributeGraphemes() {
+            activeWords = [];
+
+            let forestCandidates = [];
+            let cityCandidates = [];
+            let skyCandidates = [];
+            let waterCandidates = [];
+
+            let shopCandidates = extraLocationsEnabled
+                ? shuffle(cityBuildings.map((b, i) => ({ buildingIndex: i })))
+                : [];
+
+            const CARD_W = 60, CARD_H = 24;
+            const CARD_LIFT = CARD_H + 21;
+
+            function inBox(wx, wy, box) {
+                return (wx >= box.minX && wx + CARD_W <= box.maxX && wy >= box.minY && wy + CARD_H <= box.maxY);
+            }
+
+            platforms.forEach(plat => {
+                let wx = plat.x + (plat.w - CARD_W) / 2;
+                let wy = plat.y - CARD_LIFT;
+                if (inBox(wx, wy, BOUNDS.forest)) forestCandidates.push({x: wx, y: wy});
+                if (inBox(wx, wy, BOUNDS.city)) cityCandidates.push({x: wx, y: wy});
+                if (inBox(wx, wy, BOUNDS.sky)) skyCandidates.push({x: wx, y: wy});
+                if (inBox(wx, wy, BOUNDS.water)) waterCandidates.push({x: wx, y: wy});
+            });
+
+            walkableClouds.forEach(cloud => {
+                let wx = cloud.x + (cloud.w - CARD_W) / 2;
+                let wy = cloud.y - CARD_LIFT;
+                if (inBox(wx, wy, BOUNDS.forest)) forestCandidates.push({x: wx, y: wy});
+                if (inBox(wx, wy, BOUNDS.city)) cityCandidates.push({x: wx, y: wy});
+                if (inBox(wx, wy, BOUNDS.sky)) skyCandidates.push({x: wx, y: wy});
+                if (inBox(wx, wy, BOUNDS.water)) waterCandidates.push({x: wx, y: wy});
+            });
+
+            forestTrees.forEach(t => {
+                t.branches.forEach(br => {
+                    const brY = 815 - br.yOffset;
+                    const brW = br.w;
+                    const brX = (br.side === 'left') ? (t.x - 12 - brW) : (t.x + 12);
+                    let wx = brX + (brW - CARD_W) / 2;
+                    let wy = brY - CARD_LIFT;
+                    if (inBox(wx, wy, BOUNDS.forest)) forestCandidates.push({x: wx, y: wy});
+                    if (inBox(wx, wy, BOUNDS.city)) cityCandidates.push({x: wx, y: wy});
+                    if (inBox(wx, wy, BOUNDS.sky)) skyCandidates.push({x: wx, y: wy});
+                    if (inBox(wx, wy, BOUNDS.water)) waterCandidates.push({x: wx, y: wy});
+                });
+            });
+
+            const targetMinCandidates = 40;
+            const fillCandidates = (list, box) => {
+                while (list.length < targetMinCandidates) {
+                    let rx = box.minX + 30 + Math.random() * (box.maxX - box.minX - 180);
+                    let ry = box.minY + 30 + Math.random() * (box.maxY - box.minY - 80);
+                    list.push({x: rx, y: ry});
+                }
+            };
+
+            fillCandidates(forestCandidates, BOUNDS.forest);
+            fillCandidates(cityCandidates, BOUNDS.city);
+            fillCandidates(skyCandidates, BOUNDS.sky);
+            fillCandidates(waterCandidates, BOUNDS.water);
+
+            shuffle(forestCandidates);
+            shuffle(cityCandidates);
+            shuffle(skyCandidates);
+            shuffle(waterCandidates);
+
+            const categories = extraLocationsEnabled
+                ? [forestCandidates, cityCandidates, skyCandidates, waterCandidates, shopCandidates]
+                : [forestCandidates, cityCandidates, skyCandidates, waterCandidates];
+            const categoryNames = extraLocationsEnabled
+                ? ['forest', 'city', 'sky', 'water', 'shop']
+                : ['forest', 'city', 'sky', 'water'];
+            const numCategories = categories.length;
+
+            const CARD_GAP = 12;
+            const overlapsPlaced = (x, y) => activeWords.some(item => (
+                x < item.x + item.w + CARD_GAP &&
+                x + CARD_W + CARD_GAP > item.x &&
+                y < item.y + item.h + CARD_GAP &&
+                y + CARD_H + CARD_GAP > item.y
+            ));
+
+            const graphemePool = [];
+            wordParkourWords.forEach(w => { w.chunks.forEach(chunk => graphemePool.push(chunk)); });
+            shuffle(graphemePool);
+
+            graphemePool.forEach((grapheme, index) => {
+                let categoryIndex = index % numCategories;
+                let chosenCandidate = null;
+
+                for (let attempt = 0; attempt < numCategories && !chosenCandidate; attempt++) {
+                    let currentCatIdx = (categoryIndex + attempt) % numCategories;
+                    const pool = categories[currentCatIdx];
+                    const isShopCategory = categoryNames[currentCatIdx] === 'shop';
+                    while (pool.length > 0) {
+                        const candidate = pool.pop();
+                        if (isShopCategory || !overlapsPlaced(candidate.x, candidate.y)) {
+                            chosenCandidate = candidate;
+                            categoryIndex = currentCatIdx;
+                            break;
+                        }
+                    }
+                }
+
+                let finalLocationName = categoryNames[categoryIndex];
+                let inShopBuildingIndex;
+
+                if (chosenCandidate && finalLocationName === 'shop') {
+                    inShopBuildingIndex = chosenCandidate.buildingIndex;
+                } else if (!chosenCandidate) {
+                    if (finalLocationName === 'shop') finalLocationName = 'city';
+                    let box = BOUNDS[finalLocationName];
+                    const maxAttempts = 30;
+                    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                        let rx = box.minX + 50 + Math.random() * (box.maxX - box.minX - 220);
+                        let ry = box.minY + 50 + Math.random() * (box.maxY - box.minY - 100);
+                        if (attempt === maxAttempts - 1 || !overlapsPlaced(rx, ry)) {
+                            chosenCandidate = { x: rx, y: ry };
+                            break;
+                        }
+                    }
+                }
+
+                const placementXY = inShopBuildingIndex !== undefined
+                    ? { x: cityBuildings[inShopBuildingIndex].x, y: 815 - 70 }
+                    : chosenCandidate;
+
+                activeWords.push({
+                    text: grapheme,
+                    x: placementXY.x,
+                    y: placementXY.y,
+                    w: CARD_W,
+                    h: CARD_H,
+                    collected: false,
+                    isTarget: false,
+                    location: finalLocationName,
+                    inShop: inShopBuildingIndex,
+                    imageEl: null,
+                    imageIsPng: false
+                });
+            });
+        }
+
         // Shrinks an element's font size (never below a readable floor) until its text fits
         // on one line within maxWidthPx, instead of wrapping and pushing surrounding layout
         // around - used for the target word and location boxes, which can otherwise grow
@@ -17203,6 +17651,100 @@
                 speakWord(currentTargetWord);
             }
             setVoiceWarning('game-voice-warning', LANG_MAP[selectedLanguage]);
+        }
+
+        // Fills in the underscore progress display (repurposing the "Where?"
+        // box) for the word currently being spelled - revealed letters up to
+        // however many graphemes have been correctly collected so far, in
+        // order, coloured the same way the word itself would be if colour
+        // coding is on; everything beyond that stays as underscores.
+        function updateWordParkourProgressDisplay() {
+            const currentWord = wordParkourWords[wordParkourCurrentWordIndex];
+            const locationTextEl = document.getElementById('location-text');
+            locationTextEl.innerHTML = '';
+            if (!currentWord) return;
+            currentWord.chunks.forEach((chunk, idx) => {
+                const span = document.createElement('span');
+                span.style.marginRight = '6px';
+                if (idx < wordParkourCurrentChunkIndex) {
+                    if (colourCodedEnabled) {
+                        const graphemes = getColoredGraphemes(chunk);
+                        graphemes.forEach(g => {
+                            const gSpan = document.createElement('span');
+                            gSpan.textContent = g.char.toUpperCase();
+                            gSpan.style.color = g.color;
+                            span.appendChild(gSpan);
+                        });
+                    } else {
+                        span.textContent = chunk.toUpperCase();
+                    }
+                } else {
+                    span.textContent = '_'.repeat(chunk.length);
+                }
+                locationTextEl.appendChild(span);
+            });
+            fitTextToBoxDeferred(locationTextEl, 'location-text-zone');
+        }
+
+        // Word Parkour's equivalent of nextQuest: the word itself is never
+        // shown as text (only ever spoken), and the "Where?" box becomes the
+        // underscore progress display instead of a location hint.
+        function nextWordParkourTarget(options) {
+            options = options || {};
+            if (wordParkourCurrentWordIndex >= wordParkourWords.length) {
+                showCompletionScreen();
+                return;
+            }
+            const currentWord = wordParkourWords[wordParkourCurrentWordIndex];
+
+            const instructionEl = document.getElementById('instruction-text');
+            instructionEl.innerHTML = '';
+            instructionEl.style.color = '';
+            instructionEl.textContent = '?';
+            instructionEl.title = '';
+            fitTextToBoxDeferred(instructionEl, 'quest-text-zone');
+
+            const questHeaderEl = document.getElementById('quest-header-label');
+            if (questHeaderEl) questHeaderEl.textContent = 'Listen and Spell';
+            document.getElementById('where-title').textContent = 'Spelling';
+            updateWordParkourProgressDisplay();
+
+            document.getElementById('score').innerText = score.toString().padStart(2, '0');
+            const speakDelayMs = options.delaySpeechMs || 0;
+            if (speakDelayMs > 0) {
+                setTimeout(() => speakWord(currentWord.spelling), speakDelayMs);
+            } else {
+                speakWord(currentWord.spelling);
+            }
+            setVoiceWarning('game-voice-warning', LANG_MAP[selectedLanguage]);
+        }
+
+        // The ordered, shared-pool collection check: touching a grapheme card
+        // only does anything if its text matches whichever grapheme comes
+        // NEXT for the word currently being spelled - no card "belongs" to any
+        // particular word, and touching the wrong (not-currently-needed)
+        // grapheme has no effect at all, rather than a penalty, since the
+        // world is deliberately full of graphemes that aren't needed yet.
+        function tryCollectWordParkourGrapheme(item) {
+            const currentWord = wordParkourWords[wordParkourCurrentWordIndex];
+            if (!currentWord) return false;
+            const neededGrapheme = currentWord.chunks[wordParkourCurrentChunkIndex];
+            if (!neededGrapheme || item.text.toLowerCase() !== neededGrapheme.toLowerCase()) return false;
+
+            item.collected = true;
+            score += 10;
+            document.getElementById('score').innerText = score.toString().padStart(2, '0');
+            wordParkourCurrentChunkIndex++;
+            updateWordParkourProgressDisplay();
+
+            if (wordParkourCurrentChunkIndex >= currentWord.chunks.length) {
+                playCharacterSound(selectedCharacter);
+                recordWordCollected(currentWord.spelling);
+                wordParkourCurrentWordIndex++;
+                wordParkourCurrentChunkIndex = 0;
+                nextWordParkourTarget({ delaySpeechMs: getCelebrationSoundDelayMs() });
+            }
+            return true;
         }
 
         function formatDuration(ms) {
@@ -18711,7 +19253,10 @@
                 const cardX = 300 + idx * 70, cardY = 330;
                 const hbX = player.x, hbY = player.y, hbW = 50, hbH = 70;
                 if (hbX < cardX + shopWord.w && hbX + hbW > cardX && hbY < cardY + shopWord.h && hbY + hbH > cardY) {
-                    if (shopWord.text.toLowerCase() === currentTargetWord.toLowerCase()) {
+                    if (selectedLobbyMode === 'word') {
+                        tryCollectWordParkourGrapheme(shopWord);
+                        // Not the grapheme currently needed - no effect at all, matching the outdoor behaviour.
+                    } else if (shopWord.text.toLowerCase() === currentTargetWord.toLowerCase()) {
                         playCharacterSound(selectedCharacter);
                         score += 10;
                         shopWord.collected = true;
@@ -19198,7 +19743,15 @@
                     const overlapY = hbY < bobbingY + word.h && hbY + hbH > bobbingY;
 
                     if (overlapX && overlapY) { 
-                        if (word.text.toLowerCase() === currentTargetWord.toLowerCase()) { 
+                        if (selectedLobbyMode === 'word') {
+                            if (tryCollectWordParkourGrapheme(word)) {
+                                successAnims.push({ x: word.x, y: bobbingY, vy: 0, delay: 20, w: word.w, h: word.h, text: word.text, imageEl: null, imageIsPng: false });
+                                document.getElementById('quest-box').classList.add('pop-effect');
+                                setTimeout(() => document.getElementById('quest-box').classList.remove('pop-effect'), 400);
+                                break;
+                            }
+                            // Not the grapheme currently needed - no effect at all, keep checking other overlapping items this frame.
+                        } else if (word.text.toLowerCase() === currentTargetWord.toLowerCase()) { 
                             playCharacterSound(selectedCharacter);
                             score += 10; 
                             word.collected = true; 
