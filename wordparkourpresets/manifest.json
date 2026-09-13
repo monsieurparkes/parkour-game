@@ -5,11 +5,36 @@
       "label": "Kindergarten 1 (m, s, t, a)",
       "grapheme": "",
       "words": [
-        "a.m",
-        "a.t",
-        "a.s",
-        "m.a.t",
-        "s.a.t"
+        {
+          "word": "a.m",
+          "translation": null,
+          "example": "I am happy."
+        },
+        {
+          "word": "a.t",
+          "translation": null,
+          "example": "I am at home."
+        },
+        {
+          "word": "a.s",
+          "translation": null,
+          "example": "It is as big as a cat."
+        },
+        {
+          "word": "t.a",
+          "translation": null,
+          "example": "Ta, mate!"
+        },
+        {
+          "word": "m.a.t",
+          "translation": null,
+          "example": "I sit on the mat."
+        },
+        {
+          "word": "s.a.t",
+          "translation": null,
+          "example": "I sat on the mat."
+        }
       ]
     },
     {
@@ -17,16 +42,56 @@
       "label": "Kindergarten 2 (p, i, f, r)",
       "grapheme": "",
       "words": [
-        "s.i.t",
-        "f.i.t",
-        "p.i.t",
-        "t.i.p",
-        "r.i.p",
-        "s.i.p",
-        "t.a.p",
-        "m.a.p",
-        "r.a.t",
-        "f.a.t"
+        {
+          "word": "s.i.t",
+          "translation": null,
+          "example": "I sit on the mat."
+        },
+        {
+          "word": "f.i.t",
+          "translation": null,
+          "example": "The hat will fit."
+        },
+        {
+          "word": "p.i.t",
+          "translation": null,
+          "example": "I fell in a pit."
+        },
+        {
+          "word": "t.i.p",
+          "translation": null,
+          "example": "I see the tip of it."
+        },
+        {
+          "word": "r.i.p",
+          "translation": null,
+          "example": "I rip the paper."
+        },
+        {
+          "word": "s.i.p",
+          "translation": null,
+          "example": "I sip my milk."
+        },
+        {
+          "word": "t.a.p",
+          "translation": null,
+          "example": "I tap the drum."
+        },
+        {
+          "word": "m.a.p",
+          "translation": null,
+          "example": "I look at the map."
+        },
+        {
+          "word": "r.a.t",
+          "translation": null,
+          "example": "I see a rat."
+        },
+        {
+          "word": "f.a.t",
+          "translation": null,
+          "example": "The cat is fat."
+        }
       ]
     },
     {
@@ -34,16 +99,56 @@
       "label": "Kindergarten 3 (o, c, d, h)",
       "grapheme": "",
       "words": [
-        "c.a.t",
-        "c.o.t",
-        "d.o.t",
-        "h.o.t",
-        "h.o.p",
-        "t.o.p",
-        "d.a.d",
-        "h.a.d",
-        "h.a.m",
-        "h.a.t"
+        {
+          "word": "c.a.t",
+          "translation": null,
+          "example": "I see a cat."
+        },
+        {
+          "word": "c.o.t",
+          "translation": null,
+          "example": "The baby is in the cot."
+        },
+        {
+          "word": "d.o.t",
+          "translation": null,
+          "example": "I see a dot."
+        },
+        {
+          "word": "h.o.t",
+          "translation": null,
+          "example": "The sun is hot."
+        },
+        {
+          "word": "h.o.p",
+          "translation": null,
+          "example": "I hop on one leg."
+        },
+        {
+          "word": "t.o.p",
+          "translation": null,
+          "example": "I spin the top."
+        },
+        {
+          "word": "d.a.d",
+          "translation": null,
+          "example": "My dad is here."
+        },
+        {
+          "word": "h.a.d",
+          "translation": null,
+          "example": "I had a nap."
+        },
+        {
+          "word": "h.a.m",
+          "translation": null,
+          "example": "I eat ham."
+        },
+        {
+          "word": "h.a.t",
+          "translation": null,
+          "example": "I wear a hat."
+        }
       ]
     },
     {
@@ -51,16 +156,56 @@
       "label": "Kindergarten 4 (e, n, g, l)",
       "grapheme": "",
       "words": [
-        "n.e.t",
-        "l.e.g",
-        "l.o.g",
-        "h.e.n",
-        "t.e.n",
-        "p.e.n",
-        "l.e.t",
-        "l.a.p",
-        "n.a.p",
-        "p.e.t"
+        {
+          "word": "n.e.t",
+          "translation": null,
+          "example": "I catch fish in a net."
+        },
+        {
+          "word": "l.e.g",
+          "translation": null,
+          "example": "I hurt my leg."
+        },
+        {
+          "word": "l.o.g",
+          "translation": null,
+          "example": "I sit on a log."
+        },
+        {
+          "word": "h.e.n",
+          "translation": null,
+          "example": "The hen lays an egg."
+        },
+        {
+          "word": "t.e.n",
+          "translation": null,
+          "example": "I count to ten."
+        },
+        {
+          "word": "p.e.n",
+          "translation": null,
+          "example": "I write with a pen."
+        },
+        {
+          "word": "l.e.t",
+          "translation": null,
+          "example": "Let me see."
+        },
+        {
+          "word": "l.a.p",
+          "translation": null,
+          "example": "The cat sits on my lap."
+        },
+        {
+          "word": "n.a.p",
+          "translation": null,
+          "example": "I take a nap."
+        },
+        {
+          "word": "p.e.t",
+          "translation": null,
+          "example": "I have a pet."
+        }
       ]
     },
     {
@@ -68,16 +213,56 @@
       "label": "Kindergarten 5 (k, u, b, j)",
       "grapheme": "",
       "words": [
-        "b.u.g",
-        "b.u.s",
-        "b.u.n",
-        "c.u.b",
-        "c.u.p",
-        "j.u.g",
-        "j.a.m",
-        "j.o.b",
-        "r.u.g",
-        "r.u.n"
+        {
+          "word": "b.u.g",
+          "translation": null,
+          "example": "I see a bug."
+        },
+        {
+          "word": "b.u.s",
+          "translation": null,
+          "example": "I ride the bus."
+        },
+        {
+          "word": "b.u.n",
+          "translation": null,
+          "example": "I eat a bun."
+        },
+        {
+          "word": "c.u.b",
+          "translation": null,
+          "example": "The cub plays."
+        },
+        {
+          "word": "c.u.p",
+          "translation": null,
+          "example": "I drink from a cup."
+        },
+        {
+          "word": "j.u.g",
+          "translation": null,
+          "example": "I fill the jug."
+        },
+        {
+          "word": "j.a.m",
+          "translation": null,
+          "example": "I eat jam on toast."
+        },
+        {
+          "word": "j.o.b",
+          "translation": null,
+          "example": "I do my job."
+        },
+        {
+          "word": "r.u.g",
+          "translation": null,
+          "example": "I sit on the rug."
+        },
+        {
+          "word": "r.u.n",
+          "translation": null,
+          "example": "I run fast."
+        }
       ]
     },
     {
@@ -85,16 +270,56 @@
       "label": "Kindergarten 6 (w, ck, ll, ff, ss)",
       "grapheme": "",
       "words": [
-        "b.a.ck",
-        "s.o.ck",
-        "d.u.ck",
-        "w.e.ll",
-        "b.e.ll",
-        "o.ff",
-        "p.u.ff",
-        "m.i.ss",
-        "b.o.ss",
-        "w.e.t"
+        {
+          "word": "b.a.ck",
+          "translation": null,
+          "example": "I sit at the back."
+        },
+        {
+          "word": "s.o.ck",
+          "translation": null,
+          "example": "I wear a sock."
+        },
+        {
+          "word": "d.u.ck",
+          "translation": null,
+          "example": "I see a duck."
+        },
+        {
+          "word": "w.e.ll",
+          "translation": null,
+          "example": "I feel well."
+        },
+        {
+          "word": "b.e.ll",
+          "translation": null,
+          "example": "I ring the bell."
+        },
+        {
+          "word": "o.ff",
+          "translation": null,
+          "example": "I turn off the light."
+        },
+        {
+          "word": "p.u.ff",
+          "translation": null,
+          "example": "I puff and blow."
+        },
+        {
+          "word": "m.i.ss",
+          "translation": null,
+          "example": "I miss my mum."
+        },
+        {
+          "word": "b.o.ss",
+          "translation": null,
+          "example": "She is the boss."
+        },
+        {
+          "word": "w.e.t",
+          "translation": null,
+          "example": "My hair is wet."
+        }
       ]
     },
     {
@@ -102,16 +327,56 @@
       "label": "Kindergarten 7 (sh, qu, ee, z/zz)",
       "grapheme": "",
       "words": [
-        "sh.o.p",
-        "sh.i.p",
-        "f.i.sh",
-        "d.i.sh",
-        "w.i.sh",
-        "q.u.ee.n",
-        "q.u.i.t",
-        "s.ee",
-        "b.ee",
-        "b.u.zz"
+        {
+          "word": "sh.o.p",
+          "translation": null,
+          "example": "I go to the shop."
+        },
+        {
+          "word": "sh.i.p",
+          "translation": null,
+          "example": "I see a ship."
+        },
+        {
+          "word": "f.i.sh",
+          "translation": null,
+          "example": "I eat fish."
+        },
+        {
+          "word": "d.i.sh",
+          "translation": null,
+          "example": "I wash the dish."
+        },
+        {
+          "word": "w.i.sh",
+          "translation": null,
+          "example": "I make a wish."
+        },
+        {
+          "word": "q.u.ee.n",
+          "translation": null,
+          "example": "I see the queen."
+        },
+        {
+          "word": "q.u.i.t",
+          "translation": null,
+          "example": "I quit the game."
+        },
+        {
+          "word": "s.ee",
+          "translation": null,
+          "example": "I see you."
+        },
+        {
+          "word": "b.ee",
+          "translation": null,
+          "example": "I see a bee."
+        },
+        {
+          "word": "b.u.zz",
+          "translation": null,
+          "example": "The bee goes buzz."
+        }
       ]
     },
     {
@@ -119,16 +384,56 @@
       "label": "Kindergarten 8 (ch, v, x, y)",
       "grapheme": "",
       "words": [
-        "ch.i.p",
-        "ch.i.n",
-        "ch.a.t",
-        "v.a.n",
-        "v.e.t",
-        "f.o.x",
-        "b.o.x",
-        "s.i.x",
-        "y.e.s",
-        "m.y"
+        {
+          "word": "ch.i.p",
+          "translation": null,
+          "example": "I eat a chip."
+        },
+        {
+          "word": "ch.i.n",
+          "translation": null,
+          "example": "I touch my chin."
+        },
+        {
+          "word": "ch.a.t",
+          "translation": null,
+          "example": "I chat with my friend."
+        },
+        {
+          "word": "v.a.n",
+          "translation": null,
+          "example": "I ride in the van."
+        },
+        {
+          "word": "v.e.t",
+          "translation": null,
+          "example": "I take my dog to the vet."
+        },
+        {
+          "word": "f.o.x",
+          "translation": null,
+          "example": "I see a fox."
+        },
+        {
+          "word": "b.o.x",
+          "translation": null,
+          "example": "I open the box."
+        },
+        {
+          "word": "s.i.x",
+          "translation": null,
+          "example": "I am six."
+        },
+        {
+          "word": "y.e.s",
+          "translation": null,
+          "example": "Yes, I can."
+        },
+        {
+          "word": "m.y",
+          "translation": null,
+          "example": "This is my hat."
+        }
       ]
     },
     {
@@ -136,16 +441,56 @@
       "label": "Kindergarten 9 (wh, th, oo, ng, ay)",
       "grapheme": "",
       "words": [
-        "wh.e.n",
-        "wh.i.p",
-        "th.i.s",
-        "th.a.t",
-        "m.oo.n",
-        "b.oo.k",
-        "s.i.ng",
-        "k.i.ng",
-        "d.ay",
-        "p.l.ay"
+        {
+          "word": "wh.e.n",
+          "translation": null,
+          "example": "When do we eat?"
+        },
+        {
+          "word": "wh.i.p",
+          "translation": null,
+          "example": "I crack the whip."
+        },
+        {
+          "word": "th.i.s",
+          "translation": null,
+          "example": "This is my hat."
+        },
+        {
+          "word": "th.a.t",
+          "translation": null,
+          "example": "That is my hat."
+        },
+        {
+          "word": "m.oo.n",
+          "translation": null,
+          "example": "I see the moon."
+        },
+        {
+          "word": "b.oo.k",
+          "translation": null,
+          "example": "I read a book."
+        },
+        {
+          "word": "s.i.ng",
+          "translation": null,
+          "example": "I sing a song."
+        },
+        {
+          "word": "k.i.ng",
+          "translation": null,
+          "example": "I see the king."
+        },
+        {
+          "word": "d.ay",
+          "translation": null,
+          "example": "It is a nice day."
+        },
+        {
+          "word": "p.l.ay",
+          "translation": null,
+          "example": "I play with my friend."
+        }
       ]
     },
     {
@@ -153,16 +498,56 @@
       "label": "Kindergarten 10 (CVCC words)",
       "grapheme": "",
       "words": [
-        "f.a.s.t",
-        "h.a.n.d",
-        "l.a.m.p",
-        "m.i.l.k",
-        "h.e.l.p",
-        "b.e.l.t",
-        "t.e.n.t",
-        "n.e.s.t",
-        "d.e.s.k",
-        "l.i.s.t"
+        {
+          "word": "f.a.s.t",
+          "translation": null,
+          "example": "I run fast."
+        },
+        {
+          "word": "h.a.n.d",
+          "translation": null,
+          "example": "I wave my hand."
+        },
+        {
+          "word": "l.a.m.p",
+          "translation": null,
+          "example": "I turn on the lamp."
+        },
+        {
+          "word": "m.i.l.k",
+          "translation": null,
+          "example": "I drink milk."
+        },
+        {
+          "word": "h.e.l.p",
+          "translation": null,
+          "example": "I help my mum."
+        },
+        {
+          "word": "b.e.l.t",
+          "translation": null,
+          "example": "I wear a belt."
+        },
+        {
+          "word": "t.e.n.t",
+          "translation": null,
+          "example": "We sleep in a tent."
+        },
+        {
+          "word": "n.e.s.t",
+          "translation": null,
+          "example": "The bird has a nest."
+        },
+        {
+          "word": "d.e.s.k",
+          "translation": null,
+          "example": "I sit at my desk."
+        },
+        {
+          "word": "l.i.s.t",
+          "translation": null,
+          "example": "I make a list."
+        }
       ]
     },
     {
@@ -170,16 +555,56 @@
       "label": "Kindergarten 11 (CCVC words)",
       "grapheme": "",
       "words": [
-        "s.t.o.p",
-        "f.r.o.g",
-        "s.w.i.m",
-        "t.r.i.p",
-        "p.l.a.n",
-        "d.r.o.p",
-        "s.t.e.p",
-        "s.p.i.n",
-        "g.r.a.b",
-        "s.t.e.m"
+        {
+          "word": "s.t.o.p",
+          "translation": null,
+          "example": "I stop and look."
+        },
+        {
+          "word": "f.r.o.g",
+          "translation": null,
+          "example": "I see a frog."
+        },
+        {
+          "word": "s.w.i.m",
+          "translation": null,
+          "example": "I swim in the pool."
+        },
+        {
+          "word": "t.r.i.p",
+          "translation": null,
+          "example": "We go on a trip."
+        },
+        {
+          "word": "p.l.a.n",
+          "translation": null,
+          "example": "I have a plan."
+        },
+        {
+          "word": "d.r.o.p",
+          "translation": null,
+          "example": "I drop the ball."
+        },
+        {
+          "word": "s.t.e.p",
+          "translation": null,
+          "example": "I step on the mat."
+        },
+        {
+          "word": "s.p.i.n",
+          "translation": null,
+          "example": "I spin the top."
+        },
+        {
+          "word": "g.r.a.b",
+          "translation": null,
+          "example": "I grab my bag."
+        },
+        {
+          "word": "s.t.e.m",
+          "translation": null,
+          "example": "I hold the stem."
+        }
       ]
     },
     {
@@ -187,16 +612,56 @@
       "label": "Kindergarten 12 (CVCC, CCVC words)",
       "grapheme": "",
       "words": [
-        "m.a.s.k",
-        "l.i.f.t",
-        "d.a.m.p",
-        "c.l.a.p",
-        "f.l.a.g",
-        "s.w.a.n",
-        "t.r.u.s.t",
-        "b.r.i.s.k",
-        "p.l.a.n.t",
-        "s.t.a.m.p"
+        {
+          "word": "m.a.s.k",
+          "translation": null,
+          "example": "I wear a mask."
+        },
+        {
+          "word": "l.i.f.t",
+          "translation": null,
+          "example": "I lift the box."
+        },
+        {
+          "word": "d.a.m.p",
+          "translation": null,
+          "example": "The towel is damp."
+        },
+        {
+          "word": "c.l.a.p",
+          "translation": null,
+          "example": "I clap my hands."
+        },
+        {
+          "word": "f.l.a.g",
+          "translation": null,
+          "example": "I wave the flag."
+        },
+        {
+          "word": "s.w.a.n",
+          "translation": null,
+          "example": "I see a swan."
+        },
+        {
+          "word": "t.r.u.s.t",
+          "translation": null,
+          "example": "I trust my friend."
+        },
+        {
+          "word": "b.r.i.s.k",
+          "translation": null,
+          "example": "We go for a brisk walk."
+        },
+        {
+          "word": "p.l.a.n.t",
+          "translation": null,
+          "example": "I water the plant."
+        },
+        {
+          "word": "s.t.a.m.p",
+          "translation": null,
+          "example": "I put a stamp on it."
+        }
       ]
     },
     {
@@ -204,16 +669,56 @@
       "label": "ck (duck)",
       "grapheme": "ck",
       "words": [
-        "d.u.ck",
-        "s.o.ck",
-        "r.o.ck",
-        "l.o.ck",
-        "k.i.ck",
-        "p.i.ck",
-        "s.i.ck",
-        "b.a.ck",
-        "n.e.ck",
-        "d.e.ck"
+        {
+          "word": "d.u.ck",
+          "translation": null,
+          "example": "I see a duck."
+        },
+        {
+          "word": "s.o.ck",
+          "translation": null,
+          "example": "I wear a sock."
+        },
+        {
+          "word": "r.o.ck",
+          "translation": null,
+          "example": "I sit on a rock."
+        },
+        {
+          "word": "l.o.ck",
+          "translation": null,
+          "example": "I open the lock."
+        },
+        {
+          "word": "k.i.ck",
+          "translation": null,
+          "example": "I kick the ball."
+        },
+        {
+          "word": "p.i.ck",
+          "translation": null,
+          "example": "I pick a flower."
+        },
+        {
+          "word": "s.i.ck",
+          "translation": null,
+          "example": "I feel sick."
+        },
+        {
+          "word": "b.a.ck",
+          "translation": null,
+          "example": "I sit at the back."
+        },
+        {
+          "word": "n.e.ck",
+          "translation": null,
+          "example": "I wear it around my neck."
+        },
+        {
+          "word": "d.e.ck",
+          "translation": null,
+          "example": "I stand on the deck."
+        }
       ]
     },
     {
@@ -221,16 +726,56 @@
       "label": "sh (shell)",
       "grapheme": "sh",
       "words": [
-        "sh.e.ll",
-        "sh.i.p",
-        "sh.o.p",
-        "f.i.sh",
-        "d.i.sh",
-        "w.i.sh",
-        "c.a.sh",
-        "b.r.u.sh",
-        "sh.a.r.k",
-        "sh.u.t"
+        {
+          "word": "sh.e.ll",
+          "translation": null,
+          "example": "I find a shell."
+        },
+        {
+          "word": "sh.i.p",
+          "translation": null,
+          "example": "I see a ship."
+        },
+        {
+          "word": "sh.o.p",
+          "translation": null,
+          "example": "I go to the shop."
+        },
+        {
+          "word": "f.i.sh",
+          "translation": null,
+          "example": "I eat fish."
+        },
+        {
+          "word": "d.i.sh",
+          "translation": null,
+          "example": "I wash the dish."
+        },
+        {
+          "word": "w.i.sh",
+          "translation": null,
+          "example": "I make a wish."
+        },
+        {
+          "word": "c.a.sh",
+          "translation": null,
+          "example": "I pay with cash."
+        },
+        {
+          "word": "b.r.u.sh",
+          "translation": null,
+          "example": "I use a brush."
+        },
+        {
+          "word": "sh.a.r.k",
+          "translation": null,
+          "example": "I see a shark."
+        },
+        {
+          "word": "sh.u.t",
+          "translation": null,
+          "example": "I shut the door."
+        }
       ]
     },
     {
@@ -238,16 +783,56 @@
       "label": "wh (whale)",
       "grapheme": "wh",
       "words": [
-        "wh.a.l.e",
-        "wh.ee.l",
-        "wh.i.p",
-        "wh.e.n",
-        "wh.i.ch",
-        "wh.i.t.e",
-        "wh.ea.t",
-        "wh.i.s.k",
-        "wh.i.ff",
-        "wh.y"
+        {
+          "word": "wh.a.l.e",
+          "translation": null,
+          "example": "I see a whale."
+        },
+        {
+          "word": "wh.ee.l",
+          "translation": null,
+          "example": "I spin the wheel."
+        },
+        {
+          "word": "wh.i.p",
+          "translation": null,
+          "example": "I crack the whip."
+        },
+        {
+          "word": "wh.e.n",
+          "translation": null,
+          "example": "When do we eat?"
+        },
+        {
+          "word": "wh.i.ch",
+          "translation": null,
+          "example": "Which one is mine?"
+        },
+        {
+          "word": "wh.i.t.e",
+          "translation": null,
+          "example": "The snow is white."
+        },
+        {
+          "word": "wh.ea.t",
+          "translation": null,
+          "example": "The bread is made of wheat."
+        },
+        {
+          "word": "wh.i.s.k",
+          "translation": null,
+          "example": "I whisk the eggs."
+        },
+        {
+          "word": "wh.i.ff",
+          "translation": null,
+          "example": "I get a whiff of it."
+        },
+        {
+          "word": "wh.y",
+          "translation": null,
+          "example": "Why is it hot?"
+        }
       ]
     },
     {
@@ -255,16 +840,56 @@
       "label": "ch (chick)",
       "grapheme": "ch",
       "words": [
-        "ch.i.ck",
-        "ch.i.p",
-        "ch.i.n",
-        "ch.a.t",
-        "m.u.ch",
-        "s.u.ch",
-        "r.i.ch",
-        "l.u.n.ch",
-        "b.e.n.ch",
-        "ch.e.ss"
+        {
+          "word": "ch.i.ck",
+          "translation": null,
+          "example": "I see a chick."
+        },
+        {
+          "word": "ch.i.p",
+          "translation": null,
+          "example": "I eat a chip."
+        },
+        {
+          "word": "ch.i.n",
+          "translation": null,
+          "example": "I touch my chin."
+        },
+        {
+          "word": "ch.a.t",
+          "translation": null,
+          "example": "I chat with my friend."
+        },
+        {
+          "word": "m.u.ch",
+          "translation": null,
+          "example": "I do not eat much."
+        },
+        {
+          "word": "s.u.ch",
+          "translation": null,
+          "example": "It is such a nice day."
+        },
+        {
+          "word": "r.i.ch",
+          "translation": null,
+          "example": "He is very rich."
+        },
+        {
+          "word": "l.u.n.ch",
+          "translation": null,
+          "example": "I eat my lunch."
+        },
+        {
+          "word": "b.e.n.ch",
+          "translation": null,
+          "example": "I sit on the bench."
+        },
+        {
+          "word": "ch.e.ss",
+          "translation": null,
+          "example": "I play chess."
+        }
       ]
     },
     {
@@ -272,16 +897,56 @@
       "label": "th (thumb)",
       "grapheme": "th",
       "words": [
-        "th.u.m.b",
-        "th.i.n",
-        "th.i.ck",
-        "m.o.th",
-        "c.l.o.th",
-        "b.a.th",
-        "p.a.th",
-        "th.i.n.k",
-        "th.a.n.k",
-        "th.o.r.n"
+        {
+          "word": "th.u.m.b",
+          "translation": null,
+          "example": "I hurt my thumb."
+        },
+        {
+          "word": "th.i.n",
+          "translation": null,
+          "example": "The stick is thin."
+        },
+        {
+          "word": "th.i.ck",
+          "translation": null,
+          "example": "The book is thick."
+        },
+        {
+          "word": "m.o.th",
+          "translation": null,
+          "example": "I see a moth."
+        },
+        {
+          "word": "c.l.o.th",
+          "translation": null,
+          "example": "I wipe it with a cloth."
+        },
+        {
+          "word": "b.a.th",
+          "translation": null,
+          "example": "I have a bath."
+        },
+        {
+          "word": "p.a.th",
+          "translation": null,
+          "example": "I walk on the path."
+        },
+        {
+          "word": "th.i.n.k",
+          "translation": null,
+          "example": "I think about it."
+        },
+        {
+          "word": "th.a.n.k",
+          "translation": null,
+          "example": "I thank my mum."
+        },
+        {
+          "word": "th.o.r.n",
+          "translation": null,
+          "example": "I feel a thorn."
+        }
       ]
     },
     {
@@ -289,16 +954,56 @@
       "label": "th (feather)",
       "grapheme": "th",
       "words": [
-        "th.i.s",
-        "th.a.t",
-        "th.e.n",
-        "th.e.m",
-        "th.e.r.e",
-        "o.th.e.r",
-        "m.o.th.e.r",
-        "f.a.th.e.r",
-        "w.i.th",
-        "th.e.y"
+        {
+          "word": "th.i.s",
+          "translation": null,
+          "example": "This is my hat."
+        },
+        {
+          "word": "th.a.t",
+          "translation": null,
+          "example": "That is my hat."
+        },
+        {
+          "word": "th.e.n",
+          "translation": null,
+          "example": "I eat, then I sleep."
+        },
+        {
+          "word": "th.e.m",
+          "translation": null,
+          "example": "I see them."
+        },
+        {
+          "word": "th.e.r.e",
+          "translation": null,
+          "example": "The cat is over there."
+        },
+        {
+          "word": "o.th.e.r",
+          "translation": null,
+          "example": "I like the other one."
+        },
+        {
+          "word": "m.o.th.e.r",
+          "translation": null,
+          "example": "I love my mother."
+        },
+        {
+          "word": "f.a.th.e.r",
+          "translation": null,
+          "example": "I love my father."
+        },
+        {
+          "word": "w.i.th",
+          "translation": null,
+          "example": "I play with my friend."
+        },
+        {
+          "word": "th.e.y",
+          "translation": null,
+          "example": "They play together."
+        }
       ]
     },
     {
@@ -306,16 +1011,56 @@
       "label": "oo (moon)",
       "grapheme": "oo",
       "words": [
-        "m.oo.n",
-        "s.p.oo.n",
-        "r.oo.m",
-        "f.oo.d",
-        "b.oo.t",
-        "r.oo.f",
-        "t.oo.th",
-        "z.oo",
-        "b.r.oo.m",
-        "s.c.h.oo.l"
+        {
+          "word": "m.oo.n",
+          "translation": null,
+          "example": "I see the moon."
+        },
+        {
+          "word": "s.p.oo.n",
+          "translation": null,
+          "example": "I eat with a spoon."
+        },
+        {
+          "word": "r.oo.m",
+          "translation": null,
+          "example": "I clean my room."
+        },
+        {
+          "word": "f.oo.d",
+          "translation": null,
+          "example": "I eat my food."
+        },
+        {
+          "word": "b.oo.t",
+          "translation": null,
+          "example": "I wear a boot."
+        },
+        {
+          "word": "r.oo.f",
+          "translation": null,
+          "example": "I see the roof."
+        },
+        {
+          "word": "t.oo.th",
+          "translation": null,
+          "example": "I lost a tooth."
+        },
+        {
+          "word": "z.oo",
+          "translation": null,
+          "example": "I go to the zoo."
+        },
+        {
+          "word": "b.r.oo.m",
+          "translation": null,
+          "example": "I sweep with a broom."
+        },
+        {
+          "word": "s.c.h.oo.l",
+          "translation": null,
+          "example": "I go to school."
+        }
       ]
     },
     {
@@ -323,16 +1068,56 @@
       "label": "oo (book)",
       "grapheme": "oo",
       "words": [
-        "b.oo.k",
-        "l.oo.k",
-        "t.oo.k",
-        "f.oo.t",
-        "w.oo.d",
-        "g.oo.d",
-        "h.oo.d",
-        "c.oo.k",
-        "s.t.oo.d",
-        "h.oo.k"
+        {
+          "word": "b.oo.k",
+          "translation": null,
+          "example": "I read a book."
+        },
+        {
+          "word": "l.oo.k",
+          "translation": null,
+          "example": "I look at the book."
+        },
+        {
+          "word": "t.oo.k",
+          "translation": null,
+          "example": "I took the book."
+        },
+        {
+          "word": "f.oo.t",
+          "translation": null,
+          "example": "I hurt my foot."
+        },
+        {
+          "word": "w.oo.d",
+          "translation": null,
+          "example": "I chop the wood."
+        },
+        {
+          "word": "g.oo.d",
+          "translation": null,
+          "example": "I am a good friend."
+        },
+        {
+          "word": "h.oo.d",
+          "translation": null,
+          "example": "I wear a hood."
+        },
+        {
+          "word": "c.oo.k",
+          "translation": null,
+          "example": "I cook the food."
+        },
+        {
+          "word": "s.t.oo.d",
+          "translation": null,
+          "example": "I stood by the door."
+        },
+        {
+          "word": "h.oo.k",
+          "translation": null,
+          "example": "I hang it on a hook."
+        }
       ]
     },
     {
@@ -340,16 +1125,56 @@
       "label": "ng (swing)",
       "grapheme": "ng",
       "words": [
-        "s.w.i.ng",
-        "k.i.ng",
-        "r.i.ng",
-        "s.o.ng",
-        "l.o.ng",
-        "s.i.ng",
-        "w.i.ng",
-        "s.t.r.o.ng",
-        "b.r.i.ng",
-        "th.i.ng"
+        {
+          "word": "s.w.i.ng",
+          "translation": null,
+          "example": "I sit on the swing."
+        },
+        {
+          "word": "k.i.ng",
+          "translation": null,
+          "example": "I see the king."
+        },
+        {
+          "word": "r.i.ng",
+          "translation": null,
+          "example": "I wear a ring."
+        },
+        {
+          "word": "s.o.ng",
+          "translation": null,
+          "example": "I sing a song."
+        },
+        {
+          "word": "l.o.ng",
+          "translation": null,
+          "example": "The rope is long."
+        },
+        {
+          "word": "s.i.ng",
+          "translation": null,
+          "example": "I sing a song."
+        },
+        {
+          "word": "w.i.ng",
+          "translation": null,
+          "example": "The bird has a wing."
+        },
+        {
+          "word": "s.t.r.o.ng",
+          "translation": null,
+          "example": "He is very strong."
+        },
+        {
+          "word": "b.r.i.ng",
+          "translation": null,
+          "example": "I bring my bag."
+        },
+        {
+          "word": "th.i.ng",
+          "translation": null,
+          "example": "I see one thing."
+        }
       ]
     },
     {
@@ -357,16 +1182,56 @@
       "label": "Compound Words",
       "grapheme": "",
       "words": [
-        "s.u.n.s.e.t",
-        "f.oo.t.b.a.ll",
-        "b.a.ck.p.a.ck",
-        "b.a.th.t.u.b",
-        "c.u.p.c.a.k.e",
-        "r.ai.n.b.ow",
-        "b.i.r.th.d.ay",
-        "p.o.p.c.o.r.n",
-        "s.a.n.d.p.i.t",
-        "p.l.ay.g.r.ou.n.d"
+        {
+          "word": "s.u.n.s.e.t",
+          "translation": null,
+          "example": "I watch the sunset."
+        },
+        {
+          "word": "f.oo.t.b.a.ll",
+          "translation": null,
+          "example": "I play football."
+        },
+        {
+          "word": "b.a.ck.p.a.ck",
+          "translation": null,
+          "example": "I carry my backpack."
+        },
+        {
+          "word": "b.a.th.t.u.b",
+          "translation": null,
+          "example": "I sit in the bathtub."
+        },
+        {
+          "word": "c.u.p.c.a.k.e",
+          "translation": null,
+          "example": "I eat a cupcake."
+        },
+        {
+          "word": "r.ai.n.b.ow",
+          "translation": null,
+          "example": "I see a rainbow."
+        },
+        {
+          "word": "b.i.r.th.d.ay",
+          "translation": null,
+          "example": "It is my birthday."
+        },
+        {
+          "word": "p.o.p.c.o.r.n",
+          "translation": null,
+          "example": "I eat popcorn."
+        },
+        {
+          "word": "s.a.n.d.p.i.t",
+          "translation": null,
+          "example": "I play in the sandpit."
+        },
+        {
+          "word": "p.l.ay.g.r.ou.n.d",
+          "translation": null,
+          "example": "I play at the playground."
+        }
       ]
     },
     {
@@ -374,16 +1239,56 @@
       "label": "ay (play)",
       "grapheme": "ay",
       "words": [
-        "p.l.ay",
-        "d.ay",
-        "t.r.ay",
-        "s.t.ay",
-        "m.ay",
-        "p.l.ay.er",
-        "h.ay",
-        "c.l.ay",
-        "s.p.r.ay",
-        "w.ay"
+        {
+          "word": "p.l.ay",
+          "translation": null,
+          "example": "I play with my friend."
+        },
+        {
+          "word": "d.ay",
+          "translation": null,
+          "example": "It is a nice day."
+        },
+        {
+          "word": "t.r.ay",
+          "translation": null,
+          "example": "I carry the tray."
+        },
+        {
+          "word": "s.t.ay",
+          "translation": null,
+          "example": "I stay at home."
+        },
+        {
+          "word": "m.ay",
+          "translation": null,
+          "example": "I may go out."
+        },
+        {
+          "word": "p.l.ay.er",
+          "translation": null,
+          "example": "I am a good player."
+        },
+        {
+          "word": "h.ay",
+          "translation": null,
+          "example": "The horse eats hay."
+        },
+        {
+          "word": "c.l.ay",
+          "translation": null,
+          "example": "I make a pot from clay."
+        },
+        {
+          "word": "s.p.r.ay",
+          "translation": null,
+          "example": "I spray the plant."
+        },
+        {
+          "word": "w.ay",
+          "translation": null,
+          "example": "I know the way."
+        }
       ]
     },
     {
@@ -391,16 +1296,56 @@
       "label": "ai (rain)",
       "grapheme": "ai",
       "words": [
-        "r.ai.n",
-        "t.r.ai.n",
-        "s.n.ai.l",
-        "p.ai.n.t",
-        "m.ai.l",
-        "t.ai.l",
-        "w.ai.t",
-        "ch.ai.n",
-        "b.r.ai.n",
-        "p.l.ai.n"
+        {
+          "word": "r.ai.n",
+          "translation": null,
+          "example": "I see the rain."
+        },
+        {
+          "word": "t.r.ai.n",
+          "translation": null,
+          "example": "I ride the train."
+        },
+        {
+          "word": "s.n.ai.l",
+          "translation": null,
+          "example": "I see a snail."
+        },
+        {
+          "word": "p.ai.n.t",
+          "translation": null,
+          "example": "I paint a picture."
+        },
+        {
+          "word": "m.ai.l",
+          "translation": null,
+          "example": "I get the mail."
+        },
+        {
+          "word": "t.ai.l",
+          "translation": null,
+          "example": "The dog wags its tail."
+        },
+        {
+          "word": "w.ai.t",
+          "translation": null,
+          "example": "I wait for the bus."
+        },
+        {
+          "word": "ch.ai.n",
+          "translation": null,
+          "example": "I wear a chain."
+        },
+        {
+          "word": "b.r.ai.n",
+          "translation": null,
+          "example": "I use my brain."
+        },
+        {
+          "word": "p.l.ai.n",
+          "translation": null,
+          "example": "The cake is plain."
+        }
       ]
     },
     {
@@ -408,16 +1353,56 @@
       "label": "ee (tree)",
       "grapheme": "ee",
       "words": [
-        "t.r.ee",
-        "f.ee.t",
-        "g.r.ee.n",
-        "s.l.ee.p",
-        "q.u.ee.n",
-        "f.ee.d",
-        "s.ee.d",
-        "w.ee.k",
-        "s.t.ee.p",
-        "th.r.ee"
+        {
+          "word": "t.r.ee",
+          "translation": null,
+          "example": "I climb the tree."
+        },
+        {
+          "word": "f.ee.t",
+          "translation": null,
+          "example": "I wash my feet."
+        },
+        {
+          "word": "g.r.ee.n",
+          "translation": null,
+          "example": "The grass is green."
+        },
+        {
+          "word": "s.l.ee.p",
+          "translation": null,
+          "example": "I go to sleep."
+        },
+        {
+          "word": "q.u.ee.n",
+          "translation": null,
+          "example": "I see the queen."
+        },
+        {
+          "word": "f.ee.d",
+          "translation": null,
+          "example": "I feed the dog."
+        },
+        {
+          "word": "s.ee.d",
+          "translation": null,
+          "example": "I plant a seed."
+        },
+        {
+          "word": "w.ee.k",
+          "translation": null,
+          "example": "I wait a week."
+        },
+        {
+          "word": "s.t.ee.p",
+          "translation": null,
+          "example": "The hill is steep."
+        },
+        {
+          "word": "th.r.ee",
+          "translation": null,
+          "example": "I am three."
+        }
       ]
     },
     {
@@ -425,16 +1410,56 @@
       "label": "ea (leaf)",
       "grapheme": "ea",
       "words": [
-        "l.ea.f",
-        "b.ea.ch",
-        "d.r.ea.m",
-        "m.ea.t",
-        "s.ea.t",
-        "t.ea.m",
-        "r.ea.d",
-        "s.ea.l",
-        "p.ea.ch",
-        "c.l.ea.n"
+        {
+          "word": "l.ea.f",
+          "translation": null,
+          "example": "I see a leaf."
+        },
+        {
+          "word": "b.ea.ch",
+          "translation": null,
+          "example": "I go to the beach."
+        },
+        {
+          "word": "d.r.ea.m",
+          "translation": null,
+          "example": "I have a dream."
+        },
+        {
+          "word": "m.ea.t",
+          "translation": null,
+          "example": "I eat meat."
+        },
+        {
+          "word": "s.ea.t",
+          "translation": null,
+          "example": "I sit in my seat."
+        },
+        {
+          "word": "t.ea.m",
+          "translation": null,
+          "example": "I am on a team."
+        },
+        {
+          "word": "r.ea.d",
+          "translation": null,
+          "example": "I read a book."
+        },
+        {
+          "word": "s.ea.l",
+          "translation": null,
+          "example": "I see a seal."
+        },
+        {
+          "word": "p.ea.ch",
+          "translation": null,
+          "example": "I eat a peach."
+        },
+        {
+          "word": "c.l.ea.n",
+          "translation": null,
+          "example": "I clean my room."
+        }
       ]
     },
     {
@@ -442,16 +1467,56 @@
       "label": "oa (boat)",
       "grapheme": "oa",
       "words": [
-        "b.oa.t",
-        "c.oa.t",
-        "r.oa.d",
-        "g.oa.t",
-        "s.oa.p",
-        "f.oa.m",
-        "t.oa.d",
-        "l.oa.f",
-        "c.oa.ch",
-        "c.oa.s.t"
+        {
+          "word": "b.oa.t",
+          "translation": null,
+          "example": "I ride in a boat."
+        },
+        {
+          "word": "c.oa.t",
+          "translation": null,
+          "example": "I wear a coat."
+        },
+        {
+          "word": "r.oa.d",
+          "translation": null,
+          "example": "I cross the road."
+        },
+        {
+          "word": "g.oa.t",
+          "translation": null,
+          "example": "I see a goat."
+        },
+        {
+          "word": "s.oa.p",
+          "translation": null,
+          "example": "I wash with soap."
+        },
+        {
+          "word": "f.oa.m",
+          "translation": null,
+          "example": "I see the foam."
+        },
+        {
+          "word": "t.oa.d",
+          "translation": null,
+          "example": "I see a toad."
+        },
+        {
+          "word": "l.oa.f",
+          "translation": null,
+          "example": "I buy a loaf of bread."
+        },
+        {
+          "word": "c.oa.ch",
+          "translation": null,
+          "example": "My coach helps me."
+        },
+        {
+          "word": "c.oa.s.t",
+          "translation": null,
+          "example": "We drive along the coast."
+        }
       ]
     },
     {
@@ -459,16 +1524,56 @@
       "label": "ow (snow)",
       "grapheme": "ow",
       "words": [
-        "s.n.ow",
-        "g.r.ow",
-        "s.l.ow",
-        "y.e.ll.ow",
-        "w.i.n.d.ow",
-        "b.l.ow",
-        "c.r.ow",
-        "th.r.ow",
-        "sh.ow",
-        "f.l.ow"
+        {
+          "word": "s.n.ow",
+          "translation": null,
+          "example": "I play in the snow."
+        },
+        {
+          "word": "g.r.ow",
+          "translation": null,
+          "example": "I grow tall."
+        },
+        {
+          "word": "s.l.ow",
+          "translation": null,
+          "example": "The turtle is slow."
+        },
+        {
+          "word": "y.e.ll.ow",
+          "translation": null,
+          "example": "The sun is yellow."
+        },
+        {
+          "word": "w.i.n.d.ow",
+          "translation": null,
+          "example": "I look out the window."
+        },
+        {
+          "word": "b.l.ow",
+          "translation": null,
+          "example": "I blow the candle."
+        },
+        {
+          "word": "c.r.ow",
+          "translation": null,
+          "example": "I see a crow."
+        },
+        {
+          "word": "th.r.ow",
+          "translation": null,
+          "example": "I throw the ball."
+        },
+        {
+          "word": "sh.ow",
+          "translation": null,
+          "example": "I show my picture."
+        },
+        {
+          "word": "f.l.ow",
+          "translation": null,
+          "example": "The water starts to flow."
+        }
       ]
     },
     {
@@ -476,16 +1581,56 @@
       "label": "_y (cry)",
       "grapheme": "y",
       "words": [
-        "c.r.y",
-        "f.l.y",
-        "t.r.y",
-        "s.k.y",
-        "sh.y",
-        "d.r.y",
-        "wh.y",
-        "f.r.y",
-        "p.l.y",
-        "m.y"
+        {
+          "word": "c.r.y",
+          "translation": null,
+          "example": "I cry when I am sad."
+        },
+        {
+          "word": "f.l.y",
+          "translation": null,
+          "example": "I see a fly."
+        },
+        {
+          "word": "t.r.y",
+          "translation": null,
+          "example": "I try my best."
+        },
+        {
+          "word": "s.k.y",
+          "translation": null,
+          "example": "I look at the sky."
+        },
+        {
+          "word": "sh.y",
+          "translation": null,
+          "example": "I am shy."
+        },
+        {
+          "word": "d.r.y",
+          "translation": null,
+          "example": "My hair is dry."
+        },
+        {
+          "word": "wh.y",
+          "translation": null,
+          "example": "Why is it hot?"
+        },
+        {
+          "word": "f.r.y",
+          "translation": null,
+          "example": "I fry an egg."
+        },
+        {
+          "word": "p.l.y",
+          "translation": null,
+          "example": "This wood is one ply."
+        },
+        {
+          "word": "m.y",
+          "translation": null,
+          "example": "This is my hat."
+        }
       ]
     },
     {
@@ -493,16 +1638,56 @@
       "label": "igh (light)",
       "grapheme": "igh",
       "words": [
-        "l.igh.t",
-        "n.igh.t",
-        "h.igh",
-        "s.igh.t",
-        "f.r.igh.t",
-        "t.igh.t",
-        "m.igh.t",
-        "r.igh.t",
-        "b.r.igh.t",
-        "f.l.igh.t"
+        {
+          "word": "l.igh.t",
+          "translation": null,
+          "example": "I turn on the light."
+        },
+        {
+          "word": "n.igh.t",
+          "translation": null,
+          "example": "I sleep at night."
+        },
+        {
+          "word": "h.igh",
+          "translation": null,
+          "example": "I jump high."
+        },
+        {
+          "word": "s.igh.t",
+          "translation": null,
+          "example": "I lost sight of it."
+        },
+        {
+          "word": "f.r.igh.t",
+          "translation": null,
+          "example": "I got a fright."
+        },
+        {
+          "word": "t.igh.t",
+          "translation": null,
+          "example": "My shoes are tight."
+        },
+        {
+          "word": "m.igh.t",
+          "translation": null,
+          "example": "It might rain."
+        },
+        {
+          "word": "r.igh.t",
+          "translation": null,
+          "example": "I turn right."
+        },
+        {
+          "word": "b.r.igh.t",
+          "translation": null,
+          "example": "The sun is bright."
+        },
+        {
+          "word": "f.l.igh.t",
+          "translation": null,
+          "example": "I am on a flight."
+        }
       ]
     },
     {
@@ -510,16 +1695,56 @@
       "label": "ue (glue)",
       "grapheme": "ue",
       "words": [
-        "g.l.ue",
-        "b.l.ue",
-        "t.r.ue",
-        "c.l.ue",
-        "r.e.s.c.ue",
-        "v.a.l.ue",
-        "s.t.a.t.ue",
-        "ar.g.ue",
-        "g.l.ue.y",
-        "q.ue.u.e"
+        {
+          "word": "g.l.ue",
+          "translation": null,
+          "example": "I use glue."
+        },
+        {
+          "word": "b.l.ue",
+          "translation": null,
+          "example": "The sky is blue."
+        },
+        {
+          "word": "t.r.ue",
+          "translation": null,
+          "example": "That is true."
+        },
+        {
+          "word": "c.l.ue",
+          "translation": null,
+          "example": "I find a clue."
+        },
+        {
+          "word": "r.e.s.c.ue",
+          "translation": null,
+          "example": "I rescue the cat."
+        },
+        {
+          "word": "v.a.l.ue",
+          "translation": null,
+          "example": "I value my friend."
+        },
+        {
+          "word": "s.t.a.t.ue",
+          "translation": null,
+          "example": "I see a statue."
+        },
+        {
+          "word": "ar.g.ue",
+          "translation": null,
+          "example": "I do not argue."
+        },
+        {
+          "word": "g.l.ue.y",
+          "translation": null,
+          "example": "My hands are gluey."
+        },
+        {
+          "word": "q.ue.u.e",
+          "translation": null,
+          "example": "I stand in a queue."
+        }
       ]
     },
     {
@@ -527,16 +1752,56 @@
       "label": "ew (grew)",
       "grapheme": "ew",
       "words": [
-        "g.r.ew",
-        "n.ew",
-        "ch.ew",
-        "c.r.ew",
-        "f.l.ew",
-        "d.r.ew",
-        "s.t.ew",
-        "th.r.ew",
-        "f.ew",
-        "b.l.ew"
+        {
+          "word": "g.r.ew",
+          "translation": null,
+          "example": "The plant grew tall."
+        },
+        {
+          "word": "n.ew",
+          "translation": null,
+          "example": "I have a new hat."
+        },
+        {
+          "word": "ch.ew",
+          "translation": null,
+          "example": "I chew my food."
+        },
+        {
+          "word": "c.r.ew",
+          "translation": null,
+          "example": "The crew works hard."
+        },
+        {
+          "word": "f.l.ew",
+          "translation": null,
+          "example": "The bird flew away."
+        },
+        {
+          "word": "d.r.ew",
+          "translation": null,
+          "example": "I drew a picture."
+        },
+        {
+          "word": "s.t.ew",
+          "translation": null,
+          "example": "I eat stew."
+        },
+        {
+          "word": "th.r.ew",
+          "translation": null,
+          "example": "I threw the ball."
+        },
+        {
+          "word": "f.ew",
+          "translation": null,
+          "example": "I have a few toys."
+        },
+        {
+          "word": "b.l.ew",
+          "translation": null,
+          "example": "The wind blew hard."
+        }
       ]
     },
     {
@@ -544,16 +1809,56 @@
       "label": "ar (star)",
       "grapheme": "ar",
       "words": [
-        "s.t.ar",
-        "c.ar",
-        "f.ar.m",
-        "p.ar.k",
-        "sh.ar.k",
-        "ar.m",
-        "c.ar.t",
-        "h.ar.d",
-        "y.ar.d",
-        "d.ar.k"
+        {
+          "word": "s.t.ar",
+          "translation": null,
+          "example": "I see a star."
+        },
+        {
+          "word": "c.ar",
+          "translation": null,
+          "example": "I ride in the car."
+        },
+        {
+          "word": "f.ar.m",
+          "translation": null,
+          "example": "I live on a farm."
+        },
+        {
+          "word": "p.ar.k",
+          "translation": null,
+          "example": "I play in the park."
+        },
+        {
+          "word": "sh.ar.k",
+          "translation": null,
+          "example": "I see a shark."
+        },
+        {
+          "word": "ar.m",
+          "translation": null,
+          "example": "I hurt my arm."
+        },
+        {
+          "word": "c.ar.t",
+          "translation": null,
+          "example": "I push the cart."
+        },
+        {
+          "word": "h.ar.d",
+          "translation": null,
+          "example": "The rock is hard."
+        },
+        {
+          "word": "y.ar.d",
+          "translation": null,
+          "example": "I play in the yard."
+        },
+        {
+          "word": "d.ar.k",
+          "translation": null,
+          "example": "The room is dark."
+        }
       ]
     },
     {
@@ -561,16 +1866,56 @@
       "label": "or (fork)",
       "grapheme": "or",
       "words": [
-        "f.or.k",
-        "c.or.n",
-        "s.t.or.m",
-        "sh.or.t",
-        "s.p.or.t",
-        "f.or.t",
-        "f.or.m",
-        "s.or.t",
-        "f.or.g.o.t",
-        "n.or.th"
+        {
+          "word": "f.or.k",
+          "translation": null,
+          "example": "I eat with a fork."
+        },
+        {
+          "word": "c.or.n",
+          "translation": null,
+          "example": "I eat corn."
+        },
+        {
+          "word": "s.t.or.m",
+          "translation": null,
+          "example": "I see a storm."
+        },
+        {
+          "word": "sh.or.t",
+          "translation": null,
+          "example": "My hair is short."
+        },
+        {
+          "word": "s.p.or.t",
+          "translation": null,
+          "example": "I play a sport."
+        },
+        {
+          "word": "f.or.t",
+          "translation": null,
+          "example": "I build a fort."
+        },
+        {
+          "word": "f.or.m",
+          "translation": null,
+          "example": "I fill in the form."
+        },
+        {
+          "word": "s.or.t",
+          "translation": null,
+          "example": "I sort my toys."
+        },
+        {
+          "word": "f.or.g.o.t",
+          "translation": null,
+          "example": "I forgot my bag."
+        },
+        {
+          "word": "n.or.th",
+          "translation": null,
+          "example": "We drive north."
+        }
       ]
     },
     {
@@ -578,16 +1923,56 @@
       "label": "ore (snore)",
       "grapheme": "ore",
       "words": [
-        "s.n.ore",
-        "m.ore",
-        "s.t.ore",
-        "sh.ore",
-        "s.c.ore",
-        "c.ore",
-        "b.ore",
-        "w.ore",
-        "ch.ore",
-        "t.ore"
+        {
+          "word": "s.n.ore",
+          "translation": null,
+          "example": "My dad likes to snore."
+        },
+        {
+          "word": "m.ore",
+          "translation": null,
+          "example": "I want more."
+        },
+        {
+          "word": "s.t.ore",
+          "translation": null,
+          "example": "I go to the store."
+        },
+        {
+          "word": "sh.ore",
+          "translation": null,
+          "example": "I walk on the shore."
+        },
+        {
+          "word": "s.c.ore",
+          "translation": null,
+          "example": "I score a goal."
+        },
+        {
+          "word": "c.ore",
+          "translation": null,
+          "example": "I eat the apple to the core."
+        },
+        {
+          "word": "b.ore",
+          "translation": null,
+          "example": "The show did not bore me."
+        },
+        {
+          "word": "w.ore",
+          "translation": null,
+          "example": "I wore my hat."
+        },
+        {
+          "word": "ch.ore",
+          "translation": null,
+          "example": "I do my chore."
+        },
+        {
+          "word": "t.ore",
+          "translation": null,
+          "example": "I tore the paper."
+        }
       ]
     },
     {
@@ -595,16 +1980,56 @@
       "label": "ir (stir)",
       "grapheme": "ir",
       "words": [
-        "s.t.ir",
-        "g.ir.l",
-        "b.ir.d",
-        "sh.ir.t",
-        "f.ir.s.t",
-        "b.ir.th",
-        "th.ir.d",
-        "d.ir.t",
-        "sk.ir.t",
-        "ch.ir.p"
+        {
+          "word": "s.t.ir",
+          "translation": null,
+          "example": "I stir my soup."
+        },
+        {
+          "word": "g.ir.l",
+          "translation": null,
+          "example": "I see a girl."
+        },
+        {
+          "word": "b.ir.d",
+          "translation": null,
+          "example": "I see a bird."
+        },
+        {
+          "word": "sh.ir.t",
+          "translation": null,
+          "example": "I wear a shirt."
+        },
+        {
+          "word": "f.ir.s.t",
+          "translation": null,
+          "example": "I am first in line."
+        },
+        {
+          "word": "b.ir.th",
+          "translation": null,
+          "example": "I was there at his birth."
+        },
+        {
+          "word": "th.ir.d",
+          "translation": null,
+          "example": "I am third in line."
+        },
+        {
+          "word": "d.ir.t",
+          "translation": null,
+          "example": "I play in the dirt."
+        },
+        {
+          "word": "sk.ir.t",
+          "translation": null,
+          "example": "I wear a skirt."
+        },
+        {
+          "word": "ch.ir.p",
+          "translation": null,
+          "example": "The bird goes chirp."
+        }
       ]
     },
     {
@@ -612,16 +2037,56 @@
       "label": "ur (surf)",
       "grapheme": "ur",
       "words": [
-        "s.ur.f",
-        "t.ur.n",
-        "b.ur.n",
-        "h.ur.t",
-        "ch.ur.ch",
-        "n.ur.s.e",
-        "c.ur.l",
-        "b.l.ur",
-        "f.ur",
-        "t.ur.t.l.e"
+        {
+          "word": "s.ur.f",
+          "translation": null,
+          "example": "I surf on the wave."
+        },
+        {
+          "word": "t.ur.n",
+          "translation": null,
+          "example": "It is my turn."
+        },
+        {
+          "word": "b.ur.n",
+          "translation": null,
+          "example": "I do not want to burn it."
+        },
+        {
+          "word": "h.ur.t",
+          "translation": null,
+          "example": "I hurt my leg."
+        },
+        {
+          "word": "ch.ur.ch",
+          "translation": null,
+          "example": "I go to church."
+        },
+        {
+          "word": "n.ur.s.e",
+          "translation": null,
+          "example": "The nurse helps me."
+        },
+        {
+          "word": "c.ur.l",
+          "translation": null,
+          "example": "I curl my hair."
+        },
+        {
+          "word": "b.l.ur",
+          "translation": null,
+          "example": "I see a blur."
+        },
+        {
+          "word": "f.ur",
+          "translation": null,
+          "example": "The cat has soft fur."
+        },
+        {
+          "word": "t.ur.t.l.e",
+          "translation": null,
+          "example": "I see a turtle."
+        }
       ]
     },
     {
@@ -629,16 +2094,56 @@
       "label": "er (fern)",
       "grapheme": "er",
       "words": [
-        "f.er.n",
-        "h.er",
-        "w.i.n.t.er",
-        "s.i.s.t.er",
-        "b.r.o.th.er",
-        "m.o.th.er",
-        "f.a.th.er",
-        "p.ow.d.er",
-        "l.a.dd.er",
-        "r.i.v.er"
+        {
+          "word": "f.er.n",
+          "translation": null,
+          "example": "I see a fern."
+        },
+        {
+          "word": "h.er",
+          "translation": null,
+          "example": "I see her."
+        },
+        {
+          "word": "w.i.n.t.er",
+          "translation": null,
+          "example": "It is cold in winter."
+        },
+        {
+          "word": "s.i.s.t.er",
+          "translation": null,
+          "example": "I love my sister."
+        },
+        {
+          "word": "b.r.o.th.er",
+          "translation": null,
+          "example": "I love my brother."
+        },
+        {
+          "word": "m.o.th.er",
+          "translation": null,
+          "example": "I love my mother."
+        },
+        {
+          "word": "f.a.th.er",
+          "translation": null,
+          "example": "I love my father."
+        },
+        {
+          "word": "p.ow.d.er",
+          "translation": null,
+          "example": "I use powder."
+        },
+        {
+          "word": "l.a.dd.er",
+          "translation": null,
+          "example": "I climb the ladder."
+        },
+        {
+          "word": "r.i.v.er",
+          "translation": null,
+          "example": "I swim in the river."
+        }
       ]
     },
     {
@@ -646,16 +2151,56 @@
       "label": "Split digraph a_e (bossy e)",
       "grapheme": "a_e",
       "words": [
-        "c.a.k.e",
-        "p.l.a.t.e",
-        "s.n.a.k.e",
-        "g.a.t.e",
-        "n.a.m.e",
-        "l.a.n.e",
-        "g.r.a.p.e",
-        "s.k.a.t.e",
-        "b.r.a.v.e",
-        "c.a.v.e"
+        {
+          "word": "c.a.k.e",
+          "translation": null,
+          "example": "I eat a cake."
+        },
+        {
+          "word": "p.l.a.t.e",
+          "translation": null,
+          "example": "I eat off a plate."
+        },
+        {
+          "word": "s.n.a.k.e",
+          "translation": null,
+          "example": "I see a snake."
+        },
+        {
+          "word": "g.a.t.e",
+          "translation": null,
+          "example": "I open the gate."
+        },
+        {
+          "word": "n.a.m.e",
+          "translation": null,
+          "example": "I know your name."
+        },
+        {
+          "word": "l.a.n.e",
+          "translation": null,
+          "example": "I walk down the lane."
+        },
+        {
+          "word": "g.r.a.p.e",
+          "translation": null,
+          "example": "I eat a grape."
+        },
+        {
+          "word": "s.k.a.t.e",
+          "translation": null,
+          "example": "I skate at the rink."
+        },
+        {
+          "word": "b.r.a.v.e",
+          "translation": null,
+          "example": "I am brave."
+        },
+        {
+          "word": "c.a.v.e",
+          "translation": null,
+          "example": "I see a cave."
+        }
       ]
     },
     {
@@ -663,16 +2208,56 @@
       "label": "Split digraph i_e (bossy e)",
       "grapheme": "i_e",
       "words": [
-        "b.i.k.e",
-        "k.i.t.e",
-        "t.i.m.e",
-        "s.l.i.d.e",
-        "s.m.i.l.e",
-        "p.i.p.e",
-        "r.i.d.e",
-        "f.i.v.e",
-        "h.i.d.e",
-        "sh.i.n.e"
+        {
+          "word": "b.i.k.e",
+          "translation": null,
+          "example": "I ride my bike."
+        },
+        {
+          "word": "k.i.t.e",
+          "translation": null,
+          "example": "I fly a kite."
+        },
+        {
+          "word": "t.i.m.e",
+          "translation": null,
+          "example": "It is time to eat."
+        },
+        {
+          "word": "s.l.i.d.e",
+          "translation": null,
+          "example": "I go down the slide."
+        },
+        {
+          "word": "s.m.i.l.e",
+          "translation": null,
+          "example": "I smile at my friend."
+        },
+        {
+          "word": "p.i.p.e",
+          "translation": null,
+          "example": "The water goes through the pipe."
+        },
+        {
+          "word": "r.i.d.e",
+          "translation": null,
+          "example": "I ride my bike."
+        },
+        {
+          "word": "f.i.v.e",
+          "translation": null,
+          "example": "I am five."
+        },
+        {
+          "word": "h.i.d.e",
+          "translation": null,
+          "example": "I hide from my friend."
+        },
+        {
+          "word": "sh.i.n.e",
+          "translation": null,
+          "example": "The sun will shine."
+        }
       ]
     },
     {
@@ -680,16 +2265,56 @@
       "label": "Split digraph o_e (bossy e)",
       "grapheme": "o_e",
       "words": [
-        "b.o.n.e",
-        "r.o.p.e",
-        "n.o.s.e",
-        "h.o.m.e",
-        "h.o.l.e",
-        "n.o.t.e",
-        "s.t.o.n.e",
-        "s.m.o.k.e",
-        "c.l.o.s.e",
-        "j.o.k.e"
+        {
+          "word": "b.o.n.e",
+          "translation": null,
+          "example": "The dog has a bone."
+        },
+        {
+          "word": "r.o.p.e",
+          "translation": null,
+          "example": "I hold the rope."
+        },
+        {
+          "word": "n.o.s.e",
+          "translation": null,
+          "example": "I touch my nose."
+        },
+        {
+          "word": "h.o.m.e",
+          "translation": null,
+          "example": "I go home."
+        },
+        {
+          "word": "h.o.l.e",
+          "translation": null,
+          "example": "I dig a hole."
+        },
+        {
+          "word": "n.o.t.e",
+          "translation": null,
+          "example": "I write a note."
+        },
+        {
+          "word": "s.t.o.n.e",
+          "translation": null,
+          "example": "I throw a stone."
+        },
+        {
+          "word": "s.m.o.k.e",
+          "translation": null,
+          "example": "I see the smoke."
+        },
+        {
+          "word": "c.l.o.s.e",
+          "translation": null,
+          "example": "I close the door."
+        },
+        {
+          "word": "j.o.k.e",
+          "translation": null,
+          "example": "I tell a joke."
+        }
       ]
     },
     {
@@ -697,16 +2322,56 @@
       "label": "Split digraph u_e (bossy e)",
       "grapheme": "u_e",
       "words": [
-        "c.u.b.e",
-        "t.u.n.e",
-        "f.l.u.t.e",
-        "r.u.l.e",
-        "u.s.e",
-        "m.u.l.e",
-        "d.u.n.e",
-        "p.r.u.n.e",
-        "c.u.t.e",
-        "f.u.m.e"
+        {
+          "word": "c.u.b.e",
+          "translation": null,
+          "example": "I see a cube."
+        },
+        {
+          "word": "t.u.n.e",
+          "translation": null,
+          "example": "I sing a tune."
+        },
+        {
+          "word": "f.l.u.t.e",
+          "translation": null,
+          "example": "I play the flute."
+        },
+        {
+          "word": "r.u.l.e",
+          "translation": null,
+          "example": "I know the rule."
+        },
+        {
+          "word": "u.s.e",
+          "translation": null,
+          "example": "I use a pen."
+        },
+        {
+          "word": "m.u.l.e",
+          "translation": null,
+          "example": "I see a mule."
+        },
+        {
+          "word": "d.u.n.e",
+          "translation": null,
+          "example": "I climb the dune."
+        },
+        {
+          "word": "p.r.u.n.e",
+          "translation": null,
+          "example": "I eat a prune."
+        },
+        {
+          "word": "c.u.t.e",
+          "translation": null,
+          "example": "The puppy is cute."
+        },
+        {
+          "word": "f.u.m.e",
+          "translation": null,
+          "example": "I smell the fume."
+        }
       ]
     },
     {
@@ -714,16 +2379,56 @@
       "label": "Split digraph e_e (bossy e)",
       "grapheme": "e_e",
       "words": [
-        "th.e.s.e",
-        "th.e.m.e",
-        "c.o.m.p.e.t.e",
-        "e.x.t.r.e.m.e",
-        "d.e.l.e.t.e",
-        "c.o.n.c.r.e.t.e",
-        "e.v.e",
-        "g.e.n.e",
-        "s.c.e.n.e",
-        "s.u.p.r.e.m.e"
+        {
+          "word": "th.e.s.e",
+          "translation": null,
+          "example": "These are my toys."
+        },
+        {
+          "word": "th.e.m.e",
+          "translation": null,
+          "example": "I like the theme."
+        },
+        {
+          "word": "c.o.m.p.e.t.e",
+          "translation": null,
+          "example": "I compete in the race."
+        },
+        {
+          "word": "e.x.t.r.e.m.e",
+          "translation": null,
+          "example": "The heat is extreme."
+        },
+        {
+          "word": "d.e.l.e.t.e",
+          "translation": null,
+          "example": "I delete the picture."
+        },
+        {
+          "word": "c.o.n.c.r.e.t.e",
+          "translation": null,
+          "example": "I walk on the concrete."
+        },
+        {
+          "word": "e.v.e",
+          "translation": null,
+          "example": "It is the eve of my birthday."
+        },
+        {
+          "word": "g.e.n.e",
+          "translation": null,
+          "example": "I have my mum's gene."
+        },
+        {
+          "word": "s.c.e.n.e",
+          "translation": null,
+          "example": "I see the scene."
+        },
+        {
+          "word": "s.u.p.r.e.m.e",
+          "translation": null,
+          "example": "I eat a supreme pizza."
+        }
       ]
     },
     {
@@ -731,16 +2436,56 @@
       "label": "ow (cow)",
       "grapheme": "ow",
       "words": [
-        "c.ow",
-        "h.ow",
-        "n.ow",
-        "d.ow.n",
-        "t.ow.n",
-        "b.r.ow.n",
-        "c.l.ow.n",
-        "c.r.ow.n",
-        "g.ow.n",
-        "h.ow.l"
+        {
+          "word": "c.ow",
+          "translation": null,
+          "example": "I see a cow."
+        },
+        {
+          "word": "h.ow",
+          "translation": null,
+          "example": "How are you?"
+        },
+        {
+          "word": "n.ow",
+          "translation": null,
+          "example": "I eat now."
+        },
+        {
+          "word": "d.ow.n",
+          "translation": null,
+          "example": "I sit down."
+        },
+        {
+          "word": "t.ow.n",
+          "translation": null,
+          "example": "I go to town."
+        },
+        {
+          "word": "b.r.ow.n",
+          "translation": null,
+          "example": "The dog is brown."
+        },
+        {
+          "word": "c.l.ow.n",
+          "translation": null,
+          "example": "I see a clown."
+        },
+        {
+          "word": "c.r.ow.n",
+          "translation": null,
+          "example": "The king wears a crown."
+        },
+        {
+          "word": "g.ow.n",
+          "translation": null,
+          "example": "I wear a gown."
+        },
+        {
+          "word": "h.ow.l",
+          "translation": null,
+          "example": "The wolf will howl."
+        }
       ]
     },
     {
@@ -748,16 +2493,56 @@
       "label": "ou (cloud)",
       "grapheme": "ou",
       "words": [
-        "c.l.ou.d",
-        "l.ou.d",
-        "s.ou.n.d",
-        "r.ou.n.d",
-        "f.ou.n.d",
-        "m.ou.th",
-        "h.ou.s.e",
-        "m.ou.s.e",
-        "ou.t",
-        "a.b.ou.t"
+        {
+          "word": "c.l.ou.d",
+          "translation": null,
+          "example": "I see a cloud."
+        },
+        {
+          "word": "l.ou.d",
+          "translation": null,
+          "example": "The music is loud."
+        },
+        {
+          "word": "s.ou.n.d",
+          "translation": null,
+          "example": "I hear a sound."
+        },
+        {
+          "word": "r.ou.n.d",
+          "translation": null,
+          "example": "The ball is round."
+        },
+        {
+          "word": "f.ou.n.d",
+          "translation": null,
+          "example": "I found my toy."
+        },
+        {
+          "word": "m.ou.th",
+          "translation": null,
+          "example": "I open my mouth."
+        },
+        {
+          "word": "h.ou.s.e",
+          "translation": null,
+          "example": "I live in a house."
+        },
+        {
+          "word": "m.ou.s.e",
+          "translation": null,
+          "example": "I see a mouse."
+        },
+        {
+          "word": "ou.t",
+          "translation": null,
+          "example": "I go out."
+        },
+        {
+          "word": "a.b.ou.t",
+          "translation": null,
+          "example": "I think about it."
+        }
       ]
     },
     {
@@ -765,16 +2550,56 @@
       "label": "aw (claw)",
       "grapheme": "aw",
       "words": [
-        "c.l.aw",
-        "p.aw",
-        "s.aw",
-        "r.aw",
-        "d.r.aw",
-        "s.t.r.aw",
-        "y.aw.n",
-        "d.aw.n",
-        "h.aw.k",
-        "c.r.aw.l"
+        {
+          "word": "c.l.aw",
+          "translation": null,
+          "example": "The cat has a claw."
+        },
+        {
+          "word": "p.aw",
+          "translation": null,
+          "example": "The dog has a paw."
+        },
+        {
+          "word": "s.aw",
+          "translation": null,
+          "example": "I saw a bird."
+        },
+        {
+          "word": "r.aw",
+          "translation": null,
+          "example": "I eat it raw."
+        },
+        {
+          "word": "d.r.aw",
+          "translation": null,
+          "example": "I draw a picture."
+        },
+        {
+          "word": "s.t.r.aw",
+          "translation": null,
+          "example": "I drink with a straw."
+        },
+        {
+          "word": "y.aw.n",
+          "translation": null,
+          "example": "I yawn when I am tired."
+        },
+        {
+          "word": "d.aw.n",
+          "translation": null,
+          "example": "I wake up at dawn."
+        },
+        {
+          "word": "h.aw.k",
+          "translation": null,
+          "example": "I see a hawk."
+        },
+        {
+          "word": "c.r.aw.l",
+          "translation": null,
+          "example": "The baby will crawl."
+        }
       ]
     },
     {
@@ -782,16 +2607,56 @@
       "label": "au (autumn)",
       "grapheme": "au",
       "words": [
-        "au.t.u.m.n",
-        "s.au.s.a.g.e",
-        "s.au.c.e",
-        "s.au.c.e.p.a.n",
-        "au.th.or",
-        "d.i.n.o.s.au.r",
-        "as.t.r.o.n.au.t",
-        "c.au.s.e",
-        "p.au.s.e",
-        "h.au.n.t"
+        {
+          "word": "au.t.u.m.n",
+          "translation": null,
+          "example": "The leaves fall in autumn."
+        },
+        {
+          "word": "s.au.s.a.g.e",
+          "translation": null,
+          "example": "I eat a sausage."
+        },
+        {
+          "word": "s.au.c.e",
+          "translation": null,
+          "example": "I put sauce on it."
+        },
+        {
+          "word": "s.au.c.e.p.a.n",
+          "translation": null,
+          "example": "I cook in a saucepan."
+        },
+        {
+          "word": "au.th.or",
+          "translation": null,
+          "example": "I like this author."
+        },
+        {
+          "word": "d.i.n.o.s.au.r",
+          "translation": null,
+          "example": "I see a dinosaur."
+        },
+        {
+          "word": "as.t.r.o.n.au.t",
+          "translation": null,
+          "example": "I want to be an astronaut."
+        },
+        {
+          "word": "c.au.s.e",
+          "translation": null,
+          "example": "I know the cause."
+        },
+        {
+          "word": "p.au.s.e",
+          "translation": null,
+          "example": "I pause the show."
+        },
+        {
+          "word": "h.au.n.t",
+          "translation": null,
+          "example": "Ghosts haunt this house."
+        }
       ]
     },
     {
@@ -799,16 +2664,56 @@
       "label": "_y (puppy)",
       "grapheme": "y",
       "words": [
-        "p.u.pp.y",
-        "h.a.pp.y",
-        "b.u.nn.y",
-        "f.u.nn.y",
-        "s.u.nn.y",
-        "j.e.ll.y",
-        "s.i.ll.y",
-        "b.a.b.y",
-        "l.a.d.y",
-        "l.o.ll.y"
+        {
+          "word": "p.u.pp.y",
+          "translation": null,
+          "example": "I see a puppy."
+        },
+        {
+          "word": "h.a.pp.y",
+          "translation": null,
+          "example": "I am happy."
+        },
+        {
+          "word": "b.u.nn.y",
+          "translation": null,
+          "example": "I see a bunny."
+        },
+        {
+          "word": "f.u.nn.y",
+          "translation": null,
+          "example": "That joke is funny."
+        },
+        {
+          "word": "s.u.nn.y",
+          "translation": null,
+          "example": "Today is sunny."
+        },
+        {
+          "word": "j.e.ll.y",
+          "translation": null,
+          "example": "I eat jelly."
+        },
+        {
+          "word": "s.i.ll.y",
+          "translation": null,
+          "example": "That is silly."
+        },
+        {
+          "word": "b.a.b.y",
+          "translation": null,
+          "example": "I see a baby."
+        },
+        {
+          "word": "l.a.d.y",
+          "translation": null,
+          "example": "I see a lady."
+        },
+        {
+          "word": "l.o.ll.y",
+          "translation": null,
+          "example": "I eat a lolly."
+        }
       ]
     },
     {
@@ -816,16 +2721,56 @@
       "label": "_ey (key)",
       "grapheme": "ey",
       "words": [
-        "k.ey",
-        "m.o.n.k.ey",
-        "d.o.n.k.ey",
-        "ch.i.m.n.ey",
-        "h.o.n.ey",
-        "v.a.ll.ey",
-        "t.r.o.ll.ey",
-        "j.o.ck.ey",
-        "h.o.ck.ey",
-        "p.ar.s.l.ey"
+        {
+          "word": "k.ey",
+          "translation": null,
+          "example": "I use a key."
+        },
+        {
+          "word": "m.o.n.k.ey",
+          "translation": null,
+          "example": "I see a monkey."
+        },
+        {
+          "word": "d.o.n.k.ey",
+          "translation": null,
+          "example": "I see a donkey."
+        },
+        {
+          "word": "ch.i.m.n.ey",
+          "translation": null,
+          "example": "I see the chimney."
+        },
+        {
+          "word": "h.o.n.ey",
+          "translation": null,
+          "example": "I eat honey."
+        },
+        {
+          "word": "v.a.ll.ey",
+          "translation": null,
+          "example": "I see the valley."
+        },
+        {
+          "word": "t.r.o.ll.ey",
+          "translation": null,
+          "example": "I push the trolley."
+        },
+        {
+          "word": "j.o.ck.ey",
+          "translation": null,
+          "example": "The jockey rides the horse."
+        },
+        {
+          "word": "h.o.ck.ey",
+          "translation": null,
+          "example": "I play hockey."
+        },
+        {
+          "word": "p.ar.s.l.ey",
+          "translation": null,
+          "example": "I add parsley to the soup."
+        }
       ]
     },
     {
@@ -833,16 +2778,56 @@
       "label": "oy (boy)",
       "grapheme": "oy",
       "words": [
-        "b.oy",
-        "t.oy",
-        "j.oy",
-        "enj.oy",
-        "d.e.s.t.r.oy",
-        "ann.oy",
-        "r.oy.a.l",
-        "v.oy.a.g.e",
-        "c.oy",
-        "l.oy.a.l"
+        {
+          "word": "b.oy",
+          "translation": null,
+          "example": "I see a boy."
+        },
+        {
+          "word": "t.oy",
+          "translation": null,
+          "example": "I play with a toy."
+        },
+        {
+          "word": "j.oy",
+          "translation": null,
+          "example": "I feel joy."
+        },
+        {
+          "word": "enj.oy",
+          "translation": null,
+          "example": "I enjoy my game."
+        },
+        {
+          "word": "d.e.s.t.r.oy",
+          "translation": null,
+          "example": "I do not destroy my toys."
+        },
+        {
+          "word": "ann.oy",
+          "translation": null,
+          "example": "I do not want to annoy you."
+        },
+        {
+          "word": "r.oy.a.l",
+          "translation": null,
+          "example": "I see the royal family."
+        },
+        {
+          "word": "v.oy.a.g.e",
+          "translation": null,
+          "example": "We go on a voyage."
+        },
+        {
+          "word": "c.oy",
+          "translation": null,
+          "example": "She is a bit coy."
+        },
+        {
+          "word": "l.oy.a.l",
+          "translation": null,
+          "example": "My dog is loyal."
+        }
       ]
     },
     {
@@ -850,16 +2835,56 @@
       "label": "oi (coin)",
       "grapheme": "oi",
       "words": [
-        "c.oi.n",
-        "j.oi.n",
-        "p.oi.n.t",
-        "v.oi.c.e",
-        "n.oi.s.e",
-        "s.oi.l",
-        "b.oi.l",
-        "f.oi.l",
-        "m.oi.s.t",
-        "s.p.oi.l"
+        {
+          "word": "c.oi.n",
+          "translation": null,
+          "example": "I find a coin."
+        },
+        {
+          "word": "j.oi.n",
+          "translation": null,
+          "example": "I join the game."
+        },
+        {
+          "word": "p.oi.n.t",
+          "translation": null,
+          "example": "I point at the dog."
+        },
+        {
+          "word": "v.oi.c.e",
+          "translation": null,
+          "example": "I hear her voice."
+        },
+        {
+          "word": "n.oi.s.e",
+          "translation": null,
+          "example": "I hear a noise."
+        },
+        {
+          "word": "s.oi.l",
+          "translation": null,
+          "example": "I dig in the soil."
+        },
+        {
+          "word": "b.oi.l",
+          "translation": null,
+          "example": "I boil the water."
+        },
+        {
+          "word": "f.oi.l",
+          "translation": null,
+          "example": "I wrap it in foil."
+        },
+        {
+          "word": "m.oi.s.t",
+          "translation": null,
+          "example": "The cake is moist."
+        },
+        {
+          "word": "s.p.oi.l",
+          "translation": null,
+          "example": "I do not want to spoil it."
+        }
       ]
     },
     {
@@ -867,16 +2892,56 @@
       "label": "eer (cheer)",
       "grapheme": "eer",
       "words": [
-        "ch.eer",
-        "d.eer",
-        "st.eer",
-        "p.eer",
-        "v.o.l.u.n.t.eer",
-        "c.ar.eer",
-        "j.eer",
-        "sn.eer",
-        "r.ei.n.d.eer",
-        "p.i.o.n.eer"
+        {
+          "word": "ch.eer",
+          "translation": null,
+          "example": "I cheer for my team."
+        },
+        {
+          "word": "d.eer",
+          "translation": null,
+          "example": "I see a deer."
+        },
+        {
+          "word": "st.eer",
+          "translation": null,
+          "example": "I steer the boat."
+        },
+        {
+          "word": "p.eer",
+          "translation": null,
+          "example": "I peer through the window."
+        },
+        {
+          "word": "v.o.l.u.n.t.eer",
+          "translation": null,
+          "example": "I volunteer to help."
+        },
+        {
+          "word": "c.ar.eer",
+          "translation": null,
+          "example": "I plan my career."
+        },
+        {
+          "word": "j.eer",
+          "translation": null,
+          "example": "I do not jeer at others."
+        },
+        {
+          "word": "sn.eer",
+          "translation": null,
+          "example": "I do not sneer at others."
+        },
+        {
+          "word": "r.ei.n.d.eer",
+          "translation": null,
+          "example": "I see a reindeer."
+        },
+        {
+          "word": "p.i.o.n.eer",
+          "translation": null,
+          "example": "She is a pioneer."
+        }
       ]
     },
     {
@@ -884,16 +2949,56 @@
       "label": "ear (hear)",
       "grapheme": "ear",
       "words": [
-        "h.ear",
-        "ear",
-        "n.ear",
-        "y.ear",
-        "cl.ear",
-        "f.ear",
-        "t.ear",
-        "sm.ear",
-        "sp.ear",
-        "dr.ear.y"
+        {
+          "word": "h.ear",
+          "translation": null,
+          "example": "I hear the bird."
+        },
+        {
+          "word": "ear",
+          "translation": null,
+          "example": "I touch my ear."
+        },
+        {
+          "word": "n.ear",
+          "translation": null,
+          "example": "I live near the park."
+        },
+        {
+          "word": "y.ear",
+          "translation": null,
+          "example": "I am six this year."
+        },
+        {
+          "word": "cl.ear",
+          "translation": null,
+          "example": "The sky is clear."
+        },
+        {
+          "word": "f.ear",
+          "translation": null,
+          "example": "I do not fear the dark."
+        },
+        {
+          "word": "t.ear",
+          "translation": null,
+          "example": "I see a tear fall."
+        },
+        {
+          "word": "sm.ear",
+          "translation": null,
+          "example": "I smear the paint."
+        },
+        {
+          "word": "sp.ear",
+          "translation": null,
+          "example": "I hold a spear."
+        },
+        {
+          "word": "dr.ear.y",
+          "translation": null,
+          "example": "The day is dreary."
+        }
       ]
     },
     {
@@ -901,16 +3006,56 @@
       "label": "ear (bear)",
       "grapheme": "ear",
       "words": [
-        "b.ear",
-        "p.ear",
-        "w.ear",
-        "t.ear",
-        "sw.ear",
-        "w.ear.i.ng",
-        "t.ear.i.ng",
-        "sw.ear.i.ng",
-        "b.ear.er",
-        "u.n.d.er.w.ear"
+        {
+          "word": "b.ear",
+          "translation": null,
+          "example": "I see a bear."
+        },
+        {
+          "word": "p.ear",
+          "translation": null,
+          "example": "I eat a pear."
+        },
+        {
+          "word": "w.ear",
+          "translation": null,
+          "example": "I wear a hat."
+        },
+        {
+          "word": "t.ear",
+          "translation": null,
+          "example": "I see a tear fall."
+        },
+        {
+          "word": "sw.ear",
+          "translation": null,
+          "example": "I do not swear."
+        },
+        {
+          "word": "w.ear.i.ng",
+          "translation": null,
+          "example": "I am wearing a hat."
+        },
+        {
+          "word": "t.ear.i.ng",
+          "translation": null,
+          "example": "I am tearing the paper."
+        },
+        {
+          "word": "sw.ear.i.ng",
+          "translation": null,
+          "example": "He is not swearing."
+        },
+        {
+          "word": "b.ear.er",
+          "translation": null,
+          "example": "I am the bearer of good news."
+        },
+        {
+          "word": "u.n.d.er.w.ear",
+          "translation": null,
+          "example": "I wear underwear."
+        }
       ]
     },
     {
@@ -918,16 +3063,56 @@
       "label": "air (hair)",
       "grapheme": "air",
       "words": [
-        "h.air",
-        "f.air",
-        "p.air",
-        "ch.air",
-        "st.air",
-        "h.air.c.u.t",
-        "h.air.b.r.u.sh",
-        "f.air.y",
-        "r.e.p.air",
-        "s.t.air.s"
+        {
+          "word": "h.air",
+          "translation": null,
+          "example": "I brush my hair."
+        },
+        {
+          "word": "f.air",
+          "translation": null,
+          "example": "That is not fair."
+        },
+        {
+          "word": "p.air",
+          "translation": null,
+          "example": "I have a pair of shoes."
+        },
+        {
+          "word": "ch.air",
+          "translation": null,
+          "example": "I sit on the chair."
+        },
+        {
+          "word": "st.air",
+          "translation": null,
+          "example": "I climb the stair."
+        },
+        {
+          "word": "h.air.c.u.t",
+          "translation": null,
+          "example": "I get a haircut."
+        },
+        {
+          "word": "h.air.b.r.u.sh",
+          "translation": null,
+          "example": "I use a hairbrush."
+        },
+        {
+          "word": "f.air.y",
+          "translation": null,
+          "example": "I see a fairy."
+        },
+        {
+          "word": "r.e.p.air",
+          "translation": null,
+          "example": "I repair my toy."
+        },
+        {
+          "word": "s.t.air.s",
+          "translation": null,
+          "example": "I climb the stairs."
+        }
       ]
     },
     {
@@ -935,16 +3120,56 @@
       "label": "_are (beware)",
       "grapheme": "are",
       "words": [
-        "b.e.w.are",
-        "c.are",
-        "d.are",
-        "r.are",
-        "sh.are",
-        "sc.are",
-        "fl.are",
-        "sp.are",
-        "sq.u.are",
-        "c.are.f.u.l"
+        {
+          "word": "b.e.w.are",
+          "translation": null,
+          "example": "Beware of the dog."
+        },
+        {
+          "word": "c.are",
+          "translation": null,
+          "example": "I care for my pet."
+        },
+        {
+          "word": "d.are",
+          "translation": null,
+          "example": "I dare you."
+        },
+        {
+          "word": "r.are",
+          "translation": null,
+          "example": "This coin is rare."
+        },
+        {
+          "word": "sh.are",
+          "translation": null,
+          "example": "I share my toy."
+        },
+        {
+          "word": "sc.are",
+          "translation": null,
+          "example": "I do not scare easily."
+        },
+        {
+          "word": "fl.are",
+          "translation": null,
+          "example": "I see a flare."
+        },
+        {
+          "word": "sp.are",
+          "translation": null,
+          "example": "I have a spare pen."
+        },
+        {
+          "word": "sq.u.are",
+          "translation": null,
+          "example": "I draw a square."
+        },
+        {
+          "word": "c.are.f.u.l",
+          "translation": null,
+          "example": "I am careful."
+        }
       ]
     },
     {
@@ -952,16 +3177,56 @@
       "label": "Soft c (c saying /s/)",
       "grapheme": "c",
       "words": [
-        "c.i.t.y",
-        "i.c.e",
-        "r.a.c.e",
-        "f.a.c.e",
-        "c.e.n.t",
-        "c.i.r.c.l.e",
-        "p.r.i.n.c.e.ss",
-        "d.a.n.c.e",
-        "f.e.n.c.e",
-        "c.y.c.l.e"
+        {
+          "word": "c.i.t.y",
+          "translation": null,
+          "example": "I live in a city."
+        },
+        {
+          "word": "i.c.e",
+          "translation": null,
+          "example": "I eat ice."
+        },
+        {
+          "word": "r.a.c.e",
+          "translation": null,
+          "example": "I run a race."
+        },
+        {
+          "word": "f.a.c.e",
+          "translation": null,
+          "example": "I wash my face."
+        },
+        {
+          "word": "c.e.n.t",
+          "translation": null,
+          "example": "I have one cent."
+        },
+        {
+          "word": "c.i.r.c.l.e",
+          "translation": null,
+          "example": "I draw a circle."
+        },
+        {
+          "word": "p.r.i.n.c.e.ss",
+          "translation": null,
+          "example": "I see a princess."
+        },
+        {
+          "word": "d.a.n.c.e",
+          "translation": null,
+          "example": "I dance to the music."
+        },
+        {
+          "word": "f.e.n.c.e",
+          "translation": null,
+          "example": "I climb the fence."
+        },
+        {
+          "word": "c.y.c.l.e",
+          "translation": null,
+          "example": "I cycle to school."
+        }
       ]
     },
     {
@@ -969,16 +3234,56 @@
       "label": "Soft g (g saying /j/)",
       "grapheme": "g",
       "words": [
-        "g.i.a.n.t",
-        "g.e.m",
-        "c.a.g.e",
-        "p.a.g.e",
-        "s.t.a.g.e",
-        "g.i.n.g.er",
-        "g.y.m",
-        "or.a.n.g.e",
-        "c.h.a.n.g.e",
-        "v.i.ll.a.g.e"
+        {
+          "word": "g.i.a.n.t",
+          "translation": null,
+          "example": "I see a giant."
+        },
+        {
+          "word": "g.e.m",
+          "translation": null,
+          "example": "I find a gem."
+        },
+        {
+          "word": "c.a.g.e",
+          "translation": null,
+          "example": "The bird is in a cage."
+        },
+        {
+          "word": "p.a.g.e",
+          "translation": null,
+          "example": "I read the page."
+        },
+        {
+          "word": "s.t.a.g.e",
+          "translation": null,
+          "example": "I stand on the stage."
+        },
+        {
+          "word": "g.i.n.g.er",
+          "translation": null,
+          "example": "I eat ginger."
+        },
+        {
+          "word": "g.y.m",
+          "translation": null,
+          "example": "I go to the gym."
+        },
+        {
+          "word": "or.a.n.g.e",
+          "translation": null,
+          "example": "I eat an orange."
+        },
+        {
+          "word": "c.h.a.n.g.e",
+          "translation": null,
+          "example": "I change my shirt."
+        },
+        {
+          "word": "v.i.ll.a.g.e",
+          "translation": null,
+          "example": "I live in a village."
+        }
       ]
     },
     {
@@ -986,16 +3291,56 @@
       "label": "_dge (bridge)",
       "grapheme": "dge",
       "words": [
-        "b.r.i.dge",
-        "e.dge",
-        "h.e.dge",
-        "l.e.dge",
-        "r.i.dge",
-        "f.u.dge",
-        "j.u.dge",
-        "b.a.dge",
-        "w.e.dge",
-        "d.o.dge"
+        {
+          "word": "b.r.i.dge",
+          "translation": null,
+          "example": "I walk over the bridge."
+        },
+        {
+          "word": "e.dge",
+          "translation": null,
+          "example": "I sit on the edge."
+        },
+        {
+          "word": "h.e.dge",
+          "translation": null,
+          "example": "I trim the hedge."
+        },
+        {
+          "word": "l.e.dge",
+          "translation": null,
+          "example": "I stand on the ledge."
+        },
+        {
+          "word": "r.i.dge",
+          "translation": null,
+          "example": "I climb the ridge."
+        },
+        {
+          "word": "f.u.dge",
+          "translation": null,
+          "example": "I eat fudge."
+        },
+        {
+          "word": "j.u.dge",
+          "translation": null,
+          "example": "The judge is fair."
+        },
+        {
+          "word": "b.a.dge",
+          "translation": null,
+          "example": "I wear a badge."
+        },
+        {
+          "word": "w.e.dge",
+          "translation": null,
+          "example": "I cut a wedge."
+        },
+        {
+          "word": "d.o.dge",
+          "translation": null,
+          "example": "I dodge the ball."
+        }
       ]
     },
     {
@@ -1003,16 +3348,56 @@
       "label": "_ge (cage)",
       "grapheme": "ge",
       "words": [
-        "c.a.ge",
-        "p.a.ge",
-        "s.t.a.ge",
-        "hu.ge",
-        "c.a.ge.y",
-        "w.a.ge",
-        "r.a.ge",
-        "s.a.ge",
-        "s.t.a.ge.s",
-        "p.a.ge.s"
+        {
+          "word": "c.a.ge",
+          "translation": null,
+          "example": "The bird is in a cage."
+        },
+        {
+          "word": "p.a.ge",
+          "translation": null,
+          "example": "I read the page."
+        },
+        {
+          "word": "s.t.a.ge",
+          "translation": null,
+          "example": "I stand on the stage."
+        },
+        {
+          "word": "hu.ge",
+          "translation": null,
+          "example": "The whale is huge."
+        },
+        {
+          "word": "c.a.ge.y",
+          "translation": null,
+          "example": "She seems cagey today."
+        },
+        {
+          "word": "w.a.ge",
+          "translation": null,
+          "example": "I earn a wage."
+        },
+        {
+          "word": "r.a.ge",
+          "translation": null,
+          "example": "He is in a rage."
+        },
+        {
+          "word": "s.a.ge",
+          "translation": null,
+          "example": "I add sage to the soup."
+        },
+        {
+          "word": "s.t.a.ge.s",
+          "translation": null,
+          "example": "The play has three stages."
+        },
+        {
+          "word": "p.a.ge.s",
+          "translation": null,
+          "example": "I read the pages."
+        }
       ]
     },
     {
@@ -1020,16 +3405,56 @@
       "label": "_tch (catch)",
       "grapheme": "tch",
       "words": [
-        "c.a.tch",
-        "m.a.tch",
-        "p.a.tch",
-        "w.a.tch",
-        "b.a.tch",
-        "k.i.tch.e.n",
-        "s.k.e.tch",
-        "s.t.r.e.tch",
-        "sw.i.tch",
-        "f.e.tch"
+        {
+          "word": "c.a.tch",
+          "translation": null,
+          "example": "I catch the ball."
+        },
+        {
+          "word": "m.a.tch",
+          "translation": null,
+          "example": "I watch the match."
+        },
+        {
+          "word": "p.a.tch",
+          "translation": null,
+          "example": "I sew a patch."
+        },
+        {
+          "word": "w.a.tch",
+          "translation": null,
+          "example": "I wear a watch."
+        },
+        {
+          "word": "b.a.tch",
+          "translation": null,
+          "example": "I bake a batch of cookies."
+        },
+        {
+          "word": "k.i.tch.e.n",
+          "translation": null,
+          "example": "I cook in the kitchen."
+        },
+        {
+          "word": "s.k.e.tch",
+          "translation": null,
+          "example": "I sketch a picture."
+        },
+        {
+          "word": "s.t.r.e.tch",
+          "translation": null,
+          "example": "I stretch my legs."
+        },
+        {
+          "word": "sw.i.tch",
+          "translation": null,
+          "example": "I flip the switch."
+        },
+        {
+          "word": "f.e.tch",
+          "translation": null,
+          "example": "The dog will fetch the ball."
+        }
       ]
     },
     {
@@ -1037,16 +3462,56 @@
       "label": "_ch after short vowel (lunch)",
       "grapheme": "ch",
       "words": [
-        "l.u.n.ch",
-        "b.e.n.ch",
-        "m.u.n.ch",
-        "p.u.n.ch",
-        "b.r.a.n.ch",
-        "h.u.n.ch",
-        "p.i.n.ch",
-        "w.r.e.n.ch",
-        "c.r.u.n.ch",
-        "b.e.n.ch.e.s"
+        {
+          "word": "l.u.n.ch",
+          "translation": null,
+          "example": "I eat my lunch."
+        },
+        {
+          "word": "b.e.n.ch",
+          "translation": null,
+          "example": "I sit on the bench."
+        },
+        {
+          "word": "m.u.n.ch",
+          "translation": null,
+          "example": "I munch on my snack."
+        },
+        {
+          "word": "p.u.n.ch",
+          "translation": null,
+          "example": "I drink punch."
+        },
+        {
+          "word": "b.r.a.n.ch",
+          "translation": null,
+          "example": "The bird sits on the branch."
+        },
+        {
+          "word": "h.u.n.ch",
+          "translation": null,
+          "example": "I have a hunch."
+        },
+        {
+          "word": "p.i.n.ch",
+          "translation": null,
+          "example": "I pinch the dough."
+        },
+        {
+          "word": "w.r.e.n.ch",
+          "translation": null,
+          "example": "I use a wrench."
+        },
+        {
+          "word": "c.r.u.n.ch",
+          "translation": null,
+          "example": "I crunch the chips."
+        },
+        {
+          "word": "b.e.n.ch.e.s",
+          "translation": null,
+          "example": "We sit on the benches."
+        }
       ]
     },
     {
@@ -1054,16 +3519,56 @@
       "label": "Doubling rule (f, l, s + ck)",
       "grapheme": "",
       "words": [
-        "h.u.ff",
-        "b.e.ll",
-        "m.i.ss",
-        "d.u.ck",
-        "p.u.ff",
-        "sh.e.ll",
-        "g.r.a.ss",
-        "s.o.ck",
-        "st.u.ff",
-        "sm.e.ll"
+        {
+          "word": "h.u.ff",
+          "translation": null,
+          "example": "I huff and puff."
+        },
+        {
+          "word": "b.e.ll",
+          "translation": null,
+          "example": "I ring the bell."
+        },
+        {
+          "word": "m.i.ss",
+          "translation": null,
+          "example": "I miss my mum."
+        },
+        {
+          "word": "d.u.ck",
+          "translation": null,
+          "example": "I see a duck."
+        },
+        {
+          "word": "p.u.ff",
+          "translation": null,
+          "example": "I puff and blow."
+        },
+        {
+          "word": "sh.e.ll",
+          "translation": null,
+          "example": "I find a shell."
+        },
+        {
+          "word": "g.r.a.ss",
+          "translation": null,
+          "example": "I sit on the grass."
+        },
+        {
+          "word": "s.o.ck",
+          "translation": null,
+          "example": "I wear a sock."
+        },
+        {
+          "word": "st.u.ff",
+          "translation": null,
+          "example": "I pack my stuff."
+        },
+        {
+          "word": "sm.e.ll",
+          "translation": null,
+          "example": "I smell the flower."
+        }
       ]
     },
     {
@@ -1071,16 +3576,56 @@
       "label": "Suffix -s (plurals)",
       "grapheme": "s",
       "words": [
-        "c.a.t.s",
-        "d.o.g.s",
-        "b.oo.k.s",
-        "h.a.t.s",
-        "c.u.p.s",
-        "b.ir.d.s",
-        "d.e.s.k.s",
-        "p.e.n.s",
-        "f.r.o.g.s",
-        "d.u.ck.s"
+        {
+          "word": "c.a.t.s",
+          "translation": null,
+          "example": "I see two cats."
+        },
+        {
+          "word": "d.o.g.s",
+          "translation": null,
+          "example": "I see two dogs."
+        },
+        {
+          "word": "b.oo.k.s",
+          "translation": null,
+          "example": "I read two books."
+        },
+        {
+          "word": "h.a.t.s",
+          "translation": null,
+          "example": "I have two hats."
+        },
+        {
+          "word": "c.u.p.s",
+          "translation": null,
+          "example": "I have two cups."
+        },
+        {
+          "word": "b.ir.d.s",
+          "translation": null,
+          "example": "I see two birds."
+        },
+        {
+          "word": "d.e.s.k.s",
+          "translation": null,
+          "example": "I see two desks."
+        },
+        {
+          "word": "p.e.n.s",
+          "translation": null,
+          "example": "I have two pens."
+        },
+        {
+          "word": "f.r.o.g.s",
+          "translation": null,
+          "example": "I see two frogs."
+        },
+        {
+          "word": "d.u.ck.s",
+          "translation": null,
+          "example": "I see two ducks."
+        }
       ]
     },
     {
@@ -1088,16 +3633,56 @@
       "label": "Suffix -s (verbs)",
       "grapheme": "s",
       "words": [
-        "r.u.n.s",
-        "j.u.m.p.s",
-        "w.a.l.k.s",
-        "p.l.ay.s",
-        "s.i.n.g.s",
-        "ea.t.s",
-        "s.l.ee.p.s",
-        "r.ea.d.s",
-        "h.o.p.s",
-        "t.a.l.k.s"
+        {
+          "word": "r.u.n.s",
+          "translation": null,
+          "example": "He runs fast."
+        },
+        {
+          "word": "j.u.m.p.s",
+          "translation": null,
+          "example": "She jumps high."
+        },
+        {
+          "word": "w.a.l.k.s",
+          "translation": null,
+          "example": "He walks to school."
+        },
+        {
+          "word": "p.l.ay.s",
+          "translation": null,
+          "example": "She plays with her toy."
+        },
+        {
+          "word": "s.i.n.g.s",
+          "translation": null,
+          "example": "She sings a song."
+        },
+        {
+          "word": "ea.t.s",
+          "translation": null,
+          "example": "He eats his lunch."
+        },
+        {
+          "word": "s.l.ee.p.s",
+          "translation": null,
+          "example": "The cat sleeps a lot."
+        },
+        {
+          "word": "r.ea.d.s",
+          "translation": null,
+          "example": "She reads a book."
+        },
+        {
+          "word": "h.o.p.s",
+          "translation": null,
+          "example": "The rabbit hops."
+        },
+        {
+          "word": "t.a.l.k.s",
+          "translation": null,
+          "example": "He talks to his friend."
+        }
       ]
     },
     {
@@ -1105,16 +3690,56 @@
       "label": "Suffix -ing",
       "grapheme": "ing",
       "words": [
-        "j.u.m.p.ing",
-        "r.u.nn.ing",
-        "w.a.l.k.ing",
-        "p.l.ay.ing",
-        "s.i.ng.ing",
-        "ea.t.ing",
-        "s.l.ee.p.ing",
-        "s.w.i.mm.ing",
-        "t.a.l.k.ing",
-        "h.o.pp.ing"
+        {
+          "word": "j.u.m.p.ing",
+          "translation": null,
+          "example": "I am jumping."
+        },
+        {
+          "word": "r.u.nn.ing",
+          "translation": null,
+          "example": "I am running."
+        },
+        {
+          "word": "w.a.l.k.ing",
+          "translation": null,
+          "example": "I am walking."
+        },
+        {
+          "word": "p.l.ay.ing",
+          "translation": null,
+          "example": "I am playing."
+        },
+        {
+          "word": "s.i.ng.ing",
+          "translation": null,
+          "example": "I am singing."
+        },
+        {
+          "word": "ea.t.ing",
+          "translation": null,
+          "example": "I am eating."
+        },
+        {
+          "word": "s.l.ee.p.ing",
+          "translation": null,
+          "example": "The cat is sleeping."
+        },
+        {
+          "word": "s.w.i.mm.ing",
+          "translation": null,
+          "example": "I am swimming."
+        },
+        {
+          "word": "t.a.l.k.ing",
+          "translation": null,
+          "example": "I am talking."
+        },
+        {
+          "word": "h.o.pp.ing",
+          "translation": null,
+          "example": "The rabbit is hopping."
+        }
       ]
     },
     {
@@ -1122,16 +3747,56 @@
       "label": "Suffix -ed (past tense)",
       "grapheme": "ed",
       "words": [
-        "j.u.m.p.ed",
-        "w.a.l.k.ed",
-        "p.l.ay.ed",
-        "l.oo.k.ed",
-        "t.a.l.k.ed",
-        "h.e.l.p.ed",
-        "c.oo.k.ed",
-        "p.ai.n.t.ed",
-        "r.ai.n.ed",
-        "s.t.ay.ed"
+        {
+          "word": "j.u.m.p.ed",
+          "translation": null,
+          "example": "I jumped high."
+        },
+        {
+          "word": "w.a.l.k.ed",
+          "translation": null,
+          "example": "I walked to school."
+        },
+        {
+          "word": "p.l.ay.ed",
+          "translation": null,
+          "example": "I played with my friend."
+        },
+        {
+          "word": "l.oo.k.ed",
+          "translation": null,
+          "example": "I looked at the sky."
+        },
+        {
+          "word": "t.a.l.k.ed",
+          "translation": null,
+          "example": "I talked to my friend."
+        },
+        {
+          "word": "h.e.l.p.ed",
+          "translation": null,
+          "example": "I helped my mum."
+        },
+        {
+          "word": "c.oo.k.ed",
+          "translation": null,
+          "example": "I cooked the food."
+        },
+        {
+          "word": "p.ai.n.t.ed",
+          "translation": null,
+          "example": "I painted a picture."
+        },
+        {
+          "word": "r.ai.n.ed",
+          "translation": null,
+          "example": "It rained today."
+        },
+        {
+          "word": "s.t.ay.ed",
+          "translation": null,
+          "example": "I stayed at home."
+        }
       ]
     },
     {
@@ -1139,16 +3804,56 @@
       "label": "Suffix -er (comparative)",
       "grapheme": "er",
       "words": [
-        "f.a.s.t.er",
-        "s.l.ow.er",
-        "t.a.ll.er",
-        "s.m.a.ll.er",
-        "h.ar.d.er",
-        "s.o.f.t.er",
-        "q.u.i.ck.er",
-        "l.ou.d.er",
-        "c.o.l.d.er",
-        "w.ar.m.er"
+        {
+          "word": "f.a.s.t.er",
+          "translation": null,
+          "example": "I am faster than you."
+        },
+        {
+          "word": "s.l.ow.er",
+          "translation": null,
+          "example": "The turtle is slower than the hare."
+        },
+        {
+          "word": "t.a.ll.er",
+          "translation": null,
+          "example": "I am taller than my sister."
+        },
+        {
+          "word": "s.m.a.ll.er",
+          "translation": null,
+          "example": "The mouse is smaller than the cat."
+        },
+        {
+          "word": "h.ar.d.er",
+          "translation": null,
+          "example": "The rock is harder than the wood."
+        },
+        {
+          "word": "s.o.f.t.er",
+          "translation": null,
+          "example": "The pillow is softer than the desk."
+        },
+        {
+          "word": "q.u.i.ck.er",
+          "translation": null,
+          "example": "I am quicker than my brother."
+        },
+        {
+          "word": "l.ou.d.er",
+          "translation": null,
+          "example": "The drum is louder than the bell."
+        },
+        {
+          "word": "c.o.l.d.er",
+          "translation": null,
+          "example": "Winter is colder than summer."
+        },
+        {
+          "word": "w.ar.m.er",
+          "translation": null,
+          "example": "Summer is warmer than winter."
+        }
       ]
     },
     {
@@ -1156,16 +3861,56 @@
       "label": "Suffix -y (adjectives)",
       "grapheme": "y",
       "words": [
-        "r.ai.n.y",
-        "s.u.nn.y",
-        "w.i.n.d.y",
-        "c.l.ou.d.y",
-        "d.ir.t.y",
-        "d.u.s.t.y",
-        "s.n.ow.y",
-        "s.p.o.tt.y",
-        "b.u.m.p.y",
-        "s.l.ee.p.y"
+        {
+          "word": "r.ai.n.y",
+          "translation": null,
+          "example": "Today is rainy."
+        },
+        {
+          "word": "s.u.nn.y",
+          "translation": null,
+          "example": "Today is sunny."
+        },
+        {
+          "word": "w.i.n.d.y",
+          "translation": null,
+          "example": "Today is windy."
+        },
+        {
+          "word": "c.l.ou.d.y",
+          "translation": null,
+          "example": "Today is cloudy."
+        },
+        {
+          "word": "d.ir.t.y",
+          "translation": null,
+          "example": "My hands are dirty."
+        },
+        {
+          "word": "d.u.s.t.y",
+          "translation": null,
+          "example": "The shelf is dusty."
+        },
+        {
+          "word": "s.n.ow.y",
+          "translation": null,
+          "example": "The hill is snowy."
+        },
+        {
+          "word": "s.p.o.tt.y",
+          "translation": null,
+          "example": "The dog is spotty."
+        },
+        {
+          "word": "b.u.m.p.y",
+          "translation": null,
+          "example": "The road is bumpy."
+        },
+        {
+          "word": "s.l.ee.p.y",
+          "translation": null,
+          "example": "I am sleepy."
+        }
       ]
     },
     {
@@ -1173,16 +3918,56 @@
       "label": "Suffix -ly (adverbs)",
       "grapheme": "ly",
       "words": [
-        "s.l.ow.ly",
-        "q.u.i.ck.ly",
-        "s.o.f.t.ly",
-        "l.ou.d.ly",
-        "s.a.d.ly",
-        "g.l.a.d.ly",
-        "b.r.a.v.e.ly",
-        "s.a.f.e.ly",
-        "n.i.c.e.ly",
-        "f.i.n.a.l.ly"
+        {
+          "word": "s.l.ow.ly",
+          "translation": null,
+          "example": "I walk slowly."
+        },
+        {
+          "word": "q.u.i.ck.ly",
+          "translation": null,
+          "example": "I run quickly."
+        },
+        {
+          "word": "s.o.f.t.ly",
+          "translation": null,
+          "example": "I speak softly."
+        },
+        {
+          "word": "l.ou.d.ly",
+          "translation": null,
+          "example": "I sing loudly."
+        },
+        {
+          "word": "s.a.d.ly",
+          "translation": null,
+          "example": "She sighed sadly."
+        },
+        {
+          "word": "g.l.a.d.ly",
+          "translation": null,
+          "example": "I will gladly help."
+        },
+        {
+          "word": "b.r.a.v.e.ly",
+          "translation": null,
+          "example": "He acted bravely."
+        },
+        {
+          "word": "s.a.f.e.ly",
+          "translation": null,
+          "example": "I cross safely."
+        },
+        {
+          "word": "n.i.c.e.ly",
+          "translation": null,
+          "example": "She asked nicely."
+        },
+        {
+          "word": "f.i.n.a.l.ly",
+          "translation": null,
+          "example": "I finally finished."
+        }
       ]
     },
     {
@@ -1190,16 +3975,56 @@
       "label": "Prefix un-",
       "grapheme": "un",
       "words": [
-        "un.d.o",
-        "un.h.a.pp.y",
-        "un.f.air",
-        "un.l.o.ck",
-        "un.p.a.ck",
-        "un.t.i.d.y",
-        "un.w.e.ll",
-        "un.k.i.n.d",
-        "un.z.i.p",
-        "un.w.r.a.p"
+        {
+          "word": "un.d.o",
+          "translation": null,
+          "example": "I undo my shoe."
+        },
+        {
+          "word": "un.h.a.pp.y",
+          "translation": null,
+          "example": "I am unhappy."
+        },
+        {
+          "word": "un.f.air",
+          "translation": null,
+          "example": "That is unfair."
+        },
+        {
+          "word": "un.l.o.ck",
+          "translation": null,
+          "example": "I unlock the door."
+        },
+        {
+          "word": "un.p.a.ck",
+          "translation": null,
+          "example": "I unpack my bag."
+        },
+        {
+          "word": "un.t.i.d.y",
+          "translation": null,
+          "example": "My room is untidy."
+        },
+        {
+          "word": "un.w.e.ll",
+          "translation": null,
+          "example": "I feel unwell."
+        },
+        {
+          "word": "un.k.i.n.d",
+          "translation": null,
+          "example": "That was unkind."
+        },
+        {
+          "word": "un.z.i.p",
+          "translation": null,
+          "example": "I unzip my bag."
+        },
+        {
+          "word": "un.w.r.a.p",
+          "translation": null,
+          "example": "I unwrap the gift."
+        }
       ]
     },
     {
@@ -1207,18 +4032,1639 @@
       "label": "Contractions",
       "grapheme": "",
       "words": [
-        "d.i.d.n't",
-        "c.a.n't",
-        "d.o.n't",
-        "sh.ou.l.d.n't",
-        "w.ou.l.d.n't",
-        "c.ou.l.d.n't",
-        "I.'m",
-        "i.t.'s",
-        "th.a.t.'s",
-        "w.e.'re"
+        {
+          "word": "d.i.d.n't",
+          "translation": null,
+          "example": "I didn't see it."
+        },
+        {
+          "word": "c.a.n't",
+          "translation": null,
+          "example": "I can't find it."
+        },
+        {
+          "word": "d.o.n't",
+          "translation": null,
+          "example": "I don't know."
+        },
+        {
+          "word": "sh.ou.l.d.n't",
+          "translation": null,
+          "example": "You shouldn't do that."
+        },
+        {
+          "word": "w.ou.l.d.n't",
+          "translation": null,
+          "example": "I wouldn't do that."
+        },
+        {
+          "word": "c.ou.l.d.n't",
+          "translation": null,
+          "example": "I couldn't find it."
+        },
+        {
+          "word": "I.'m",
+          "translation": null,
+          "example": "I'm happy."
+        },
+        {
+          "word": "i.t.'s",
+          "translation": null,
+          "example": "It's my hat."
+        },
+        {
+          "word": "th.a.t.'s",
+          "translation": null,
+          "example": "That's my hat."
+        },
+        {
+          "word": "w.e.'re",
+          "translation": null,
+          "example": "We're happy."
+        }
       ]
     }
   ],
-  "fr": []
+  "fr": [
+    {
+      "id": "a_intro",
+      "label": "a (Introduction)",
+      "grapheme": "a",
+      "words": [
+        {
+          "word": "v.a",
+          "translation": "goes",
+          "example": "Il va vite."
+        },
+        {
+          "word": "l.a",
+          "translation": "the/there",
+          "example": "Je vois la table."
+        },
+        {
+          "word": "m.a",
+          "translation": "my",
+          "example": "C'est ma table."
+        },
+        {
+          "word": "s.a",
+          "translation": "his/her",
+          "example": "C'est sa table."
+        },
+        {
+          "word": "t.a",
+          "translation": "your",
+          "example": "C'est ta table."
+        },
+        {
+          "word": "t.a.b.l.[e]",
+          "translation": "table",
+          "example": "C'est une table."
+        },
+        {
+          "word": "d.a.t.[e]",
+          "translation": "date",
+          "example": "C'est une date."
+        },
+        {
+          "word": "c.a.r.t.[e]",
+          "translation": "card/map",
+          "example": "C'est une carte."
+        }
+      ]
+    },
+    {
+      "id": "a_reuse",
+      "label": "a (Combined)",
+      "grapheme": "a",
+      "words": [
+        {
+          "word": "s.a.l.a.d.[e]",
+          "translation": "salad",
+          "example": "Je mange une salade."
+        },
+        {
+          "word": "p.a.r.a.d.[e]",
+          "translation": "parade",
+          "example": "Il y a une parade."
+        },
+        {
+          "word": "c.r.a.v.a.t.[e]",
+          "translation": "tie",
+          "example": "C'est une cravate."
+        },
+        {
+          "word": "m.a.l.a.d.[e]",
+          "translation": "sick",
+          "example": "Il est malade."
+        },
+        {
+          "word": "c.a.p.a.b.l.[e]",
+          "translation": "capable",
+          "example": "Il est capable."
+        }
+      ]
+    },
+    {
+      "id": "e_intro",
+      "label": "e (Introduction)",
+      "grapheme": "e",
+      "words": [
+        {
+          "word": "l.e",
+          "translation": "the",
+          "example": "Je vois le chat."
+        },
+        {
+          "word": "j.e",
+          "translation": "I",
+          "example": "Je mange."
+        },
+        {
+          "word": "n.e",
+          "translation": "not",
+          "example": "Je ne sais pas."
+        },
+        {
+          "word": "d.e",
+          "translation": "of/from",
+          "example": "C'est la table de Léo."
+        },
+        {
+          "word": "c.e",
+          "translation": "this/that",
+          "example": "C'est ce chat."
+        },
+        {
+          "word": "m.e",
+          "translation": "me",
+          "example": "Il me voit."
+        },
+        {
+          "word": "t.e",
+          "translation": "you",
+          "example": "Il te voit."
+        }
+      ]
+    },
+    {
+      "id": "i_intro",
+      "label": "i (Introduction)",
+      "grapheme": "i",
+      "words": [
+        {
+          "word": "i.l",
+          "translation": "he/it",
+          "example": "Il mange."
+        },
+        {
+          "word": "s.i",
+          "translation": "if/so",
+          "example": "Si tu veux."
+        },
+        {
+          "word": "i.c.i",
+          "translation": "here",
+          "example": "Je suis ici."
+        },
+        {
+          "word": "l.i.[t]",
+          "translation": "bed",
+          "example": "C'est un lit."
+        },
+        {
+          "word": "r.i.[z]",
+          "translation": "rice",
+          "example": "Je mange du riz."
+        },
+        {
+          "word": "v.i.[e]",
+          "translation": "life",
+          "example": "C'est la vie."
+        },
+        {
+          "word": "m.i.d.i",
+          "translation": "noon",
+          "example": "Il est midi."
+        },
+        {
+          "word": "n.i",
+          "translation": "neither",
+          "example": "Ni ici, ni là."
+        },
+        {
+          "word": "n.i.[d]",
+          "translation": "nest",
+          "example": "C'est un nid."
+        },
+        {
+          "word": "f.i.l",
+          "translation": "thread/wire",
+          "example": "C'est un fil."
+        }
+      ]
+    },
+    {
+      "id": "o_intro",
+      "label": "o (Introduction)",
+      "grapheme": "o",
+      "words": [
+        {
+          "word": "d.o.[s]",
+          "translation": "back",
+          "example": "C'est mon dos."
+        },
+        {
+          "word": "m.o.[t]",
+          "translation": "word",
+          "example": "C'est un mot."
+        },
+        {
+          "word": "p.o.[t]",
+          "translation": "pot",
+          "example": "C'est un pot."
+        },
+        {
+          "word": "m.o.t.o",
+          "translation": "motorcycle",
+          "example": "C'est une moto."
+        },
+        {
+          "word": "r.o.b.o.[t]",
+          "translation": "robot",
+          "example": "C'est un robot."
+        },
+        {
+          "word": "z.o.[o]",
+          "translation": "zoo",
+          "example": "Je vois le zoo."
+        },
+        {
+          "word": "t.r.o.[p]",
+          "translation": "too-much",
+          "example": "C'est trop."
+        },
+        {
+          "word": "g.r.o.[s]",
+          "translation": "big/fat",
+          "example": "Il est gros."
+        },
+        {
+          "word": "s.o.l",
+          "translation": "ground",
+          "example": "C'est le sol."
+        },
+        {
+          "word": "p.o.r.t.[e]",
+          "translation": "door",
+          "example": "Je vois la porte."
+        },
+        {
+          "word": "f.o.r.m.[e]",
+          "translation": "shape/form",
+          "example": "C'est une forme."
+        }
+      ]
+    },
+    {
+      "id": "o_reuse",
+      "label": "o (Combined)",
+      "grapheme": "o",
+      "words": [
+        {
+          "word": "t.o.t.a.l",
+          "translation": "total",
+          "example": "C'est le total."
+        },
+        {
+          "word": "o.l.i.v.[e]",
+          "translation": "olive",
+          "example": "Je mange une olive."
+        },
+        {
+          "word": "f.o.s.s.i.l.[e]",
+          "translation": "fossil",
+          "example": "C'est un fossile."
+        },
+        {
+          "word": "p.i.l.o.t.[e]",
+          "translation": "pilot",
+          "example": "C'est un pilote."
+        },
+        {
+          "word": "c.a.r.o.t.t.[e]",
+          "translation": "carrot",
+          "example": "Je mange une carotte."
+        }
+      ]
+    },
+    {
+      "id": "u_intro",
+      "label": "u (as in tu) (Introduction)",
+      "grapheme": "u",
+      "words": [
+        {
+          "word": "t.u",
+          "translation": "you",
+          "example": "Tu manges."
+        },
+        {
+          "word": "d.u",
+          "translation": "some/of-the",
+          "example": "Je mange du pain."
+        },
+        {
+          "word": "v.u",
+          "translation": "seen",
+          "example": "J'ai vu le chat."
+        },
+        {
+          "word": "s.u",
+          "translation": "known",
+          "example": "J'ai su la réponse."
+        },
+        {
+          "word": "u.n.[e]",
+          "translation": "a/one",
+          "example": "C'est une pomme."
+        },
+        {
+          "word": "l.u.n.[e]",
+          "translation": "moon",
+          "example": "Je vois la lune."
+        },
+        {
+          "word": "m.u.r",
+          "translation": "wall",
+          "example": "C'est un mur."
+        },
+        {
+          "word": "s.u.r",
+          "translation": "on",
+          "example": "Le chat est sur la table."
+        },
+        {
+          "word": "p.u.r",
+          "translation": "pure",
+          "example": "C'est pur."
+        },
+        {
+          "word": "d.u.r",
+          "translation": "hard",
+          "example": "C'est dur."
+        }
+      ]
+    },
+    {
+      "id": "u_reuse",
+      "label": "u (as in tu) (Combined)",
+      "grapheme": "u",
+      "words": [
+        {
+          "word": "j.u.p.[e]",
+          "translation": "skirt",
+          "example": "C'est une jupe."
+        },
+        {
+          "word": "p.u.c.[e]",
+          "translation": "flea/chip",
+          "example": "C'est une puce."
+        },
+        {
+          "word": "p.l.u.[s]",
+          "translation": "more",
+          "example": "Je veux plus."
+        },
+        {
+          "word": "t.o.r.t.u.[e]",
+          "translation": "turtle",
+          "example": "C'est une tortue."
+        },
+        {
+          "word": "f.i.g.u.r.[e]",
+          "translation": "face/figure",
+          "example": "C'est sa figure."
+        }
+      ]
+    },
+    {
+      "id": "oi_intro",
+      "label": "oi (Introduction)",
+      "grapheme": "oi",
+      "words": [
+        {
+          "word": "m.oi",
+          "translation": "me",
+          "example": "C'est moi."
+        },
+        {
+          "word": "t.oi",
+          "translation": "you",
+          "example": "C'est toi."
+        },
+        {
+          "word": "r.oi",
+          "translation": "king",
+          "example": "C'est le roi."
+        },
+        {
+          "word": "l.oi",
+          "translation": "law",
+          "example": "C'est la loi."
+        },
+        {
+          "word": "m.i.r.oi.r",
+          "translation": "mirror",
+          "example": "Je vois un miroir."
+        },
+        {
+          "word": "n.oi.r",
+          "translation": "black",
+          "example": "C'est noir."
+        },
+        {
+          "word": "b.oi.[s]",
+          "translation": "wood",
+          "example": "C'est du bois."
+        },
+        {
+          "word": "t.r.oi.[s]",
+          "translation": "three",
+          "example": "Il y a trois chats."
+        },
+        {
+          "word": "p.oi.[s]",
+          "translation": "pea",
+          "example": "Je mange un pois."
+        },
+        {
+          "word": "v.oi.[x]",
+          "translation": "voice",
+          "example": "J'entends sa voix."
+        }
+      ]
+    },
+    {
+      "id": "oi_reuse",
+      "label": "oi (Combined)",
+      "grapheme": "oi",
+      "words": [
+        {
+          "word": "m.oi.[s]",
+          "translation": "month",
+          "example": "C'est un mois."
+        },
+        {
+          "word": "d.oi.[gt]",
+          "translation": "finger",
+          "example": "C'est mon doigt."
+        },
+        {
+          "word": "b.oi.[t]",
+          "translation": "drinks",
+          "example": "Il boit de l'eau."
+        },
+        {
+          "word": "p.oi.[ds]",
+          "translation": "weight",
+          "example": "C'est un poids."
+        },
+        {
+          "word": "f.r.oi.[d]",
+          "translation": "cold",
+          "example": "Il fait froid."
+        },
+        {
+          "word": "j.oi.[e]",
+          "translation": "joy",
+          "example": "C'est la joie."
+        },
+        {
+          "word": "n.oi.[x]",
+          "translation": "walnut",
+          "example": "Je mange une noix."
+        },
+        {
+          "word": "s.oi.r",
+          "translation": "evening",
+          "example": "C'est le soir."
+        },
+        {
+          "word": "oi.[e]",
+          "translation": "goose",
+          "example": "Je vois une oie."
+        },
+        {
+          "word": "d.r.oi.t.[e]",
+          "translation": "right (direction)",
+          "example": "Il va à droite."
+        }
+      ]
+    },
+    {
+      "id": "ou_intro",
+      "label": "ou (Introduction)",
+      "grapheme": "ou",
+      "words": [
+        {
+          "word": "v.ou.[s]",
+          "translation": "you-formal",
+          "example": "Vous mangez."
+        },
+        {
+          "word": "n.ou.[s]",
+          "translation": "we",
+          "example": "Nous mangeons."
+        },
+        {
+          "word": "t.ou.[t]",
+          "translation": "all",
+          "example": "Je vois tout."
+        },
+        {
+          "word": "d.ou.[x]",
+          "translation": "soft",
+          "example": "C'est doux."
+        },
+        {
+          "word": "l.ou.[p]",
+          "translation": "wolf",
+          "example": "C'est un loup."
+        },
+        {
+          "word": "c.ou.[p]",
+          "translation": "a-hit",
+          "example": "C'est un coup."
+        },
+        {
+          "word": "b.ou.[t]",
+          "translation": "end/tip",
+          "example": "C'est le bout."
+        },
+        {
+          "word": "s.ou.[s]",
+          "translation": "under",
+          "example": "Le chat est sous la table."
+        },
+        {
+          "word": "r.ou.[e]",
+          "translation": "wheel",
+          "example": "C'est une roue."
+        },
+        {
+          "word": "r.ou.g.[e]",
+          "translation": "red",
+          "example": "C'est rouge."
+        }
+      ]
+    },
+    {
+      "id": "ou_reuse",
+      "label": "ou (Combined)",
+      "grapheme": "ou",
+      "words": [
+        {
+          "word": "f.ou",
+          "translation": "crazy",
+          "example": "Il est fou."
+        },
+        {
+          "word": "j.ou.[e]",
+          "translation": "cheek",
+          "example": "C'est sa joue."
+        },
+        {
+          "word": "b.ou.[e]",
+          "translation": "mud",
+          "example": "C'est de la boue."
+        },
+        {
+          "word": "p.ou.r",
+          "translation": "for",
+          "example": "C'est pour toi."
+        },
+        {
+          "word": "t.ou.r",
+          "translation": "tower/turn",
+          "example": "Je vois une tour."
+        },
+        {
+          "word": "t.ou.r.n.[e]",
+          "translation": "turns",
+          "example": "Il tourne."
+        },
+        {
+          "word": "j.ou.r",
+          "translation": "day",
+          "example": "C'est un beau jour."
+        },
+        {
+          "word": "[h].i.b.ou",
+          "translation": "owl",
+          "example": "Je vois un hibou."
+        },
+        {
+          "word": "a.m.ou.r",
+          "translation": "love",
+          "example": "C'est l'amour."
+        },
+        {
+          "word": "b.on.j.ou.r",
+          "translation": "hello",
+          "example": "Il dit bonjour."
+        }
+      ]
+    },
+    {
+      "id": "au_intro",
+      "label": "au (Introduction)",
+      "grapheme": "au",
+      "words": [
+        {
+          "word": "[e].au",
+          "translation": "water",
+          "example": "Je vois de l'eau."
+        },
+        {
+          "word": "j.au.n.[e]",
+          "translation": "yellow",
+          "example": "C'est jaune."
+        },
+        {
+          "word": "au.s.s.i",
+          "translation": "also",
+          "example": "Moi aussi."
+        },
+        {
+          "word": "b.[e].au",
+          "translation": "beautiful",
+          "example": "C'est beau."
+        },
+        {
+          "word": "t.au.p.[e]",
+          "translation": "mole",
+          "example": "C'est une taupe."
+        },
+        {
+          "word": "s.au.c.[e]",
+          "translation": "sauce",
+          "example": "Je mange la sauce."
+        },
+        {
+          "word": "c.a.d.[e].au",
+          "translation": "gift",
+          "example": "C'est un cadeau."
+        },
+        {
+          "word": "g.â.t.[e].au",
+          "translation": "cake",
+          "example": "Je mange un gâteau."
+        },
+        {
+          "word": "s.au.t.[e]",
+          "translation": "jumps",
+          "example": "Il saute."
+        },
+        {
+          "word": "f.au.n.[e]",
+          "translation": "wildlife",
+          "example": "C'est la faune."
+        }
+      ]
+    },
+    {
+      "id": "au_reuse",
+      "label": "au (Combined)",
+      "grapheme": "au",
+      "words": [
+        {
+          "word": "oi.s.[e].au",
+          "translation": "bird",
+          "example": "Je vois un oiseau."
+        },
+        {
+          "word": "t.u.y.au",
+          "translation": "pipe",
+          "example": "C'est un tuyau."
+        },
+        {
+          "word": "au.j.ou.r.d'.[h].u.i",
+          "translation": "today",
+          "example": "C'est aujourd'hui."
+        },
+        {
+          "word": "b.[e].au.c.ou.[p]",
+          "translation": "a-lot/many",
+          "example": "Il mange beaucoup."
+        }
+      ]
+    },
+    {
+      "id": "qu_intro",
+      "label": "qu (Introduction)",
+      "grapheme": "qu",
+      "words": [
+        {
+          "word": "qu.i",
+          "translation": "who",
+          "example": "Qui est-ce?"
+        },
+        {
+          "word": "qu.e",
+          "translation": "that/what",
+          "example": "Que manges-tu?"
+        },
+        {
+          "word": "qu.e.l",
+          "translation": "which",
+          "example": "Quel chat?"
+        },
+        {
+          "word": "qu.a.r.[t]",
+          "translation": "quarter",
+          "example": "C'est un quart."
+        },
+        {
+          "word": "qu.i.tt.[e]",
+          "translation": "leaves",
+          "example": "Il quitte la maison."
+        },
+        {
+          "word": "m.u.s.i.qu.[e]",
+          "translation": "music",
+          "example": "J'écoute la musique."
+        },
+        {
+          "word": "p.r.a.t.i.qu.[e]",
+          "translation": "practical",
+          "example": "C'est pratique."
+        },
+        {
+          "word": "u.n.i.qu.[e]",
+          "translation": "unique",
+          "example": "C'est unique."
+        },
+        {
+          "word": "m.a.r.qu.[e]",
+          "translation": "brand",
+          "example": "C'est sa marque."
+        }
+      ]
+    },
+    {
+      "id": "qu_reuse",
+      "label": "qu (Combined)",
+      "grapheme": "qu",
+      "words": [
+        {
+          "word": "qu.oi",
+          "translation": "what",
+          "example": "C'est quoi?"
+        },
+        {
+          "word": "p.ou.r.qu.oi",
+          "translation": "why",
+          "example": "Pourquoi pas?"
+        },
+        {
+          "word": "qu.a.t.o.r.z.[e]",
+          "translation": "fourteen",
+          "example": "Il a quatorze ans."
+        },
+        {
+          "word": "d.i.s.qu.[e]",
+          "translation": "disk",
+          "example": "C'est un disque."
+        },
+        {
+          "word": "qu.e.s.t.i.o.[n]",
+          "translation": "question",
+          "example": "C'est une question."
+        },
+        {
+          "word": "a.t.t.a.qu.[e]",
+          "translation": "attack",
+          "example": "C'est une attaque."
+        },
+        {
+          "word": "b.r.i.qu.[e]",
+          "translation": "brick",
+          "example": "C'est une brique."
+        }
+      ]
+    },
+    {
+      "id": "ch_intro",
+      "label": "ch (Introduction)",
+      "grapheme": "ch",
+      "words": [
+        {
+          "word": "ch.a.[t]",
+          "translation": "cat",
+          "example": "C'est un chat."
+        },
+        {
+          "word": "ch.ai.s.[e]",
+          "translation": "chair",
+          "example": "C'est une chaise."
+        },
+        {
+          "word": "ch.e.v.a.l",
+          "translation": "horse",
+          "example": "C'est un cheval."
+        },
+        {
+          "word": "ch.o.c.o.l.a.[t]",
+          "translation": "chocolate",
+          "example": "Je mange du chocolat."
+        },
+        {
+          "word": "r.i.ch.[e]",
+          "translation": "rich",
+          "example": "Il est riche."
+        },
+        {
+          "word": "v.a.ch.[e]",
+          "translation": "cow",
+          "example": "C'est une vache."
+        },
+        {
+          "word": "ch.a.t.o.[n]",
+          "translation": "kitten",
+          "example": "C'est un chaton."
+        },
+        {
+          "word": "m.a.r.ch.[e]",
+          "translation": "walk/market",
+          "example": "Il marche."
+        },
+        {
+          "word": "t.a.ch.[e]",
+          "translation": "stain",
+          "example": "C'est une tache."
+        },
+        {
+          "word": "p.o.ch.[e]",
+          "translation": "pocket",
+          "example": "C'est sa poche."
+        }
+      ]
+    },
+    {
+      "id": "ch_reuse",
+      "label": "ch (Combined)",
+      "grapheme": "ch",
+      "words": [
+        {
+          "word": "b.ou.ch.[e]",
+          "translation": "mouth",
+          "example": "C'est sa bouche."
+        },
+        {
+          "word": "ch.au.[d]",
+          "translation": "hot",
+          "example": "Il fait chaud."
+        },
+        {
+          "word": "g.au.ch.[e]",
+          "translation": "left",
+          "example": "Il va à gauche."
+        },
+        {
+          "word": "ch.a.p.[e].au",
+          "translation": "hat",
+          "example": "C'est un chapeau."
+        },
+        {
+          "word": "ch.ou.e.t.t.[e]",
+          "translation": "owl/cool",
+          "example": "C'est chouette."
+        },
+        {
+          "word": "m.ou.s.t.a.ch.[e]",
+          "translation": "mustache",
+          "example": "Il a une moustache."
+        },
+        {
+          "word": "d.ou.ch.[e]",
+          "translation": "shower",
+          "example": "Je vois la douche."
+        },
+        {
+          "word": "l.ou.ch.[e]",
+          "translation": "ladle/shady",
+          "example": "C'est une louche."
+        },
+        {
+          "word": "ch.ou.ch.ou",
+          "translation": "darling/favorite",
+          "example": "C'est mon chouchou."
+        },
+        {
+          "word": "p.r.o.ch.[e]",
+          "translation": "close/near",
+          "example": "C'est proche."
+        },
+        {
+          "word": "ch.â.t.[e].au",
+          "translation": "castle",
+          "example": "C'est un château."
+        }
+      ]
+    },
+    {
+      "id": "é_intro",
+      "label": "é (Introduction)",
+      "grapheme": "é",
+      "words": [
+        {
+          "word": "é.t.é",
+          "translation": "summer",
+          "example": "C'est l'été."
+        },
+        {
+          "word": "é.c.o.l.[e]",
+          "translation": "school",
+          "example": "Je vais à l'école."
+        },
+        {
+          "word": "t.[h].é",
+          "translation": "tea",
+          "example": "Je bois du thé."
+        },
+        {
+          "word": "c.a.f.é",
+          "translation": "coffee",
+          "example": "Je bois du café."
+        },
+        {
+          "word": "v.é.l.o",
+          "translation": "bike",
+          "example": "C'est mon vélo."
+        },
+        {
+          "word": "b.é.b.é",
+          "translation": "baby",
+          "example": "C'est un bébé."
+        },
+        {
+          "word": "i.d.é.[e]",
+          "translation": "idea",
+          "example": "C'est une bonne idée."
+        },
+        {
+          "word": "m.u.s.é.[e]",
+          "translation": "museum",
+          "example": "Je vois le musée."
+        },
+        {
+          "word": "f.u.s.é.[e]",
+          "translation": "rocket",
+          "example": "C'est une fusée."
+        },
+        {
+          "word": "p.ou.p.é.[e]",
+          "translation": "doll",
+          "example": "C'est une poupée."
+        }
+      ]
+    },
+    {
+      "id": "é_reuse",
+      "label": "é (Combined)",
+      "grapheme": "é",
+      "words": [
+        {
+          "word": "é.p.au.l.[e]",
+          "translation": "shoulder",
+          "example": "C'est mon épaule."
+        },
+        {
+          "word": "é.qu.i.p.[e]",
+          "translation": "team",
+          "example": "C'est mon équipe."
+        },
+        {
+          "word": "é.ch.e.ll.[e]",
+          "translation": "ladder",
+          "example": "C'est une échelle."
+        },
+        {
+          "word": "f.é.[e]",
+          "translation": "fairy",
+          "example": "C'est une fée."
+        },
+        {
+          "word": "c.a.r.r.é",
+          "translation": "square",
+          "example": "C'est un carré."
+        }
+      ]
+    },
+    {
+      "id": "eu_intro",
+      "label": "eu (Introduction)",
+      "grapheme": "eu",
+      "words": [
+        {
+          "word": "d.eu.[x]",
+          "translation": "two",
+          "example": "Il y a deux chats."
+        },
+        {
+          "word": "p.eu",
+          "translation": "little/few",
+          "example": "C'est un peu."
+        },
+        {
+          "word": "j.eu",
+          "translation": "game",
+          "example": "C'est un jeu."
+        },
+        {
+          "word": "b.l.eu",
+          "translation": "blue",
+          "example": "C'est bleu."
+        },
+        {
+          "word": "f.eu",
+          "translation": "fire",
+          "example": "Je vois le feu."
+        },
+        {
+          "word": "y.eu.[x]",
+          "translation": "eyes",
+          "example": "Je vois ses yeux."
+        },
+        {
+          "word": "ch.e.v.eu.[x]",
+          "translation": "hair",
+          "example": "Il a des cheveux."
+        },
+        {
+          "word": "n.e.v.eu",
+          "translation": "nephew",
+          "example": "C'est mon neveu."
+        },
+        {
+          "word": "f.l.eu.r",
+          "translation": "flower",
+          "example": "Je vois une fleur."
+        },
+        {
+          "word": "m.i.l.i.eu",
+          "translation": "middle",
+          "example": "C'est au milieu."
+        }
+      ]
+    },
+    {
+      "id": "eu_reuse",
+      "label": "eu (Combined)",
+      "grapheme": "eu",
+      "words": [
+        {
+          "word": "j.ou.eu.r",
+          "translation": "player",
+          "example": "C'est un joueur."
+        },
+        {
+          "word": "c.ou.l.eu.r",
+          "translation": "color",
+          "example": "C'est ma couleur."
+        },
+        {
+          "word": "ch.au.ff.eu.r",
+          "translation": "driver",
+          "example": "C'est le chauffeur."
+        },
+        {
+          "word": "qu.eu.[e]",
+          "translation": "tail/line",
+          "example": "Le chat a une queue."
+        },
+        {
+          "word": "ch.a.l.eu.r",
+          "translation": "heat/warmth",
+          "example": "Il y a de la chaleur."
+        }
+      ]
+    },
+    {
+      "id": "en_an_intro",
+      "label": "en / an (nasal) (Introduction)",
+      "grapheme": "en",
+      "words": [
+        {
+          "word": "en.f.an.[t]",
+          "translation": "child",
+          "example": "C'est un enfant."
+        },
+        {
+          "word": "d.en.[t]",
+          "translation": "tooth",
+          "example": "C'est une dent."
+        },
+        {
+          "word": "v.en.[t]",
+          "translation": "wind",
+          "example": "Il y a du vent."
+        },
+        {
+          "word": "l.en.[t]",
+          "translation": "slow",
+          "example": "Il est lent."
+        },
+        {
+          "word": "a.r.g.en.[t]",
+          "translation": "money",
+          "example": "Il a de l'argent."
+        },
+        {
+          "word": "d.an.[s]",
+          "translation": "in",
+          "example": "Le chat est dans la boîte."
+        },
+        {
+          "word": "g.r.an.[d]",
+          "translation": "big",
+          "example": "Il est grand."
+        },
+        {
+          "word": "an",
+          "translation": "year",
+          "example": "J'ai un an."
+        },
+        {
+          "word": "b.an.[c]",
+          "translation": "bench",
+          "example": "Je vois un banc."
+        },
+        {
+          "word": "p.en.[d]",
+          "translation": "hangs",
+          "example": "Il pend."
+        }
+      ],
+      "grapheme2": "an"
+    },
+    {
+      "id": "en_an_reuse",
+      "label": "en / an (nasal) (Combined)",
+      "grapheme": "en",
+      "words": [
+        {
+          "word": "ch.i.en",
+          "translation": "dog",
+          "example": "C'est un chien."
+        },
+        {
+          "word": "qu.an.[d]",
+          "translation": "when",
+          "example": "Quand manges-tu?"
+        },
+        {
+          "word": "ch.an.t.eu.r",
+          "translation": "singer",
+          "example": "C'est un chanteur."
+        },
+        {
+          "word": "g.ou.r.m.an.[d]",
+          "translation": "greedy",
+          "example": "Il est gourmand."
+        },
+        {
+          "word": "é.l.é.ph.an.[t]",
+          "translation": "elephant",
+          "example": "C'est un éléphant."
+        },
+        {
+          "word": "p.an.d.a",
+          "translation": "panda",
+          "example": "C'est un panda."
+        },
+        {
+          "word": "o.c.é.an",
+          "translation": "ocean",
+          "example": "Je vois l'océan."
+        },
+        {
+          "word": "ch.an.t.eu.s.[e]",
+          "translation": "female-singer",
+          "example": "C'est une chanteuse."
+        }
+      ],
+      "grapheme2": "an"
+    },
+    {
+      "id": "in_intro",
+      "label": "in (Introduction)",
+      "grapheme": "in",
+      "words": [
+        {
+          "word": "v.in",
+          "translation": "wine",
+          "example": "Il boit du vin."
+        },
+        {
+          "word": "f.in",
+          "translation": "end",
+          "example": "C'est la fin."
+        },
+        {
+          "word": "j.a.r.d.in",
+          "translation": "garden",
+          "example": "Je vois le jardin."
+        },
+        {
+          "word": "m.a.t.in",
+          "translation": "morning",
+          "example": "C'est le matin."
+        },
+        {
+          "word": "l.a.p.in",
+          "translation": "rabbit",
+          "example": "C'est un lapin."
+        },
+        {
+          "word": "c.ou.s.in",
+          "translation": "cousin",
+          "example": "C'est mon cousin."
+        },
+        {
+          "word": "v.oi.s.in",
+          "translation": "neighbor",
+          "example": "C'est mon voisin."
+        },
+        {
+          "word": "s.a.p.in",
+          "translation": "pine-tree",
+          "example": "C'est un sapin."
+        },
+        {
+          "word": "c.ou.s.s.in",
+          "translation": "cushion",
+          "example": "C'est un coussin."
+        }
+      ]
+    },
+    {
+      "id": "in_reuse",
+      "label": "in (Combined)",
+      "grapheme": "in",
+      "words": [
+        {
+          "word": "m.ou.l.in",
+          "translation": "mill",
+          "example": "Je vois un moulin."
+        },
+        {
+          "word": "ch.e.m.in",
+          "translation": "path",
+          "example": "C'est le chemin."
+        },
+        {
+          "word": "p.an.t.in",
+          "translation": "puppet",
+          "example": "C'est un pantin."
+        },
+        {
+          "word": "m.a.g.a.s.in",
+          "translation": "store",
+          "example": "Je vois le magasin."
+        },
+        {
+          "word": "r.ai.s.in",
+          "translation": "grape",
+          "example": "Je mange du raisin."
+        }
+      ]
+    },
+    {
+      "id": "im_intro",
+      "label": "im (Introduction)",
+      "grapheme": "im",
+      "words": [
+        {
+          "word": "s.im.p.l.[e]",
+          "translation": "simple",
+          "example": "C'est simple."
+        },
+        {
+          "word": "im.p.o.r.t.an.[t]",
+          "translation": "important",
+          "example": "C'est important."
+        },
+        {
+          "word": "im.p.o.s.s.i.b.l.[e]",
+          "translation": "impossible",
+          "example": "C'est impossible."
+        },
+        {
+          "word": "g.r.im.p.[e]",
+          "translation": "climbs",
+          "example": "Il grimpe."
+        }
+      ]
+    },
+    {
+      "id": "ill_intro",
+      "label": "ill (silent, glide) (Introduction)",
+      "grapheme": "ill",
+      "words": [
+        {
+          "word": "f.ill.[e]",
+          "translation": "girl",
+          "example": "C'est une fille."
+        },
+        {
+          "word": "f.a.m.ill.[e]",
+          "translation": "family",
+          "example": "C'est ma famille."
+        },
+        {
+          "word": "b.ill.e.[t]",
+          "translation": "ticket",
+          "example": "C'est un billet."
+        },
+        {
+          "word": "p.a.p.ill.o.[n]",
+          "translation": "butterfly",
+          "example": "Je vois un papillon."
+        },
+        {
+          "word": "b.ou.t.e.ill.[e]",
+          "translation": "bottle",
+          "example": "C'est une bouteille."
+        },
+        {
+          "word": "f.eu.ill.[e]",
+          "translation": "leaf",
+          "example": "Je vois une feuille."
+        },
+        {
+          "word": "g.r.o.s.e.ill.[e]",
+          "translation": "currant",
+          "example": "Je mange une groseille."
+        }
+      ]
+    },
+    {
+      "id": "ill_reuse",
+      "label": "ill (silent, glide) (Combined)",
+      "grapheme": "ill",
+      "words": [
+        {
+          "word": "g.o.r.ill.[e]",
+          "translation": "gorilla",
+          "example": "C'est un gorille."
+        },
+        {
+          "word": "v.a.n.ill.[e]",
+          "translation": "vanilla",
+          "example": "Je mange de la vanille."
+        },
+        {
+          "word": "b.r.ou.ill.a.r.[d]",
+          "translation": "fog",
+          "example": "Il y a du brouillard."
+        },
+        {
+          "word": "a.b.e.ill.[e]",
+          "translation": "bee",
+          "example": "Je vois une abeille."
+        },
+        {
+          "word": "ch.e.n.ill.[e]",
+          "translation": "caterpillar",
+          "example": "C'est une chenille."
+        },
+        {
+          "word": "ch.a.t.ou.ill.[e]",
+          "translation": "tickle",
+          "example": "Il me chatouille."
+        }
+      ]
+    },
+    {
+      "id": "er_intro",
+      "label": "-er (infinitive) (Introduction)",
+      "grapheme": "er",
+      "words": [
+        {
+          "word": "p.a.r.l.er",
+          "translation": "to-speak",
+          "example": "Je parle."
+        },
+        {
+          "word": "m.an.g.er",
+          "translation": "to-eat",
+          "example": "Je mange."
+        },
+        {
+          "word": "j.ou.er",
+          "translation": "to-play",
+          "example": "Je joue."
+        },
+        {
+          "word": "ch.an.t.er",
+          "translation": "to-sing",
+          "example": "Je chante."
+        },
+        {
+          "word": "m.a.r.ch.er",
+          "translation": "to-walk",
+          "example": "Je marche."
+        },
+        {
+          "word": "d.o.n.n.er",
+          "translation": "to-give",
+          "example": "Je donne."
+        },
+        {
+          "word": "ai.m.er",
+          "translation": "to-like/love",
+          "example": "J'aime."
+        },
+        {
+          "word": "é.c.ou.t.er",
+          "translation": "to-listen",
+          "example": "J'écoute."
+        },
+        {
+          "word": "d.an.s.er",
+          "translation": "to-dance",
+          "example": "Je danse."
+        }
+      ]
+    },
+    {
+      "id": "er_reuse",
+      "label": "-er (infinitive) (Combined)",
+      "grapheme": "er",
+      "words": [
+        {
+          "word": "ch.e.r.ch.er",
+          "translation": "to-search",
+          "example": "Je cherche."
+        },
+        {
+          "word": "t.ou.ch.er",
+          "translation": "to-touch",
+          "example": "Je touche."
+        },
+        {
+          "word": "a.ch.e.t.er",
+          "translation": "to-buy",
+          "example": "J'achète."
+        },
+        {
+          "word": "i.m.p.r.i.m.er",
+          "translation": "to-print",
+          "example": "J'imprime."
+        },
+        {
+          "word": "i.m.p.e.r.m.é.a.b.l.[e]",
+          "translation": "raincoat",
+          "example": "C'est un imperméable."
+        },
+        {
+          "word": "g.r.i.m.p.er",
+          "translation": "to-climb",
+          "example": "Je grimpe."
+        }
+      ]
+    },
+    {
+      "id": "ir_intro",
+      "label": "-ir (infinitive) (Introduction)",
+      "grapheme": "ir",
+      "words": [
+        {
+          "word": "f.i.n.ir",
+          "translation": "to-finish",
+          "example": "Je finis."
+        },
+        {
+          "word": "ch.oi.s.ir",
+          "translation": "to-choose",
+          "example": "Je choisis."
+        },
+        {
+          "word": "g.r.an.d.ir",
+          "translation": "to-grow",
+          "example": "Je grandis."
+        },
+        {
+          "word": "r.é.u.s.s.ir",
+          "translation": "to-succeed",
+          "example": "Je réussis."
+        },
+        {
+          "word": "d.o.r.m.ir",
+          "translation": "to-sleep",
+          "example": "Je dors."
+        }
+      ]
+    },
+    {
+      "id": "re_intro",
+      "label": "-re (infinitive) (Introduction)",
+      "grapheme": "re",
+      "words": [
+        {
+          "word": "p.r.en.d.re",
+          "translation": "to-take",
+          "example": "Je prends."
+        },
+        {
+          "word": "v.en.d.re",
+          "translation": "to-sell",
+          "example": "Je vends."
+        },
+        {
+          "word": "a.t.t.en.d.re",
+          "translation": "to-wait",
+          "example": "J'attends."
+        },
+        {
+          "word": "d.e.s.[c].en.d.re",
+          "translation": "to-descend",
+          "example": "Je descends."
+        },
+        {
+          "word": "p.e.r.d.re",
+          "translation": "to-lose",
+          "example": "Je perds."
+        }
+      ]
+    },
+    {
+      "id": "re_reuse",
+      "label": "-re (infinitive) (Combined)",
+      "grapheme": "re",
+      "words": [
+        {
+          "word": "b.oi.re",
+          "translation": "to-drink",
+          "example": "Je bois."
+        },
+        {
+          "word": "l.i.re",
+          "translation": "to-read",
+          "example": "Je lis."
+        },
+        {
+          "word": "é.c.r.i.re",
+          "translation": "to-write",
+          "example": "J'écris."
+        },
+        {
+          "word": "v.i.v.re",
+          "translation": "to-live",
+          "example": "Je vis."
+        },
+        {
+          "word": "r.i.re",
+          "translation": "to-laugh",
+          "example": "Je ris."
+        },
+        {
+          "word": "qu.a.t.re",
+          "translation": "four",
+          "example": "Il y a quatre chats."
+        },
+        {
+          "word": "r.e.qu.in",
+          "translation": "shark",
+          "example": "C'est un requin."
+        },
+        {
+          "word": "g.r.e.n.ou.ill.[e]",
+          "translation": "frog",
+          "example": "C'est une grenouille."
+        },
+        {
+          "word": "o.r.e.ill.[e]",
+          "translation": "ear",
+          "example": "C'est mon oreille."
+        },
+        {
+          "word": "r.e.g.a.r.d.er",
+          "translation": "to-watch",
+          "example": "Je regarde."
+        },
+        {
+          "word": "r.e.m.p.l.ir",
+          "translation": "to-fill",
+          "example": "Je remplis."
+        },
+        {
+          "word": "[h].i.s.t.oi.re",
+          "translation": "story",
+          "example": "C'est une histoire."
+        }
+      ]
+    }
+  ]
 }
