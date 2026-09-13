@@ -1509,6 +1509,45 @@
             overflow-y: auto;
         }
 
+        #matching-screen {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background-color: rgba(250, 250, 249, 0.98);
+            z-index: 95;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .matching-chip {
+            border: 2px solid #1e293b;
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-weight: 800;
+            font-size: 14px;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .matching-chip.matching-selected {
+            background: #dbeafe;
+            border-color: #2563eb;
+            transform: scale(1.03);
+        }
+        .matching-chip.matching-matched {
+            background: #dcfce7;
+            border-color: #16a34a;
+            opacity: 0.6;
+            cursor: default;
+        }
+        .matching-chip.matching-wrong-flash {
+            background: #fee2e2;
+            border-color: #dc2626;
+        }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -3571,7 +3610,7 @@
                 <div id="results-code-summary" class="text-left" style="display:none;">
                     <p class="text-sm font-bold text-slate-700">Today I checked my understanding of:</p>
                     <p id="results-code-words" dir="auto" class="text-sm font-black text-slate-900 mt-1 mb-2 leading-relaxed"></p>
-                    <p class="text-[11px] text-slate-500 leading-relaxed">NESA Modern Languages Syllabus outcomes MLE-UND-01, ML1-UND-01, ML2-UND-01, ML3-UND-01, ML4-UND-01, ML5-UND-01</p>
+                    <p id="results-syllabus-outcomes" class="text-[11px] text-slate-500 leading-relaxed">NESA Modern Languages Syllabus outcomes MLE-UND-01, ML1-UND-01, ML2-UND-01, ML3-UND-01, ML4-UND-01, ML5-UND-01</p>
                 </div>
 
                 <div class="text-left bg-slate-50 rounded-2xl p-4 space-y-2 border-2 border-slate-200">
@@ -3591,6 +3630,18 @@
                 <div class="flex flex-col sm:flex-row gap-3 pt-2">
                     <button id="results-try-again-btn" class="flex-1 board-btn interactive text-base">Try Again</button>
                     <button id="results-return-btn" class="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-black text-sm uppercase px-4 py-4 rounded-2xl border-2 border-slate-800 shadow-[3px_3px_0px_#1e293b] transition-all interactive">Return to Hub</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="matching-screen" class="dyslexic-font">
+            <div class="bg-white p-6 rounded-3xl max-w-2xl w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 space-y-4 interactive relative">
+                <div class="text-5xl">🔗</div>
+                <h2 class="text-2xl font-black text-slate-800">Match the words!</h2>
+                <p class="text-sm text-slate-500">Tap a word, then tap its translation.</p>
+                <div style="display:flex; gap:20px; justify-content:center; align-items:flex-start;">
+                    <div id="matching-words-col" style="display:flex; flex-direction:column; gap:8px; flex:1;"></div>
+                    <div id="matching-translations-col" style="display:flex; flex-direction:column; gap:8px; flex:1;"></div>
                 </div>
             </div>
         </div>
@@ -3731,14 +3782,20 @@
                 wiggleTime: 0, // accumulates whenever visible, drives its cosmetic wiggle
                 hasHitPlayerThisSwoop: false,
                 hoverScreenY: 60, // this cycle's hover/entry/exit height in screen pixels - varies for Mega Magpie Mode
+                pastPeak: false, // true once past the dip - the SAME parabola continues, but t now advances at an accelerating rate rather than linearly
+                exitElapsed: 0,
+                t: 0, // the parabola's own interpolation parameter (0=start, tPeak=dip, 1=original end) - tracked explicitly so it can advance non-linearly and keep extrapolating past 1
+                tRateBase: 0, // how fast t was advancing at the moment of crossing the peak - the exit's acceleration starts from here, not from zero, so the transition is seamless
             };
         }
         let magpieA = createMagpieInstance(); // the always-present magpie for both Magpie Mode and Mega Magpie Mode
         let magpieB = createMagpieInstance(); // Mega Magpie Mode's occasional second, simultaneous magpie from the opposite side - stays dormant (phase 'idle') otherwise
         const MAGPIE_HOVER_DURATION = 1.2; // seconds spent visibly hovering before swooping - the player's warning
-        const MAGPIE_SWOOP_DURATION = 3.5; // seconds for the full corner-to-corner swoop
+        const MAGPIE_SWOOP_DURATION = 3.5; // seconds the dip portion (start to peak to the original end point) would take at a constant rate - the exit afterward keeps following the same curve but speeds up past this rate
         const MAGPIE_ENTER_DURATION = 0.7; // seconds spent flying in from off-screen to the hover position
-        const MAGPIE_ENTER_OFFSET = 220; // how far beyond the screen edge it starts from, in screen pixels
+        const MAGPIE_ENTER_OFFSET = 220; // how far beyond the screen edge it starts from (entering) or must clear (exiting), in screen pixels
+        const MAGPIE_EXIT_ACCEL_RATE = 4; // t's rate of advance multiplies by this every second after the peak, so it visibly rockets away along the same arc rather than crawling off screen
+        const MAGPIE_EXIT_MAX_ELAPSED = 5; // safety cap (seconds) - forces idle even if some edge case kept it on-screen this long
         const MAGPIE_MIN_CYCLE = 9, MAGPIE_MAX_CYCLE = 13; // seconds between swoops, randomised a little so it isn't a predictable metronome
         const MAGPIE_MEGA_MIN_CYCLE = 0.875, MAGPIE_MEGA_MAX_CYCLE = 1.375; // Mega Magpie Mode's baseline - quartered again from the previous 3.5-5.5s for a much more hectic pace
         const MAGPIE_MEGA_QUICK_CYCLE_CHANCE = 0.25; // how often Mega Magpie Mode instead fires back-to-back with barely a pause
@@ -3861,11 +3918,11 @@
             return null;
         }
 
-        function recordWordCollected(text, englishOverride) {
+        function recordWordCollected(text, englishOverride, exampleOverride) {
             const trimmed = text.trim();
             const lower = trimmed.toLowerCase();
             if (!lower || collectedWordsLog.some(w => w.text.toLowerCase() === lower)) return;
-            collectedWordsLog.push({ text: trimmed, englishOverride: englishOverride || null });
+            collectedWordsLog.push({ text: trimmed, englishOverride: englishOverride || null, exampleOverride: exampleOverride || null });
             renderCollectedWordsPanel();
         }
 
@@ -3881,7 +3938,10 @@
             collectedWordsLog.forEach(entry => {
                 const presetItem = findPresetEntryForWord(entry.text);
                 const englishText = entry.englishOverride || (presetItem && presetItem.translations ? presetItem.translations.en : null);
-                const definitionText = presetItem ? presetItem.definition : null;
+                // Word Parkour supplies its own simple example sentence in place of a
+                // dictionary-style definition - everything else keeps the existing
+                // preset-lookup definition untouched.
+                const definitionText = entry.exampleOverride || (presetItem ? presetItem.definition : null);
 
                 const row = document.createElement('div');
                 row.style.cssText = 'border:1px solid var(--hub-line); border-radius:12px; padding:6px 8px;';
@@ -4251,7 +4311,7 @@
             forest: { minX: -3654, maxX: -1470, minY: 200, maxY: 745 },
             city: { minX: -1160, maxX: 1188, minY: 200, maxY: 745 },
             water: { minX: 2435, maxX: 4430, minY: 885, maxY: 1040 },
-            sky: { minX: -1310, maxX: 2040, minY: -370, maxY: 310 }
+            sky: { minX: -1310, maxX: 4430, minY: -370, maxY: 310 } // extended to cover the entire region above the sea, not just above the forest/city
         };
 
         // Precision localized date formats featuring fully integrated non-Latin numeral tags (e.g. hanidec, jpan, deva, hebr, arab)
@@ -4444,7 +4504,35 @@
             { x: 1500, y: -400, w: 200, h: 40 },
             { x: -1300, y: -300, w: 180, h: 40 },
             { x: 286, y: -100, w: 180, h: 40 },
-            { x: 449, y: -150, w: 180, h: 40 }
+            { x: 449, y: -150, w: 180, h: 40 },
+            // Extended over the sea, matching the same tiered scattering (low/mid/high)
+            // used across the rest of the sky region, so Parkour Unit and Bobot can
+            // run and jump across clouds there too now that the sky area covers the
+            // whole region above the water.
+            { x: 2100, y: 300, w: 180, h: 40 },
+            { x: 2350, y: 380, w: 170, h: 40 },
+            { x: 2600, y: 250, w: 190, h: 40 },
+            { x: 2850, y: 400, w: 180, h: 40 },
+            { x: 3100, y: 280, w: 170, h: 40 },
+            { x: 3350, y: 350, w: 200, h: 40 },
+            { x: 3600, y: 260, w: 180, h: 40 },
+            { x: 3850, y: 320, w: 170, h: 40 },
+            { x: 4100, y: 220, w: 190, h: 40 },
+            { x: 2200, y: 140, w: 180, h: 40 },
+            { x: 2500, y: 110, w: 170, h: 40 },
+            { x: 2800, y: 150, w: 190, h: 40 },
+            { x: 3150, y: 120, w: 180, h: 40 },
+            { x: 3450, y: 160, w: 170, h: 40 },
+            { x: 3750, y: 130, w: 180, h: 40 },
+            { x: 4050, y: 145, w: 170, h: 40 },
+            { x: 2150, y: -100, w: 170, h: 40 },
+            { x: 2450, y: -250, w: 180, h: 40 },
+            { x: 2750, y: -350, w: 190, h: 40 },
+            { x: 3050, y: -180, w: 180, h: 40 },
+            { x: 3350, y: -400, w: 170, h: 40 },
+            { x: 3700, y: -280, w: 190, h: 40 },
+            { x: 4000, y: -150, w: 180, h: 40 },
+            { x: 4300, y: -320, w: 170, h: 40 }
         ];
 
         const forestTrees = [
@@ -13563,6 +13651,81 @@
             });
         }
 
+        // A big decorative rainbow spanning from the middle of the forest area to
+        // the middle of the sea area, peaking high through the main sky area -
+        // purely a backdrop, drawn before anything else in the world so it never
+        // A big decorative rainbow spanning from the middle of the forest area to
+        // the middle of the sea area, peaking high through the main sky area -
+        // purely a backdrop, drawn before anything else in the world so it never
+        // sits in front of (and thus never obscures) any other layer.
+        //
+        // The six colour bands are one rigid, flat bar (fixed thickness, fixed
+        // order, no independent geometry per band) - a single shared curve then
+        // says how high that whole bar sits at each horizontal position, and
+        // every band's top/bottom edge is read straight off that one curve. Since
+        // adjacent bands share an edge by construction (band N's bottom edge is
+        // exactly band N+1's top edge, both the same curve plus a fixed offset),
+        // they can never drift apart or leave a gap - including right where the
+        // arc touches down at ground/sea level.
+        //
+        // The curve itself is a simple power function: height(u) = peakHeight *
+        // (1 - u^2), where u runs from -1 (left edge) to 1 (right edge). At the
+        // edges this is exactly 0 (the whole bar sits right on the baseline); at
+        // the centre it's exactly peakHeight (the bar's top reaches its highest
+        // point, in the sky). Opacity is one shared vertical gradient (baseline =
+        // transparent, peak height = fully opaque) applied identically to every
+        // band, so the fade depends purely on absolute height everywhere.
+        function drawBackgroundRainbow(ctx) {
+            const forestMidX = (BOUNDS.forest.minX + BOUNDS.forest.maxX) / 2;
+            const seaMidX = (BOUNDS.water.minX + BOUNDS.water.maxX) / 2;
+            const centerX = (forestMidX + seaMidX) / 2;
+            const baselineY = 815; // the standard outdoor ground/water-surface level - the bar sits exactly here at both ends
+            const halfWidth = (seaMidX - forestMidX) / 2;
+            const peakHeight = baselineY - (BOUNDS.sky.minY + 120); // how far above the baseline the bar's top edge reaches at the very centre
+
+            const bandColors = ['#ee3333', '#ff9933', '#ffdd33', '#4caf50', '#3388ee', '#9933cc'];
+            const bandWidth = 60;
+
+            const archExponent = 2; // the power in the bending function - 2 gives a classic, smooth parabolic arc
+            function archHeight(u) { return peakHeight * (1 - Math.pow(u, archExponent)); }
+
+            const steps = 200; // resolution along the arc - fine enough to look smooth at this scale
+            const xs = new Array(steps + 1);
+            const topYs = new Array(steps + 1); // the ONE shared curve every band's edges are derived from
+            for (let i = 0; i <= steps; i++) {
+                const u = -1 + (2 * i / steps);
+                xs[i] = centerX + u * halfWidth;
+                topYs[i] = baselineY - archHeight(u);
+            }
+
+            ctx.save();
+            bandColors.forEach((color, index) => {
+                const topOffset = index * bandWidth;
+                const bottomOffset = (index + 1) * bandWidth;
+
+                const r = parseInt(color.slice(1, 3), 16);
+                const g = parseInt(color.slice(3, 5), 16);
+                const b = parseInt(color.slice(5, 7), 16);
+
+                const gradient = ctx.createLinearGradient(0, baselineY, 0, baselineY - peakHeight);
+                gradient.addColorStop(0, `rgba(${r},${g},${b},0)`);
+                gradient.addColorStop(1, `rgba(${r},${g},${b},1)`);
+                ctx.fillStyle = gradient;
+
+                ctx.beginPath();
+                for (let i = 0; i <= steps; i++) {
+                    const y = topYs[i] + topOffset;
+                    if (i === 0) ctx.moveTo(xs[i], y); else ctx.lineTo(xs[i], y);
+                }
+                for (let i = steps; i >= 0; i--) {
+                    ctx.lineTo(xs[i], topYs[i] + bottomOffset);
+                }
+                ctx.closePath();
+                ctx.fill();
+            });
+            ctx.restore();
+        }
+
         function drawCompoundCloud(ctx, x, y, size, isPlatform, customW, customH) {
             ctx.save();
             ctx.fillStyle = '#ffffff';
@@ -14161,6 +14324,10 @@
                 if (kartCurrentTargetWord) speakWord(kartCurrentTargetWord);
             };
             document.getElementById('tts-location-button').onclick = () => {
+                if (selectedLobbyMode === 'word') {
+                    if (currentTargetWord) speakWord(currentTargetWord);
+                    return;
+                }
                 const phrase = getCurrentLocationSpeechPhrase();
                 if (phrase) speakWord(phrase);
             };
@@ -14168,6 +14335,10 @@
                 if (currentTargetWord) speakWordSlow(currentTargetWord);
             };
             document.getElementById('tts-location-button-slow').onclick = () => {
+                if (selectedLobbyMode === 'word') {
+                    if (currentTargetWord) speakWordSlow(currentTargetWord);
+                    return;
+                }
                 const phrase = getCurrentLocationSpeechPhrase();
                 if (phrase) speakWordSlow(phrase);
             };
@@ -15084,7 +15255,7 @@
             'title-screen', 'coder-screen', 'bobot-screen',
             'bobot-bookshelf-library-screen', 'bobot-bookshelf-reader-screen',
             'translation-studio-library-screen', 'translation-studio-player-screen',
-            'whiteboard-screen', 'game-view-shell', 'results-screen', 'syntax-scramble-screen'
+            'whiteboard-screen', 'game-view-shell', 'results-screen', 'matching-screen', 'syntax-scramble-screen'
         ];
         function hideAllToolScreens() {
             ALL_TOOL_SCREEN_IDS.forEach(id => {
@@ -16369,6 +16540,11 @@
         let wordParkourWords = []; // [{ spelling: 'plate', chunks: ['p','l','a','t','e'] }, ...]
         let wordParkourCurrentWordIndex = 0;
         let wordParkourCurrentChunkIndex = 0; // how many chunks of the CURRENT word have been correctly collected, in order
+        // Populated when a Word Parkour preset is applied - keyed by lowercased
+        // reconstructed spelling, since the word-input textarea only round-trips
+        // plain chunked text, losing any translation/example data that came with
+        // the preset. Manually typed words simply have no entry here.
+        let wordParkourPresetMeta = {};
 
         // Splits raw input (one word per line/comma, dot-separated graphemes,
         // e.g. "c.a.t") into word objects. Matches Lava Literacy's existing
@@ -16378,8 +16554,13 @@
             const lines = (rawText || '').split(/[,\n]/).map(l => l.trim()).filter(l => l.length > 0);
             return lines
                 .map(line => {
-                    const chunks = line.split('.').map(c => c.trim()).filter(c => c.length > 0);
-                    return { spelling: chunks.join(''), chunks };
+                    const rawChunks = line.split('.').map(c => c.trim()).filter(c => c.length > 0);
+                    const chunks = rawChunks.map(c => {
+                        const isSilent = c.startsWith('[') && c.endsWith(']') && c.length > 2;
+                        return { text: isSilent ? c.slice(1, -1) : c, silent: isSilent };
+                    });
+                    const spelling = chunks.map(c => c.text).join('');
+                    return { spelling, chunks };
                 })
                 .filter(w => w.chunks.length > 0);
         }
@@ -16397,9 +16578,13 @@
         function loadWordParkourPresetManifest() {
             const cacheBustedUrl = WORD_PARKOUR_PRESET_MANIFEST_URL + '?cb=' + Date.now();
             fetch(cacheBustedUrl, { cache: 'no-store' })
-                .then(res => { if (!res.ok) throw new Error('Manifest not found'); return res.json(); })
+                .then(res => { if (!res.ok) throw new Error('Manifest not found (HTTP ' + res.status + ')'); return res.json(); })
                 .then(data => { wordParkourPresetManifest = data; renderWordParkourPresetDropdown(); })
-                .catch(() => { wordParkourPresetManifest = null; renderWordParkourPresetDropdown(); });
+                .catch(err => {
+                    console.warn('Could not load the Word Parkour preset manifest from ' + WORD_PARKOUR_PRESET_MANIFEST_URL + ' - the dropdown will be empty until this is fixed. Reason:', err);
+                    wordParkourPresetManifest = null;
+                    renderWordParkourPresetDropdown();
+                });
         }
 
         function renderWordParkourPresetDropdown() {
@@ -16419,29 +16604,73 @@
             select.value = entries.some(e => e.id === previousValue) ? previousValue : '';
         }
 
+        // The eight NESA/built-in French target graphemes each have their own
+        // established preset colour (matching the colours getColoredGraphemes
+        // already uses automatically for French) - a Word Parkour preset for
+        // one of these keeps that same colour instead of red, so a grapheme
+        // always looks the same regardless of which tool taught it. Every
+        // other grapheme (in, im, ill, er, ir, re, and the single vowels) and
+        // every English grapheme still defaults to red.
+        const FRENCH_TARGET_GRAPHEME_COLOURS = {
+            'oi': { color: '#000000' },
+            'ch': { color: '#946045' },
+            'eu': { color: '#4361ff' },
+            'en': { color: '#ff751f' },
+            'an': { color: '#ff751f' },
+            'qu': { color: '#00bf63' },
+            'ou': { color: '#ff3131' },
+            'au': { color: '#00bf63', color2: '#ffde59' },
+            'é': { color: '#ffde59' },
+        };
+
         function applyWordParkourPreset(presetId) {
             if (!presetId) return;
             const entries = (wordParkourPresetManifest && wordParkourPresetManifest[selectedLanguage]) || [];
             const entry = entries.find(e => e.id === presetId);
             if (!entry) return;
 
-            document.getElementById('word-input').value = entry.words.join('\n');
+            document.getElementById('word-input').value = entry.words.map(w => w.word).join('\n');
             document.getElementById('word-colour-coded').checked = true;
             colourCodedEnabled = true;
+
+            // Reset fresh each time a preset is applied - a manually typed word has
+            // no meta entry, which is fine (recordWordCollected simply falls back
+            // to no translation/example override for it).
+            wordParkourPresetMeta = {};
+            entry.words.forEach(w => {
+                const spelling = w.word.split('.').map(c => { c = c.trim(); return (c.startsWith('[') && c.endsWith(']')) ? c.slice(1, -1) : c; }).join('');
+                wordParkourPresetMeta[spelling.toLowerCase()] = { translation: w.translation || null, example: w.example || null };
+            });
 
             // Some presets (compound words, contractions, the Kindergarten letter-group
             // lists, etc.) have no single target grapheme to colour - leave the
             // existing colour-coding rules untouched rather than matching against
             // an empty string, which would otherwise hit the blank placeholder row.
             if (entry.grapheme) {
-                const existingIdx = customGraphemes.findIndex(cg => cg.text.trim().toLowerCase() === entry.grapheme.toLowerCase());
-                if (existingIdx !== -1) {
-                    customGraphemes[existingIdx].color = '#ff0000';
-                    customGraphemes[existingIdx].color2 = null;
-                } else {
-                    customGraphemes.unshift({ text: entry.grapheme, color: '#ff0000' });
-                }
+                addOrUpdateGraphemeRule(entry.grapheme, colourForPresetGrapheme(entry.grapheme));
+                // Some sounds are spelled two different ways (e.g. the same nasal
+                // vowel as either "en" or "an") - grapheme2, when present, gets its
+                // own separate rule so both spellings are highlighted together.
+                if (entry.grapheme2) addOrUpdateGraphemeRule(entry.grapheme2, colourForPresetGrapheme(entry.grapheme2));
                 syncCustomGraphemeArrays();
+            }
+        }
+
+        function colourForPresetGrapheme(graphemeText) {
+            if (selectedLanguage === 'fr') {
+                const preset = FRENCH_TARGET_GRAPHEME_COLOURS[graphemeText.toLowerCase()];
+                if (preset) return preset;
+            }
+            return { color: '#ff0000' };
+        }
+
+        function addOrUpdateGraphemeRule(graphemeText, colourInfo) {
+            const existingIdx = customGraphemes.findIndex(cg => cg.text.trim().toLowerCase() === graphemeText.toLowerCase());
+            if (existingIdx !== -1) {
+                customGraphemes[existingIdx].color = colourInfo.color;
+                customGraphemes[existingIdx].color2 = colourInfo.color2 || null;
+            } else {
+                customGraphemes.unshift({ text: graphemeText, color: colourInfo.color, color2: colourInfo.color2 || null });
             }
         }
 
@@ -17089,15 +17318,25 @@
             roundHadExtraLocations = extraLocationsEnabled;
             roundCharacterUsed = selectedCharacter;
             magpieDeductionTotal = 0;
-            magpieActive = magpieModeOn;
+            // Word Parkour always keeps the magpie system's plumbing active (its own
+            // automatic cycle still only runs if Magpie Mode is on - see
+            // updateOneMagpie), since a wrong-letter attempt spawns a one-off punishment
+            // magpie regardless of whether Magpie Mode itself is enabled this round.
+            magpieActive = (selectedLobbyMode === 'word') ? true : magpieModeOn;
             magpieA = createMagpieInstance();
             magpieA.timer = getNextMagpieCycleSeconds();
             magpieB = createMagpieInstance();
 
             const questHeaderEl = document.getElementById('quest-header-label');
             if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
+            const questBoxEl = document.getElementById('quest-box');
+            if (questBoxEl) questBoxEl.style.display = (selectedLobbyMode === 'word') ? 'none' : '';
             const locationBoxEl = document.getElementById('location-box');
             if (locationBoxEl) locationBoxEl.style.display = '';
+            const locationTtsZoneEl = document.getElementById('location-tts-zone');
+            if (locationTtsZoneEl) locationTtsZoneEl.style.display = 'flex';
+            const locationTextZoneEl = document.getElementById('location-text-zone');
+            if (locationTextZoneEl) locationTextZoneEl.style.maxWidth = (selectedLobbyMode === 'word') ? '220px' : '';
 
             playBackgroundMusic();
 
@@ -17356,7 +17595,7 @@
                 ? shuffle(cityBuildings.map((b, i) => ({ buildingIndex: i })))
                 : [];
 
-            const CARD_W = 60, CARD_H = 24;
+            const CARD_W = 60, CARD_H = 52;
             const CARD_LIFT = CARD_H + 21;
 
             function inBox(wx, wy, box) {
@@ -17431,7 +17670,7 @@
             ));
 
             const graphemePool = [];
-            wordParkourWords.forEach(w => { w.chunks.forEach(chunk => graphemePool.push(chunk)); });
+            wordParkourWords.forEach(w => { w.chunks.forEach(chunk => { if (!chunk.silent) graphemePool.push(chunk.text); }); });
             shuffle(graphemePool);
 
             graphemePool.forEach((grapheme, index) => {
@@ -17657,31 +17896,53 @@
         // box) for the word currently being spelled - revealed letters up to
         // however many graphemes have been correctly collected so far, in
         // order, coloured the same way the word itself would be if colour
-        // coding is on; everything beyond that stays as underscores.
+        // coding is on; everything beyond that stays as underscores. Silent
+        // chunks are pre-filled and faded from the very start, regardless of
+        // collection progress - there's nothing to "sound out" for a letter
+        // that makes no sound, so it's never shown as a blank to fill in.
         function updateWordParkourProgressDisplay() {
             const currentWord = wordParkourWords[wordParkourCurrentWordIndex];
             const locationTextEl = document.getElementById('location-text');
             locationTextEl.innerHTML = '';
             if (!currentWord) return;
+            // Every individual letter position gets the same small margin,
+            // regardless of which chunk it belongs to - a multi-letter target
+            // grapheme's underscores must never sit closer together than any
+            // other letter, or the gap itself would give away where the
+            // target grapheme is before it's even revealed.
+            const CHAR_MARGIN = '6px';
             currentWord.chunks.forEach((chunk, idx) => {
-                const span = document.createElement('span');
-                span.style.marginRight = '6px';
-                if (idx < wordParkourCurrentChunkIndex) {
+                const isSilent = chunk.silent;
+                const isRevealed = idx < wordParkourCurrentChunkIndex;
+                if (isSilent || isRevealed) {
+                    const wrapSpan = document.createElement('span');
+                    if (isSilent) wrapSpan.style.opacity = '0.35';
                     if (colourCodedEnabled) {
-                        const graphemes = getColoredGraphemes(chunk);
+                        const graphemes = getColoredGraphemes(chunk.text);
                         graphemes.forEach(g => {
                             const gSpan = document.createElement('span');
-                            gSpan.textContent = g.char.toUpperCase();
+                            gSpan.textContent = g.char;
                             gSpan.style.color = g.color;
-                            span.appendChild(gSpan);
+                            gSpan.style.marginRight = CHAR_MARGIN;
+                            wrapSpan.appendChild(gSpan);
                         });
                     } else {
-                        span.textContent = chunk.toUpperCase();
+                        for (const ch of chunk.text) {
+                            const cSpan = document.createElement('span');
+                            cSpan.textContent = ch;
+                            cSpan.style.marginRight = CHAR_MARGIN;
+                            wrapSpan.appendChild(cSpan);
+                        }
                     }
+                    locationTextEl.appendChild(wrapSpan);
                 } else {
-                    span.textContent = '_'.repeat(chunk.length);
+                    for (let i = 0; i < chunk.text.length; i++) {
+                        const uSpan = document.createElement('span');
+                        uSpan.textContent = '_';
+                        uSpan.style.marginRight = CHAR_MARGIN;
+                        locationTextEl.appendChild(uSpan);
+                    }
                 }
-                locationTextEl.appendChild(span);
             });
             fitTextToBoxDeferred(locationTextEl, 'location-text-zone');
         }
@@ -17689,13 +17950,25 @@
         // Word Parkour's equivalent of nextQuest: the word itself is never
         // shown as text (only ever spoken), and the "Where?" box becomes the
         // underscore progress display instead of a location hint.
+        // Silent chunks are pre-filled, not collected - whenever a word becomes
+        // current (a fresh word, or right after collecting a chunk), skip
+        // wordParkourCurrentChunkIndex past any silent chunk(s) immediately
+        // next, so the game only ever waits on something actually collectible.
+        function advancePastSilentChunks(word) {
+            while (wordParkourCurrentChunkIndex < word.chunks.length && word.chunks[wordParkourCurrentChunkIndex].silent) {
+                wordParkourCurrentChunkIndex++;
+            }
+        }
+
         function nextWordParkourTarget(options) {
             options = options || {};
             if (wordParkourCurrentWordIndex >= wordParkourWords.length) {
-                showCompletionScreen();
+                startWordParkourMatchingTask();
                 return;
             }
             const currentWord = wordParkourWords[wordParkourCurrentWordIndex];
+            currentTargetWord = currentWord.spelling;
+            advancePastSilentChunks(currentWord);
 
             const instructionEl = document.getElementById('instruction-text');
             instructionEl.innerHTML = '';
@@ -17719,6 +17992,107 @@
             setVoiceWarning('game-voice-warning', LANG_MAP[selectedLanguage]);
         }
 
+        let wordParkourMatchingPairs = [];
+        let wordParkourMatchingSelectedWordEl = null;
+        let wordParkourMatchingRemaining = 0;
+
+        // Once every word has been spelled, a translation-matching task runs
+        // before the completion screen - tap a word, then tap its
+        // translation, reinforcing meaning alongside spelling. If any word
+        // this round has no translation available (e.g. a manually typed
+        // word list with no preset behind it), there's nothing to match, so
+        // this falls straight through to the completion screen exactly as
+        // it always did before this feature existed.
+        function startWordParkourMatchingTask() {
+            const seen = new Set();
+            const pairs = [];
+            for (const w of wordParkourWords) {
+                const key = w.spelling.toLowerCase();
+                if (seen.has(key)) continue;
+                seen.add(key);
+                const meta = wordParkourPresetMeta[key];
+                if (!meta || !meta.translation) {
+                    showCompletionScreen();
+                    return;
+                }
+                pairs.push({ word: w.spelling, translation: meta.translation });
+            }
+            if (pairs.length === 0) {
+                showCompletionScreen();
+                return;
+            }
+
+            wordParkourMatchingPairs = pairs;
+            wordParkourMatchingSelectedWordEl = null;
+            wordParkourMatchingRemaining = pairs.length;
+
+            const wordsCol = document.getElementById('matching-words-col');
+            const translationsCol = document.getElementById('matching-translations-col');
+            wordsCol.innerHTML = '';
+            translationsCol.innerHTML = '';
+
+            // Shuffled independently - the two columns' orders are
+            // unrelated, so position alone never hints at the pairing.
+            const shuffledWords = shuffle(pairs.slice());
+            const shuffledTranslations = shuffle(pairs.slice());
+
+            shuffledWords.forEach(pair => {
+                const chip = document.createElement('div');
+                chip.className = 'matching-chip';
+                chip.textContent = pair.word;
+                chip.dataset.word = pair.word.toLowerCase();
+                chip.onclick = () => handleMatchingWordClick(chip);
+                wordsCol.appendChild(chip);
+            });
+
+            shuffledTranslations.forEach(pair => {
+                const chip = document.createElement('div');
+                chip.className = 'matching-chip';
+                chip.textContent = pair.translation;
+                chip.dataset.word = pair.word.toLowerCase();
+                chip.onclick = () => handleMatchingTranslationClick(chip);
+                translationsCol.appendChild(chip);
+            });
+
+            document.getElementById('ui-board').style.display = 'none';
+            canvas.style.display = 'none';
+            document.getElementById('game-view-shell').style.display = 'none';
+            document.getElementById('matching-screen').style.display = 'flex';
+        }
+
+        function handleMatchingWordClick(chip) {
+            if (chip.classList.contains('matching-matched')) return;
+            if (wordParkourMatchingSelectedWordEl) {
+                wordParkourMatchingSelectedWordEl.classList.remove('matching-selected');
+            }
+            wordParkourMatchingSelectedWordEl = chip;
+            chip.classList.add('matching-selected');
+        }
+
+        // Wrong pairs get an error chime and a brief red flash - no penalty
+        // of any kind, since this is purely reinforcement, not assessment.
+        // The selected word stays selected, so a wrong guess costs nothing
+        // but a moment - the student can just try again immediately.
+        function handleMatchingTranslationClick(chip) {
+            if (chip.classList.contains('matching-matched')) return;
+            if (!wordParkourMatchingSelectedWordEl) return;
+
+            if (chip.dataset.word === wordParkourMatchingSelectedWordEl.dataset.word) {
+                chip.classList.add('matching-matched');
+                wordParkourMatchingSelectedWordEl.classList.remove('matching-selected');
+                wordParkourMatchingSelectedWordEl.classList.add('matching-matched');
+                wordParkourMatchingSelectedWordEl = null;
+                wordParkourMatchingRemaining--;
+                if (wordParkourMatchingRemaining <= 0) {
+                    setTimeout(() => showCompletionScreen(), 600);
+                }
+            } else {
+                playChime(false);
+                chip.classList.add('matching-wrong-flash');
+                setTimeout(() => chip.classList.remove('matching-wrong-flash'), 400);
+            }
+        }
+
         // The ordered, shared-pool collection check: touching a grapheme card
         // only does anything if its text matches whichever grapheme comes
         // NEXT for the word currently being spelled - no card "belongs" to any
@@ -17728,23 +18102,61 @@
         function tryCollectWordParkourGrapheme(item) {
             const currentWord = wordParkourWords[wordParkourCurrentWordIndex];
             if (!currentWord) return false;
-            const neededGrapheme = currentWord.chunks[wordParkourCurrentChunkIndex];
-            if (!neededGrapheme || item.text.toLowerCase() !== neededGrapheme.toLowerCase()) return false;
+            const neededChunk = currentWord.chunks[wordParkourCurrentChunkIndex];
+            if (!neededChunk || neededChunk.silent || item.text.toLowerCase() !== neededChunk.text.toLowerCase()) return false;
 
             item.collected = true;
             score += 10;
             document.getElementById('score').innerText = score.toString().padStart(2, '0');
+            playChime(true); // the correct-pickup chime, for every correctly collected grapheme
             wordParkourCurrentChunkIndex++;
+            advancePastSilentChunks(currentWord);
             updateWordParkourProgressDisplay();
 
             if (wordParkourCurrentChunkIndex >= currentWord.chunks.length) {
                 playCharacterSound(selectedCharacter);
-                recordWordCollected(currentWord.spelling);
-                wordParkourCurrentWordIndex++;
-                wordParkourCurrentChunkIndex = 0;
-                nextWordParkourTarget({ delaySpeechMs: getCelebrationSoundDelayMs() });
+                const meta = wordParkourPresetMeta[currentWord.spelling.toLowerCase()];
+                recordWordCollected(currentWord.spelling, meta ? meta.translation : null, meta ? meta.example : null);
+                // Give the student a moment to actually see the fully-revealed
+                // spelling before moving on - wait for the character success
+                // sound to finish, then an extra half second, before advancing.
+                const pauseMs = getCharacterSoundDurationMs(selectedCharacter) + 500;
+                setTimeout(() => {
+                    wordParkourCurrentWordIndex++;
+                    wordParkourCurrentChunkIndex = 0;
+                    nextWordParkourTarget({});
+                }, pauseMs);
             }
             return true;
+        }
+
+        // How long the character's word-completion celebration sound takes to
+        // play, in milliseconds - used to time the pause before advancing to
+        // the next word so it lands right after the sound finishes.
+        function getCharacterSoundDurationMs(charId) {
+            const audio = characterSoundAudio[charId];
+            if (audio && !isNaN(audio.duration) && audio.duration > 0) {
+                return Math.ceil(audio.duration * 1000);
+            }
+            return 1000; // fallback if metadata hasn't loaded yet
+        }
+
+        // Fires once at the moment the player first touches a grapheme that
+        // ISN'T the one currently needed (not every frame they continue
+        // overlapping it - the caller only invokes this on that first frame).
+        // A sound instead of a popup, plus a one-off punishment magpie launched
+        // from a random edge - reusing magpieB (already designed to be
+        // triggered externally, e.g. by Mega Magpie Mode) rather than
+        // magpieA, whose own timer-driven cycle stays independent of this.
+        // Skipped if magpieB is already mid-cycle, to avoid interrupting it.
+        function triggerWordParkourWrongGrapheme() {
+            playChime(false);
+            if (magpieB.phase === 'idle') {
+                magpieB.hoverSide = Math.random() < 0.5 ? 'left' : 'right';
+                magpieB.hoverScreenY = 60 + Math.random() * 260;
+                magpieB.enterElapsed = 0;
+                magpieB.phase = 'entering';
+            }
         }
 
         function formatDuration(ms) {
@@ -17770,6 +18182,21 @@
             }
             return 350; // matches the short synthesized success chime
         }
+
+        // NESA syllabus outcomes shown on the results screen - Modern Languages for every
+        // language except English, where the game is instead being used to practise the
+        // English syllabus itself, so the relevant Early Stage 1 and Stage 1 (Kindergarten,
+        // Year 1, Year 2) outcome codes are shown in its place.
+        const MODERN_LANGUAGES_SYLLABUS_OUTCOMES_TEXT = 'NESA Modern Languages Syllabus outcomes MLE-UND-01, ML1-UND-01, ML2-UND-01, ML3-UND-01, ML4-UND-01, ML5-UND-01';
+        // Filtered to outcomes the game actually exercises - vocabulary exposure,
+        // phonological blending/segmenting (the grapheme-by-grapheme collection
+        // mechanic), grapheme-phoneme decoding, and spelling via phonological/
+        // orthographic/morphological patterns. Excludes oral communication (solo
+        // play, not interpersonal), print directionality, reading fluency/
+        // comprehension (no connected-text reading task here), creating written
+        // texts, handwriting, and responding to literature - none of which this
+        // game actually asks the student to do.
+        const ENGLISH_SYLLABUS_OUTCOMES_TEXT = 'NESA English Syllabus outcomes ENE-VOCAB-01, ENE-PHOAW-01, ENE-PHOKW-01, ENE-SPELL-01, EN1-VOCAB-01, EN1-PHOKW-01, EN1-SPELL-01';
 
         // Shown once every vocabulary word has been collected. Freezes gameplay and displays
         // assessment-friendly stats that a student can screenshot for their LMS.
@@ -17826,11 +18253,15 @@
 
             const codeSummaryEl = document.getElementById('results-code-summary');
             document.getElementById('results-code-words').textContent = vocabularyList.join(', ');
+            document.getElementById('results-syllabus-outcomes').textContent = (selectedLanguage === 'en')
+                ? ENGLISH_SYLLABUS_OUTCOMES_TEXT
+                : MODERN_LANGUAGES_SYLLABUS_OUTCOMES_TEXT;
             codeSummaryEl.style.display = 'block';
 
             document.getElementById('ui-board').style.display = 'none';
             canvas.style.display = 'none';
             document.getElementById('game-view-shell').style.display = 'none';
+            document.getElementById('matching-screen').style.display = 'none';
             stopAllBobotVideos();
             document.getElementById('bobot-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'flex';
@@ -19254,8 +19685,12 @@
                 const hbX = player.x, hbY = player.y, hbW = 50, hbH = 70;
                 if (hbX < cardX + shopWord.w && hbX + hbW > cardX && hbY < cardY + shopWord.h && hbY + hbH > cardY) {
                     if (selectedLobbyMode === 'word') {
-                        tryCollectWordParkourGrapheme(shopWord);
-                        // Not the grapheme currently needed - no effect at all, matching the outdoor behaviour.
+                        if (tryCollectWordParkourGrapheme(shopWord)) {
+                            shopWord.isWronglyTouched = false;
+                        } else {
+                            if (!shopWord.isWronglyTouched) triggerWordParkourWrongGrapheme();
+                            shopWord.isWronglyTouched = true;
+                        }
                     } else if (shopWord.text.toLowerCase() === currentTargetWord.toLowerCase()) {
                         playCharacterSound(selectedCharacter);
                         score += 10;
@@ -19266,6 +19701,8 @@
                     } else {
                         triggerCorrection(shopWord.text);
                     }
+                } else if (selectedLobbyMode === 'word' && shopWord.isWronglyTouched) {
+                    shopWord.isWronglyTouched = false;
                 }
             });
         }
@@ -19303,6 +19740,7 @@
 
             if (m.phase === 'idle') {
                 if (!isPrimary) return; // launched externally by the primary's cycle-start logic, not its own timer
+                if (!magpieModeOn) return; // magpieActive can be true without Magpie Mode being on (Word Parkour's punishment magpie) - don't auto-cycle in that case
                 m.timer -= dtSeconds;
                 if (m.timer <= 0) {
                     m.hoverScreenY = (megaMagpieModeOn && Math.random() < MAGPIE_MEGA_LOW_ENTRY_CHANCE)
@@ -19352,6 +19790,9 @@
                     m.swoopPeakY = player.y + 10; // head height - low enough that crawling ducks under it
                     m.swoopElapsed = 0;
                     m.hasHitPlayerThisSwoop = false;
+                    m.pastPeak = false;
+                    m.exitElapsed = 0;
+                    m.t = 0;
                     m.hoverSide = otherSide; // next cycle enters from the side this one is heading toward
                     m.phase = 'swooping';
                     playMagpieSwoopSound();
@@ -19360,23 +19801,45 @@
             }
 
             if (m.phase === 'swooping') {
-                m.swoopElapsed += dtSeconds;
-                const progress = Math.min(1, m.swoopElapsed / MAGPIE_SWOOP_DURATION);
-
-                // Horizontal motion is a steady sweep from corner to corner.
-                m.x = m.swoopStartX + (m.swoopEndX - m.swoopStartX) * progress;
-
-                // Vertical motion is a genuine parabola through three points -
-                // the start height, a dip to the player's head at whatever
-                // progress value corresponds to the magpie being horizontally
-                // above them, and back up to the end height - rather than a
-                // straight line that stops at the player. Clamped away from
-                // the very ends so the curve stays well-behaved even if the
-                // player is standing close to one of the hover corners.
+                // tPeak only depends on values fixed at swoop start, so it's the same
+                // throughout - computed once here rather than duplicated in both branches.
                 const rawSpan = m.swoopEndX - m.swoopStartX;
                 const rawPeakT = rawSpan !== 0 ? (m.swoopPeakX - m.swoopStartX) / rawSpan : 0.5;
                 const tPeak = Math.min(0.8, Math.max(0.2, rawPeakT));
-                const t = progress;
+                const baseTRate = 1 / MAGPIE_SWOOP_DURATION; // t's constant rate of advance before the peak
+
+                if (!m.pastPeak) {
+                    m.t += baseTRate * dtSeconds;
+                    if (m.t >= tPeak) {
+                        // Past the dip - the exit continues along this exact same
+                        // curve (computed below, shared with the dip) rather than
+                        // switching to a new direction, but t now advances at an
+                        // accelerating rate instead of the constant one above, so it
+                        // rushes past its old endpoint faster and faster. Starting the
+                        // acceleration from baseTRate (not from zero) keeps the
+                        // transition seamless - no sudden change of speed at the
+                        // crossover moment, only a gradual increase afterward.
+                        m.pastPeak = true;
+                        m.exitElapsed = 0;
+                        m.tRateBase = baseTRate;
+                    }
+                } else {
+                    m.exitElapsed += dtSeconds;
+                    const tRate = m.tRateBase * Math.pow(MAGPIE_EXIT_ACCEL_RATE, m.exitElapsed);
+                    m.t += tRate * dtSeconds;
+                }
+
+                // Horizontal motion is a steady sweep from corner to corner - linear
+                // in t, so it extrapolates naturally for t beyond 1 too.
+                m.x = m.swoopStartX + (m.swoopEndX - m.swoopStartX) * m.t;
+
+                // Vertical motion is a genuine parabola through three points - the
+                // start height, a dip to the player's head at tPeak, and back up to
+                // the end height - rather than a straight line that stops at the
+                // player. The same quadratic naturally keeps rising past t=1 too, so
+                // reusing it for the exit (instead of switching to a different curve)
+                // is what keeps the whole swoop looking like one continuous arc.
+                const t = m.t;
                 const y0 = m.swoopStartY, y1 = m.swoopPeakY, y2 = m.swoopEndY;
                 const L0 = ((t - tPeak) * (t - 1)) / ((0 - tPeak) * (0 - 1));
                 const L1 = ((t - 0) * (t - 1)) / ((tPeak - 0) * (tPeak - 1));
@@ -19398,7 +19861,18 @@
                     }
                 }
 
-                if (progress >= 1) {
+                // Despawn once genuinely off the visible play area (screen-space,
+                // using the CURRENT camera position each frame) instead of after a
+                // fixed duration - a magpie never visibly vanishes mid-flight just
+                // because the player moved a lot during the swoop. The safety cap
+                // guards against any edge case keeping it on-screen indefinitely.
+                const doneExiting = m.pastPeak && (m.exitElapsed >= MAGPIE_EXIT_MAX_ELAPSED || (() => {
+                    const screenX = (m.x + camX) * targetScale;
+                    const screenY = (m.y + cameraY) * targetScale;
+                    const margin = MAGPIE_ENTER_OFFSET;
+                    return screenX < -margin || screenX > canvas.width + margin || screenY < -margin || screenY > canvas.height + margin;
+                })());
+                if (doneExiting) {
                     m.phase = 'idle';
                     if (isPrimary) {
                         m.timer = getNextMagpieCycleSeconds();
@@ -19610,8 +20084,12 @@
                 // tree - only the ground itself stops her descent, following
                 // its real contour (including the sloped beach) rather than
                 // a single flat barrier, and an explicit ceiling stops her
-                // flying off the top of the world.
-                const CHER_WORLD_MIN_Y = -300;
+                // flying off the top of the world. Set with margin above
+                // BOUNDS.sky.minY (-370) - a card can legitimately be placed
+                // right at that boundary (e.g. on a cloud near the top of the
+                // sky region), and the old -300 stopped 70 units short of it,
+                // making such an item genuinely unreachable.
+                const CHER_WORLD_MIN_Y = -390;
                 if (player.y < CHER_WORLD_MIN_Y) { player.y = CHER_WORLD_MIN_Y; player.vy = 0; }
                 const cherGroundY = getGroundYAtX(player.x + 25);
                 if (player.y + 70 > cherGroundY) {
@@ -19745,12 +20223,15 @@
                     if (overlapX && overlapY) { 
                         if (selectedLobbyMode === 'word') {
                             if (tryCollectWordParkourGrapheme(word)) {
+                                word.isWronglyTouched = false;
                                 successAnims.push({ x: word.x, y: bobbingY, vy: 0, delay: 20, w: word.w, h: word.h, text: word.text, imageEl: null, imageIsPng: false });
-                                document.getElementById('quest-box').classList.add('pop-effect');
-                                setTimeout(() => document.getElementById('quest-box').classList.remove('pop-effect'), 400);
+                                document.getElementById('location-box').classList.add('pop-effect');
+                                setTimeout(() => document.getElementById('location-box').classList.remove('pop-effect'), 400);
                                 break;
+                            } else {
+                                if (!word.isWronglyTouched) triggerWordParkourWrongGrapheme();
+                                word.isWronglyTouched = true;
                             }
-                            // Not the grapheme currently needed - no effect at all, keep checking other overlapping items this frame.
                         } else if (word.text.toLowerCase() === currentTargetWord.toLowerCase()) { 
                             playCharacterSound(selectedCharacter);
                             score += 10; 
@@ -19766,6 +20247,8 @@
                             triggerCorrection(word.text); 
                             break; 
                         } 
+                    } else if (word.isWronglyTouched) {
+                        word.isWronglyTouched = false;
                     }
                 }
             }
@@ -20122,6 +20605,8 @@
             // The word card(s), for any words this shop currently holds that haven't been found yet
             getShopWords(inShopInterior).forEach((shopWord, idx) => {
                 const cardX = 300 + idx * 70, cardY = 330;
+                ctx.save();
+                if (shopWord.isWronglyTouched) ctx.globalAlpha = 0.35;
                 ctx.fillStyle = '#ffffff';
                 ctx.strokeStyle = '#1e293b';
                 ctx.lineWidth = 3;
@@ -20139,6 +20624,7 @@
                     ctx.textBaseline = 'middle';
                     ctx.fillText(textToShow, cardX + shopWord.w / 2, cardY + shopWord.h / 2 + 1.5);
                 }
+                ctx.restore();
             });
 
             // Player sprite
@@ -20497,6 +20983,8 @@
 
             renderLevelEditorImages('background');
 
+            drawBackgroundRainbow(ctx);
+
             // 1. SCENERY CLOUDS (Background)
             backgroundClouds.forEach(cl => {
                 drawCompoundCloud(ctx, cl.x, cl.y, cl.size, false, 0, 0);
@@ -20757,26 +21245,42 @@
                         }
                     } else {
                         ctx.save();
-                        ctx.font = "bold 22px 'OpenDyslexic', sans-serif";
+                        const isWordParkour = selectedLobbyMode === 'word';
+                        const fontPx = isWordParkour ? 32 : 22;
+                        ctx.font = `bold ${fontPx}px 'OpenDyslexic', sans-serif`;
+                        if (word.isWronglyTouched) ctx.globalAlpha = 0.35;
                         
                         const textToShow = word.text;
                         const cleanTextForMeasurement = textToShow.replace(/[\[\]]/g, '');
                         
                         const textWidth = ctx.measureText(cleanTextForMeasurement).width;
-                        const cardWidth = Math.max(100, textWidth + 30);
+                        const cardWidth = isWordParkour ? Math.max(140, textWidth + 60) : Math.max(100, textWidth + 30);
                         word.w = cardWidth; 
                         
                         ctx.fillStyle = '#ffffff';
-                        ctx.strokeStyle = '#1e293b';
-                        ctx.lineWidth = 3;
+                        const cornerRadius = isWordParkour ? word.h / 2 : 12; // pill/stadium shape - the closest a variable-width shape gets to circular
+                        if (isWordParkour) {
+                            const gradient = ctx.createLinearGradient(word.x, finalY, word.x + word.w, finalY + word.h);
+                            gradient.addColorStop(0, '#ee3333');
+                            gradient.addColorStop(0.2, '#ff9933');
+                            gradient.addColorStop(0.4, '#ffdd33');
+                            gradient.addColorStop(0.6, '#4caf50');
+                            gradient.addColorStop(0.8, '#3388ee');
+                            gradient.addColorStop(1, '#9933cc');
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = 5;
+                        } else {
+                            ctx.strokeStyle = '#1e293b';
+                            ctx.lineWidth = 3;
+                        }
                         
                         ctx.beginPath();
-                        ctx.roundRect(word.x, finalY, word.w, word.h, 12);
+                        ctx.roundRect(word.x, finalY, word.w, word.h, cornerRadius);
                         ctx.fill();
                         ctx.stroke();
                         
                         if (colourCodedEnabled) {
-                            drawColoredText(ctx, textToShow, word.x + word.w / 2, finalY + word.h / 2 + 1.5, "bold 22px 'OpenDyslexic', sans-serif");
+                            drawColoredText(ctx, textToShow, word.x + word.w / 2, finalY + word.h / 2 + 1.5, `bold ${fontPx}px 'OpenDyslexic', sans-serif`);
                         } else {
                             ctx.fillStyle = '#1e293b';
                             ctx.textAlign = 'center';
