@@ -4273,6 +4273,7 @@
 
         // Audio synthesis context
         let audioCtx = null;
+        let keepAliveOscillator = null; // see initAudio() - a permanent, inaudible tone that stops the context ever going idle/suspended
 
         // Language TTS locale mapping
         const LANG_MAP = {
@@ -4644,6 +4645,23 @@
         function initAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (!keepAliveOscillator) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                // Genuinely non-zero (not exactly 0) so the context always has real,
+                // changing output samples to process - some browsers' idle-suspend
+                // heuristics key off detecting actual silence in the rendered
+                // output, not just "are there active nodes", so an exact-zero gain
+                // risks being suspended anyway. -100dB is far below both the
+                // threshold of human hearing and the noise floor of any real
+                // speaker, so this is inaudible under any realistic circumstance.
+                gain.gain.value = 0.00001;
+                osc.frequency.value = 440;
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                keepAliveOscillator = osc;
             }
         }
 
@@ -13857,6 +13875,13 @@
                 updateFullScreenButtonLabels();
                 updateSinhalaVowelSignsVisibility();
                 refreshCoderColorization();
+                // This selector stays live across every landing step - including
+                // while already sitting on the Word Parkour settings screen - so
+                // the dropdown needs refreshing right here, the moment the
+                // language actually changes, not just when that screen is first
+                // entered. Safe to call unconditionally even when the settings
+                // panel isn't currently visible.
+                renderWordParkourPresetDropdown();
                 const bbsScreen = document.getElementById('bobot-bookshelf-reader-screen');
                 if (bbsScreen && bbsScreen.style.display !== 'none' && bbsCurrentBook) {
                     bbsAutoCheckFrenchColorCoding();
@@ -14912,6 +14937,13 @@
                 pictureSettings.style.display = 'block';
             } else if (mode === 'word') {
                 if (wordSettings) wordSettings.style.display = 'block';
+                // The manifest is only ever fetched once, at page load, but
+                // selectedLanguage can change afterwards without a reload
+                // (switching target language mid-session) - re-render here,
+                // every time this screen is actually about to be seen, so
+                // the dropdown always matches whatever language is current
+                // right now rather than whatever it was at load time.
+                renderWordParkourPresetDropdown();
             } else if (mode === 'kart') {
                 if (kartSettings) kartSettings.style.display = 'block';
             } else if (mode === 'potato') {
