@@ -4117,17 +4117,17 @@
           "example": "C'est ta table."
         },
         {
-          "word": "t.a.b.l.[e]",
+          "word": "t.a.b.l.{e}",
           "translation": "table",
           "example": "C'est une table."
         },
         {
-          "word": "d.a.t.[e]",
+          "word": "d.a.t.{e}",
           "translation": "date",
           "example": "C'est une date."
         },
         {
-          "word": "c.a.r.t.[e]",
+          "word": "c.a.r.t.{e}",
           "translation": "card/map",
           "example": "C'est une carte."
         }
@@ -4139,27 +4139,27 @@
       "grapheme": "a",
       "words": [
         {
-          "word": "s.a.l.a.d.[e]",
+          "word": "s.a.l.a.d.{e}",
           "translation": "salad",
           "example": "Je mange une salade."
         },
         {
-          "word": "p.a.r.a.d.[e]",
+          "word": "p.a.r.a.d.{e}",
           "translation": "parade",
           "example": "Il y a une parade."
         },
         {
-          "word": "c.r.a.v.a.t.[e]",
+          "word": "c.r.a.v.a.t.{e}",
           "translation": "tie",
           "example": "C'est une cravate."
         },
         {
-          "word": "m.a.l.a.d.[e]",
+          "word": "m.a.l.a.d.{e}",
           "translation": "sick",
           "example": "Il est malade."
         },
         {
-          "word": "c.a.p.a.b.l.[e]",
+          "word": "c.a.p.a.b.l.{e}",
           "translation": "capable",
           "example": "Il est capable."
         }
@@ -4228,17 +4228,17 @@
           "example": "Je suis ici."
         },
         {
-          "word": "l.i.[t]",
+          "word": "l.i.{t}",
           "translation": "bed",
           "example": "C'est un lit."
         },
         {
-          "word": "r.i.[z]",
+          "word": "r.i.{z}",
           "translation": "rice",
           "example": "Je mange du riz."
         },
         {
-          "word": "v.i.[e]",
+          "word": "v.i.{e}",
           "translation": "life",
           "example": "C'est la vie."
         },
@@ -4253,7 +4253,7 @@
           "example": "Ni ici, ni là."
         },
         {
-          "word": "n.i.[d]",
+          "word": "n.i.{d}",
           "translation": "nest",
           "example": "C'est un nid."
         },
@@ -4270,17 +4270,17 @@
       "grapheme": "o",
       "words": [
         {
-          "word": "d.o.[s]",
+          "word": "d.o.{s}",
           "translation": "back",
           "example": "C'est mon dos."
         },
         {
-          "word": "m.o.[t]",
+          "word": "m.o.{t}",
           "translation": "word",
           "example": "C'est un mot."
         },
         {
-          "word": "p.o.[t]",
+          "word": "p.o.{t}",
           "translation": "pot",
           "example": "C'est un pot."
         },
@@ -4290,22 +4290,22 @@
           "example": "C'est une moto."
         },
         {
-          "word": "r.o.b.o.[t]",
+          "word": "r.o.b.o.{t}",
           "translation": "robot",
           "example": "C'est un robot."
         },
         {
-          "word": "z.o.[o]",
+          "word": "z.o.{o}",
           "translation": "zoo",
           "example": "Je vois le zoo."
         },
         {
-          "word": "t.r.o.[p]",
+          "word": "t.r.o.{p}",
           "translation": "too-much",
           "example": "C'est trop."
         },
         {
-          "word": "g.r.o.[s]",
+          "word": "g.r.o.{s}",
           "translation": "big/fat",
           "example": "Il est gros."
         },
@@ -4315,12 +4315,12 @@
           "example": "C'est le sol."
         },
         {
-          "word": "p.o.r.t.[e]",
+          "word": "p.o.r.t.{e}",
           "translation": "door",
           "example": "Je vois la porte."
         },
         {
-          "word": "f.o.r.m.[e]",
+          "word": "f.o.r.m.{e}",
           "translation": "shape/form",
           "example": "C'est une forme."
         }
@@ -4337,22 +4337,22 @@
           "example": "C'est le total."
         },
         {
-          "word": "o.l.i.v.[e]",
+          "word": "o.l.i.v.{e}",
           "translation": "olive",
           "example": "Je mange une olive."
         },
         {
-          "word": "f.o.s.s.i.l.[e]",
+          "word": "f.o.s.s.i.l.{e}",
           "translation": "fossil",
           "example": "C'est un fossile."
         },
         {
-          "word": "p.i.l.o.t.[e]",
+          "word": "p.i.l.o.t.{e}",
           "translation": "pilot",
           "example": "C'est un pilote."
         },
         {
-          "word": "c.a.r.o.t.t.[e]",
+          "word": "c.a.r.o.t.t.{e}",
           "translation": "carrot",
           "example": "Je mange une carotte."
         }
@@ -4384,12 +4384,12 @@
           "example": "J'ai su la réponse."
         },
         {
-          "word": "u.n.[e]",
+          "word": "u.n.{e}",
           "translation": "a/one",
           "example": "C'est une pomme."
         },
         {
-          "word": "l.u.n.[e]",
+          "word": "l.u.n.{e}",
           "translation": "moon",
           "example": "Je vois la lune."
         },
@@ -4421,27 +4421,27 @@
       "grapheme": "u",
       "words": [
         {
-          "word": "j.u.p.[e]",
+          "word": "j.u.p.{e}",
           "translation": "skirt",
           "example": "C'est une jupe."
         },
         {
-          "word": "p.u.c.[e]",
+          "word": "p.u.c.{e}",
           "translation": "flea/chip",
           "example": "C'est une puce."
         },
         {
-          "word": "p.l.u.[s]",
+          "word": "p.l.u.{s}",
           "translation": "more",
           "example": "Je veux plus."
         },
         {
-          "word": "t.o.r.t.u.[e]",
+          "word": "t.o.r.t.u.{e}",
           "translation": "turtle",
           "example": "C'est une tortue."
         },
         {
-          "word": "f.i.g.u.r.[e]",
+          "word": "f.i.g.u.r.{e}",
           "translation": "face/figure",
           "example": "C'est sa figure."
         }
@@ -4483,22 +4483,22 @@
           "example": "C'est noir."
         },
         {
-          "word": "b.oi.[s]",
+          "word": "b.oi.{s}",
           "translation": "wood",
           "example": "C'est du bois."
         },
         {
-          "word": "t.r.oi.[s]",
+          "word": "t.r.oi.{s}",
           "translation": "three",
           "example": "Il y a trois chats."
         },
         {
-          "word": "p.oi.[s]",
+          "word": "p.oi.{s}",
           "translation": "pea",
           "example": "Je mange un pois."
         },
         {
-          "word": "v.oi.[x]",
+          "word": "v.oi.{x}",
           "translation": "voice",
           "example": "J'entends sa voix."
         }
@@ -4510,37 +4510,37 @@
       "grapheme": "oi",
       "words": [
         {
-          "word": "m.oi.[s]",
+          "word": "m.oi.{s}",
           "translation": "month",
           "example": "C'est un mois."
         },
         {
-          "word": "d.oi.[gt]",
+          "word": "d.oi.{gt}",
           "translation": "finger",
           "example": "C'est mon doigt."
         },
         {
-          "word": "b.oi.[t]",
+          "word": "b.oi.{t}",
           "translation": "drinks",
           "example": "Il boit de l'eau."
         },
         {
-          "word": "p.oi.[ds]",
+          "word": "p.oi.{ds}",
           "translation": "weight",
           "example": "C'est un poids."
         },
         {
-          "word": "f.r.oi.[d]",
+          "word": "f.r.oi.{d}",
           "translation": "cold",
           "example": "Il fait froid."
         },
         {
-          "word": "j.oi.[e]",
+          "word": "j.oi.{e}",
           "translation": "joy",
           "example": "C'est la joie."
         },
         {
-          "word": "n.oi.[x]",
+          "word": "n.oi.{x}",
           "translation": "walnut",
           "example": "Je mange une noix."
         },
@@ -4550,12 +4550,12 @@
           "example": "C'est le soir."
         },
         {
-          "word": "oi.[e]",
+          "word": "oi.{e}",
           "translation": "goose",
           "example": "Je vois une oie."
         },
         {
-          "word": "d.r.oi.t.[e]",
+          "word": "d.r.oi.t.{e}",
           "translation": "right (direction)",
           "example": "Il va à droite."
         }
@@ -4567,52 +4567,52 @@
       "grapheme": "ou",
       "words": [
         {
-          "word": "v.ou.[s]",
+          "word": "v.ou.{s}",
           "translation": "you-formal",
           "example": "Vous mangez."
         },
         {
-          "word": "n.ou.[s]",
+          "word": "n.ou.{s}",
           "translation": "we",
           "example": "Nous mangeons."
         },
         {
-          "word": "t.ou.[t]",
+          "word": "t.ou.{t}",
           "translation": "all",
           "example": "Je vois tout."
         },
         {
-          "word": "d.ou.[x]",
+          "word": "d.ou.{x}",
           "translation": "soft",
           "example": "C'est doux."
         },
         {
-          "word": "l.ou.[p]",
+          "word": "l.ou.{p}",
           "translation": "wolf",
           "example": "C'est un loup."
         },
         {
-          "word": "c.ou.[p]",
+          "word": "c.ou.{p}",
           "translation": "a-hit",
           "example": "C'est un coup."
         },
         {
-          "word": "b.ou.[t]",
+          "word": "b.ou.{t}",
           "translation": "end/tip",
           "example": "C'est le bout."
         },
         {
-          "word": "s.ou.[s]",
+          "word": "s.ou.{s}",
           "translation": "under",
           "example": "Le chat est sous la table."
         },
         {
-          "word": "r.ou.[e]",
+          "word": "r.ou.{e}",
           "translation": "wheel",
           "example": "C'est une roue."
         },
         {
-          "word": "r.ou.g.[e]",
+          "word": "r.ou.g.{e}",
           "translation": "red",
           "example": "C'est rouge."
         }
@@ -4629,12 +4629,12 @@
           "example": "Il est fou."
         },
         {
-          "word": "j.ou.[e]",
+          "word": "j.ou.{e}",
           "translation": "cheek",
           "example": "C'est sa joue."
         },
         {
-          "word": "b.ou.[e]",
+          "word": "b.ou.{e}",
           "translation": "mud",
           "example": "C'est de la boue."
         },
@@ -4649,7 +4649,7 @@
           "example": "Je vois une tour."
         },
         {
-          "word": "t.ou.r.n.[e]",
+          "word": "t.ou.r.n.{e}",
           "translation": "turns",
           "example": "Il tourne."
         },
@@ -4659,7 +4659,7 @@
           "example": "C'est un beau jour."
         },
         {
-          "word": "[h].i.b.ou",
+          "word": "{h}.i.b.ou",
           "translation": "owl",
           "example": "Je vois un hibou."
         },
@@ -4681,12 +4681,12 @@
       "grapheme": "au",
       "words": [
         {
-          "word": "[e].au",
+          "word": "{e}.au",
           "translation": "water",
           "example": "Je vois de l'eau."
         },
         {
-          "word": "j.au.n.[e]",
+          "word": "j.au.n.{e}",
           "translation": "yellow",
           "example": "C'est jaune."
         },
@@ -4696,37 +4696,37 @@
           "example": "Moi aussi."
         },
         {
-          "word": "b.[e].au",
+          "word": "b.{e}.au",
           "translation": "beautiful",
           "example": "C'est beau."
         },
         {
-          "word": "t.au.p.[e]",
+          "word": "t.au.p.{e}",
           "translation": "mole",
           "example": "C'est une taupe."
         },
         {
-          "word": "s.au.c.[e]",
+          "word": "s.au.c.{e}",
           "translation": "sauce",
           "example": "Je mange la sauce."
         },
         {
-          "word": "c.a.d.[e].au",
+          "word": "c.a.d.{e}.au",
           "translation": "gift",
           "example": "C'est un cadeau."
         },
         {
-          "word": "g.â.t.[e].au",
+          "word": "g.â.t.{e}.au",
           "translation": "cake",
           "example": "Je mange un gâteau."
         },
         {
-          "word": "s.au.t.[e]",
+          "word": "s.au.t.{e}",
           "translation": "jumps",
           "example": "Il saute."
         },
         {
-          "word": "f.au.n.[e]",
+          "word": "f.au.n.{e}",
           "translation": "wildlife",
           "example": "C'est la faune."
         }
@@ -4738,7 +4738,7 @@
       "grapheme": "au",
       "words": [
         {
-          "word": "oi.s.[e].au",
+          "word": "oi.s.{e}.au",
           "translation": "bird",
           "example": "Je vois un oiseau."
         },
@@ -4748,12 +4748,12 @@
           "example": "C'est un tuyau."
         },
         {
-          "word": "au.j.ou.r.d'.[h].u.i",
+          "word": "au.j.ou.r.d'.{h}.u.i",
           "translation": "today",
           "example": "C'est aujourd'hui."
         },
         {
-          "word": "b.[e].au.c.ou.[p]",
+          "word": "b.{e}.au.c.ou.{p}",
           "translation": "a-lot/many",
           "example": "Il mange beaucoup."
         }
@@ -4780,32 +4780,32 @@
           "example": "Quel chat?"
         },
         {
-          "word": "qu.a.r.[t]",
+          "word": "qu.a.r.{t}",
           "translation": "quarter",
           "example": "C'est un quart."
         },
         {
-          "word": "qu.i.tt.[e]",
+          "word": "qu.i.tt.{e}",
           "translation": "leaves",
           "example": "Il quitte la maison."
         },
         {
-          "word": "m.u.s.i.qu.[e]",
+          "word": "m.u.s.i.qu.{e}",
           "translation": "music",
           "example": "J'écoute la musique."
         },
         {
-          "word": "p.r.a.t.i.qu.[e]",
+          "word": "p.r.a.t.i.qu.{e}",
           "translation": "practical",
           "example": "C'est pratique."
         },
         {
-          "word": "u.n.i.qu.[e]",
+          "word": "u.n.i.qu.{e}",
           "translation": "unique",
           "example": "C'est unique."
         },
         {
-          "word": "m.a.r.qu.[e]",
+          "word": "m.a.r.qu.{e}",
           "translation": "brand",
           "example": "C'est sa marque."
         }
@@ -4827,27 +4827,27 @@
           "example": "Pourquoi pas?"
         },
         {
-          "word": "qu.a.t.o.r.z.[e]",
+          "word": "qu.a.t.o.r.z.{e}",
           "translation": "fourteen",
           "example": "Il a quatorze ans."
         },
         {
-          "word": "d.i.s.qu.[e]",
+          "word": "d.i.s.qu.{e}",
           "translation": "disk",
           "example": "C'est un disque."
         },
         {
-          "word": "qu.e.s.t.i.o.[n]",
+          "word": "qu.e.s.t.i.o.{n}",
           "translation": "question",
           "example": "C'est une question."
         },
         {
-          "word": "a.t.t.a.qu.[e]",
+          "word": "a.t.t.a.qu.{e}",
           "translation": "attack",
           "example": "C'est une attaque."
         },
         {
-          "word": "b.r.i.qu.[e]",
+          "word": "b.r.i.qu.{e}",
           "translation": "brick",
           "example": "C'est une brique."
         }
@@ -4859,12 +4859,12 @@
       "grapheme": "ch",
       "words": [
         {
-          "word": "ch.a.[t]",
+          "word": "ch.a.{t}",
           "translation": "cat",
           "example": "C'est un chat."
         },
         {
-          "word": "ch.ai.s.[e]",
+          "word": "ch.ai.s.{e}",
           "translation": "chair",
           "example": "C'est une chaise."
         },
@@ -4874,37 +4874,37 @@
           "example": "C'est un cheval."
         },
         {
-          "word": "ch.o.c.o.l.a.[t]",
+          "word": "ch.o.c.o.l.a.{t}",
           "translation": "chocolate",
           "example": "Je mange du chocolat."
         },
         {
-          "word": "r.i.ch.[e]",
+          "word": "r.i.ch.{e}",
           "translation": "rich",
           "example": "Il est riche."
         },
         {
-          "word": "v.a.ch.[e]",
+          "word": "v.a.ch.{e}",
           "translation": "cow",
           "example": "C'est une vache."
         },
         {
-          "word": "ch.a.t.o.[n]",
+          "word": "ch.a.t.o.{n}",
           "translation": "kitten",
           "example": "C'est un chaton."
         },
         {
-          "word": "m.a.r.ch.[e]",
+          "word": "m.a.r.ch.{e}",
           "translation": "walk/market",
           "example": "Il marche."
         },
         {
-          "word": "t.a.ch.[e]",
+          "word": "t.a.ch.{e}",
           "translation": "stain",
           "example": "C'est une tache."
         },
         {
-          "word": "p.o.ch.[e]",
+          "word": "p.o.ch.{e}",
           "translation": "pocket",
           "example": "C'est sa poche."
         }
@@ -4916,42 +4916,42 @@
       "grapheme": "ch",
       "words": [
         {
-          "word": "b.ou.ch.[e]",
+          "word": "b.ou.ch.{e}",
           "translation": "mouth",
           "example": "C'est sa bouche."
         },
         {
-          "word": "ch.au.[d]",
+          "word": "ch.au.{d}",
           "translation": "hot",
           "example": "Il fait chaud."
         },
         {
-          "word": "g.au.ch.[e]",
+          "word": "g.au.ch.{e}",
           "translation": "left",
           "example": "Il va à gauche."
         },
         {
-          "word": "ch.a.p.[e].au",
+          "word": "ch.a.p.{e}.au",
           "translation": "hat",
           "example": "C'est un chapeau."
         },
         {
-          "word": "ch.ou.e.t.t.[e]",
+          "word": "ch.ou.e.t.t.{e}",
           "translation": "owl/cool",
           "example": "C'est chouette."
         },
         {
-          "word": "m.ou.s.t.a.ch.[e]",
+          "word": "m.ou.s.t.a.ch.{e}",
           "translation": "mustache",
           "example": "Il a une moustache."
         },
         {
-          "word": "d.ou.ch.[e]",
+          "word": "d.ou.ch.{e}",
           "translation": "shower",
           "example": "Je vois la douche."
         },
         {
-          "word": "l.ou.ch.[e]",
+          "word": "l.ou.ch.{e}",
           "translation": "ladle/shady",
           "example": "C'est une louche."
         },
@@ -4961,12 +4961,12 @@
           "example": "C'est mon chouchou."
         },
         {
-          "word": "p.r.o.ch.[e]",
+          "word": "p.r.o.ch.{e}",
           "translation": "close/near",
           "example": "C'est proche."
         },
         {
-          "word": "ch.â.t.[e].au",
+          "word": "ch.â.t.{e}.au",
           "translation": "castle",
           "example": "C'est un château."
         }
@@ -4983,12 +4983,12 @@
           "example": "C'est l'été."
         },
         {
-          "word": "é.c.o.l.[e]",
+          "word": "é.c.o.l.{e}",
           "translation": "school",
           "example": "Je vais à l'école."
         },
         {
-          "word": "t.[h].é",
+          "word": "t.{h}.é",
           "translation": "tea",
           "example": "Je bois du thé."
         },
@@ -5008,22 +5008,22 @@
           "example": "C'est un bébé."
         },
         {
-          "word": "i.d.é.[e]",
+          "word": "i.d.é.{e}",
           "translation": "idea",
           "example": "C'est une bonne idée."
         },
         {
-          "word": "m.u.s.é.[e]",
+          "word": "m.u.s.é.{e}",
           "translation": "museum",
           "example": "Je vois le musée."
         },
         {
-          "word": "f.u.s.é.[e]",
+          "word": "f.u.s.é.{e}",
           "translation": "rocket",
           "example": "C'est une fusée."
         },
         {
-          "word": "p.ou.p.é.[e]",
+          "word": "p.ou.p.é.{e}",
           "translation": "doll",
           "example": "C'est une poupée."
         }
@@ -5035,22 +5035,22 @@
       "grapheme": "é",
       "words": [
         {
-          "word": "é.p.au.l.[e]",
+          "word": "é.p.au.l.{e}",
           "translation": "shoulder",
           "example": "C'est mon épaule."
         },
         {
-          "word": "é.qu.i.p.[e]",
+          "word": "é.qu.i.p.{e}",
           "translation": "team",
           "example": "C'est mon équipe."
         },
         {
-          "word": "é.ch.e.ll.[e]",
+          "word": "é.ch.e.ll.{e}",
           "translation": "ladder",
           "example": "C'est une échelle."
         },
         {
-          "word": "f.é.[e]",
+          "word": "f.é.{e}",
           "translation": "fairy",
           "example": "C'est une fée."
         },
@@ -5067,7 +5067,7 @@
       "grapheme": "eu",
       "words": [
         {
-          "word": "d.eu.[x]",
+          "word": "d.eu.{x}",
           "translation": "two",
           "example": "Il y a deux chats."
         },
@@ -5092,12 +5092,12 @@
           "example": "Je vois le feu."
         },
         {
-          "word": "y.eu.[x]",
+          "word": "y.eu.{x}",
           "translation": "eyes",
           "example": "Je vois ses yeux."
         },
         {
-          "word": "ch.e.v.eu.[x]",
+          "word": "ch.e.v.eu.{x}",
           "translation": "hair",
           "example": "Il a des cheveux."
         },
@@ -5139,7 +5139,7 @@
           "example": "C'est le chauffeur."
         },
         {
-          "word": "qu.eu.[e]",
+          "word": "qu.eu.{e}",
           "translation": "tail/line",
           "example": "Le chat a une queue."
         },
@@ -5156,37 +5156,37 @@
       "grapheme": "en",
       "words": [
         {
-          "word": "en.f.an.[t]",
+          "word": "en.f.an.{t}",
           "translation": "child",
           "example": "C'est un enfant."
         },
         {
-          "word": "d.en.[t]",
+          "word": "d.en.{t}",
           "translation": "tooth",
           "example": "C'est une dent."
         },
         {
-          "word": "v.en.[t]",
+          "word": "v.en.{t}",
           "translation": "wind",
           "example": "Il y a du vent."
         },
         {
-          "word": "l.en.[t]",
+          "word": "l.en.{t}",
           "translation": "slow",
           "example": "Il est lent."
         },
         {
-          "word": "a.r.g.en.[t]",
+          "word": "a.r.g.en.{t}",
           "translation": "money",
           "example": "Il a de l'argent."
         },
         {
-          "word": "d.an.[s]",
+          "word": "d.an.{s}",
           "translation": "in",
           "example": "Le chat est dans la boîte."
         },
         {
-          "word": "g.r.an.[d]",
+          "word": "g.r.an.{d}",
           "translation": "big",
           "example": "Il est grand."
         },
@@ -5196,12 +5196,12 @@
           "example": "J'ai un an."
         },
         {
-          "word": "b.an.[c]",
+          "word": "b.an.{c}",
           "translation": "bench",
           "example": "Je vois un banc."
         },
         {
-          "word": "p.en.[d]",
+          "word": "p.en.{d}",
           "translation": "hangs",
           "example": "Il pend."
         }
@@ -5219,7 +5219,7 @@
           "example": "C'est un chien."
         },
         {
-          "word": "qu.an.[d]",
+          "word": "qu.an.{d}",
           "translation": "when",
           "example": "Quand manges-tu?"
         },
@@ -5229,12 +5229,12 @@
           "example": "C'est un chanteur."
         },
         {
-          "word": "g.ou.r.m.an.[d]",
+          "word": "g.ou.r.m.an.{d}",
           "translation": "greedy",
           "example": "Il est gourmand."
         },
         {
-          "word": "é.l.é.ph.an.[t]",
+          "word": "é.l.é.ph.an.{t}",
           "translation": "elephant",
           "example": "C'est un éléphant."
         },
@@ -5249,7 +5249,7 @@
           "example": "Je vois l'océan."
         },
         {
-          "word": "ch.an.t.eu.s.[e]",
+          "word": "ch.an.t.eu.s.{e}",
           "translation": "female-singer",
           "example": "C'est une chanteuse."
         }
@@ -5346,22 +5346,22 @@
       "grapheme": "im",
       "words": [
         {
-          "word": "s.im.p.l.[e]",
+          "word": "s.im.p.l.{e}",
           "translation": "simple",
           "example": "C'est simple."
         },
         {
-          "word": "im.p.o.r.t.an.[t]",
+          "word": "im.p.o.r.t.an.{t}",
           "translation": "important",
           "example": "C'est important."
         },
         {
-          "word": "im.p.o.s.s.i.b.l.[e]",
+          "word": "im.p.o.s.s.i.b.l.{e}",
           "translation": "impossible",
           "example": "C'est impossible."
         },
         {
-          "word": "g.r.im.p.[e]",
+          "word": "g.r.im.p.{e}",
           "translation": "climbs",
           "example": "Il grimpe."
         }
@@ -5373,37 +5373,37 @@
       "grapheme": "ill",
       "words": [
         {
-          "word": "f.ill.[e]",
+          "word": "f.ill.{e}",
           "translation": "girl",
           "example": "C'est une fille."
         },
         {
-          "word": "f.a.m.ill.[e]",
+          "word": "f.a.m.ill.{e}",
           "translation": "family",
           "example": "C'est ma famille."
         },
         {
-          "word": "b.ill.e.[t]",
+          "word": "b.ill.e.{t}",
           "translation": "ticket",
           "example": "C'est un billet."
         },
         {
-          "word": "p.a.p.ill.o.[n]",
+          "word": "p.a.p.ill.o.{n}",
           "translation": "butterfly",
           "example": "Je vois un papillon."
         },
         {
-          "word": "b.ou.t.e.ill.[e]",
+          "word": "b.ou.t.e.ill.{e}",
           "translation": "bottle",
           "example": "C'est une bouteille."
         },
         {
-          "word": "f.eu.ill.[e]",
+          "word": "f.eu.ill.{e}",
           "translation": "leaf",
           "example": "Je vois une feuille."
         },
         {
-          "word": "g.r.o.s.e.ill.[e]",
+          "word": "g.r.o.s.e.ill.{e}",
           "translation": "currant",
           "example": "Je mange une groseille."
         }
@@ -5415,32 +5415,32 @@
       "grapheme": "ill",
       "words": [
         {
-          "word": "g.o.r.ill.[e]",
+          "word": "g.o.r.ill.{e}",
           "translation": "gorilla",
           "example": "C'est un gorille."
         },
         {
-          "word": "v.a.n.ill.[e]",
+          "word": "v.a.n.ill.{e}",
           "translation": "vanilla",
           "example": "Je mange de la vanille."
         },
         {
-          "word": "b.r.ou.ill.a.r.[d]",
+          "word": "b.r.ou.ill.a.r.{d}",
           "translation": "fog",
           "example": "Il y a du brouillard."
         },
         {
-          "word": "a.b.e.ill.[e]",
+          "word": "a.b.e.ill.{e}",
           "translation": "bee",
           "example": "Je vois une abeille."
         },
         {
-          "word": "ch.e.n.ill.[e]",
+          "word": "ch.e.n.ill.{e}",
           "translation": "caterpillar",
           "example": "C'est une chenille."
         },
         {
-          "word": "ch.a.t.ou.ill.[e]",
+          "word": "ch.a.t.ou.ill.{e}",
           "translation": "tickle",
           "example": "Il me chatouille."
         }
@@ -5524,7 +5524,7 @@
           "example": "J'imprime."
         },
         {
-          "word": "i.m.p.e.r.m.é.a.b.l.[e]",
+          "word": "i.m.p.e.r.m.é.a.b.l.{e}",
           "translation": "raincoat",
           "example": "C'est un imperméable."
         },
@@ -5588,7 +5588,7 @@
           "example": "J'attends."
         },
         {
-          "word": "d.e.s.[c].en.d.re",
+          "word": "d.e.s.{c}.en.d.re",
           "translation": "to-descend",
           "example": "Je descends."
         },
@@ -5640,12 +5640,12 @@
           "example": "C'est un requin."
         },
         {
-          "word": "g.r.e.n.ou.ill.[e]",
+          "word": "g.r.e.n.ou.ill.{e}",
           "translation": "frog",
           "example": "C'est une grenouille."
         },
         {
-          "word": "o.r.e.ill.[e]",
+          "word": "o.r.e.ill.{e}",
           "translation": "ear",
           "example": "C'est mon oreille."
         },
@@ -5660,7 +5660,7 @@
           "example": "Je remplis."
         },
         {
-          "word": "[h].i.s.t.oi.re",
+          "word": "{h}.i.s.t.oi.re",
           "translation": "story",
           "example": "C'est une histoire."
         }
