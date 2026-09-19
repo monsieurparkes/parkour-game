@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <script>
-    // On a phone or tablet (not a real desktop/laptop computer), the whole
-    // app gets wrapped in an iframe held at a fixed "desktop-like"
+    // On a phone or tablet (not a real desktop/laptop computer), OR on any
+    // screen/embedding context too small to show the app at its reference
+    // size (e.g. a Squarespace iframe that doesn't fill the page), the
+    // whole app gets wrapped in an iframe held at a fixed "desktop-like"
     // reference size and then scaled down as one unit to fit the actual
-    // screen - so every fixed-px font/button/spacing value throughout the
-    // app shrinks together in exact proportion, rather than staying
-    // full-size inside a much smaller viewport. Detection runs
-    // immediately (hiding the page right away so there's no flash of
-    // unscaled content before the wrap happens), but the actual wrapping
-    // itself happens later, once the page has fully loaded, using plain
-    // DOM APIs rather than document.write() - which technically works by
-    // having the browser restart parsing on a freshly-written document,
-    // but is an old, quirky mechanism to depend on. A real computer is
-    // unaffected: the check below is false for it, so the page loads and
-    // displays completely normally with nothing hidden and nothing extra
-    // run.
+    // available space - so every fixed-px font/button/spacing value
+    // throughout the app shrinks together in exact proportion, rather than
+    // staying full-size and getting clipped by game-container's
+    // overflow:hidden. Detection runs immediately (hiding the page right
+    // away so there's no flash of unscaled content before the wrap
+    // happens), but the actual wrapping itself happens later, once the
+    // page has fully loaded, using plain DOM APIs rather than
+    // document.write() - which technically works by having the browser
+    // restart parsing on a freshly-written document, but is an old, quirky
+    // mechanism to depend on. A large-enough desktop window is unaffected:
+    // the check below is false for it, so the page loads and displays
+    // completely normally with nothing hidden and nothing extra run.
     (function() {
+        window.bbFrameWrapRefW = 1280;
+        window.bbFrameWrapRefH = 720;
         function needsFrameWrap() {
             var ua = navigator.userAgent;
             if (/iPhone|iPod/.test(ua)) return true;
@@ -30,6 +34,11 @@
             // tell them apart is that only the iPad reports touch support.
             if (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1) return true;
             if (/Android/.test(ua) && !/Mobile/.test(ua)) return true; // Android tablets omit "Mobile"
+            // Not a phone/tablet, but the available space (an embedding
+            // iframe's own dimensions, from its own point of view) is
+            // smaller than the reference size the whole layout is designed
+            // around - same fix applies regardless of why the space is small.
+            if (window.innerWidth < window.bbFrameWrapRefW || window.innerHeight < window.bbFrameWrapRefH) return true;
             return false;
         }
         // bbEmbedded=1 marks this as the iframe's own copy of the page,
@@ -457,6 +466,62 @@
             opacity: 0.35;
             pointer-events: none;
         }
+        .tool-tile.selected {
+            border-color: var(--tool-accent, var(--hub-violet));
+            background: var(--tool-accent-soft, var(--hub-violet-soft));
+            box-shadow: var(--hub-shadow-md);
+        }
+        .landing-nav-btn {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: var(--hub-violet);
+            color: #ffffff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--hub-shadow-md);
+            cursor: pointer;
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 60;
+            transition: opacity 0.15s ease, background-color 0.15s ease;
+        }
+        .landing-nav-btn:active { opacity: 0.85; }
+        .landing-nav-btn.disabled { opacity: 0.35; pointer-events: none; cursor: default; }
+        .landing-nav-btn.nav-green { background: #22c55e; }
+        .landing-nav-btn.nav-flash-red { background: #dc2626 !important; }
+        #landing-nav-back { left: 24px; }
+        #landing-nav-forward { right: 24px; }
+        @media (max-width: 640px) {
+            .landing-nav-btn { width: 52px; height: 52px; }
+            #landing-nav-back { left: 10px; }
+            #landing-nav-forward { right: 10px; }
+        }
+        .userkind-btn {
+            flex: 1;
+            max-width: 280px;
+            padding: 28px 20px;
+            border-radius: var(--hub-radius-lg);
+            border: 3px solid var(--hub-line);
+            background: var(--hub-surface);
+            color: var(--hub-ink);
+            font-family: 'OpenDyslexic', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+            box-shadow: var(--hub-shadow-sm);
+        }
+        .userkind-btn:hover { transform: translateY(-2px); box-shadow: var(--hub-shadow-md); }
+        .userkind-btn.selected {
+            border-color: var(--hub-violet);
+            background: var(--hub-violet-soft);
+            box-shadow: var(--hub-shadow-md);
+        }
+
         .tool-tile {
             width: 200px;
             aspect-ratio: 1 / 1;
@@ -631,6 +696,14 @@
             flex-direction: column;
             gap: 12px;
         }
+        #ui-board { display: flex; gap: 10px; align-items: stretch; flex-shrink: 0; }
+        .ui-board-box {
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-line);
+            border-radius: var(--hub-radius-md);
+            box-shadow: var(--hub-shadow-sm);
+            padding: 10px 14px;
+        }
         .wb-tray {
             display: flex;
             flex-wrap: wrap;
@@ -723,6 +796,16 @@
             flex-direction: column;
             gap: 8px;
         }
+        /* Clear visual feedback while a TTS button's audio is actually playing -
+           a green highlight, so a student can tell at a glance whether their
+           tap registered rather than wondering if they missed the button. */
+        .tts-button.tts-playing {
+            background-color: #22c55e !important;
+        }
+        .tts-button.tts-playing svg {
+            color: #ffffff !important;
+        }
+
         .wb-text-tts-btn {
             position: absolute;
             top: -12px;
@@ -1581,7 +1664,7 @@
         #score, #kart-score-text {
             font-size: clamp(15px, 4vw, 30px) !important;
         }
-        #instruction-text, #location-text, #kart-target-text {
+        #instruction-text, #location-text, #kart-target-text, #quest-header-label, #where-title {
             font-size: clamp(15px, 4.5vw, 30px) !important;
         }
         #kart-lap-text {
@@ -1589,9 +1672,6 @@
         }
         #score-card, #quest-box, #location-box {
             padding: clamp(8px, 2vw, 24px) !important;
-        }
-        #quest-header-label {
-            font-size: clamp(9px, 2vw, 12px) !important;
         }
 
         @keyframes tts-attention-pulse {
@@ -1695,6 +1775,13 @@
         <!-- Lobby / Mode Selection Screen              -->
         <!-- ========================================== -->
         <div id="title-screen" class="dyslexic-font">
+            <button id="landing-nav-back" class="landing-nav-btn interactive" style="display:none;" title="Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button id="landing-nav-forward" class="landing-nav-btn interactive disabled" style="display:none;" title="Continue">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <div id="landing-nav-forward-msg" style="display:none; position:fixed; right:16px; top:calc(50% + 46px); transform:translateX(0); z-index:61; background:#dc2626; color:#ffffff; font-family:'OpenDyslexic', sans-serif; font-weight:800; font-size:14px; padding:6px 14px; border-radius:9999px; white-space:nowrap; box-shadow:var(--hub-shadow-sm);">Incorrect Code!</div>
             <div id="landing-flow" class="hub-font w-full h-full flex flex-col items-center justify-center overflow-y-auto py-8 px-6" style="background:var(--hub-paper);">
                 <div id="landing-flow-inner" class="w-full max-w-2xl mx-auto">
                     <div id="landing-logo-wrap" style="position:relative; width:100%; max-width:884px; margin:0 auto 24px;">
@@ -1757,7 +1844,15 @@
                     </div>
 
                     <!-- STEP 1 (merged): Language + Tool selection -->
-                    <div id="landing-step-wheel" class="landing-step">
+                    <!-- STEP 0: Who's using the hub -->
+                    <div id="landing-step-userkind" class="landing-step">
+                        <div class="flex items-center justify-center gap-4 flex-wrap" style="margin-top:12px;">
+                            <button id="userkind-kid-btn" class="userkind-btn interactive">I am a kid.</button>
+                            <button id="userkind-adult-btn" class="userkind-btn interactive">I am an adult.</button>
+                        </div>
+                    </div>
+
+                    <div id="landing-step-wheel" class="landing-step" style="display:none;">
                         <h2 class="hub-step-title">What would you like to do?</h2>
                         <div id="landing-tools-row" class="landing-tools-row">
                             <div class="tool-group">
@@ -1769,7 +1864,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tool-group">
+                            <div class="tool-group" id="teacher-tools-group">
                                 <div class="tool-group-label">Teacher Tools</div>
                                 <div class="tool-group-bubble">
                                     <div id="tool-grid-side" class="tool-grid-1x2"></div>
@@ -1798,7 +1893,7 @@
                                 <p class="text-xs mt-1" style="color:var(--hub-ink-soft);">Spell a word by collecting its graphemes in order.</p>
                             </div>
                         </div>
-                        <div class="flex justify-center gap-3 mt-6">
+                        <div class="flex justify-center gap-3 mt-6" id="submode-old-nav-row">
                             <button id="submode-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
                             <button id="submode-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
@@ -1829,7 +1924,7 @@
                     <div id="landing-step-player" class="landing-step" style="display:none;">
                         <h2 class="hub-step-title">Choose Your Player</h2>
                         <div id="player-select-grid" class="flex flex-wrap justify-center gap-5"></div>
-                        <div class="flex justify-center gap-3 mt-6">
+                        <div class="flex justify-center gap-3 mt-6" id="player-old-nav-row">
                             <button id="player-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
                             <button id="start-button" class="hub-btn-primary hub-font interactive text-lg">Launch Activity</button>
                         </div>
@@ -1975,35 +2070,42 @@
                                 </div>
                             </div>
 
-                            <div class="hub-row">
+                            <div class="hub-row" id="quest-manual-vocab-row">
                                 <label class="hub-label">Vocabulary List (separated by commas)</label>
                                 <textarea id="vocab-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="Your target vocabulary here..."></textarea>
                                 <p class="hub-hint">If you are colour coding graphemes in your text but any of your words contain an exception which shouldn't be coloured, put that grapheme between square brackets and it will be excluded from your colour coding rules.</p>
+                                <p id="vocab-empty-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Please enter at least one word before continuing.</p>
                             </div>
 
-                            <div class="hub-row grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div class="hub-checkbox-row">
+                            <div class="hub-row">
+                                <label class="hub-label mb-1">Choose Your Challenge</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="magpie-mode-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="magpie-mode-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none flex items-center gap-1" style="color:var(--hub-ink);"><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:18px; height:18px; object-fit:contain;" alt="">Magpie Mode</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="mega-magpie-mode-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="mega-magpie-mode-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none flex items-center gap-0.5" style="color:var(--hub-ink);"><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain;" alt=""><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain;" alt=""><img src="https://raw.githubusercontent.com/monsieurparkes/parkour-game/main/parkoursprites/MAGPIE.png" style="width:14px; height:14px; object-fit:contain; margin-right:2px;" alt="">Mega Magpie Mode</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Listening Only</label>
+                                    </div>
+                                    <div class="hub-checkbox-row">
+                                        <input type="checkbox" id="extra-locations-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
+                                        <label for="extra-locations-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations (buildings)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Custom Grapheme Panel inside Settings -->
+                            <div class="hub-row" id="quest-colour-coding-row">
+                                <label class="hub-label mb-3">Custom Colour Coding Rules</label>
+                                <div class="hub-checkbox-row mb-3">
                                     <input type="checkbox" id="colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
                                     <label for="colour-coded" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">colour-coded</label>
                                 </div>
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="challenge-mode" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                                    <label for="challenge-mode" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">Challenge Mode (hide text, listen only)</label>
-                                </div>
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="magpie-mode-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                                    <label for="magpie-mode-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🐦 Magpie Mode (extra challenge)</label>
-                                </div>
-                                <div class="hub-checkbox-row">
-                                    <input type="checkbox" id="extra-locations-quest" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive">
-                                    <label for="extra-locations-quest" class="text-xs font-bold uppercase tracking-wide cursor-pointer select-none" style="color:var(--hub-ink);">🏠 Extra Locations (buildings)</label>
-                                </div>
-                            </div>
-                            <p class="hub-hint mt-0 mb-0">Off by default: building doors are locked and no words spawn inside, keeping the focus on the target vocabulary itself rather than building names. Tick this to open the buildings up as extra locations.</p>
-
-                            <!-- Dynamic Custom Grapheme Panel inside Settings -->
-                            <div class="hub-row">
-                                <label class="hub-label mb-3">Custom Colour Coding Rules</label>
                                 <div id="default-grapheme-row-lobby" class="flex items-center gap-2 mb-3 interactive" style="display:none;">
                                     <span class="text-[11px] font-bold flex-1" style="color:var(--hub-ink-soft);">All other graphemes</span>
                                     <input type="color" id="default-grapheme-color-lobby" value="#b4b4b4" class="w-8 h-8 rounded-lg border border-slate-200 cursor-pointer">
@@ -2046,17 +2148,20 @@
                             </div>
 
                             <div class="hub-row">
-                                <label class="hub-label" for="picture-archive-code-input">Have a code? (optional)</label>
-                                <div class="flex items-center gap-2">
-                                    <input type="text" id="picture-archive-code-input" dir="auto" class="hub-input" placeholder="Enter code">
-                                    <button id="picture-archive-load-btn" class="hub-btn-ghost hub-font interactive" style="flex-shrink:0;">Load</button>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                                    <div>
+                                        <label for="picture-student-name-input" class="hub-label">Student Name (optional)</label>
+                                        <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                                    </div>
+                                    <div>
+                                        <label class="hub-label" for="picture-archive-code-input">Have a code? (optional)</label>
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" id="picture-archive-code-input" dir="auto" class="hub-input" placeholder="Enter code">
+                                            <button id="picture-archive-load-btn" class="hub-btn-ghost hub-font interactive" style="flex-shrink:0;">Load</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p id="picture-archive-status" class="hub-hint mt-2" style="display:none;"></p>
-                            </div>
-
-                            <div class="hub-row">
-                                <label for="picture-student-name-input" class="hub-label">Student Name (optional)</label>
-                                <input type="text" id="picture-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
                             </div>
 
                             <div class="hub-row">
@@ -2082,7 +2187,7 @@
                             </div>
 
                             <!-- Dynamic Custom Grapheme Panel inside Settings -->
-                            <div class="hub-row">
+                            <div class="hub-row" id="picture-colour-coding-row">
                                 <label class="hub-label mb-3">Custom Colour Coding Rules</label>
                                 <div class="hub-checkbox-row mb-3">
                                     <input type="checkbox" id="picture-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
@@ -2106,10 +2211,18 @@
                         <!-- Word Parkour Settings Panel -->
                         <div id="word-settings" class="hub-group hub-font text-left" style="display:none;">
                             <div class="hub-row">
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                                <label for="word-student-name-input" class="hub-label">Student Name (optional)</label>
+                                <input type="text" id="word-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                            </div>
+
+                            <div class="hub-row" id="word-dropdown-code-row">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
                                     <div>
-                                        <label for="word-student-name-input" class="hub-label">Student Name (optional)</label>
-                                        <input type="text" id="word-student-name-input" dir="auto" class="hub-input" placeholder="Enter your name...">
+                                        <label for="word-preset-select" class="hub-label">Choose a Target Grapheme (optional)</label>
+                                        <select id="word-preset-select" class="hub-input">
+                                            <option value="">-- Pick a phonics target --</option>
+                                        </select>
+                                        <p class="hub-hint">Loads 10 ready-made words for that target and colour-codes it red throughout the game.</p>
                                     </div>
                                     <div>
                                         <label for="word-code-input" class="hub-label">Have a code? (optional)</label>
@@ -2122,15 +2235,7 @@
                                 <p id="word-code-error" class="hub-hint" style="display:none; color:#dc2626; font-weight:800;">Oops! Try again!</p>
                             </div>
 
-                            <div class="hub-row">
-                                <label for="word-preset-select" class="hub-label">Choose a Target Grapheme (optional)</label>
-                                <select id="word-preset-select" class="hub-input">
-                                    <option value="">-- Pick a phonics target --</option>
-                                </select>
-                                <p class="hub-hint">Loads 10 ready-made words for that target and colour-codes it red throughout the game.</p>
-                            </div>
-
-                            <div class="hub-row">
+                            <div class="hub-row" id="word-manual-vocab-row">
                                 <label class="hub-label">Words to Spell (one per line, graphemes separated by dots)</label>
                                 <textarea id="word-input" dir="auto" class="hub-input h-24 leading-relaxed" placeholder="c.a.t&#10;sh.i.p&#10;s.i.t.s"></textarea>
                                 <p class="hub-hint">Each dot-separated chunk is one grapheme to find and collect, in order - e.g. "sh.i.p" for a word with the digraph "sh".</p>
@@ -2155,7 +2260,7 @@
                             </div>
 
                             <!-- Dynamic Custom Grapheme Panel inside Settings -->
-                            <div class="hub-row">
+                            <div class="hub-row" id="word-colour-coding-row">
                                 <label class="hub-label mb-3">Custom Colour Coding Rules</label>
                                 <div class="hub-checkbox-row mb-3">
                                     <input type="checkbox" id="word-colour-coded" class="w-5 h-5 rounded accent-[var(--hub-violet)] interactive" checked>
@@ -2176,7 +2281,7 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-3 pt-6 pb-2">
+                        <div class="flex flex-col sm:flex-direction-row justify-center items-center gap-3 pt-6 pb-2" id="settings-old-nav-row">
                             <button id="settings-return-btn" class="hub-btn-ghost hub-font interactive">Go Back</button>
                             <button id="settings-confirm-btn" class="hub-btn-primary hub-font interactive text-lg">Continue</button>
                         </div>
@@ -3304,82 +3409,88 @@
             </button>
         </div>
 
-        <div id="ui-board" class="wb-tray dyslexic-font" style="display:none;">
-            <div class="flex flex-col items-center interactive flex-shrink-0">
-                <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</div>
-                <div id="score" class="text-2xl font-black text-slate-800 leading-none">00</div>
-            </div>
-
-            <div id="ui-board-center" style="flex:1; display:flex; align-items:center; justify-content:center; gap:48px; min-width:0;">
-                <div id="quest-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0; width:100%;">
-                    <h3 id="quest-header-label" class="text-slate-400 text-xs font-bold uppercase tracking-wider">Target Objective</h3>
-                    <div class="flex items-center gap-3" style="min-width:0; width:100%; justify-content:center;">
-                        <div id="quest-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:center; overflow:hidden;">
-                            <div id="instruction-text" dir="auto" class="font-black text-blue-900 leading-tight whitespace-pre-wrap text-center" style="min-width:0; font-size:1.5rem;">...</div>
+        <div id="ui-board" class="dyslexic-font" style="display:none;">
+            <div style="flex:1; display:flex; gap:10px; min-width:0;">
+                <div id="quest-box" class="ui-board-box interactive flex items-center" style="min-width:0; flex:1 1 0; border-color:#eab308; border-width:2px; gap:10px;">
+                    <div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <h3 id="quest-header-label" class="font-black text-blue-900" style="margin:0;">I am looking for...</h3>
+                        <div id="quest-text-zone" style="min-width:0; width:100%; display:flex; justify-content:center; overflow:hidden;">
+                            <div id="instruction-text" dir="auto" class="font-black text-blue-900 leading-tight whitespace-pre-wrap text-center" style="min-width:0;">...</div>
                         </div>
-                        <div id="quest-tts-zone" style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
-                            <button id="tts-button" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Word">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                            </button>
-                            <button id="tts-button-slow" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Slowly">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
-                            </button>
-                        </div>
+                        <span id="game-voice-warning" class="hidden text-[10px] font-bold text-amber-700 bg-amber-50 border-2 border-amber-300 rounded-lg px-2 py-0.5 mt-1 interactive"></span>
                     </div>
-                    <span id="game-voice-warning" class="hidden text-[10px] font-bold text-amber-700 bg-amber-50 border-2 border-amber-300 rounded-lg px-2 py-0.5 mt-1 interactive"></span>
+                    <div style="width:2px; align-self:stretch; background:var(--hub-line); flex-shrink:0;"></div>
+                    <div id="quest-tts-zone" style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:4px;">
+                        <button id="tts-button" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;" title="Listen Word">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                        <button id="tts-button-slow" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;" title="Listen Slowly">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                        </button>
+                    </div>
                 </div>
 
-                <div id="location-box" class="interactive flex flex-col justify-center items-center gap-0" style="min-width:0; flex:1 1 0; width:100%;">
-                    <h3 id="where-title" class="text-xs font-bold uppercase tracking-wider text-slate-400">Where?</h3>
-                    <div class="flex items-center gap-3" style="min-width:0; width:100%; justify-content:center;">
-                        <div id="location-text-zone" style="min-width:0; flex:1 1 auto; display:flex; justify-content:center; overflow:hidden;">
-                            <div id="location-text" dir="auto" class="font-black leading-tight text-center tracking-wide" style="min-width:0; font-size:1.5rem;">...</div>
+                <div id="location-box" class="ui-board-box interactive flex items-center" style="min-width:0; flex:1 1 0; border-color:#dc2626; border-width:2px; gap:10px;">
+                    <div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <h3 id="where-title" class="font-black" style="color:var(--hub-ink); margin:0;">Where?</h3>
+                        <div id="location-text-zone" style="min-width:0; width:100%; display:flex; justify-content:center; overflow:hidden;">
+                            <div id="location-text" dir="auto" class="font-black leading-tight text-center tracking-wide" style="min-width:0;">...</div>
                         </div>
-                        <div id="location-tts-zone" style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
-                            <button id="tts-location-button" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Location">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </div>
+                    <div style="width:2px; align-self:stretch; background:var(--hub-line); flex-shrink:0;"></div>
+                    <div id="location-tts-zone" style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:4px;">
+                        <button id="tts-location-button" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;" title="Listen Location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-900"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                             </button>
-                            <button id="tts-location-button-slow" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:34px; height:34px; display:flex; align-items:center; justify-content:center;" title="Listen Slowly">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
+                        <button id="tts-location-button-slow" class="tts-button interactive hover:bg-slate-100 transition-all" style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;" title="Listen Slowly">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 150 149.999998" class="text-blue-900"><defs><clipPath id="e2792e3c7f"><path d="M 22.273438 26 L 128 26 L 128 116.488281 L 22.273438 116.488281 Z M 22.273438 26 " clip-rule="nonzero"/></clipPath><clipPath id="86bb8ee799"><path d="M 76 0.640625 L 98 0.640625 L 98 33 L 76 33 Z M 76 0.640625 " clip-rule="nonzero"/></clipPath><clipPath id="4b7506b20a"><path d="M 1 17 L 105 17 L 105 90.398438 L 1 90.398438 Z M 1 17 " clip-rule="nonzero"/></clipPath><clipPath id="23a73fc170"><rect x="0" width="106" y="0" height="91"/></clipPath></defs><g clip-path="url(#e2792e3c7f)"><g transform="matrix(1, 0, 0, 1, 22, 26)"><g clip-path="url(#23a73fc170)"><g clip-path="url(#86bb8ee799)"><path fill="currentColor" d="M 78.984375 31.28125 C 78.984375 19.730469 73.207031 8.175781 78.984375 2.402344 C 84.757812 -3.375 87.648438 8.175781 84.757812 8.175781 C 80.675781 8.175781 78.984375 13.953125 81.871094 22.617188 C 84.757812 31.28125 78.984375 34.164062 78.984375 31.28125 Z M 90.175781 31.28125 C 90.175781 19.730469 84.398438 8.175781 90.175781 2.402344 C 95.949219 -3.375 98.835938 8.175781 95.949219 8.175781 C 91.867188 8.175781 90.175781 13.953125 93.0625 22.617188 C 95.949219 31.28125 90.175781 34.164062 90.175781 31.28125 Z M 90.175781 31.28125 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#4b7506b20a)"><path fill="currentColor" d="M 1.015625 87.230469 C 1.015625 90.117188 3.902344 90.117188 6.789062 90.117188 L 73.207031 90.117188 C 87.648438 90.117188 94.207031 81.195312 96.308594 72.789062 C 99.199219 61.238281 90.535156 41.027344 96.308594 38.136719 C 102.085938 35.25 104.972656 35.25 104.972656 29.476562 C 104.972656 23.699219 92.066406 14.269531 84.757812 17.921875 C 73.207031 23.699219 76.769531 37.941406 78.984375 46.800781 C 81.523438 56.972656 75.765625 57.179688 64.546875 61.238281 C 50.28125 66.398438 28.96875 74.0625 24.117188 75.679688 C 15.453125 78.566406 1.015625 84.339844 1.015625 87.230469 Z M 1.015625 87.230469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="none" d="M 73.425781 58.347656 C 65.089844 61.238281 62.308594 84.339844 34.523438 84.339844 C 16.105469 84.339844 9.515625 68.515625 9.515625 52.574219 C 9.515625 36.625 24.441406 23.695312 42.859375 23.695312 C 61.273438 23.699219 76.0625 57.4375 73.425781 58.347656 Z M 73.425781 58.347656 " fill-opacity="1" fill-rule="nonzero"/><path fill="currentColor" d="M 33.027344 84.347656 C 28.097656 84.347656 23.242188 82.960938 18.902344 80.253906 C 12.59375 76.324219 8.132812 70.066406 6.347656 62.644531 C 1.925781 44.269531 12.714844 25.582031 30.398438 20.988281 C 51.746094 15.433594 73.480469 28.980469 78.820312 51.179688 C 79.5625 54.273438 77.753906 57.410156 74.78125 58.183594 C 71.8125 58.96875 68.785156 57.078125 68.035156 53.984375 C 64.183594 37.96875 48.511719 28.195312 33.09375 32.199219 C 21.363281 35.246094 14.199219 47.648438 17.132812 59.84375 C 18.195312 64.273438 20.855469 68.003906 24.621094 70.351562 C 28.390625 72.699219 32.8125 73.386719 37.070312 72.277344 C 40.191406 71.472656 42.820312 69.445312 44.476562 66.578125 C 46.128906 63.707031 46.613281 60.347656 45.828125 57.105469 C 45.28125 54.808594 43.902344 52.875 41.949219 51.65625 C 39.996094 50.441406 37.539062 49.613281 35.496094 50.660156 C 31.75 52.578125 31.75 58.355469 34.527344 61.242188 C 36.699219 63.496094 29.894531 64.316406 26.191406 61.242188 C 22.871094 58.484375 21.441406 54.046875 23.105469 49.117188 C 24.785156 44.136719 28.320312 40.621094 32.804688 39.453125 C 37.890625 38.128906 43.171875 38.945312 47.667969 41.753906 C 52.164062 44.558594 55.34375 49.015625 56.617188 54.304688 C 58.113281 60.539062 57.191406 67.007812 54.007812 72.519531 C 50.824219 78.035156 45.769531 81.925781 39.769531 83.484375 C 37.53125 84.058594 35.269531 84.347656 33.027344 84.347656 Z M 33.027344 84.347656 " fill-opacity="1" fill-rule="nonzero"/></g></g></g></svg>
                             </button>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <button class="fullscreen-toggle-btn wb-circle-btn interactive" title="Toggle fullscreen">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
-            </button>
-            <button id="controls-help-btn" class="wb-circle-btn interactive" title="Game Controls">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            </button>
-            <div class="relative interactive">
-                <button id="settings-cog-btn" class="wb-circle-btn" title="Game Settings">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <div class="ui-board-box dyslexic-font" style="width:240px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;">
+                <div class="flex flex-col items-center interactive flex-shrink-0">
+                    <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Score</div>
+                    <div id="score" class="text-2xl font-black text-slate-800 leading-none">00</div>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;">
+                    <button class="fullscreen-toggle-btn wb-circle-btn interactive" title="Toggle fullscreen">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 4 4 9 4"></polyline><polyline points="15 4 20 4 20 9"></polyline><polyline points="20 15 20 20 15 20"></polyline><polyline points="9 20 4 20 4 15"></polyline></svg>
                 </button>
-                <div id="settings-panel" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
-                    <div>
-                        <label for="music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
-                        <input type="range" id="music-volume-slider" min="0" max="100" value="25" class="w-full">
+                    <button id="controls-help-btn" class="wb-circle-btn interactive" title="Game Controls">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </button>
+                    <div class="relative interactive">
+                    <button id="settings-cog-btn" class="wb-circle-btn" title="Game Settings">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    </button>
+                    <div id="settings-panel" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl border-4 border-slate-800 shadow-[6px_6px_0px_#1e293b] p-4 space-y-4 dyslexic-font z-[100]">
+                        <div>
+                            <label for="music-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Music Volume</label>
+                            <input type="range" id="music-volume-slider" min="0" max="100" value="25" class="w-full">
+                        </div>
+                        <div>
+                            <label for="tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
+                            <input type="range" id="tts-volume-slider" min="0" max="100" value="100" class="w-full">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="fx-enabled-checkbox" checked class="w-5 h-5 rounded border-2 border-slate-800 accent-blue-900 cursor-pointer">
+                            <label for="fx-enabled-checkbox" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none">Sound FX</label>
+                        </div>
+                        <button id="settings-debug-btn" class="w-full bg-slate-800 text-white font-black text-xs uppercase py-3 rounded-xl hover:bg-black transition-all">🔒 Debug Mode</button>
                     </div>
-                    <div>
-                        <label for="tts-volume-slider" class="block text-[10px] font-bold uppercase text-slate-500 tracking-wide mb-1">Text-to-Speech Volume</label>
-                        <input type="range" id="tts-volume-slider" min="0" max="100" value="100" class="w-full">
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <input type="checkbox" id="fx-enabled-checkbox" checked class="w-5 h-5 rounded border-2 border-slate-800 accent-blue-900 cursor-pointer">
-                        <label for="fx-enabled-checkbox" class="text-xs font-bold uppercase text-slate-600 tracking-wide cursor-pointer select-none">Sound FX</label>
-                    </div>
-                    <button id="settings-debug-btn" class="w-full bg-slate-800 text-white font-black text-xs uppercase py-3 rounded-xl hover:bg-black transition-all">🔒 Debug Mode</button>
                 </div>
+                </div>
+                <button id="back-to-config" class="hub-btn-ghost interactive" style="color:#dc2626; border-color:#fecdd3; white-space:nowrap; width:100%;">
+                    Exit Game
+                </button>
             </div>
-            <button id="back-to-config" class="hub-btn-ghost interactive" style="color:#dc2626; border-color:#fecdd3;">
-                Reset Board
-            </button>
         </div>
 
+
         <div id="game-middle-row" style="display:flex; flex:1; min-height:0; gap:10px;">
-                <div id="game-canvas-wrap" style="position:relative; flex:1; min-height:0; min-width:0; border:3px solid var(--hub-line); border-radius:var(--hub-radius-lg); overflow:hidden; background:#bae6fd;">
+                <div id="game-canvas-wrap" style="position:relative; flex:1; min-height:0; min-width:0; border:3px solid #2563eb; border-radius:var(--hub-radius-lg); overflow:hidden; background:#bae6fd;">
                     <canvas id="gameCanvas"></canvas>
                     <button id="lava-fullscreen-btn" class="fullscreen-toggle-btn wb-circle-btn interactive bbs-overlay-btn" style="display:none; position:absolute; top:16px; right:16px; z-index:20; width:36px; height:36px;" title="Toggle fullscreen">⛶</button>
                     <button id="lava-back-to-settings-btn" class="wb-circle-btn interactive bbs-overlay-btn" style="display:none; position:absolute; top:16px; left:16px; z-index:20; width:36px; height:36px;" title="Back to settings">←</button>
@@ -3417,7 +3528,7 @@
                 </div>
 
                 <!-- Collected Words dock - Parkour + Kart only -->
-                <div id="collected-words-panel" class="hub-font" style="display:none; flex-shrink:0; width:190px; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-sm); padding:10px; flex-direction:column;">
+                <div id="collected-words-panel" class="hub-font" style="display:none; flex-shrink:0; width:240px; background:var(--hub-surface); border:1px solid var(--hub-line); border-radius:var(--hub-radius-lg); box-shadow:var(--hub-shadow-sm); padding:10px; flex-direction:column;">
                     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; flex-shrink:0;">
                         <strong style="font-size:12px; color:var(--hub-ink);">📚 My Words</strong>
                         <button id="collected-words-collapse-btn" class="interactive" style="border:none; background:transparent; font-size:16px; cursor:pointer; line-height:1;" title="Hide/show list">➖</button>
@@ -3590,46 +3701,52 @@
 
 
         <!-- Correction / Instruction Notification Modal -->
-        <div id="feedback-overlay" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-50 interactive backdrop-blur-sm dyslexic-font">
-            <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800">
-                <div class="text-6xl mb-4">🖍️</div>
-                <h2 id="feedback-header" class="text-xl font-black text-slate-800 mb-2">Keep Searching!</h2>
-                <p id="feedback-text" class="text-slate-600 mb-6 text-base font-bold leading-relaxed"></p>
-                <button id="close-feedback-btn" class="w-full bg-blue-900 text-white font-black py-4 rounded-2xl hover:bg-black transition-all shadow-sm">Close Whiteboard</button>
+        <div id="feedback-overlay" class="absolute inset-0 bg-slate-900/80 hidden items-center justify-center p-6 z-50 interactive backdrop-blur-sm dyslexic-font">
+            <div class="bg-white p-12 rounded-3xl max-w-2xl w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800">
+                <div class="text-8xl mb-5">🖍️</div>
+                <h2 id="feedback-header" class="text-4xl font-black text-slate-800 mb-4">Keep Searching!</h2>
+                <p id="feedback-text" class="text-slate-600 mb-8 text-2xl font-bold leading-relaxed"></p>
+                <button id="close-feedback-btn" class="w-full bg-blue-900 text-white font-black py-5 text-lg rounded-2xl hover:bg-black transition-all shadow-sm">Close Whiteboard</button>
             </div>
         </div>
 
         <!-- Assessment Results Screen: shown once every word has been collected -->
         <div id="results-screen" class="dyslexic-font">
-            <div class="bg-white p-8 rounded-3xl max-w-lg w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 space-y-4 interactive relative">
-                <img id="results-character-preview" alt="" style="display:none; position:absolute; top:14px; right:14px; width:60px; height:82px; object-fit:contain;">
-                <div class="text-6xl">🏆</div>
-                <h2 class="text-2xl font-black text-slate-800">Well Done!</h2>
-                <p id="results-modes-played" class="text-[11px] font-bold text-slate-400 -mt-2 leading-relaxed" style="display:none;"></p>
+            <div class="bg-white p-8 rounded-3xl w-full text-center shadow-[10px_10px_0px_#1e293b] border-4 border-slate-800 interactive relative" style="max-width: min(94vw, calc(85vh * 16 / 9)); max-height: 92vh; overflow-y: auto;">
+                <img id="results-character-preview" alt="" style="display:none; position:absolute; top:18px; right:18px; width:80px; height:110px; object-fit:contain;">
+                <div class="text-7xl mb-1">🏆</div>
+                <h2 class="text-4xl font-black text-slate-800">Well Done!</h2>
+                <p id="results-modes-played" class="text-sm font-bold text-slate-400 mt-1 mb-2 leading-relaxed" style="display:none;"></p>
 
-                <div id="results-code-summary" class="text-left" style="display:none;">
-                    <p class="text-sm font-bold text-slate-700">Today I checked my understanding of:</p>
-                    <p id="results-code-words" dir="auto" class="text-sm font-black text-slate-900 mt-1 mb-2 leading-relaxed"></p>
-                    <p id="results-syllabus-outcomes" class="text-[11px] text-slate-500 leading-relaxed">NESA Modern Languages Syllabus outcomes MLE-UND-01, ML1-UND-01, ML2-UND-01, ML3-UND-01, ML4-UND-01, ML5-UND-01</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-4">
+                    <div id="results-code-summary" style="display:none;">
+                        <p class="text-xl font-bold text-slate-700">Today I checked my understanding of:</p>
+                        <p id="results-code-words" dir="auto" class="text-xl font-black text-slate-900 mt-2 mb-3 leading-relaxed"></p>
+                        <p id="results-syllabus-outcomes" class="text-sm text-slate-500 leading-relaxed"></p>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-5 space-y-3 border-2 border-slate-200">
+                        <p class="text-lg font-bold text-slate-700 flex justify-between gap-2"><span>Name</span> <span id="results-name" dir="auto" class="font-black text-slate-900 text-right"></span></p>
+                        <p class="text-lg font-bold text-slate-700 flex justify-between gap-2"><span>Completed</span> <span id="results-datetime" class="font-black text-slate-900 text-right"></span></p>
+                        <p class="text-lg font-bold text-slate-700 flex justify-between gap-2"><span>Duration</span> <span id="results-duration" class="font-black text-slate-900 text-right"></span></p>
+                        <p class="text-lg font-bold text-slate-700 flex justify-between gap-2"><span>Accuracy</span> <span id="results-accuracy" class="font-black text-slate-900 text-right"></span></p>
+                        <p id="results-mistakes" class="text-lg font-bold text-slate-700"></p>
+                        <p id="results-true-score-row" class="text-lg font-bold text-slate-700 flex justify-between gap-2" style="display:none;"><span>Score (excl. Magpie deductions)</span> <span id="results-true-score" class="font-black text-slate-900 text-right"></span></p>
+                        <div id="results-goal-section" style="display:none;" class="pt-3 mt-1 border-t-2 border-slate-200">
+                            <p class="text-lg font-bold text-slate-700">My goal is to better understand:</p>
+                            <p id="results-goal-words" dir="auto" class="text-lg font-black text-slate-900 mt-1 leading-relaxed"></p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="text-left bg-slate-50 rounded-2xl p-4 space-y-2 border-2 border-slate-200">
-                    <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Name</span> <span id="results-name" dir="auto" class="font-black text-slate-900 text-right"></span></p>
-                    <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Completed</span> <span id="results-datetime" class="font-black text-slate-900 text-right"></span></p>
-                    <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Duration</span> <span id="results-duration" class="font-black text-slate-900 text-right"></span></p>
-                    <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Accuracy</span> <span id="results-accuracy" class="font-black text-slate-900 text-right"></span></p>
-                    <p class="text-sm font-bold text-slate-700 flex justify-between gap-2"><span>Mistakes learnt from</span> <span id="results-mistakes" class="font-black text-slate-900 text-right"></span></p>
-                    <p id="results-true-score-row" class="text-sm font-bold text-slate-700 flex justify-between gap-2" style="display:none;"><span>Score (excl. Magpie deductions)</span> <span id="results-true-score" class="font-black text-slate-900 text-right"></span></p>
-                </div>
-
-                <div class="text-left">
+                <div id="results-vocab-section" class="text-left mt-4" style="display:none;">
                     <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wide mb-1">Vocabulary practised</p>
                     <p id="results-vocab" dir="auto" class="text-xs text-slate-500 leading-relaxed"></p>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button id="results-try-again-btn" class="flex-1 board-btn interactive text-base">Try Again</button>
-                    <button id="results-return-btn" class="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-black text-sm uppercase px-4 py-4 rounded-2xl border-2 border-slate-800 shadow-[3px_3px_0px_#1e293b] transition-all interactive">Return to Hub</button>
+                <div class="flex flex-col sm:flex-row gap-3 pt-5">
+                    <button id="results-try-again-btn" class="flex-1 board-btn interactive text-lg">Try Again</button>
+                    <button id="results-return-btn" class="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-black text-base uppercase px-4 py-5 rounded-2xl border-2 border-slate-800 shadow-[3px_3px_0px_#1e293b] transition-all interactive">Return to Hub</button>
                 </div>
             </div>
         </div>
@@ -3889,6 +4006,7 @@
         let outdoorPlayerY = 730;
         let gameStartTime = 0;
         let mistakeCount = 0;
+        let mistakeLog = []; // one entry per mistake - the target word/answer the student was looking for at the time, used to surface their most common mistakes on the results screen
 
         // Picture Parkour: maps a lowercased word (derived from an uploaded image's filename,
         // without its extension) to the preloaded HTMLImageElement to draw in the world.
@@ -3948,7 +4066,7 @@
 
                 const wordRow = document.createElement('div');
                 wordRow.style.cssText = 'display:flex; align-items:center; gap:4px; cursor:pointer;';
-                wordRow.innerHTML = `<span style="font-size:10px;">🔊</span><span class="cw-target-text" style="font-size:12px; font-weight:800; line-height:1.2;">${colorizeSentenceText(entry.text)}</span>`;
+                wordRow.innerHTML = `<span style="font-size:10px;">🔊</span><span class="cw-target-text" style="font-size:24px; font-weight:800; line-height:1.2;">${colorizeSentenceText(entry.text)}</span>`;
                 wordRow.onclick = () => speakOneInLanguage(entry.text, selectedLanguage);
                 row.appendChild(wordRow);
 
@@ -4312,7 +4430,7 @@
             forest: { minX: -3654, maxX: -1470, minY: 200, maxY: 745 },
             city: { minX: -1160, maxX: 1188, minY: 200, maxY: 745 },
             water: { minX: 2435, maxX: 4430, minY: 885, maxY: 1040 },
-            sky: { minX: -1310, maxX: 4430, minY: -370, maxY: 310 } // extended to cover the entire region above the sea, not just above the forest/city
+            sky: { minX: -150, maxX: 3270, minY: -370, maxY: 310 } // narrowed from the full forest-to-sea span - that was wide enough that even a correctly-read "in the sky" clue didn't meaningfully narrow down where to look
         };
 
         // Precision localized date formats featuring fully integrated non-Latin numeral tags (e.g. hanidec, jpan, deva, hebr, arab)
@@ -13868,6 +13986,7 @@
             langSelect.addEventListener('change', () => {
                 if (!langSelect.value) return; // the disabled placeholder itself can't be re-selected, but guard anyway
                 selectedLanguage = langSelect.value;
+                languageWasChosen = true;
                 localStorage.setItem('polhSelectedLanguage', langSelect.value);
                 landingToolsRow.classList.remove('wb-tiles-disabled');
                 updateDateHeader();
@@ -13897,15 +14016,33 @@
                     bbsAutoCheckFrenchColorCoding();
                     bbsRenderLibraryGrid();
                 }
+                const userkindStep = document.getElementById('landing-step-userkind');
+                if (userkindStep && userkindStep.style.display !== 'none') updateLandingNav('userkind');
             });
+
+            const savedUserKind = localStorage.getItem('polhUserKind');
+            if (savedUserKind === 'kid' || savedUserKind === 'adult') {
+                userKind = savedUserKind;
+                const selectedBtn = document.getElementById(savedUserKind === 'kid' ? 'userkind-kid-btn' : 'userkind-adult-btn');
+                if (selectedBtn) selectedBtn.classList.add('selected');
+            }
 
             if (savedLanguage) {
                 langSelect.value = savedLanguage;
                 selectedLanguage = savedLanguage;
+                languageWasChosen = true;
                 landingToolsRow.classList.remove('wb-tiles-disabled');
             } else {
                 selectedLanguage = 'fr'; // sensible internal default while nothing is chosen yet - the tiles are disabled so nothing can act on this prematurely
                 landingToolsRow.classList.add('wb-tiles-disabled');
+            }
+            // Returning users who already have both saved skip straight past
+            // Landing 1 to the tool-selection screen, rather than being
+            // walked through the kid/adult choice again every visit.
+            if (savedLanguage && userKind) {
+                showLandingStep('wheel');
+            } else {
+                updateLandingNav('userkind');
             }
             updateDateHeader();
             updateDefaultGraphemeRowVisibility();
@@ -14100,6 +14237,7 @@
                 } else {
                     statusEl.style.display = 'none';
                 }
+                updateSettingsForwardButtonState();
             });
 
             // Loads a teacher's own archive folder from GitHub by code -
@@ -14267,12 +14405,41 @@
                 showLandingStep('settings');
             };
             document.getElementById('kart-submode-return-btn').onclick = () => showLandingStep('wheel');
+            document.getElementById('userkind-kid-btn').onclick = () => {
+                userKind = 'kid';
+                localStorage.setItem('polhUserKind', 'kid');
+                document.getElementById('userkind-kid-btn').classList.add('selected');
+                document.getElementById('userkind-adult-btn').classList.remove('selected');
+                updateLandingNav('userkind');
+            };
+            document.getElementById('userkind-adult-btn').onclick = () => {
+                userKind = 'adult';
+                localStorage.setItem('polhUserKind', 'adult');
+                document.getElementById('userkind-adult-btn').classList.add('selected');
+                document.getElementById('userkind-kid-btn').classList.remove('selected');
+                updateLandingNav('userkind');
+            };
+            ['vocab-code-input', 'word-code-input', 'picture-archive-code-input'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('input', updateSettingsForwardButtonState);
+            });
+            const wordPresetSelectEl = document.getElementById('word-preset-select');
+            if (wordPresetSelectEl) wordPresetSelectEl.addEventListener('change', updateSettingsForwardButtonState);
             document.getElementById('settings-confirm-btn').onclick = () => {
                 if (selectedLobbyMode === 'kart' || selectedLobbyMode === 'bobot') {
                     launchSelectedActivity();
-                } else {
-                    showLandingStep('player');
+                    return;
                 }
+                if (selectedLobbyMode === 'quest') {
+                    const hasWords = document.getElementById('vocab-input').value.split(/[,\n]/).some(w => w.trim().length > 0);
+                    const emptyError = document.getElementById('vocab-empty-error');
+                    if (!hasWords) {
+                        emptyError.style.display = 'block';
+                        return;
+                    }
+                    emptyError.style.display = 'none';
+                }
+                showLandingStep('player');
             };
             document.getElementById('kart-vocab-code-go-btn').onclick = () => {
                 handleVocabCodeSubmit('kart-vocab-code-input', 'kart-vocab-code-error', 'kart-vocab-input', launchSelectedActivity);
@@ -14310,6 +14477,12 @@
             document.getElementById('mega-magpie-mode-picture').addEventListener('change', (e) => {
                 if (e.target.checked) document.getElementById('magpie-mode-picture').checked = false;
             });
+            document.getElementById('magpie-mode-quest').addEventListener('change', (e) => {
+                if (e.target.checked) document.getElementById('mega-magpie-mode-quest').checked = false;
+            });
+            document.getElementById('mega-magpie-mode-quest').addEventListener('change', (e) => {
+                if (e.target.checked) document.getElementById('magpie-mode-quest').checked = false;
+            });
             document.getElementById('player-return-btn').onclick = () => {
                 showLandingStep(selectedLobbyMode === 'lava' ? 'wheel' : 'settings');
             };
@@ -14330,8 +14503,6 @@
                 }
             };
 
-            showLandingStep('wheel');
-
             ['default-grapheme-color-lobby', 'default-grapheme-color-workspace', 'default-grapheme-color-picture', 'default-grapheme-color-bbs', 'default-grapheme-color-ts', 'default-grapheme-color-lava', 'default-grapheme-color-syntaxscramble', 'default-grapheme-color-word'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('input', (e) => setDefaultGraphemeColor(e.target.value));
@@ -14342,33 +14513,45 @@
                 document.getElementById('feedback-overlay').classList.add('hidden');
             };
             document.getElementById('close-feedback-btn').onclick = closeFeedbackOverlay;
+            // Clear visual feedback while a TTS button's own audio is actually
+            // playing - the button turns green until playback truly finishes
+            // (or errors), so a student can tell at a glance whether their tap
+            // registered rather than wondering if they missed the button.
+            window.speakWithButtonFeedback = function(btnId, text, slow) {
+                const btn = document.getElementById(btnId);
+                btn.classList.add('tts-playing');
+                const onEnd = () => btn.classList.remove('tts-playing');
+                if (slow) speakWordSlow(text, onEnd);
+                else speakWord(text, undefined, onEnd);
+            };
+
             document.getElementById('tts-button').onclick = () => {
-                if (currentTargetWord) speakWord(currentTargetWord);
+                if (currentTargetWord) speakWithButtonFeedback('tts-button', currentTargetWord, false);
             };
             document.getElementById('kart-tts-button').onclick = () => {
-                if (kartCurrentTargetWord) speakWord(kartCurrentTargetWord);
+                if (kartCurrentTargetWord) speakWithButtonFeedback('kart-tts-button', kartCurrentTargetWord, false);
             };
             document.getElementById('tts-location-button').onclick = () => {
                 if (selectedLobbyMode === 'word') {
-                    if (currentTargetWord) speakWord(currentTargetWord);
+                    if (currentTargetWord) speakWithButtonFeedback('tts-location-button', currentTargetWord, false);
                     return;
                 }
                 const phrase = getCurrentLocationSpeechPhrase();
-                if (phrase) speakWord(phrase);
+                if (phrase) speakWithButtonFeedback('tts-location-button', phrase, false);
             };
             document.getElementById('tts-button-slow').onclick = () => {
-                if (currentTargetWord) speakWordSlow(currentTargetWord);
+                if (currentTargetWord) speakWithButtonFeedback('tts-button-slow', currentTargetWord, true);
             };
             document.getElementById('tts-location-button-slow').onclick = () => {
                 if (selectedLobbyMode === 'word') {
-                    if (currentTargetWord) speakWordSlow(currentTargetWord);
+                    if (currentTargetWord) speakWithButtonFeedback('tts-location-button-slow', currentTargetWord, true);
                     return;
                 }
                 const phrase = getCurrentLocationSpeechPhrase();
-                if (phrase) speakWordSlow(phrase);
+                if (phrase) speakWithButtonFeedback('tts-location-button-slow', phrase, true);
             };
             document.getElementById('kart-tts-button-slow').onclick = () => {
-                if (kartCurrentTargetWord) speakWordSlow(kartCurrentTargetWord);
+                if (kartCurrentTargetWord) speakWithButtonFeedback('kart-tts-button-slow', kartCurrentTargetWord, true);
             };
             const ttsDateBtnSlow = document.getElementById('tts-date-btn-slow');
             if (ttsDateBtnSlow) ttsDateBtnSlow.onclick = () => {
@@ -14976,6 +15159,9 @@
             { id: 'syntaxscramble', label: 'Syntax Scramble', icon: '🥚', accent: '--hub-rose', accentSoft: '--hub-rose-soft', desc: 'Fill word-class boxes with vocabulary, then scramble to build a new sentence each time.' }
         ];
         let pendingParkourSubmode = 'picture'; // defaults to Picture Parkour, per design
+        let userKind = null; // 'kid' | 'adult' | null - who's using the hub, chosen on Landing 1
+        let languageWasChosen = false; // separate from selectedLanguage, which is given a default value even before a real choice is made
+        let pendingToolSelection = null; // the tile highlighted (but not yet confirmed via the forward nav button) on Landing 2
         let pendingKartSubmode = 'picture'; // defaults to Picture Parkour Kart, per design
 
         const HUB_CHARACTERS = [
@@ -15003,6 +15189,7 @@
                 'colour-coded': true,
                 'challenge-mode': false,
                 'magpie-mode-quest': false,
+                'mega-magpie-mode-quest': false,
                 'extra-locations-quest': false,
                 'magpie-mode-picture': false,
                 'mega-magpie-mode-picture': false,
@@ -15024,8 +15211,213 @@
             });
         }
 
+        // Kid mode only: clears every vocab-entry field across all three
+        // Parkour settings panels, so backing up from character-select to
+        // fix a mistyped code starts from a clean slate rather than leaving
+        // a stale, already-validated code's vocabulary sitting there.
+        function resetKidVocabEntry() {
+            ['vocab-code-input', 'word-code-input', 'picture-archive-code-input'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            ['vocab-input', 'word-input'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            const wordPresetSelectEl = document.getElementById('word-preset-select');
+            if (wordPresetSelectEl) wordPresetSelectEl.value = '';
+            ['vocab-code-error', 'word-code-error', 'picture-archive-status'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+        }
+
+        function updateLandingNav(step) {
+            const backBtn = document.getElementById('landing-nav-back');
+            const forwardBtn = document.getElementById('landing-nav-forward');
+            if (!backBtn || !forwardBtn) return;
+            const isParkourSubmode = selectedLobbyMode === 'quest' || selectedLobbyMode === 'picture' || selectedLobbyMode === 'word';
+
+            // The persistent nav fully replaces the old Go Back/Continue/
+            // Launch Activity buttons throughout the Parkour flow - hidden
+            // there, but kept for other tools (Kart, Bobot, Lava) that still
+            // share these same steps and haven't been given the new nav.
+            const submodeOldNav = document.getElementById('submode-old-nav-row');
+            if (submodeOldNav) submodeOldNav.style.display = 'none';
+            const settingsOldNav = document.getElementById('settings-old-nav-row');
+            if (settingsOldNav) settingsOldNav.style.display = (step === 'settings' && !isParkourSubmode) ? '' : 'none';
+            const playerOldNav = document.getElementById('player-old-nav-row');
+            if (playerOldNav) playerOldNav.style.display = (step === 'player' && !isParkourSubmode) ? '' : 'none';
+
+            if (step === 'userkind') {
+                backBtn.style.display = 'none';
+                forwardBtn.style.display = 'flex';
+                forwardBtn.classList.remove('nav-green');
+                forwardBtn.classList.toggle('disabled', !(languageWasChosen && userKind));
+                forwardBtn.onclick = () => {
+                    if (!(languageWasChosen && userKind)) return;
+                    showLandingStep('wheel');
+                };
+            } else if (step === 'wheel') {
+                backBtn.style.display = 'flex';
+                backBtn.onclick = () => showLandingStep('userkind');
+                forwardBtn.style.display = 'flex';
+                forwardBtn.classList.remove('nav-green');
+                forwardBtn.classList.toggle('disabled', !pendingToolSelection);
+                forwardBtn.onclick = () => {
+                    if (!pendingToolSelection) return;
+                    selectTool(pendingToolSelection);
+                };
+            } else if (step === 'submode') {
+                backBtn.style.display = 'flex';
+                backBtn.onclick = () => showLandingStep('wheel');
+                forwardBtn.style.display = 'flex';
+                forwardBtn.classList.remove('nav-green', 'disabled'); // a submode is always pre-highlighted by default
+                forwardBtn.onclick = () => {
+                    selectMode(pendingParkourSubmode);
+                    showLandingStep('settings');
+                };
+            } else if (step === 'settings' && isParkourSubmode) {
+                backBtn.style.display = 'flex';
+                backBtn.onclick = () => showLandingStep('submode');
+                forwardBtn.style.display = 'flex';
+                forwardBtn.classList.remove('nav-green');
+                applyKidModeVisibility();
+                updateSettingsForwardButtonState();
+                forwardBtn.onclick = () => attemptSettingsAdvance();
+            } else if (step === 'player' && isParkourSubmode) {
+                backBtn.style.display = 'flex';
+                backBtn.onclick = () => {
+                    if (userKind === 'kid') resetKidVocabEntry();
+                    showLandingStep('settings');
+                };
+                forwardBtn.style.display = 'flex';
+                forwardBtn.classList.add('nav-green');
+                forwardBtn.classList.toggle('disabled', !characterWasChosen);
+                forwardBtn.onclick = () => {
+                    if (!characterWasChosen) return;
+                    launchSelectedActivity();
+                };
+            } else {
+                // Every other step (and every other tool) keeps its own existing buttons.
+                backBtn.style.display = 'none';
+                forwardBtn.style.display = 'none';
+            }
+        }
+
+        // Shows/hides the kid-only-simplified sections of each Parkour
+        // settings panel: manual vocabulary entry and colour-coding rules
+        // are hidden entirely for kids, along with the "Go"/"Load" buttons
+        // next to a vocab code box, since the forward nav button now
+        // validates a code itself rather than needing a separate button.
+        function applyKidModeVisibility() {
+            const isKid = userKind === 'kid';
+            ['quest-manual-vocab-row', 'quest-colour-coding-row',
+             'picture-colour-coding-row',
+             'word-manual-vocab-row', 'word-colour-coding-row'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = isKid ? 'none' : '';
+            });
+            ['vocab-code-go-btn', 'word-code-go-btn', 'picture-archive-load-btn'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = isKid ? 'none' : '';
+            });
+        }
+
+        // Re-evaluates whether the forward nav button should be enabled on
+        // the settings step - kids need something entered (a code, or for
+        // Word Parkour a chosen preset) before it unlocks; adults keep the
+        // old Continue button's always-enabled behaviour, since validation
+        // there (e.g. an empty vocabulary list) happens on click instead.
+        function updateSettingsForwardButtonState() {
+            const forwardBtn = document.getElementById('landing-nav-forward');
+            if (!forwardBtn) return;
+            const settingsStep = document.getElementById('landing-step-settings');
+            if (!settingsStep || settingsStep.style.display === 'none') return;
+            if (!(selectedLobbyMode === 'quest' || selectedLobbyMode === 'picture' || selectedLobbyMode === 'word')) return;
+
+            let enabled = true;
+            if (userKind === 'kid') {
+                if (selectedLobbyMode === 'quest') {
+                    enabled = document.getElementById('vocab-code-input').value.trim().length > 0;
+                } else if (selectedLobbyMode === 'picture') {
+                    enabled = document.getElementById('picture-archive-code-input').value.trim().length > 0
+                        || presetSelectedFiles.length > 0
+                        || pictureFileNames.length > 0;
+                } else {
+                    enabled = document.getElementById('word-code-input').value.trim().length > 0
+                        || document.getElementById('word-preset-select').value !== '';
+                }
+            }
+            forwardBtn.classList.toggle('disabled', !enabled);
+        }
+
+        function flashForwardButtonIncorrect() {
+            playChime(false);
+            const forwardBtn = document.getElementById('landing-nav-forward');
+            const msg = document.getElementById('landing-nav-forward-msg');
+            forwardBtn.classList.add('nav-flash-red');
+            msg.style.display = 'block';
+            setTimeout(() => {
+                forwardBtn.classList.remove('nav-flash-red');
+                msg.style.display = 'none';
+            }, 1400);
+        }
+
+        // Kid mode: the forward nav button both validates a vocab code and
+        // advances on success, rather than needing the separate "Go" button
+        // a student could otherwise skip past.
+        async function attemptKidVocabCode(codeInputId, errorId, vocabInputId) {
+            const errorEl = document.getElementById(errorId);
+            await handleVocabCodeSubmit(codeInputId, errorId, vocabInputId, () => showLandingStep('player'));
+            if (errorEl.style.display === 'block') flashForwardButtonIncorrect();
+        }
+
+        async function attemptKidPictureCode() {
+            const statusEl = document.getElementById('picture-archive-status');
+            const loadBtnEl = document.getElementById('picture-archive-load-btn');
+            if (loadBtnEl && loadBtnEl.onclick) await loadBtnEl.onclick();
+            if (statusEl.textContent && statusEl.textContent.startsWith('✓')) {
+                showLandingStep('player');
+            } else {
+                flashForwardButtonIncorrect();
+            }
+        }
+
+        async function attemptSettingsAdvance() {
+            const forwardBtn = document.getElementById('landing-nav-forward');
+            if (forwardBtn.classList.contains('disabled')) return;
+
+            if (userKind !== 'kid') {
+                // Adults: identical to the existing Continue button's own logic.
+                const confirmBtn = document.getElementById('settings-confirm-btn');
+                if (confirmBtn && confirmBtn.onclick) confirmBtn.onclick();
+                return;
+            }
+
+            if (selectedLobbyMode === 'quest') {
+                await attemptKidVocabCode('vocab-code-input', 'vocab-code-error', 'vocab-input');
+            } else if (selectedLobbyMode === 'word') {
+                const code = document.getElementById('word-code-input').value.trim();
+                const dropdownChosen = document.getElementById('word-preset-select').value !== '';
+                if (code) {
+                    await attemptKidVocabCode('word-code-input', 'word-code-error', 'word-input');
+                } else if (dropdownChosen) {
+                    showLandingStep('player');
+                }
+            } else if (selectedLobbyMode === 'picture') {
+                const code = document.getElementById('picture-archive-code-input').value.trim();
+                if (code) {
+                    await attemptKidPictureCode();
+                } else if (presetSelectedFiles.length > 0 || pictureFileNames.length > 0) {
+                    showLandingStep('player');
+                }
+            }
+        }
+
+
         function showLandingStep(step) {
-            ['wheel', 'submode', 'kart-submode', 'player', 'settings', 'lava-settings'].forEach(s => {
+            ['userkind', 'wheel', 'submode', 'kart-submode', 'player', 'settings', 'lava-settings'].forEach(s => {
                 const el = document.getElementById('landing-step-' + s);
                 if (el) el.style.display = (s === step) ? '' : 'none';
             });
@@ -15033,6 +15425,7 @@
             if (innerWrapper) innerWrapper.classList.toggle('landing-wide', step === 'settings' || step === 'player');
             if (step === 'wheel') {
                 resetModeSelections();
+                pendingToolSelection = null;
                 renderToolGrid();
             }
             if (step === 'player') {
@@ -15054,6 +15447,7 @@
                 clearInterval(playerIdleAnimTimer);
                 playerIdleAnimTimer = null;
             }
+            updateLandingNav(step);
         }
 
         function playTileClickSound() {
@@ -15077,15 +15471,19 @@
         function wbBuildToolTile(tool) {
             const tile = document.createElement('div');
             tile.className = 'tool-tile hub-font';
+            tile.dataset.toolId = tool.id;
             tile.style.setProperty('--tool-accent', `var(${tool.accent})`);
             tile.style.setProperty('--tool-accent-soft', `var(${tool.accentSoft})`);
             const iconHtml = tool.image
                 ? `<img src="${tool.image}" alt="${tool.label}" class="tool-icon-img">`
                 : `<div class="tool-icon">${tool.icon}</div>`;
             tile.innerHTML = `${iconHtml}<div class="tool-label">${tool.label}</div><div class="tool-desc">${tool.desc}</div>`;
+            tile.classList.toggle('selected', pendingToolSelection === tool.id);
             tile.onclick = () => {
                 playTileClickSound();
-                selectTool(tool.id);
+                pendingToolSelection = tool.id;
+                document.querySelectorAll('.tool-tile').forEach(t => t.classList.toggle('selected', t.dataset.toolId === tool.id));
+                updateLandingNav('wheel');
             };
             return tile;
         }
@@ -15094,13 +15492,22 @@
             const row1 = document.getElementById('tool-grid-main-row1');
             const row2 = document.getElementById('tool-grid-main-row2');
             const sideGrid = document.getElementById('tool-grid-side');
+            const teacherToolsGroup = document.getElementById('teacher-tools-group');
             if (!row1 || !row2 || !sideGrid) return;
             row1.innerHTML = '';
             row2.innerHTML = '';
             sideGrid.innerHTML = '';
-            HUB_TOOLS.slice(0, 3).forEach(tool => row1.appendChild(wbBuildToolTile(tool)));
-            HUB_TOOLS.slice(3, 6).forEach(tool => row2.appendChild(wbBuildToolTile(tool)));
-            HUB_TOOLS.slice(6).forEach(tool => sideGrid.appendChild(wbBuildToolTile(tool)));
+            // Potato Parkour and Parkour Kart are hidden for now - due to be
+            // replaced by a different game - while the rest of the Learner
+            // Tools set stays as-is.
+            const learnerTools = HUB_TOOLS.slice(0, 6).filter(t => t.id !== 'potato' && t.id !== 'kart');
+            const half = Math.ceil(learnerTools.length / 2);
+            learnerTools.slice(0, half).forEach(tool => row1.appendChild(wbBuildToolTile(tool)));
+            learnerTools.slice(half).forEach(tool => row2.appendChild(wbBuildToolTile(tool)));
+            if (teacherToolsGroup) teacherToolsGroup.style.display = (userKind === 'adult') ? '' : 'none';
+            if (userKind === 'adult') {
+                HUB_TOOLS.slice(6).forEach(tool => sideGrid.appendChild(wbBuildToolTile(tool)));
+            }
         }
 
         function selectTool(toolId) {
@@ -15138,6 +15545,15 @@
             document.getElementById('submode-picture-card').classList.toggle('selected', mode === 'picture');
             document.getElementById('submode-sentence-card').classList.toggle('selected', mode === 'quest');
             document.getElementById('submode-word-card').classList.toggle('selected', mode === 'word');
+            // A player may switch between Picture/Sentence/Word without ever
+            // going back to the main wheel, so this is the actual point where
+            // "potentially a different mode" is detected - reset every
+            // mode-specific toggle, plus any custom colour-coding rules left
+            // over from a previous mode (e.g. Word Parkour's target grapheme
+            // rule), so nothing bleeds into whichever mode is being entered now.
+            resetModeSelections();
+            customGraphemes = [{ text: '', color: '#ef4444' }];
+            syncCustomGraphemeArrays();
         }
 
         function chooseKartSubmode(mode) {
@@ -15183,10 +15599,15 @@
 
         function updateStartButtonEnabled() {
             const btn = document.getElementById('start-button');
-            if (!btn) return;
-            btn.disabled = !characterWasChosen;
-            btn.classList.toggle('opacity-40', !characterWasChosen);
-            btn.classList.toggle('cursor-not-allowed', !characterWasChosen);
+            if (btn) {
+                btn.disabled = !characterWasChosen;
+                btn.classList.toggle('opacity-40', !characterWasChosen);
+                btn.classList.toggle('cursor-not-allowed', !characterWasChosen);
+            }
+            const forwardBtn = document.getElementById('landing-nav-forward');
+            if (forwardBtn && forwardBtn.classList.contains('nav-green')) {
+                forwardBtn.classList.toggle('disabled', !characterWasChosen);
+            }
         }
 
         function startPlayerIdleAnimation() {
@@ -15242,6 +15663,43 @@
             'kart-vocab-input': 'kart-challenge-mode'
         };
 
+        // Word Parkour vocab codes can optionally carry a translation and/or
+        // example sentence per word, using a pipe-delimited extension of the
+        // plain word-list format: "word|translation|example". Both extra
+        // fields are optional - a code with no pipes anywhere behaves
+        // exactly as it always has (plain words, no matching task at the
+        // end). Splits on newline only, not comma, since an example
+        // sentence can itself contain a comma - a pipe-free line is passed
+        // through completely unchanged, so it may still use the existing
+        // comma-separated-words-on-one-line shorthand exactly as before;
+        // the one-word-per-line rule only applies to a line that actually
+        // uses a pipe.
+        function extractWordParkourVocabMeta(text) {
+            const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            const cleanLines = [];
+            const meta = {};
+            lines.forEach(line => {
+                if (!line.includes('|')) {
+                    cleanLines.push(line);
+                    return;
+                }
+                const parts = line.split('|').map(p => p.trim());
+                const chunkedWord = parts[0];
+                const translation = parts[1] || null;
+                const example = parts[2] || null;
+                cleanLines.push(chunkedWord);
+                if (translation || example) {
+                    const spelling = chunkedWord.split('.').map(c => {
+                        c = c.trim();
+                        const unwrapped = (c.startsWith('{') && c.endsWith('}')) ? c.slice(1, -1) : c;
+                        return unwrapped.replace(/[\[\]]/g, '');
+                    }).join('');
+                    meta[spelling.toLowerCase()] = { translation, example };
+                }
+            });
+            return { cleanText: cleanLines.join('\n'), meta };
+        }
+
         async function handleVocabCodeSubmit(codeInputId, errorId, vocabInputId, onSuccess, subfolder) {
             const codeInput = document.getElementById(codeInputId);
             const errorEl = document.getElementById(errorId);
@@ -15253,7 +15711,17 @@
                 if (!response.ok) throw new Error('code not found');
                 const text = (await response.text()).trim();
                 if (!text) throw new Error('empty file');
-                document.getElementById(vocabInputId).value = text;
+                let displayText = text;
+                if (vocabInputId === 'word-input') {
+                    // Reset fresh from this code, clearing any stale meta left
+                    // over from a previously selected preset - the code's own
+                    // content (or lack of pipes) is the sole source of truth
+                    // for this round's translations from here on.
+                    const extracted = extractWordParkourVocabMeta(text);
+                    displayText = extracted.cleanText;
+                    wordParkourPresetMeta = extracted.meta;
+                }
+                document.getElementById(vocabInputId).value = displayText;
                 errorEl.style.display = 'none';
                 if (vocabInputId === 'vocab-input' || vocabInputId === 'kart-vocab-input') {
                     vocabCodeWasUsed = true;
@@ -15431,7 +15899,7 @@
         // browser voice for just that call, while a later button press
         // (once things have settled) reaches the cloud service fine. One
         // retry after a failed attempt makes that far less likely.
-        async function speakWordViaCloudTTS(text, config, rate) {
+        async function speakWordViaCloudTTS(text, config, rate, onEnd) {
             const cleanText = prepareTextForSpeech(text);
             const cacheKey = config.languageCode + '::' + (rate || 'default') + '::' + cleanText;
             try {
@@ -15448,6 +15916,10 @@
                 const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
                 audio.volume = ttsVolume;
                 currentCloudTtsAudio = audio;
+                if (onEnd) {
+                    audio.addEventListener('ended', onEnd, { once: true });
+                    audio.addEventListener('error', onEnd, { once: true });
+                }
                 await audio.play();
                 return true;
             } catch (e) {
@@ -15468,16 +15940,16 @@
             return /Edg\//.test(navigator.userAgent);
         }
 
-        function speakWord(text, rate) {
+        function speakWord(text, rate, onEnd) {
             const cloudConfig = CLOUD_TTS_CONFIG[selectedLanguage];
             const preferCloud = cloudConfig && cloudConfig.proxyUrl;
             if (preferCloud) {
-                speakWordViaCloudTTS(text, cloudConfig, rate).then(succeeded => {
-                    if (!succeeded) speakWordBrowser(text, rate);
+                speakWordViaCloudTTS(text, cloudConfig, rate, onEnd).then(succeeded => {
+                    if (!succeeded) speakWordBrowser(text, rate, onEnd);
                 });
                 return;
             }
-            speakWordBrowser(text, rate);
+            speakWordBrowser(text, rate, onEnd);
         }
 
         // Always speaks at a slow, learner-friendly pace regardless of how fast
@@ -15506,8 +15978,8 @@
             return phrase;
         }
 
-        function speakWordSlow(text) {
-            speakWord(text, 0.6);
+        function speakWordSlow(text, onEnd) {
+            speakWord(text, 0.6, onEnd);
         }
 
         // Speaks text in a SPECIFIC language, regardless of what selectedLanguage
@@ -15576,7 +16048,7 @@
             }
         }
 
-        async function speakWordBrowser(text, rate) {
+        async function speakWordBrowser(text, rate, onEnd) {
             if ('speechSynthesis' in window) {
                 await ensureVoicesLoaded();
                 window.speechSynthesis.cancel();
@@ -15590,7 +16062,13 @@
                 
                 const bestVoice = getBestVoice(locale);
                 if (bestVoice) utterance.voice = bestVoice;
+                if (onEnd) {
+                    utterance.onend = onEnd;
+                    utterance.onerror = onEnd;
+                }
                 window.speechSynthesis.speak(utterance);
+            } else if (onEnd) {
+                onEnd(); // no speech synthesis available at all - clear the visual state immediately rather than leaving it stuck
             }
         }
 
@@ -15788,7 +16266,7 @@
             if (challengeModeEnabled) {
                 targetEl.innerHTML = '';
                 targetEl.style.color = '';
-                targetEl.textContent = '?';
+                targetEl.textContent = '';
                 targetEl.title = '';
             } else {
                 targetEl.innerHTML = colorizeSentenceText(chosen.text);
@@ -16467,7 +16945,7 @@
             if (challengeModeEnabled) {
                 instructionEl.innerHTML = '';
                 instructionEl.style.color = '';
-                instructionEl.textContent = '?';
+                instructionEl.textContent = '';
                 instructionEl.title = '';
             } else {
                 instructionEl.innerHTML = colorizeSentenceText(currentTargetWord);
@@ -16526,7 +17004,8 @@
             colourCodedEnabled = document.getElementById('colour-coded').checked;
             challengeModeEnabled = document.getElementById('challenge-mode').checked;
             extraLocationsEnabled = document.getElementById('extra-locations-quest').checked;
-            magpieModeOn = document.getElementById('magpie-mode-quest').checked;
+            megaMagpieModeOn = document.getElementById('mega-magpie-mode-quest').checked;
+            magpieModeOn = document.getElementById('magpie-mode-quest').checked || megaMagpieModeOn;
 
             startQuestGame();
         }
@@ -16588,10 +17067,21 @@
                 .map(line => {
                     const rawChunks = line.split('.').map(c => c.trim()).filter(c => c.length > 0);
                     const chunks = rawChunks.map(c => {
-                        const isSilent = c.startsWith('[') && c.endsWith(']') && c.length > 2;
+                        // Curly braces mark a silent chunk (pre-filled, faded,
+                        // never collectible) - kept deliberately separate from
+                        // the square brackets used hub-wide to protect a
+                        // character from colour-coding, so the two concepts
+                        // (silent vs simply-uncoloured-but-still-collectible)
+                        // can never be confused with one another.
+                        const isSilent = c.startsWith('{') && c.endsWith('}') && c.length > 2;
                         return { text: isSilent ? c.slice(1, -1) : c, silent: isSilent };
                     });
-                    const spelling = chunks.map(c => c.text).join('');
+                    // The spelling (used for TTS and for the translation/example
+                    // lookup key) needs the clean letters only - any square
+                    // brackets a chunk's text still carries are a colour-coding
+                    // annotation, not part of the actual word, so they're
+                    // stripped here.
+                    const spelling = chunks.map(c => c.text.replace(/[\[\]]/g, '')).join('');
                     return { spelling, chunks };
                 })
                 .filter(w => w.chunks.length > 0);
@@ -16670,7 +17160,11 @@
             // to no translation/example override for it).
             wordParkourPresetMeta = {};
             entry.words.forEach(w => {
-                const spelling = w.word.split('.').map(c => { c = c.trim(); return (c.startsWith('[') && c.endsWith(']')) ? c.slice(1, -1) : c; }).join('');
+                const spelling = w.word.split('.').map(c => {
+                    c = c.trim();
+                    const unwrapped = (c.startsWith('{') && c.endsWith('}')) ? c.slice(1, -1) : c;
+                    return unwrapped.replace(/[\[\]]/g, '');
+                }).join('');
                 wordParkourPresetMeta[spelling.toLowerCase()] = { translation: w.translation || null, example: w.example || null };
             });
 
@@ -17279,6 +17773,7 @@
                     } else if (containerId === 'kart-preset-category-tiles') {
                         appendUploadTile('kart-preset-category-tiles', 'kart-picture-file-input');
                     }
+                    updateSettingsForwardButtonState();
                 };
                 container.appendChild(tile);
             });
@@ -17332,6 +17827,7 @@
             customMoveSpeed = 3.0;
             score = 0;
             mistakeCount = 0;
+            mistakeLog = [];
             gameStartTime = Date.now();
             lastTime = 0;
             inShopInterior = null;
@@ -17354,13 +17850,16 @@
             // automatic cycle still only runs if Magpie Mode is on - see
             // updateOneMagpie), since a wrong-letter attempt spawns a one-off punishment
             // magpie regardless of whether Magpie Mode itself is enabled this round.
+            // Sentence/Picture Parkour deliberately do NOT do this - their wrong-answer
+            // feedback is the 'oops' modal itself, and a magpie swooping in at the same
+            // time would distract from that learning moment rather than reinforce it.
             magpieActive = (selectedLobbyMode === 'word') ? true : magpieModeOn;
             magpieA = createMagpieInstance();
             magpieA.timer = getNextMagpieCycleSeconds();
             magpieB = createMagpieInstance();
 
             const questHeaderEl = document.getElementById('quest-header-label');
-            if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
+            if (questHeaderEl) questHeaderEl.textContent = 'I am looking for...';
             const questBoxEl = document.getElementById('quest-box');
             if (questBoxEl) questBoxEl.style.display = (selectedLobbyMode === 'word') ? 'none' : '';
             const locationBoxEl = document.getElementById('location-box');
@@ -17472,7 +17971,7 @@
             // 120/24/45 (the original constants) for regular Sentence Parkour, so
             // that game's placement is completely unaffected.
             const CARD_W = (selectedLobbyMode === 'picture') ? 90 : 120;
-            const CARD_H = (selectedLobbyMode === 'picture') ? 90 : 24;
+            const CARD_H = (selectedLobbyMode === 'picture') ? 90 : (selectedLobbyMode === 'quest' ? 52 : 24);
             const CARD_LIFT = CARD_H + 21;
 
             function inBox(wx, wy, box) {
@@ -17666,7 +18165,7 @@
                 });
             });
 
-            const targetMinCandidates = 40;
+            const targetMinCandidates = 60; // more candidates to draw from, since the larger card gap means fewer of them end up usable
             const fillCandidates = (list, box) => {
                 while (list.length < targetMinCandidates) {
                     let rx = box.minX + 30 + Math.random() * (box.maxX - box.minX - 180);
@@ -17693,7 +18192,7 @@
                 : ['forest', 'city', 'sky', 'water'];
             const numCategories = categories.length;
 
-            const CARD_GAP = 12;
+            const CARD_GAP = 50; // tuned for the current 52px cards - the old 12-unit gap (set when cards were half this height) left them too densely clustered to navigate between
             const overlapsPlaced = (x, y) => activeWords.some(item => (
                 x < item.x + item.w + CARD_GAP &&
                 x + CARD_W + CARD_GAP > item.x &&
@@ -17856,7 +18355,7 @@
             if (challengeModeEnabled) {
                 instructionEl.innerHTML = '';
                 instructionEl.style.color = '';
-                instructionEl.textContent = '?';
+                instructionEl.textContent = '';
                 instructionEl.title = '';
             } else if (colourCodedEnabled) {
                 instructionEl.innerHTML = '';
@@ -17892,7 +18391,7 @@
             const langData = LOCALIZED_LOCATIONS[selectedLanguage] || LOCALIZED_LOCATIONS.en;
 
             const questHeaderEl = document.getElementById('quest-header-label');
-            if (questHeaderEl) questHeaderEl.textContent = 'Target Objective';
+            if (questHeaderEl) questHeaderEl.textContent = 'I am looking for...';
 
             let whereLabel = langData.where;
             let locationLabel;
@@ -17959,7 +18458,7 @@
                             wrapSpan.appendChild(gSpan);
                         });
                     } else {
-                        for (const ch of chunk.text) {
+                        for (const ch of chunk.text.replace(/[\[\]]/g, '')) {
                             const cSpan = document.createElement('span');
                             cSpan.textContent = ch;
                             cSpan.style.marginRight = CHAR_MARGIN;
@@ -17968,7 +18467,8 @@
                     }
                     locationTextEl.appendChild(wrapSpan);
                 } else {
-                    for (let i = 0; i < chunk.text.length; i++) {
+                    const letterCount = chunk.text.replace(/[\[\]]/g, '').length;
+                    for (let i = 0; i < letterCount; i++) {
                         const uSpan = document.createElement('span');
                         uSpan.textContent = '_';
                         uSpan.style.marginRight = CHAR_MARGIN;
@@ -18005,7 +18505,7 @@
             const instructionEl = document.getElementById('instruction-text');
             instructionEl.innerHTML = '';
             instructionEl.style.color = '';
-            instructionEl.textContent = '?';
+            instructionEl.textContent = '';
             instructionEl.title = '';
             fitTextToBoxDeferred(instructionEl, 'quest-text-zone');
 
@@ -18181,14 +18681,24 @@
         // triggered externally, e.g. by Mega Magpie Mode) rather than
         // magpieA, whose own timer-driven cycle stays independent of this.
         // Skipped if magpieB is already mid-cycle, to avoid interrupting it.
-        function triggerWordParkourWrongGrapheme() {
-            playChime(false);
+        // Launches the "punishment" magpie (magpieB) in from a random side, if
+        // it isn't already mid-swoop - shared by every mode's wrong-answer
+        // handler, regardless of whether Magpie Mode itself is toggled on.
+        function launchWrongAnswerMagpie() {
             if (magpieB.phase === 'idle') {
                 magpieB.hoverSide = Math.random() < 0.5 ? 'left' : 'right';
                 magpieB.hoverScreenY = 60 + Math.random() * 260;
                 magpieB.enterElapsed = 0;
                 magpieB.phase = 'entering';
             }
+        }
+
+        function triggerWordParkourWrongGrapheme() {
+            playChime(false);
+            launchWrongAnswerMagpie();
+            mistakeCount++;
+            const currentWord = wordParkourWords[wordParkourCurrentWordIndex];
+            if (currentWord) mistakeLog.push(currentWord.spelling);
         }
 
         function formatDuration(ms) {
@@ -18232,6 +18742,21 @@
 
         // Shown once every vocabulary word has been collected. Freezes gameplay and displays
         // assessment-friendly stats that a student can screenshot for their LMS.
+        // Returns the topN most frequently occurring entries in a list, most
+        // common first - used to surface a student's most common mistakes.
+        function getMostFrequent(list, topN) {
+            const counts = {};
+            list.forEach(item => { counts[item] = (counts[item] || 0) + 1; });
+            return Object.entries(counts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, topN)
+                .map(([item]) => item);
+        }
+
+        function formatMistakesSentence(count) {
+            return `I learned from ${count} mistake${count === 1 ? '' : 's'}.`;
+        }
+
         function showCompletionScreen() {
             playHappyNoise();
             gameStarted = false;
@@ -18247,8 +18772,20 @@
             document.getElementById('results-datetime').textContent = new Date(endTime).toLocaleString();
             document.getElementById('results-duration').textContent = formatDuration(durationMs);
             document.getElementById('results-accuracy').textContent = accuracy + '%';
-            document.getElementById('results-mistakes').textContent = mistakeCount;
-            document.getElementById('results-vocab').textContent = vocabularyList.join(', ');
+            document.getElementById('results-mistakes').textContent = formatMistakesSentence(mistakeCount);
+            // The vocabulary list is already shown identically above, under
+            // "Today I checked my understanding of" - showing it again down
+            // here was pure duplication.
+            document.getElementById('results-vocab-section').style.display = 'none';
+
+            const goalSectionEl = document.getElementById('results-goal-section');
+            const topMistakes = getMostFrequent(mistakeLog, 3);
+            if (topMistakes.length > 0) {
+                document.getElementById('results-goal-words').textContent = topMistakes.join(', ');
+                goalSectionEl.style.display = 'block';
+            } else {
+                goalSectionEl.style.display = 'none';
+            }
 
             const activeModes = [];
             if (roundHadMegaMagpieMode) activeModes.push('🐦🐦🐦 Mega Magpie Mode');
@@ -18303,6 +18840,7 @@
             isModalOpen = true;
             score = Math.max(0, score - 1);
             mistakeCount++;
+            if (currentTargetWord) mistakeLog.push(currentTargetWord);
             document.getElementById('score').innerText = score.toString().padStart(2, '0');
             
             playChime(false);
@@ -18831,11 +19369,15 @@
             document.getElementById('results-datetime').textContent = new Date(endTime).toLocaleString();
             document.getElementById('results-duration').textContent = formatDuration(durationMs);
             document.getElementById('results-accuracy').textContent = accuracy + '%';
-            document.getElementById('results-mistakes').textContent = lavaScore.chunksFallen;
+            document.getElementById('results-mistakes').textContent = formatMistakesSentence(lavaScore.chunksFallen);
             document.getElementById('results-vocab').textContent =
                 `${lavaScore.wordsCompleted}/${lavaScore.totalWords} words, ${lavaScore.chunksCompleted}/${lavaScore.totalChunks} chunks decoded`;
+            document.getElementById('results-vocab-section').style.display = 'block';
             document.getElementById('results-modes-played').style.display = 'none';
             document.getElementById('results-true-score-row').style.display = 'none';
+            document.getElementById('results-code-summary').style.display = 'none';
+            document.getElementById('results-goal-section').style.display = 'none';
+            document.getElementById('results-character-preview').style.display = 'none';
 
             document.getElementById('lava-ui-board').style.display = 'none';
             document.getElementById('lava-fullscreen-btn').style.display = 'none';
@@ -20415,16 +20957,40 @@
             const topPadding = viewHeight * 0.30;
             const bottomPadding = viewHeight * 0.15;
 
-            const playerScreenY = player.y + baseCameraY;
+            // Simple rule: if the player's collision box overlaps this fixed
+            // zone (covering the water and the stretch leading into it), pull
+            // the camera down so the water is visible before the player has
+            // to enter it to see it.
+            const WATER_PREVIEW_ZONE = { minX: 1800, maxX: 4451, minY: 600, maxY: 1041 };
+            const overlapsWaterZone =
+                player.x < WATER_PREVIEW_ZONE.maxX &&
+                player.x + player.w > WATER_PREVIEW_ZONE.minX &&
+                player.y < WATER_PREVIEW_ZONE.maxY &&
+                player.y + player.h > WATER_PREVIEW_ZONE.minY;
 
-            let targetCameraY = baseCameraY;
-            if (playerScreenY < topPadding) {
-                targetCameraY = topPadding - player.y;
-            } else if (playerScreenY > viewHeight - bottomPadding) {
-                targetCameraY = (viewHeight - bottomPadding) - player.y;
+            let targetCameraY;
+            let smoothingRate;
+            if (overlapsWaterZone) {
+                // Halfway between the player's normal resting position (85%
+                // down the screen) and a full top-padding pull (30% down) -
+                // a full pull was roughly double the drop actually needed.
+                const waterZoneFraction = 0.575;
+                targetCameraY = viewHeight * waterZoneFraction - player.y;
+                // Distinctly slower than the normal rate below, so this reads
+                // as a gentle drop rather than a quick correction.
+                smoothingRate = 0.05;
+            } else {
+                const playerScreenY = player.y + baseCameraY;
+                targetCameraY = baseCameraY;
+                if (playerScreenY < topPadding) {
+                    targetCameraY = topPadding - player.y;
+                } else if (playerScreenY > viewHeight - bottomPadding) {
+                    targetCameraY = (viewHeight - bottomPadding) - player.y;
+                }
+                smoothingRate = 0.12;
             }
 
-            const smoothing = Math.min(1, 0.12 * dt);
+            const smoothing = Math.min(1, smoothingRate * dt);
             cameraY += (targetCameraY - cameraY) * smoothing;
         }
 
@@ -21277,8 +21843,8 @@
                         }
                     } else {
                         ctx.save();
-                        const isWordParkour = selectedLobbyMode === 'word';
-                        const fontPx = isWordParkour ? 32 : 22;
+                        const useBigRainbowCards = selectedLobbyMode === 'word' || selectedLobbyMode === 'quest';
+                        const fontPx = useBigRainbowCards ? 32 : 22;
                         ctx.font = `bold ${fontPx}px 'OpenDyslexic', sans-serif`;
                         if (word.isWronglyTouched) ctx.globalAlpha = 0.35;
                         
@@ -21286,12 +21852,12 @@
                         const cleanTextForMeasurement = textToShow.replace(/[\[\]]/g, '');
                         
                         const textWidth = ctx.measureText(cleanTextForMeasurement).width;
-                        const cardWidth = isWordParkour ? Math.max(140, textWidth + 60) : Math.max(100, textWidth + 30);
+                        const cardWidth = useBigRainbowCards ? Math.max(140, textWidth + 60) : Math.max(100, textWidth + 30);
                         word.w = cardWidth; 
                         
                         ctx.fillStyle = '#ffffff';
-                        const cornerRadius = isWordParkour ? word.h / 2 : 12; // pill/stadium shape - the closest a variable-width shape gets to circular
-                        if (isWordParkour) {
+                        const cornerRadius = useBigRainbowCards ? word.h / 2 : 12; // pill/stadium shape - the closest a variable-width shape gets to circular
+                        if (useBigRainbowCards) {
                             const gradient = ctx.createLinearGradient(word.x, finalY, word.x + word.w, finalY + word.h);
                             gradient.addColorStop(0, '#ee3333');
                             gradient.addColorStop(0.2, '#ff9933');
@@ -21580,16 +22146,17 @@
 
         loadAssets();
 
-        // If the phone-detection script at the top of <head> flagged this
-        // as needing the mobile wrap, do it now, using plain DOM APIs -
-        // this whole page's real content gets cleared out and replaced
-        // with a single iframe that reloads the same page a second time
-        // (marked so it won't try to wrap itself again), held at a fixed
-        // "desktop-like" size and scaled down as one unit to fit the
-        // actual phone screen.
+        // If the detection script at the top of <head> flagged this as
+        // needing the frame wrap (a phone/tablet, or simply not enough
+        // available space for the reference size), do it now, using plain
+        // DOM APIs - this whole page's real content gets cleared out and
+        // replaced with a single iframe that reloads the same page a
+        // second time (marked so it won't try to wrap itself again), held
+        // at a fixed "desktop-like" size and scaled down as one unit to
+        // fit whatever space is actually available.
         if (window.bbNeedsMobileWrap) {
             (function() {
-                const REF_W = 1280, REF_H = 720;
+                const REF_W = window.bbFrameWrapRefW, REF_H = window.bbFrameWrapRefH;
                 const url = new URL(window.location.href);
                 url.searchParams.set('bbEmbedded', '1');
 
