@@ -4178,41 +4178,6 @@
           "definition": "What the teacher says when everyone should sit down on their chairs."
         },
         {
-          "file": "Allez-y.png",
-          "translations": {
-            "fr": "Allez-y",
-            "en": "Go",
-            "es": "Id",
-            "de": "Geht",
-            "it": "Andate",
-            "ja": "行ってください",
-            "zh-pinyin": "Qù ba",
-            "zh-hanzi": "去吧",
-            "cantonese": "去啦",
-            "he": "לכו",
-            "ar": "اذهبوا",
-            "sinhala": "යන්න",
-            "vi": "Đi đi",
-            "ur": "جائیں",
-            "hi": "जाइए",
-            "uk": "Ідіть",
-            "ru": "Идите",
-            "macedonian": "Одете",
-            "afrikaans": "Gaan",
-            "serbian": "Идите",
-            "croatian": "Idite",
-            "korean": "가세요",
-            "telugu": "వెళ్ళండి",
-            "dutch": "Ga",
-            "thai": "ไป",
-            "burmese": "သွားပါ",
-            "punjabi": "ਜਾਓ",
-            "tamil": "போங்கள்",
-            "nepali": "जानुहोस्"
-          },
-          "definition": "What the teacher says to tell everyone to go."
-        },
-        {
           "file": "Regardez-moi.png",
           "translations": {
             "fr": "Regardez-moi",
