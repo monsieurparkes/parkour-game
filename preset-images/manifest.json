@@ -36,7 +36,14 @@
             "burmese": "အနီရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਲਾਲ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு சிவப்பு டைனோசர்",
-            "nepali": "एउटा रातो डायनासोर"
+            "nepali": "एउटा रातो डायनासोर",
+            "hungarian": "egy piros dinoszaurusz",
+            "armenian": "կարմիր դինոզավր",
+            "malayalam": "ഒരു ചുവന്ന ദിനോസർ",
+            "maltese": "dinosawru aħmar",
+            "bengali": "একটি লাল ডাইনোসর",
+            "portuguese-br": "um dinossauro vermelho",
+            "portuguese-pt": "um dinossauro vermelho"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -71,7 +78,14 @@
             "burmese": "အပြာရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਨੀਲਾ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு நீல டைனோசர்",
-            "nepali": "एउटा निलो डायनासोर"
+            "nepali": "एउटा निलो डायनासोर",
+            "hungarian": "egy kék dinoszaurusz",
+            "armenian": "կապույտ դինոզավր",
+            "malayalam": "ഒരു നീല ദിനോസർ",
+            "maltese": "dinosawru blu",
+            "bengali": "একটি নীল ডাইনোসর",
+            "portuguese-br": "um dinossauro azul",
+            "portuguese-pt": "um dinossauro azul"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -106,7 +120,14 @@
             "burmese": "အစိမ်းရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਹਰਾ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு பச்சை டைனோசர்",
-            "nepali": "एउटा हरियो डायनासोर"
+            "nepali": "एउटा हरियो डायनासोर",
+            "hungarian": "egy zöld dinoszaurusz",
+            "armenian": "կանաչ դինոզավր",
+            "malayalam": "ഒരു പച്ച ദിനോസർ",
+            "maltese": "dinosawru aħdar",
+            "bengali": "একটি সবুজ ডাইনোসর",
+            "portuguese-br": "um dinossauro verde",
+            "portuguese-pt": "um dinossauro verde"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -141,7 +162,14 @@
             "burmese": "အဝါရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਪੀਲਾ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு மஞ்சள் டைனோசர்",
-            "nepali": "एउटा पहेँलो डायनासोर"
+            "nepali": "एउटा पहेँलो डायनासोर",
+            "hungarian": "egy sárga dinoszaurusz",
+            "armenian": "դեղին դինոզավր",
+            "malayalam": "ഒരു മഞ്ഞ ദിനോസർ",
+            "maltese": "dinosawru isfar",
+            "bengali": "একটি হলুদ ডাইনোসর",
+            "portuguese-br": "um dinossauro amarelo",
+            "portuguese-pt": "um dinossauro amarelo"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -176,7 +204,14 @@
             "burmese": "ခရမ်းရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਜਾਮਨੀ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு ஊதா டைனோசர்",
-            "nepali": "एउटा बैजनी डायनासोर"
+            "nepali": "एउटा बैजनी डायनासोर",
+            "hungarian": "egy lila dinoszaurusz",
+            "armenian": "մանուշակագույն դինոզավր",
+            "malayalam": "ഒരു പർപ്പിൾ ദിനോസർ",
+            "maltese": "dinosawru vjola",
+            "bengali": "একটি বেগুনি ডাইনোসর",
+            "portuguese-br": "um dinossauro roxo",
+            "portuguese-pt": "um dinossauro roxo"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -211,7 +246,14 @@
             "burmese": "လိမ္မော်ရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਸੰਤਰੀ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு ஆரஞ்சு டைனோசர்",
-            "nepali": "एउटा सुन्तले डायनासोर"
+            "nepali": "एउटा सुन्तले डायनासोर",
+            "hungarian": "egy narancssárga dinoszaurusz",
+            "armenian": "նարնջագույն դինոզավր",
+            "malayalam": "ഒരു ഓറഞ്ച് ദിനോസർ",
+            "maltese": "dinosawru oranġjo",
+            "bengali": "একটি কমলা ডাইনোসর",
+            "portuguese-br": "um dinossauro laranja",
+            "portuguese-pt": "um dinossauro cor de laranja"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -246,7 +288,14 @@
             "burmese": "ပန်းရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਗੁਲਾਬੀ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு இளஞ்சிவப்பு டைனோசர்",
-            "nepali": "एउटा गुलाबी डायनासोर"
+            "nepali": "एउटा गुलाबी डायनासोर",
+            "hungarian": "egy rózsaszín dinoszaurusz",
+            "armenian": "վարդագույն դինոզավր",
+            "malayalam": "ഒരു പിങ്ക് ദിനോസർ",
+            "maltese": "dinosawru roża",
+            "bengali": "একটি গোলাপি ডাইনোসর",
+            "portuguese-br": "um dinossauro rosa",
+            "portuguese-pt": "um dinossauro cor-de-rosa"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -281,7 +330,14 @@
             "burmese": "အမည်းရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਕਾਲਾ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு கருப்பு டைனோசர்",
-            "nepali": "एउटा कालो डायनासोर"
+            "nepali": "एउटा कालो डायनासोर",
+            "hungarian": "egy fekete dinoszaurusz",
+            "armenian": "սև դինոզավր",
+            "malayalam": "ഒരു കറുത്ത ദിനോസർ",
+            "maltese": "dinosawru iswed",
+            "bengali": "একটি কালো ডাইনোসর",
+            "portuguese-br": "um dinossauro preto",
+            "portuguese-pt": "um dinossauro preto"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -316,7 +372,14 @@
             "burmese": "အဖြူရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਚਿੱਟਾ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு வெள்ளை டைனோசர்",
-            "nepali": "एउटा सेतो डायनासोर"
+            "nepali": "एउटा सेतो डायनासोर",
+            "hungarian": "egy fehér dinoszaurusz",
+            "armenian": "սպիտակ դինոզավր",
+            "malayalam": "ഒരു വെള്ള ദിനോസർ",
+            "maltese": "dinosawru abjad",
+            "bengali": "একটি সাদা ডাইনোসর",
+            "portuguese-br": "um dinossauro branco",
+            "portuguese-pt": "um dinossauro branco"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         },
@@ -351,7 +414,14 @@
             "burmese": "အညိုရောင် ဒိုင်နိုဆော်",
             "punjabi": "ਇੱਕ ਭੂਰਾ ਡਾਇਨਾਸੌਰ",
             "tamil": "ஒரு பழுப்பு டைனோசர்",
-            "nepali": "एउटा खैरो डायनासोर"
+            "nepali": "एउटा खैरो डायनासोर",
+            "hungarian": "egy barna dinoszaurusz",
+            "armenian": "շագանակագույն դինոզավր",
+            "malayalam": "ഒരു തവിട്ട് ദിനോസർ",
+            "maltese": "dinosawru kannella",
+            "bengali": "একটি বাদামি ডাইনোসর",
+            "portuguese-br": "um dinossauro marrom",
+            "portuguese-pt": "um dinossauro castanho"
           },
           "definition": "An extinct prehistoric reptile that lived on Earth millions of years ago, long before humans existed."
         }
@@ -393,7 +463,14 @@
             "burmese": "မီးခိုးရောင် ကန်ဂါရူး",
             "punjabi": "ਇੱਕ ਸਲੇਟੀ ਕੰਗਾਰੂ",
             "tamil": "ஒரு சாம்பல் கங்காரு",
-            "nepali": "एउटा खरानी रङको कङ्गारु"
+            "nepali": "एउटा खरानी रङको कङ्गारु",
+            "hungarian": "egy szürke kenguru",
+            "armenian": "մոխրագույն կենգուրու",
+            "malayalam": "ഒരു ചാരനിറമുള്ള കംഗാരു",
+            "maltese": "kangaru griż",
+            "bengali": "একটি ধূসর ক্যাঙ্গারু",
+            "portuguese-br": "um canguru cinza",
+            "portuguese-pt": "um canguru cinzento"
           },
           "definition": "A large Australian marsupial that hops on powerful hind legs and carries its young in a pouch."
         },
@@ -428,7 +505,14 @@
             "burmese": "အညိုရောင် ကန်ဂါရူး",
             "punjabi": "ਇੱਕ ਭੂਰਾ ਕੰਗਾਰੂ",
             "tamil": "ஒரு பழுப்பு கங்காரு",
-            "nepali": "एउटा खैरो कङ्गारु"
+            "nepali": "एउटा खैरो कङ्गारु",
+            "hungarian": "egy barna kenguru",
+            "armenian": "շագանակագույն կենգուրու",
+            "malayalam": "ഒരു തവിട്ട് കംഗാരു",
+            "maltese": "kangaru kannella",
+            "bengali": "একটি বাদামি ক্যাঙ্গারু",
+            "portuguese-br": "um canguru marrom",
+            "portuguese-pt": "um canguru castanho"
           },
           "definition": "A large Australian marsupial that hops on powerful hind legs and carries its young in a pouch."
         },
@@ -463,7 +547,14 @@
             "burmese": "သက်တံ့ရောင် ငှက်",
             "punjabi": "ਇੱਕ ਸਤਰੰਗੀ ਪੰਛੀ",
             "tamil": "ஒரு வானவில் நிற பறவை",
-            "nepali": "एउटा इन्द्रेणी रङको चरा"
+            "nepali": "एउटा इन्द्रेणी रङको चरा",
+            "hungarian": "egy szivárványszínű madár",
+            "armenian": "ծիածանագույն թռչուն",
+            "malayalam": "ഒരു മഴവിൽ പക്ഷി",
+            "maltese": "għasfur bil-kuluri tal-qawsalla",
+            "bengali": "একটি রংধনু পাখি",
+            "portuguese-br": "um pássaro arco-íris",
+            "portuguese-pt": "um pássaro arco-íris"
           },
           "definition": "A rainbow lorikeet. A small, strikingly multicoloured parrot native to Australia's coastal regions."
         },
@@ -498,7 +589,14 @@
             "burmese": "အဖြူရောင်နှင့် အဝါရောင် ငှက်",
             "punjabi": "ਇੱਕ ਚਿੱਟਾ ਅਤੇ ਪੀਲਾ ਪੰਛੀ",
             "tamil": "ஒரு வெள்ளை மற்றும் மஞ்சள் நிற பறவை",
-            "nepali": "एउटा सेतो र पहेँलो चरा"
+            "nepali": "एउटा सेतो र पहेँलो चरा",
+            "hungarian": "egy fehér-sárga madár",
+            "armenian": "սպիտակ և դեղին թռչուն",
+            "malayalam": "ഒരു വെള്ളയും മഞ്ഞയും നിറമുള്ള പക്ഷി",
+            "maltese": "għasfur abjad u isfar",
+            "bengali": "একটি সাদা ও হলুদ পাখি",
+            "portuguese-br": "um pássaro branco e amarelo",
+            "portuguese-pt": "um pássaro branco e amarelo"
           },
           "definition": "A sulphur-crested cockatoo. A large white Australian parrot with a bright yellow crest."
         },
@@ -533,7 +631,14 @@
             "burmese": "အညိုရောင်နှင့် အဖြူရောင် ငှက်",
             "punjabi": "ਇੱਕ ਭੂਰਾ ਅਤੇ ਚਿੱਟਾ ਪੰਛੀ",
             "tamil": "ஒரு பழுப்பு மற்றும் வெள்ளை நிற பறவை",
-            "nepali": "एउटा खैरो र सेतो चरा"
+            "nepali": "एउटा खैरो र सेतो चरा",
+            "hungarian": "egy barna-fehér madár",
+            "armenian": "շագանակագույն և սպիտակ թռչուն",
+            "malayalam": "ഒരു തവിട്ടും വെള്ളയും നിറമുള്ള പക്ഷി",
+            "maltese": "għasfur kannella u abjad",
+            "bengali": "একটি বাদামি ও সাদা পাখি",
+            "portuguese-br": "um pássaro marrom e branco",
+            "portuguese-pt": "um pássaro castanho e branco"
           },
           "definition": "A kookaburra. An Australian bird famous for its call, which sounds like laughter."
         },
@@ -568,7 +673,14 @@
             "burmese": "အမည်းရောင်နှင့် အဖြူရောင် ငှက်",
             "punjabi": "ਇੱਕ ਕਾਲਾ ਅਤੇ ਚਿੱਟਾ ਪੰਛੀ",
             "tamil": "ஒரு கருப்பு மற்றும் வெள்ளை நிற பறவை",
-            "nepali": "एउटा कालो र सेतो चरा"
+            "nepali": "एउटा कालो र सेतो चरा",
+            "hungarian": "egy fekete-fehér madár",
+            "armenian": "սև և սպիտակ թռչուն",
+            "malayalam": "ഒരു കറുപ്പും വെള്ളയും നിറമുള്ള പക്ഷി",
+            "maltese": "għasfur iswed u abjad",
+            "bengali": "একটি কালো ও সাদা পাখি",
+            "portuguese-br": "um pássaro preto e branco",
+            "portuguese-pt": "um pássaro preto e branco"
           },
           "definition": "An Australian magpie. A familiar black-and-white bird known for its warbling call and swooping cyclists."
         },
@@ -603,7 +715,14 @@
             "burmese": "အမည်း၊ အညို၊ အဖြူနှင့် အဝါရောင် ငှက်",
             "punjabi": "ਇੱਕ ਕਾਲਾ, ਭੂਰਾ, ਚਿੱਟਾ ਅਤੇ ਪੀਲਾ ਪੰਛੀ",
             "tamil": "ஒரு கருப்பு, பழுப்பு, வெள்ளை மற்றும் மஞ்சள் நிற பறவை",
-            "nepali": "एउटा कालो, खैरो, सेतो र पहेँलो चरा"
+            "nepali": "एउटा कालो, खैरो, सेतो र पहेँलो चरा",
+            "hungarian": "egy fekete, barna, fehér és sárga madár",
+            "armenian": "սև, շագանակագույն, սպիտակ և դեղին թռչուն",
+            "malayalam": "ഒരു കറുപ്പും തവിട്ടും വെള്ളയും മഞ്ഞയും നിറമുള്ള പക്ഷി",
+            "maltese": "għasfur iswed, kannella, abjad u isfar",
+            "bengali": "একটি কালো, বাদামি, সাদা ও হলুদ পাখি",
+            "portuguese-br": "um pássaro preto, marrom, branco e amarelo",
+            "portuguese-pt": "um pássaro preto, castanho, branco e amarelo"
           },
           "definition": "A plover. Easily distinguished by its yellow mask and unique call."
         },
@@ -638,7 +757,14 @@
             "burmese": "ပန်းရောင်နှင့် မီးခိုးရောင် ငှက်",
             "punjabi": "ਇੱਕ ਗੁਲਾਬੀ ਅਤੇ ਸਲੇਟੀ ਪੰਛੀ",
             "tamil": "ஒரு இளஞ்சிவப்பு மற்றும் சாம்பல் நிற பறவை",
-            "nepali": "एउटा गुलाबी र खरानी रङको चरा"
+            "nepali": "एउटा गुलाबी र खरानी रङको चरा",
+            "hungarian": "egy rózsaszín-szürke madár",
+            "armenian": "վարդագույն և մոխրագույն թռչուն",
+            "malayalam": "ഒരു പിങ്കും ചാരവും നിറമുള്ള പക്ഷി",
+            "maltese": "għasfur roża u griż",
+            "bengali": "একটি গোলাপি ও ধূসর পাখি",
+            "portuguese-br": "um pássaro rosa e cinza",
+            "portuguese-pt": "um pássaro cor-de-rosa e cinzento"
           },
           "definition": "A galah. A distinctive pink and grey Australian bird found in large, noisy flocks."
         },
@@ -673,7 +799,14 @@
             "burmese": "သက်တံ့ရောင် မြွေ",
             "punjabi": "ਇੱਕ ਸਤਰੰਗੀ ਸੱਪ",
             "tamil": "ஒரு வானவில் நிற பாம்பு",
-            "nepali": "एउटा इन्द्रेणी रङको सर्प"
+            "nepali": "एउटा इन्द्रेणी रङको सर्प",
+            "hungarian": "egy szivárványszínű kígyó",
+            "armenian": "ծիածանագույն օձ",
+            "malayalam": "ഒരു മഴവിൽ പാമ്പ്",
+            "maltese": "serp bil-kuluri tal-qawsalla",
+            "bengali": "একটি রংধনু সাপ",
+            "portuguese-br": "uma cobra arco-íris",
+            "portuguese-pt": "uma cobra arco-íris"
           },
           "definition": "The Rainbow Serpent. A major creation figure in the Dreaming in Aboriginal Australian cultures."
         },
@@ -708,7 +841,14 @@
             "burmese": "အမည်းရောင်နှင့် အနီရောင် မြွေ",
             "punjabi": "ਇੱਕ ਕਾਲਾ ਅਤੇ ਲਾਲ ਸੱਪ",
             "tamil": "ஒரு கருப்பு மற்றும் சிவப்பு பாம்பு",
-            "nepali": "एउटा कालो र रातो सर्प"
+            "nepali": "एउटा कालो र रातो सर्प",
+            "hungarian": "egy fekete-piros kígyó",
+            "armenian": "սև և կարմիր օձ",
+            "malayalam": "ഒരു കറുപ്പും ചുവപ്പും നിറമുള്ള പാമ്പ്",
+            "maltese": "serp iswed u aħmar",
+            "bengali": "একটি কালো ও লাল সাপ",
+            "portuguese-br": "uma cobra preta e vermelha",
+            "portuguese-pt": "uma cobra preta e vermelha"
           },
           "definition": "A red-bellied black snake. A venomous Australian snake with glossy, black skin and a red underside."
         }
@@ -750,7 +890,14 @@
             "burmese": "ချောကလက်",
             "punjabi": "ਚਾਕਲੇਟ",
             "tamil": "சாக்லேட்",
-            "nepali": "चकलेट"
+            "nepali": "चकलेट",
+            "hungarian": "a csokoládé",
+            "armenian": "շոկոլադ",
+            "malayalam": "ചോക്ലേറ്റ്",
+            "maltese": "iċ-ċikkulata",
+            "bengali": "চকলেট",
+            "portuguese-br": "o chocolate",
+            "portuguese-pt": "o chocolate"
           },
           "definition": "A sweet food made from roasted cacao beans, originally cultivated by the Olmec, Maya, and Aztec civilizations of Mesoamerica."
         },
@@ -785,7 +932,14 @@
             "burmese": "ပြောင်းဖူး",
             "punjabi": "ਮੱਕੀ",
             "tamil": "சோளம்",
-            "nepali": "मकै"
+            "nepali": "मकै",
+            "hungarian": "a kukorica",
+            "armenian": "եգիպտացորեն",
+            "malayalam": "ചോളം",
+            "maltese": "il-qamħirrum",
+            "bengali": "ভুট্টা",
+            "portuguese-br": "o milho",
+            "portuguese-pt": "o milho"
           },
           "definition": "A cereal grain with sweet yellow kernels, first domesticated in Mexico thousands of years ago and now grown worldwide."
         },
@@ -820,7 +974,14 @@
             "burmese": "ပေါင်မုန့်",
             "punjabi": "ਰੋਟੀ",
             "tamil": "ரொட்டி",
-            "nepali": "पाउरोटी"
+            "nepali": "पाउरोटी",
+            "hungarian": "a kenyér",
+            "armenian": "հաց",
+            "malayalam": "റൊട്ടി",
+            "maltese": "il-ħobż",
+            "bengali": "রুটি",
+            "portuguese-br": "o pão",
+            "portuguese-pt": "o pão"
           },
           "definition": "A staple food made by baking a dough of flour and water, found in some form in nearly every culture worldwide."
         },
@@ -855,7 +1016,14 @@
             "burmese": "ချိစ်ဘာဂါ",
             "punjabi": "ਇੱਕ ਚੀਜ਼ਬਰਗਰ",
             "tamil": "ஒரு சீஸ்பர்கர்",
-            "nepali": "एउटा चिजबर्गर"
+            "nepali": "एउटा चिजबर्गर",
+            "hungarian": "egy sajtburger",
+            "armenian": "չիզբուրգեր",
+            "malayalam": "ഒരു ചീസ്ബർഗർ",
+            "maltese": "cheeseburger",
+            "bengali": "একটি চিজবার্গার",
+            "portuguese-br": "um cheeseburger",
+            "portuguese-pt": "um cheeseburger"
           },
           "definition": "A hamburger with a slice of melted cheese added, a popular fast-food dish that originated in the United States."
         },
@@ -890,7 +1058,14 @@
             "burmese": "သခွားသီး",
             "punjabi": "ਇੱਕ ਖੀਰਾ",
             "tamil": "ஒரு வெள்ளரிக்காய்",
-            "nepali": "एउटा काँक्रो"
+            "nepali": "एउटा काँक्रो",
+            "hungarian": "egy uborka",
+            "armenian": "վարունգ",
+            "malayalam": "ഒരു വെള്ളരിക്ക",
+            "maltese": "ħjara",
+            "bengali": "একটি শসা",
+            "portuguese-br": "um pepino",
+            "portuguese-pt": "um pepino"
           },
           "definition": "A long, green vegetable with a mild, watery flavour, usually eaten raw in salads."
         },
@@ -925,7 +1100,14 @@
             "burmese": "ကိတ်မုန့်",
             "punjabi": "ਇੱਕ ਕੇਕ",
             "tamil": "ஒரு கேக்",
-            "nepali": "एउटा केक"
+            "nepali": "एउटा केक",
+            "hungarian": "egy torta",
+            "armenian": "տորթ",
+            "malayalam": "ഒരു കേക്ക്",
+            "maltese": "kejk",
+            "bengali": "একটি কেক",
+            "portuguese-br": "um bolo",
+            "portuguese-pt": "um bolo"
           },
           "definition": "A sweet baked dessert, often layered and decorated, traditionally served to celebrate birthdays and other special occasions."
         },
@@ -960,7 +1142,14 @@
             "burmese": "ဆန်းဒဝစ်ချ်",
             "punjabi": "ਇੱਕ ਸੈਂਡਵਿਚ",
             "tamil": "ஒரு சாண்ட்விச்",
-            "nepali": "एउटा स्यान्डविच"
+            "nepali": "एउटा स्यान्डविच",
+            "hungarian": "egy szendvics",
+            "armenian": "սենդվիչ",
+            "malayalam": "ഒരു സാൻഡ്‌വിച്ച്",
+            "maltese": "sandwich",
+            "bengali": "একটি স্যান্ডউইচ",
+            "portuguese-br": "um sanduíche",
+            "portuguese-pt": "uma sandes"
           },
           "definition": "A food consisting of a filling placed between two slices of bread, said to be named after an 18th-century English Earl of Sandwich."
         },
@@ -995,7 +1184,14 @@
             "burmese": "ငှက်ပျောသီး",
             "punjabi": "ਇੱਕ ਕੇਲਾ",
             "tamil": "ஒரு வாழைப்பழம்",
-            "nepali": "एउटा केरा"
+            "nepali": "एउटा केरा",
+            "hungarian": "egy banán",
+            "armenian": "բանան",
+            "malayalam": "ഒരു പഴം",
+            "maltese": "banana",
+            "bengali": "একটি কলা",
+            "portuguese-br": "uma banana",
+            "portuguese-pt": "uma banana"
           },
           "definition": "A long, curved yellow fruit that grows in large bunches on tropical plants."
         },
@@ -1030,7 +1226,14 @@
             "burmese": "စတော်ဘယ်ရီသီး",
             "punjabi": "ਇੱਕ ਸਟ੍ਰਾਬੇਰੀ",
             "tamil": "ஒரு ஸ்ட்ராபெர்ரி",
-            "nepali": "एउटा स्ट्रबेरी"
+            "nepali": "एउटा स्ट्रबेरी",
+            "hungarian": "egy eper",
+            "armenian": "ելակ",
+            "malayalam": "ഒരു സ്ട്രോബെറി",
+            "maltese": "frawla",
+            "bengali": "একটি স্ট্রবেরি",
+            "portuguese-br": "um morango",
+            "portuguese-pt": "um morango"
           },
           "definition": "A small, red, heart-shaped fruit covered in tiny seeds, notable for being the only fruit with its seeds on the outside."
         },
@@ -1065,7 +1268,14 @@
             "burmese": "လိမ္မော်သီး",
             "punjabi": "ਇੱਕ ਸੰਤਰਾ",
             "tamil": "ஒரு ஆரஞ்சு பழம்",
-            "nepali": "एउटा सुन्तला"
+            "nepali": "एउटा सुन्तला",
+            "hungarian": "egy narancs",
+            "armenian": "նարինջ",
+            "malayalam": "ഒരു ഓറഞ്ച്",
+            "maltese": "larinġa",
+            "bengali": "একটি কমলা",
+            "portuguese-br": "uma laranja",
+            "portuguese-pt": "uma laranja"
           },
           "definition": "A round citrus fruit with orange skin and juicy, tangy-sweet segments inside."
         },
@@ -1100,7 +1310,14 @@
             "burmese": "အာလူး",
             "punjabi": "ਇੱਕ ਆਲੂ",
             "tamil": "ஒரு உருளைக்கிழங்கு",
-            "nepali": "एउटा आलु"
+            "nepali": "एउटा आलु",
+            "hungarian": "egy krumpli",
+            "armenian": "կարտոֆիլ",
+            "malayalam": "ഒരു ഉരുളക്കിഴങ്ങ്",
+            "maltese": "patata",
+            "bengali": "একটি আলু",
+            "portuguese-br": "uma batata",
+            "portuguese-pt": "uma batata"
           },
           "definition": "A starchy root vegetable that grows underground, which can be prepared in countless different ways."
         },
@@ -1135,7 +1352,14 @@
             "burmese": "ပန်းသီး",
             "punjabi": "ਇੱਕ ਸੇਬ",
             "tamil": "ஒரு ஆப்பிள்",
-            "nepali": "एउटा स्याउ"
+            "nepali": "एउटा स्याउ",
+            "hungarian": "egy alma",
+            "armenian": "խնձոր",
+            "malayalam": "ഒരു ആപ്പിൾ",
+            "maltese": "tuffieħa",
+            "bengali": "একটি আপেল",
+            "portuguese-br": "uma maçã",
+            "portuguese-pt": "uma maçã"
           },
           "definition": "A round fruit with crisp flesh and shiny skin that can be red, green, or yellow."
         },
@@ -1170,7 +1394,14 @@
             "burmese": "ခရမ်းချဉ်သီး",
             "punjabi": "ਇੱਕ ਟਮਾਟਰ",
             "tamil": "ஒரு தக்காளி",
-            "nepali": "एउटा गोलभेँडा"
+            "nepali": "एउटा गोलभेँडा",
+            "hungarian": "egy paradicsom",
+            "armenian": "լոլիկ",
+            "malayalam": "ഒരു തക്കാളി",
+            "maltese": "tadama",
+            "bengali": "একটি টমেটো",
+            "portuguese-br": "um tomate",
+            "portuguese-pt": "um tomate"
           },
           "definition": "A round, red fruit. Commonly found in Italian cuisine."
         }
@@ -1212,7 +1443,14 @@
             "burmese": "ကော်တံဆိပ်",
             "punjabi": "ਇੱਕ ਗੂੰਦ ਸਟਿੱਕ",
             "tamil": "ஒரு பசை குச்சி",
-            "nepali": "एउटा ग्लु स्टिक"
+            "nepali": "एउटा ग्लु स्टिक",
+            "hungarian": "egy ragasztóstift",
+            "armenian": "սոսնձամատիտ",
+            "malayalam": "ഒരു പശ സ്റ്റിക്ക്",
+            "maltese": "stikk tal-kolla",
+            "bengali": "একটি আঠার স্টিক",
+            "portuguese-br": "uma cola em bastão",
+            "portuguese-pt": "uma cola em stick"
           },
           "definition": "A solid, twist-up stick of glue used for sticking paper, common in classrooms."
         },
@@ -1247,7 +1485,14 @@
             "burmese": "စာရေးစားပွဲ",
             "punjabi": "ਇੱਕ ਡੈਸਕ",
             "tamil": "ஒரு மேசை",
-            "nepali": "एउटा डेस्क"
+            "nepali": "एउटा डेस्क",
+            "hungarian": "egy íróasztal",
+            "armenian": "գրասեղան",
+            "malayalam": "ഒരു മേശ",
+            "maltese": "skrivanija",
+            "bengali": "একটি ডেস্ক",
+            "portuguese-br": "uma carteira",
+            "portuguese-pt": "uma secretária"
           },
           "definition": "A piece of furniture with a flat surface used for writing, reading, or working, typically paired with a chair."
         },
@@ -1282,7 +1527,14 @@
             "burmese": "စာအုပ်",
             "punjabi": "ਇੱਕ ਕਾਪੀ",
             "tamil": "ஒரு பயிற்சி புத்தகம்",
-            "nepali": "एउटा कापी"
+            "nepali": "एउटा कापी",
+            "hungarian": "egy füzet",
+            "armenian": "տետր",
+            "malayalam": "ഒരു നോട്ട്ബുക്ക്",
+            "maltese": "pitazz",
+            "bengali": "একটি খাতা",
+            "portuguese-br": "um caderno",
+            "portuguese-pt": "um caderno"
           },
           "definition": "A bound book of blank or lined pages used by students for writing notes and completing exercises."
         },
@@ -1317,7 +1569,14 @@
             "burmese": "ခဲတံ",
             "punjabi": "ਇੱਕ ਪੈਨਸਿਲ",
             "tamil": "ஒரு பென்சில்",
-            "nepali": "एउटा पेन्सिल"
+            "nepali": "एउटा पेन्सिल",
+            "hungarian": "egy ceruza",
+            "armenian": "մատիտ",
+            "malayalam": "ഒരു പെൻസിൽ",
+            "maltese": "lapes",
+            "bengali": "একটি পেন্সিল",
+            "portuguese-br": "um lápis",
+            "portuguese-pt": "um lápis"
           },
           "definition": "A writing tool with a thin core of graphite encased in wood."
         },
@@ -1352,7 +1611,14 @@
             "burmese": "ကွန်ပျူတာ",
             "punjabi": "ਇੱਕ ਕੰਪਿਊਟਰ",
             "tamil": "ஒரு கணினி",
-            "nepali": "एउटा कम्प्युटर"
+            "nepali": "एउटा कम्प्युटर",
+            "hungarian": "egy számítógép",
+            "armenian": "համակարգիչ",
+            "malayalam": "ഒരു കമ്പ്യൂട്ടർ",
+            "maltese": "kompjuter",
+            "bengali": "একটি কম্পিউটার",
+            "portuguese-br": "um computador",
+            "portuguese-pt": "um computador"
           },
           "definition": "An electronic device used for processing information, writing, and connecting to the internet."
         },
@@ -1387,7 +1653,14 @@
             "burmese": "ကျောပိုးအိတ်",
             "punjabi": "ਇੱਕ ਬੈਗ",
             "tamil": "ஒரு பை",
-            "nepali": "एउटा पिठ्युँ झोला"
+            "nepali": "एउटा पिठ्युँ झोला",
+            "hungarian": "egy hátizsák",
+            "armenian": "ուսապարկ",
+            "malayalam": "ഒരു സ്കൂൾ ബാഗ്",
+            "maltese": "basket tad-dahar",
+            "bengali": "একটি ব্যাকপ্যাক",
+            "portuguese-br": "uma mochila",
+            "portuguese-pt": "uma mochila"
           },
           "definition": "A bag with two shoulder straps, worn on the back, used to carry things."
         },
@@ -1422,7 +1695,14 @@
             "burmese": "ထမင်းဗူး",
             "punjabi": "ਇੱਕ ਲੰਚ ਬਾਕਸ",
             "tamil": "ஒரு மதிய உணவு பெட்டி",
-            "nepali": "एउटा खाजा बाकस"
+            "nepali": "एउटा खाजा बाकस",
+            "hungarian": "egy uzsonnásdoboz",
+            "armenian": "նախաճաշի տուփ",
+            "malayalam": "ഒരു ലഞ്ച് ബോക്സ്",
+            "maltese": "kaxxa tal-ikel",
+            "bengali": "একটি টিফিন বক্স",
+            "portuguese-br": "uma lancheira",
+            "portuguese-pt": "uma lancheira"
           },
           "definition": "A small container used for carrying a packed meal from home, typically to school or work."
         },
@@ -1457,7 +1737,14 @@
             "burmese": "ပုလင်း",
             "punjabi": "ਇੱਕ ਬੋਤਲ",
             "tamil": "ஒரு பாட்டில்",
-            "nepali": "एउटा बोतल"
+            "nepali": "एउटा बोतल",
+            "hungarian": "egy kulacs",
+            "armenian": "շիշ",
+            "malayalam": "ഒരു കുപ്പി",
+            "maltese": "flixkun",
+            "bengali": "একটি বোতল",
+            "portuguese-br": "uma garrafa",
+            "portuguese-pt": "uma garrafa"
           },
           "definition": "A narrow-necked container used for holding and carrying liquids such as water."
         },
@@ -1492,7 +1779,14 @@
             "burmese": "ခဲတံဖျက်",
             "punjabi": "ਇੱਕ ਰਬੜ",
             "tamil": "ஒரு அழிப்பான்",
-            "nepali": "एउटा रबर"
+            "nepali": "एउटा रबर",
+            "hungarian": "egy radír",
+            "armenian": "ռետին",
+            "malayalam": "ഒരു റബ്ബർ",
+            "maltese": "gomma",
+            "bengali": "একটি রাবার",
+            "portuguese-br": "uma borracha",
+            "portuguese-pt": "uma borracha"
           },
           "definition": "A small block of rubber used to remove pencil marks from paper."
         },
@@ -1527,7 +1821,14 @@
             "burmese": "တက်ဘလက်",
             "punjabi": "ਇੱਕ ਟੈਬਲੇਟ",
             "tamil": "ஒரு டேப்லெட்",
-            "nepali": "एउटा ट्याब्लेट"
+            "nepali": "एउटा ट्याब्लेट",
+            "hungarian": "egy tablet",
+            "armenian": "պլանշետ",
+            "malayalam": "ഒരു ടാബ്‌ലെറ്റ്",
+            "maltese": "tablet",
+            "bengali": "একটি ট্যাবলেট",
+            "portuguese-br": "um tablet",
+            "portuguese-pt": "um tablet"
           },
           "definition": "A flat, portable touchscreen computer, larger than a phone but without a physical keyboard."
         },
@@ -1562,7 +1863,14 @@
             "burmese": "ခဲတံအိတ်",
             "punjabi": "ਇੱਕ ਪੈਨਸਿਲ ਡੱਬਾ",
             "tamil": "ஒரு பென்சில் பெட்டி",
-            "nepali": "एउटा पेन्सिल केस"
+            "nepali": "एउटा पेन्सिल केस",
+            "hungarian": "egy tolltartó",
+            "armenian": "գրչատուփ",
+            "malayalam": "ഒരു പെൻസിൽ ബോക്സ്",
+            "maltese": "kaxxa tal-lapsijiet",
+            "bengali": "একটি পেন্সিল বক্স",
+            "portuguese-br": "um estojo",
+            "portuguese-pt": "um estojo"
           },
           "definition": "A small case used to store and carry pens, pencils, and other stationery."
         }
@@ -1604,7 +1912,14 @@
             "burmese": "စတုရန်း",
             "punjabi": "ਇੱਕ ਵਰਗ",
             "tamil": "ஒரு சதுரம்",
-            "nepali": "एउटा वर्ग"
+            "nepali": "एउटा वर्ग",
+            "hungarian": "egy négyzet",
+            "armenian": "քառակուսի",
+            "malayalam": "ഒരു സമചതുരം",
+            "maltese": "kwadru",
+            "bengali": "একটি বর্গ",
+            "portuguese-br": "um quadrado",
+            "portuguese-pt": "um quadrado"
           },
           "definition": "A flat shape with four edges of equal length and four vertices."
         },
@@ -1639,7 +1954,14 @@
             "burmese": "စက်ဝိုင်း",
             "punjabi": "ਇੱਕ ਚੱਕਰ",
             "tamil": "ஒரு வட்டம்",
-            "nepali": "एउटा वृत्त"
+            "nepali": "एउटा वृत्त",
+            "hungarian": "egy kör",
+            "armenian": "շրջան",
+            "malayalam": "ഒരു വൃത്തം",
+            "maltese": "ċirku",
+            "bengali": "একটি বৃত্ত",
+            "portuguese-br": "um círculo",
+            "portuguese-pt": "um círculo"
           },
           "definition": "A perfectly round form where every location on the outside is the same distance from the centre."
         },
@@ -1674,7 +1996,14 @@
             "burmese": "နှလုံးသားပုံ",
             "punjabi": "ਇੱਕ ਦਿਲ",
             "tamil": "ஒரு இதயம்",
-            "nepali": "एउटा मुटुको आकार"
+            "nepali": "एउटा मुटुको आकार",
+            "hungarian": "egy szív",
+            "armenian": "սիրտ",
+            "malayalam": "ഒരു ഹൃദയം",
+            "maltese": "qalb",
+            "bengali": "একটি হৃদয়",
+            "portuguese-br": "um coração",
+            "portuguese-pt": "um coração"
           },
           "definition": "A rounded shape with two curved lobes at the top meeting in a point at the bottom. Widely used as a symbol of love."
         },
@@ -1709,7 +2038,14 @@
             "burmese": "ခြောက်ဒီယင်ဂံ",
             "punjabi": "ਇੱਕ ਷਼ਟਭੁਜ",
             "tamil": "ஒரு அறுகோணம்",
-            "nepali": "एउटा षट्भुज"
+            "nepali": "एउटा षट्भुज",
+            "hungarian": "egy hatszög",
+            "armenian": "վեցանկյուն",
+            "malayalam": "ഒരു ഷഡ്ഭുജം",
+            "maltese": "eżagonu",
+            "bengali": "একটি ষড়ভুজ",
+            "portuguese-br": "um hexágono",
+            "portuguese-pt": "um hexágono"
           },
           "definition": "A form with six edges and six vertices."
         },
@@ -1744,7 +2080,14 @@
             "burmese": "ရှစ်ဒီယင်ဂံ",
             "punjabi": "ਇੱਕ ਅਸ਼ਟਭੁਜ",
             "tamil": "ஒரு எண்கோணம்",
-            "nepali": "एउटा अष्टभुज"
+            "nepali": "एउटा अष्टभुज",
+            "hungarian": "egy nyolcszög",
+            "armenian": "ութանկյուն",
+            "malayalam": "ഒരു അഷ്ടഭുജം",
+            "maltese": "ottagonu",
+            "bengali": "একটি অষ্টভুজ",
+            "portuguese-br": "um octógono",
+            "portuguese-pt": "um octógono"
           },
           "definition": "A form with eight edges and eight vertices, commonly used for stop signs around the world."
         },
@@ -1779,7 +2122,14 @@
             "burmese": "ဥပုံ",
             "punjabi": "ਇੱਕ ਅੰਡਾਕਾਰ",
             "tamil": "ஒரு நீள்வட்டம்",
-            "nepali": "एउटा अण्डाकार"
+            "nepali": "एउटा अण्डाकार",
+            "hungarian": "egy ovális",
+            "armenian": "օվալ",
+            "malayalam": "ഒരു ദീർഘവൃത്തം",
+            "maltese": "ovali",
+            "bengali": "একটি ডিম্বাকৃতি",
+            "portuguese-br": "um oval",
+            "portuguese-pt": "um oval"
           },
           "definition": "A circle that has been stretched in one direction, like the outline of an egg."
         },
@@ -1814,7 +2164,14 @@
             "burmese": "ငါးဒီယင်ဂံ",
             "punjabi": "ਇੱਕ ਪੰਜਭੁਜ",
             "tamil": "ஒரு ஐங்கோணம்",
-            "nepali": "एउटा पञ्चभुज"
+            "nepali": "एउटा पञ्चभुज",
+            "hungarian": "egy ötszög",
+            "armenian": "հնգանկյուն",
+            "malayalam": "ഒരു പഞ്ചഭുജം",
+            "maltese": "pentagonu",
+            "bengali": "একটি পঞ্চভুজ",
+            "portuguese-br": "um pentágono",
+            "portuguese-pt": "um pentágono"
           },
           "definition": "A form with five edges and five vertices."
         },
@@ -1849,7 +2206,14 @@
             "burmese": "ထောင့်မှန်စတုဂံ",
             "punjabi": "ਇੱਕ ਆਇਤ",
             "tamil": "ஒரு செவ்வகம்",
-            "nepali": "एउटा आयत"
+            "nepali": "एउटा आयत",
+            "hungarian": "egy téglalap",
+            "armenian": "ուղղանկյուն",
+            "malayalam": "ഒരു ദീർഘചതുരം",
+            "maltese": "rettangolu",
+            "bengali": "একটি আয়তক্ষেত্র",
+            "portuguese-br": "um retângulo",
+            "portuguese-pt": "um retângulo"
           },
           "definition": "A form with four straight sides and four vertices. Like a square but with two sides longer than the other two."
         },
@@ -1884,7 +2248,14 @@
             "burmese": "တြိဂံ",
             "punjabi": "ਇੱਕ ਤ੍ਰਿਕੋਣ",
             "tamil": "ஒரு முக்கோணம்",
-            "nepali": "एउटा त्रिभुज"
+            "nepali": "एउटा त्रिभुज",
+            "hungarian": "egy háromszög",
+            "armenian": "եռանկյուն",
+            "malayalam": "ഒരു ത്രികോണം",
+            "maltese": "trijangolu",
+            "bengali": "একটি ত্রিভুজ",
+            "portuguese-br": "um triângulo",
+            "portuguese-pt": "um triângulo"
           },
           "definition": "A form with three straight sides and three vertices."
         },
@@ -1919,7 +2290,14 @@
             "burmese": "ကြယ်",
             "punjabi": "ਇੱਕ ਤਾਰਾ",
             "tamil": "ஒரு நட்சத்திரம்",
-            "nepali": "एउटा तारा"
+            "nepali": "एउटा तारा",
+            "hungarian": "egy csillag",
+            "armenian": "աստղ",
+            "malayalam": "ഒരു നക്ഷത്രം",
+            "maltese": "stilla",
+            "bengali": "একটি তারা",
+            "portuguese-br": "uma estrela",
+            "portuguese-pt": "uma estrela"
           },
           "definition": "A shape with pointed rays extending outward, commonly drawn with five points."
         }
@@ -1961,7 +2339,14 @@
             "burmese": "ကွန်ပုံ",
             "punjabi": "ਇੱਕ ਸ਼ੰਕੂ",
             "tamil": "ஒரு கூம்பு",
-            "nepali": "एउटा शङ्कु"
+            "nepali": "एउटा शङ्कु",
+            "hungarian": "egy kúp",
+            "armenian": "կոն",
+            "malayalam": "ഒരു കോൺ",
+            "maltese": "kon",
+            "bengali": "একটি শঙ্কু",
+            "portuguese-br": "um cone",
+            "portuguese-pt": "um cone"
           },
           "definition": "An object with a circular base that narrows smoothly to a single vertex. Like an ice-cream cone."
         },
@@ -1996,7 +2381,14 @@
             "burmese": "ကုဗ",
             "punjabi": "ਇੱਕ ਘਣ",
             "tamil": "ஒரு கனசதுரம்",
-            "nepali": "एउटा घन"
+            "nepali": "एउटा घन",
+            "hungarian": "egy kocka",
+            "armenian": "խորանարդ",
+            "malayalam": "ഒരു ക്യൂബ്",
+            "maltese": "kubu",
+            "bengali": "একটি ঘনক",
+            "portuguese-br": "um cubo",
+            "portuguese-pt": "um cubo"
           },
           "definition": "An object with six identical square faces. Like dice or a sugar cube."
         },
@@ -2031,7 +2423,14 @@
             "burmese": "ဆလင်ဒါပုံ",
             "punjabi": "ਇੱਕ ਸਿਲੰਡਰ",
             "tamil": "ஒரு உருளை",
-            "nepali": "एउटा बेलना"
+            "nepali": "एउटा बेलना",
+            "hungarian": "egy henger",
+            "armenian": "գլան",
+            "malayalam": "ഒരു സിലിണ്ടർ",
+            "maltese": "ċilindru",
+            "bengali": "একটি সিলিন্ডার",
+            "portuguese-br": "um cilindro",
+            "portuguese-pt": "um cilindro"
           },
           "definition": "An object with two identical, flat, circular ends connected by a curved surface. Like a can of soup."
         },
@@ -2066,7 +2465,14 @@
             "burmese": "လေးထောင့်ပုံးသဏ္ဌာန်",
             "punjabi": "ਇੱਕ ਆਇਤਾਕਾਰ ਪ੍ਰਿਜ਼ਮ",
             "tamil": "ஒரு செவ்வக இயூகம்",
-            "nepali": "एउटा आयताकार प्रिज्म"
+            "nepali": "एउटा आयताकार प्रिज्म",
+            "hungarian": "egy téglatest",
+            "armenian": "ուղղանկյուն պրիզմա",
+            "malayalam": "ഒരു ചതുരാകൃതിയിലുള്ള പ്രിസം",
+            "maltese": "priżma rettangolari",
+            "bengali": "একটি আয়তাকার প্রিজম",
+            "portuguese-br": "um prisma retangular",
+            "portuguese-pt": "um prisma retangular"
           },
           "definition": "Similar to a cube that has been stretched or squeezed in one or more dimensions. An extruded rectangle."
         },
@@ -2101,7 +2507,14 @@
             "burmese": "တြိဂံပရစ်ဇင်ပုံ",
             "punjabi": "ਇੱਕ ਤ੍ਰਿਕੋਣੀ ਪ੍ਰਿਜ਼ਮ",
             "tamil": "ஒரு முக்கோண இயூகம்",
-            "nepali": "एउटा त्रिभुजाकार प्रिज्म"
+            "nepali": "एउटा त्रिभुजाकार प्रिज्म",
+            "hungarian": "egy háromszög alapú hasáb",
+            "armenian": "եռանկյուն պրիզմա",
+            "malayalam": "ഒരു ത്രികോണാകൃതിയിലുള്ള പ്രിസം",
+            "maltese": "priżma trijangolari",
+            "bengali": "একটি ত্রিভুজাকার প্রিজম",
+            "portuguese-br": "um prisma triangular",
+            "portuguese-pt": "um prisma triangular"
           },
           "definition": "An object with two triangular ends connected by three rectangular faces. An extruded triangle."
         },
@@ -2136,7 +2549,14 @@
             "burmese": "စတုရန်းအခြေရှိ ပိရမစ်ပုံ",
             "punjabi": "ਇੱਕ ਵਰਗ-ਆਧਾਰਿਤ ਪਿਰਾਮਿਡ",
             "tamil": "ஒரு சதுர அடிப்படை பிரமிடு",
-            "nepali": "एउटा वर्गाकार आधार भएको पिरामिड"
+            "nepali": "एउटा वर्गाकार आधार भएको पिरामिड",
+            "hungarian": "egy négyzet alapú gúla",
+            "armenian": "քառակուսի հիմքով բուրգ",
+            "malayalam": "ഒരു സമചതുര അടിത്തറയുള്ള പിരമിഡ്",
+            "maltese": "piramida b'bażi kwadra",
+            "bengali": "একটি বর্গাকার ভূমির পিরামিড",
+            "portuguese-br": "uma pirâmide de base quadrada",
+            "portuguese-pt": "uma pirâmide de base quadrada"
           },
           "definition": "An object with a square base and four triangular faces meeting at a single vertex, like the Great Pyramids of Giza in Egypt."
         },
@@ -2171,7 +2591,14 @@
             "burmese": "တြိဂံအခြေရှိ ပိရမစ်ပုံ",
             "punjabi": "ਇੱਕ ਤ੍ਰਿਕੋਣ-ਆਧਾਰਿਤ ਪਿਰਾਮਿਡ",
             "tamil": "ஒரு முக்கோண அடிப்படை பிரமிடு",
-            "nepali": "एउटा त्रिभुजाकार आधार भएको पिरामिड"
+            "nepali": "एउटा त्रिभुजाकार आधार भएको पिरामिड",
+            "hungarian": "egy háromszög alapú gúla",
+            "armenian": "եռանկյուն հիմքով բուրգ",
+            "malayalam": "ഒരു ത്രികോണ അടിത്തറയുള്ള പിരമിഡ്",
+            "maltese": "piramida b'bażi trijangolari",
+            "bengali": "একটি ত্রিভুজাকার ভূমির পিরামিড",
+            "portuguese-br": "uma pirâmide de base triangular",
+            "portuguese-pt": "uma pirâmide de base triangular"
           },
           "definition": "An object with a triangular base and three more triangular faces meeting at a single vertex."
         },
@@ -2206,7 +2633,14 @@
             "burmese": "စက်လုံး",
             "punjabi": "ਇੱਕ ਗੋਲਾ",
             "tamil": "ஒரு கோளம்",
-            "nepali": "एउटा गोला"
+            "nepali": "एउटा गोला",
+            "hungarian": "egy gömb",
+            "armenian": "գունդ",
+            "malayalam": "ഒരു ഗോളം",
+            "maltese": "sfera",
+            "bengali": "একটি গোলক",
+            "portuguese-br": "uma esfera",
+            "portuguese-pt": "uma esfera"
           },
           "definition": "A perfectly round object where every point on its surface is the same distance from the centre. Like a ball."
         }
@@ -2249,7 +2683,14 @@
             "burmese": "ဂျပန်",
             "tamil": "ஜப்பான்",
             "telugu": "జపాన్",
-            "nepali": "जापान"
+            "nepali": "जापान",
+            "hungarian": "Japán",
+            "armenian": "Ճապոնիա",
+            "malayalam": "ജപ്പാൻ",
+            "maltese": "il-Ġappun",
+            "bengali": "জাপান",
+            "portuguese-br": "o Japão",
+            "portuguese-pt": "o Japão"
           }
         },
         {
@@ -2284,7 +2725,14 @@
             "burmese": "ကနေဒါ",
             "tamil": "கனடா",
             "telugu": "కెనడా",
-            "nepali": "क्यानडा"
+            "nepali": "क्यानडा",
+            "hungarian": "Kanada",
+            "armenian": "Կանադա",
+            "malayalam": "കാനഡ",
+            "maltese": "il-Kanada",
+            "bengali": "কানাডা",
+            "portuguese-br": "o Canadá",
+            "portuguese-pt": "o Canadá"
           }
         },
         {
@@ -2319,7 +2767,14 @@
             "burmese": "သြစတြေးလျ",
             "tamil": "ஆஸ்திரேலியா",
             "telugu": "ఆస్ట్రేలియా",
-            "nepali": "अस्ट्रेलिया"
+            "nepali": "अस्ट्रेलिया",
+            "hungarian": "Ausztrália",
+            "armenian": "Ավստրալիա",
+            "malayalam": "ഓസ്ട്രേലിയ",
+            "maltese": "l-Awstralja",
+            "bengali": "অস্ট্রেলিয়া",
+            "portuguese-br": "a Austrália",
+            "portuguese-pt": "a Austrália"
           }
         },
         {
@@ -2354,7 +2809,14 @@
             "burmese": "အင်္ဂလန်",
             "tamil": "இங்கிலாந்து",
             "telugu": "ఇంగ్లాండ్",
-            "nepali": "इङ्ल्यान्ड"
+            "nepali": "इङ्ल्यान्ड",
+            "hungarian": "Anglia",
+            "armenian": "Անգլիա",
+            "malayalam": "ഇംഗ്ലണ്ട്",
+            "maltese": "l-Ingilterra",
+            "bengali": "ইংল্যান্ড",
+            "portuguese-br": "a Inglaterra",
+            "portuguese-pt": "a Inglaterra"
           }
         },
         {
@@ -2389,7 +2851,14 @@
             "burmese": "ဂျာမနီ",
             "tamil": "ஜெர்மனி",
             "telugu": "జర్మనీ",
-            "nepali": "जर्मनी"
+            "nepali": "जर्मनी",
+            "hungarian": "Németország",
+            "armenian": "Գերմանիա",
+            "malayalam": "ജർമ്മനി",
+            "maltese": "il-Ġermanja",
+            "bengali": "জার্মানি",
+            "portuguese-br": "a Alemanha",
+            "portuguese-pt": "a Alemanha"
           }
         },
         {
@@ -2424,7 +2893,14 @@
             "burmese": "စပိန်",
             "tamil": "ஸ்பெயின்",
             "telugu": "స్పెయిన్",
-            "nepali": "स्पेन"
+            "nepali": "स्पेन",
+            "hungarian": "Spanyolország",
+            "armenian": "Իսպանիա",
+            "malayalam": "സ്പെയിൻ",
+            "maltese": "Spanja",
+            "bengali": "স্পেন",
+            "portuguese-br": "a Espanha",
+            "portuguese-pt": "a Espanha"
           }
         },
         {
@@ -2459,7 +2935,14 @@
             "burmese": "အိန္ဒိယ",
             "tamil": "இந்தியா",
             "telugu": "భారతదేశం",
-            "nepali": "भारत"
+            "nepali": "भारत",
+            "hungarian": "India",
+            "armenian": "Հնդկաստան",
+            "malayalam": "ഇന്ത്യ",
+            "maltese": "l-Indja",
+            "bengali": "ভারত",
+            "portuguese-br": "a Índia",
+            "portuguese-pt": "a Índia"
           }
         },
         {
@@ -2494,7 +2977,14 @@
             "burmese": "အိုင်ယာလန်",
             "tamil": "அயர்லாந்து",
             "telugu": "ఐర్లాండ్",
-            "nepali": "आयरल्यान्ड"
+            "nepali": "आयरल्यान्ड",
+            "hungarian": "Írország",
+            "armenian": "Իռլանդիա",
+            "malayalam": "അയർലൻഡ്",
+            "maltese": "l-Irlanda",
+            "bengali": "আয়ারল্যান্ড",
+            "portuguese-br": "a Irlanda",
+            "portuguese-pt": "a Irlanda"
           }
         },
         {
@@ -2529,7 +3019,14 @@
             "burmese": "ပါကစ္စတန်",
             "tamil": "பாகிஸ்தான்",
             "telugu": "పాకిస్తాన్",
-            "nepali": "पाकिस्तान"
+            "nepali": "पाकिस्तान",
+            "hungarian": "Pakisztán",
+            "armenian": "Պակիստան",
+            "malayalam": "പാകിസ്ഥാൻ",
+            "maltese": "il-Pakistan",
+            "bengali": "পাকিস্তান",
+            "portuguese-br": "o Paquistão",
+            "portuguese-pt": "o Paquistão"
           }
         },
         {
@@ -2564,7 +3061,14 @@
             "burmese": "အီတလီ",
             "tamil": "இத்தாலி",
             "telugu": "ఇటలీ",
-            "nepali": "इटाली"
+            "nepali": "इटाली",
+            "hungarian": "Olaszország",
+            "armenian": "Իտալիա",
+            "malayalam": "ഇറ്റലി",
+            "maltese": "l-Italja",
+            "bengali": "ইতালি",
+            "portuguese-br": "a Itália",
+            "portuguese-pt": "a Itália"
           }
         },
         {
@@ -2599,7 +3103,14 @@
             "burmese": "ပြင်သစ်",
             "tamil": "பிரான்ஸ்",
             "telugu": "ఫ్రాన్స్",
-            "nepali": "फ्रान्स"
+            "nepali": "फ्रान्स",
+            "hungarian": "Franciaország",
+            "armenian": "Ֆրանսիա",
+            "malayalam": "ഫ്രാൻസ്",
+            "maltese": "Franza",
+            "bengali": "ফ্রান্স",
+            "portuguese-br": "a França",
+            "portuguese-pt": "a França"
           }
         },
         {
@@ -2634,7 +3145,14 @@
             "burmese": "တရုတ်",
             "tamil": "சீனா",
             "telugu": "చైనా",
-            "nepali": "चीन"
+            "nepali": "चीन",
+            "hungarian": "Kína",
+            "armenian": "Չինաստան",
+            "malayalam": "ചൈന",
+            "maltese": "iċ-Ċina",
+            "bengali": "চীন",
+            "portuguese-br": "a China",
+            "portuguese-pt": "a China"
           }
         }
       ]
@@ -2676,7 +3194,14 @@
             "burmese": "ကမ်းခြေမှာ",
             "tamil": "கடற்கரையில்",
             "telugu": "బీచ్‌లో",
-            "nepali": "समुद्र किनारमा"
+            "nepali": "समुद्र किनारमा",
+            "hungarian": "a tengerparton",
+            "armenian": "լողափում",
+            "malayalam": "കടൽത്തീരത്ത്",
+            "maltese": "fuq il-bajja",
+            "bengali": "সমুদ্রসৈকতে",
+            "portuguese-br": "na praia",
+            "portuguese-pt": "na praia"
           }
         },
         {
@@ -2711,7 +3236,14 @@
             "burmese": "တောင်ပေါ်မှာ",
             "tamil": "மலையில்",
             "telugu": "కొండలలో",
-            "nepali": "पहाडमा"
+            "nepali": "पहाडमा",
+            "hungarian": "a hegyekben",
+            "armenian": "լեռներում",
+            "malayalam": "മലകളിൽ",
+            "maltese": "fil-muntanji",
+            "bengali": "পাহাড়ে",
+            "portuguese-br": "nas montanhas",
+            "portuguese-pt": "nas montanhas"
           }
         },
         {
@@ -2746,7 +3278,14 @@
             "burmese": "ကျေးလက်မှာ",
             "tamil": "கிராமப்புறத்தில்",
             "telugu": "గ్రామీణ ప్రాంతంలో",
-            "nepali": "गाउँमा"
+            "nepali": "गाउँमा",
+            "hungarian": "vidéken",
+            "armenian": "գյուղում",
+            "malayalam": "ഗ്രാമപ്രദേശത്ത്",
+            "maltese": "fil-kampanja",
+            "bengali": "গ্রামে",
+            "portuguese-br": "no campo",
+            "portuguese-pt": "no campo"
           }
         },
         {
@@ -2781,7 +3320,14 @@
             "burmese": "တောထဲမှာ",
             "tamil": "காட்டில்",
             "telugu": "అడవిలో",
-            "nepali": "जङ्गलमा"
+            "nepali": "जङ्गलमा",
+            "hungarian": "az erdőben",
+            "armenian": "անտառում",
+            "malayalam": "കാട്ടിൽ",
+            "maltese": "fil-foresta",
+            "bengali": "বনে",
+            "portuguese-br": "na floresta",
+            "portuguese-pt": "na floresta"
           }
         },
         {
@@ -2816,7 +3362,14 @@
             "burmese": "သဲကန္တာရထဲမှာ",
             "tamil": "பாலைவனத்தில்",
             "telugu": "ఎడారిలో",
-            "nepali": "मरुभूमिमा"
+            "nepali": "मरुभूमिमा",
+            "hungarian": "a sivatagban",
+            "armenian": "անապատում",
+            "malayalam": "മരുഭൂമിയിൽ",
+            "maltese": "fid-deżert",
+            "bengali": "মরুভূমিতে",
+            "portuguese-br": "no deserto",
+            "portuguese-pt": "no deserto"
           }
         },
         {
@@ -2851,7 +3404,14 @@
             "burmese": "မြို့ထဲမှာ",
             "tamil": "நகரத்தில்",
             "telugu": "పట్టణంలో",
-            "nepali": "सहरमा"
+            "nepali": "सहरमा",
+            "hungarian": "a városban",
+            "armenian": "քաղաքում",
+            "malayalam": "പട്ടണത്തിൽ",
+            "maltese": "fil-belt",
+            "bengali": "শহরে",
+            "portuguese-br": "na cidade",
+            "portuguese-pt": "na cidade"
           }
         },
         {
@@ -2886,7 +3446,14 @@
             "burmese": "ရေကူးကန်မှာ",
             "tamil": "நீச்சல் குளத்தில்",
             "telugu": "స్విమ్మింగ్ పూల్‌లో",
-            "nepali": "पौडी पोखरीमा"
+            "nepali": "पौडी पोखरीमा",
+            "hungarian": "az uszodában",
+            "armenian": "լողավազանում",
+            "malayalam": "നീന്തൽക്കുളത്തിൽ",
+            "maltese": "fil-pixxina",
+            "bengali": "সুইমিং পুলে",
+            "portuguese-br": "na piscina",
+            "portuguese-pt": "na piscina"
           }
         },
         {
@@ -2921,7 +3488,14 @@
             "burmese": "သစ်တောအုပ်ထဲမှာ",
             "tamil": "அடர்ந்த காட்டில்",
             "telugu": "దట్టమైన అడవిలో",
-            "nepali": "घना जङ्गलमा"
+            "nepali": "घना जङ्गलमा",
+            "hungarian": "a dzsungelben",
+            "armenian": "ջունգլիներում",
+            "malayalam": "കൊടുംകാട്ടിൽ",
+            "maltese": "fil-ġungla",
+            "bengali": "জঙ্গলে",
+            "portuguese-br": "na selva",
+            "portuguese-pt": "na selva"
           }
         }
       ]
@@ -2963,7 +3537,14 @@
             "burmese": "သူပျော်တယ်",
             "tamil": "அவன் சந்தோஷமாக இருக்கிறான்",
             "telugu": "అతను సంతోషంగా ఉన్నాడు",
-            "nepali": "ऊ खुसी छ"
+            "nepali": "ऊ खुसी छ",
+            "hungarian": "ő boldog",
+            "armenian": "նա ուրախ է",
+            "malayalam": "അവൻ സന്തോഷവാനാണ്",
+            "maltese": "huwa kuntent",
+            "bengali": "সে খুশি",
+            "portuguese-br": "ele está feliz",
+            "portuguese-pt": "ele está contente"
           }
         },
         {
@@ -2998,7 +3579,14 @@
             "burmese": "သူပျော်တယ်",
             "tamil": "அவள் சந்தோஷமாக இருக்கிறாள்",
             "telugu": "ఆమె సంతోషంగా ఉంది",
-            "nepali": "ऊ खुसी छे"
+            "nepali": "ऊ खुसी छे",
+            "hungarian": "ő boldog",
+            "armenian": "նա ուրախ է",
+            "malayalam": "അവൾ സന്തോഷവതിയാണ്",
+            "maltese": "hija kuntenta",
+            "bengali": "সে খুশি",
+            "portuguese-br": "ela está feliz",
+            "portuguese-pt": "ela está contente"
           }
         },
         {
@@ -3033,7 +3621,14 @@
             "burmese": "သူဖန်တီးနိုင်စွမ်းရှိတယ်",
             "tamil": "அவன் படைப்பாற்றல் உள்ளவன்",
             "telugu": "అతను సృజనాత్మకుడు",
-            "nepali": "ऊ सिर्जनशील छ"
+            "nepali": "ऊ सिर्जनशील छ",
+            "hungarian": "ő kreatív",
+            "armenian": "նա ստեղծագործ է",
+            "malayalam": "അവൻ സർഗ്ഗാത്മകനാണ്",
+            "maltese": "huwa kreattiv",
+            "bengali": "সে সৃজনশীল",
+            "portuguese-br": "ele é criativo",
+            "portuguese-pt": "ele é criativo"
           }
         },
         {
@@ -3068,7 +3663,14 @@
             "burmese": "သူဖန်တီးနိုင်စွမ်းရှိတယ်",
             "tamil": "அவள் படைப்பாற்றல் உள்ளவள்",
             "telugu": "ఆమె సృజనాత్మకురాలు",
-            "nepali": "ऊ सिर्जनशील छे"
+            "nepali": "ऊ सिर्जनशील छे",
+            "hungarian": "ő kreatív",
+            "armenian": "նա ստեղծագործ է",
+            "malayalam": "അവൾ സർഗ്ഗാത്മകയാണ്",
+            "maltese": "hija kreattiva",
+            "bengali": "সে সৃজনশীল",
+            "portuguese-br": "ela é criativa",
+            "portuguese-pt": "ela é criativa"
           }
         },
         {
@@ -3103,7 +3705,14 @@
             "burmese": "သူအားကစားကြိုက်တယ်",
             "tamil": "அவனுக்கு விளையாட்டு பிடிக்கும்",
             "telugu": "అతనికి ఆటలు ఇష్టం",
-            "nepali": "ऊ फुर्तिलो छ"
+            "nepali": "ऊ फुर्तिलो छ",
+            "hungarian": "ő sportos",
+            "armenian": "նա սպորտային է",
+            "malayalam": "അവൻ കായികപ്രേമിയാണ്",
+            "maltese": "huwa sportiv",
+            "bengali": "সে খেলাধুলা পছন্দ করে",
+            "portuguese-br": "ele é esportivo",
+            "portuguese-pt": "ele é desportivo"
           }
         },
         {
@@ -3138,7 +3747,14 @@
             "burmese": "သူအားကစားကြိုက်တယ်",
             "tamil": "அவளுக்கு விளையாட்டு பிடிக்கும்",
             "telugu": "ఆమెకి ఆటలు ఇష్టం",
-            "nepali": "ऊ फुर्तिली छे"
+            "nepali": "ऊ फुर्तिली छे",
+            "hungarian": "ő sportos",
+            "armenian": "նա սպորտային է",
+            "malayalam": "അവൾ കായികപ്രേമിയാണ്",
+            "maltese": "hija sportiva",
+            "bengali": "সে খেলাধুলা পছন্দ করে",
+            "portuguese-br": "ela é esportiva",
+            "portuguese-pt": "ela é desportiva"
           }
         },
         {
@@ -3173,7 +3789,14 @@
             "burmese": "သူသဘောကောင်းတယ်",
             "tamil": "அவன் இரக்கமுள்ளவன்",
             "telugu": "అతను దయగలవాడు",
-            "nepali": "ऊ दयालु छ"
+            "nepali": "ऊ दयालु छ",
+            "hungarian": "ő kedves",
+            "armenian": "նա բարի է",
+            "malayalam": "അവൻ ദയയുള്ളവനാണ്",
+            "maltese": "huwa ġentili",
+            "bengali": "সে দয়ালু",
+            "portuguese-br": "ele é gentil",
+            "portuguese-pt": "ele é simpático"
           }
         },
         {
@@ -3208,7 +3831,14 @@
             "burmese": "သူသဘောကောင်းတယ်",
             "tamil": "அவள் இரக்கமுள்ளவள்",
             "telugu": "ఆమె దయగలది",
-            "nepali": "ऊ दयालु छे"
+            "nepali": "ऊ दयालु छे",
+            "hungarian": "ő kedves",
+            "armenian": "նա բարի է",
+            "malayalam": "അവൾ ദയയുള്ളവളാണ്",
+            "maltese": "hija ġentili",
+            "bengali": "সে দয়ালু",
+            "portuguese-br": "ela é gentil",
+            "portuguese-pt": "ela é simpática"
           }
         },
         {
@@ -3243,7 +3873,14 @@
             "burmese": "သူရယ်စရာကောင်းတယ်",
             "tamil": "அவன் வேடிக்கையானவன்",
             "telugu": "అతను తమాషాగా ఉంటాడు",
-            "nepali": "ऊ ठट्यौलो छ"
+            "nepali": "ऊ ठट्यौलो छ",
+            "hungarian": "ő vicces",
+            "armenian": "նա զվարճալի է",
+            "malayalam": "അവൻ തമാശക്കാരനാണ്",
+            "maltese": "huwa umoristiku",
+            "bengali": "সে মজার",
+            "portuguese-br": "ele é engraçado",
+            "portuguese-pt": "ele é engraçado"
           }
         },
         {
@@ -3278,7 +3915,14 @@
             "burmese": "သူရယ်စရာကောင်းတယ်",
             "tamil": "அவள் வேடிக்கையானவள்",
             "telugu": "ఆమె తమాషాగా ఉంటుంది",
-            "nepali": "ऊ ठट्यौली छे"
+            "nepali": "ऊ ठट्यौली छे",
+            "hungarian": "ő vicces",
+            "armenian": "նա զվարճալի է",
+            "malayalam": "അവൾ തമാശക്കാരിയാണ്",
+            "maltese": "hija umoristika",
+            "bengali": "সে মজার",
+            "portuguese-br": "ela é engraçada",
+            "portuguese-pt": "ela é engraçada"
           }
         },
         {
@@ -3313,7 +3957,14 @@
             "burmese": "သူဝမ်းနည်းတယ်",
             "tamil": "அவன் சோகமாக இருக்கிறான்",
             "telugu": "అతను దుఃఖంగా ఉన్నాడు",
-            "nepali": "ऊ दुःखी छ"
+            "nepali": "ऊ दुःखी छ",
+            "hungarian": "ő szomorú",
+            "armenian": "նա տխուր է",
+            "malayalam": "അവൻ ദുഃഖിതനാണ്",
+            "maltese": "huwa mdejjaq",
+            "bengali": "সে দুঃখী",
+            "portuguese-br": "ele está triste",
+            "portuguese-pt": "ele está triste"
           }
         },
         {
@@ -3348,7 +3999,14 @@
             "burmese": "သူဝမ်းနည်းတယ်",
             "tamil": "அவள் சோகமாக இருக்கிறாள்",
             "telugu": "ఆమె దుఃఖంగా ఉంది",
-            "nepali": "ऊ दुःखी छे"
+            "nepali": "ऊ दुःखी छे",
+            "hungarian": "ő szomorú",
+            "armenian": "նա տխուր է",
+            "malayalam": "അവൾ ദുഃഖിതയാണ്",
+            "maltese": "hija mdejqa",
+            "bengali": "সে দুঃখী",
+            "portuguese-br": "ela está triste",
+            "portuguese-pt": "ela está triste"
           }
         }
       ]
@@ -3389,7 +4047,14 @@
             "burmese": "တီရှပ်",
             "punjabi": "ਇੱਕ ਟੀ-ਸ਼ਰਟ",
             "tamil": "ஒரு டி-ஷர்ட்",
-            "nepali": "एउटा टी-सर्ट"
+            "nepali": "एउटा टी-सर्ट",
+            "hungarian": "egy póló",
+            "armenian": "շապիկ",
+            "malayalam": "ഒരു ടീ-ഷർട്ട്",
+            "maltese": "t-shirt",
+            "bengali": "একটি টি-শার্ট",
+            "portuguese-br": "uma camiseta",
+            "portuguese-pt": "uma t-shirt"
           },
           "definition": "A light top with short sleeves and no collar, pulled on over the head."
         },
@@ -3424,7 +4089,14 @@
             "burmese": "ဘောင်းဘီတို",
             "punjabi": "ਨਿੱਕਰ",
             "tamil": "ஒரு அரைக்கால் சட்டை",
-            "nepali": "हाफ पाइन्ट"
+            "nepali": "हाफ पाइन्ट",
+            "hungarian": "egy rövidnadrág",
+            "armenian": "կարճ տաբատ",
+            "malayalam": "ഒരു ഷോർട്സ്",
+            "maltese": "qalziet qasir",
+            "bengali": "একটি হাফপ্যান্ট",
+            "portuguese-br": "um short",
+            "portuguese-pt": "uns calções"
           },
           "definition": "Short pants that stop above the knee, worn in warm weather or for sport."
         },
@@ -3459,7 +4131,14 @@
             "burmese": "ဂျင်းဘောင်းဘီ",
             "punjabi": "ਜੀਨਸ",
             "tamil": "ஜீன்ஸ்",
-            "nepali": "जिन्स पाइन्ट"
+            "nepali": "जिन्स पाइन्ट",
+            "hungarian": "egy farmer",
+            "armenian": "ջինս",
+            "malayalam": "ഒരു ജീൻസ്",
+            "maltese": "jeans",
+            "bengali": "একটি জিন্স",
+            "portuguese-br": "uma calça jeans",
+            "portuguese-pt": "umas calças de ganga"
           },
           "definition": "Strong trousers made of blue denim cloth."
         },
@@ -3494,7 +4173,14 @@
             "burmese": "ဘောင်းဘီရှည်",
             "punjabi": "ਪੈਂਟ",
             "tamil": "ஒரு கால்சட்டை",
-            "nepali": "पाइन्ट"
+            "nepali": "पाइन्ट",
+            "hungarian": "egy nadrág",
+            "armenian": "տաբատ",
+            "malayalam": "ഒരു പാന്റ്",
+            "maltese": "qalziet",
+            "bengali": "একটি প্যান্ট",
+            "portuguese-br": "uma calça",
+            "portuguese-pt": "umas calças"
           },
           "definition": "A piece of clothing that covers each leg separately, from the waist down to the ankles."
         },
@@ -3529,7 +4215,14 @@
             "burmese": "ဆွယ်တာ",
             "punjabi": "ਇੱਕ ਸਵੈਟਰ",
             "tamil": "ஒரு ஸ்வெட்டர்",
-            "nepali": "एउटा स्वेटर"
+            "nepali": "एउटा स्वेटर",
+            "hungarian": "egy pulóver",
+            "armenian": "սվիտեր",
+            "malayalam": "ഒരു സ്വെറ്റർ",
+            "maltese": "ġersi",
+            "bengali": "একটি সোয়েটার",
+            "portuguese-br": "um suéter",
+            "portuguese-pt": "uma camisola"
           },
           "definition": "A warm knitted top with long sleeves, pulled on over the head."
         },
@@ -3564,7 +4257,14 @@
             "burmese": "ဆွက်ရှပ်",
             "punjabi": "ਇੱਕ ਸਵੈੱਟਸ਼ਰਟ",
             "tamil": "ஒரு ஸ்வெட்ஷர்ட்",
-            "nepali": "एउटा स्वेटसर्ट"
+            "nepali": "एउटा स्वेटसर्ट",
+            "hungarian": "egy melegítőfelső",
+            "armenian": "սվիտշոթ",
+            "malayalam": "ഒരു സ്വെറ്റ്ഷർട്ട്",
+            "maltese": "sweatshirt",
+            "bengali": "একটি সোয়েটশার্ট",
+            "portuguese-br": "um moletom",
+            "portuguese-pt": "uma sweatshirt"
           },
           "definition": "A soft, thick cotton top with long sleeves, often worn for sport or to keep warm."
         },
@@ -3599,7 +4299,14 @@
             "burmese": "ဦးထုပ်",
             "punjabi": "ਇੱਕ ਟੋਪੀ",
             "tamil": "ஒரு தொப்பி",
-            "nepali": "एउटा टोपी"
+            "nepali": "एउटा टोपी",
+            "hungarian": "egy kalap",
+            "armenian": "գլխարկ",
+            "malayalam": "ഒരു തൊപ്പി",
+            "maltese": "kappell",
+            "bengali": "একটি টুপি",
+            "portuguese-br": "um chapéu",
+            "portuguese-pt": "um chapéu"
           },
           "definition": "Something worn on the head, often with a brim, to keep off the sun or rain."
         },
@@ -3634,7 +4341,14 @@
             "burmese": "ဂါဝန်",
             "punjabi": "ਇੱਕ ਫ਼ਰਾਕ",
             "tamil": "ஒரு கவுன்",
-            "nepali": "एउटा फ्रक"
+            "nepali": "एउटा फ्रक",
+            "hungarian": "egy ruha",
+            "armenian": "զգեստ",
+            "malayalam": "ഒരു ഫ്രോക്ക്",
+            "maltese": "libsa",
+            "bengali": "একটি ফ্রক",
+            "portuguese-br": "um vestido",
+            "portuguese-pt": "um vestido"
           },
           "definition": "A one-piece piece of clothing that covers the body and hangs down over the legs."
         },
@@ -3669,7 +4383,14 @@
             "burmese": "စကတ်",
             "punjabi": "ਇੱਕ ਸਕਰਟ",
             "tamil": "ஒரு பாவாடை",
-            "nepali": "एउटा स्कर्ट"
+            "nepali": "एउटा स्कर्ट",
+            "hungarian": "egy szoknya",
+            "armenian": "կիսաշրջազգեստ",
+            "malayalam": "ഒരു പാവാട",
+            "maltese": "dublett",
+            "bengali": "একটি স্কার্ট",
+            "portuguese-br": "uma saia",
+            "portuguese-pt": "uma saia"
           },
           "definition": "A piece of clothing that hangs from the waist and covers part of the legs."
         },
@@ -3704,7 +4425,14 @@
             "burmese": "ရှပ်အင်္ကျီ",
             "punjabi": "ਇੱਕ ਕਮੀਜ਼",
             "tamil": "ஒரு சட்டை",
-            "nepali": "एउटा सर्ट"
+            "nepali": "एउटा सर्ट",
+            "hungarian": "egy ing",
+            "armenian": "վերնաշապիկ",
+            "malayalam": "ഒരു ഷർട്ട്",
+            "maltese": "qmis",
+            "bengali": "একটি শার্ট",
+            "portuguese-br": "uma camisa",
+            "portuguese-pt": "uma camisa"
           },
           "definition": "A top with a collar and buttons down the front."
         },
@@ -3739,7 +4467,14 @@
             "burmese": "ဂျာကင်",
             "punjabi": "ਇੱਕ ਜੈਕਟ",
             "tamil": "ஒரு ஜாக்கெட்",
-            "nepali": "एउटा ज्याकेट"
+            "nepali": "एउटा ज्याकेट",
+            "hungarian": "egy dzseki",
+            "armenian": "բաճկոն",
+            "malayalam": "ഒരു ജാക്കറ്റ്",
+            "maltese": "ġakketta",
+            "bengali": "একটি জ্যাকেট",
+            "portuguese-br": "uma jaqueta",
+            "portuguese-pt": "um blusão"
           },
           "definition": "A short coat worn over other clothes to keep warm or dry."
         },
@@ -3774,7 +4509,14 @@
             "burmese": "ကက်ဦးထုပ်",
             "punjabi": "ਇੱਕ ਕੈਪ",
             "tamil": "ஒரு கேப்",
-            "nepali": "एउटा क्याप"
+            "nepali": "एउटा क्याप",
+            "hungarian": "egy baseballsapka",
+            "armenian": "կեպի",
+            "malayalam": "ഒരു ക്യാപ്",
+            "maltese": "beritta",
+            "bengali": "একটি ক্যাপ",
+            "portuguese-br": "um boné",
+            "portuguese-pt": "um boné"
           },
           "definition": "A soft hat with a stiff peak at the front to shade the eyes."
         }
@@ -3816,7 +4558,14 @@
             "burmese": "ဖိနပ်",
             "punjabi": "ਜੁੱਤੀਆਂ",
             "tamil": "காலணிகள்",
-            "nepali": "जुत्ता"
+            "nepali": "जुत्ता",
+            "hungarian": "cipő",
+            "armenian": "կոշիկներ",
+            "malayalam": "ഷൂസ്",
+            "maltese": "żraben",
+            "bengali": "জুতা",
+            "portuguese-br": "sapatos",
+            "portuguese-pt": "sapatos"
           },
           "definition": "A pair of coverings for the feet, with firm soles, worn for walking outside."
         },
@@ -3851,7 +4600,14 @@
             "burmese": "ဘွတ်ဖိနပ်",
             "punjabi": "ਬੂਟ",
             "tamil": "பூட்ஸ்",
-            "nepali": "बुट"
+            "nepali": "बुट",
+            "hungarian": "csizma",
+            "armenian": "երկարաճիտք կոշիկներ",
+            "malayalam": "ബൂട്ട്സ്",
+            "maltese": "stivali",
+            "bengali": "বুট",
+            "portuguese-br": "botas",
+            "portuguese-pt": "botas"
           },
           "definition": "Strong shoes that cover the foot and ankle, and often part of the leg."
         },
@@ -3886,7 +4642,14 @@
             "burmese": "ညှပ်ဖိနပ်",
             "punjabi": "ਸੈਂਡਲ",
             "tamil": "செருப்புகள்",
-            "nepali": "स्यान्डल"
+            "nepali": "स्यान्डल",
+            "hungarian": "szandál",
+            "armenian": "սանդալներ",
+            "malayalam": "ചെരിപ്പുകൾ",
+            "maltese": "sandli",
+            "bengali": "স্যান্ডেল",
+            "portuguese-br": "sandálias",
+            "portuguese-pt": "sandálias"
           },
           "definition": "Open shoes held on with straps, worn in warm weather."
         },
@@ -3921,7 +4684,14 @@
             "burmese": "ခြေအိတ်",
             "punjabi": "ਜੁਰਾਬਾਂ",
             "tamil": "காலுறைகள்",
-            "nepali": "मोजा"
+            "nepali": "मोजा",
+            "hungarian": "zokni",
+            "armenian": "գուլպաներ",
+            "malayalam": "സോക്സ്",
+            "maltese": "kalzetti",
+            "bengali": "মোজা",
+            "portuguese-br": "meias",
+            "portuguese-pt": "meias"
           },
           "definition": "Soft coverings worn on the feet, inside shoes."
         },
@@ -3956,7 +4726,14 @@
             "burmese": "မျက်မှန်",
             "punjabi": "ਐਨਕਾਂ",
             "tamil": "மூக்குக் கண்ணாடி",
-            "nepali": "चस्मा"
+            "nepali": "चस्मा",
+            "hungarian": "szemüveg",
+            "armenian": "ակնոց",
+            "malayalam": "കണ്ണട",
+            "maltese": "nuċċalijiet",
+            "bengali": "চশমা",
+            "portuguese-br": "óculos",
+            "portuguese-pt": "óculos"
           },
           "definition": "Two lenses in a frame, worn in front of the eyes to help people see clearly."
         },
@@ -3991,7 +4768,14 @@
             "burmese": "နေကာမျက်မှန်",
             "punjabi": "ਧੁੱਪ ਵਾਲੀਆਂ ਐਨਕਾਂ",
             "tamil": "குளிர் கண்ணாடி",
-            "nepali": "कालो चस्मा"
+            "nepali": "कालो चस्मा",
+            "hungarian": "napszemüveg",
+            "armenian": "արևային ակնոց",
+            "malayalam": "കൂളിംഗ് ഗ്ലാസ്",
+            "maltese": "nuċċalijiet tax-xemx",
+            "bengali": "সানগ্লাস",
+            "portuguese-br": "óculos de sol",
+            "portuguese-pt": "óculos de sol"
           },
           "definition": "Glasses with dark lenses that protect the eyes from bright sunlight."
         },
@@ -4026,7 +4810,14 @@
             "burmese": "လက်အိတ်",
             "punjabi": "ਦਸਤਾਨੇ",
             "tamil": "கையுறைகள்",
-            "nepali": "पन्जा"
+            "nepali": "पन्जा",
+            "hungarian": "kesztyű",
+            "armenian": "ձեռնոցներ",
+            "malayalam": "കയ്യുറകൾ",
+            "maltese": "ingwanti",
+            "bengali": "দস্তানা",
+            "portuguese-br": "luvas",
+            "portuguese-pt": "luvas"
           },
           "definition": "Coverings for the hands, with a separate part for each finger, worn to keep hands warm or safe."
         },
@@ -4061,7 +4852,14 @@
             "burmese": "အားကစားဖိနပ်",
             "punjabi": "ਖੇਡ ਵਾਲੇ ਬੂਟ",
             "tamil": "விளையாட்டு காலணிகள்",
-            "nepali": "खेलकुदका जुत्ता"
+            "nepali": "खेलकुदका जुत्ता",
+            "hungarian": "sportcipő",
+            "armenian": "մարզակոշիկներ",
+            "malayalam": "സ്പോർട്സ് ഷൂസ്",
+            "maltese": "żraben tal-isport",
+            "bengali": "কেডস",
+            "portuguese-br": "tênis",
+            "portuguese-pt": "ténis"
           },
           "definition": "Comfortable shoes with soft rubber soles, made for sport and running."
         },
@@ -4096,7 +4894,14 @@
             "burmese": "အိမ်စီးဖိနပ်",
             "punjabi": "ਚੱਪਲਾਂ",
             "tamil": "வீட்டுச் செருப்புகள்",
-            "nepali": "चप्पल"
+            "nepali": "चप्पल",
+            "hungarian": "papucs",
+            "armenian": "հողաթափեր",
+            "malayalam": "വീട്ടിലിടുന്ന ചെരിപ്പുകൾ",
+            "maltese": "papoċċi",
+            "bengali": "চপ্পল",
+            "portuguese-br": "pantufas",
+            "portuguese-pt": "pantufas"
           },
           "definition": "Soft, comfortable shoes worn inside the house."
         }
@@ -4138,7 +4943,14 @@
             "burmese": "မတ်တပ်ရပ်ပါ",
             "punjabi": "ਖੜ੍ਹੇ ਹੋ ਜਾਓ",
             "tamil": "எழுந்து நில்லுங்கள்",
-            "nepali": "उठ्नुहोस्"
+            "nepali": "उठ्नुहोस्",
+            "hungarian": "Álljatok fel",
+            "armenian": "Վեր կացեք",
+            "malayalam": "എഴുന്നേൽക്കൂ",
+            "maltese": "Qumu",
+            "bengali": "দাঁড়াও",
+            "portuguese-br": "Levantem-se",
+            "portuguese-pt": "Levantem-se"
           },
           "definition": "What the teacher says when everyone should get up out of their chairs."
         },
@@ -4173,9 +4985,58 @@
             "burmese": "ထိုင်ပါ",
             "punjabi": "ਬੈਠ ਜਾਓ",
             "tamil": "உட்காருங்கள்",
-            "nepali": "बस्नुहोस्"
+            "nepali": "बस्नुहोस्",
+            "hungarian": "Üljetek le",
+            "armenian": "Նստեք",
+            "malayalam": "ഇരിക്കൂ",
+            "maltese": "Oqogħdu bilqiegħda",
+            "bengali": "বসো",
+            "portuguese-br": "Sentem-se",
+            "portuguese-pt": "Sentem-se"
           },
           "definition": "What the teacher says when everyone should sit down on their chairs."
+        },
+        {
+          "file": "Allez-y.png",
+          "translations": {
+            "fr": "Allez-y",
+            "en": "Go",
+            "es": "Id",
+            "de": "Geht",
+            "it": "Andate",
+            "ja": "行ってください",
+            "zh-pinyin": "Qù ba",
+            "zh-hanzi": "去吧",
+            "cantonese": "去啦",
+            "he": "לכו",
+            "ar": "اذهبوا",
+            "sinhala": "යන්න",
+            "vi": "Đi đi",
+            "ur": "جائیں",
+            "hi": "जाइए",
+            "uk": "Ідіть",
+            "ru": "Идите",
+            "macedonian": "Одете",
+            "afrikaans": "Gaan",
+            "serbian": "Идите",
+            "croatian": "Idite",
+            "korean": "가세요",
+            "telugu": "వెళ్ళండి",
+            "dutch": "Ga",
+            "thai": "ไป",
+            "burmese": "သွားပါ",
+            "punjabi": "ਜਾਓ",
+            "tamil": "போங்கள்",
+            "nepali": "जानुहोस्",
+            "hungarian": "Menjetek",
+            "armenian": "Գնացեք",
+            "malayalam": "പോകൂ",
+            "maltese": "Morru",
+            "bengali": "যাও",
+            "portuguese-br": "Vão",
+            "portuguese-pt": "Vão"
+          },
+          "definition": "What the teacher says to tell everyone to go."
         },
         {
           "file": "Regardez-moi.png",
@@ -4208,7 +5069,14 @@
             "burmese": "ဆရာ့ကို ကြည့်ပါ",
             "punjabi": "ਮੇਰੇ ਵੱਲ ਦੇਖੋ",
             "tamil": "என்னைப் பாருங்கள்",
-            "nepali": "मलाई हेर्नुहोस्"
+            "nepali": "मलाई हेर्नुहोस्",
+            "hungarian": "Nézzetek rám",
+            "armenian": "Նայեք ինձ",
+            "malayalam": "എന്നെ നോക്കൂ",
+            "maltese": "Ħarsu lejja",
+            "bengali": "আমার দিকে তাকাও",
+            "portuguese-br": "Olhem para mim",
+            "portuguese-pt": "Olhem para mim"
           },
           "definition": "What the teacher says when everyone should turn their eyes to the teacher."
         },
@@ -4243,7 +5111,14 @@
             "burmese": "နားထောင်ပါ",
             "punjabi": "ਸੁਣੋ",
             "tamil": "கேளுங்கள்",
-            "nepali": "सुन्नुहोस्"
+            "nepali": "सुन्नुहोस्",
+            "hungarian": "Figyeljetek",
+            "armenian": "Լսեք",
+            "malayalam": "കേൾക്കൂ",
+            "maltese": "Isimgħu",
+            "bengali": "শোনো",
+            "portuguese-br": "Escutem",
+            "portuguese-pt": "Ouçam"
           },
           "definition": "What the teacher says when everyone should pay attention with their ears."
         },
@@ -4278,7 +5153,14 @@
             "burmese": "လိုက်ဆိုပါ",
             "punjabi": "ਦੁਹਰਾਓ",
             "tamil": "திரும்பச் சொல்லுங்கள்",
-            "nepali": "दोहोर्याउनुहोस्"
+            "nepali": "दोहोर्याउनुहोस्",
+            "hungarian": "Ismételjétek",
+            "armenian": "Կրկնեք",
+            "malayalam": "ആവർത്തിക്കൂ",
+            "maltese": "Irrepetu",
+            "bengali": "আবার বলো",
+            "portuguese-br": "Repitam",
+            "portuguese-pt": "Repitam"
           },
           "definition": "What the teacher says when everyone should say the same words again, after the teacher."
         },
@@ -4313,7 +5195,14 @@
             "burmese": "တိတ်တိတ်နေပါ",
             "punjabi": "ਚੁੱਪ ਰਹੋ",
             "tamil": "அமைதியாக இருங்கள்",
-            "nepali": "चुप लाग्नुहोस्"
+            "nepali": "चुप लाग्नुहोस्",
+            "hungarian": "Csend legyen",
+            "armenian": "Լռեք",
+            "malayalam": "മിണ്ടാതിരിക്കൂ",
+            "maltese": "Isktu",
+            "bengali": "চুপ করো",
+            "portuguese-br": "Fiquem quietos",
+            "portuguese-pt": "Calem-se"
           },
           "definition": "What the teacher says when everyone should stop talking."
         },
@@ -4348,7 +5237,14 @@
             "burmese": "မျက်စိမှိတ်ပါ",
             "punjabi": "ਅੱਖਾਂ ਬੰਦ ਕਰੋ",
             "tamil": "கண்களை மூடுங்கள்",
-            "nepali": "आँखा बन्द गर्नुहोस्"
+            "nepali": "आँखा बन्द गर्नुहोस्",
+            "hungarian": "Csukjátok be a szemeteket",
+            "armenian": "Փակեք ձեր աչքերը",
+            "malayalam": "കണ്ണുകൾ അടയ്ക്കൂ",
+            "maltese": "Agħlqu għajnejkom",
+            "bengali": "চোখ বন্ধ করো",
+            "portuguese-br": "Fechem os olhos",
+            "portuguese-pt": "Fechem os olhos"
           },
           "definition": "What the teacher says when everyone should shut their eyes."
         },
@@ -4383,7 +5279,14 @@
             "burmese": "ပါးစပ်ပိတ်ပါ",
             "punjabi": "ਮੂੰਹ ਬੰਦ ਕਰੋ",
             "tamil": "வாயை மூடுங்கள்",
-            "nepali": "मुख बन्द गर्नुहोस्"
+            "nepali": "मुख बन्द गर्नुहोस्",
+            "hungarian": "Csukjátok be a szátokat",
+            "armenian": "Փակեք ձեր բերանը",
+            "malayalam": "വായ അടയ്ക്കൂ",
+            "maltese": "Agħlqu ħalqkom",
+            "bengali": "মুখ বন্ধ করো",
+            "portuguese-br": "Fechem a boca",
+            "portuguese-pt": "Fechem a boca"
           },
           "definition": "What the teacher says when everyone should shut their mouths."
         },
@@ -4418,7 +5321,14 @@
             "burmese": "လက်ထောင်ပါ",
             "punjabi": "ਹੱਥ ਖੜ੍ਹਾ ਕਰੋ",
             "tamil": "கையை உயர்த்துங்கள்",
-            "nepali": "हात उठाउनुहोस्"
+            "nepali": "हात उठाउनुहोस्",
+            "hungarian": "Tegyétek fel a kezeteket",
+            "armenian": "Բարձրացրեք ձեր ձեռքը",
+            "malayalam": "കൈ ഉയർത്തൂ",
+            "maltese": "Għollu idejkom",
+            "bengali": "হাত তোলো",
+            "portuguese-br": "Levantem a mão",
+            "portuguese-pt": "Levantem o dedo"
           },
           "definition": "What the teacher says when someone should raise their hand to ask or answer a question."
         },
@@ -4453,7 +5363,14 @@
             "burmese": "လက်ချပါ",
             "punjabi": "ਹੱਥ ਥੱਲੇ ਕਰੋ",
             "tamil": "கையை இறக்குங்கள்",
-            "nepali": "हात तल झार्नुहोस्"
+            "nepali": "हात तल झार्नुहोस्",
+            "hungarian": "Tegyétek le a kezeteket",
+            "armenian": "Իջեցրեք ձեր ձեռքը",
+            "malayalam": "കൈ താഴ്ത്തൂ",
+            "maltese": "Niżżlu idejkom",
+            "bengali": "হাত নামাও",
+            "portuguese-br": "Abaixem a mão",
+            "portuguese-pt": "Baixem o dedo"
           },
           "definition": "What the teacher says when someone should lower their hand again."
         }
@@ -4495,7 +5412,14 @@
             "burmese": "ခြောက်နာရီ ထိုးပြီ",
             "punjabi": "ਛੇ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஆறு",
-            "nepali": "छ बज्यो"
+            "nepali": "छ बज्यो",
+            "hungarian": "Hat óra van",
+            "armenian": "Ժամը վեցն է",
+            "malayalam": "സമയം ആറ് മണി",
+            "maltese": "Is-sitta",
+            "bengali": "এখন ছয়টা বাজে",
+            "portuguese-br": "São seis horas",
+            "portuguese-pt": "São seis horas"
           },
           "definition": "The clock shows six o'clock."
         },
@@ -4530,7 +5454,14 @@
             "burmese": "ခုနစ်နာရီ ထိုးပြီ",
             "punjabi": "ਸੱਤ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஏழு",
-            "nepali": "सात बज्यो"
+            "nepali": "सात बज्यो",
+            "hungarian": "Hét óra van",
+            "armenian": "Ժամը յոթն է",
+            "malayalam": "സമയം ഏഴ് മണി",
+            "maltese": "Is-sebgħa",
+            "bengali": "এখন সাতটা বাজে",
+            "portuguese-br": "São sete horas",
+            "portuguese-pt": "São sete horas"
           },
           "definition": "The clock shows seven o'clock."
         },
@@ -4565,7 +5496,14 @@
             "burmese": "ရှစ်နာရီ ထိုးပြီ",
             "punjabi": "ਅੱਠ ਵੱਜੇ ਹਨ",
             "tamil": "மணி எட்டு",
-            "nepali": "आठ बज्यो"
+            "nepali": "आठ बज्यो",
+            "hungarian": "Nyolc óra van",
+            "armenian": "Ժամը ութն է",
+            "malayalam": "സമയം എട്ട് മണി",
+            "maltese": "It-tmienja",
+            "bengali": "এখন আটটা বাজে",
+            "portuguese-br": "São oito horas",
+            "portuguese-pt": "São oito horas"
           },
           "definition": "The clock shows eight o'clock."
         },
@@ -4600,7 +5538,14 @@
             "burmese": "ကိုးနာရီ ထိုးပြီ",
             "punjabi": "ਨੌਂ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஒன்பது",
-            "nepali": "नौ बज्यो"
+            "nepali": "नौ बज्यो",
+            "hungarian": "Kilenc óra van",
+            "armenian": "Ժամը ինն է",
+            "malayalam": "സമയം ഒമ്പത് മണി",
+            "maltese": "Id-disgħa",
+            "bengali": "এখন নয়টা বাজে",
+            "portuguese-br": "São nove horas",
+            "portuguese-pt": "São nove horas"
           },
           "definition": "The clock shows nine o'clock."
         },
@@ -4635,7 +5580,14 @@
             "burmese": "ဆယ်နာရီ ထိုးပြီ",
             "punjabi": "ਦਸ ਵੱਜੇ ਹਨ",
             "tamil": "மணி பத்து",
-            "nepali": "दस बज्यो"
+            "nepali": "दस बज्यो",
+            "hungarian": "Tíz óra van",
+            "armenian": "Ժամը տասն է",
+            "malayalam": "സമയം പത്ത് മണി",
+            "maltese": "L-għaxra",
+            "bengali": "এখন দশটা বাজে",
+            "portuguese-br": "São dez horas",
+            "portuguese-pt": "São dez horas"
           },
           "definition": "The clock shows ten o'clock."
         },
@@ -4670,7 +5622,14 @@
             "burmese": "ဆယ့်တစ်နာရီ ထိုးပြီ",
             "punjabi": "ਗਿਆਰਾਂ ਵੱਜੇ ਹਨ",
             "tamil": "மணி பதினொன்று",
-            "nepali": "एघार बज्यो"
+            "nepali": "एघार बज्यो",
+            "hungarian": "Tizenegy óra van",
+            "armenian": "Ժամը տասնմեկն է",
+            "malayalam": "സമയം പതിനൊന്ന് മണി",
+            "maltese": "Il-ħdax",
+            "bengali": "এখন এগারোটা বাজে",
+            "portuguese-br": "São onze horas",
+            "portuguese-pt": "São onze horas"
           },
           "definition": "The clock shows eleven o'clock."
         },
@@ -4705,7 +5664,14 @@
             "burmese": "မွန်းတည့်ပြီ",
             "punjabi": "ਦੁਪਹਿਰ ਦੇ ਬਾਰਾਂ ਵੱਜੇ ਹਨ",
             "tamil": "மதியம் பன்னிரண்டு மணி",
-            "nepali": "दिउँसोको बाह्र बज्यो"
+            "nepali": "दिउँसोको बाह्र बज्यो",
+            "hungarian": "Dél van",
+            "armenian": "Կեսօր է",
+            "malayalam": "സമയം ഉച്ചയ്ക്ക് പന്ത്രണ്ട് മണി",
+            "maltese": "Nofsinhar",
+            "bengali": "এখন দুপুর বারোটা বাজে",
+            "portuguese-br": "É meio-dia",
+            "portuguese-pt": "É meio-dia"
           },
           "definition": "The clock shows twelve o'clock in the middle of the day."
         },
@@ -4740,7 +5706,14 @@
             "burmese": "တစ်နာရီ ထိုးပြီ",
             "punjabi": "ਇੱਕ ਵੱਜਿਆ ਹੈ",
             "tamil": "மணி ஒன்று",
-            "nepali": "एक बज्यो"
+            "nepali": "एक बज्यो",
+            "hungarian": "Egy óra van",
+            "armenian": "Ժամը մեկն է",
+            "malayalam": "സമയം ഒരു മണി",
+            "maltese": "Is-siegħa",
+            "bengali": "এখন একটা বাজে",
+            "portuguese-br": "É uma hora",
+            "portuguese-pt": "É uma hora"
           },
           "definition": "The clock shows one o'clock."
         },
@@ -4775,7 +5748,14 @@
             "burmese": "နှစ်နာရီ ထိုးပြီ",
             "punjabi": "ਦੋ ਵੱਜੇ ਹਨ",
             "tamil": "மணி இரண்டு",
-            "nepali": "दुई बज्यो"
+            "nepali": "दुई बज्यो",
+            "hungarian": "Két óra van",
+            "armenian": "Ժամը երկուսն է",
+            "malayalam": "സമയം രണ്ട് മണി",
+            "maltese": "Is-sagħtejn",
+            "bengali": "এখন দুইটা বাজে",
+            "portuguese-br": "São duas horas",
+            "portuguese-pt": "São duas horas"
           },
           "definition": "The clock shows two o'clock."
         },
@@ -4810,7 +5790,14 @@
             "burmese": "သုံးနာရီ ထိုးပြီ",
             "punjabi": "ਤਿੰਨ ਵੱਜੇ ਹਨ",
             "tamil": "மணி மூன்று",
-            "nepali": "तीन बज्यो"
+            "nepali": "तीन बज्यो",
+            "hungarian": "Három óra van",
+            "armenian": "Ժամը երեքն է",
+            "malayalam": "സമയം മൂന്ന് മണി",
+            "maltese": "It-tlieta",
+            "bengali": "এখন তিনটা বাজে",
+            "portuguese-br": "São três horas",
+            "portuguese-pt": "São três horas"
           },
           "definition": "The clock shows three o'clock."
         },
@@ -4845,7 +5832,14 @@
             "burmese": "လေးနာရီ ထိုးပြီ",
             "punjabi": "ਚਾਰ ਵੱਜੇ ਹਨ",
             "tamil": "மணி நான்கு",
-            "nepali": "चार बज्यो"
+            "nepali": "चार बज्यो",
+            "hungarian": "Négy óra van",
+            "armenian": "Ժամը չորսն է",
+            "malayalam": "സമയം നാല് മണി",
+            "maltese": "L-erbgħa",
+            "bengali": "এখন চারটা বাজে",
+            "portuguese-br": "São quatro horas",
+            "portuguese-pt": "São quatro horas"
           },
           "definition": "The clock shows four o'clock."
         },
@@ -4880,7 +5874,14 @@
             "burmese": "ငါးနာရီ ထိုးပြီ",
             "punjabi": "ਪੰਜ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஐந்து",
-            "nepali": "पाँच बज्यो"
+            "nepali": "पाँच बज्यो",
+            "hungarian": "Öt óra van",
+            "armenian": "Ժամը հինգն է",
+            "malayalam": "സമയം അഞ്ച് മണി",
+            "maltese": "Il-ħamsa",
+            "bengali": "এখন পাঁচটা বাজে",
+            "portuguese-br": "São cinco horas",
+            "portuguese-pt": "São cinco horas"
           },
           "definition": "The clock shows five o'clock."
         }
@@ -4922,7 +5923,14 @@
             "burmese": "ခြောက်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਛੇ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஆறரை",
-            "nepali": "साढे छ बज्यो"
+            "nepali": "साढे छ बज्यो",
+            "hungarian": "Fél hét van",
+            "armenian": "Ժամը վեցն անց կես է",
+            "malayalam": "സമയം ആറര",
+            "maltese": "Is-sitta u nofs",
+            "bengali": "এখন সাড়ে ছয়টা বাজে",
+            "portuguese-br": "São seis e meia",
+            "portuguese-pt": "São seis e meia"
           },
           "definition": "The clock shows half past six."
         },
@@ -4957,7 +5965,14 @@
             "burmese": "ခုနစ်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਸੱਤ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஏழரை",
-            "nepali": "साढे सात बज्यो"
+            "nepali": "साढे सात बज्यो",
+            "hungarian": "Fél nyolc van",
+            "armenian": "Ժամը յոթն անց կես է",
+            "malayalam": "സമയം ഏഴര",
+            "maltese": "Is-sebgħa u nofs",
+            "bengali": "এখন সাড়ে সাতটা বাজে",
+            "portuguese-br": "São sete e meia",
+            "portuguese-pt": "São sete e meia"
           },
           "definition": "The clock shows half past seven."
         },
@@ -4992,7 +6007,14 @@
             "burmese": "ရှစ်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਅੱਠ ਵੱਜੇ ਹਨ",
             "tamil": "மணி எட்டரை",
-            "nepali": "साढे आठ बज्यो"
+            "nepali": "साढे आठ बज्यो",
+            "hungarian": "Fél kilenc van",
+            "armenian": "Ժամը ութն անց կես է",
+            "malayalam": "സമയം എട്ടര",
+            "maltese": "It-tmienja u nofs",
+            "bengali": "এখন সাড়ে আটটা বাজে",
+            "portuguese-br": "São oito e meia",
+            "portuguese-pt": "São oito e meia"
           },
           "definition": "The clock shows half past eight."
         },
@@ -5027,7 +6049,14 @@
             "burmese": "ကိုးနာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਨੌਂ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஒன்பதரை",
-            "nepali": "साढे नौ बज्यो"
+            "nepali": "साढे नौ बज्यो",
+            "hungarian": "Fél tíz van",
+            "armenian": "Ժամը ինն անց կես է",
+            "malayalam": "സമയം ഒമ്പതര",
+            "maltese": "Id-disgħa u nofs",
+            "bengali": "এখন সাড়ে নয়টা বাজে",
+            "portuguese-br": "São nove e meia",
+            "portuguese-pt": "São nove e meia"
           },
           "definition": "The clock shows half past nine."
         },
@@ -5062,7 +6091,14 @@
             "burmese": "ဆယ်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਦਸ ਵੱਜੇ ਹਨ",
             "tamil": "மணி பத்தரை",
-            "nepali": "साढे दस बज्यो"
+            "nepali": "साढे दस बज्यो",
+            "hungarian": "Fél tizenegy van",
+            "armenian": "Ժամը տասն անց կես է",
+            "malayalam": "സമയം പത്തര",
+            "maltese": "L-għaxra u nofs",
+            "bengali": "এখন সাড়ে দশটা বাজে",
+            "portuguese-br": "São dez e meia",
+            "portuguese-pt": "São dez e meia"
           },
           "definition": "The clock shows half past ten."
         },
@@ -5097,7 +6133,14 @@
             "burmese": "ဆယ့်တစ်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਗਿਆਰਾਂ ਵੱਜੇ ਹਨ",
             "tamil": "மணி பதினொன்றரை",
-            "nepali": "साढे एघार बज्यो"
+            "nepali": "साढे एघार बज्यो",
+            "hungarian": "Fél tizenkettő van",
+            "armenian": "Ժամը տասնմեկն անց կես է",
+            "malayalam": "സമയം പതിനൊന്നര",
+            "maltese": "Il-ħdax u nofs",
+            "bengali": "এখন সাড়ে এগারোটা বাজে",
+            "portuguese-br": "São onze e meia",
+            "portuguese-pt": "São onze e meia"
           },
           "definition": "The clock shows half past eleven."
         },
@@ -5132,7 +6175,14 @@
             "burmese": "ဆယ့်နှစ်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਦੁਪਹਿਰ ਦੇ ਸਾਢੇ ਬਾਰਾਂ ਵੱਜੇ ਹਨ",
             "tamil": "மதியம் பன்னிரண்டரை மணி",
-            "nepali": "दिउँसोको साढे बाह्र बज्यो"
+            "nepali": "दिउँसोको साढे बाह्र बज्यो",
+            "hungarian": "Fél egy van",
+            "armenian": "Ժամը տասներկուսն անց կես է",
+            "malayalam": "സമയം ഉച്ചയ്ക്ക് പന്ത്രണ്ടര",
+            "maltese": "Nofsinhar u nofs",
+            "bengali": "এখন দুপুর সাড়ে বারোটা বাজে",
+            "portuguese-br": "É meio-dia e meia",
+            "portuguese-pt": "É meio-dia e meia"
           },
           "definition": "The clock shows half past twelve in the middle of the day."
         },
@@ -5167,7 +6217,14 @@
             "burmese": "တစ်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਡੇਢ ਵੱਜਿਆ ਹੈ",
             "tamil": "மணி ஒன்றரை",
-            "nepali": "डेढ बज्यो"
+            "nepali": "डेढ बज्यो",
+            "hungarian": "Fél kettő van",
+            "armenian": "Ժամը մեկն անց կես է",
+            "malayalam": "സമയം ഒന്നര",
+            "maltese": "Is-siegħa u nofs",
+            "bengali": "এখন দেড়টা বাজে",
+            "portuguese-br": "É uma e meia",
+            "portuguese-pt": "É uma e meia"
           },
           "definition": "The clock shows half past one."
         },
@@ -5202,7 +6259,14 @@
             "burmese": "နှစ်နာရီခွဲ ရှိပြီ",
             "punjabi": "ਢਾਈ ਵੱਜੇ ਹਨ",
             "tamil": "மணி இரண்டரை",
-            "nepali": "अढाई बज्यो"
+            "nepali": "अढाई बज्यो",
+            "hungarian": "Fél három van",
+            "armenian": "Ժամը երկուսն անց կես է",
+            "malayalam": "സമയം രണ്ടര",
+            "maltese": "Is-sagħtejn u nofs",
+            "bengali": "এখন আড়াইটা বাজে",
+            "portuguese-br": "São duas e meia",
+            "portuguese-pt": "São duas e meia"
           },
           "definition": "The clock shows half past two."
         },
@@ -5237,7 +6301,14 @@
             "burmese": "သုံးနာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਤਿੰਨ ਵੱਜੇ ਹਨ",
             "tamil": "மணி மூன்றரை",
-            "nepali": "साढे तीन बज्यो"
+            "nepali": "साढे तीन बज्यो",
+            "hungarian": "Fél négy van",
+            "armenian": "Ժամը երեքն անց կես է",
+            "malayalam": "സമയം മൂന്നര",
+            "maltese": "It-tlieta u nofs",
+            "bengali": "এখন সাড়ে তিনটা বাজে",
+            "portuguese-br": "São três e meia",
+            "portuguese-pt": "São três e meia"
           },
           "definition": "The clock shows half past three."
         },
@@ -5272,7 +6343,14 @@
             "burmese": "လေးနာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਚਾਰ ਵੱਜੇ ਹਨ",
             "tamil": "மணி நான்கரை",
-            "nepali": "साढे चार बज्यो"
+            "nepali": "साढे चार बज्यो",
+            "hungarian": "Fél öt van",
+            "armenian": "Ժամը չորսն անց կես է",
+            "malayalam": "സമയം നാലര",
+            "maltese": "L-erbgħa u nofs",
+            "bengali": "এখন সাড়ে চারটা বাজে",
+            "portuguese-br": "São quatro e meia",
+            "portuguese-pt": "São quatro e meia"
           },
           "definition": "The clock shows half past four."
         },
@@ -5307,7 +6385,14 @@
             "burmese": "ငါးနာရီခွဲ ရှိပြီ",
             "punjabi": "ਸਾਢੇ ਪੰਜ ਵੱਜੇ ਹਨ",
             "tamil": "மணி ஐந்தரை",
-            "nepali": "साढे पाँच बज्यो"
+            "nepali": "साढे पाँच बज्यो",
+            "hungarian": "Fél hat van",
+            "armenian": "Ժամը հինգն անց կես է",
+            "malayalam": "സമയം അഞ്ചര",
+            "maltese": "Il-ħamsa u nofs",
+            "bengali": "এখন সাড়ে পাঁচটা বাজে",
+            "portuguese-br": "São cinco e meia",
+            "portuguese-pt": "São cinco e meia"
           },
           "definition": "The clock shows half past five."
         }
